@@ -8,7 +8,8 @@
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <style>
     :root { --index-width: 270px; --content-max: 56rem; --border:#000; }
-    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+    html { overflow-x: hidden; max-width: 100vw; }
+    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; overflow-x: hidden; max-width: 100vw; position: relative; }
     .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
     .cs-index { position:sticky; top:0; align-self:start; height:100vh; padding:0.5rem 0.75rem; border-right:1px solid var(--border); background:#fff; overflow-y:auto; }
     .cs-index-title { font-size:0.8125rem; margin-bottom:0.25rem; }
@@ -16,8 +17,8 @@
     .cs-index a { color:#000; text-decoration:none; display:inline-flex; gap:0.5rem; align-items:baseline; }
     .cs-index a .num { color:#000; width:2.8rem; display:inline-block; text-align:right; }
     .cs-index a.active { color: #000; font-weight: bold; }
-    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; }
-    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; }
+    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; max-width: 100vw; box-sizing: border-box; }
+    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; max-width: 100%; box-sizing: border-box; }
     .cs-num { display:block; text-align:right; color:#000; font-size:0.875rem; padding-top:0.2rem; }
     .cs-content h1 { font-size:1.125rem; margin:0 0 0.35rem 0; font-weight:700; color:#000; word-wrap:break-word; }
     .cs-content h2 { font-size:1rem; margin:0.5rem 0 0.25rem 0; font-weight:600; color:#000; word-wrap:break-word; }
@@ -74,8 +75,8 @@
     .pill.green { border-color:#00aa00; color:#00aa00; }
     .pill.red { border-color:#ff0000; color:#ff0000; }
     .pill.yellow { border-color:#ff9900; color:#ff9900; }
-    table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.875rem; table-layout:auto; }
-    th, td { border:1px solid #000; padding:0.5rem; text-align:left; word-wrap:break-word; overflow-wrap:break-word; }
+    table { width:100%; max-width: 100%; border-collapse:collapse; margin:1rem 0; font-size:0.875rem; table-layout:auto; box-sizing: border-box; }
+    th, td { border:1px solid #000; padding:0.5rem; text-align:left; word-wrap:break-word; overflow-wrap:break-word; max-width: 100%; box-sizing: border-box; }
     th { background:#f0f0f0; font-weight:600; }
     .status-indicator { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #000; }
     .status-indicator.active { background: #00aa00; }
@@ -86,22 +87,32 @@
     .confidence-medium { color: #ff9900; font-weight: bold; }
     .confidence-low { color: #ff0000; font-weight: bold; }
     @media (max-width: 700px) { 
-      .cs-wrapper{ grid-template-columns:1fr;} 
-      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border);} 
-      section.cs-page{ grid-template-columns:3rem 1fr; padding:0.25rem 0;} 
-      .two-col, .three-col{ grid-template-columns:1fr; gap:0.85rem;} 
-      .kpi-grid, .metrics-grid{ grid-template-columns:1fr; } 
-      .before-after{ grid-template-columns:1fr; }
-      .mermaid { min-height:400px; padding:1rem; max-width: 100vw; overflow-x: auto; box-sizing: border-box; }
+      html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+      .cs-wrapper{ grid-template-columns:1fr; max-width: 100vw; overflow-x: hidden; } 
+      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); max-width: 100%; }
+      .cs-sections { padding: 0 0.75rem; max-width: 100vw; overflow-x: hidden; }
+      section.cs-page{ grid-template-columns:2.5rem 1fr; padding:0.25rem 0; max-width: 100%; gap: 0.25rem; } 
+      .cs-content { max-width: 100%; overflow-wrap: break-word; word-wrap: break-word; }
+      .two-col, .three-col{ grid-template-columns:1fr; gap:0.85rem; max-width: 100%; } 
+      .kpi-grid, .metrics-grid{ grid-template-columns:1fr; max-width: 100%; } 
+      .before-after{ grid-template-columns:1fr; max-width: 100%; }
+      .box, .problem-box, .solution-box, .alert-box, .success-box, .warning-box, .component-section { max-width: 100%; box-sizing: border-box; word-wrap: break-word; overflow-wrap: break-word; }
+      table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+      table thead, table tbody, table tr { display: table; width: 100%; table-layout: fixed; }
+      .terminal-output, .code-block, .ascii-art { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; word-wrap: break-word; font-size: 0.7rem; }
+      .mermaid { min-height:400px; padding:1rem; max-width: 100% !important; width: 100% !important; overflow-x: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
+      .mermaid > div { max-width: 100% !important; width: 100% !important; }
       .mermaid svg { min-height:350px; max-width: 100% !important; width: 100% !important; height: auto !important; }
-      .mermaid.gantt-chart { min-height: 600px; padding: 1.5rem 1rem; }
+      .mermaid.gantt-chart { min-height: 600px; padding: 1.5rem 1rem; max-width: 100% !important; }
       .mermaid.gantt-chart svg { min-height: 550px; max-width: 100% !important; width: 100% !important; }
-      .mermaid .nodeLabel, .mermaid .edgeLabel, .mermaid .label, .mermaid text { font-size:14px !important; }
+      .mermaid .nodeLabel, .mermaid .edgeLabel, .mermaid .label, .mermaid text { font-size:12px !important; }
+      .password-form { padding: 1.5rem; max-width: 85vw; }
+      .password-form input { font-size: 16px !important; width: 90%; max-width: 280px; }
     }
     .password-protection { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-    .password-form { background: #fff; padding: 2rem; border: 1px solid #000; text-align: center; }
+    .password-form { background: #fff; padding: 2rem; border: 1px solid #000; text-align: center; max-width: 90vw; box-sizing: border-box; }
     .password-form h2 { margin: 0 0 1rem 0; font-size: 1.5rem; }
-    .password-form input { padding: 0.75rem; font-size: 1rem; border: 1px solid #000; margin: 0.5rem 0; width: 250px; }
+    .password-form input { padding: 0.75rem; font-size: 16px; border: 1px solid #000; margin: 0.5rem 0; width: 250px; max-width: 80vw; box-sizing: border-box; }
     .password-form button { padding: 0.75rem 2rem; font-size: 1rem; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 0.5rem; }
     .password-form button:hover { background: #333; }
     .password-form .error { color: #ff0000; margin-top: 0.5rem; display: none; }
@@ -1868,6 +1879,30 @@ Industry:
       };
     }
     
+    // Prevent zoom on mobile
+    function preventZoom() {
+      const viewport = document.querySelector('meta[name=viewport]');
+      if (viewport) {
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+      }
+      // Force viewport reset
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        document.addEventListener('touchstart', function(event) {
+          if (event.touches.length > 1) {
+            event.preventDefault();
+          }
+        }, { passive: false });
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, false);
+      }
+    }
+    
     // Password protection
     function checkPassword() {
       const password = document.getElementById('password-input').value;
@@ -1880,6 +1915,13 @@ Industry:
         passwordProtection.style.display = 'none';
         contentWrapper.classList.add('authenticated');
         sessionStorage.setItem('pvp-authenticated', 'true');
+        // Prevent zoom when content appears
+        preventZoom();
+        // Force viewport reset after a brief delay
+        setTimeout(function() {
+          preventZoom();
+          window.scrollTo(0, 0);
+        }, 100);
       } else {
         errorDiv.style.display = 'block';
         document.getElementById('password-input').value = '';
@@ -1888,16 +1930,28 @@ Industry:
     
     // Check if already authenticated
     window.addEventListener('DOMContentLoaded', function() {
+      preventZoom();
+      
       if (sessionStorage.getItem('pvp-authenticated') === 'true') {
         document.getElementById('password-protection').style.display = 'none';
         document.getElementById('content-wrapper').classList.add('authenticated');
+        preventZoom();
       }
       
       // Allow Enter key to submit password
-      document.getElementById('password-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          checkPassword();
-        }
+      const passwordInput = document.getElementById('password-input');
+      if (passwordInput) {
+        passwordInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            checkPassword();
+          }
+        });
+      }
+      
+      // Prevent zoom on window resize
+      window.addEventListener('resize', preventZoom);
+      window.addEventListener('orientationchange', function() {
+        setTimeout(preventZoom, 100);
       });
     });
   </script>
