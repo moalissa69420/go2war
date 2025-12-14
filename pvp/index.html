@@ -41,8 +41,10 @@
     .kpi-card .big { font-size:1.25rem; font-weight:700; color:#000; }
     .kpi-card .label { font-size:0.75rem; color:#666; margin-top:0.25rem; }
     .mermaid { background:#fff; border:1px solid #000; padding:3rem; margin:2rem 0; overflow:visible !important; min-height:600px; width:100%; position:relative; }
+    .mermaid.gantt-chart { min-height:800px; padding:4rem 3rem; }
     .mermaid > div { overflow:visible !important; }
     .mermaid svg { max-width:none !important; width:100% !important; height:auto !important; min-height:550px; overflow:visible !important; }
+    .mermaid.gantt-chart svg { min-height:700px; }
     .mermaid svg * { overflow:visible !important; }
     .mermaid .nodeLabel { font-size:18px !important; word-wrap:break-word !important; overflow:visible !important; line-height:1.4 !important; white-space:normal !important; text-overflow:clip !important; }
     .mermaid .edgeLabel { font-size:16px !important; word-wrap:break-word !important; overflow:visible !important; line-height:1.4 !important; white-space:normal !important; text-overflow:clip !important; }
@@ -1253,7 +1255,7 @@ MEDIA:
         <div class="cs-content">
           <h1>Implementation Timeline</h1>
           
-          <div class="mermaid">
+          <div class="mermaid gantt-chart">
             gantt
                 title Predica GTM Timeline
                 dateFormat  YYYY-MM
@@ -1784,11 +1786,12 @@ Industry:
       gantt: {
         useMaxWidth: false,
         wrap: true,
-        leftPadding: 150,
-        gridLineStartPadding: 20,
-        fontSize: 18,
-        bottomPadding: 60,
-        topPadding: 40
+        leftPadding: 250,
+        gridLineStartPadding: 30,
+        fontSize: 16,
+        bottomPadding: 100,
+        topPadding: 60,
+        rightPadding: 40
       },
       securityLevel: 'loose',
       fontFamily: 'inherit',
