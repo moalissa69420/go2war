@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.coming-soon {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
