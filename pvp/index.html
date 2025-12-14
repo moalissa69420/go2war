@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Predica Case Study — Solana Prediction Markets Platform</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    :root { --index-width: 270px; --content-max: 56rem; --border:#000; }
+    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+    .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+    .cs-index { position:sticky; top:0; align-self:start; height:100vh; padding:0.5rem 0.75rem; border-right:1px solid var(--border); background:#fff; overflow-y:auto; }
+    .cs-index-title { font-size:0.8125rem; margin-bottom:0.25rem; }
+    .cs-index ol { list-style:none; padding:0; margin:0; font-size:0.875rem; line-height:1.4; }
+    .cs-index a { color:#000; text-decoration:none; display:inline-flex; gap:0.5rem; align-items:baseline; }
+    .cs-index a .num { color:#000; width:2.8rem; display:inline-block; text-align:right; }
+    .cs-index a.active { color: #000; font-weight: bold; }
+    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; }
+    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; }
+    .cs-num { display:block; text-align:right; color:#000; font-size:0.875rem; padding-top:0.2rem; }
+    .cs-content h1 { font-size:1.125rem; margin:0 0 0.35rem 0; font-weight:700; color:#000; word-wrap:break-word; }
+    .cs-content h2 { font-size:1rem; margin:0.5rem 0 0.25rem 0; font-weight:600; color:#000; word-wrap:break-word; }
+    .cs-content h3 { font-size:0.9rem; margin:0.4rem 0 0.2rem 0; font-weight:600; color:#000; word-wrap:break-word; }
+    .cs-content p, .cs-content li { word-wrap:break-word; overflow-wrap:break-word; }
+    .two-col { display:grid; grid-template-columns: 1.2fr 1fr; gap:1rem; align-items:start; }
+    .two-col.equal { grid-template-columns: 1fr 1fr; }
+    .three-col { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:1rem; align-items:start; }
+    .box { background:#fff; border:1px solid var(--border); border-radius:0; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .problem-box { background:#fff; border:1px solid #000; border-left:4px solid #ff0000; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .solution-box { background:#fff; border:1px solid #000; border-left:4px solid #00aa00; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .alert-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .success-box { background:#fff; border:1px solid #000; border-left:4px solid #00aa00; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .warning-box { background:#fff; border:1px solid #000; border-left:4px solid #ff9900; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .code-block { background:#fff; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.8rem; overflow:auto; color:#000; word-wrap:break-word; }
+    .terminal-output { background:#fff; color:#000; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.8rem; white-space:pre-wrap; overflow:auto; word-wrap:break-word; }
+    .ascii-art { background:#fff; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.75rem; white-space:pre-wrap; overflow:auto; color:#000; word-wrap:break-word; }
+    .kpi-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:0.75rem; }
+    .kpi-grid.four { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .kpi-card { border:1px solid #000; background:#fff; padding:0.75rem; text-align:center; }
+    .kpi-card .big { font-size:1.25rem; font-weight:700; color:#000; }
+    .kpi-card .label { font-size:0.75rem; color:#666; margin-top:0.25rem; }
+    .mermaid { background:#fff; border:1px solid #000; padding:3rem; margin:2rem 0; overflow:visible !important; min-height:600px; width:100%; position:relative; }
+    .mermaid > div { overflow:visible !important; }
+    .mermaid svg { max-width:none !important; width:100% !important; height:auto !important; min-height:550px; overflow:visible !important; }
+    .mermaid svg * { overflow:visible !important; }
+    .mermaid .nodeLabel { font-size:18px !important; word-wrap:break-word !important; overflow:visible !important; line-height:1.4 !important; white-space:normal !important; text-overflow:clip !important; }
+    .mermaid .edgeLabel { font-size:16px !important; word-wrap:break-word !important; overflow:visible !important; line-height:1.4 !important; white-space:normal !important; text-overflow:clip !important; }
+    .mermaid .label { overflow:visible !important; font-size:18px !important; word-wrap:break-word !important; white-space:normal !important; }
+    .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse, .mermaid .node polygon { stroke-width: 2.5px; overflow:visible !important; }
+    .mermaid .flowchart-label { font-size: 18px !important; overflow:visible !important; word-wrap:break-word !important; }
+    .mermaid .gantt-label { font-size: 18px !important; overflow:visible !important; word-wrap:break-word !important; }
+    .mermaid text { font-size: 18px !important; overflow:visible !important; }
+    .mermaid .titleText { font-size: 20px !important; font-weight: bold; overflow:visible !important; }
+    .mermaid tspan { overflow:visible !important; }
+    .mermaid foreignObject { overflow:visible !important; }
+    .mermaid .labelText { overflow:visible !important; word-wrap:break-word !important; white-space:normal !important; }
+    .component-section { background:#fff; border:1px solid #000; padding:0.9rem; margin:0.5rem 0; overflow:visible; word-wrap:break-word; }
+    .workflow-step { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin:0.5rem 0; }
+    .metrics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; margin:1rem 0; }
+    .metric-card { background:#fff; border:1px solid #000; padding:0.75rem; text-align:center; }
+    .metric-value { font-size:1.5rem; font-weight:700; color:#000; margin-bottom:0.25rem; }
+    .metric-label { font-size:0.8rem; color:#000; text-transform:uppercase; letter-spacing:0.5px; }
+    .before-after { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1rem 0; }
+    .before { background:#fff; border:1px solid #000; border-left:4px solid #ff0000; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .after { background:#fff; border:1px solid #000; border-left:4px solid #00aa00; padding:0.9rem; overflow:visible; word-wrap:break-word; }
+    .pill { display:inline-block; padding:0.15rem 0.35rem; border:1px solid #000; margin-right:0.35rem; font-size:0.8rem; color:#000; }
+    .pill.green { border-color:#00aa00; color:#00aa00; }
+    .pill.red { border-color:#ff0000; color:#ff0000; }
+    .pill.yellow { border-color:#ff9900; color:#ff9900; }
+    table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.875rem; table-layout:auto; }
+    th, td { border:1px solid #000; padding:0.5rem; text-align:left; word-wrap:break-word; overflow-wrap:break-word; }
+    th { background:#f0f0f0; font-weight:600; }
+    .status-indicator { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #000; }
+    .status-indicator.active { background: #00aa00; }
+    .status-indicator.warning { background: #ff9900; }
+    .status-indicator.danger { background: #ff0000; }
+    blockquote { margin: 1rem 0; padding: 1rem; border-left: 4px solid #000; background: #f9f9f9; font-style: italic; }
+    .confidence-high { color: #00aa00; font-weight: bold; }
+    .confidence-medium { color: #ff9900; font-weight: bold; }
+    .confidence-low { color: #ff0000; font-weight: bold; }
+    @media (max-width: 700px) { 
+      .cs-wrapper{ grid-template-columns:1fr;} 
+      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border);} 
+      section.cs-page{ grid-template-columns:3rem 1fr; padding:0.25rem 0;} 
+      .two-col, .three-col{ grid-template-columns:1fr; gap:0.85rem;} 
+      .kpi-grid, .metrics-grid{ grid-template-columns:1fr; } 
+      .before-after{ grid-template-columns:1fr; }
+      .mermaid { min-height:400px; padding:1.5rem; }
+      .mermaid svg { min-height:350px; }
+      .mermaid .nodeLabel, .mermaid .edgeLabel, .mermaid .label, .mermaid text { font-size:14px !important; }
+    }
+    .password-protection { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+    .password-form { background: #fff; padding: 2rem; border: 1px solid #000; text-align: center; }
+    .password-form h2 { margin: 0 0 1rem 0; font-size: 1.5rem; }
+    .password-form input { padding: 0.75rem; font-size: 1rem; border: 1px solid #000; margin: 0.5rem 0; width: 250px; }
+    .password-form button { padding: 0.75rem 2rem; font-size: 1rem; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 0.5rem; }
+    .password-form button:hover { background: #333; }
+    .password-form .error { color: #ff0000; margin-top: 0.5rem; display: none; }
+    .content-wrapper { display: none; }
+    .content-wrapper.authenticated { display: block; }
+  </style>
+</head>
+<body class="cs-template">
+  <div id="password-protection" class="password-protection">
+    <div class="password-form">
+      <h2>Protected Content</h2>
+      <p>Please enter the password to continue</p>
+      <input type="password" id="password-input" placeholder="Enter password" />
+      <div class="error" id="password-error">Incorrect password. Please try again.</div>
+      <br>
+      <button onclick="checkPassword()">Enter</button>
+    </div>
+  </div>
+  <div id="content-wrapper" class="content-wrapper">
+  <div class="cs-wrapper">
+    <aside class="cs-index">
+      <div class="cs-index-title">Index</div>
+      <ol>
+        <li><a href="#s1"><span class="num">01.</span> Executive Summary</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Strategic Approach</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Market Context</a></li>
+        <li><a href="#s4"><span class="num">04.</span> Competitive Analysis</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Fee Structure Decision</a></li>
+        <li><a href="#s6"><span class="num">06.</span> User Economics</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Regulatory Approach</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Distribution Execution</a></li>
+        <li><a href="#s9"><span class="num">09.</span> Token & Liquidity</a></li>
+        <li><a href="#s10"><span class="num">10.</span> Risk Management</a></li>
+        <li><a href="#s11"><span class="num">11.</span> Implementation Timeline</a></li>
+        <li><a href="#s12"><span class="num">12.</span> Financial Results</a></li>
+        <li><a href="#s13"><span class="num">13.</span> Outcomes & Metrics</a></li>
+        <li><a href="#s14"><span class="num">14.</span> Key Learnings</a></li>
+        <li><a href="#s15"><span class="num">15.</span> Appendix: Data Sources</a></li>
+      </ol>
+    </aside>
+    <main class="cs-sections">
+      
+      <!-- Section 1: Executive Summary -->
+      <section id="s1" class="cs-page">
+        <div class="cs-num">01.</div>
+        <div class="cs-content">
+          <h1>Predica Case Study</h1>
+          <p style="margin: 0 0 1rem 0; font-size: 0.875rem; color: #666; font-style: italic;">Solana Prediction Markets Platform | December 2025</p>
+          <p style="margin: 0 0 1rem 0; font-size: 0.75rem; color: #999;">Prepared using 787 sources</p>
+          
+          <div class="alert-box" style="margin-bottom: 1.5rem;">
+            <p style="line-height: 1.8;"><strong>When we began this project, the prediction markets industry had hit $7.4B monthly volume in October 2025—exceeding 2024 election peaks. ICE (NYSE parent) had just invested $2B in Polymarket at $8B valuation. The window to capture market share was closing as institutional players prepared to consolidate the market.</strong></p>
+          </div>
+          
+          <div class="alert-box" style="margin-bottom: 2rem;">
+            <p style="margin: 0;"><strong>Our Strategy: Position Predica as the institutional-grade crypto prediction platform.<br>
+            We didn't chase Polymarket's volume or Kalshi's regulation—we focused on owning the crypto segment they were both ignoring.</strong></p>
+          </div>
+          
+          <div class="two-col" style="margin-top: 1.5rem;">
+            <div class="box">
+              <h3 style="margin-top: 0; font-size: 1rem; margin-bottom: 0.75rem;">Strategic Approach</h3>
+              <p style="margin-bottom: 0.75rem;"><strong>Crypto-Native Vertical Dominance</strong></p>
+              <ul style="margin: 0;">
+                <li>Launched crypto + macro predictions first (avoided sports)</li>
+                <li>Priced at 0.1-0.25% fees (vs initial 1% proposal)</li>
+                <li>Built Telegram-first with aggressive referral economics</li>
+                <li>Explored DCM acquisition for regulatory clarity</li>
+                <li>Planned token launch with retroactive airdrop</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3 style="margin-top: 0; font-size: 1rem; margin-bottom: 0.75rem;">Key Market Metrics</h3>
+              <div class="kpi-grid">
+                <div class="kpi-card">
+                  <div class="big">$7.4B</div>
+                  <div class="label">Monthly Volume (Oct 2025)</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="big">$95.5B</div>
+                  <div class="label">TAM by 2035</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="big">46.8%</div>
+                  <div class="label">CAGR (2024-2035)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-section" style="margin-top: 1.5rem;">
+            <h3>Five Critical Strategic Decisions</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Decision</th>
+                  <th>Rationale</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Launched crypto predictions, NOT sports</strong></td>
+                  <td>Avoided state gambling laws; aligned with Solana's 3.6M daily wallets</td>
+                  <td><span class="confidence-high">SUCCESSFUL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>2. Priced at 0.1-0.25% fees</strong></td>
+                  <td>Polymarket US charges 0.01% — original 1% was 100x more expensive</td>
+                  <td><span class="confidence-high">CRITICAL FIX</span></td>
+                </tr>
+                <tr>
+                  <td><strong>3. Explored DCM acquisition</strong></td>
+                  <td>Polymarket paid $112M for QCEX; new applications take 2-4 years</td>
+                  <td><span class="confidence-medium">ONGOING</span></td>
+                </tr>
+                <tr>
+                  <td><strong>4. Built Telegram-first</strong></td>
+                  <td>50%+ of high-volume trading via Telegram bots</td>
+                  <td><span class="confidence-high">HIGH ADOPTION</span></td>
+                </tr>
+                <tr>
+                  <td><strong>5. Planned token launch</strong></td>
+                  <td>Polymarket POLY token confirmed Q1 2026; needed to beat or differentiate</td>
+                  <td><span class="confidence-medium">IN PROGRESS</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Strategic Recommendation -->
+      <section id="s2" class="cs-page">
+        <div class="cs-num">02.</div>
+        <div class="cs-content">
+          <h1>Strategic Approach</h1>
+          
+          <div class="two-col">
+            <div class="problem-box">
+              <h2>The Market Context: Post-2024 Shift</h2>
+              <ul>
+                <li><strong>November 2024 Election:</strong> Peak $1B+ weekly volume → 90% user churn by June 2025</li>
+                <li><strong>October 2025 Recovery:</strong> Exceeded election peaks at $2.3B weekly → market matured</li>
+                <li><strong>Sports Now Dominates:</strong> 75% of Kalshi volume vs 25% politics</li>
+                <li><strong>Institutions Entering:</strong> ICE, DraftKings, Robinhood, Coinbase all announced</li>
+              </ul>
+            </div>
+            <div class="solution-box">
+              <h2>Why We Chose Crypto-Native</h2>
+              <ul>
+                <li>✅ Crypto users show 2-3x superior retention vs sports cohorts</li>
+                <li>✅ Avoids 10+ state gambling law conflicts</li>
+                <li>✅ Aligns with Solana ecosystem (3.6M daily active wallets)</li>
+                <li>✅ Less wash trading than sports (25% vs 45%)</li>
+                <li>✅ Prediction markets now infrastructure, not novelty</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mermaid">
+            flowchart TB
+                subgraph "Why NOT Sports"
+                    A1[State Gambling Laws] --> A2[10+ States Challenging]
+                    A3[45% Wash Trading] --> A4[Distorted Metrics]
+                    A5[DraftKings/FanDuel] --> A6[Entrenched Competition]
+                end
+                
+                subgraph "Why Crypto"
+                    B1[State Law Exemption] --> B2[Federal Commodity Classification]
+                    B3[Solana Ecosystem] --> B4[3.6M Daily Wallets]
+                    B5[25% Lower Wash Trading] --> B6[Cleaner Metrics]
+                end
+                
+                A2 --> C[HIGH RISK]
+                A4 --> C
+                A6 --> C
+                
+                B2 --> D[STRATEGIC ADVANTAGE]
+                B4 --> D
+                B6 --> D
+          </div>
+
+          <div class="alert-box">
+            <h3>The Competitive Window</h3>
+            <p><strong>Polymarket US re-entry Q1 2026</strong> backed by ICE's $2B would reshape the market. We needed to establish meaningful share in 6-12 months or face an entrenched, well-capitalized incumbent with brand, liquidity, and regulatory clarity.</p>
+            <p><strong>Our Decision:</strong> Execute before Polymarket US launch to establish market position before competing against institutional-backed incumbent.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Market Landscape -->
+      <section id="s3" class="cs-page">
+        <div class="cs-num">03.</div>
+        <div class="cs-content">
+          <h1>Market Context</h1>
+          
+          <div class="component-section">
+            <h2>Current Ecosystem Size (December 2025)</h2>
+            <div class="kpi-grid four">
+              <div class="kpi-card">
+                <div class="big">$7.4B</div>
+                <div class="label">Monthly Volume (Oct 2025)</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$27.9B</div>
+                <div class="label">Annualized Volume</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">300K+</div>
+                <div class="label">Active Users</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">46-50%</div>
+                <div class="label">YoY Growth</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Market Share Distribution</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Weekly Volume</th>
+                  <th>Market Share</th>
+                  <th>Users</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Kalshi</strong></td>
+                  <td>$500M+</td>
+                  <td>62%</td>
+                  <td>150K+</td>
+                  <td><span class="pill green">CFTC Regulated</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Polymarket</strong></td>
+                  <td>$430M</td>
+                  <td>37%</td>
+                  <td>72K DAU / 247K WAU</td>
+                  <td><span class="pill yellow">US Re-entry Q1 2026</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Drift BET</strong></td>
+                  <td>$20M peak</td>
+                  <td>&lt;1%</td>
+                  <td>Unknown</td>
+                  <td><span class="pill">Solana Native</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Others</strong></td>
+                  <td>&lt;$50M</td>
+                  <td>&lt;1%</td>
+                  <td>Minimal</td>
+                  <td><span class="pill red">Declining</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="two-col equal">
+            <div class="component-section">
+              <h2>Category Breakdown (Current)</h2>
+              <div class="terminal-output">
+PREDICTION MARKET CATEGORY MIX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+POST-ELECTION SHIFT (Dec 2025):
+
+Crypto Prices    ████████████░░░░  25-30%
+Sports           ████████████████  20-25%  → 75% Kalshi
+Elections        ██████░░░░░░░░░░  15-20%  ↓ declining
+Economic         ██████░░░░░░░░░░  10-15%
+Entertainment    ████░░░░░░░░░░░░   5-10%  +670% growth
+Miscellaneous    ████░░░░░░░░░░░░   5-10%
+
+KEY INSIGHT: Politics peaked, sports rising
+OPPORTUNITY: Crypto underserved by leaders
+              </div>
+            </div>
+            <div class="component-section">
+              <h2>TAM Projections</h2>
+              <div class="terminal-output">
+TOTAL ADDRESSABLE MARKET
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+Prediction Markets:
+2024: $1.4B
+2025: $27.9B (annualized)
+2030: $50-100B (projected)
+2035: $95.5B (46.8% CAGR)
+
+Adjacent Markets:
+├─ Global Sports Betting: $103B → $275B
+├─ US Sports Betting: $18B → $45B+
+├─ US Options Market: $400B+ daily
+└─ Global DeFi TVL: $50-70B
+
+INSIGHT: Prediction &lt;1% of sports TAM
+              </div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h3>Critical Finding: Post-Election Sustainability CONFIRMED</h3>
+            <p>October 2025 volumes ($7.4B) exceeded November 2024 election peaks. Sports diversification proved market can sustain without political events. This is infrastructure now, not novelty.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Competitive Deep Dive -->
+      <section id="s4" class="cs-page">
+        <div class="cs-num">04.</div>
+        <div class="cs-content">
+          <h1>Competitive Analysis</h1>
+          
+          <div class="component-section">
+            <h2>Tier 1: Polymarket — The Volume Leader</h2>
+            <div class="two-col">
+              <div class="box">
+                <h3 style="margin-top:0;">Strengths</h3>
+                <ul>
+                  <li>✅ $18.4B+ cumulative volume (2025)</li>
+                  <li>✅ Zero trading fees globally (0.01% US)</li>
+                  <li>✅ Markets launch in hours, not months</li>
+                  <li>✅ ICE invested $2B at $8B valuation</li>
+                  <li>✅ $112M QCX acquisition = US re-entry Q1 2026</li>
+                  <li>✅ POLY token confirmed</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Weaknesses</h3>
+                <ul>
+                  <li>❌ Only 67% accuracy (lowest of major platforms)</li>
+                  <li>❌ 25% wash trading (45% on sports)</li>
+                  <li>❌ 70-90% churn post-election</li>
+                  <li>❌ 58% of price movements reverse next day</li>
+                  <li>❌ Regulatory uncertainty until QCX closes</li>
+                  <li>❌ Only 12.7% of wallets profitable</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Tier 1: Kalshi — The Regulatory Leader</h2>
+            <div class="two-col">
+              <div class="box">
+                <h3 style="margin-top:0;">Strengths</h3>
+                <ul>
+                  <li>✅ Only CFTC DCM for event contracts</li>
+                  <li>✅ 62% market share, $11B valuation</li>
+                  <li>✅ 78% calibration accuracy</li>
+                  <li>✅ NHL, Robinhood, Jupiter partnerships</li>
+                  <li>✅ Proper margin system, clearing</li>
+                  <li>✅ Announced Solana tokenization (DFlow)</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Weaknesses</h3>
+                <ul>
+                  <li>❌ 1-4% effective fees (vs 0% Polymarket)</li>
+                  <li>❌ 18+ month regulatory delays</li>
+                  <li>❌ US-focused, limited global reach</li>
+                  <li>❌ In-house market maker "not profitable"</li>
+                  <li>❌ Open interest ratio 0.29 = high churn</li>
+                  <li>❌ State sports law challenges</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Solana Ecosystem: Current State</h2>
+            <div class="warning-box">
+              <h3>Solana Dramatically Underperforming</h3>
+              <p>Despite Solana's advantages (speed, low fees, active ecosystem), prediction markets on Solana have minimal traction.</p>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Peak Volume</th>
+                  <th>Status</th>
+                  <th>Differentiator</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Drift BET</strong></td>
+                  <td>$20M daily peak</td>
+                  <td><span class="pill yellow">Active</span></td>
+                  <td>30+ collateral tokens, yield on positions</td>
+                </tr>
+                <tr>
+                  <td><strong>Hedgehog</strong></td>
+                  <td>Minimal</td>
+                  <td><span class="pill red">Struggling</span></td>
+                  <td>Prediction gaming</td>
+                </tr>
+                <tr>
+                  <td><strong>Triad</strong></td>
+                  <td>Minimal</td>
+                  <td><span class="pill red">Struggling</span></td>
+                  <td>Social predictions</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>Key Development:</strong> Kalshi announced Solana tokenization via DFlow (December 2024) — could shift dynamics significantly.</p>
+          </div>
+
+          <div class="component-section">
+            <h2>Incoming TradFi Competition</h2>
+            <div class="terminal-output">
+TRADFI ENTRANTS (2025-2026)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Platform         Status              Threat Level
+─────────────────────────────────────────────────
+Robinhood        Kalshi partnership   HIGH
+Coinbase         Launch Dec 2025      HIGH
+DraftKings       Railbird acquired    MEDIUM-HIGH
+Interactive      ICE/Polymarket data  MEDIUM
+Brokers
+Charles Schwab   Evaluating           LOW
+
+IMPLICATION: 6-12 month window before
+institutional capital floods market
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Fee Structure Analysis -->
+      <section id="s5" class="cs-page">
+        <div class="cs-num">05.</div>
+        <div class="cs-content">
+          <h1>Fee Structure Decision</h1>
+          
+          <div class="alert-box">
+            <h3>⚠️ CRITICAL DISCOVERY: Initial 1% Fee Was Untenable</h3>
+            <p>Polymarket US charges <strong>0.01%</strong>. The initial proposed 1% fee would have been <strong>100x more expensive</strong>. High-volume traders would never migrate to a 100x cost increase. We pivoted immediately.</p>
+          </div>
+
+          <div class="component-section">
+            <h2>Competitive Fee Comparison</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Trading Fee</th>
+                  <th>Withdrawal</th>
+                  <th>Other Fees</th>
+                  <th>Effective Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:#f0fff0;">
+                  <td><strong>Polymarket (Global)</strong></td>
+                  <td>0%</td>
+                  <td>~$0.50-2</td>
+                  <td>Gas only</td>
+                  <td><strong>~0%</strong></td>
+                </tr>
+                <tr style="background:#f0fff0;">
+                  <td><strong>Polymarket (US)</strong></td>
+                  <td>0.01%</td>
+                  <td>~$0.50-2</td>
+                  <td>Gas only</td>
+                  <td><strong>~0.01%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Drift BET</strong></td>
+                  <td>0.1%</td>
+                  <td>Minimal</td>
+                  <td>FUEL rewards offset</td>
+                  <td><strong>~0.05-0.1%</strong></td>
+                </tr>
+                <tr style="background:#fff0f0;">
+                  <td><strong>Kalshi</strong></td>
+                  <td>1-4%</td>
+                  <td>$0</td>
+                  <td>None</td>
+                  <td><strong>~1-4%</strong></td>
+                </tr>
+                <tr style="background:#f0fff0;">
+                  <td><strong>Predica (Final)</strong></td>
+                  <td>0.1-0.25%</td>
+                  <td>Minimal</td>
+                  <td>Token rewards offset</td>
+                  <td><strong>~0.1-0.25%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="before-after">
+            <div class="before">
+              <h3>❌ At 1% Fees</h3>
+              <ul>
+                <li>100x more expensive than Polymarket US</li>
+                <li>High-volume traders avoid platform</li>
+                <li>Only viable for retail with no alternatives</li>
+                <li>Cannot compete on volume metrics</li>
+                <li>Market makers demand higher spreads</li>
+              </ul>
+            </div>
+            <div class="after">
+              <h3>✅ At 0.1-0.25% Fees</h3>
+              <ul>
+                <li>10-25x Polymarket US (still premium)</li>
+                <li>Competitive with Drift BET</li>
+                <li>Offset with token rewards</li>
+                <li>Attracts volume-focused traders</li>
+                <li>Sustainable market maker economics</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h3>Final Fee Structure</h3>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="big">0.1-0.15%</div>
+                <div class="label">Maker Fee</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">0.2-0.25%</div>
+                <div class="label">Taker Fee</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">50%+</div>
+                <div class="label">Token Rewards Offset</div>
+              </div>
+            </div>
+            <p style="margin-top:1rem;"><strong>Rationale:</strong> Premium to Polymarket (justifiable via Solana benefits) but competitive enough to attract serious traders. Token rewards effectively reduce to near-zero for early adopters.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: User Economics -->
+      <section id="s6" class="cs-page">
+        <div class="cs-num">06.</div>
+        <div class="cs-content">
+          <h1>User Behavior & Unit Economics</h1>
+          
+          <div class="component-section">
+            <h2>The Retention Crisis (Industry Bottleneck)</h2>
+            <div class="terminal-output">
+USER RETENTION PATTERNS
+━━━━━━━━━━━━━━━━━━━━━━━
+
+POLYMARKET POST-ELECTION:
+Nov 2024: 100K+/day downloads
+Jun 2025: 650/day downloads
+Decline: 90%+ churn
+
+KALSHI POST-ELECTION:
+Nov 2024: Peak engagement
+Jun 2025: 6,500/day downloads
+Decline: Still 90%+ from peak
+
+CRITICAL INSIGHT:
+70-90% churn makes volume metrics misleading
+True market size = sustainable DAU
+Kalshi dominance came from solving retention
+            </div>
+          </div>
+
+          <div class="two-col equal">
+            <div class="component-section">
+              <h2>Profitability Distribution</h2>
+              <div class="terminal-output">
+POLYMARKET WALLET PROFITABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Profitable wallets: 12.7%
+Break-even:         ~5%
+Losing wallets:     82.3%
+
+TOP PERFORMERS:
+$1K+ PNL = Top 0.51% of wallets
+Top 10 arbitrageurs: $8.18M captured
+(21% of total arbitrage profits)
+
+POWER LAW: Extreme concentration
+Average user LOSES money
+              </div>
+            </div>
+            <div class="component-section">
+              <h2>Whale Economics</h2>
+              <div class="terminal-output">
+HIGH-VALUE USER BEHAVIOR
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+Top 1% traders:
+├─ Avg transaction: $4,800+
+├─ Predictive of price movements
+└─ Drive majority of volume
+
+Whale net buying strongly predicts
+future price movements
+
+IMPLICATION:
+Build for institutions FIRST
+Retail comes from network effects
+              </div>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Customer Acquisition Benchmarks</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>CAC Range</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Sports Betting (Historical)</strong></td>
+                  <td>$300-500</td>
+                  <td>DraftKings 2020</td>
+                </tr>
+                <tr>
+                  <td><strong>Sports Betting (Current)</strong></td>
+                  <td>$100-200</td>
+                  <td>Efficiency gains 2025</td>
+                </tr>
+                <tr>
+                  <td><strong>Prediction Markets (Election)</strong></td>
+                  <td>~$0</td>
+                  <td>Viral growth, unsustainable</td>
+                </tr>
+                <tr>
+                  <td><strong>Crypto Organic</strong></td>
+                  <td>$5-15</td>
+                  <td>Twitter, Reddit, Discord</td>
+                </tr>
+                <tr>
+                  <td><strong>Crypto Influencer</strong></td>
+                  <td>$20-100</td>
+                  <td>KOL partnerships</td>
+                </tr>
+                <tr>
+                  <td><strong>Crypto Paid</strong></td>
+                  <td>$30-50</td>
+                  <td>Ad networks</td>
+                </tr>
+                <tr style="background:#f0fff0;">
+                  <td><strong>Polymarket Affiliate</strong></td>
+                  <td>$10/deposit</td>
+                  <td>$1.3M deposits in 7 days (one affiliate)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="success-box">
+            <h3>Our Target Unit Economics</h3>
+            <div class="kpi-grid four">
+              <div class="kpi-card">
+                <div class="big">$1,000</div>
+                <div class="label">Target Avg Deposit</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$20-30</div>
+                <div class="label">Break-even CAC</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">3:1</div>
+                <div class="label">LTV:CAC Target</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">30%+</div>
+                <div class="label">M1 Retention Target</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Regulatory Strategy -->
+      <section id="s7" class="cs-page">
+        <div class="cs-num">07.</div>
+        <div class="cs-content">
+          <h1>Regulatory Approach</h1>
+          
+          <div class="component-section">
+            <h2>Federal Landscape: Favorable Tailwinds</h2>
+            <div class="success-box">
+              <h3>Trump Administration Signals</h3>
+              <ul>
+                <li><strong>Acting CFTC Chair:</strong> Caroline Pham (pro-crypto)</li>
+                <li><strong>Expected Chair:</strong> Brian Quintenz (former Kalshi board member)</li>
+                <li><strong>Kalshi Precedent:</strong> Court ruled CFTC "exceeded statutory authority" blocking election contracts</li>
+                <li><strong>Dec 2025:</strong> No-action letters relaxed recordkeeping requirements</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>State-Level: Sports Markets Under Attack</h2>
+            <div class="warning-box">
+              <h3>⚠️ Why Sports Is HIGH RISK</h3>
+              <p>10+ states actively challenging sports prediction markets under state gambling laws.</p>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>Status</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nevada</td>
+                  <td>Challenged</td>
+                  <td><span class="pill red">LOST</span> Subject to state gaming laws</td>
+                </tr>
+                <tr>
+                  <td>Maryland</td>
+                  <td>Challenged</td>
+                  <td><span class="pill red">LOST</span> Subject to state gaming laws</td>
+                </tr>
+                <tr>
+                  <td>New Jersey</td>
+                  <td>Challenged</td>
+                  <td><span class="pill green">WON</span> Preliminary injunction</td>
+                </tr>
+                <tr>
+                  <td>Connecticut</td>
+                  <td>Ongoing</td>
+                  <td><span class="pill yellow">PENDING</span></td>
+                </tr>
+                <tr>
+                  <td>Massachusetts</td>
+                  <td>Ongoing</td>
+                  <td><span class="pill yellow">PENDING</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mermaid">
+            flowchart TB
+                subgraph "Regulatory Paths"
+                    A[DCM Acquisition] --> B[Fastest: 6-12 months]
+                    C[New DCM Application] --> D[Slowest: 2-4 years]
+                    E[Offshore First] --> F[Risk: Enforcement]
+                end
+                
+                subgraph "Polymarket Example"
+                    G[2022: $1.4M Settlement] --> H[2024: $112M QCEX Buy]
+                    H --> I[2026: US Re-entry]
+                end
+                
+                B --> J[RECOMMENDED]
+                D --> K[BACKUP]
+                F --> L[AVOID IF POSSIBLE]
+          </div>
+
+          <div class="component-section">
+            <h2>Our Approach: Hybrid Compliance</h2>
+            <div class="three-col">
+              <div class="box">
+                <h3 style="margin-top:0;">Phase 1: Launch</h3>
+                <ul>
+                  <li>Crypto predictions only</li>
+                  <li>No KYC for &lt;$50K</li>
+                  <li>Geo-block restricted states</li>
+                  <li>Decentralized architecture</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Phase 2: Scale</h3>
+                <ul>
+                  <li>Explore DCM acquisition</li>
+                  <li>Add economics/Fed markets</li>
+                  <li>Tiered KYC by limit</li>
+                  <li>Legal counsel engagement</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Phase 3: Mature</h3>
+                <ul>
+                  <li>Full regulatory clarity</li>
+                  <li>Institutional onboarding</li>
+                  <li>Sports (if state laws resolve)</li>
+                  <li>Global expansion</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Distribution Strategy -->
+      <section id="s8" class="cs-page">
+        <div class="cs-num">08.</div>
+        <div class="cs-content">
+          <h1>Distribution Execution</h1>
+          
+          <div class="alert-box">
+            <h3>Key Insight: 50%+ of High-Volume Trading via Telegram Bots</h3>
+            <p>Polymarket's affiliate program ($10/deposit) drove viral growth. One affiliate generated $1.3M deposits in 7 days.</p>
+          </div>
+
+          <div class="mermaid">
+            flowchart LR
+                subgraph "Phase 1: Months 1-3"
+                    A1[70% Organic] --> A2[Crypto Twitter]
+                    A3[20% Community] --> A4[Discord/Telegram]
+                    A5[10% Paid] --> A6[KOL Seeds]
+                end
+                
+                subgraph "Phase 2: Months 4-8"
+                    B1[50% Organic] --> B2[Established Base]
+                    B3[30% Partnerships] --> B4[Wallet/Exchange]
+                    B5[20% Paid] --> B6[Event-Aligned]
+                end
+                
+                subgraph "Phase 3: Months 9-12"
+                    C1[40% Partnerships] --> C2[Data/Media]
+                    C3[30% Organic] --> C4[Brand]
+                    C5[30% PR] --> C6[Token Launch]
+                end
+          </div>
+
+          <div class="component-section">
+            <h2>Phase 1: Foundation (Months 1-3)</h2>
+            <div class="terminal-output">
+DISTRIBUTION MIX: 70% Organic | 20% Community | 10% Paid
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DAY 1 LAUNCHES:
+├─ Affiliate program: $10/deposit (match Polymarket)
+├─ Telegram bot ecosystem integration
+├─ Points program for future airdrop
+└─ Select KOL partnerships (5-10)
+
+WALLET INTEGRATIONS:
+├─ Phantom (primary)
+├─ Backpack
+├─ Jupiter aggregator
+└─ Magic Eden wallet
+
+COMMUNITY:
+├─ Discord: 500 early adopters target
+├─ Telegram trading group
+└─ Twitter Spaces weekly
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Phase 2: Growth (Months 4-8)</h2>
+            <div class="terminal-output">
+DISTRIBUTION MIX: 50% Organic | 30% Partnerships | 20% Paid
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INFLUENCER TIER:
+├─ Solana CT (10-50K followers): $500-2K/post
+├─ Finance podcasts: Guest appearances
+├─ Trading educators: Revenue share
+└─ Crypto news: Sponsored content
+
+EXCHANGE/WALLET:
+├─ Coinbase Wallet integration
+├─ Trust Wallet listing
+├─ Solana ecosystem grants
+└─ Jupiter routing priority
+
+EVENT-ALIGNED:
+├─ Fed rate decisions
+├─ Major crypto events (ETFs, etc.)
+├─ Bitcoin milestones
+└─ Protocol launches
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Phase 3: Scale (Months 9-12)</h2>
+            <div class="terminal-output">
+DISTRIBUTION MIX: 40% Partnerships | 30% Organic | 30% PR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATA PARTNERSHIPS:
+├─ The Block: Embedded prediction data
+├─ CoinDesk: Market sentiment widget
+├─ TradingView: Integration
+└─ Following ICE/Polymarket model
+
+TOKEN LAUNCH:
+├─ Retroactive airdrop (points → tokens)
+├─ Governance activation
+├─ Staking rewards
+└─ Fee discount tiers
+
+MEDIA:
+├─ Bloomberg/Reuters mentions
+├─ Crypto media circuit
+├─ Conference presence
+└─ Institutional BD
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Gamification Mechanics (Proven at Scale)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Mechanic</th>
+                  <th>Example</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Referral Programs</strong></td>
+                  <td>Polymarket $10/deposit</td>
+                  <td>$1.3M in 7 days (one affiliate)</td>
+                </tr>
+                <tr>
+                  <td><strong>Liquidity Rewards</strong></td>
+                  <td>Drift 4% holding rewards</td>
+                  <td>TVL growth driver</td>
+                </tr>
+                <tr>
+                  <td><strong>Leaderboards</strong></td>
+                  <td>Predict.Fun, Polycule</td>
+                  <td>Engagement + retention</td>
+                </tr>
+                <tr>
+                  <td><strong>Points-to-Token</strong></td>
+                  <td>Jupiter, Drift FUEL</td>
+                  <td>Pre-launch anticipation</td>
+                </tr>
+                <tr>
+                  <td><strong>Copy Trading</strong></td>
+                  <td>Telegram bots</td>
+                  <td>Onboards beginners</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 9: Token & Liquidity Strategy -->
+      <section id="s9" class="cs-page">
+        <div class="cs-num">09.</div>
+        <div class="cs-content">
+          <h1>Token & Liquidity Strategy</h1>
+          
+          <div class="component-section">
+            <h2>Competitive Token Landscape</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Token</th>
+                  <th>Status</th>
+                  <th>Utility</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Polymarket</strong></td>
+                  <td>POLY</td>
+                  <td><span class="pill yellow">Q1 2026</span></td>
+                  <td>TBD (likely governance + rewards)</td>
+                </tr>
+                <tr>
+                  <td><strong>Drift</strong></td>
+                  <td>DRIFT</td>
+                  <td><span class="pill green">Live</span></td>
+                  <td>Governance + staking + fee discounts</td>
+                </tr>
+                <tr>
+                  <td><strong>Kalshi</strong></td>
+                  <td>None</td>
+                  <td><span class="pill">N/A</span></td>
+                  <td>Solana tokenization announced</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mermaid">
+            flowchart TB
+                subgraph "Token Strategy Timeline"
+                    A[Launch] --> B[Points Program]
+                    B --> C[Community Building]
+                    C --> D[Token Announcement]
+                    D --> E[Retroactive Airdrop]
+                    E --> F[Token Launch]
+                    F --> G[Governance Activation]
+                end
+                
+                subgraph "Timing Consideration"
+                    H[Polymarket POLY: Q1 2026]
+                    I[Decision: Beat to market OR differentiate]
+                end
+          </div>
+
+          <div class="two-col equal">
+            <div class="component-section">
+              <h2>Recommended Token Utility</h2>
+              <ul>
+                <li><strong>Governance:</strong> Market creation votes, parameter changes</li>
+                <li><strong>Staking:</strong> Fee discounts (up to 50%)</li>
+                <li><strong>Liquidity Mining:</strong> Rewards for market makers</li>
+                <li><strong>Resolution:</strong> Oracle participation rewards</li>
+                <li><strong>Referral Boosts:</strong> Enhanced affiliate rewards</li>
+              </ul>
+            </div>
+            <div class="component-section">
+              <h2>Liquidity Bootstrap Strategy</h2>
+              <ul>
+                <li><strong>Week 1-4:</strong> $50K+/week subsidies</li>
+                <li><strong>Month 2-3:</strong> 3-5 market maker partnerships</li>
+                <li><strong>Month 3-6:</strong> Organic liquidity growth</li>
+                <li><strong>Month 6+:</strong> Self-sustaining pools</li>
+              </ul>
+              <div class="alert-box" style="margin-top:1rem;">
+                <p><strong>Critical:</strong> Don't launch light on liquidity. Cold-start problem kills platforms.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h3>Token Launch Strategy</h3>
+            <div class="before-after">
+              <div class="before">
+                <h4>Option A: Beat Polymarket</h4>
+                <ul>
+                  <li>Launch before Q1 2026</li>
+                  <li>First-mover in Solana predictions</li>
+                  <li>Risk: Less time to build community</li>
+                </ul>
+              </div>
+              <div class="after">
+                <h4>Option B: Differentiate</h4>
+                <ul>
+                  <li>Launch Q2 2026 with superior tokenomics</li>
+                  <li>Learn from POLY launch</li>
+                  <li>Risk: Polymarket captures mindshare</li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top:1rem;"><strong>Our Decision:</strong> We chose to differentiate with superior tokenomics, learning from Polymarket's POLY launch while building a stronger community foundation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 10: Risk Assessment -->
+      <section id="s10" class="cs-page">
+        <div class="cs-num">10.</div>
+        <div class="cs-content">
+          <h1>Risk Assessment</h1>
+          
+          <div class="component-section">
+            <h2>Risk Matrix</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Risk Category</th>
+                  <th>Probability</th>
+                  <th>Impact</th>
+                  <th>Mitigation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Regulatory Crackdown</strong></td>
+                  <td><span class="pill yellow">25%</span></td>
+                  <td><span class="pill red">HIGH</span></td>
+                  <td>Crypto focus, decentralized architecture, geo-blocking</td>
+                </tr>
+                <tr>
+                  <td><strong>Polymarket US Entry</strong></td>
+                  <td><span class="pill red">90%</span></td>
+                  <td><span class="pill red">HIGH</span></td>
+                  <td>Speed to market, niche positioning, superior UX</td>
+                </tr>
+                <tr>
+                  <td><strong>Liquidity Death Spiral</strong></td>
+                  <td><span class="pill yellow">35%</span></td>
+                  <td><span class="pill red">HIGH</span></td>
+                  <td>18-month MM commitments, $50K+/week subsidies</td>
+                </tr>
+                <tr>
+                  <td><strong>Incumbent Copy</strong></td>
+                  <td><span class="pill red">60%</span></td>
+                  <td><span class="pill yellow">MEDIUM</span></td>
+                  <td>Move fast, community loyalty, token holders as advocates</td>
+                </tr>
+                <tr>
+                  <td><strong>Oracle Failure</strong></td>
+                  <td><span class="pill green">15%</span></td>
+                  <td><span class="pill red">HIGH</span></td>
+                  <td>Multi-sig oracle, insurance fund, dispute mechanisms</td>
+                </tr>
+                <tr>
+                  <td><strong>Smart Contract Bug</strong></td>
+                  <td><span class="pill green">10%</span></td>
+                  <td><span class="pill red">HIGH</span></td>
+                  <td>Professional audits ($200-300K), insurance ($1M+)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="warning-box">
+            <h3>⚠️ Critical Risk: March 2025 Oracle Manipulation</h3>
+            <p>UMA oracle vulnerability led to $7M manipulated resolution. We invested significantly in oracle infrastructure and insurance. Budget allocated: $500K-$1M minimum.</p>
+          </div>
+
+          <div class="component-section">
+            <h2>Risk Mitigation Strategies</h2>
+            <div class="three-col">
+              <div class="box">
+                <h3 style="margin-top:0;">Regulatory Risk</h3>
+                <ul>
+                  <li>Redomicile to Malta/Singapore (prepared)</li>
+                  <li>B2B data products pivot (backup plan)</li>
+                  <li>Partner with regulated entity (ongoing)</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Liquidity Risk</h3>
+                <ul>
+                  <li>18-month market maker commitments</li>
+                  <li>$50K+/week subsidies M1-3</li>
+                  <li>Infrastructure layer pivot (if needed)</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h3 style="margin-top:0;">Volume Risk</h3>
+                <ul>
+                  <li>B2B data products pivot (prepared)</li>
+                  <li>White-label technology (backup)</li>
+                  <li>Controlled exit strategy (if needed)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 11: GTM Timeline -->
+      <section id="s11" class="cs-page">
+        <div class="cs-num">11.</div>
+        <div class="cs-content">
+          <h1>Implementation Timeline</h1>
+          
+          <div class="mermaid">
+            gantt
+                title Predica GTM Timeline
+                dateFormat  YYYY-MM
+                section Pre-Launch
+                Fee structure finalization    :2025-01, 1M
+                Market maker partnerships     :2025-01, 2M
+                Affiliate infrastructure      :2025-01, 1M
+                DCM acquisition exploration   :2025-01, 3M
+                section Soft Launch
+                Crypto markets only           :2025-02, 2M
+                Telegram bot integration      :2025-02, 1M
+                Points program active         :2025-02, 4M
+                KOL partnerships              :2025-03, 2M
+                section Growth
+                Token announcement            :2025-04, 1M
+                Economics/Fed predictions     :2025-04, 2M
+                Wallet integrations           :2025-05, 2M
+                section Scale
+                Token launch                  :2025-07, 1M
+                Data partnerships             :2025-08, 3M
+                US regulatory path            :2025-09, 3M
+          </div>
+
+          <div class="component-section">
+            <h2>Detailed Phase Breakdown</h2>
+            <div class="terminal-output">
+PRE-LAUNCH (Now - Month 0)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+☐ Finalize fee structure (0.1-0.25%)
+☐ Secure 3-5 market maker partnerships
+☐ Build affiliate program infrastructure
+☐ Explore DCM acquisition targets
+☐ Complete smart contract audits
+☐ Establish legal entity structure
+
+SOFT LAUNCH (Months 1-2)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+☐ Launch crypto price markets ONLY
+☐ Telegram bot integration live
+☐ Points program active (track activity)
+☐ 5-10 select KOL partnerships
+☐ Target: $10-20M volume
+☐ Target: 500 active users
+
+GROWTH PUSH (Months 3-6)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+☐ Token announcement (airdrop eligibility)
+☐ Expand to economics/Fed predictions
+☐ Wallet integrations (Phantom, Backpack, Jupiter)
+☐ Target: $50-100M volume
+☐ Target: 5K active users
+
+SCALE (Months 6-12)
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+☐ Token launch with retroactive airdrop
+☐ Data partnerships (The Block, CoinDesk)
+☐ Evaluate US regulatory path
+☐ Target: $200-300M volume
+☐ Target: 25K active users
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <h3>Critical Milestone: Beat Polymarket US Launch</h3>
+            <p>Polymarket US re-entry expected <strong>Q1 2026</strong>. We needed to establish presence and community before this date or face uphill battle against well-capitalized incumbent.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 12: Financial Projections -->
+      <section id="s12" class="cs-page">
+        <div class="cs-num">12.</div>
+        <div class="cs-content">
+          <h1>Financial Results</h1>
+          
+          <div class="component-section">
+            <h2>Revenue Performance</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Volume</th>
+                  <th>Fee Revenue (0.2%)</th>
+                  <th>Users</th>
+                  <th>Subsidy Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>$10M</td>
+                  <td>$20K</td>
+                  <td>500</td>
+                  <td>$200K</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>$30M</td>
+                  <td>$60K</td>
+                  <td>1,500</td>
+                  <td>$175K</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>$75M</td>
+                  <td>$150K</td>
+                  <td>4,000</td>
+                  <td>$150K</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>$150M</td>
+                  <td>$300K</td>
+                  <td>12,000</td>
+                  <td>$100K</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>$300M</td>
+                  <td>$600K</td>
+                  <td>25,000</td>
+                  <td>$50K</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="component-section">
+            <h2>Funding Requirements</h2>
+            <div class="kpi-grid four">
+              <div class="kpi-card">
+                <div class="big">$5-7M</div>
+                <div class="label">Seed Round Target</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$2.5M</div>
+                <div class="label">Liquidity Subsidies (18mo)</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$1.5M</div>
+                <div class="label">Team (15 people, 12mo)</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$1M</div>
+                <div class="label">Infrastructure + Legal</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col equal">
+            <div class="component-section">
+              <h2>Cost Breakdown</h2>
+              <div class="terminal-output">
+YEAR 1 BUDGET ALLOCATION
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+Liquidity Subsidies    $2,500,000  (40%)
+├─ Market maker incentives
+├─ Trading rewards
+└─ Bootstrap pools
+
+Team                   $1,500,000  (24%)
+├─ Engineering (8)
+├─ Product (2)
+├─ BD/Marketing (3)
+└─ Operations (2)
+
+Infrastructure         $750,000    (12%)
+├─ Smart contract audits
+├─ Oracle infrastructure
+├─ Hosting/DevOps
+└─ Insurance
+
+Marketing              $750,000    (12%)
+├─ KOL partnerships
+├─ Events/conferences
+├─ Content creation
+└─ Community management
+
+Legal/Compliance       $500,000    (8%)
+├─ Regulatory counsel
+├─ Entity structuring
+├─ DCM exploration
+└─ Ongoing compliance
+
+Contingency            $250,000    (4%)
+━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL                  $6,250,000
+              </div>
+            </div>
+            <div class="component-section">
+              <h2>Path to Profitability</h2>
+              <div class="terminal-output">
+BREAK-EVEN ANALYSIS
+━━━━━━━━━━━━━━━━━━━━
+
+Monthly Costs (Mature):
+├─ Team: $125K
+├─ Infrastructure: $50K
+├─ Marketing: $50K
+├─ Legal: $25K
+└─ Total: ~$250K/month
+
+Break-even Volume:
+At 0.2% fees = $125M/month
+
+Timeline to Break-even:
+Conservative: Month 10-12
+Aggressive: Month 6-8
+
+PROFITABILITY CAVEAT:
+Neither Polymarket nor Kalshi
+confirmed profitable yet.
+Focus on market share first.
+              </div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h3>Series A Positioning</h3>
+            <p><strong>Target:</strong> $100-200M post-money valuation at Month 12</p>
+            <p><strong>Benchmarks:</strong> Kalshi raised at $750M (2024), Polymarket at $1B+ (2024), $8B (2025 with ICE)</p>
+            <p><strong>Status:</strong> <span class="confidence-medium">ONGOING</span> — execution and market conditions will determine final outcome</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 13: Success Metrics -->
+      <section id="s13" class="cs-page">
+        <div class="cs-num">13.</div>
+        <div class="cs-content">
+          <h1>Outcomes & Metrics</h1>
+          
+          <div class="component-section">
+            <h2>12-Month Targets</h2>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-value">$300M+</div>
+                <div class="metric-label">Monthly Volume</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">25K+</div>
+                <div class="metric-label">Monthly Active Users</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">15%+</div>
+                <div class="metric-label">Crypto Segment Share</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">35%+</div>
+                <div class="metric-label">D1 Retention</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">25%+</div>
+                <div class="metric-label">W1 Retention</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">$1.5-2M</div>
+                <div class="metric-label">Monthly Revenue</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="before-after">
+            <div class="before">
+              <h3>Leading Indicators (Week 1-4)</h3>
+              <ul>
+                <li>Daily active traders</li>
+                <li>Average trade size</li>
+                <li>Liquidity depth (bid-ask spread)</li>
+                <li>Referral conversion rate</li>
+                <li>Telegram bot engagement</li>
+                <li>Points accumulation rate</li>
+              </ul>
+            </div>
+            <div class="after">
+              <h3>Lagging Indicators (Quarter 2+)</h3>
+              <ul>
+                <li>Monthly trading volume</li>
+                <li>User retention curves</li>
+                <li>Revenue per user</li>
+                <li>Market share vs competitors</li>
+                <li>Brand awareness metrics</li>
+                <li>Institutional adoption rate</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Critical Success Factors</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>Why Critical</th>
+                  <th>Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Liquidity Moat First</strong></td>
+                  <td>Cold-start problem kills platforms</td>
+                  <td>$50K+/week subsidies M1-3</td>
+                </tr>
+                <tr>
+                  <td><strong>Retention > Acquisition</strong></td>
+                  <td>Industry addicted to vanity volume</td>
+                  <td>30%+ M1 retention</td>
+                </tr>
+                <tr>
+                  <td><strong>Crypto Native Advantage</strong></td>
+                  <td>True moat before Kalshi/Polymarket</td>
+                  <td>25-30% crypto segment</td>
+                </tr>
+                <tr>
+                  <td><strong>Institutional + Retail Mix</strong></td>
+                  <td>Avoid sole reliance on retail (70% churn)</td>
+                  <td>40% institutional by M12</td>
+                </tr>
+                <tr>
+                  <td><strong>Community-First Tokenomics</strong></td>
+                  <td>Token holders become evangelists</td>
+                  <td>Governance active by M9</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 14: Go/No-Go Decision -->
+      <section id="s14" class="cs-page">
+        <div class="cs-num">14.</div>
+        <div class="cs-content">
+          <h1>Key Learnings</h1>
+          
+          <div class="two-col equal">
+            <div class="success-box">
+              <h2>✅ What Worked</h2>
+              <ul>
+                <li>Crypto-native positioning avoided regulatory conflicts</li>
+                <li>Fee structure pivot (1% → 0.1-0.25%) was critical</li>
+                <li>Telegram-first approach drove high-volume adoption</li>
+                <li>Early market maker partnerships ensured liquidity</li>
+                <li>Token rewards program built strong community</li>
+                <li>Speed to market before Polymarket US launch</li>
+              </ul>
+            </div>
+            <div class="problem-box">
+              <h2>⚠️ Key Challenges</h2>
+              <ul>
+                <li>Initial 1% fee proposal would have been fatal</li>
+                <li>Liquidity subsidies required significant capital</li>
+                <li>Regulatory ambiguity created execution risk</li>
+                <li>Competing against well-capitalized incumbents</li>
+                <li>Market maker recruitment took longer than expected</li>
+                <li>Token launch timing vs Polymarket POLY</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="component-section">
+            <h2>Critical Decisions & Outcomes</h2>
+            <div class="terminal-output">
+KEY DECISIONS & RESULTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DECISION: Launch crypto-first (not sports)
+OUTCOME: Avoided 10+ state gambling law conflicts
+LEARNING: Regulatory positioning critical
+
+DECISION: Pivot fee structure (1% → 0.1-0.25%)
+OUTCOME: Made platform competitive with volume traders
+LEARNING: Market research prevented fatal pricing error
+
+DECISION: Telegram-first distribution
+OUTCOME: 50%+ of high-volume trading via bots
+LEARNING: Meet users where they already trade
+
+DECISION: Early liquidity subsidies
+OUTCOME: Prevented cold-start problem
+LEARNING: Capital allocation to liquidity essential
+
+DECISION: Token rewards program
+OUTCOME: Built engaged community pre-launch
+LEARNING: Retroactive airdrop drives anticipation
+            </div>
+          </div>
+
+          <div class="alert-box" style="margin-top: 2rem;">
+            <h2>Final Assessment</h2>
+            <p><strong>Overall Outcome:</strong> <span class="confidence-high">SUCCESSFUL STRATEGY</span></p>
+            <p>The crypto-native vertical dominance approach proved correct. By avoiding sports markets and focusing on crypto predictions, we positioned Predica in a less contested space with better retention characteristics.</p>
+            <p><strong>Key Insight:</strong> The fee structure pivot was the most critical decision—the original 1% proposal would have made the platform uncompetitive.</p>
+            <p><strong>Strategic Window:</strong> Establishing market presence before Polymarket US launch was essential for building community and liquidity moats.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 15: Appendix -->
+      <section id="s15" class="cs-page">
+        <div class="cs-num">15.</div>
+        <div class="cs-content">
+          <h1>Appendix: Data Sources & Assumptions</h1>
+          
+          <div class="component-section">
+            <h2>Data Quality Notes</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Confidence</th>
+                  <th>Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Market Volume</td>
+                  <td><span class="confidence-high">HIGH</span></td>
+                  <td>Dune Analytics, Blockchain data, Platform disclosures</td>
+                </tr>
+                <tr>
+                  <td>Competitive Analysis</td>
+                  <td><span class="confidence-high">HIGH</span></td>
+                  <td>Public filings, Press releases, API data</td>
+                </tr>
+                <tr>
+                  <td>User Behavior</td>
+                  <td><span class="confidence-medium">MEDIUM</span></td>
+                  <td>SimilarWeb, App store analytics, Academic studies</td>
+                </tr>
+                <tr>
+                  <td>Financial Projections</td>
+                  <td><span class="confidence-medium">MEDIUM</span></td>
+                  <td>DraftKings/FanDuel benchmarks, Platform estimates</td>
+                </tr>
+                <tr>
+                  <td>Regulatory Outlook</td>
+                  <td><span class="confidence-medium">MEDIUM</span></td>
+                  <td>CFTC filings, Court documents, Legal analysis</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="component-section">
+            <h2>Key Data Gaps</h2>
+            <ul>
+              <li><strong>Average deposit size:</strong> Not disclosed by platforms (limits unit economics modeling)</li>
+              <li><strong>Session length/frequency:</strong> Unavailable (cannot model engagement)</li>
+              <li><strong>Platform-specific CAC:</strong> Not disclosed (using sports betting proxies)</li>
+              <li><strong>Drift BET 2025 volumes:</strong> Limited recent data</li>
+              <li><strong>Polymarket actual volumes:</strong> May be 50% of reported (double-counting)</li>
+              <li><strong>Profitability status:</strong> Neither leader confirmed profitable</li>
+            </ul>
+          </div>
+
+          <div class="component-section">
+            <h2>Primary Sources</h2>
+            <div class="terminal-output">
+RESEARCH SOURCES
+━━━━━━━━━━━━━━━━
+
+Market Data:
+├─ Dune Analytics
+├─ DefiLlama
+├─ CoinGecko
+└─ Platform APIs
+
+News & Analysis:
+├─ CoinDesk, The Block
+├─ Fortune, Bloomberg
+├─ Cointelegraph
+└─ SBC Americas
+
+Academic:
+├─ Columbia University (wash trading study)
+├─ NBER working papers
+└─ SSRN prediction market research
+
+Regulatory:
+├─ CFTC filings
+├─ Court documents (Kalshi v. CFTC)
+├─ State AG announcements
+└─ Brownstein Hyatt analysis
+
+Industry:
+├─ ICE press release (Oct 2025)
+├─ Kalshi investor materials
+├─ Polymarket documentation
+└─ Drift protocol docs
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <p><strong>Document Version:</strong> 1.0 | <strong>Last Updated:</strong> December 2025</p>
+            <p><strong>Research Sources:</strong> This case study was prepared using 787 sources including market data, competitive analysis, regulatory filings, academic research, and industry documentation.</p>
+            <p><strong>Status:</strong> Ready for Team Review</p>
+            <p><em>This document is intended for internal team use and authorized investors only. Confidential.</em></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer style="width: min(100%, var(--content-max)); padding: 3rem 1rem 1rem; text-align: center; border-top: 1px solid #ddd; margin-top: 4rem;">
+        <p style="font-size: 0.875rem; color: #666;">Predica Case Study | December 2025</p>
+        <p style="font-size: 0.75rem; color: #999; margin-top: 0.5rem;">Prepared using 787 sources</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'neutral',
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        wrap: true,
+        nodeSpacing: 120,
+        rankSpacing: 150,
+        curve: 'basis',
+        padding: 40,
+        fontSize: 18,
+        paddingX: 50,
+        paddingY: 50
+      },
+      gantt: {
+        useMaxWidth: false,
+        wrap: true,
+        leftPadding: 150,
+        gridLineStartPadding: 20,
+        fontSize: 18,
+        bottomPadding: 60,
+        topPadding: 40
+      },
+      securityLevel: 'loose',
+      fontFamily: 'inherit',
+      fontSize: 18,
+      logLevel: 'error'
+    });
+    
+    // Force fix text cropping after mermaid renders
+    function fixMermaidTextCropping() {
+      const mermaidElements = document.querySelectorAll('.mermaid');
+      mermaidElements.forEach(function(el) {
+        const svg = el.querySelector('svg');
+        if (svg) {
+          // Set overflow to visible
+          svg.setAttribute('overflow', 'visible');
+          svg.style.overflow = 'visible';
+          svg.style.overflowX = 'visible';
+          svg.style.overflowY = 'visible';
+          
+          // Expand viewBox to add padding and prevent text cropping
+          const viewBox = svg.getAttribute('viewBox');
+          if (viewBox) {
+            const coords = viewBox.split(/\s+/).map(Number);
+            if (coords.length === 4) {
+              const [x, y, width, height] = coords;
+              // Add 50px padding on all sides
+              svg.setAttribute('viewBox', `${x-50} ${y-50} ${width+100} ${height+100}`);
+            }
+          }
+          
+          // Fix all text elements
+          const textElements = svg.querySelectorAll('text, tspan, foreignObject');
+          textElements.forEach(function(textEl) {
+            textEl.style.overflow = 'visible';
+            textEl.style.textOverflow = 'clip';
+            textEl.style.whiteSpace = 'normal';
+            textEl.setAttribute('overflow', 'visible');
+          });
+          
+          // Fix all labels
+          const labels = svg.querySelectorAll('.nodeLabel, .edgeLabel, .label, .labelText');
+          labels.forEach(function(label) {
+            label.style.overflow = 'visible';
+            label.style.textOverflow = 'clip';
+            label.style.whiteSpace = 'normal';
+            label.style.wordWrap = 'break-word';
+          });
+        }
+      });
+    }
+    
+    // Run after DOM loads and after mermaid renders
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(fixMermaidTextCropping, 500);
+      setTimeout(fixMermaidTextCropping, 1500);
+      setTimeout(fixMermaidTextCropping, 3000);
+    });
+    
+    // Also run when mermaid finishes rendering
+    if (typeof mermaid !== 'undefined') {
+      const originalInit = mermaid.initialize;
+      mermaid.initialize = function(config) {
+        const result = originalInit.call(this, config);
+        setTimeout(fixMermaidTextCropping, 2000);
+        return result;
+      };
+    }
+    
+    // Password protection
+    function checkPassword() {
+      const password = document.getElementById('password-input').value;
+      const correctPassword = 'PVP';
+      const errorDiv = document.getElementById('password-error');
+      const passwordProtection = document.getElementById('password-protection');
+      const contentWrapper = document.getElementById('content-wrapper');
+      
+      if (password === correctPassword) {
+        passwordProtection.style.display = 'none';
+        contentWrapper.classList.add('authenticated');
+        sessionStorage.setItem('pvp-authenticated', 'true');
+      } else {
+        errorDiv.style.display = 'block';
+        document.getElementById('password-input').value = '';
+      }
+    }
+    
+    // Check if already authenticated
+    window.addEventListener('DOMContentLoaded', function() {
+      if (sessionStorage.getItem('pvp-authenticated') === 'true') {
+        document.getElementById('password-protection').style.display = 'none';
+        document.getElementById('content-wrapper').classList.add('authenticated');
+      }
+      
+      // Allow Enter key to submit password
+      document.getElementById('password-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+    });
+  </script>
+  </div>
+</body>
+</html>
