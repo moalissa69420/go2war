@@ -120,20 +120,15 @@
   width: 100%;
 }
 
-/* Main Content Grid - Swiss 3-Column System */
+/* Main Content Grid - 2-Column System (Images + Content) - Like Section 1 */
 .content {
   display: grid;
-  grid-template-columns: 1fr 1fr 380px;
+  grid-template-columns: 1fr 380px;
   min-height: auto;
   padding: 0;
   align-items: start;
   gap: 0;
   background: var(--white);
-}
-
-/* All pages use same layout as section 1 - 2 columns (images + content) */
-.content {
-  grid-template-columns: 1fr 380px;
 }
 
 /* Left Column - Primary Image */
