@@ -4,133 +4,674 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PVP x Nubcat - Presentation</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      background: #000;
-      color: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 2rem;
-    }
-    
-    .container {
-      text-align: center;
-      max-width: 800px;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-weight: 300;
-    }
-    
-    .subtitle {
-      font-size: 1.2rem;
-      color: #999;
-      margin-bottom: 3rem;
-    }
-    
-    .slide-nav {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .slide-link {
       background: #fff;
-      color: #000;
-      padding: 2rem;
-      text-decoration: none;
-      border: 1px solid #333;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
     
-    .slide-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
-    .slide-link .slide-number {
-      font-size: 2rem;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
+    .slide-wrapper .page {
+      margin-bottom: 0;
     }
     
-    .slide-link .slide-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    
-    .slide-link .slide-desc {
-      font-size: 0.875rem;
-      color: #666;
-    }
-    
-    @media (max-width: 600px) {
-      .slide-nav {
-        grid-template-columns: 1fr;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
+    .slide-wrapper .page:last-child {
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>PVP x Nubcat</h1>
-    <p class="subtitle">Presentation Deck</p>
+  <div class="slide-wrapper">
     
-    <div class="slide-nav">
-      <a href="slide-a1.html" class="slide-link">
-        <div class="slide-number">A1</div>
-        <div class="slide-title">The Opportunity</div>
-        <div class="slide-desc">Massive audience, zero product monetization</div>
-      </a>
+    <!-- Slide A1 -->
+    <div class="page">
       
-      <a href="slide-a2.html" class="slide-link">
-        <div class="slide-number">A2</div>
-        <div class="slide-title">The Playbook</div>
-        <div class="slide-desc">Proven market validation</div>
-      </a>
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
       
-      <a href="slide-a3.html" class="slide-link">
-        <div class="slide-number">A3</div>
-        <div class="slide-title">The Product</div>
-        <div class="slide-desc">Hero products and unique positioning</div>
-      </a>
+      <!-- Divider -->
+      <div class="divider"></div>
       
-      <a href="slide-a4.html" class="slide-link">
-        <div class="slide-number">A4</div>
-        <div class="slide-title">The Roadmap</div>
-        <div class="slide-desc">Go-to-market timeline</div>
-      </a>
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/nubcat-main.png" alt="Nubcat" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- Card Element -->
+          <div class="card-element">
+            <div class="card-brand">NUBCAT</div>
+            <div class="card-name">Silly Nubcat</div>
+            <div class="card-number">1,000,000+ followers</div>
+            <div class="card-label">Instagram creator</div>
+            <div class="card-handwriting">@sillynubcat</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/nubcat-secondary.png" alt="Nubcat content" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A1</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>Nubcat has 1M+ Instagram followers, 17.2M TikTok likes, and 12 years of brand equity.</strong> The audience is massive. The emotional connection is real. But the product opportunity remains untapped. No plushies. No collectibles. No retail presence. Just basic merch on a Fourthwall store. This represents a $10M+ opportunity waiting to be captured.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>Instagram Followers</li>
+            <li>TikTok Engagement</li>
+            <li>Years of Brand Equity</li>
+            <li>Current Revenue Gap</li>
+            <li>Unrealized Potential</li>
+            <li>Product Whitespace</li>
+          </ol>
+          
+        </div>
+        
+      </div>
       
-      <a href="slide-a5.html" class="slide-link">
-        <div class="slide-number">A5</div>
-        <div class="slide-title">The Partnership</div>
-        <div class="slide-desc">Aligned incentives</div>
-      </a>
-      
-      <a href="slide-a6.html" class="slide-link">
-        <div class="slide-number">A6</div>
-        <div class="slide-title">Next Steps</div>
-        <div class="slide-desc">Let's talk</div>
-      </a>
     </div>
+    
+    <!-- Slide A2 -->
+    <div class="page">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider"></div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/pudgy-penguins.png" alt="Pudgy Penguins" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- Stats Card -->
+          <div class="card-element">
+            <div class="card-brand">PUDGY PENGUINS</div>
+            <div class="card-name">$13M+ retail sales</div>
+            <div class="card-number">3,100 Walmart stores</div>
+            <div class="card-label">In under 2 years</div>
+            <div class="card-handwriting">Web2-first</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/squishmallows.png" alt="Squishmallows" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A2</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>The playbook is proven. Character IP transforms into consumer empires</strong> when paired with the right product strategy and distribution. Pudgy Penguins went from 250K followers to $13M+ retail sales in 2 years. Squishmallows hit $1.5B. Hello Kitty built $80B lifetime revenue on licensing alone. Nubcat has more followers than Pudgy had at launch.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>Pudgy Penguins $13M+</li>
+            <li>Squishmallows $1.5B</li>
+            <li>Hello Kitty $80B</li>
+            <li>Web2-First Strategy</li>
+            <li>Scarcity Model</li>
+            <li>Licensing Revenue</li>
+          </ol>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Slide A3 -->
+    <div class="page">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider"></div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/plush-mockup.png" alt="Nubcat Plush" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- Product Card -->
+          <div class="card-element">
+            <div class="card-brand">HERO PRODUCT</div>
+            <div class="card-name">8-10" Nubcat Plush</div>
+            <div class="card-number">$24.99-$29.99 DTC</div>
+            <div class="card-label">55-65% gross margin</div>
+            <div class="card-handwriting">500 MOQ</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/couples-set.png" alt="Couples Set" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A3</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>Premium plush collection as the hero product. A unique couples line that no kawaii brand owns.</strong> High-margin accessories as entry points. The couples angle is completely untapped — $23B Valentine's market, 52% of adults buy plush as gifts, zero kawaii competitors targeting couples directly. Nubcat's content already resonates with this audience.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>8-10" Nubcat Plush</li>
+            <li>Couples Matching Set</li>
+            <li>Enamel Pins</li>
+            <li>Sticker Packs</li>
+            <li>Keychains</li>
+            <li>Blind Box Series</li>
+          </ol>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Slide A4 -->
+    <div class="page">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider"></div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/shopify-store.png" alt="DTC Store" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- Roadmap Card -->
+          <div class="card-element">
+            <div class="card-brand">YEAR 1</div>
+            <div class="card-name">$500K Target</div>
+            <div class="card-number">DTC + Amazon</div>
+            <div class="card-label">10,000+ units</div>
+            <div class="card-handwriting">40% margin</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/walmart-shelf.png" alt="Retail" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A4</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>Start DTC to validate demand. Expand to Amazon and conventions. Scale into specialty retail, then mass retail.</strong> Year 1 targets $500K revenue with 40% blended margin. Year 2 scales to $2M with Hot Topic and BoxLunch. Year 3+ pushes to $10M+ with Walmart, Target, and category licensing.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>DTC Launch Q1</li>
+            <li>Amazon FBA Q2</li>
+            <li>Convention Circuit Q3-Q4</li>
+            <li>Specialty Retail Year 2</li>
+            <li>Mass Retail Year 3</li>
+            <li>Licensing Expansion</li>
+          </ol>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Slide A5 -->
+    <div class="page">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider"></div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/partnership.png" alt="Partnership" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- Partnership Card -->
+          <div class="card-element">
+            <div class="card-brand">PVP BRINGS</div>
+            <div class="card-name">Capital + Operations</div>
+            <div class="card-number">Manufacturing</div>
+            <div class="card-label">Distribution + Growth</div>
+            <div class="card-handwriting">You create</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/leon-content.png" alt="Leon Creates" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A5</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>You own the IP. You keep creating. We handle product development, manufacturing, distribution, and growth.</strong> Revenue share means our incentives are completely aligned. PVP brings capital, operations, and scale. You bring the brand, the audience, and creative direction. Everything gets your approval before it ships.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>Product Development</li>
+            <li>Manufacturing</li>
+            <li>Distribution</li>
+            <li>Growth Marketing</li>
+            <li>Operations</li>
+            <li>Capital Investment</li>
+          </ol>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Slide A6 -->
+    <div class="page">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="header-row">
+          <span class="header-left">Nubcat Presentation</span>
+          <span class="header-center">PVP</span>
+          <div class="header-right">
+            <span>Email, Instagram</span>
+            <div class="header-icons">
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="header-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <span class="header-meta">Dec 16 2025</span>
+          <span class="header-url">WWW.GO2WAR.COM</span>
+          <span></span>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider"></div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        
+        <!-- Left Column - Large Image -->
+        <div class="col-image-large">
+          <div class="image-container">
+            <div class="image-placeholder" style="aspect-ratio: 3/4;">
+              <img src="assets/nubcat-wave.png" alt="Nubcat" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Middle Column - Stacked Elements -->
+        <div class="col-image-stack">
+          
+          <!-- CTA Card -->
+          <div class="card-element">
+            <div class="card-brand">LET'S TALK</div>
+            <div class="card-name">30 minute call</div>
+            <div class="card-number">Discuss the vision</div>
+            <div class="card-label">See if there's a fit</div>
+            <div class="card-handwriting">Move fast</div>
+          </div>
+          
+          <!-- Secondary Image -->
+          <div class="image-container" style="flex: 1;">
+            <div class="image-placeholder">
+              <img src="assets/product-lineup.png" alt="Products" onerror="this.style.display='none'">
+              <div class="image-placeholder-icon" style="position: absolute;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <path d="M4 16l4-4 4 4 8-8"/>
+                  <circle cx="9" cy="9" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column - Content -->
+        <div class="col-content">
+          
+          <div class="section-id">A6</div>
+          
+          <div class="section-rule"></div>
+          
+          <p class="body-copy">
+            <strong>Let's talk. 30 minutes to discuss the vision and see if there's a fit.</strong> If we're aligned, we move fast. You've built something special over 12 years. We want to help turn it into something bigger — without losing what makes it special. The playbook is proven. The audience is there. Let's build.
+          </p>
+          
+          <ol class="numbered-list">
+            <li>Jump on a Call</li>
+            <li>Share Character Assets</li>
+            <li>Review Product Mockups</li>
+            <li>Align on Structure</li>
+            <li>Plan First Drop</li>
+            <li>Execute Together</li>
+          </ol>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
   </div>
 </body>
 </html>
-
