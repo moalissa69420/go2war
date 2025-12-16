@@ -131,26 +131,9 @@
   background: var(--white);
 }
 
-/* Special layout for page 1 - no left column */
-.page:first-of-type .content {
+/* All pages use same layout as section 1 - 2 columns (images + content) */
+.content {
   grid-template-columns: 1fr 380px;
-}
-
-/* Special layout for page 2 - larger, more visible images (like bonus page) */
-.page:nth-of-type(2) .content {
-  grid-template-columns: 1fr 2fr 380px;
-}
-
-.page:nth-of-type(2) .col-image-stack {
-  padding: 12px;
-}
-
-.page:nth-of-type(2) .image-grid-3col {
-  gap: 3px;
-}
-
-.page:nth-of-type(2) .col-image-large {
-  padding: 12px;
 }
 
 /* Left Column - Primary Image */
@@ -510,21 +493,11 @@
     font-size: 11px;
   }
 
-  /* Content - Maintain 3-Column Grid, Scaled Down */
+  /* Content - All pages use 2-column layout like section 1 */
   .content {
-    grid-template-columns: 0.8fr 1fr 0.7fr !important;
+    grid-template-columns: 1fr 0.7fr !important;
     gap: 0;
     font-size: 0.85em;
-  }
-
-  /* Special layout for page 1 - scaled */
-  .page:first-of-type .content {
-    grid-template-columns: 1fr 0.7fr !important;
-  }
-
-  /* Special layout for page 2 - scaled */
-  .page:nth-of-type(2) .content {
-    grid-template-columns: 0.8fr 1.2fr 0.7fr !important;
   }
 
   /* Column Padding - Reduced but Proportional */
@@ -623,17 +596,9 @@
     max-width: 100%;
   }
 
-  /* Maintain 3-column layout, scaled */
+  /* All pages use 2-column layout like section 1 */
   .content {
-    grid-template-columns: 0.9fr 1fr 0.9fr !important;
-  }
-
-  .page:first-of-type .content {
     grid-template-columns: 1fr 0.9fr !important;
-  }
-
-  .page:nth-of-type(2) .content {
-    grid-template-columns: 0.9fr 1.3fr 0.9fr !important;
   }
 
   .col-image-large,
