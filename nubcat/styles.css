@@ -1,4 +1,4 @@
-/* PVP Editorial Deck - Base Styles */
+/* PVP Editorial Deck - Swiss Design Grid System */
 
 * {
   margin: 0;
@@ -7,30 +7,33 @@
 }
 
 :root {
-  /* Colors */
+  /* Swiss Design Color Palette */
   --black: #000000;
   --white: #FFFFFF;
-  --gray-dark: #333333;
+  --gray-dark: #1A1A1A;
   --gray-medium: #666666;
   --gray-light: #999999;
   --gray-lighter: #CCCCCC;
-  --border: #E0E0E0;
-  --list-color: #8B7355; /* Brownish color for list items */
-  --accent: #5B5BFF;
+  --border: #E5E5E5;
+  --list-color: #666666;
+  --accent: #000000;
   
   /* Typography */
   --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
   
-  /* Spacing */
+  /* Swiss Grid System - Base Unit: 4px */
+  --base-unit: 4px;
+  --grid-gap: 2px; /* Minimal gap for clean grid */
+  --col-padding: 24px; /* 6 × base-unit */
+  --content-padding: 48px; /* 12 × base-unit */
   --page-padding: 48px;
-  --gutter: 24px;
 }
 
 /* Page Container */
 .page {
   width: 1440px;
-  min-height: 900px;
+  min-height: auto;
   background: var(--white);
   font-family: var(--font-primary);
   position: relative;
@@ -59,14 +62,14 @@
 
 .header-left {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--black);
   letter-spacing: 0.02em;
 }
 
 .header-center {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--black);
   letter-spacing: 0.02em;
 }
@@ -87,7 +90,7 @@
 .header-icon {
   width: 20px;
   height: 20px;
-  border: 1px solid var(--gray-light);
+  border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -111,43 +114,306 @@
 /* Divider */
 .divider {
   height: 1px;
-  background: var(--black);
-  margin: 0 var(--page-padding);
+  background: var(--border);
+  margin: 0;
+  width: 100%;
 }
 
-/* Main Content Grid */
+/* Main Content Grid - Swiss 3-Column System */
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr 380px;
-  min-height: 780px;
+  min-height: auto;
   padding: 0;
+  align-items: start;
+  gap: 0;
+  background: var(--white);
 }
 
-/* Column Styles */
+/* Special layout for page 1 - no left column */
+.page:first-of-type .content {
+  grid-template-columns: 1fr 380px;
+}
+
+/* Special layout for page 2 - larger, more visible images (like bonus page) */
+.page:nth-of-type(2) .content {
+  grid-template-columns: 1fr 2fr 380px;
+}
+
+.page:nth-of-type(2) .col-image-stack {
+  padding: 12px;
+}
+
+.page:nth-of-type(2) .image-grid-3col {
+  gap: 3px;
+}
+
+.page:nth-of-type(2) .col-image-large {
+  padding: 12px;
+}
+
+/* Left Column - Primary Image */
 .col-image-large {
-  padding: var(--gutter);
+  padding: var(--col-padding);
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  background: var(--white);
+  border-right: 1px solid var(--border);
 }
 
+.col-image-large .image-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FAFAFA;
+  min-height: 400px;
+}
+
+.col-image-large .page-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border: none;
+  transition: opacity 0.2s ease;
+  max-height: 100%;
+}
+
+.col-image-large .page-image:hover {
+  opacity: 0.85;
+}
+
+.col-image-large .page-image[src$=".gif"] {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Middle Column - Image Grid Feed */
 .col-image-stack {
-  padding: var(--gutter);
+  padding: var(--col-padding);
   display: flex;
   flex-direction: column;
-  gap: var(--gutter);
+  gap: 0;
+  align-items: stretch;
+  overflow: visible;
+  background: var(--white);
+  border-right: 1px solid var(--border);
 }
 
-.col-content {
-  padding: 32px var(--page-padding) 32px 32px;
-  border-left: 1px solid var(--border);
-}
-
-/* Images */
-.image-placeholder {
-  background: #F5F5F5;
+/* Swiss Grid System - Vertical Feed (1 column) - For single column layouts */
+.col-image-stack .image-grid-vertical {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
   width: 100%;
-  aspect-ratio: 4/5;
+  background: var(--white);
+}
+
+.col-image-stack .image-grid-vertical .page-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  background: #FAFAFA;
+  border: none;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+  aspect-ratio: auto;
+}
+
+.col-image-stack .image-grid-vertical .page-image:hover {
+  opacity: 0.85;
+}
+
+/* Swiss Grid System - 2 Column Grid */
+.col-image-stack .image-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gap);
+  width: 100%;
+  background: var(--white);
+}
+
+.col-image-stack .image-grid-2col .image-container {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  background: #FAFAFA;
+  min-height: 200px;
+}
+
+.col-image-stack .image-grid-2col .page-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border: none;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+  aspect-ratio: auto;
+}
+
+.col-image-stack .image-grid-2col .page-image:hover {
+  opacity: 0.85;
+}
+
+/* Card Element - Swiss Design */
+.card-element {
+  background: var(--white);
+  padding: 32px;
+  border: 1px solid var(--border);
+  margin-bottom: var(--grid-gap);
+  border-radius: 0;
+}
+
+.card-brand {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  color: var(--gray-medium);
+}
+
+.card-name {
+  font-size: 16px;
+  color: var(--black);
+  margin-bottom: 4px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.card-number {
+  font-size: 16px;
+  color: var(--black);
+  margin-bottom: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.card-label {
+  font-size: 14px;
+  color: var(--gray-medium);
+  margin-bottom: 8px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.card-handwriting {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--black);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Right Column - Content */
+.col-content {
+  padding: var(--content-padding);
+  border-left: 1px solid var(--border);
+  background: var(--white);
+}
+
+/* Section Header */
+.section-id {
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+}
+
+.section-rule {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+/* Body Copy */
+.body-copy {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--black);
+  margin-bottom: 24px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.body-copy strong {
+  font-weight: 500;
+}
+
+/* Numbered List */
+.numbered-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.numbered-list li {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--list-color);
+  margin-bottom: 8px;
+  padding-left: 0;
+  line-height: 1.6;
+}
+
+.numbered-list li::before {
+  content: counter(list-counter) ". ";
+  counter-increment: list-counter;
+}
+
+.numbered-list {
+  counter-reset: list-counter;
+}
+
+/* Image Container Base */
+.col-image-stack .image-container {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  background: #FAFAFA;
+  min-height: 200px;
+}
+
+.col-image-stack .page-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border: none;
+  box-sizing: border-box;
+  aspect-ratio: auto;
+  transition: opacity 0.2s ease;
+}
+
+.col-image-stack .page-image:hover {
+  opacity: 0.85;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Base Page Image */
+.page-image {
+  width: 100%;
+  display: block;
+  border: none;
+  box-sizing: border-box;
+}
+
+/* Image Placeholder (for fallbacks) */
+.image-placeholder {
+  background: #FAFAFA;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,178 +436,29 @@
   color: var(--gray-lighter);
 }
 
-/* Card/Business Card Style Element */
-.card-element {
-  background: #F0F4F8;
-  padding: 24px 32px;
-  border: 1px solid var(--border);
-}
-
-.card-brand {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  margin-bottom: 16px;
-}
-
-.card-name {
-  font-size: 16px;
-  color: #5B7BB4;
-  margin-bottom: 4px;
-}
-
-.card-number {
-  font-size: 16px;
-  color: #5B7BB4;
-  margin-bottom: 16px;
-}
-
-.card-label {
-  font-size: 14px;
-  color: #5B7BB4;
-  margin-bottom: 8px;
-}
-
-.card-handwriting {
-  font-family: 'Brush Script MT', cursive;
-  font-size: 24px;
-  color: var(--black);
-}
-
-/* Section Header (A1, B1, etc) */
-.section-id {
-  font-size: 96px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--black);
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
-}
-
-.section-rule {
-  height: 1px;
-  background: var(--black);
-  margin-bottom: 24px;
-}
-
-/* Body Copy */
-.body-copy {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--black);
-  margin-bottom: 24px;
-  text-align: justify;
-  font-weight: 400;
-}
-
-.body-copy strong {
-  font-weight: 600;
-}
-
-/* Numbered List */
-.numbered-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.numbered-list li {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--list-color);
-  margin-bottom: 8px;
-  padding-left: 0;
-}
-
-.numbered-list li::before {
-  content: counter(list-counter) ". ";
-  counter-increment: list-counter;
-}
-
-.numbered-list {
-  counter-reset: list-counter;
-}
-
-/* Alternative: Manual numbered list without counter */
-.list-item {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--list-color);
-  margin-bottom: 8px;
-  display: block;
-}
-
-/* Image with overlay icon */
-.image-container {
-  position: relative;
+/* 2 Column Grid - Larger Images */
+.col-image-stack .image-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap);
   width: 100%;
+  background: var(--white);
 }
 
-.image-overlay-icon {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--gray-lighter);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.col-image-stack .image-grid-3col .page-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  background: #FAFAFA;
+  border: none;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+  aspect-ratio: auto;
 }
 
-/* Grid variations for different layouts */
-.content-2col {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-}
-
-.content-wide-left {
-  display: grid;
-  grid-template-columns: 2fr 1fr 380px;
-}
-
-/* Multi-image grid in middle column */
-.image-grid-2x2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.image-grid-stacked {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Text overlay on images */
-.image-with-text {
-  position: relative;
-}
-
-.image-text-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 16px;
-  font-size: 10px;
-  line-height: 1.4;
-  color: var(--gray-dark);
-  columns: 3;
-  column-gap: 12px;
-}
-
-/* Page label (Page A, Page B) */
-.page-label {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #4CAF50;
-  color: white;
-  font-size: 10px;
-  padding: 2px 8px;
-  font-weight: 500;
+.col-image-stack .image-grid-3col .page-image:hover {
+  opacity: 0.85;
 }
 
 /* Utility classes */
