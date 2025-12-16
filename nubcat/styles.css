@@ -1,0 +1,369 @@
+/* PVP Editorial Deck - Base Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+  --black: #000000;
+  --white: #FFFFFF;
+  --gray-dark: #333333;
+  --gray-medium: #666666;
+  --gray-light: #999999;
+  --gray-lighter: #CCCCCC;
+  --border: #E0E0E0;
+  --list-color: #8B7355; /* Brownish color for list items */
+  --accent: #5B5BFF;
+  
+  /* Typography */
+  --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  
+  /* Spacing */
+  --page-padding: 48px;
+  --gutter: 24px;
+}
+
+/* Page Container */
+.page {
+  width: 1440px;
+  min-height: 900px;
+  background: var(--white);
+  font-family: var(--font-primary);
+  position: relative;
+}
+
+/* Header Section */
+.header {
+  padding: 24px var(--page-padding) 0;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.header-row:first-child {
+  border-bottom: none;
+}
+
+.header-row:last-child {
+  padding-bottom: 16px;
+}
+
+.header-left {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: 0.02em;
+}
+
+.header-center {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: 0.02em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--black);
+}
+
+.header-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.header-icon {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--gray-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-meta {
+  font-size: 13px;
+  color: var(--gray-light);
+  font-weight: 400;
+}
+
+.header-url {
+  font-size: 13px;
+  color: var(--gray-light);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--black);
+  margin: 0 var(--page-padding);
+}
+
+/* Main Content Grid */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 380px;
+  min-height: 780px;
+  padding: 0;
+}
+
+/* Column Styles */
+.col-image-large {
+  padding: var(--gutter);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.col-image-stack {
+  padding: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+}
+
+.col-content {
+  padding: 32px var(--page-padding) 32px 32px;
+  border-left: 1px solid var(--border);
+}
+
+/* Images */
+.image-placeholder {
+  background: #F5F5F5;
+  width: 100%;
+  aspect-ratio: 4/5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder-icon {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--gray-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-lighter);
+}
+
+/* Card/Business Card Style Element */
+.card-element {
+  background: #F0F4F8;
+  padding: 24px 32px;
+  border: 1px solid var(--border);
+}
+
+.card-brand {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.card-name {
+  font-size: 16px;
+  color: #5B7BB4;
+  margin-bottom: 4px;
+}
+
+.card-number {
+  font-size: 16px;
+  color: #5B7BB4;
+  margin-bottom: 16px;
+}
+
+.card-label {
+  font-size: 14px;
+  color: #5B7BB4;
+  margin-bottom: 8px;
+}
+
+.card-handwriting {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 24px;
+  color: var(--black);
+}
+
+/* Section Header (A1, B1, etc) */
+.section-id {
+  font-size: 96px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.section-rule {
+  height: 1px;
+  background: var(--black);
+  margin-bottom: 24px;
+}
+
+/* Body Copy */
+.body-copy {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--black);
+  margin-bottom: 24px;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.body-copy strong {
+  font-weight: 600;
+}
+
+/* Numbered List */
+.numbered-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.numbered-list li {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--list-color);
+  margin-bottom: 8px;
+  padding-left: 0;
+}
+
+.numbered-list li::before {
+  content: counter(list-counter) ". ";
+  counter-increment: list-counter;
+}
+
+.numbered-list {
+  counter-reset: list-counter;
+}
+
+/* Alternative: Manual numbered list without counter */
+.list-item {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--list-color);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Image with overlay icon */
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.image-overlay-icon {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--gray-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid variations for different layouts */
+.content-2col {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+}
+
+.content-wide-left {
+  display: grid;
+  grid-template-columns: 2fr 1fr 380px;
+}
+
+/* Multi-image grid in middle column */
+.image-grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.image-grid-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Text overlay on images */
+.image-with-text {
+  position: relative;
+}
+
+.image-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--gray-dark);
+  columns: 3;
+  column-gap: 12px;
+}
+
+/* Page label (Page A, Page B) */
+.page-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #4CAF50;
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  font-weight: 500;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mt-4 { margin-top: 32px; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.mb-4 { margin-bottom: 32px; }
+
+/* Print/Export styles */
+@media print {
+  .page {
+    width: 100%;
+    page-break-after: always;
+  }
+}

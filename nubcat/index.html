@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PVP x Nubcat - Presentation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 800px;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: #999;
+      margin-bottom: 3rem;
+    }
+    
+    .slide-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .slide-link {
+      background: #fff;
+      color: #000;
+      padding: 2rem;
+      text-decoration: none;
+      border: 1px solid #333;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .slide-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+    
+    .slide-link .slide-number {
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    
+    .slide-link .slide-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .slide-link .slide-desc {
+      font-size: 0.875rem;
+      color: #666;
+    }
+    
+    @media (max-width: 600px) {
+      .slide-nav {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PVP x Nubcat</h1>
+    <p class="subtitle">Presentation Deck</p>
+    
+    <div class="slide-nav">
+      <a href="slide-a1.html" class="slide-link">
+        <div class="slide-number">A1</div>
+        <div class="slide-title">The Opportunity</div>
+        <div class="slide-desc">Massive audience, zero product monetization</div>
+      </a>
+      
+      <a href="slide-a2.html" class="slide-link">
+        <div class="slide-number">A2</div>
+        <div class="slide-title">The Playbook</div>
+        <div class="slide-desc">Proven market validation</div>
+      </a>
+      
+      <a href="slide-a3.html" class="slide-link">
+        <div class="slide-number">A3</div>
+        <div class="slide-title">The Product</div>
+        <div class="slide-desc">Hero products and unique positioning</div>
+      </a>
+      
+      <a href="slide-a4.html" class="slide-link">
+        <div class="slide-number">A4</div>
+        <div class="slide-title">The Roadmap</div>
+        <div class="slide-desc">Go-to-market timeline</div>
+      </a>
+      
+      <a href="slide-a5.html" class="slide-link">
+        <div class="slide-number">A5</div>
+        <div class="slide-title">The Partnership</div>
+        <div class="slide-desc">Aligned incentives</div>
+      </a>
+      
+      <a href="slide-a6.html" class="slide-link">
+        <div class="slide-number">A6</div>
+        <div class="slide-title">Next Steps</div>
+        <div class="slide-desc">Let's talk</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+
