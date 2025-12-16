@@ -3,13 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GO TO WAR - STRATEGY INC</title>
+    <title>go2war</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1 class="coming-soon">COMING SOON</h1>
+        <h1 class="logo">go2war</h1>
+
+        <div class="diagram-container">
+            <pre class="mermaid">
+gantt
+    title Project Timeline
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Research           :a1, 2024-01-01, 30d
+    Planning           :a2, after a1, 20d
+    section Phase 2
+    Development        :b1, after a2, 45d
+    Testing            :b2, after b1, 15d
+    section Phase 3
+    Deployment         :c1, after b2, 10d
+    Launch             :c2, after c1, 5d
+            </pre>
+        </div>
+
+        <a href="/pvp/" class="launch-btn">Launch PvP</a>
+
+        <p class="footer-text">Made by The Wizard</p>
     </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            gantt: {
+                titleTopMargin: 25,
+                barHeight: 30,
+                barGap: 8,
+                topPadding: 50,
+                leftPadding: 100,
+                gridLineStartPadding: 35,
+                fontSize: 14,
+                sectionFontSize: 16,
+                numberSectionStyles: 3
+            }
+        });
+    </script>
 </body>
 </html>
-
