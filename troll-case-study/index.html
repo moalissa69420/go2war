@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$TROLL Meme Coin — Comprehensive Case Study & Market Analysis</title>
+  <style>
+    :root { --index-width: 280px; --content-max: 58rem; --border:#000; --accent:#000; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+
+    .wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+
+    /* Sidebar */
+    .index { position:sticky; top:0; align-self:start; height:100vh; padding:1rem; border-right:1px solid var(--border); background:#fafafa; overflow-y:auto; }
+    .index-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; color:#666; }
+    .index-logo { font-size:1.5rem; font-weight:800; margin-bottom:0.5rem; }
+    .index ol { list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.5; }
+    .index li { margin-bottom:0.35rem; }
+    .index a { color:#000; text-decoration:none; display:flex; gap:0.5rem; align-items:baseline; padding:0.25rem 0; -webkit-tap-highlight-color:rgba(0,0,0,0.1); }
+    .index a:hover, .index a:active { color:#666; }
+    .index .num { color:#999; width:1.5rem; display:inline-block; text-align:right; font-size:0.8rem; }
+    
+    /* Mobile menu toggle */
+    .mobile-menu-toggle { display:none; position:fixed; top:1rem; right:1rem; z-index:1000; background:#000; color:#fff; border:none; padding:0.5rem 0.75rem; border-radius:4px; font-size:0.9rem; cursor:pointer; -webkit-tap-highlight-color:rgba(255,255,255,0.2); }
+    .mobile-menu-toggle:active { background:#333; }
+    
+    /* Mobile menu backdrop */
+    .menu-backdrop { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; }
+    .menu-backdrop.active { display:block; }
+    
+    /* Image error handling */
+    .image-gallery img, .product-card img { object-fit:cover; background:#f5f5f5; }
+    .image-gallery img[src=""], .product-card img[src=""] { min-height:200px; display:flex; align-items:center; justify-content:center; }
+    .image-gallery img[src=""]::after, .product-card img[src=""]::after { content:"Image not available"; color:#999; font-size:0.8rem; }
+
+    /* Main content */
+    .sections { padding:2rem; display:flex; flex-direction:column; gap:0; }
+
+    section.page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.5rem 0; border-bottom:1px solid #eee; scroll-margin-top: 20px; }
+    section.page:last-child { border-bottom:none; }
+
+    .num-col { display:block; text-align:right; color:#999; font-size:0.85rem; padding-top:0.3rem; font-weight:600; }
+
+    .content h1 { font-size:1.5rem; margin:0 0 0.75rem 0; font-weight:700; color:#000; }
+    .content h2 { font-size:1.15rem; margin:1.25rem 0 0.5rem 0; font-weight:600; color:#000; }
+    .content h3 { font-size:1rem; margin:1rem 0 0.35rem 0; font-weight:600; color:#000; }
+    .content h4 { font-size:0.9rem; margin:0.75rem 0 0.25rem 0; font-weight:600; color:#333; }
+    .content p { margin:0 0 0.75rem 0; }
+    .content ul, .content ol { margin:0 0 0.75rem 0; padding-left:1.25rem; }
+    .content li { margin-bottom:0.35rem; }
+
+    /* Components */
+    .box { background:#fff; border:1px solid var(--border); padding:1rem; margin:0.75rem 0; }
+    .highlight-box { background:#f9f9f9; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .alert-box { background:#fff3cd; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .success-box { background:#d4edda; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:0.75rem 0; }
+    .three-col { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin:0.75rem 0; }
+
+    /* KPI Cards */
+    .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:0.75rem; margin:0.75rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:1rem; text-align:center; }
+    .kpi-card .big { font-size:1.75rem; font-weight:700; color:#000; line-height:1.2; }
+    .kpi-card .label { font-size:0.75rem; color:#666; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem; }
+
+    /* Tables */
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.9rem; }
+    th, td { border:1px solid #ddd; padding:0.5rem 0.75rem; text-align:left; }
+    th { background:#f5f5f5; font-weight:600; }
+    tr:nth-child(even) { background:#fafafa; }
+
+    /* Persona Cards */
+    .persona-card { border:1px solid #000; padding:1rem; margin:0.75rem 0; background:#fff; }
+    .persona-card h4 { margin:0 0 0.75rem 0; font-size:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem; }
+    .persona-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:0.5rem; font-size:0.85rem; }
+    .persona-grid dt { font-weight:600; color:#666; }
+    .persona-grid dd { margin:0; }
+
+    /* Timeline */
+    .timeline { margin:1rem 0; padding-left:1.5rem; border-left:2px solid #000; }
+    .timeline-item { margin-bottom:1rem; position:relative; }
+    .timeline-item::before { content:''; position:absolute; left:-1.65rem; top:0.4rem; width:8px; height:8px; background:#000; border-radius:50%; }
+    .timeline-year { font-weight:700; color:#000; }
+    .timeline-text { color:#333; }
+
+    /* Competitor Matrix */
+    .matrix-yes { color:#000; font-weight:700; }
+    .matrix-no { color:#999; }
+    .matrix-partial { color:#666; }
+
+    /* Quote */
+    blockquote { margin:1rem 0; padding:1rem; background:#f9f9f9; border-left:4px solid #000; font-style:italic; }
+
+    /* Image Galleries */
+    .image-gallery { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin:1rem 0; }
+    .image-gallery.large { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .image-gallery img { width:100%; height:auto; border:1px solid #ddd; border-radius:4px; transition: transform 0.2s, box-shadow 0.2s; cursor:pointer; }
+    .image-gallery img:hover { transform:scale(1.02); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+    .gallery-item { text-align:center; }
+    .gallery-item img { margin-bottom:0.5rem; }
+    .gallery-item .caption { font-size:0.8rem; color:#666; font-weight:500; }
+
+    .product-showcase { display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem; margin:1.5rem 0; }
+    .product-showcase.two-up { grid-template-columns: repeat(2, 1fr); }
+    .product-card { border:1px solid #000; padding:0; overflow:hidden; background:#fff; }
+    .product-card img { width:100%; height:auto; display:block; border-bottom:1px solid #eee; }
+    .product-card .product-info { padding:0.75rem; }
+    .product-card .product-name { font-weight:700; font-size:0.9rem; margin-bottom:0.25rem; }
+    .product-card .product-units { font-size:0.8rem; color:#666; }
+
+    /* Table wrapper for horizontal scroll on mobile */
+    .table-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0.75rem 0; }
+    .table-wrapper table { min-width:100%; }
+
+    /* Responsive - Tablet and below */
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns:1fr; }
+      .index { position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); max-height:none; padding:1rem 0.75rem; }
+      .index ol { display:flex; flex-wrap:wrap; gap:0.5rem; }
+      .index li { margin-bottom:0; }
+      .index a { padding:0.5rem; border:1px solid #ddd; border-radius:4px; background:#fff; }
+      .sections { padding:1rem; }
+      section.page { grid-template-columns:2rem 1fr; gap:0.75rem; padding:1rem 0; }
+      .two-col, .three-col { grid-template-columns:1fr; }
+      .product-showcase { grid-template-columns: repeat(2, 1fr); gap:1rem; }
+      .image-gallery { grid-template-columns: repeat(2, 1fr); }
+      .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+      .persona-grid { grid-template-columns: 1fr; }
+      body { font-size:14.5px; }
+      .content h1 { font-size:1.35rem; }
+      .content h2 { font-size:1.1rem; }
+      .content h3 { font-size:0.95rem; }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 600px) {
+      .mobile-menu-toggle { display:block; }
+      .menu-backdrop { display:block; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+      .menu-backdrop.active { opacity:1; pointer-events:auto; }
+      .index { position:fixed; top:0; left:-100%; width:80%; max-width:280px; height:100vh; z-index:999; transition:left 0.3s ease; box-shadow:2px 0 10px rgba(0,0,0,0.1); }
+      .index.open { left:0; }
+      .sections { padding:0.75rem; padding-top:3.5rem; }
+      section.page { grid-template-columns:1.5rem 1fr; gap:0.5rem; padding:0.75rem 0; }
+      .num-col { font-size:0.75rem; }
+      .index { padding:0.75rem 0.5rem; }
+      .index-logo { font-size:1.25rem; }
+      .index-title { font-size:0.7rem; }
+      .index a { font-size:0.8rem; padding:0.4rem; }
+      .index .num { width:1.2rem; font-size:0.75rem; }
+      .index ol { flex-direction:column; }
+      .index li { margin-bottom:0.25rem; }
+      .index a { border:0; background:transparent; }
+      .product-showcase { grid-template-columns: 1fr; gap:0.75rem; }
+      .image-gallery { grid-template-columns: 1fr; gap:0.75rem; }
+      .image-gallery.large { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap:0.5rem; }
+      .kpi-card { padding:0.75rem 0.5rem; }
+      .kpi-card .big { font-size:1.4rem; }
+      .kpi-card .label { font-size:0.7rem; }
+      .box, .highlight-box, .alert-box, .success-box { padding:0.75rem; margin:0.5rem 0; }
+      table { font-size:0.8rem; }
+      th, td { padding:0.4rem 0.5rem; }
+      .persona-card { padding:0.75rem; }
+      .persona-card h4 { font-size:0.9rem; }
+      .persona-grid { font-size:0.8rem; }
+      .timeline { padding-left:1rem; }
+      .timeline-item::before { left:-1.15rem; }
+      blockquote { padding:0.75rem; }
+      body { font-size:14px; line-height:1.6; }
+      .content h1 { font-size:1.25rem; }
+      .content h2 { font-size:1.05rem; }
+      .content h3 { font-size:0.9rem; }
+      .content h4 { font-size:0.85rem; }
+    }
+
+    /* Very small mobile devices */
+    @media (max-width: 400px) {
+      .sections { padding:0.5rem; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-card .big { font-size:1.25rem; }
+      table { font-size:0.75rem; }
+      th, td { padding:0.35rem 0.4rem; }
+    }
+
+    /* Print */
+    @media print {
+      .index { display:none; }
+      .wrapper { grid-template-columns:1fr; }
+      section.page { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">☰ Menu</button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="wrapper">
+    <aside class="index" id="indexNav">
+      <div class="index-logo">$TROLL</div>
+      <div class="index-title">Case Study Index</div>
+      <ol>
+        <li><a href="#s0"><span class="num">00.</span> Executive Summary</a></li>
+        <li><a href="#s1"><span class="num">01.</span> Target Market Research</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Customer Profiles</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Demographics & Habits</a></li>
+        <li><a href="#s4"><span class="num">04.</span> The TROLL Brand</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Value Drivers</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Origin Story</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Crypto Calendar</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Competitors</a></li>
+        <li><a href="#s9"><span class="num">09.</span> Competitor Strategy</a></li>
+        <li><a href="#s10"><span class="num">10.</span> Merchandise & Activation</a></li>
+        <li><a href="#s11"><span class="num">11.</span> Recommendations</a></li>
+      </ol>
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; font-size:0.75rem; color:#999;">
+        Prepared by Mo Alissa<br>
+        December 2024
+      </div>
+    </aside>
+
+    <main class="sections">
+
+      <!-- Section 0: Executive Summary -->
+      <section id="s0" class="page">
+        <div class="num-col">00.</div>
+        <div class="content">
+          <h1>$TROLL Meme Coin: Case Study & Market Analysis</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;"><strong>$TROLL represents a uniquely positioned meme coin with an unprecedented competitive advantage: exclusive worldwide intellectual property rights to the Trollface meme</strong>—the internet's oldest and most culturally significant meme, created in 2008.</p>
+          </div>
+
+          <h2>Key Metrics at a Glance</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$33.4M</div>
+              <div class="label">Market Cap</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$283.8M</div>
+              <div class="label">All-Time High</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">44,000+</div>
+              <div class="label">Holders</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$5.2M</div>
+              <div class="label">Daily Volume</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">#39</div>
+              <div class="label">Global Meme Rank</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">17 Years</div>
+              <div class="label">Meme Age</div>
+            </div>
+          </div>
+
+          <h2>The Opportunity</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Current Position</h4>
+              <ul style="margin-bottom:0;">
+                <li>Trading <strong>88% below ATH</strong></li>
+                <li>Exclusive IP licensing deal</li>
+                <li>Major exchange listings (Coinbase, Binance Alpha)</li>
+                <li>Growing holder base (+300-600/week)</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Unique Advantages</h4>
+              <ul style="margin-bottom:0;">
+                <li><strong>Only meme coin</strong> with creator IP license</li>
+                <li>11% royalty alignment with creator</li>
+                <li>Legal protection via U.S. Copyright</li>
+                <li>Merchandise revenue potential</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Target Market Research -->
+      <section id="s1" class="page">
+        <div class="num-col">01.</div>
+        <div class="content">
+          <h1>In-Depth Target Market Research</h1>
+
+          <h2>Global Meme Coin Market Overview</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">The meme coin sector grew <strong>500% in 2024</strong>—from $20B to $120B total market cap. Solana generates 17,000-20,000 new meme tokens daily.</p>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$120B</div>
+              <div class="label">2024 Market Cap</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">30%+</div>
+              <div class="label">Of Crypto Interest</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">50K</div>
+              <div class="label">New Tokens/Day</div>
+            </div>
+          </div>
+
+          <h2>Primary Target Markets</h2>
+          <h3>Tier 1: United States</h3>
+          <table>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td>troll.fund visitors</td>
+              <td><strong>685</strong> (39% of total)</td>
+            </tr>
+            <tr>
+              <td>trollnetwork visitors</td>
+              <td><strong>428</strong> (28% of total)</td>
+            </tr>
+            <tr>
+              <td>US crypto ownership</td>
+              <td>53 million Americans (28% of adults)</td>
+            </tr>
+          </table>
+
+          <h3>Tier 2: English-Speaking Developed Markets</h3>
+          <table>
+            <tr>
+              <th>Country</th>
+              <th>troll.fund</th>
+              <th>trollnetwork</th>
+              <th>Combined</th>
+            </tr>
+            <tr><td>United Kingdom</td><td>101</td><td>63</td><td>164</td></tr>
+            <tr><td>Canada</td><td>91</td><td>83</td><td>174</td></tr>
+            <tr><td>Australia</td><td>51</td><td>37</td><td>88</td></tr>
+          </table>
+
+          <h3>Tier 3: High-Growth Emerging Markets</h3>
+          <table>
+            <tr>
+              <th>Country</th>
+              <th>troll.fund</th>
+              <th>trollnetwork</th>
+              <th>Notes</th>
+            </tr>
+            <tr><td>Indonesia</td><td>87</td><td>126</td><td>High mobile penetration, young demographic</td></tr>
+            <tr><td>Nigeria</td><td>8</td><td>54</td><td>One of world's highest crypto adoption rates</td></tr>
+            <tr><td>India</td><td>32</td><td>36</td><td>93M crypto owners—largest globally</td></tr>
+          </table>
+
+          <h2>Traffic & Device Insights</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Device Distribution</h4>
+              <table style="margin:0;">
+                <tr><td>Mobile</td><td><strong>76%</strong></td></tr>
+                <tr><td>Desktop</td><td>23%</td></tr>
+                <tr><td>Tablet</td><td>1%</td></tr>
+              </table>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Top Traffic Sources</h4>
+              <table style="margin:0;">
+                <tr><td>Twitter (t.co)</td><td><strong>44%</strong></td></tr>
+                <tr><td>trololol.io</td><td>11%</td></tr>
+                <tr><td>Direct/Other</td><td>45%</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <strong>Key Insight:</strong> iOS dominance (61%) on troll.fund suggests a higher-income demographic engaging with investment-focused content.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Customer Profiles -->
+      <section id="s2" class="page">
+        <div class="num-col">02.</div>
+        <div class="content">
+          <h1>Customer Profile Development</h1>
+
+          <h2>Demographic Breakdown</h2>
+
+          <h3>Age Distribution</h3>
+          <table>
+            <tr>
+              <th>Segment</th>
+              <th>%</th>
+              <th>Age Range</th>
+              <th>Characteristics</th>
+            </tr>
+            <tr>
+              <td><strong>Primary</strong></td>
+              <td>56-57%</td>
+              <td>18-34</td>
+              <td>Digital natives, high social media engagement, FOMO-driven</td>
+            </tr>
+            <tr>
+              <td><strong>Secondary</strong></td>
+              <td>29%</td>
+              <td>25-34</td>
+              <td>Higher disposable income, calculated risk-takers</td>
+            </tr>
+            <tr>
+              <td><strong>Tertiary</strong></td>
+              <td>13-15%</td>
+              <td>35+</td>
+              <td>Larger investments, lower trading frequency</td>
+            </tr>
+          </table>
+
+          <h3>Gender & Income</h3>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Gender Split</h4>
+              <table style="margin:0;">
+                <tr><td>Male</td><td><strong>62%</strong></td></tr>
+                <tr><td>Female</td><td>38%</td></tr>
+              </table>
+              <p style="font-size:0.85rem; margin:0.5rem 0 0 0; color:#666;">Gap has shrunk 6% in 2025. Only 2% difference among youngest investors.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Income Distribution</h4>
+              <table style="margin:0;">
+                <tr><td>$100K+</td><td>22% (40% of holdings)</td></tr>
+                <tr><td>$50K-$100K</td><td><strong>29%</strong> (largest group)</td></tr>
+                <tr><td>Under $50K</td><td>49%</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <h2>Psychographic Segments</h2>
+
+          <div class="persona-card">
+            <h4>Segment 1: The FOMO Trader (~35%)</h4>
+            <div class="persona-grid">
+              <dt>Behavior</dt><dd>Reactive, impulsive purchases chasing quick profits</dd>
+              <dt>Motivation</dt><dd>Fear of missing explosive gains</dd>
+              <dt>Platform</dt><dd>TikTok discovery → Twitter → immediate purchase</dd>
+              <dt>Hold Time</dt><dd>Minutes to hours</dd>
+              <dt>TROLL Appeal</dt><dd>Recovery narrative ("down 88%, next 10x")</dd>
+            </div>
+          </div>
+
+          <div class="persona-card">
+            <h4>Segment 2: The Community Member (~25%)</h4>
+            <div class="persona-grid">
+              <dt>Behavior</dt><dd>Prioritizes belonging over profit</dd>
+              <dt>Motivation</dt><dd>Shared identity, creating memes, recruiting friends</dd>
+              <dt>Platform</dt><dd>Discord/Telegram native, creates content</dd>
+              <dt>Hold Time</dt><dd>Months to years</dd>
+              <dt>TROLL Appeal</dt><dd>Trollface cultural significance, community ownership</dd>
+            </div>
+          </div>
+
+          <div class="persona-card">
+            <h4>Segment 3: The Anti-Establishment Rebel (~20%)</h4>
+            <div class="persona-grid">
+              <dt>Behavior</dt><dd>Holds based on ideological commitment</dd>
+              <dt>Motivation</dt><dd>Rebellion against traditional finance</dd>
+              <dt>Platform</dt><dd>Reddit, crypto Twitter</dd>
+              <dt>Hold Time</dt><dd>Long-term "diamond hands"</dd>
+              <dt>TROLL Appeal</dt><dd>Grassroots origins, creator-aligned economics</dd>
+            </div>
+          </div>
+
+          <div class="persona-card">
+            <h4>Segment 4: The Gambler (~15%)</h4>
+            <div class="persona-grid">
+              <dt>Behavior</dt><dd>Trades frequently across multiple coins</dd>
+              <dt>Motivation</dt><dd>Dopamine from volatility</dd>
+              <dt>Hold Time</dt><dd>Very short (median 100 seconds on Solana)</dd>
+              <dt>TROLL Appeal</dt><dd>High volatility, major exchange listings</dd>
+            </div>
+          </div>
+
+          <div class="persona-card">
+            <h4>Segment 5: The Researcher (~5%)</h4>
+            <div class="persona-grid">
+              <dt>Behavior</dt><dd>Methodical due diligence before entering</dd>
+              <dt>Motivation</dt><dd>Finding undervalued opportunities</dd>
+              <dt>Platform</dt><dd>CoinGecko, on-chain analysis</dd>
+              <dt>Hold Time</dt><dd>Strategic, based on thesis</dd>
+              <dt>TROLL Appeal</dt><dd>IP moat, unique legal positioning</dd>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Demographics & Habits -->
+      <section id="s3" class="page">
+        <div class="num-col">03.</div>
+        <div class="content">
+          <h1>Age, Location, Occupation, Gender + Habits</h1>
+
+          <h2>Comprehensive Persona Profiles</h2>
+
+          <div class="persona-card" style="background:#f9f9f9;">
+            <h4>Persona 1: "The Zoomer Speculator" (18-24)</h4>
+            <div class="persona-grid">
+              <dt>Location</dt><dd>US urban centers, UK, Canada, Australia</dd>
+              <dt>Gender</dt><dd>60% male, 40% female</dd>
+              <dt>Occupation</dt><dd>Student, gig worker, content creator, entry-level tech</dd>
+              <dt>Income</dt><dd>$30K-$80K annually</dd>
+              <dt>Device</dt><dd>iPhone (primary), checks prices on wake</dd>
+              <dt>Habits</dt><dd>TikTok 3+ hours/day, Twitter scrolling, Discord communities</dd>
+              <dt>Trading</dt><dd>Small positions ($50-$500), high frequency</dd>
+              <dt>Discovery</dt><dd>TikTok "gain porn" videos, Twitter viral threads</dd>
+              <dt>Decision Time</dt><dd>24-48 hours from discovery to purchase</dd>
+            </div>
+          </div>
+
+          <div class="persona-card" style="background:#f9f9f9;">
+            <h4>Persona 2: "The Millennial Investor" (25-34)</h4>
+            <div class="persona-grid">
+              <dt>Location</dt><dd>Major tech hubs (Bay Area, NYC, Toronto, London)</dd>
+              <dt>Gender</dt><dd>55% male, 45% female</dd>
+              <dt>Occupation</dt><dd>Software engineer, marketing professional, entrepreneur</dd>
+              <dt>Income</dt><dd>$60K-$150K annually</dd>
+              <dt>Device</dt><dd>Mixed iOS/Android, desktop for research</dd>
+              <dt>Habits</dt><dd>Twitter daily, Reddit research, portfolio tracking apps</dd>
+              <dt>Trading</dt><dd>Calculated positions ($500-$5,000), 1-5% portfolio allocation</dd>
+              <dt>Discovery</dt><dd>Twitter KOLs, Reddit discussions, crypto newsletters</dd>
+              <dt>Decision Time</dt><dd>1-3 days, includes basic research</dd>
+            </div>
+          </div>
+
+          <div class="persona-card" style="background:#f9f9f9;">
+            <h4>Persona 3: "The Crypto Whale" (35-50)</h4>
+            <div class="persona-grid">
+              <dt>Location</dt><dd>US, UAE, Singapore, Switzerland</dd>
+              <dt>Gender</dt><dd>70% male, 30% female</dd>
+              <dt>Occupation</dt><dd>Executive, business owner, early crypto adopter</dd>
+              <dt>Income</dt><dd>$200K-$1M+ annually</dd>
+              <dt>Device</dt><dd>Multiple devices, hardware wallets</dd>
+              <dt>Habits</dt><dd>Selective engagement, private Telegram groups</dd>
+              <dt>Trading</dt><dd>Large positions ($10K-$100K+), lower frequency</dd>
+              <dt>Decision Time</dt><dd>1-2 weeks, thorough due diligence</dd>
+            </div>
+          </div>
+
+          <h2>Daily Habits & Platform Usage</h2>
+
+          <table>
+            <tr>
+              <th>Time</th>
+              <th>Activity</th>
+            </tr>
+            <tr><td>7:00 AM</td><td>Check portfolio/prices immediately on wake</td></tr>
+            <tr><td>7:30 AM</td><td>Scroll Twitter for overnight developments</td></tr>
+            <tr><td>9:00 AM</td><td>Reddit/Discord check during commute or work break</td></tr>
+            <tr><td>12:00 PM</td><td>Quick price check, scan for news</td></tr>
+            <tr><td>6:00 PM</td><td>Post-work community engagement</td></tr>
+            <tr><td>9:00 PM</td><td>TikTok/YouTube crypto content consumption</td></tr>
+            <tr><td>11:00 PM</td><td>Final portfolio check before sleep</td></tr>
+          </table>
+
+          <h2>Platform Hierarchy</h2>
+          <table>
+            <tr>
+              <th>Platform</th>
+              <th>Role</th>
+              <th>Activity</th>
+            </tr>
+            <tr><td><strong>Twitter/X</strong></td><td>Primary hub</td><td>14K-32K crypto tweets daily</td></tr>
+            <tr><td><strong>Telegram</strong></td><td>Community engagement</td><td>Alpha calls, direct access</td></tr>
+            <tr><td><strong>Discord</strong></td><td>Deep discussions</td><td>Token-gated, exclusive</td></tr>
+            <tr><td><strong>TikTok</strong></td><td>Viral discovery</td><td>56% of Gen Z audience</td></tr>
+            <tr><td><strong>Reddit</strong></td><td>Research</td><td>Organic community building</td></tr>
+          </table>
+
+          <h2>Content Preferences</h2>
+          <div class="two-col">
+            <div class="success-box">
+              <h4 style="margin-top:0;">What Resonates</h4>
+              <ul style="margin:0;">
+                <li>Memes (highest engagement)</li>
+                <li>Price screenshots / "gain porn"</li>
+                <li>Short-form video (&lt;60 seconds)</li>
+                <li>Twitter threads</li>
+                <li>AMAs and transparency</li>
+              </ul>
+            </div>
+            <div class="alert-box">
+              <h4 style="margin-top:0;">What Fails</h4>
+              <ul style="margin:0;">
+                <li>Overly technical explanations</li>
+                <li>Long-form without visual hooks</li>
+                <li>Corporate-feeling marketing</li>
+                <li>Promises without proof</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: The TROLL Brand -->
+      <section id="s4" class="page">
+        <div class="num-col">04.</div>
+        <div class="content">
+          <h1>Understanding the TROLL Brand & Who Engages</h1>
+
+          <h2>Core Brand Pillars</h2>
+          <div class="three-col">
+            <div class="box" style="text-align:center;">
+              <h4 style="margin-top:0;">"The Official Trollface Token"</h4>
+              <p style="margin:0; font-size:0.85rem;">Exclusive IP rights provide legitimacy</p>
+            </div>
+            <div class="box" style="text-align:center;">
+              <h4 style="margin-top:0;">"From Culture to Coin"</h4>
+              <p style="margin:0; font-size:0.85rem;">Bridge between internet history and Web3</p>
+            </div>
+            <div class="box" style="text-align:center;">
+              <h4 style="margin-top:0;">"Trade Less, Troll More"</h4>
+              <p style="margin:0; font-size:0.85rem;">Community over speculation</p>
+            </div>
+          </div>
+
+          <h2>Brand Characteristics</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Brand Tone</h4>
+              <ul style="margin:0;">
+                <li><strong>Playful</strong> — Irreverent, self-aware humor</li>
+                <li><strong>Authentic</strong> — Acknowledges it's a meme coin</li>
+                <li><strong>Nostalgic</strong> — 2000s internet culture connection</li>
+                <li><strong>Anti-corporate</strong> — Grassroots, community-driven</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Why TROLL Resonates</h4>
+              <ul style="margin:0;">
+                <li><strong>Cultural Authority</strong> — THE original internet meme</li>
+                <li><strong>Nostalgia</strong> — Rage comics era shared memory</li>
+                <li><strong>Anti-Corporate</strong> — Genuine grassroots culture</li>
+                <li><strong>Creator Alignment</strong> — 11% to Carlos Ramirez</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Who Engages with TROLL</h2>
+          <h3>Traffic Source Analysis</h3>
+          <table>
+            <tr>
+              <th>Source</th>
+              <th>Visitors (troll.fund)</th>
+              <th>Percentage</th>
+            </tr>
+            <tr><td>Twitter (t.co)</td><td>777</td><td><strong>44%</strong></td></tr>
+            <tr><td>trololol.io (main site)</td><td>196</td><td>11%</td></tr>
+            <tr><td>Apple ID (iOS app links)</td><td>43</td><td>2.5%</td></tr>
+            <tr><td>Instagram</td><td>23</td><td>1.3%</td></tr>
+            <tr><td>Direct/Other</td><td>~714</td><td>41%</td></tr>
+          </table>
+
+          <h3>Community Metrics</h3>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">30.6K+</div>
+              <div class="label">Twitter Followers</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">44K+</div>
+              <div class="label">Holders</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">+300-600</div>
+              <div class="label">New Holders/Week</div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <strong>Engagement Quality:</strong> Strong holder retention through market downturns. Active meme creation and organic buying patterns (vs whale manipulation).
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Value Drivers -->
+      <section id="s5" class="page">
+        <div class="num-col">05.</div>
+        <div class="content">
+          <h1>What Drives Coin Value?</h1>
+
+          <h2>Primary Value Drivers (Ranked by Impact)</h2>
+
+          <div class="box">
+            <h3 style="margin-top:0;">1. Social Media Sentiment & Virality (40-50% of price impact)</h3>
+            <p>The single largest driver. A trending hashtag or viral tweet can multiply prices in hours.</p>
+            <ul>
+              <li><strong>Elon Musk's tweets</strong> caused Dogecoin surges of 14-50% in single days</li>
+              <li><strong>TROLL's 4/20 rally</strong> saw 59,944% gains driven by meme-date virality</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">2. Influencer Endorsements & KOL Backing (30-40% of price impact)</h3>
+            <p>A single endorsement from a respected crypto KOL can drive 200-500% price appreciation.</p>
+            <div class="alert-box" style="margin-bottom:0;">
+              <strong>Caution:</strong> 76% of influencer-endorsed tokens fail within 3 months.
+            </div>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">3. Community Size & Engagement (20-30% of price impact)</h3>
+            <p>Larger, engaged communities create sustained volume, network effects, and holder resilience.</p>
+            <p><strong>TROLL:</strong> 44,000+ holders, active Telegram/Discord, growing even in bear conditions.</p>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">4. Exchange Listings (15-25% of price impact)</h3>
+            <p><strong>The "Coinbase Effect":</strong> Average 91% gain in first 5 days post-listing.</p>
+            <p><strong>TROLL's Listings:</strong> Coinbase, Binance Alpha, KuCoin, MEXC, Crypto.com, Bybit Web3</p>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">5. Trading Volume & Liquidity (10-20% of price impact)</h3>
+            <p>Higher volume = reduced slippage, better price discovery, higher confidence.</p>
+            <p><strong>TROLL Challenge:</strong> Current $5.2M daily volume is 4-8% of major competitors.</p>
+          </div>
+
+          <h2>TROLL's Unique Value Propositions</h2>
+          <table>
+            <tr>
+              <th>Advantage</th>
+              <th>TROLL</th>
+              <th>Competitors</th>
+            </tr>
+            <tr>
+              <td>Exclusive IP Licensing</td>
+              <td class="matrix-yes">Yes (six-figure deal)</td>
+              <td class="matrix-no">No major meme coin has this</td>
+            </tr>
+            <tr>
+              <td>Creator Alignment</td>
+              <td class="matrix-yes">11% royalty to Carlos Ramirez</td>
+              <td class="matrix-no">Most creators receive nothing</td>
+            </tr>
+            <tr>
+              <td>Meme Age</td>
+              <td class="matrix-yes">17 years (2008 origin)</td>
+              <td class="matrix-partial">Most are 1-3 years old</td>
+            </tr>
+            <tr>
+              <td>Legal Protection</td>
+              <td class="matrix-yes">U.S. Copyright Office registered</td>
+              <td class="matrix-no">Vulnerable to DMCA/litigation</td>
+            </tr>
+            <tr>
+              <td>Merchandise Revenue</td>
+              <td class="matrix-yes">Structured IP deal enables this</td>
+              <td class="matrix-no">Legally questionable</td>
+            </tr>
+            <tr>
+              <td>Recovery Narrative</td>
+              <td class="matrix-yes">Down 88% from ATH</td>
+              <td class="matrix-partial">Many are at/near highs</td>
+            </tr>
+          </table>
+
+          <h2>What Does NOT Drive Meme Coin Value</h2>
+          <div class="box">
+            <ul style="margin:0;">
+              <li><strong>Technology/Innovation</strong> — Solana speed doesn't increase token value</li>
+              <li><strong>Fundamental Earnings</strong> — No business model, no revenue metrics</li>
+              <li><strong>Long-Term Roadmap</strong> — Most don't survive past 2 years regardless</li>
+              <li><strong>Tokenomics Complexity</strong> — Fixed supply, no emissions</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Origin Story -->
+      <section id="s6" class="page">
+        <div class="num-col">06.</div>
+        <div class="content">
+          <h1>The TROLL Origin Story</h1>
+
+          <h2>The Creation of Trollface</h2>
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Date:</strong> September 19, 2008<br>
+            <strong>Creator:</strong> Carlos Ramirez, 18-year-old Oakland college student ("Whynne")<br>
+            <strong>Platform:</strong> DeviantArt<br>
+            <strong>Tool:</strong> Microsoft Paint</p>
+          </div>
+
+          <blockquote>
+            "That's what that whole little trollface comic was about—trolling as an excuse for being an idiot."
+            <br><em>— Carlos Ramirez on the original intent</em>
+          </blockquote>
+
+          <h2>Viral Evolution Timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-year">2008</span>
+              <span class="timeline-text">Created September 19; posted to DeviantArt as part of webcomic satirizing 4chan trolling</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2009</span>
+              <span class="timeline-text">Explosive spread across 4chan, Reddit (/r/f7u12), Tumblr. First Urban Dictionary definition.</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2010</span>
+              <span class="timeline-text">Ramirez registers with U.S. Copyright Office (July 27, 2010)</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2010-2012</span>
+              <span class="timeline-text">Golden era of rage comics; Trollface becomes universal symbol</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2011-2015</span>
+              <span class="timeline-text">Commercial licensing generates $100,000+ (Hot Topic, games, merchandise)</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2020</span>
+              <span class="timeline-text">Revival through "Trollge" variants and "Cover Yourself in Oil" memes</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">May 2024</span>
+              <span class="timeline-text">$TROLL token launches on Pump.fun</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">April 2025</span>
+              <span class="timeline-text">TROLL explodes 174,948% to $42M market cap (4/20 rally)</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">August 2025</span>
+              <span class="timeline-text">Six-figure IP licensing deal signed with Carlos Ramirez. ATH of $283.8M.</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">December 2025</span>
+              <span class="timeline-text">Current: ~$33M market cap, 44,000+ holders</span>
+            </div>
+          </div>
+
+          <h2>Cultural Significance</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Recognition</h4>
+              <ul style="margin:0;">
+                <li>Called <strong>"the father of memes"</strong> by La Tercera</li>
+                <li>Featured in Netflix's <em>Black Mirror</em></li>
+                <li>Displayed in Museo del Meme, Mexico City</li>
+                <li>Rebecca Black's "Friday" 10th anniversary remix</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Legacy</h4>
+              <ul style="margin:0;">
+                <li>Predates Instagram (2010), Snapchat (2011), TikTok (2016)</li>
+                <li>Remained relevant across every platform shift</li>
+                <li>Genesis of modern meme culture</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>The IP Deal</h2>
+          <div class="success-box">
+            <h4 style="margin-top:0;">August 29, 2025</h4>
+            <p><strong>Parties:</strong> Carlos Ramirez (creator) + Troll Network Limited (community takeover team)</p>
+            <p><strong>Terms:</strong></p>
+            <ul style="margin-bottom:0;">
+              <li><strong>Exclusive worldwide license</strong> within crypto/meme coin space</li>
+              <li><strong>11% royalty</strong> on net merchandise revenue to Ramirez</li>
+              <li>Funded by 10 TROLL whale investors pooling Solana</li>
+              <li>This is the <strong>only meme coin</strong> with legitimate IP rights from original creator</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Crypto Calendar -->
+      <section id="s7" class="page">
+        <div class="num-col">07.</div>
+        <div class="content">
+          <h1>Key Months for Crypto — Events & Opportunities</h1>
+
+          <h2>Crypto Seasonality Patterns</h2>
+
+          <h3>Bullish Periods</h3>
+          <table>
+            <tr>
+              <th>Month</th>
+              <th>Historical Pattern</th>
+              <th>Mechanism</th>
+            </tr>
+            <tr>
+              <td><strong>February</strong></td>
+              <td>67-80% win rate</td>
+              <td>Post-Chinese New Year recovery</td>
+            </tr>
+            <tr>
+              <td><strong>March</strong></td>
+              <td>80-100% win rate</td>
+              <td>Altseason typically begins</td>
+            </tr>
+            <tr>
+              <td><strong>April</strong></td>
+              <td>33.79% avg returns (strongest)</td>
+              <td>Tax refunds (US), fresh starts</td>
+            </tr>
+            <tr>
+              <td><strong>October</strong></td>
+              <td>90-100% win rate ("Uptober")</td>
+              <td>Institutional return, Q4 positioning</td>
+            </tr>
+            <tr>
+              <td><strong>Nov-Dec</strong></td>
+              <td>15-53% avg returns</td>
+              <td>Santa rally, year-end accumulation</td>
+            </tr>
+          </table>
+
+          <h3>Bearish Periods to Avoid</h3>
+          <table>
+            <tr>
+              <th>Period</th>
+              <th>Pattern</th>
+              <th>Strategy</th>
+            </tr>
+            <tr>
+              <td>Late January</td>
+              <td>Chinese New Year liquidations</td>
+              <td>Expect 10-20% retracements</td>
+            </tr>
+            <tr>
+              <td>Mid-April</td>
+              <td>US tax deadline sell-off</td>
+              <td>Launch after April 15</td>
+            </tr>
+            <tr>
+              <td>June-July</td>
+              <td>Summer doldrums</td>
+              <td>Conserve marketing budget</td>
+            </tr>
+            <tr>
+              <td><strong>September</strong></td>
+              <td>Historically weakest (-70% avg)</td>
+              <td>Avoid major launches</td>
+            </tr>
+          </table>
+
+          <h2>Altcoin Season Dynamics</h2>
+          <div class="highlight-box">
+            <p><strong>Definition:</strong> When 75%+ of top 50 cryptos outperform Bitcoin over 90 days</p>
+            <p><strong>Current Status (Dec 2025):</strong> Altcoin Season Index at 39 (Bitcoin Season). Full altseason has NOT yet materialized this cycle.</p>
+            <p style="margin:0;"><strong>Implication:</strong> The major meme coin rally may still be ahead. Positioning now could capture the next wave.</p>
+          </div>
+
+          <h2>Major Crypto Events 2025-2026</h2>
+          <table>
+            <tr>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Significance</th>
+            </tr>
+            <tr>
+              <td>Paris Blockchain Week</td>
+              <td>April 15-16, 2026</td>
+              <td>Paris</td>
+              <td>European hub</td>
+            </tr>
+            <tr>
+              <td><strong>TOKEN2049 Dubai</strong></td>
+              <td>April 29-30, 2026</td>
+              <td>Dubai</td>
+              <td>15,000+ attendees, 70% C-level</td>
+            </tr>
+            <tr>
+              <td><strong>Bitcoin 2026</strong></td>
+              <td>April 27-29, 2026</td>
+              <td>Las Vegas</td>
+              <td>Largest Bitcoin conference</td>
+            </tr>
+            <tr>
+              <td>Consensus 2026</td>
+              <td>May 5-7, 2026</td>
+              <td>Miami</td>
+              <td>Major industry gathering</td>
+            </tr>
+            <tr>
+              <td>Blockchain Life 2026</td>
+              <td>Dec 1-2, 2026</td>
+              <td>Dubai</td>
+              <td>15,000+ attendees</td>
+            </tr>
+          </table>
+
+          <h2>Cultural Marketing Moments</h2>
+          <table>
+            <tr>
+              <th>Date</th>
+              <th>Opportunity</th>
+              <th>TROLL Relevance</th>
+            </tr>
+            <tr>
+              <td><strong>April 1</strong></td>
+              <td>April Fools' Day</td>
+              <td>Peak meme/trolling alignment</td>
+            </tr>
+            <tr>
+              <td><strong>April 20</strong></td>
+              <td>4/20 (Meme coin day)</td>
+              <td>TROLL's 2025 breakout was on 4/20</td>
+            </tr>
+            <tr>
+              <td><strong>September 19</strong></td>
+              <td>Trollface Birthday</td>
+              <td>Created September 19, 2008</td>
+            </tr>
+            <tr>
+              <td><strong>October 31</strong></td>
+              <td>Halloween</td>
+              <td>Spooky/troll themes</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 8: Competitors -->
+      <section id="s8" class="page">
+        <div class="num-col">08.</div>
+        <div class="content">
+          <h1>Identifying Competitors</h1>
+
+          <h2>Competitive Landscape Overview</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">The meme coin market is dominated by <strong>10 coins controlling ~90% of sector capitalization</strong>. Total market: $80-90 billion.</p>
+          </div>
+
+          <h2>Tier 1: Established Giants</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Dogecoin (DOGE)</h4>
+              <table style="margin:0;">
+                <tr><td>Market Cap</td><td><strong>$18.6B</strong></td></tr>
+                <tr><td>Ranking</td><td>#8 overall</td></tr>
+                <tr><td>Age</td><td>12 years (2013)</td></tr>
+              </table>
+              <p style="font-size:0.85rem; margin:0.5rem 0 0 0;"><strong>Positioning:</strong> "The People's Cryptocurrency" with Elon Musk backing</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Shiba Inu (SHIB)</h4>
+              <table style="margin:0;">
+                <tr><td>Market Cap</td><td><strong>$6-8B</strong></td></tr>
+                <tr><td>Ranking</td><td>Top 15</td></tr>
+                <tr><td>Ecosystem</td><td>ShibaSwap, Shibarium L2</td></tr>
+              </table>
+              <p style="font-size:0.85rem; margin:0.5rem 0 0 0;"><strong>Positioning:</strong> "Dogecoin Killer" with actual utility</p>
+            </div>
+          </div>
+
+          <h2>Tier 2: Solana Ecosystem Leaders</h2>
+          <table>
+            <tr>
+              <th>Token</th>
+              <th>Market Cap</th>
+              <th>Daily Volume</th>
+              <th>Positioning</th>
+            </tr>
+            <tr>
+              <td><strong>BONK</strong></td>
+              <td>$1.71B</td>
+              <td>$72M</td>
+              <td>"The People's Coin on Solana" — fair airdrop distribution</td>
+            </tr>
+            <tr>
+              <td><strong>dogwifhat (WIF)</strong></td>
+              <td>~$1.5B</td>
+              <td>Variable</td>
+              <td>"literally just a dog wif a hat" — maximum simplicity</td>
+            </tr>
+            <tr>
+              <td><strong>PEPE</strong></td>
+              <td>~$3.2B</td>
+              <td>$362M</td>
+              <td>Pure meme culture — no utility, no roadmap</td>
+            </tr>
+          </table>
+
+          <h2>Tier 3: Emerging Competitors</h2>
+          <table>
+            <tr>
+              <th>Token</th>
+              <th>Market Cap</th>
+              <th>Positioning</th>
+            </tr>
+            <tr><td>FLOKI</td><td>$1.21B</td><td>Aggressive marketing (sports partnerships)</td></tr>
+            <tr><td>Brett</td><td>$813M</td><td>First-mover on Base chain</td></tr>
+            <tr><td>Popcat</td><td>~$450M</td><td>Cat-clicking game meme</td></tr>
+          </table>
+
+          <h2>TROLL's Competitive Position</h2>
+          <table>
+            <tr>
+              <th>Metric</th>
+              <th>TROLL</th>
+              <th>vs BONK</th>
+              <th>vs WIF</th>
+              <th>vs PEPE</th>
+            </tr>
+            <tr>
+              <td>Market Cap</td>
+              <td>$33M</td>
+              <td>52x smaller</td>
+              <td>45x smaller</td>
+              <td>97x smaller</td>
+            </tr>
+            <tr>
+              <td>Daily Volume</td>
+              <td>$5.2M</td>
+              <td>14x smaller</td>
+              <td>Variable</td>
+              <td>70x smaller</td>
+            </tr>
+            <tr>
+              <td>IP Rights</td>
+              <td class="matrix-yes"><strong>Exclusive</strong></td>
+              <td class="matrix-no">None</td>
+              <td class="matrix-no">None</td>
+              <td class="matrix-no">None</td>
+            </tr>
+          </table>
+
+          <div class="success-box">
+            <strong>Key Insight:</strong> TROLL is significantly smaller by market cap, but possesses the <strong>only exclusive IP licensing deal</strong> in the meme coin space—a unique moat no competitor can replicate.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 9: Competitor Strategy -->
+      <section id="s9" class="page">
+        <div class="num-col">09.</div>
+        <div class="content">
+          <h1>Competitor Strategy Analysis</h1>
+
+          <h2>What Has Worked</h2>
+
+          <div class="box">
+            <h3 style="margin-top:0;">BONK's Success Formula</h3>
+            <table style="margin:0;">
+              <tr><td><strong>Massive Airdrop</strong></td><td>50% of supply to Solana users → built-in grateful audience</td></tr>
+              <tr><td><strong>Fair Distribution</strong></td><td>No whale dominance → community trust</td></tr>
+              <tr><td><strong>Token Burns</strong></td><td>65%+ supply burned, "BURNmas" events → scarcity narrative</td></tr>
+              <tr><td><strong>DeFi Integration</strong></td><td>Jupiter, Orca, Magic Eden → utility beyond speculation</td></tr>
+            </table>
+            <p style="font-size:0.85rem; margin:0.75rem 0 0 0;"><strong>Lesson for TROLL:</strong> Community-first distribution builds lasting loyalty. Consider holder reward programs.</p>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">dogwifhat's Success Formula</h3>
+            <table style="margin:0;">
+              <tr><td><strong>Visual Simplicity</strong></td><td>Absurdist hat imagery → instantly recognizable</td></tr>
+              <tr><td><strong>Community Activism</strong></td><td>Vegas Sphere fundraise ($700K in 4 days) → massive media coverage</td></tr>
+              <tr><td><strong>Grassroots Fundraising</strong></td><td>Small donations ($1-$10) → broad community support</td></tr>
+              <tr><td><strong>Merchandise</strong></td><td>Pink beanie hats, charity tie-ins → brand extension</td></tr>
+            </table>
+            <p style="font-size:0.85rem; margin:0.75rem 0 0 0;"><strong>Lesson for TROLL:</strong> Bold community initiatives generate earned media. Even failed campaigns can succeed as marketing.</p>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">PEPE's Success Formula</h3>
+            <table style="margin:0;">
+              <tr><td><strong>Pure Meme Appeal</strong></td><td>No promises, no roadmap → authentic meme energy</td></tr>
+              <tr><td><strong>Cultural Timing</strong></td><td>"Make Memecoins Great Again" → captured sentiment</td></tr>
+              <tr><td><strong>Organic Virality</strong></td><td>Zero marketing budget → 7,000% gains from pure memes</td></tr>
+            </table>
+            <p style="font-size:0.85rem; margin:0.75rem 0 0 0;"><strong>Lesson for TROLL:</strong> Authenticity > marketing. The Trollface already has cultural legitimacy—lean into it.</p>
+          </div>
+
+          <div class="box">
+            <h3 style="margin-top:0;">FLOKI's Marketing Machine</h3>
+            <table style="margin:0;">
+              <tr><td><strong>Sports Partnerships</strong></td><td>8+ major football clubs → mainstream visibility</td></tr>
+              <tr><td><strong>Outdoor Advertising</strong></td><td>London Underground, Times Square → 60M+ impressions</td></tr>
+              <tr><td><strong>Media Partnerships</strong></td><td>Fox Business, Bloomberg TV → 219M+ US household reach</td></tr>
+            </table>
+            <p style="font-size:0.85rem; margin:0.75rem 0 0 0;"><strong>Lesson for TROLL:</strong> Aggressive marketing works but requires significant budget ($10K-$50K+ per campaign).</p>
+          </div>
+
+          <h2>What Has Failed</h2>
+
+          <div class="alert-box">
+            <h4 style="margin-top:0;">Shark Cat Memecoin</h4>
+            <p><strong>What happened:</strong> Reached $384M peak, then faced legal threats from original image owner</p>
+            <p style="margin:0;"><strong>Lesson for TROLL:</strong> IP licensing upfront prevents this disaster—TROLL already has this advantage</p>
+          </div>
+
+          <div class="alert-box">
+            <h4 style="margin-top:0;">dogwifhat Vegas Sphere Campaign</h4>
+            <p><strong>What happened:</strong> Raised $700K, but Sphere denied any deal existed, called it "fraudulent purposes"</p>
+            <p style="margin:0;"><strong>Lesson for TROLL:</strong> Verify partnerships before public announcements; over-promising destroys trust</p>
+          </div>
+
+          <div class="alert-box">
+            <h4 style="margin-top:0;">Shiba Inu AI Spam Controversy</h4>
+            <p><strong>What happened:</strong> September 2025, SHIB encouraged community to "spam crypto comment sections using AI tools"</p>
+            <p style="margin:0;"><strong>Lesson for TROLL:</strong> Authentic engagement > artificial spam; community actions reflect on brand</p>
+          </div>
+
+          <h2>Competitive Advantages Matrix</h2>
+          <table>
+            <tr>
+              <th>Advantage</th>
+              <th>TROLL</th>
+              <th>BONK</th>
+              <th>WIF</th>
+              <th>PEPE</th>
+              <th>FLOKI</th>
+            </tr>
+            <tr>
+              <td>Exclusive IP License</td>
+              <td class="matrix-yes"><strong>YES</strong></td>
+              <td class="matrix-no">No</td>
+              <td class="matrix-no">No</td>
+              <td class="matrix-no">No</td>
+              <td class="matrix-no">No</td>
+            </tr>
+            <tr>
+              <td>Creator Royalty Alignment</td>
+              <td class="matrix-yes"><strong>11%</strong></td>
+              <td class="matrix-no">N/A</td>
+              <td class="matrix-no">N/A</td>
+              <td class="matrix-no">N/A</td>
+              <td class="matrix-no">N/A</td>
+            </tr>
+            <tr>
+              <td>Meme Cultural Age</td>
+              <td class="matrix-yes"><strong>17 years</strong></td>
+              <td class="matrix-partial">2 years</td>
+              <td class="matrix-partial">2 years</td>
+              <td class="matrix-partial">3 years</td>
+              <td class="matrix-partial">3 years</td>
+            </tr>
+            <tr>
+              <td>Legal IP Protection</td>
+              <td class="matrix-yes"><strong>Strong</strong></td>
+              <td class="matrix-no">Weak</td>
+              <td class="matrix-no">Weak</td>
+              <td class="matrix-no">Weak</td>
+              <td class="matrix-no">Weak</td>
+            </tr>
+            <tr>
+              <td>Recovery Narrative</td>
+              <td class="matrix-yes"><strong>-88% ATH</strong></td>
+              <td class="matrix-partial">Stagnant</td>
+              <td class="matrix-partial">Declining</td>
+              <td class="matrix-no">Near ATH</td>
+              <td class="matrix-partial">Mixed</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 10: Merchandise & Activation Strategy -->
+      <section id="s10" class="page">
+        <div class="num-col">10.</div>
+        <div class="content">
+          <h1>Merchandise & Activation Strategy</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;"><strong>Every element of TROLL's go-to-market strategy is designed to resonate with the specific customer profiles identified in our research.</strong> This isn't generic meme coin marketing—it's precision-targeted activation validated by real-world success.</p>
+          </div>
+
+          <h2>10.1 Strategy Informed by Customer Insights</h2>
+
+          <h3>Why Physical Merchandise Works for Our Audience</h3>
+          <table>
+            <tr>
+              <th>Customer Segment</th>
+              <th>% of Audience</th>
+              <th>What They Want</th>
+              <th>How Our Strategy Delivers</th>
+            </tr>
+            <tr><td><strong>FOMO Trader</strong></td><td>35%</td><td>Visible social proof, shareable moments</td><td>Limited drops create urgency; wearers = walking ads</td></tr>
+            <tr><td><strong>Community Member</strong></td><td>25%</td><td>Identity markers, belonging signals</td><td>Merch = tribal uniform; "U Mad Bro?" = shared language</td></tr>
+            <tr><td><strong>Anti-Establishment Rebel</strong></td><td>20%</td><td>Authentic expression, counter-culture</td><td>Streetwear aesthetic + guerrilla = anti-corporate</td></tr>
+            <tr><td><strong>Gambler</strong></td><td>15%</td><td>Collectibles, rare items</td><td>Mystery variations, limited runs, tradeable items</td></tr>
+            <tr><td><strong>Researcher</strong></td><td>5%</td><td>Quality execution, real business model</td><td>Revenue diversification validates investment thesis</td></tr>
+          </table>
+
+          <h3>Why Guerrilla Marketing Works for Our Audience</h3>
+          <p>Our primary demographic (18-34, mobile-first, iOS-dominant, Twitter-native) responds to:</p>
+          <ul>
+            <li><strong>Organic-feeling content</strong> — They reject corporate ads but embrace "discovered" moments</li>
+            <li><strong>Shareable spectacles</strong> — They create content; give them something worth filming</li>
+            <li><strong>Physical-digital crossover</strong> — Digital natives crave IRL experiences they can post about</li>
+            <li><strong>Scarcity and exclusivity</strong> — Limited sightings of the Smartcar = status for spotters</li>
+          </ul>
+          <div class="highlight-box">
+            <p style="margin:0;">The 76% mobile usage rate and 44% Twitter referral data confirm: <strong>our audience lives to capture and share</strong>. Every activation is designed as content fuel.</p>
+          </div>
+
+          <h2>10.2 Proof of Concept: Miami x Rolling Loud Basel (December 2024)</h2>
+
+          <div class="success-box">
+            <h3 style="margin-top:0;">TROLL's first major physical activation proved the strategy works.</h3>
+            <p>During Art Basel Miami 2024, TROLL executed a partnership with Rolling Loud—combining crypto, music culture, and streetwear in a single high-visibility event. <strong>Result: Massive success.</strong></p>
+          </div>
+
+          <h3>Why This Event Worked (Customer Profile Alignment)</h3>
+          <table>
+            <tr>
+              <th>Profile Match</th>
+              <th>Activation Element</th>
+            </tr>
+            <tr><td><strong>Zoomer Speculator (18-24)</strong></td><td>Rolling Loud's core demo; hip-hop + crypto crossover</td></tr>
+            <tr><td><strong>Urban US Concentration</strong></td><td>Miami = #2 US crypto hub; matches our 39% US traffic</td></tr>
+            <tr><td><strong>Mobile-First Content Creators</strong></td><td>Festival = infinite content opportunities</td></tr>
+            <tr><td><strong>Streetwear Identity</strong></td><td>Art Basel audience values fashion, exclusivity, culture</td></tr>
+            <tr><td><strong>FOMO Psychology</strong></td><td>One-time event creates urgency and exclusivity</td></tr>
+          </table>
+
+          <div class="kpi-grid" style="margin-top:1.5rem;">
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.1rem;">Music x Crypto</div>
+              <div class="label">Crossover resonates with audience</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.1rem;">Physical → Digital</div>
+              <div class="label">Event content outperformed standard posts</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.1rem;">Natural Scaling</div>
+              <div class="label">Attendees become ambassadors</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.1rem;">Art Basel</div>
+              <div class="label">Affluent, trend-forward audience</div>
+            </div>
+          </div>
+
+          <h2>10.3 The Troll Network x Goatfarm Collaboration</h2>
+          <p>14 distinct products designed for <strong>specific customer segments</strong>:</p>
+
+          <div class="product-showcase">
+            <div class="product-card">
+              <img src="images/goatfarm-001.png" alt="U.M.B.? T-Shirt">
+              <div class="product-info">
+                <div class="product-name">U.M.B.? T-Shirt</div>
+                <div class="product-units">35 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-002.png" alt="U.M.B.? Longsleeve">
+              <div class="product-info">
+                <div class="product-name">U.M.B.? Longsleeve</div>
+                <div class="product-units">35 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-006.png" alt="Troll Tracksuit Top">
+              <div class="product-info">
+                <div class="product-name">Troll Tracksuit Top</div>
+                <div class="product-units">50 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-007.png" alt="Troll Tracksuit Bottoms">
+              <div class="product-info">
+                <div class="product-name">Troll Tracksuit Bottoms</div>
+                <div class="product-units">50 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-011.png" alt="MAD? Snapback">
+              <div class="product-info">
+                <div class="product-name">MAD? Snapback</div>
+                <div class="product-units">50 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-003.png" alt="U.M.B.? Socks">
+              <div class="product-info">
+                <div class="product-name">U.M.B.? Socks (4 Colors)</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-004.png" alt="Troll Bracelet">
+              <div class="product-info">
+                <div class="product-name">Troll Bracelet</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-005.png" alt="Troll Rosary">
+              <div class="product-info">
+                <div class="product-name">Troll Rosary</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-012.png" alt="TrollBelt">
+              <div class="product-info">
+                <div class="product-name">TrollBelt</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-008.png" alt="Plastic Troll Mask">
+              <div class="product-info">
+                <div class="product-name">Plastic Troll Mask</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-009.png" alt="Troll Slippers">
+              <div class="product-info">
+                <div class="product-name">Troll Slippers</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-013.png" alt="Trollface Pillow">
+              <div class="product-info">
+                <div class="product-name">Trollface Pillow</div>
+                <div class="product-units">100 Units</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <img src="images/goatfarm-010.png" alt="TrollCar Toy">
+              <div class="product-info">
+                <div class="product-name">TrollCar Toy (1:64)</div>
+                <div class="product-units">100 Units — HERO ITEM</div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Apparel Line — Target: Community Members + Anti-Establishment Rebels</h3>
+          <p>Identity markers—wearers signal tribe membership while walking as brand ambassadors.</p>
+          <table>
+            <tr>
+              <th>Product</th>
+              <th>Units</th>
+              <th>Profile Match</th>
+            </tr>
+            <tr><td>U.M.B.? T-Shirt</td><td>35</td><td>Entry-level identity piece; low commitment</td></tr>
+            <tr><td>U.M.B.? Longsleeve</td><td>35</td><td>Streetwear-forward for fashion-conscious holders</td></tr>
+            <tr><td>Troll Tracksuit Top</td><td>50</td><td>Premium tribe uniform; high visibility</td></tr>
+            <tr><td>Troll Tracksuit Bottoms</td><td>50</td><td>Full commitment piece; true believers</td></tr>
+            <tr><td>MAD? Snapback</td><td>50</td><td>Everyday wearable; constant brand exposure</td></tr>
+          </table>
+          <p><strong>Why this works:</strong> 76% mobile users always photographing. Every piece is <strong>immediately recognizable in photos and videos</strong>—perfect for the content-first audience driving 44% of traffic from Twitter.</p>
+
+          <h3>Accessories Line — Target: Gamblers + FOMO Traders</h3>
+          <p>Lower price points = lower barrier. High volume potential for impulse buyers.</p>
+          <table>
+            <tr>
+              <th>Product</th>
+              <th>Units</th>
+              <th>Profile Match</th>
+            </tr>
+            <tr><td>U.M.B.? Socks</td><td>100</td><td>Low-cost entry; collectible colorways</td></tr>
+            <tr><td>Troll Bracelet</td><td>100</td><td>Visible daily-wear; conversation starter</td></tr>
+            <tr><td>Troll Rosary</td><td>100</td><td>Statement piece; irreverent humor for rebels</td></tr>
+            <tr><td>TrollBelt</td><td>100</td><td>Premium subtle flex; quality signals legitimacy</td></tr>
+          </table>
+          <p><strong>Why this works:</strong> FOMO Traders (35%) make impulsive decisions. Accessories at $25-$60 hit the <strong>impulse purchase threshold</strong>—same psychology that drives their trading drives merchandise conversion.</p>
+
+          <h3>Collectibles & Home — Target: Community Members + Researchers</h3>
+          <p>Items that validate long-term investment thesis and create lasting brand presence.</p>
+          <table>
+            <tr>
+              <th>Product</th>
+              <th>Units</th>
+              <th>Profile Match</th>
+            </tr>
+            <tr><td>Plastic Troll Mask</td><td>100</td><td>Event activation essential; creates viral content</td></tr>
+            <tr><td>Troll Slippers</td><td>100</td><td>"Lives in the ecosystem" signal</td></tr>
+            <tr><td>Trollface Pillow</td><td>100</td><td>Home environment branding; daily reinforcement</td></tr>
+            <tr><td><strong>TrollCar Toy</strong></td><td>100</td><td><strong>HERO ITEM:</strong> Bridges physical activation to collectible</td></tr>
+          </table>
+          <p><strong>Why this works:</strong> Researchers (5% but outsized investment) need <strong>real business execution</strong>. Physical product = proof of legitimate operation.</p>
+
+          <div class="kpi-grid" style="margin-top:1.5rem;">
+            <div class="kpi-card">
+              <div class="big">14</div>
+              <div class="label">Total SKUs</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">1,020</div>
+              <div class="label">Total Units (Limited)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$31-61K</div>
+              <div class="label">Phase 1 Revenue Range</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">10x</div>
+              <div class="label">Scale-up Potential</div>
+            </div>
+          </div>
+
+          <h2>10.4 Kevin Rosa Guerrilla Marketing Activation</h2>
+          <p>November 2025 campaign designed <strong>specifically for our audience's psychology</strong>:</p>
+
+          <h3>Concept References</h3>
+          <div class="image-gallery large">
+            <div class="gallery-item">
+              <img src="images/kevinrosa-000.png" alt="Campaign Overview">
+              <div class="caption">Campaign Overview</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kevinrosa-004.png" alt="Smartcar Reference - Penguin">
+              <div class="caption">Smartcar Concept Reference</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kevinrosa-007.png" alt="Smartcar Reference - Shark">
+              <div class="caption">Smartcar Wrap Reference</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kevinrosa-001.png" alt="Billboard Vandalism">
+              <div class="caption">Billboard "Vandalism" Concept</div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h4 style="margin-top:0;">The Trollface Smartcar</h4>
+            <p style="margin-bottom:0.5rem;">A real Smart Car transformed into the original Trollface meme, driven around NYC as a "moving meme."</p>
+            <table style="margin-top:0.5rem;">
+              <tr><td><strong>Zoomer Speculator:</strong></td><td>They don't watch ads—they create content. The Smartcar gives them something worth filming.</td></tr>
+              <tr><td><strong>Community Member:</strong></td><td>Sighting becomes a status symbol. "I spotted it first."</td></tr>
+              <tr><td><strong>Anti-Establishment Rebel:</strong></td><td>Corporate marketing is cringe. Weird car on the street is authentic.</td></tr>
+            </table>
+          </div>
+
+          <div class="alert-box" style="margin-top:1rem;">
+            <h4 style="margin-top:0;">Billboard Takeover Campaign</h4>
+            <p style="margin-bottom:0.5rem;">Billboards that look like real corporate ads—except they're "vandalized" with a giant spray-painted Trollface.</p>
+            <ul style="margin:0; padding-left:1.5rem;">
+              <li>61% iOS users = <strong>affluent but culturally rebellious</strong></li>
+              <li>"Vandalism" creates illusion of organic street culture, not purchased advertising</li>
+              <li>News coverage of "mysterious Trollface graffiti" = earned media at zero cost</li>
+            </ul>
+          </div>
+
+          <h3>DTC Hero Item: TrollCar Collectible</h3>
+          <p>The 1:64 diecast Smartcar bridges physical activation to collectible merchandise—packaged like Hot Wheels with mystery variations.</p>
+          <div class="image-gallery">
+            <div class="gallery-item">
+              <img src="images/kevinrosa-019.png" alt="Hot Wheels Reference">
+              <div class="caption">Hot Wheels Packaging Reference</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kevinrosa-021.png" alt="Blind Box Unboxing">
+              <div class="caption">Blind Box Collectible Reference</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kevinrosa-018.png" alt="Matchbox Smartcar">
+              <div class="caption">Matchbox Smartcar Reference</div>
+            </div>
+          </div>
+
+          <h2>10.5 Approved Budget Breakdown</h2>
+
+          <div class="success-box">
+            <h3 style="margin-top:0;">Total Project Budget: $81,350 USD (APPROVED)</h3>
+            <p style="margin:0;">Program Dates: 2026 | Locations: New York / Paris / Online</p>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$15.5K</div>
+              <div class="label">NYC Smartcar</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$24.5K</div>
+              <div class="label">Paris Inflatable</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$20.6K</div>
+              <div class="label">Merchandise (800 units)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$14.5K</div>
+              <div class="label">Social / Content</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$7.5K</div>
+              <div class="label">Management</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">20</div>
+              <div class="label">Influencer Partners</div>
+            </div>
+          </div>
+
+          <h3>NYC Smartcar Activation — $15,515</h3>
+          <table>
+            <tr><th>Line Item</th><th>Cost</th></tr>
+            <tr><td>Smart Car Purchase</td><td>$10,000</td></tr>
+            <tr><td>Custom Trollface Wrap</td><td>$4,000</td></tr>
+            <tr><td>Insurance</td><td>$250</td></tr>
+            <tr><td>License Plate</td><td>$50</td></tr>
+            <tr><td>Photographer</td><td>$500</td></tr>
+            <tr><td>Videographer</td><td>$500</td></tr>
+            <tr><td>Gas</td><td>$500</td></tr>
+          </table>
+
+          <h3>Paris Inflatable Activation — $24,500</h3>
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>NEW:</strong> Giant inflatable Trollface installation in Paris—a landmark guerrilla activation designed to generate international press coverage and viral social content.</p>
+          </div>
+          <table>
+            <tr><th>Line Item</th><th>Cost</th></tr>
+            <tr><td>Inflatable Fabrication</td><td>$8,500</td></tr>
+            <tr><td>Permitting</td><td>$10,000</td></tr>
+            <tr><td>Shipping</td><td>$1,500</td></tr>
+            <tr><td>Install Team</td><td>$3,500</td></tr>
+            <tr><td>Contingency</td><td>$1,000</td></tr>
+          </table>
+
+          <h3>Online Merchandise — $20,600 (800 units)</h3>
+          <table>
+            <tr><th>Product</th><th>Units</th><th>Sample Fee</th><th>Unit Cost</th><th>Total</th></tr>
+            <tr><td>T-Shirt</td><td>100</td><td>$200</td><td>$19</td><td>$2,100</td></tr>
+            <tr><td>Hoodie</td><td>100</td><td>$200</td><td>$35</td><td>$3,500</td></tr>
+            <tr><td>Hat</td><td>100</td><td>$200</td><td>$15</td><td>$1,500</td></tr>
+            <tr><td>Mask</td><td>100</td><td>$200</td><td>$15</td><td>$1,500</td></tr>
+            <tr><td>Keychain</td><td>100</td><td>$200</td><td>$5</td><td>$500</td></tr>
+            <tr><td><strong>Collectible Car</strong></td><td>100</td><td>$750</td><td>$25</td><td>$2,500</td></tr>
+            <tr><td>Plushie</td><td>100</td><td>$500</td><td>$50</td><td>$5,000</td></tr>
+            <tr><td>Slippers</td><td>100</td><td>$200</td><td>$40</td><td>$4,000</td></tr>
+          </table>
+
+          <h3>Social / Content — $14,500</h3>
+          <table>
+            <tr><th>Line Item</th><th>Qty</th><th>Unit Cost</th><th>Total</th></tr>
+            <tr><td>Repost Pages</td><td>5</td><td>$500</td><td>$2,500</td></tr>
+            <tr><td>Social Ads</td><td>1</td><td>$3,500</td><td>$3,500</td></tr>
+            <tr><td>Content Bucket</td><td>1</td><td>$3,500</td><td>$3,500</td></tr>
+            <tr><td>Influencers</td><td>20</td><td>$250</td><td>$5,000</td></tr>
+          </table>
+
+          <h2>10.6 Revenue Projection</h2>
+          <table>
+            <tr><th>Product</th><th>Units</th><th>Est. Retail</th><th>Gross Revenue</th><th>Margin</th></tr>
+            <tr><td>T-Shirt</td><td>100</td><td>$45</td><td>$4,500</td><td>$2,400</td></tr>
+            <tr><td>Hoodie</td><td>100</td><td>$85</td><td>$8,500</td><td>$5,000</td></tr>
+            <tr><td>Hat</td><td>100</td><td>$35</td><td>$3,500</td><td>$2,000</td></tr>
+            <tr><td>Mask</td><td>100</td><td>$30</td><td>$3,000</td><td>$1,500</td></tr>
+            <tr><td>Keychain</td><td>100</td><td>$15</td><td>$1,500</td><td>$1,000</td></tr>
+            <tr><td>Collectible Car</td><td>100</td><td>$45</td><td>$4,500</td><td>$2,000</td></tr>
+            <tr><td>Plushie</td><td>100</td><td>$75</td><td>$7,500</td><td>$2,500</td></tr>
+            <tr><td>Slippers</td><td>100</td><td>$60</td><td>$6,000</td><td>$2,000</td></tr>
+            <tr style="font-weight:bold; background:#f0f0f0;"><td>TOTAL</td><td>800</td><td>—</td><td>$39,000</td><td>$18,400</td></tr>
+          </table>
+
+          <div class="kpi-grid" style="margin-top:1rem;">
+            <div class="kpi-card">
+              <div class="big">$81.4K</div>
+              <div class="label">Total Investment</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$39K</div>
+              <div class="label">Merch Gross Revenue</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$18.4K</div>
+              <div class="label">Merch Profit</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">48%</div>
+              <div class="label">Merch Cost Recovery</div>
+            </div>
+          </div>
+
+          <div class="alert-box" style="margin-top:1rem;">
+            <p style="margin:0;"><strong>ROI Note:</strong> Merchandise recovers ~48% of total investment. Full ROI comes from brand value increase, holder growth, social reach (20 influencers + 5 repost pages), and token price appreciation driven by activations.</p>
+          </div>
+
+          <h2>10.7 Go-to-Market Summary: Why This Approach Works</h2>
+
+          <h3>The Five Principles</h3>
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Principle</th>
+              <th>Application</th>
+            </tr>
+            <tr><td>1</td><td><strong>Content Fuel, Not Advertising</strong></td><td>Smartcar sightings > paid ads; 18-34 audience shares organic moments</td></tr>
+            <tr><td>2</td><td><strong>Scarcity Drives FOMO</strong></td><td>Limited 1,020 unit drop; "If I don't buy now, it's gone"</td></tr>
+            <tr><td>3</td><td><strong>Physical Validates Digital</strong></td><td>14-SKU merchandise = proof of real business execution</td></tr>
+            <tr><td>4</td><td><strong>Tribe Uniform Creates Visibility</strong></td><td>Wearers become walking advertisements; strangers become holders</td></tr>
+            <tr><td>5</td><td><strong>Integrated Activation Funnel</strong></td><td>See → Share → Buy → Wear → Share Again</td></tr>
+          </table>
+
+          <div class="highlight-box" style="margin-top:1.5rem;">
+            <h4 style="margin-top:0;">The Bottom Line</h4>
+            <p style="margin:0;">Every element is reverse-engineered from customer psychology. We know who our audience is (18-34, mobile-first, Twitter-native, iOS-dominant), what they respond to (organic content, scarcity, tribe identity), and what they reject (corporate advertising, empty promises). <strong>Rolling Loud Basel is proof of concept. Goatfarm merchandise and Kevin Rosa activations are the scale-up.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 11: Recommendations -->
+      <section id="s11" class="page">
+        <div class="num-col">11.</div>
+        <div class="content">
+          <h1>Conclusions & Strategic Recommendations</h1>
+
+          <h2>TROLL's Core Strengths</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">Exclusive IP</div>
+              <div class="label">Only meme coin with creator licensing</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">17-Year Legacy</div>
+              <div class="label">Unmatched cultural authenticity</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">11% Royalty</div>
+              <div class="label">Creator aligned with success</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">Major CEX</div>
+              <div class="label">Coinbase, Binance Alpha listed</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">-88% ATH</div>
+              <div class="label">Compelling recovery narrative</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big" style="font-size:1.25rem;">Solana</div>
+              <div class="label">Fast, cheap transactions</div>
+            </div>
+          </div>
+
+          <h2>Key Challenges</h2>
+          <div class="alert-box">
+            <ul style="margin:0;">
+              <li><strong>Market Cap Gap:</strong> 50-100x smaller than major competitors</li>
+              <li><strong>Volume Constraints:</strong> Lower liquidity limits large position entries</li>
+              <li><strong>Brand Awareness:</strong> Less mainstream recognition than DOGE, SHIB</li>
+              <li><strong>Market Timing:</strong> Current Bitcoin dominance may delay altseason</li>
+            </ul>
+          </div>
+
+          <h2>Immediate Priorities (Next 30 Days)</h2>
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Expected Outcome</th>
+            </tr>
+            <tr><td>1</td><td>Secure 10-15 mid-tier crypto influencer partnerships</td><td>Expanded reach, social proof</td></tr>
+            <tr><td>2</td><td>Develop merchandise design system</td><td>Revenue stream preparation</td></tr>
+            <tr><td>3</td><td>Publish official IP licensing statement</td><td>Differentiation narrative</td></tr>
+            <tr><td>4</td><td>Launch community ambassador program</td><td>Organic growth engine</td></tr>
+            <tr><td>5</td><td>Plan physical meetups in 3-5 major cities</td><td>Community strengthening</td></tr>
+          </table>
+
+          <h2>Medium-Term Strategy (3-6 Months)</h2>
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Expected Outcome</th>
+            </tr>
+            <tr><td>1</td><td>Execute Phase 1 merchandise launch</td><td>Revenue + brand visibility</td></tr>
+            <tr><td>2</td><td>Conference presence (TOKEN2049 Dubai)</td><td>Industry credibility</td></tr>
+            <tr><td>3</td><td>Expand retail partnerships (Hot Topic precedent)</td><td>Mainstream distribution</td></tr>
+            <tr><td>4</td><td>NFT-merchandise integration</td><td>Holder utility</td></tr>
+            <tr><td>5</td><td>Secure Carlos Ramirez public endorsement</td><td>Creator validation</td></tr>
+          </table>
+
+          <h2>Key Success Metrics</h2>
+          <table>
+            <tr>
+              <th>Metric</th>
+              <th>Current</th>
+              <th>6-Month Target</th>
+              <th>12-Month Target</th>
+            </tr>
+            <tr>
+              <td>Market Cap</td>
+              <td>$33M</td>
+              <td>$100M</td>
+              <td>$300M+</td>
+            </tr>
+            <tr>
+              <td>Holders</td>
+              <td>44K</td>
+              <td>100K</td>
+              <td>500K</td>
+            </tr>
+            <tr>
+              <td>Daily Volume</td>
+              <td>$5.2M</td>
+              <td>$25M</td>
+              <td>$100M</td>
+            </tr>
+            <tr>
+              <td>Twitter Followers</td>
+              <td>30.6K</td>
+              <td>100K</td>
+              <td>500K</td>
+            </tr>
+            <tr>
+              <td>Merchandise Revenue</td>
+              <td>$0</td>
+              <td>$500K</td>
+              <td>$2M</td>
+            </tr>
+          </table>
+
+          <div class="success-box" style="margin-top:1.5rem;">
+            <h3 style="margin-top:0;">The Bottom Line</h3>
+            <p style="margin:0; font-size:1.05rem;"><strong>TROLL represents a unique intersection of authentic internet culture, legal-defensible IP moats, and creator-aligned economics that no other meme coin possesses.</strong></p>
+            <p style="margin:1rem 0 0 0;">With the 17-year Trollface legacy, exclusive IP licensing deal, and Solana infrastructure advantages, TROLL has the foundation for explosive growth during upcoming crypto bull seasons. The recovery narrative—"Down 88% from peak, now positioning for the next bull run with the strongest IP moat in meme coin history"—is among the most compelling in the space.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const indexNav = document.getElementById('indexNav');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    
+    if (menuToggle && indexNav && menuBackdrop) {
+      function toggleMenu() {
+        const isOpen = indexNav.classList.toggle('open');
+        menuBackdrop.classList.toggle('active', isOpen);
+      }
+      
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+      
+      menuBackdrop.addEventListener('click', () => {
+        toggleMenu();
+      });
+      
+      // Close menu when clicking a nav link on mobile
+      document.querySelectorAll('.index a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 600) {
+            toggleMenu();
+          }
+        });
+      });
+    }
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('.index a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Highlight current section in nav
+    const sections = document.querySelectorAll('section.page');
+    const navLinks = document.querySelectorAll('.index a');
+
+    function updateActiveSection() {
+      let current = '';
+      const scrollPos = window.scrollY || window.pageYOffset;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (scrollPos >= sectionTop - 150 && scrollPos < sectionTop + sectionHeight - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.style.fontWeight = 'normal';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.fontWeight = 'bold';
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection(); // Initial call
+  </script>
+</body>
+</html>
