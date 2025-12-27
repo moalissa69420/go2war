@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>The PEO Link Growth System — Full-Stack Lead Generation Infrastructure</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <style>
     :root { --index-width: 270px; --content-max: 56rem; --border:#000; }
-    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
-    .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; overflow-x: hidden; }
+    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; width:100%; max-width:100vw; overflow-x:hidden; }
+    .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; width:100%; max-width:100vw; overflow-x:hidden; }
     .cs-index { position:sticky; top:0; align-self:start; height:100vh; padding:0.5rem 0.75rem; border-right:1px solid var(--border); background:#fff; overflow-y:auto; }
     .cs-index-title { font-size:0.8125rem; margin-bottom:0.25rem; font-weight:bold; }
     .cs-index ol { list-style:none; padding:0; margin:0; font-size:0.875rem; line-height:1.4; }
@@ -16,8 +18,8 @@
     .cs-index a { color:#000; text-decoration:none; display:inline-flex; gap:0.5rem; align-items:baseline; }
     .cs-index a .num { color:#000; width:2.8rem; display:inline-block; text-align:right; }
     .cs-index a:hover { text-decoration:underline; }
-    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; overflow:visible; }
-    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; border-bottom:1px solid #eee; overflow:visible; }
+    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; overflow:visible; width:100%; max-width:100%; }
+    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; border-bottom:1px solid #eee; overflow:visible; max-width:100%; }
     .cs-num { display:block; text-align:right; color:#000; font-size:0.875rem; padding-top:0.2rem; font-weight:bold; }
     .cs-content { overflow:visible; }
     .cs-content h1 { font-size:1.125rem; margin:0 0 0.35rem 0; font-weight:700; color:#000; }
@@ -34,12 +36,12 @@
     .alert-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin: 1rem 0; }
     .success-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin: 1rem 0; }
     .warning-box { background:#fff; border:1px solid #000; border-left:4px solid #999; padding:0.9rem; margin: 1rem 0; }
-    .terminal-output { background:#f9f9f9; color:#000; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.75rem; white-space:pre-wrap; overflow-x:auto; margin: 1rem 0; }
+    .terminal-output { background:#f9f9f9; color:#000; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.75rem; white-space:pre-wrap; overflow-x:auto; margin: 1rem 0; width:100%; max-width:100%; word-wrap:break-word; }
     .kpi-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:0.75rem; margin: 1rem 0; }
     .kpi-card { border:1px solid #000; background:#fff; padding:0.75rem; text-align:center; }
     .kpi-card .big { font-size:1.5rem; font-weight:700; color:#000; }
     .kpi-card .label { font-size:0.75rem; color:#666; margin-top:0.25rem; }
-    .mermaid { background:#fff; border:1px solid #000; padding:2rem; margin:1rem 0; overflow:visible; min-width:100%; width:100%; position:relative; }
+    .mermaid { background:#fff; border:1px solid #000; padding:2rem; margin:1rem 0; overflow-x:auto; overflow-y:visible; min-width:100%; width:100%; max-width:100%; position:relative; }
     .mermaid svg { max-width:100%; width:100%; height:auto; overflow:visible !important; }
     .mermaid svg foreignObject { overflow:visible !important; }
     .mermaid .node-label { overflow:visible !important; text-overflow:clip !important; white-space:normal !important; }
@@ -48,7 +50,7 @@
     .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse { overflow:visible; }
     .mermaid .cluster rect { overflow:visible; }
     .component-section { background:#fff; border:1px solid #000; padding:0.9rem; margin:0.75rem 0; }
-    .data-table { width:100%; border-collapse:collapse; margin: 1rem 0; font-size:0.85rem; }
+    .data-table { width:100%; max-width:100%; border-collapse:collapse; margin: 1rem 0; font-size:0.85rem; }
     .data-table th, .data-table td { border:1px solid #000; padding:0.5rem; text-align:left; }
     .data-table th { background:#1a1a1a; color:#fff; font-weight:600; }
     .data-table tr:nth-child(even) { background:#f9f9f9; }
@@ -72,12 +74,19 @@
     .competitor-card { border:1px solid #000; padding:0.75rem; }
     .competitor-card h4 { margin:0 0 0.5rem 0; font-size:0.9rem; }
     @media (max-width: 900px) { 
-      .cs-wrapper{ grid-template-columns:1fr;} 
-      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border);} 
-      section.cs-page{ grid-template-columns:3rem 1fr; padding:0.25rem 0;} 
-      .two-col, .three-col { grid-template-columns:1fr; } 
-      .kpi-grid { grid-template-columns:1fr; }
-      .competitor-grid { grid-template-columns:1fr; }
+      html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
+      body.cs-template { font-size: 14px; }
+      .cs-wrapper{ grid-template-columns:1fr; width:100%; max-width:100vw; overflow-x:hidden; } 
+      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); width:100%; max-width:100%; } 
+      .cs-sections { padding:0 0.75rem; width:100%; max-width:100%; }
+      section.cs-page{ grid-template-columns:3rem 1fr; padding:0.25rem 0; width:100%; max-width:100%; } 
+      .two-col, .three-col { grid-template-columns:1fr; width:100%; max-width:100%; } 
+      .kpi-grid { grid-template-columns:1fr; width:100%; max-width:100%; }
+      .competitor-grid { grid-template-columns:1fr; width:100%; max-width:100%; }
+      .data-table { width:100%; max-width:100%; overflow-x:auto; display:block; }
+      .mermaid { width:100%; max-width:100%; overflow-x:auto; }
+      .mermaid svg { max-width:100%; }
+      .terminal-output { overflow-x:auto; word-wrap:break-word; white-space:pre-wrap; }
     }
   </style>
 </head>
