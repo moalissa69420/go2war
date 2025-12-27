@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The PEO Link Growth System — Full-Stack Lead Generation Infrastructure</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    :root { --index-width: 270px; --content-max: 56rem; --border:#000; }
+    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+    .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+    .cs-index { position:sticky; top:0; align-self:start; height:100vh; padding:0.5rem 0.75rem; border-right:1px solid var(--border); background:#fff; overflow-y:auto; }
+    .cs-index-title { font-size:0.8125rem; margin-bottom:0.25rem; font-weight:bold; }
+    .cs-index ol { list-style:none; padding:0; margin:0; font-size:0.875rem; line-height:1.4; }
+    .cs-index li { margin-bottom:0.35rem; }
+    .cs-index a { color:#000; text-decoration:none; display:inline-flex; gap:0.5rem; align-items:baseline; }
+    .cs-index a .num { color:#000; width:2.8rem; display:inline-block; text-align:right; }
+    .cs-index a:hover { text-decoration:underline; }
+    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; overflow:visible; }
+    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; border-bottom:1px solid #eee; overflow:visible; }
+    .cs-num { display:block; text-align:right; color:#000; font-size:0.875rem; padding-top:0.2rem; font-weight:bold; }
+    .cs-content { overflow:visible; }
+    .cs-content h1 { font-size:1.125rem; margin:0 0 0.35rem 0; font-weight:700; color:#000; }
+    .cs-content h2 { font-size:1rem; margin:0.5rem 0 0.25rem 0; font-weight:600; color:#000; }
+    .cs-content h3 { font-size:0.9rem; margin:0.4rem 0 0.2rem 0; font-weight:600; color:#000; }
+    .cs-content p { margin: 0.5rem 0; }
+    .cs-content ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+    .cs-content li { margin-bottom: 0.25rem; }
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; align-items:start; margin: 1rem 0; }
+    .three-col { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.75rem; margin: 1rem 0; }
+    .box { background:#fff; border:1px solid var(--border); padding:0.9rem; }
+    .problem-box { background:#fff; border:1px solid #000; border-left:4px solid #666; padding:0.9rem; }
+    .solution-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; }
+    .alert-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin: 1rem 0; }
+    .success-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin: 1rem 0; }
+    .warning-box { background:#fff; border:1px solid #000; border-left:4px solid #999; padding:0.9rem; margin: 1rem 0; }
+    .terminal-output { background:#f9f9f9; color:#000; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.75rem; white-space:pre-wrap; overflow-x:auto; margin: 1rem 0; }
+    .kpi-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:0.75rem; margin: 1rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:0.75rem; text-align:center; }
+    .kpi-card .big { font-size:1.5rem; font-weight:700; color:#000; }
+    .kpi-card .label { font-size:0.75rem; color:#666; margin-top:0.25rem; }
+    .mermaid { background:#fff; border:1px solid #000; padding:2rem; margin:1rem 0; overflow:visible; min-width:100%; width:100%; position:relative; }
+    .mermaid svg { max-width:100%; width:100%; height:auto; overflow:visible !important; }
+    .mermaid svg foreignObject { overflow:visible !important; }
+    .mermaid .node-label { overflow:visible !important; text-overflow:clip !important; white-space:normal !important; }
+    .mermaid .edgeLabel { overflow:visible !important; background:transparent !important; text-overflow:clip !important; white-space:normal !important; }
+    .mermaid .label { overflow:visible !important; text-overflow:clip !important; white-space:normal !important; }
+    .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse { overflow:visible; }
+    .mermaid .cluster rect { overflow:visible; }
+    .component-section { background:#fff; border:1px solid #000; padding:0.9rem; margin:0.75rem 0; }
+    .data-table { width:100%; border-collapse:collapse; margin: 1rem 0; font-size:0.85rem; }
+    .data-table th, .data-table td { border:1px solid #000; padding:0.5rem; text-align:left; }
+    .data-table th { background:#1a1a1a; color:#fff; font-weight:600; }
+    .data-table tr:nth-child(even) { background:#f9f9f9; }
+    .pill { display:inline-block; padding:0.15rem 0.5rem; border:1px solid #000; margin-right:0.35rem; font-size:0.75rem; }
+    .pill.priority { background:#000; color:#fff; }
+    .pill.tier1 { background:#000; color:#fff; border-color:#000; }
+    .pill.tier2 { background:#999; color:#000; border-color:#999; }
+    .pill.tier3 { background:#666; color:#fff; border-color:#666; }
+    blockquote { margin: 1rem 0; padding: 1rem; border-left: 4px solid #000; background: #f9f9f9; font-style: italic; }
+    .team-card { border:1px solid #000; padding:1rem; margin:0.5rem 0; }
+    .team-card h4 { margin:0 0 0.5rem 0; }
+    .team-card .role { font-weight:bold; }
+    .team-card .cost { font-size:1.1rem; font-weight:bold; color:#000; }
+    .team-card .details { font-size:0.85rem; color:#666; margin-top:0.5rem; }
+    .revenue-model { background:#f9f9f9; border:2px solid #000; padding:1.5rem; margin:1rem 0; }
+    .revenue-model h3 { margin-top:0; }
+    .funnel-stage { display:flex; align-items:center; margin:0.5rem 0; }
+    .funnel-stage .stage-name { width:150px; font-weight:bold; }
+    .funnel-stage .stage-bar { flex:1; height:30px; background:#000; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; }
+    .competitor-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:1rem; margin:1rem 0; }
+    .competitor-card { border:1px solid #000; padding:0.75rem; }
+    .competitor-card h4 { margin:0 0 0.5rem 0; font-size:0.9rem; }
+    @media (max-width: 900px) { 
+      .cs-wrapper{ grid-template-columns:1fr;} 
+      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border);} 
+      section.cs-page{ grid-template-columns:3rem 1fr; padding:0.25rem 0;} 
+      .two-col, .three-col { grid-template-columns:1fr; } 
+      .kpi-grid { grid-template-columns:1fr; }
+      .competitor-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body class="cs-template">
+  <div class="cs-wrapper">
+    <aside class="cs-index">
+      <div class="cs-index-title">Index</div>
+      <ol>
+        <li><a href="#s1"><span class="num">01.</span> Executive Summary</a></li>
+        <li><a href="#s2"><span class="num">02.</span> The Opportunity</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Market Intelligence</a></li>
+        <li><a href="#s4"><span class="num">04.</span> The Gap Analysis</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Ideal Customer Profile</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Competitive Landscape</a></li>
+        <li><a href="#s7"><span class="num">07.</span> System Architecture</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Landing Page Engine</a></li>
+        <li><a href="#s9"><span class="num">09.</span> CRM & Lead Routing</a></li>
+        <li><a href="#s10"><span class="num">10.</span> Paid Acquisition</a></li>
+        <li><a href="#s11"><span class="num">11.</span> Nurture System</a></li>
+        <li><a href="#s12"><span class="num">12.</span> Tracking Infrastructure</a></li>
+        <li><a href="#s13"><span class="num">13.</span> Referral Engine</a></li>
+        <li><a href="#s14"><span class="num">14.</span> Complete Workflow</a></li>
+        <li><a href="#s15"><span class="num">15.</span> Team Requirements</a></li>
+        <li><a href="#s16"><span class="num">16.</span> Partnership Model</a></li>
+        <li><a href="#s17"><span class="num">17.</span> Expected Results</a></li>
+        <li><a href="#s18"><span class="num">18.</span> Implementation Timeline</a></li>
+        <li><a href="#s19"><span class="num">19.</span> Risk Mitigation</a></li>
+        <li><a href="#s20"><span class="num">20.</span> Next Steps</a></li>
+        <li><a href="#s21"><span class="num">21.</span> Research Appendix</a></li>
+      </ol>
+    </aside>
+    
+    <main class="cs-sections">
+      <!-- SECTION 1: Executive Summary -->
+      <section id="s1" class="cs-page">
+        <div class="cs-num">01.</div>
+        <div class="cs-content">
+          <h1>The PEO Link Growth System</h1>
+          <p style="margin: 0 0 1rem 0; font-size: 0.875rem; color: #666; font-style: italic;">Full-Stack Lead Generation Infrastructure for Orlando/Tampa Territory</p>
+          
+          <div class="alert-box">
+            <p><strong>You just acquired exclusive rights to one of America's fastest-growing business markets. The PEO Link gives you the product, the relationships, and the training. What they don't give you is a machine that consistently generates qualified leads. That's what we build.</strong></p>
+          </div>
+          
+          <div class="two-col">
+            <div class="box">
+              <h3 style="margin-top:0;">The Full-Stack Lead Gen System</h3>
+              <ul>
+                <li>Dedicated landing pages optimized for your territory</li>
+                <li>CRM with automated lead routing to you (not corporate)</li>
+                <li>Multi-channel paid acquisition (Google, LinkedIn, Meta)</li>
+                <li>Email nurture sequences for long-cycle B2B sales</li>
+                <li>Tracking infrastructure measuring every touchpoint</li>
+                <li>Referral partnership development system</li>
+                <li>Ongoing optimization and scaling strategy</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3 style="margin-top:0;">Territory Snapshot</h3>
+              <div class="kpi-grid">
+                <div class="kpi-card">
+                  <div class="big">35-50K</div>
+                  <div class="label">Target Businesses</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="big">25%</div>
+                  <div class="label">of US PEO Clients</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="big">90K+</div>
+                  <div class="label">New Biz Apps/Year (Tampa)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="success-box">
+            <p><strong>The Partnership Model:</strong> Monthly retainer for infrastructure + strategy + management, plus revenue share on closed deals. We succeed when you succeed. No large upfront costs. Aligned incentives.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: The Opportunity -->
+      <section id="s2" class="cs-page">
+        <div class="cs-num">02.</div>
+        <div class="cs-content">
+          <h1>The Opportunity</h1>
+          
+          <blockquote>
+            "Florida accounts for 25% of all PEO clients nationally. The Orlando/Tampa corridor is ground zero for small business growth in America. This isn't just a territory — it's a goldmine for anyone who can systematically reach business owners drowning in HR complexity."
+          </blockquote>
+          
+          <div class="two-col">
+            <div class="problem-box">
+              <h2>Why Florida Dominates PEO</h2>
+              <ul>
+                <li><strong>Mandatory Workers' Comp:</strong> Construction needs coverage at 1 employee, others at 4</li>
+                <li><strong>Zero Income Tax:</strong> Attracts entrepreneurs and relocating companies</li>
+                <li><strong>Population Boom:</strong> Orlando gained 267,000 new residents since 2020</li>
+                <li><strong>Tight Labor Market:</strong> 3.3% unemployment forces benefits competition</li>
+                <li><strong>E-Verify Law:</strong> July 2024 compliance requirements added complexity</li>
+              </ul>
+            </div>
+            <div class="solution-box">
+              <h2>The Numbers</h2>
+              <ul>
+                <li><strong>120+ PEOs</strong> operating in Florida</li>
+                <li><strong>$24 billion</strong> in annual PEO payroll statewide</li>
+                <li><strong>43,600 companies</strong> using PEO services</li>
+                <li><strong>76,000+ businesses</strong> in Orlando metro alone</li>
+                <li><strong>2,000-3,000</strong> net new target businesses annually in territory</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="terminal-output">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    TERRITORY MARKET ANALYSIS                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  📍 ORLANDO METRO                    📍 TAMPA BAY                           │
+│  ├─ 76,000+ total businesses         ├─ 90,000+ new biz applications/year  │
+│  ├─ 14,400 in 10-50 employee range   ├─ 3rd highest in US for new business │
+│  ├─ 12.4% annual business growth     ├─ Emerging cybersecurity hub         │
+│  └─ Disney, Universal, AdventHealth  └─ Financial services concentration   │
+│                                                                              │
+│  🎯 COMBINED TERRITORY OPPORTUNITY                                          │
+│  ├─ Target businesses (5-150 emp): 35,000 - 50,000                         │
+│  ├─ High-priority prospects: 15,000 - 20,000                               │
+│  ├─ Net new businesses annually: 2,000 - 3,000                             │
+│  └─ Florida = 25% of all US PEO clients                                    │
+│                                                                              │
+│  💰 CLIENT VALUE INDICATORS                                                 │
+│  ├─ Average client lifetime: 5-7+ years                                    │
+│  ├─ Retention rate: 95%+                                                   │
+│  ├─ 25-employee client value: $45,000/year revenue                         │
+│  └─ Single strategic deal: $6.9M lifetime value potential                  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Market Intelligence -->
+      <section id="s3" class="cs-page">
+        <div class="cs-num">03.</div>
+        <div class="cs-content">
+          <h1>Market Intelligence</h1>
+          <h2>Deep Research on the PEO Industry & Florida Market</h2>
+          
+          <div class="component-section">
+            <h3>What The PEO Link Actually Sells</h3>
+            <p>Critical distinction: The PEO Link is a <strong>broker</strong>, not a PEO. Franchisees connect SMBs with the right PEO from 75+ pre-negotiated agreements, earning commissions on placed clients.</p>
+            
+            <div class="two-col">
+              <div class="box">
+                <h4>The Value Proposition to Business Owners</h4>
+                <ul>
+                  <li><strong>Cost Reduction:</strong> SMBs pay 30-70% more for health insurance than large companies. PEOs pool thousands of employees for Fortune 500-level rates.</li>
+                  <li><strong>Time Recovery:</strong> Companies spend 570+ hours annually on HR admin. Mid-sized company HR costs reach $413,000/year.</li>
+                  <li><strong>Risk Mitigation:</strong> Only 49% of employers stay proactively compliant. PEOs share compliance burden.</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h4>The Broker Advantage</h4>
+                <ul>
+                  <li><strong>Objectivity:</strong> Not tied to one PEO product</li>
+                  <li><strong>Competitive Bidding:</strong> Multiple PEOs compete for each client</li>
+                  <li><strong>Better Pricing:</strong> Competition drives costs down vs. going direct</li>
+                  <li><strong>75+ Agreements:</strong> More options than most competitors</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Industry Statistics That Matter</h3>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="big">21%</div>
+                <div class="label">Reduction in Admin Time with PEO</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">24-33%</div>
+                <div class="label">Turnover Reduction</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">50%</div>
+                <div class="label">Less Likely to Go Out of Business</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">2x</div>
+                <div class="label">Faster Growth Rate</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">52%</div>
+                <div class="label">401k Penetration (vs 23% non-PEO)</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">12-14%</div>
+                <div class="label">Lower Employee Turnover</div>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;">Sources: NAPEO Industry Statistics, Shortlister PEO Research 2025</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: The Gap Analysis -->
+      <section id="s4" class="cs-page">
+        <div class="cs-num">04.</div>
+        <div class="cs-content">
+          <h1>The Gap Analysis</h1>
+          <h2>What The Franchise Provides vs. What You Need</h2>
+          
+          <div class="two-col">
+            <div class="solution-box">
+              <h3>✅ What The PEO Link Provides</h3>
+              <ul>
+                <li>Training and support on PEO sales process</li>
+                <li>Access to 75+ pre-negotiated PEO agreements</li>
+                <li>Brand credibility (Inc. 5000 recognition)</li>
+                <li>Corporate website with generic quote form</li>
+                <li>Free resources (Cost of Labor Calculator)</li>
+                <li>Territory exclusivity</li>
+              </ul>
+            </div>
+            <div class="problem-box">
+              <h3>❌ What's Missing</h3>
+              <ul>
+                <li>Dedicated landing pages for your territory</li>
+                <li>CRM with lead routing to you (not HQ)</li>
+                <li>Paid advertising infrastructure</li>
+                <li>Conversion tracking and analytics</li>
+                <li>Email nurture sequences</li>
+                <li>Local SEO presence</li>
+                <li>Referral partnership systems</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="warning-box">
+            <h3>⚠️ The Corporate Website Problem</h3>
+            <p>The PEO Link's quote form has <strong>12+ fields</strong> and routes to San Antonio HQ. Running paid ads to this form means:</p>
+            <ul>
+              <li><strong>High friction:</strong> Too many fields kills conversion rates</li>
+              <li><strong>Unclear ownership:</strong> Leads go to corporate, not you</li>
+              <li><strong>No tracking:</strong> Can't measure what's working</li>
+              <li><strong>No local trust:</strong> Generic national messaging doesn't convert local businesses</li>
+            </ul>
+            <p><strong>Bottom line:</strong> Without dedicated infrastructure, you're flying blind and burning budget.</p>
+          </div>
+          
+          <div class="terminal-output">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    CORPORATE QUOTE FORM ANALYSIS                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  CURRENT FORM FIELDS (12+):                                                 │
+│  ├─ First name                  ├─ Business phone                          │
+│  ├─ Last name                   ├─ Business address (full)                 │
+│  ├─ Title                       ├─ Business description                    │
+│  ├─ Email                       ├─ Number of employees                     │
+│  ├─ Mobile phone                └─ Service interest checkboxes (9 options) │
+│                                                                              │
+│  EXPECTED CONVERSION RATE: 1-3% (industry avg for long forms)              │
+│  OPTIMIZED SHORT-FORM RATE: 8-15%                                          │
+│                                                                              │
+│  ⚠️ CRITICAL ISSUES:                                                        │
+│  ├─ Form submits to: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e4a565b4e5b5152575055105d5153">[email&#160;protected]</a> (corporate)                       │
+│  ├─ No UTM tracking visible                                                │
+│  ├─ No conversion pixel implementation                                     │
+│  ├─ No A/B testing capability                                              │
+│  └─ No local market messaging                                              │
+│                                                                              │
+│  💡 SOLUTION: Build dedicated landing pages with 4-field forms             │
+│     routing directly to franchisee CRM                                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: Ideal Customer Profile -->
+      <section id="s5" class="cs-page">
+        <div class="cs-num">05.</div>
+        <div class="cs-content">
+          <h1>Ideal Customer Profile</h1>
+          <h2>Who We're Targeting & Why</h2>
+          
+          <div class="component-section">
+            <h3>Company Size Sweet Spot: 10-50 Employees</h3>
+            <p>Businesses below 5 employees rarely justify PEO costs. Companies above 150 often build internal HR capacity. The sweet spot is 10-50 employees — <strong>Orlando alone has 14,400 businesses in this range</strong>, growing at 12.4% annually.</p>
+          </div>
+          
+          <h3>Industry Priority Tiers</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Priority</th>
+                <th>Industry</th>
+                <th>Why They Need PEO</th>
+                <th>Territory Opportunity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="pill tier1">TIER 1</span></td>
+                <td><strong>Construction</strong></td>
+                <td>Mandatory 1-employee WC; subcontractor liability; highest injury rates</td>
+                <td>Strong Orlando growth; mandatory coverage creates urgency</td>
+              </tr>
+              <tr>
+                <td><span class="pill tier1">TIER 1</span></td>
+                <td><strong>Hospitality/Restaurants</strong></td>
+                <td>High turnover; seasonal workforce; slip-and-fall exposure</td>
+                <td>520,601 FL workers (14.9% of small biz); Disney, Universal anchor</td>
+              </tr>
+              <tr>
+                <td><span class="pill tier1">TIER 1</span></td>
+                <td><strong>Healthcare</strong></td>
+                <td>Physical demand injuries; HIPAA complexity; competitive benefits</td>
+                <td>6,900 new Orlando jobs in 2024; AdventHealth, Orlando Health</td>
+              </tr>
+              <tr>
+                <td><span class="pill tier2">TIER 2</span></td>
+                <td><strong>Professional Services</strong></td>
+                <td>Scaling startups; competitive talent markets; compliance</td>
+                <td>12.5% of all FL small businesses; largest sector</td>
+              </tr>
+              <tr>
+                <td><span class="pill tier2">TIER 2</span></td>
+                <td><strong>Transportation/Logistics</strong></td>
+                <td>Driver compliance; physical injury exposure; equipment risks</td>
+                <td>1.2M+ sq ft logistics occupation in Orlando</td>
+              </tr>
+              <tr>
+                <td><span class="pill tier3">TIER 3</span></td>
+                <td><strong>Tech/Startups</strong></td>
+                <td>Rapid scaling; benefits competition for engineers</td>
+                <td>74,000 Orlando tech employees; Tampa cybersecurity hub</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="component-section">
+            <h3>Trigger Events That Create Buying Intent</h3>
+            <div class="three-col">
+              <div class="box">
+                <h4>📈 Growth Triggers</h4>
+                <ul>
+                  <li>Crossing 4→5 employees (FL WC threshold)</li>
+                  <li>New construction projects requiring coverage proof</li>
+                  <li>Failed hiring due to weak benefits</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h4>💰 Cost Triggers</h4>
+                <ul>
+                  <li>Workers' comp rate increases or audit surprises</li>
+                  <li>Benefits renewal sticker shock</li>
+                  <li>Year-end budget planning (Q4 = "Super Bowl of PEO")</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h4>⏰ Time Triggers</h4>
+                <ul>
+                  <li>Owner spending 10+ hours/week on payroll/HR</li>
+                  <li>Compliance violations or near-misses</li>
+                  <li>Key HR person leaving</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: Competitive Landscape -->
+      <section id="s6" class="cs-page">
+        <div class="cs-num">06.</div>
+        <div class="cs-content">
+          <h1>Competitive Landscape</h1>
+          <h2>Who You're Up Against in Orlando/Tampa — Research-Backed Intel</h2>
+          
+          <div class="alert-box">
+            <p><strong>Key Finding:</strong> NetPEO has built exactly what you need — dedicated local pages for every Florida city, SEO-optimized content, and a consultative broker positioning. They're the template to beat.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Primary Competitor Deep Dive: NetPEO</h3>
+            <div class="box" style="border-left: 4px solid #000;">
+              <h4>🎯 NetPEO — netpeo.com <span class="pill priority">PRIMARY THREAT</span></h4>
+              <div class="two-col">
+                <div>
+                  <h5>What They've Built:</h5>
+                  <ul>
+                    <li><strong>Dedicated city pages:</strong> Orlando, Tampa, Miami, Jacksonville, St. Pete, Fort Lauderdale, Cape Coral, Port St. Lucie, Tallahassee, Hialeah</li>
+                    <li><strong>Service pages:</strong> Workers' comp, employee benefits, insurance, payroll for each location</li>
+                    <li><strong>Local SEO:</strong> Ranking for "[city] PEO broker" searches</li>
+                    <li><strong>Phone:</strong> 678-376-1212 (Georgia HQ, but local presence)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Their Positioning:</h5>
+                  <ul>
+                    <li>"We're not a PEO — we're a network of PEOs"</li>
+                    <li>Claims 95% client retention rate</li>
+                    <li>Claims 100% customer satisfaction</li>
+                    <li>Free broker services (PEOs pay commission)</li>
+                    <li>National network with local content</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="warning-box" style="margin-top:1rem;">
+                <p><strong>Competitive Advantage They Claim:</strong> "NetPEO represents several different companies... Unlike a salaried salesman working for a single employer, a broker represents several top national professional employer organizations."</p>
+                <p><strong>Our Counter:</strong> The PEO Link has 75+ PEO agreements vs. NetPEO's unspecified "national network." Inc. 5000 growth credibility. Franchise = truly local owner, not remote rep.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Other Direct Broker Competitors</h3>
+            <div class="competitor-grid">
+              <div class="competitor-card">
+                <h4>PEO Exchange — peoexchange.com</h4>
+                <p><strong>Tampa office.</strong> Works with insurance agents. Claims "200+ PEOs" in network. Automated quoting portal. Commission-based model for insurance brokers.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>Payroll & PEO Consultants of Florida</h4>
+                <p>Strong Tampa Bay local presence. Deep community ties. Regional focus with boutique service model.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>StaffMarket</h4>
+                <p>120+ PEO comparison platform. Technology-forward approach. National reach, less local presence.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>PEO Brokers of America</h4>
+                <p>Jacksonville-based. Workers' comp specialization. Strong in construction vertical.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>National PEOs Selling Direct</h3>
+            <div class="competitor-grid">
+              <div class="competitor-card">
+                <h4>ADP TotalSource</h4>
+                <p>Largest IRS-certified PEO. Massive brand recognition. Enterprise focus. High-volume advertising budget.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>Paychex (Oasis) <span class="pill priority">FLORIDA ROOTS</span></h4>
+                <p>Acquired Oasis Outsourcing — historically Florida's largest PEO. Deep local relationships. HQ was in West Palm Beach before acquisition.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>TriNet / Insperity</h4>
+                <p>National players with significant Florida presence. Strong brand awareness. Competing heavily on paid search.</p>
+              </div>
+              <div class="competitor-card">
+                <h4>VensureHR</h4>
+                <p>"Fastest-growing PEO in US" — active in Naples, Orlando, Jacksonville, Tampa. Aggressive expansion.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Florida-Based PEOs (Potential Partners & Competitors)</h3>
+            <ul>
+              <li><strong>SouthEast Personnel Leasing:</strong> Tampa Bay since 1986 — deep local relationships</li>
+              <li><strong>FrankCrum:</strong> Clearwater HQ — strong regional brand</li>
+              <li><strong>Engage PEO:</strong> Hollywood, Inc. 5000 honoree — growth-focused</li>
+              <li><strong>Integrity Employee Leasing:</strong> Punta Gorda, 15,000+ leased employees</li>
+              <li><strong>Harbor America:</strong> Orlando HQ, 20+ years — your backyard</li>
+              <li><strong>YCO & Associates:</strong> 35+ years Florida experience, WC specialists</li>
+            </ul>
+          </div>
+          
+          <div class="success-box">
+            <h3>The PEO Link's Competitive Differentiators</h3>
+            <div class="two-col">
+              <div>
+                <h4>vs. NetPEO & Other Brokers:</h4>
+                <ul>
+                  <li><strong>75+ PEO agreements</strong> — quantified network size</li>
+                  <li><strong>Inc. 5000 recognition</strong> — #3181 in 2025, 126% growth</li>
+                  <li><strong>Local franchise owner</strong> — not remote rep in Georgia</li>
+                  <li><strong>Face-to-face meetings</strong> — relationship business advantage</li>
+                </ul>
+              </div>
+              <div>
+                <h4>vs. Direct PEOs (ADP, Paychex):</h4>
+                <ul>
+                  <li><strong>Broker objectivity</strong> — not tied to one product</li>
+                  <li><strong>Multi-quote competitive bidding</strong> — better pricing</li>
+                  <li><strong>Right-sized solutions</strong> — SMB focus vs. enterprise</li>
+                  <li><strong>Ongoing advocacy</strong> — broker fights for client on renewals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: System Architecture -->
+      <section id="s7" class="cs-page">
+        <div class="cs-num">07.</div>
+        <div class="cs-content">
+          <h1>System Architecture</h1>
+          <h2>The Complete Lead Generation Infrastructure</h2>
+          
+          <div class="mermaid">
+            flowchart TB
+                subgraph ACQUISITION ["ACQUISITION LAYER"]
+                    G[Google Ads] --> LP
+                    L[LinkedIn Ads] --> LP
+                    M[Meta/Retargeting] --> LP
+                    REF[Referral Partners] --> LP
+                    SEO[Local SEO] --> LP
+                end
+                
+                subgraph CONVERSION ["CONVERSION LAYER"]
+                    LP[Landing Pages] --> FORM[Lead Capture Form]
+                    FORM --> CRM[CRM System]
+                end
+                
+                subgraph NURTURE ["NURTURE LAYER"]
+                    CRM --> EMAIL[Email Sequences]
+                    CRM --> SMS[SMS Notifications]
+                    CRM --> RETARGET[Retargeting Audiences]
+                end
+                
+                subgraph SALES ["SALES LAYER"]
+                    CRM --> NOTIFY[Instant Lead Alert]
+                    NOTIFY --> CALL[Discovery Call]
+                    CALL --> PROPOSAL[PEO Matching]
+                    PROPOSAL --> CLOSE[Closed Deal]
+                end
+                
+                subgraph TRACKING ["TRACKING LAYER"]
+                    GA[Google Analytics 4]
+                    PIXEL[Conversion Pixels]
+                    CALLTRACK[Call Tracking]
+                    REPORT[Reporting Dashboard]
+                end
+          </div>
+          
+          <div class="terminal-output">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    LEAD GENERATION SYSTEM STATUS                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  🎯 ACQUISITION CHANNELS              📊 CONVERSION TRACKING                │
+│  ├─ Google Ads: [PENDING BUILD]       ├─ GA4: [PENDING SETUP]              │
+│  ├─ LinkedIn Ads: [PENDING BUILD]     ├─ Google Ads Pixel: [PENDING]       │
+│  ├─ Meta Retargeting: [PENDING]       ├─ LinkedIn Insight: [PENDING]       │
+│  ├─ Local SEO: [PENDING]              ├─ Meta Pixel: [PENDING]             │
+│  └─ Referral System: [PENDING]        └─ Call Tracking: [PENDING]          │
+│                                                                              │
+│  🖥️ LANDING PAGES                     📧 NURTURE SEQUENCES                  │
+│  ├─ Primary Orlando/Tampa: [BUILD]    ├─ Welcome Sequence: [BUILD]         │
+│  ├─ Construction Industry: [BUILD]    ├─ Educational Drip: [BUILD]         │
+│  ├─ Hospitality Industry: [BUILD]     ├─ Re-engagement: [BUILD]            │
+│  ├─ Healthcare Industry: [BUILD]      └─ Industry-Specific: [BUILD]        │
+│  └─ Service-Specific: [BUILD]                                               │
+│                                                                              │
+│  📱 CRM SYSTEM                        🤝 REFERRAL ENGINE                    │
+│  ├─ Lead Routing: [CONFIGURE]         ├─ Insurance Broker Outreach: [PLAN] │
+│  ├─ Pipeline Stages: [CONFIGURE]      ├─ CPA Partnership: [PLAN]           │
+│  ├─ Automation Rules: [CONFIGURE]     ├─ Chamber Connections: [PLAN]       │
+│  └─ Reporting: [CONFIGURE]            └─ Commission Structure: [PLAN]      │
+│                                                                              │
+│  SYSTEM STATUS: READY TO BUILD                                              │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: Landing Page Engine -->
+      <section id="s8" class="cs-page">
+        <div class="cs-num">08.</div>
+        <div class="cs-content">
+          <h1>Component 1: Landing Page Engine</h1>
+          <h2>High-Converting Lead Capture Built for Your Territory</h2>
+          
+          <div class="alert-box">
+            <p><strong>The Problem:</strong> Corporate's 12-field form converts at 1-3%. Optimized short-form landing pages convert at 8-15%. That's a 5-8x improvement in leads per dollar spent.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Landing Page Architecture</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Page Type</th>
+                  <th>Purpose</th>
+                  <th>Target Keywords</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Primary Territory Page</strong></td>
+                  <td>Main conversion page for Orlando/Tampa</td>
+                  <td>PEO Orlando, HR outsourcing Tampa, PEO broker Florida</td>
+                </tr>
+                <tr>
+                  <td><strong>Construction Industry</strong></td>
+                  <td>Workers' comp focus, subcontractor liability</td>
+                  <td>Construction workers comp Florida, contractor PEO</td>
+                </tr>
+                <tr>
+                  <td><strong>Hospitality Industry</strong></td>
+                  <td>Turnover reduction, seasonal workforce</td>
+                  <td>Restaurant HR outsourcing, hospitality PEO Florida</td>
+                </tr>
+                <tr>
+                  <td><strong>Healthcare Industry</strong></td>
+                  <td>HIPAA compliance, competitive benefits</td>
+                  <td>Healthcare PEO, medical practice HR solutions</td>
+                </tr>
+                <tr>
+                  <td><strong>Workers' Comp Focus</strong></td>
+                  <td>Direct response to WC pain points</td>
+                  <td>Workers comp insurance Florida, reduce WC costs</td>
+                </tr>
+                <tr>
+                  <td><strong>Payroll Services</strong></td>
+                  <td>Entry point for payroll-first buyers</td>
+                  <td>Payroll services Orlando, small business payroll Tampa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="two-col">
+            <div class="problem-box">
+              <h3>❌ Corporate Form (Current)</h3>
+              <ul>
+                <li>12+ fields</li>
+                <li>Full address required</li>
+                <li>Routes to HQ</li>
+                <li>No mobile optimization</li>
+                <li>Generic national messaging</li>
+                <li>Expected conversion: 1-3%</li>
+              </ul>
+            </div>
+            <div class="solution-box">
+              <h3>✅ Optimized Form (Build)</h3>
+              <ul>
+                <li>4 fields max (Name, Email, Phone, # Employees)</li>
+                <li>Routes directly to your CRM</li>
+                <li>Mobile-first design</li>
+                <li>Local Orlando/Tampa messaging</li>
+                <li>Industry-specific trust signals</li>
+                <li>Expected conversion: 8-15%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: CRM & Lead Routing -->
+      <section id="s9" class="cs-page">
+        <div class="cs-num">09.</div>
+        <div class="cs-content">
+          <h1>Component 2: CRM & Lead Routing</h1>
+          <h2>Automated Lead Management That Works For You</h2>
+          
+          <div class="component-section">
+            <h3>CRM System Setup</h3>
+            <p>We'll implement GoHighLevel or HubSpot — platforms built for lead generation businesses. Every lead goes directly to you with full attribution data.</p>
+            
+            <div class="mermaid">
+              flowchart LR
+                  A[Lead Submits Form] --> B[CRM Captures Lead]
+                  B --> C{Lead Source}
+                  C -->|Google Ads| D[Tag: Google]
+                  C -->|LinkedIn| E[Tag: LinkedIn]
+                  C -->|Referral| F[Tag: Partner Name]
+                  D --> G[Instant Notification]
+                  E --> G
+                  F --> G
+                  G --> H[Email Alert]
+                  G --> I[SMS Alert]
+                  G --> J[CRM Task Created]
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Pipeline Stages</h3>
+            <div class="funnel-stage">
+              <div class="stage-name">New Lead</div>
+              <div class="stage-bar" style="width:100%;">Form submission received</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="stage-name">Contacted</div>
+              <div class="stage-bar" style="width:85%;">Initial outreach made</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="stage-name">Discovery</div>
+              <div class="stage-bar" style="width:60%;">Needs assessment call scheduled/completed</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="stage-name">Proposal</div>
+              <div class="stage-bar" style="width:35%;">PEO options presented</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="stage-name">Negotiation</div>
+              <div class="stage-bar" style="width:20%;">Final terms discussion</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="stage-name">Closed Won</div>
+              <div class="stage-bar" style="width:10%; background:#000;">Client signed with PEO</div>
+            </div>
+          </div>
+          
+          <div class="success-box">
+            <h3>Automation Rules</h3>
+            <ul>
+              <li><strong>Instant notification:</strong> Email + SMS alert within 60 seconds of form submission</li>
+              <li><strong>Auto-tagging:</strong> Lead source, industry, employee count automatically tagged</li>
+              <li><strong>Task creation:</strong> Follow-up task auto-created with deadline</li>
+              <li><strong>Nurture enrollment:</strong> Non-responsive leads automatically enter email sequences</li>
+              <li><strong>Stale lead alerts:</strong> Notification if lead untouched for 48 hours</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: Paid Acquisition -->
+      <section id="s10" class="cs-page">
+        <div class="cs-num">10.</div>
+        <div class="cs-content">
+          <h1>Component 3: Paid Acquisition</h1>
+          <h2>Multi-Channel Advertising Strategy — Research-Backed</h2>
+          
+          <div class="alert-box">
+            <p><strong>Research Note:</strong> The following CPC and CPL estimates are based on December 2025 industry benchmark data from LocaliQ, WordStream, Ahrefs, and direct competitor analysis. B2B professional services in competitive Florida markets typically run 2-3x above national CPC averages.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Channel Mix Strategy</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>Budget %</th>
+                  <th>Purpose</th>
+                  <th>Est. CPC</th>
+                  <th>Expected CPL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Google Ads</strong></td>
+                  <td>50%</td>
+                  <td>Capture high-intent searches</td>
+                  <td>$8-15</td>
+                  <td>$100-200</td>
+                </tr>
+                <tr>
+                  <td><strong>LinkedIn Ads</strong></td>
+                  <td>35%</td>
+                  <td>Precision B2B targeting</td>
+                  <td>$5-16</td>
+                  <td>$100-150</td>
+                </tr>
+                <tr>
+                  <td><strong>Meta/Retargeting</strong></td>
+                  <td>15%</td>
+                  <td>Nurture & re-engage</td>
+                  <td>$1-3</td>
+                  <td>$40-80</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;"><strong>Why higher than "average" benchmarks?</strong> PEO/HR keywords are B2B professional services with high client LTV. Competition is aggressive. National avg. Google CPC is $4.66 — but high-value B2B services run $8-18. LinkedIn CPL for business services averages $60-120 nationally.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Keyword Research: Google Ads CPC Estimates</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Keyword Category</th>
+                  <th>Example Keywords</th>
+                  <th>Est. CPC</th>
+                  <th>Search Intent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PEO Services</strong></td>
+                  <td>"PEO services Florida", "PEO Orlando", "PEO broker"</td>
+                  <td>$8-15</td>
+                  <td>High commercial</td>
+                </tr>
+                <tr>
+                  <td><strong>HR Outsourcing</strong></td>
+                  <td>"HR outsourcing Orlando", "outsource HR Tampa"</td>
+                  <td>$6-12</td>
+                  <td>High commercial</td>
+                </tr>
+                <tr>
+                  <td><strong>Payroll Services</strong></td>
+                  <td>"payroll services small business", "hr payroll"</td>
+                  <td>$10-18</td>
+                  <td>High commercial (competitive with ADP, Paychex)</td>
+                </tr>
+                <tr>
+                  <td><strong>Workers Comp</strong></td>
+                  <td>"workers comp Florida", "reduce workers comp costs"</td>
+                  <td>$5-10</td>
+                  <td>High commercial (insurance-adjacent)</td>
+                </tr>
+                <tr>
+                  <td><strong>Employee Leasing</strong></td>
+                  <td>"employee leasing Orlando", "staff leasing Florida"</td>
+                  <td>$6-12</td>
+                  <td>Medium commercial (older terminology)</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;"><em>Source: AdTargeting, industry benchmarks (Dec 2025). "hr payroll" CPC = $10.97, "payroll register" = $18.07. B2B services typically 2-3x above average.</em></p>
+          </div>
+          
+          <div class="component-section">
+            <h3>LinkedIn Ads Benchmarks (2025 Data)</h3>
+            <div class="two-col">
+              <div class="box">
+                <h4>LinkedIn Cost Metrics</h4>
+                <ul>
+                  <li><strong>Average CPC:</strong> $5.58 - $15.72 (varies by quarter)</li>
+                  <li><strong>Average CPM:</strong> $33.80 - $55</li>
+                  <li><strong>CPL (Recruiting/HR):</strong> $50-100</li>
+                  <li><strong>CPL (Business Services):</strong> $60-120</li>
+                  <li><strong>CPL (Professional Services):</strong> $100-150</li>
+                </ul>
+                <p style="font-size:0.8rem; color:#666;">Q3 typically 30-40% higher than Q1. Plan budget accordingly.</p>
+              </div>
+              <div class="box">
+                <h4>LinkedIn Advantage</h4>
+                <ul>
+                  <li><strong>Lead Gen Forms:</strong> 2x conversion vs. landing pages (13%+ CVR)</li>
+                  <li><strong>ROAS:</strong> Outperforming other B2B platforms</li>
+                  <li><strong>Decision-maker access:</strong> 4 of 5 LinkedIn members drive business decisions</li>
+                  <li><strong>B2B lead quality:</strong> 2.74% avg conversion rate — 3x higher than Facebook/Twitter</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="two-col">
+            <div class="component-section">
+              <h3>Google Ads Strategy</h3>
+              <h4>Priority Keywords (by CPC efficiency)</h4>
+              <ul>
+                <li><span class="pill tier1">HIGH</span> "PEO broker Florida" — lower competition, high intent</li>
+                <li><span class="pill tier1">HIGH</span> "workers comp Orlando" — insurance pain = urgency</li>
+                <li><span class="pill tier2">MED</span> "HR outsourcing Tampa" — broad but qualified</li>
+                <li><span class="pill tier2">MED</span> "employee leasing Florida" — lower CPC, older term</li>
+                <li><span class="pill tier3">TEST</span> "payroll services small business" — high competition with Paychex/ADP</li>
+              </ul>
+              <h4>Campaign Structure</h4>
+              <ul>
+                <li>Search campaigns by service type + location</li>
+                <li>Orlando + Tampa metro targeting (50mi radius)</li>
+                <li>Aggressive negative keywords (jobs, salary, free)</li>
+                <li>Ad extensions: call, location, sitelinks</li>
+                <li>Device bid adjustments (mobile typically lower intent)</li>
+              </ul>
+            </div>
+            <div class="component-section">
+              <h3>LinkedIn Ads Strategy</h3>
+              <h4>Targeting Parameters</h4>
+              <ul>
+                <li><strong>Job Titles:</strong> Owner, CEO, President, CFO, HR Director, Office Manager, Controller</li>
+                <li><strong>Company Size:</strong> 10-100 employees (sweet spot)</li>
+                <li><strong>Industries:</strong> Construction, Hospitality, Healthcare, Professional Services, Manufacturing</li>
+                <li><strong>Geography:</strong> Orlando-Kissimmee-Sanford MSA, Tampa-St. Pete-Clearwater MSA</li>
+              </ul>
+              <h4>Ad Formats (Priority Order)</h4>
+              <ul>
+                <li><strong>1. Lead Gen Forms</strong> — 13%+ CVR, 2x landing page conversion</li>
+                <li><strong>2. Sponsored Content</strong> — industry-specific creative</li>
+                <li><strong>3. Message Ads</strong> — $0.80-1.00 per send, direct outreach</li>
+              </ul>
+              <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;">Lead Gen Forms have higher CPL but significantly better lead quality and shorter sales cycles.</p>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Messaging That Resonates</h3>
+            <div class="three-col">
+              <div class="box">
+                <h4>Time Savings</h4>
+                <p>"Focus on your business, not paperwork"</p>
+                <p>"Stop spending 10+ hours a week on HR admin"</p>
+              </div>
+              <div class="box">
+                <h4>Cost Reduction</h4>
+                <p>"Fortune 500 benefits for small business budgets"</p>
+                <p>"Compare multiple PEO solutions in one conversation"</p>
+              </div>
+              <div class="box">
+                <h4>Growth/Risk</h4>
+                <p>"Businesses using PEOs grow 2x faster"</p>
+                <p>"50% less likely to go out of business"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 11: Nurture System -->
+      <section id="s11" class="cs-page">
+        <div class="cs-num">11.</div>
+        <div class="cs-content">
+          <h1>Component 4: Nurture System</h1>
+          <h2>Converting Leads Who Aren't Ready Today</h2>
+          
+          <div class="alert-box">
+            <p><strong>Reality:</strong> B2B sales cycles for PEO services run 1-6 months. Most leads aren't ready to buy immediately. Without nurture, you lose them to competitors who stay top-of-mind.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Email Sequence Architecture</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sequence</th>
+                  <th>Trigger</th>
+                  <th>Emails</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Welcome Sequence</strong></td>
+                  <td>New lead submission</td>
+                  <td>5-7 emails over 14 days</td>
+                  <td>Establish credibility, educate on PEO benefits, drive to call</td>
+                </tr>
+                <tr>
+                  <td><strong>Educational Drip</strong></td>
+                  <td>Post-welcome, no conversion</td>
+                  <td>Ongoing (2x/month)</td>
+                  <td>Case studies, industry insights, PEO comparisons</td>
+                </tr>
+                <tr>
+                  <td><strong>Re-engagement</strong></td>
+                  <td>30+ days inactive</td>
+                  <td>3 emails</td>
+                  <td>Win back cold leads with new offers/content</td>
+                </tr>
+                <tr>
+                  <td><strong>Industry-Specific</strong></td>
+                  <td>Based on lead industry tag</td>
+                  <td>4-6 emails</td>
+                  <td>Construction WC, hospitality turnover, healthcare compliance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="terminal-output">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    WELCOME SEQUENCE FLOW                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  DAY 0: IMMEDIATE                                                           │
+│  └─ "Thanks for reaching out — here's what happens next"                   │
+│     CTA: Book a 15-minute call                                              │
+│                                                                              │
+│  DAY 1: VALUE                                                               │
+│  └─ "The hidden cost of DIY HR (and how PEOs fix it)"                      │
+│     CTA: Download cost calculator                                           │
+│                                                                              │
+│  DAY 3: SOCIAL PROOF                                                        │
+│  └─ "How [Industry] companies are saving 30% on benefits"                  │
+│     CTA: See case study                                                     │
+│                                                                              │
+│  DAY 5: OBJECTION HANDLING                                                  │
+│  └─ "The 5 biggest myths about PEOs (debunked)"                            │
+│     CTA: Get your questions answered                                        │
+│                                                                              │
+│  DAY 7: COMPARISON                                                          │
+│  └─ "Why a broker vs going direct to a PEO"                                │
+│     CTA: Compare your options                                               │
+│                                                                              │
+│  DAY 10: URGENCY                                                            │
+│  └─ "Q4 is the best time to switch — here's why"                           │
+│     CTA: Lock in rates before renewal season                                │
+│                                                                              │
+│  DAY 14: FINAL CTA                                                          │
+│  └─ "Still exploring? Let's chat (no pressure)"                            │
+│     CTA: Book a call or reply with questions                                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 12: Tracking Infrastructure -->
+      <section id="s12" class="cs-page">
+        <div class="cs-num">12.</div>
+        <div class="cs-content">
+          <h1>Component 5: Tracking Infrastructure</h1>
+          <h2>Measuring What Matters</h2>
+          
+          <div class="component-section">
+            <h3>Tracking Stack</h3>
+            <div class="three-col">
+              <div class="box">
+                <h4>Google Analytics 4</h4>
+                <ul>
+                  <li>Traffic sources</li>
+                  <li>User behavior</li>
+                  <li>Conversion paths</li>
+                  <li>Audience insights</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h4>Conversion Pixels</h4>
+                <ul>
+                  <li>Google Ads conversion tag</li>
+                  <li>LinkedIn Insight tag</li>
+                  <li>Meta pixel</li>
+                  <li>Custom events</li>
+                </ul>
+              </div>
+              <div class="box">
+                <h4>Call Tracking</h4>
+                <ul>
+                  <li>Dynamic number insertion</li>
+                  <li>Call recording</li>
+                  <li>Source attribution</li>
+                  <li>Call-to-lead matching</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>KPIs We Track</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Definition</th>
+                  <th>Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cost Per Lead (CPL)</strong></td>
+                  <td>Ad spend ÷ leads generated</td>
+                  <td>$50-150</td>
+                </tr>
+                <tr>
+                  <td><strong>Lead-to-Opportunity Rate</strong></td>
+                  <td>% of leads that become qualified opportunities</td>
+                  <td>30-50%</td>
+                </tr>
+                <tr>
+                  <td><strong>Opportunity-to-Close Rate</strong></td>
+                  <td>% of opportunities that close</td>
+                  <td>15-25%</td>
+                </tr>
+                <tr>
+                  <td><strong>Customer Acquisition Cost (CAC)</strong></td>
+                  <td>Total marketing cost ÷ clients acquired</td>
+                  <td>$500-800</td>
+                </tr>
+                <tr>
+                  <td><strong>Return on Ad Spend (ROAS)</strong></td>
+                  <td>Revenue generated ÷ ad spend</td>
+                  <td>5x+ (year 1 client value)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 13: Referral Engine -->
+      <section id="s13" class="cs-page">
+        <div class="cs-num">13.</div>
+        <div class="cs-content">
+          <h1>Component 6: Referral Engine</h1>
+          <h2>Building Partnership Channels</h2>
+          
+          <blockquote>
+            "In PEO sales, referral partnerships often outperform paid advertising. Insurance brokers see HR pain daily. CPAs see compliance struggles in the numbers. These channels convert at 2-3x paid traffic rates."
+          </blockquote>
+          
+          <div class="component-section">
+            <h3>Priority Referral Partners</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Partner Type</th>
+                  <th>Why They Refer</th>
+                  <th>Approach</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Insurance Brokers</strong></td>
+                  <td>Already handle benefits; see HR pain; protect client relationship</td>
+                  <td>Commission sharing, carve-out options, Account Manager meetings</td>
+                </tr>
+                <tr>
+                  <td><strong>CPAs / Accountants</strong></td>
+                  <td>See payroll struggles; want to offload HR questions</td>
+                  <td>Lunch-and-learns, co-branded content, referral fees</td>
+                </tr>
+                <tr>
+                  <td><strong>Business Attorneys</strong></td>
+                  <td>Handle employment issues; see compliance gaps</td>
+                  <td>Educational partnerships, mutual referrals</td>
+                </tr>
+                <tr>
+                  <td><strong>Chambers of Commerce</strong></td>
+                  <td>Serve SMB members; credibility by association</td>
+                  <td>Membership, speaking opportunities, sponsorships</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="two-col">
+            <div class="box">
+              <h4>Local Targets</h4>
+              <ul>
+                <li>Tampa Bay Chamber</li>
+                <li>Orlando Economic Partnership</li>
+                <li>Florida SBDC at UCF</li>
+                <li>Hospitality associations</li>
+                <li>Construction trade groups</li>
+                <li>Healthcare practice networks</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4>Partnership Structure</h4>
+              <ul>
+                <li>Lifetime commission on referred clients</li>
+                <li>Protection from client poaching</li>
+                <li>Co-marketing opportunities</li>
+                <li>Regular check-ins and updates</li>
+                <li>Easy referral submission process</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 14: Complete Workflow -->
+      <section id="s14" class="cs-page">
+        <div class="cs-num">14.</div>
+        <div class="cs-content">
+          <h1>Complete Workflow</h1>
+          <h2>From Ad Click to Closed Deal</h2>
+          
+          <div class="mermaid">
+            sequenceDiagram
+                participant User as Business Owner
+                participant Ad as Paid Ad
+                participant LP as Landing Page
+                participant CRM as CRM System
+                participant You as Franchisee
+                participant Nurture as Email Nurture
+                participant PEO as PEO Partner
+                
+                User->>Ad: Sees ad (Google/LinkedIn)
+                Ad->>LP: Clicks to landing page
+                LP->>CRM: Submits form (4 fields)
+                CRM->>You: Instant notification (email+SMS)
+                CRM->>Nurture: Enrolls in welcome sequence
+                You->>User: Calls within 5 minutes
+                
+                alt Ready to Talk
+                    You->>User: Discovery call scheduled
+                    User->>You: Needs assessment complete
+                    You->>PEO: Requests quotes from 3-5 PEOs
+                    PEO->>You: Returns proposals
+                    You->>User: Presents options
+                    User->>You: Selects PEO
+                    You->>PEO: Initiates onboarding
+                    Note over You,PEO: Commission earned
+                else Not Ready Yet
+                    Nurture->>User: Educational emails (14 days)
+                    User->>LP: Returns to site
+                    LP->>CRM: Tracked as returning visitor
+                    CRM->>You: Alert: Lead re-engaged
+                    You->>User: Follow-up call
+                end
+          </div>
+          
+          <div class="terminal-output">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    LEAD LIFECYCLE EXAMPLE                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  LEAD: Mike's Construction LLC                                              │
+│  SOURCE: Google Ads - "workers comp Tampa"                                  │
+│  EMPLOYEE COUNT: 18                                                         │
+│  INDUSTRY: Construction                                                     │
+│                                                                              │
+│  TIMELINE:                                                                  │
+│  ├─ Day 0, 10:15 AM: Form submitted                                        │
+│  ├─ Day 0, 10:16 AM: SMS + Email alert sent to franchisee                  │
+│  ├─ Day 0, 10:22 AM: Franchisee calls Mike                                 │
+│  ├─ Day 0: Discovery call scheduled for Day 2                              │
+│  ├─ Day 2: 30-min needs assessment completed                               │
+│  ├─ Day 3: RFP sent to 4 PEOs (construction specialists)                   │
+│  ├─ Day 7: Quotes received from all 4                                      │
+│  ├─ Day 8: Presentation call with Mike                                     │
+│  ├─ Day 10: Mike selects VensureHR option                                  │
+│  ├─ Day 12: Contract signed                                                │
+│  ├─ Day 15: PEO onboarding begins                                          │
+│  └─ Day 30: First payroll processed through PEO                            │
+│                                                                              │
+│  RESULT: 18-employee client, ~$27,000 annual revenue                       │
+│  ACQUISITION COST: $127 (ad spend + portion of retainer)                   │
+│  LTV:CAC RATIO: 35:1 (assuming 5-year retention)                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 15: Team Requirements -->
+      <section id="s15" class="cs-page">
+        <div class="cs-num">15.</div>
+        <div class="cs-content">
+          <h1>Team Requirements</h1>
+          <h2>Who You Need to Run This System</h2>
+          
+          <div class="alert-box">
+            <p><strong>Key Question:</strong> Do you want to manage campaigns yourself, or have us handle everything? The answer determines team structure and costs.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Option A: Full-Service (We Handle Everything)</h3>
+            <p>You focus on sales and client relationships. We manage the entire lead generation machine.</p>
+            
+            <div class="team-card">
+              <h4>GTW Strategy Team (Included in Retainer)</h4>
+              <div class="role">Growth Strategist</div>
+              <p>Overall strategy, campaign architecture, optimization decisions, reporting</p>
+              <div class="details">Time allocation: ~10-15 hrs/month on your account</div>
+            </div>
+            
+            <div class="team-card">
+              <h4>GTW Strategy Team (Included in Retainer)</h4>
+              <div class="role">Paid Media Specialist</div>
+              <p>Google Ads management, LinkedIn Ads management, bid optimization, creative testing</p>
+              <div class="details">Time allocation: ~15-20 hrs/month on your account</div>
+            </div>
+            
+            <div class="team-card">
+              <h4>GTW Strategy Team (Included in Retainer)</h4>
+              <div class="role">Marketing Operations</div>
+              <p>CRM management, email sequences, tracking, landing page updates</p>
+              <div class="details">Time allocation: ~8-12 hrs/month on your account</div>
+            </div>
+            
+            <div class="success-box">
+              <p><strong>Your Role:</strong> Answer the phone. Run discovery calls. Close deals. We handle everything else.</p>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Option B: Hybrid (Some Internal Capacity)</h3>
+            <p>If you want to build internal capability or have someone who can help:</p>
+            
+            <div class="team-card">
+              <h4>Virtual Assistant / Marketing Coordinator</h4>
+              <div class="role">Part-Time (10-20 hrs/week)</div>
+              <div class="cost">$800 - $1,500/month</div>
+              <p>Lead follow-up, CRM data hygiene, appointment scheduling, basic reporting</p>
+              <div class="details">Hire via: OnlineJobs.ph, Belay, Time Etc</div>
+            </div>
+            
+            <div class="team-card">
+              <h4>SDR / Appointment Setter</h4>
+              <div class="role">Part-Time or Commission-Based</div>
+              <div class="cost">$1,500 - $3,000/month (or $50-100/qualified appointment)</div>
+              <p>Outbound calling on inbound leads, appointment setting, initial qualification</p>
+              <div class="details">Valuable if lead volume exceeds your call capacity</div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Tools & Software Costs (You'll Need)</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Purpose</th>
+                  <th>Monthly Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>CRM (GoHighLevel or HubSpot)</strong></td>
+                  <td>Lead management, email, SMS, automation</td>
+                  <td>$97 - $297/mo</td>
+                </tr>
+                <tr>
+                  <td><strong>Call Tracking (CallRail)</strong></td>
+                  <td>Call attribution, recording, analytics</td>
+                  <td>$45 - $145/mo</td>
+                </tr>
+                <tr>
+                  <td><strong>Landing Page Hosting</strong></td>
+                  <td>If not using GHL (Unbounce, Webflow, etc.)</td>
+                  <td>$0 - $99/mo</td>
+                </tr>
+                <tr>
+                  <td><strong>Domain + Email</strong></td>
+                  <td>Professional email, domain registration</td>
+                  <td>$10 - $20/mo</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><strong>Total Tools Budget</strong></td>
+                  <td><strong>$150 - $500/mo</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 16: Partnership Model -->
+      <section id="s16" class="cs-page">
+        <div class="cs-num">16.</div>
+        <div class="cs-content">
+          <h1>Partnership Model</h1>
+          <h2>Retainer + Revenue Share</h2>
+          
+          <div class="revenue-model">
+            <h3>How It Works</h3>
+            <p>This isn't a vendor relationship — it's a growth partnership. We're invested in your success because our compensation is tied to your results.</p>
+            
+            <div class="two-col" style="margin-top:1rem;">
+              <div class="box">
+                <h4>Monthly Retainer</h4>
+                <p>Covers infrastructure build-out, campaign management, optimization, reporting, and strategy. Paid monthly regardless of results.</p>
+                <p><em>This ensures we can dedicate proper resources to your account.</em></p>
+              </div>
+              <div class="box">
+                <h4>Revenue Share on Closes</h4>
+                <p>Percentage of commission earned on deals closed from leads we generate. Paid when you get paid.</p>
+                <p><em>This aligns our incentives — we make more when you close more.</em></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>What's Included in the Retainer</h3>
+            <ul>
+              <li>✅ All landing page design and development</li>
+              <li>✅ CRM setup and configuration</li>
+              <li>✅ Tracking infrastructure implementation</li>
+              <li>✅ Google Ads campaign build and management</li>
+              <li>✅ LinkedIn Ads campaign build and management</li>
+              <li>✅ Meta/Retargeting setup and management</li>
+              <li>✅ Email nurture sequence creation</li>
+              <li>✅ Weekly optimization and bid management</li>
+              <li>✅ Bi-weekly strategy calls</li>
+              <li>✅ Monthly performance reports</li>
+              <li>✅ Ongoing creative testing</li>
+              <li>✅ Landing page A/B testing</li>
+              <li>✅ Local SEO setup (Google Business Profile)</li>
+            </ul>
+          </div>
+          
+          <div class="component-section">
+            <h3>What's NOT Included (Your Costs)</h3>
+            <ul>
+              <li>❌ Ad spend (paid directly to Google, LinkedIn, Meta)</li>
+              <li>❌ CRM software subscription</li>
+              <li>❌ Call tracking subscription</li>
+              <li>❌ Domain and hosting</li>
+              <li>❌ Any internal hires you make</li>
+            </ul>
+          </div>
+          
+          <div class="warning-box">
+            <h3>Minimum Commitment</h3>
+            <p>This is a 6-month minimum engagement. Lead generation takes time to optimize — we need runway to build, test, learn, and scale. Month 1 is infrastructure. Month 2 is launch. Months 3-6 are optimization and scaling.</p>
+            <p>If we can't show clear progress and ROI trajectory by month 4, we'll have a serious conversation about what's not working.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 17: Expected Results -->
+      <section id="s17" class="cs-page">
+        <div class="cs-num">17.</div>
+        <div class="cs-content">
+          <h1>Expected Results</h1>
+          <h2>What Success Looks Like — Research-Backed Projections</h2>
+          
+          <div class="alert-box">
+            <p><strong>Note:</strong> The following projections incorporate December 2025 industry benchmark data. B2B professional services in competitive Florida markets typically run higher CPL than national averages due to high client LTV and aggressive competition.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Benchmark Metrics (2025 Industry Data)</h3>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="big">$100-180</div>
+                <div class="label">Blended Cost Per Lead</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">25-50</div>
+                <div class="label">Monthly Leads (at $5k spend)</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">15-20%</div>
+                <div class="label">Lead-to-Client Conversion</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$600-1,200</div>
+                <div class="label">Customer Acquisition Cost</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">$15-50K+</div>
+                <div class="label">Client Lifetime Value</div>
+              </div>
+              <div class="kpi-card">
+                <div class="big">15-50x</div>
+                <div class="label">LTV:CAC Ratio</div>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; color:#666;">Sources: LocaliQ 2025 Search Benchmarks, WordStream 2024 Google Ads Benchmarks, AxZLead LinkedIn B2B Costs 2025, NAPEO industry statistics.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Google Ads Projections (50% of Budget)</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ad Spend</th>
+                  <th>Est. CPC</th>
+                  <th>Clicks</th>
+                  <th>Conv Rate</th>
+                  <th>Leads</th>
+                  <th>CPL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>$1,500/mo</td>
+                  <td>$10</td>
+                  <td>150</td>
+                  <td>5%</td>
+                  <td>7-8</td>
+                  <td>$187</td>
+                </tr>
+                <tr>
+                  <td>$2,500/mo</td>
+                  <td>$10</td>
+                  <td>250</td>
+                  <td>5%</td>
+                  <td>12-13</td>
+                  <td>$192</td>
+                </tr>
+                <tr>
+                  <td>$5,000/mo</td>
+                  <td>$9</td>
+                  <td>555</td>
+                  <td>5%</td>
+                  <td>27-28</td>
+                  <td>$178</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>LinkedIn Ads Projections (35% of Budget)</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ad Spend</th>
+                  <th>Est. CPL Range</th>
+                  <th>Expected Leads</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>$1,050/mo</td>
+                  <td>$100-150</td>
+                  <td>7-10</td>
+                  <td>Lead Gen Forms recommended</td>
+                </tr>
+                <tr>
+                  <td>$1,750/mo</td>
+                  <td>$100-140</td>
+                  <td>12-17</td>
+                  <td>Higher volume = slight efficiency</td>
+                </tr>
+                <tr>
+                  <td>$3,500/mo</td>
+                  <td>$90-130</td>
+                  <td>27-39</td>
+                  <td>Better targeting optimization</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>Combined Scenario Modeling (All Channels)</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Conservative</th>
+                  <th>Moderate</th>
+                  <th>Aggressive</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monthly Ad Spend</td>
+                  <td>$3,000</td>
+                  <td>$5,000</td>
+                  <td>$10,000</td>
+                </tr>
+                <tr>
+                  <td>Blended CPL</td>
+                  <td>$150-200</td>
+                  <td>$120-150</td>
+                  <td>$100-130</td>
+                </tr>
+                <tr>
+                  <td>Monthly Leads</td>
+                  <td>15-20</td>
+                  <td>35-45</td>
+                  <td>75-100</td>
+                </tr>
+                <tr>
+                  <td>Conversion Rate</td>
+                  <td>15%</td>
+                  <td>18%</td>
+                  <td>20%</td>
+                </tr>
+                <tr>
+                  <td>New Clients/Month</td>
+                  <td>2-3</td>
+                  <td>6-8</td>
+                  <td>15-20</td>
+                </tr>
+                <tr>
+                  <td>Avg First-Year Value</td>
+                  <td>$8,000</td>
+                  <td>$10,000</td>
+                  <td>$12,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Monthly Revenue Added</strong></td>
+                  <td><strong>$16-24K</strong></td>
+                  <td><strong>$60-80K</strong></td>
+                  <td><strong>$180-240K</strong></td>
+                </tr>
+                <tr>
+                  <td>CAC (Ad + Retainer)</td>
+                  <td>~$1,500</td>
+                  <td>~$900</td>
+                  <td>~$700</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.8rem; color:#666;">Note: Conservative estimates account for initial learning period (months 1-2). Efficiency improves as campaigns optimize. CPL typically decreases 20-30% by month 3-4.</p>
+          </div>
+          
+          <div class="warning-box">
+            <h3>Reality Check: Why CPL is Higher Than "Industry Average"</h3>
+            <ul>
+              <li><strong>National avg. Google CPC is $4.66</strong> — but B2B professional services run $8-18</li>
+              <li><strong>National avg. CPL is $70</strong> — but B2B services with high LTV run $100-200</li>
+              <li><strong>LinkedIn CPL for business services: $60-150</strong> — higher end for decision-maker targeting</li>
+              <li><strong>Florida market is competitive</strong> — NetPEO, Paychex, ADP all bidding on same keywords</li>
+            </ul>
+            <p><strong>The math still works:</strong> Even at $150 CPL and 15% close rate, you're paying ~$1,000 to acquire a client worth $50,000+ lifetime.</p>
+          </div>
+          
+          <div class="success-box">
+            <h3>The Math That Matters</h3>
+            <p>A single 25-employee client generates approximately $45,000/year in revenue. With 95% retention and 5-7 year average lifetime, that's <strong>$225,000+ lifetime value per client</strong>.</p>
+            <p>If your CAC is $1,000, your LTV:CAC ratio is still <strong>225:1</strong>.</p>
+            <p>Even doubling the acquisition cost to $2,000 CAC yields <strong>112:1 LTV:CAC</strong> — exceptional by any standard.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 18: Implementation Timeline -->
+      <section id="s18" class="cs-page">
+        <div class="cs-num">18.</div>
+        <div class="cs-content">
+          <h1>Implementation Timeline</h1>
+          <h2>90-Day Build-Out + Ongoing Optimization</h2>
+          
+          <div class="component-section">
+            <h3>Month 1: Foundation</h3>
+            <ul>
+              <li>✅ Kickoff call and strategy session</li>
+              <li>✅ CRM setup and lead routing configured</li>
+              <li>✅ Tracking infrastructure installed (GA4, pixels, call tracking)</li>
+              <li>✅ Primary landing page designed and launched</li>
+              <li>✅ Google Ads account setup and initial campaigns launched</li>
+              <li>✅ Google Business Profile created</li>
+              <li>✅ Welcome email sequence drafted</li>
+            </ul>
+            <p><strong>Milestone:</strong> First leads coming in by end of Month 1</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Month 2: Expansion</h3>
+            <ul>
+              <li>✅ Industry-specific landing pages (Construction, Hospitality, Healthcare)</li>
+              <li>✅ LinkedIn Ads campaigns launched</li>
+              <li>✅ Email welcome sequence live and automated</li>
+              <li>✅ Retargeting campaigns activated</li>
+              <li>✅ First optimization pass based on initial data</li>
+              <li>✅ Referral partner outreach begins</li>
+            </ul>
+            <p><strong>Milestone:</strong> Full multi-channel acquisition running</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Month 3: Optimization</h3>
+            <ul>
+              <li>✅ Full email nurture sequences deployed</li>
+              <li>✅ A/B testing on landing pages and ads</li>
+              <li>✅ Budget reallocation based on channel performance</li>
+              <li>✅ Service-specific landing pages added</li>
+              <li>✅ 90-day performance review and scaling plan</li>
+            </ul>
+            <p><strong>Milestone:</strong> Clear ROI trajectory established</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>Months 4-6+: Scale & Refine</h3>
+            <ul>
+              <li>Continuous optimization based on conversion data</li>
+              <li>New campaign experiments and creative testing</li>
+              <li>Scaling budget on winning channels</li>
+              <li>Referral partnership development</li>
+              <li>Quarterly strategy reviews</li>
+              <li>Expansion opportunities assessment</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 19: Risk Mitigation -->
+      <section id="s19" class="cs-page">
+        <div class="cs-num">19.</div>
+        <div class="cs-content">
+          <h1>Risk Mitigation</h1>
+          <h2>What Could Go Wrong & How We Handle It</h2>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Risk</th>
+                <th>Likelihood</th>
+                <th>Mitigation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>High CPL initially</strong></td>
+                <td>Medium</td>
+                <td>Normal for new campaigns. We optimize aggressively in months 2-3. Start with conservative budget.</td>
+              </tr>
+              <tr>
+                <td><strong>Low conversion on leads</strong></td>
+                <td>Medium</td>
+                <td>Speed-to-lead matters hugely. We'll implement instant notifications. You need to call within 5 minutes.</td>
+              </tr>
+              <tr>
+                <td><strong>Competitive market pressure</strong></td>
+                <td>High</td>
+                <td>Orlando/Tampa is competitive. Differentiation through local presence, broker objectivity, and speed wins.</td>
+              </tr>
+              <tr>
+                <td><strong>Long sales cycles</strong></td>
+                <td>High</td>
+                <td>Normal for B2B. Nurture sequences keep leads warm. Track pipeline, not just closed deals.</td>
+              </tr>
+              <tr>
+                <td><strong>Franchise restrictions</strong></td>
+                <td>Low</td>
+                <td>Confirm with The PEO Link that local landing pages and advertising are permitted.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="warning-box">
+            <h3>⚠️ Critical Success Factor: Speed-to-Lead</h3>
+            <p>Research shows that calling a lead within 5 minutes makes you <strong>100x more likely</strong> to connect vs. waiting 30 minutes. You MUST be available to call leads quickly, or invest in an appointment setter.</p>
+            <p>We'll set up instant notifications. You need to answer.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 20: Next Steps -->
+      <section id="s20" class="cs-page">
+        <div class="cs-num">20.</div>
+        <div class="cs-content">
+          <h1>Next Steps</h1>
+          <h2>How We Move Forward</h2>
+          
+          <div class="component-section">
+            <h3>Before We Start, We Need:</h3>
+            <ol>
+              <li><strong>Domain decision:</strong> Do you have one? Should we set up peolinkorlando.com or similar?</li>
+              <li><strong>Business email:</strong> For lead notifications and CRM</li>
+              <li><strong>Corporate assets:</strong> Logos, brand guidelines from The PEO Link</li>
+              <li><strong>Sales process overview:</strong> How do you handle leads today? What's your close process?</li>
+              <li><strong>Franchise confirmation:</strong> Verify with corporate that local landing pages and advertising are permitted</li>
+              <li><strong>Payment method:</strong> Credit card for ad platform billing</li>
+            </ol>
+          </div>
+          
+          <div class="component-section">
+            <h3>The Process</h3>
+            <ol>
+              <li>Review this document thoroughly</li>
+              <li>Schedule a call to discuss questions and align on goals</li>
+              <li>Confirm retainer and revenue share terms</li>
+              <li>Sign agreement</li>
+              <li>Kickoff call within 48 hours</li>
+              <li>We get to work</li>
+            </ol>
+          </div>
+          
+          <div class="success-box">
+            <h3>Ready When You Are</h3>
+            <p>This territory is a goldmine for someone who can systematically reach business owners drowning in HR complexity. The infrastructure we build will be the engine that feeds your sales pipeline for years.</p>
+            <p>Let's build it.</p>
+          </div>
+          
+          <div style="margin-top:2rem; padding:1.5rem; border:2px solid #000; text-align:center;">
+            <h3 style="margin-top:0;">Go To War Strategy Inc.</h3>
+            <p style="margin:0.5rem 0;">Growth Strategy & Performance Marketing</p>
+            <p style="margin:0; font-size:0.9rem; color:#666;">Montreal, QC • Ottawa, ON • Toronto, ON</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 21: Research Appendix -->
+      <section id="s21" class="cs-page">
+        <div class="cs-num">21.</div>
+        <div class="cs-content">
+          <h1>Research Appendix</h1>
+          <h2>Data Sources & Methodology — December 2025</h2>
+          
+          <div class="alert-box">
+            <p><strong>This document incorporates real market research conducted in December 2025.</strong> The following sources were used to validate projections, estimate costs, and analyze the competitive landscape.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>PPC & Advertising Benchmarks</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Data Used</th>
+                  <th>Access Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>LocaliQ 2025 Search Benchmarks</strong></td>
+                  <td>Average CPC ($5.26), CTR (6.66%), CPL ($70.11) across industries</td>
+                  <td>Dec 2025</td>
+                </tr>
+                <tr>
+                  <td><strong>WordStream 2024 Google Ads Benchmarks</strong></td>
+                  <td>CTR by industry (6.42%), CPC trends (+10% YoY), conversion rates</td>
+                  <td>Dec 2025</td>
+                </tr>
+                <tr>
+                  <td><strong>WebFX 2026 PPC Benchmarks</strong></td>
+                  <td>Industry-specific CPL, deal cycles, marketing spend benchmarks</td>
+                  <td>Dec 2025</td>
+                </tr>
+                <tr>
+                  <td><strong>AdTargeting Keyword Data</strong></td>
+                  <td>Specific CPC: "hr payroll" ($10.97), "payroll register" ($18.07)</td>
+                  <td>Dec 2025</td>
+                </tr>
+                <tr>
+                  <td><strong>Business of Apps CPC Rates 2025</strong></td>
+                  <td>Google Search CPC ($2.69), Display ($0.63), Facebook ($0.97 US)</td>
+                  <td>Dec 2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>LinkedIn Advertising Data</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Data Used</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>AxZLead LinkedIn B2B Lead Gen Costs 2025</strong></td>
+                  <td>CPL by industry: Recruiting/Staffing ($50-100), Business Services (~$60), Professional Services ($100-150)</td>
+                </tr>
+                <tr>
+                  <td><strong>NAV43 LinkedIn Ads Benchmarks 2025</strong></td>
+                  <td>Costs +8% YoY, CPL routinely exceeds $100 for B2B tech, video ads growing 74%</td>
+                </tr>
+                <tr>
+                  <td><strong>Swydo Google vs LinkedIn Ads 2025</strong></td>
+                  <td>LinkedIn CPC $5.58-$15.72, CPM $33.80-$55, 39% of B2B ad budgets go to LinkedIn</td>
+                </tr>
+                <tr>
+                  <td><strong>Cleverly LinkedIn Lead Gen Cost Guide</strong></td>
+                  <td>CPL ranges $15-350, LinkedIn leads convert 3x better than Facebook</td>
+                </tr>
+                <tr>
+                  <td><strong>WebFX LinkedIn Advertising Cost 2025</strong></td>
+                  <td>CPC $2-3, CPM $5-8, 57% satisfaction with LinkedIn ROI</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>Competitor Intelligence</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Competitor</th>
+                  <th>Research Conducted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>NetPEO (netpeo.com)</strong></td>
+                  <td>Full site audit. Identified 10+ Florida city pages, service pages, positioning ("not a PEO, a network of PEOs"), 95% retention claim, 100% satisfaction claim. Georgia HQ (678-376-1212).</td>
+                </tr>
+                <tr>
+                  <td><strong>The PEO Link (thepeolink.com)</strong></td>
+                  <td>Founded 2004, San Antonio HQ, Inc. 5000 #3181 (126% 3-year growth), IFA member, 75+ PEO agreements, franchise model.</td>
+                </tr>
+                <tr>
+                  <td><strong>PEO Exchange (peoexchange.com)</strong></td>
+                  <td>Tampa office, 200+ PEO network, works with insurance agents, automated quoting portal.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>Industry & Market Data</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Data Used</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>NAPEO (National Association of Professional Employer Organizations)</strong></td>
+                  <td>700+ PEOs in US, Florida = "high relative PEO presence" state, 2-3M Americans in PEO relationships, industry statistics on retention and growth</td>
+                </tr>
+                <tr>
+                  <td><strong>Florida Workers' Compensation Rating Bureau</strong></td>
+                  <td>WC rates by class code, FL ranked #30 nationally for WC costs, 6.9% decrease proposed for 2026, 9 consecutive years of rate decreases</td>
+                </tr>
+                <tr>
+                  <td><strong>Florida Business Requirements</strong></td>
+                  <td>4+ employees require WC (non-construction), 1+ employees require WC (construction), 6+ for agriculture</td>
+                </tr>
+                <tr>
+                  <td><strong>MoneyGeek FL Workers Comp 2025</strong></td>
+                  <td>Average $80/month ($955/year), construction significantly higher, office workers ~$3/employee/month</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>Key Assumptions & Methodology</h3>
+            <ul>
+              <li><strong>CPC estimates:</strong> Based on B2B professional services benchmarks, adjusted upward for competitive Florida market. National avg is $4.66 — we estimate $8-15 for PEO/HR keywords.</li>
+              <li><strong>CPL estimates:</strong> Based on LinkedIn and Google benchmarks for business services, adjusted for high-value B2B with long sales cycles. We estimate $100-180 blended vs. ~$70 national average.</li>
+              <li><strong>Conversion rates:</strong> Conservative 15-20% lead-to-client based on B2B services benchmarks and PEO industry norms.</li>
+              <li><strong>Client LTV:</strong> Based on NAPEO data: 95%+ retention, 5-7 year average relationship, $100-200 per employee per month revenue to broker.</li>
+            </ul>
+          </div>
+          
+          <div class="warning-box">
+            <h3>Research Gaps — Information Needed From Client</h3>
+            <ul>
+              <li><strong>Franchise commission structure:</strong> What % does franchisee earn per placement?</li>
+              <li><strong>Average deal value:</strong> What's typical first-year revenue per client?</li>
+              <li><strong>Marketing restrictions:</strong> Can franchisee run local landing pages? Brand guidelines?</li>
+              <li><strong>Sales process:</strong> Current close rate, sales cycle length, experience level</li>
+              <li><strong>Capital/timeline:</strong> Available budget, when does he want leads flowing?</li>
+            </ul>
+            <p><strong>These gaps should be filled before finalizing retainer pricing and revenue share terms.</strong></p>
+          </div>
+          
+          <div style="margin-top:1.5rem; font-size:0.8rem; color:#666; text-align:center;">
+            <p><em>Research conducted December 26, 2025 | Data subject to market changes | Projections are estimates, not guarantees</em></p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#fff',
+        primaryTextColor: '#000',
+        primaryBorderColor: '#000',
+        lineColor: '#000',
+        secondaryColor: '#f9f9f9',
+        tertiaryColor: '#fff',
+        fontSize: '14px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: 'basis',
+        padding: 20,
+        nodeSpacing: 50,
+        rankSpacing: 80
+      },
+      sequence: {
+        useMaxWidth: false,
+        diagramMarginX: 50,
+        diagramMarginY: 10,
+        actorMargin: 50,
+        width: 150,
+        height: 65,
+        boxMargin: 10,
+        boxTextMargin: 5,
+        noteMargin: 10,
+        messageMargin: 35,
+        mirrorActors: true,
+        bottomMarginAdj: 1,
+        rightAngles: false,
+        showSequenceNumbers: false
+      },
+      gantt: {
+        useMaxWidth: false,
+        leftPadding: 75
+      },
+      securityLevel: 'loose'
+    });
+    
+    // Smooth scroll for index links
+    document.querySelectorAll('.cs-index a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    
+    // Highlight active section in index
+    const sections = document.querySelectorAll('section.cs-page');
+    const navLinks = document.querySelectorAll('.cs-index a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
