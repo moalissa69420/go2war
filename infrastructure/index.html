@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTW Infrastructure Strategy — Capturing Canada's $116B Nation-Building Initiative</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    :root { --index-width: 270px; --content-max: 56rem; --border:#000; }
+    body.cs-template { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0 !important; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+    .cs-wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+    .cs-index { position:sticky; top:0; align-self:start; height:100vh; padding:0.5rem 0.75rem; border-right:1px solid var(--border); background:#fff; overflow-y:auto; }
+    .cs-index-title { font-size:0.8125rem; margin-bottom:0.25rem; font-weight:700; }
+    .cs-index ol { list-style:none; padding:0; margin:0; font-size:0.875rem; line-height:1.4; }
+    .cs-index li { margin-bottom:0.15rem; }
+    .cs-index a { color:#000; text-decoration:none; display:inline-flex; gap:0.5rem; align-items:baseline; }
+    .cs-index a .num { color:#000; width:2.8rem; display:inline-block; text-align:right; }
+    .cs-index a:hover { text-decoration:underline; }
+    .cs-sections { padding:0 1.25rem; display:flex; flex-direction:column; align-items:flex-end; }
+    section.cs-page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:4rem 1fr; gap:0.5rem; padding:0.45rem 0; scroll-margin-top: 12px; border-bottom:1px solid #eee; }
+    .cs-num { display:block; text-align:right; color:#000; font-size:0.875rem; padding-top:0.2rem; font-weight:600; }
+    .cs-content h1 { font-size:1.125rem; margin:0 0 0.35rem 0; font-weight:700; color:#000; }
+    .cs-content h2 { font-size:1rem; margin:0.5rem 0 0.25rem 0; font-weight:600; color:#000; }
+    .cs-content h3 { font-size:0.9rem; margin:0.4rem 0 0.2rem 0; font-weight:600; color:#000; }
+    .cs-content p { margin:0.5rem 0; }
+    .cs-content ul { margin:0.5rem 0; padding-left:1.25rem; }
+    .cs-content li { margin-bottom:0.25rem; }
+    .two-col { display:grid; grid-template-columns: 1.2fr 1fr; gap:1rem; align-items:start; }
+    .three-col { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.75rem; align-items:start; }
+    .box { background:#fff; border:1px solid var(--border); padding:0.9rem; }
+    .problem-box { background:#fff; border:1px solid #000; border-left:4px solid #c00; padding:0.9rem; }
+    .solution-box { background:#fff; border:1px solid #000; border-left:4px solid #090; padding:0.9rem; }
+    .alert-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:0.9rem; margin:0.75rem 0; }
+    .success-box { background:#fff; border:1px solid #000; border-left:4px solid #090; padding:0.9rem; margin:0.75rem 0; }
+    .warning-box { background:#fff; border:1px solid #000; border-left:4px solid #f90; padding:0.9rem; margin:0.75rem 0; }
+    .terminal-output { background:#fff; color:#000; border:1px solid #000; padding:0.9rem; font-family: 'Monaco', 'Menlo', 'Courier New', monospace; font-size:0.72rem; white-space:pre-wrap; overflow-x:auto; line-height:1.5; }
+    .kpi-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:0.75rem; margin:1rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:0.75rem; text-align:center; }
+    .kpi-card .big { font-size:1.5rem; font-weight:700; color:#000; }
+    .kpi-card .label { font-size:0.75rem; color:#333; margin-top:0.25rem; }
+    .mermaid { background:#fff; border:1px solid #000; padding:1.5rem; margin:1rem 0; overflow-x:auto; min-height:200px; }
+    .component-section { background:#fff; border:1px solid #000; padding:0.9rem; margin:0.5rem 0; }
+    .metrics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem; margin:1rem 0; }
+    .metric-card { background:#fff; border:1px solid #000; padding:0.75rem; text-align:center; }
+    .metric-value { font-size:1.5rem; font-weight:700; color:#000; margin-bottom:0.25rem; }
+    .metric-label { font-size:0.75rem; color:#333; text-transform:uppercase; letter-spacing:0.5px; }
+    .before-after { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1rem 0; }
+    .before { background:#fff; border:1px solid #000; border-left:4px solid #c00; padding:0.9rem; }
+    .after { background:#fff; border:1px solid #000; border-left:4px solid #090; padding:0.9rem; }
+    .pill { display:inline-block; padding:0.15rem 0.5rem; border:1px solid #000; margin-right:0.35rem; font-size:0.75rem; color:#000; }
+    .pill.green { background:#e8f5e9; border-color:#090; }
+    .pill.red { background:#ffebee; border-color:#c00; }
+    .pill.blue { background:#e3f2fd; border-color:#00c; }
+    blockquote { margin: 0.75rem 0; padding: 0.75rem 1rem; border-left: 4px solid #000; background: #f9f9f9; font-style: italic; }
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.85rem; }
+    th, td { border:1px solid #000; padding:0.5rem; text-align:left; }
+    th { background:#f5f5f5; font-weight:600; }
+    .project-card { border:1px solid #000; padding:0.75rem; margin:0.5rem 0; }
+    .project-card h4 { margin:0 0 0.5rem 0; font-size:0.95rem; }
+    .project-card .meta { font-size:0.8rem; color:#333; }
+    .timeline-item { display:grid; grid-template-columns: 80px 1fr; gap:1rem; padding:0.75rem 0; border-bottom:1px solid #eee; }
+    .timeline-item:last-child { border-bottom:none; }
+    .timeline-date { font-weight:600; font-size:0.85rem; }
+    .contact-card { border:1px solid #000; padding:0.6rem; margin:0.35rem 0; font-size:0.8rem; }
+    .contact-card strong { font-size:0.85rem; }
+    .contact-card a { color:#000; }
+    .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:0.5rem; }
+    .status-dot.green { background:#090; }
+    .status-dot.yellow { background:#f90; }
+    .status-dot.red { background:#c00; }
+    .email-template { background:#f9f9f9; border:1px solid #000; padding:1rem; margin:0.5rem 0; font-size:0.85rem; }
+    .email-template .subject { font-weight:600; margin-bottom:0.5rem; border-bottom:1px solid #ccc; padding-bottom:0.5rem; }
+    @media (max-width: 700px) { 
+      body.cs-template { font-size: 14px; }
+      .cs-wrapper{ grid-template-columns:1fr; } 
+      .cs-index{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); padding: 0.75rem; } 
+      .cs-index-title { font-size: 0.9rem; margin-bottom: 0.5rem; }
+      .cs-index ol { font-size: 0.8rem; }
+      .cs-index li { margin-bottom: 0.35rem; }
+      .cs-sections { padding: 0 0.75rem; }
+      section.cs-page{ grid-template-columns:2.5rem 1fr; gap:0.5rem; padding:0.75rem 0;} 
+      .cs-num { font-size: 0.75rem; padding-top: 0.1rem; }
+      .cs-content h1 { font-size: 1rem; margin-bottom: 0.5rem; }
+      .cs-content h2 { font-size: 0.95rem; margin-top: 0.75rem; }
+      .cs-content h3 { font-size: 0.85rem; }
+      .cs-content p { margin: 0.75rem 0; }
+      .two-col, .three-col{ grid-template-columns:1fr; gap:1rem;} 
+      .kpi-grid{ grid-template-columns:1fr 1fr; gap: 0.5rem; }
+      .metrics-grid{ grid-template-columns:1fr 1fr; gap: 0.5rem; }
+      .kpi-card, .metric-card { padding: 0.5rem; }
+      .kpi-card .big, .metric-value { font-size: 1.25rem; }
+      .before-after{ grid-template-columns:1fr; gap: 0.75rem; }
+      table { font-size: 0.75rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { padding: 0.4rem 0.35rem; white-space: nowrap; }
+      .component-section { padding: 0.75rem; margin: 0.75rem 0; }
+      .contact-card { padding: 0.75rem; font-size: 0.75rem; }
+      .terminal-output { font-size: 0.65rem; padding: 0.75rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .mermaid { padding: 1rem; margin: 0.75rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; min-height: 150px; }
+      .email-template { padding: 0.75rem; font-size: 0.8rem; }
+      .alert-box, .success-box, .warning-box { padding: 0.75rem; margin: 0.75rem 0; }
+      .timeline-item { grid-template-columns: 60px 1fr; gap: 0.75rem; }
+      .project-card { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body class="cs-template">
+  <div class="cs-wrapper">
+    <aside class="cs-index">
+      <div class="cs-index-title">GTW Infrastructure Strategy</div>
+      <ol>
+        <li><a href="#s1"><span class="num">01.</span> Executive Summary</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Problem Diagnosis</a></li>
+        <li><a href="#s3"><span class="num">03.</span> GTW Strategic Positioning</a></li>
+        <li><a href="#s4"><span class="num">04.</span> The 10 Projects + Contacts</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Indigenous Partnerships</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Recruitment Marketing</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Content Production</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Quebec Advantage</a></li>
+        <li><a href="#s9"><span class="num">09.</span> Technology Platform</a></li>
+        <li><a href="#s10"><span class="num">10.</span> Competitive Landscape</a></li>
+        <li><a href="#s11"><span class="num">11.</span> Financial Model</a></li>
+        <li><a href="#s12"><span class="num">12.</span> Implementation + Templates</a></li>
+        <li><a href="#s13"><span class="num">13.</span> Risk Analysis</a></li>
+        <li><a href="#s14"><span class="num">14.</span> Conclusion</a></li>
+      </ol>
+    </aside>
+    
+    <main class="cs-sections">
+      <!-- SECTION 1: EXECUTIVE SUMMARY -->
+      <section id="s1" class="cs-page">
+        <div class="cs-num">01.</div>
+        <div class="cs-content">
+          <h1>GTW Infrastructure Strategy: Capturing Canada's $116B Nation-Building Initiative</h1>
+          <p style="margin: 0 0 1rem 0; font-size: 0.875rem; color: #666; font-style: italic;">Strategic Case Study by Go To War Strategy Inc. | January 2026</p>
+          
+          <div class="alert-box" style="margin-bottom: 1.5rem;">
+            <p style="line-height: 1.8;"><strong>Prime Minister Mark Carney just launched the largest coordinated infrastructure investment in Canadian history—$116 billion across 10 nation-building projects. Every project needs workers. Every project needs communications. Every project requires Indigenous partnership. And every project is understaffed, under-marketed, and racing against a 2-year approval timeline. GTW is positioned to capture a significant share of this market.</strong></p>
+          </div>
+          
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$116B</div>
+              <div class="label">Total Investment</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">80,000+</div>
+              <div class="label">Jobs Created</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">10</div>
+              <div class="label">Major Projects</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">2-Year</div>
+              <div class="label">Approval Timeline</div>
+            </div>
+          </div>
+          
+          <div class="component-section" style="margin-top: 1.5rem;">
+            <h3 style="margin-top: 0;">The Opportunity</h3>
+            <ul style="margin: 0;">
+              <li><strong>Recruitment Marketing:</strong> $50-100M+ annually across all projects</li>
+              <li><strong>Indigenous Communications:</strong> $40M federal capacity fund + IBA requirements</li>
+              <li><strong>Content Production:</strong> Documentary, ESG reports, milestone campaigns</li>
+              <li><strong>Technology Platforms:</strong> $675M construction software market by 2035</li>
+              <li><strong>Quebec Proximity:</strong> Contrecœur + NMG require French-first execution</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: PROBLEM DIAGNOSIS -->
+      <section id="s2" class="cs-page">
+        <div class="cs-num">02.</div>
+        <div class="cs-content">
+          <h1>Problem Diagnosis: Canada's Infrastructure Execution Gap</h1>
+          
+          <div class="two-col">
+            <div class="problem-box">
+              <h2 style="margin-top:0; color:#c00;">The Workforce Crisis</h2>
+              <ul>
+                <li><strong>222,000+ Red Seal journeypersons</strong> needed by 2028</li>
+                <li><strong>80,000+ construction retirements</strong> in Ontario alone by 2031</li>
+                <li><strong>15-year average</strong> from mineral discovery to mine production</li>
+                <li><strong>No coordinated recruitment</strong> across projects</li>
+                <li><strong>Indigenous workforce underutilized</strong> despite IBA mandates</li>
+              </ul>
+            </div>
+            <div class="problem-box">
+              <h2 style="margin-top:0; color:#c00;">The Communications Gap</h2>
+              <ul>
+                <li><strong>Projects launching without brand identity</strong> (Ksi Lisims)</li>
+                <li><strong>Indigenous opposition</strong> from consultation failures</li>
+                <li><strong>Nuclear safety misconceptions</strong> blocking public support</li>
+                <li><strong>French-first requirements</strong> (Bill 96) with no capacity</li>
+                <li><strong>ESG reporting mandates</strong> with no storytelling</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="terminal-output" style="margin-top:1rem;">
+CANADA INFRASTRUCTURE CRISIS DASHBOARD — January 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WORKFORCE GAPS BY PROJECT:
+┌────────────────────────────────────────────────────────┐
+│ LNG Canada Phase 2      │ 7,500 workers needed        │
+│ Darlington SMR          │ 18,000 jobs/year            │
+│ Contrecœur Terminal     │ 8,000-10,000 construction   │
+│ Crawford Nickel         │ 1,000+ direct               │
+│ Ksi Lisims LNG          │ 800 construction            │
+│ Red Chris Expansion     │ 800 operations              │
+│ McIlvenna Bay           │ 400 operations              │
+│ Nouveau Monde Graphite  │ 1,000+ Quebec jobs          │
+│ Iqaluit Hydro           │ Hundreds (remote Arctic)    │
+└────────────────────────────────────────────────────────┘
+
+INDIGENOUS PARTNERSHIP STATUS:
+┌────────────────────────────────────────────────────────┐
+│ ✅ LNG Canada/Haisla    │ $3.8B+ contracts flowing    │
+│ ✅ Red Chris/Tahltan    │ $100M/year in business      │
+│ ✅ Crawford/TTN         │ $20M equity stake           │
+│ ⚠️  Ksi Lisims          │ Legal challenges pending    │
+│ ❌ Sisson Mine          │ Significant opposition      │
+└────────────────────────────────────────────────────────┘
+
+COMMUNICATIONS READINESS:
+┌────────────────────────────────────────────────────────┐
+│ Ksi Lisims              │ No brand identity ❌         │
+│ Crawford Nickel         │ Carbon story untold ⚠️      │
+│ Darlington SMR          │ Public education needed ⚠️  │
+│ Contrecœur              │ French content gap ❌        │
+│ McIlvenna Bay           │ Mid-2026 launch pending ⚠️  │
+└────────────────────────────────────────────────────────┘
+          </div>
+          
+          <blockquote>
+            "To get to 'one project, one review, one decision' will set Canada apart globally and will attract enormous inflows of capital." — Dawn Farrell, CEO Major Projects Office
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- SECTION 3: GTW STRATEGIC POSITIONING -->
+      <section id="s3" class="cs-page">
+        <div class="cs-num">03.</div>
+        <div class="cs-content">
+          <h1>GTW Strategic Positioning: Why We Win This</h1>
+          
+          <div class="mermaid">
+            flowchart TB
+                A[GTW Core Capabilities] --> B[Performance Marketing]
+                A --> C[Brand Development]
+                A --> D[Content Production]
+                A --> E[Technology Development]
+                
+                B --> F[Recruitment Marketing]
+                B --> G[Paid Acquisition]
+                C --> H[Indigenous Partnership Comms]
+                C --> I[Project Brand Identity]
+                D --> J[Documentary Production]
+                D --> K[ESG Reporting]
+                E --> L[Training Platforms]
+                E --> M[Workforce Management]
+                
+                F --> N[Infrastructure Projects]
+                G --> N
+                H --> N
+                I --> N
+                J --> N
+                K --> N
+                L --> N
+                M --> N
+          </div>
+          
+          <div class="component-section">
+            <h3>The Competitive Moat</h3>
+            <div class="two-col">
+              <div>
+                <h4>What Big Agencies Can't Do</h4>
+                <ul>
+                  <li><strong>Performance marketing + storytelling:</strong> PR firms don't do ROAS optimization</li>
+                  <li><strong>French-first execution:</strong> Toronto agencies outsource Quebec</li>
+                  <li><strong>Speed:</strong> 2-year MPO timeline requires startup velocity</li>
+                  <li><strong>Indigenous-led communications:</strong> Underserved, funded, growing</li>
+                </ul>
+              </div>
+              <div>
+                <h4>What GTW Brings</h4>
+                <ul>
+                  <li><strong>11.6x ROAS track record:</strong> Performance-first approach</li>
+                  <li><strong>Montreal HQ:</strong> Native French, Bill 96 compliance</li>
+                  <li><strong>Fashion/DTC expertise:</strong> Employer branding sophistication</li>
+                  <li><strong>Founder-led:</strong> Direct access, fast decisions</li>
+                  <li><strong>Enterprise experience:</strong> Google, Amazon, Nike scale</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="terminal-output">
+GTW CAPABILITY MATRIX — Infrastructure Alignment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SERVICE LINE              │ PROJECT FIT          │ COMPETITION LEVEL
+─────────────────────────────────────────────────────────────────────
+Recruitment Marketing     │ ALL 10 PROJECTS      │ LOW (fragmented)
+Indigenous Partnership    │ 8/10 PROJECTS        │ LOW (underserved)
+French-First Content      │ Contrecœur, NMG      │ VERY LOW
+Brand Development         │ Ksi Lisims, Crawford │ MEDIUM
+Documentary Production    │ ALL 10 PROJECTS      │ MEDIUM
+ESG/Sustainability        │ ALL 10 PROJECTS      │ HIGH (big 4)
+Training Platforms        │ 6/10 PROJECTS        │ MEDIUM
+Workforce Tech            │ 5/10 PROJECTS        │ MEDIUM
+
+GTW DIFFERENTIATOR:
+"We're the only agency that treats your growth like a system, not 
+a series of campaigns." — Creative informed by data. Data elevated 
+by taste.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: THE 10 PROJECTS + CONTACTS -->
+      <section id="s4" class="cs-page">
+        <div class="cs-num">04.</div>
+        <div class="cs-content">
+          <h1>The 10 Projects: Decision-Maker Contacts</h1>
+          
+          <div class="alert-box">
+            <p><strong>First Tranche (September 2025):</strong> $60B across 5 advanced-stage projects<br>
+            <strong>Second Tranche (November 2025):</strong> $56B across 5 development-stage projects</p>
+          </div>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Investment</th>
+                <th>Jobs</th>
+                <th>Indigenous Partner</th>
+                <th>GTW Fit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>LNG Canada Phase 2</strong><br><span style="font-size:0.8rem;">Kitimat, BC</span></td>
+                <td>~$20B</td>
+                <td>7,500</td>
+                <td>Haisla Nation</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Darlington SMR</strong><br><span style="font-size:0.8rem;">Clarington, ON</span></td>
+                <td>$20.9B</td>
+                <td>18,000/yr</td>
+                <td>Williams Treaties FN</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Ksi Lisims LNG</strong><br><span style="font-size:0.8rem;">Pearse Island, BC</span></td>
+                <td>~$30B</td>
+                <td>800+</td>
+                <td>Nisga'a Nation (majority)</td>
+                <td><span class="pill green">VERY HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Contrecœur Terminal</strong><br><span style="font-size:0.8rem;">Quebec</span></td>
+                <td>$950M</td>
+                <td>8,000+</td>
+                <td>Mohawk Council</td>
+                <td><span class="pill green">VERY HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Crawford Nickel</strong><br><span style="font-size:0.8rem;">Timmins, ON</span></td>
+                <td>$5B</td>
+                <td>1,000</td>
+                <td>Taykwa Tagamou ($20M equity)</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>McIlvenna Bay</strong><br><span style="font-size:0.8rem;">Saskatchewan</span></td>
+                <td>$1.08B</td>
+                <td>400</td>
+                <td>Peter Ballantyne Cree</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Nouveau Monde</strong><br><span style="font-size:0.8rem;">Quebec</span></td>
+                <td>$1.8B</td>
+                <td>1,000+</td>
+                <td>Local communities</td>
+                <td><span class="pill green">VERY HIGH</span></td>
+              </tr>
+              <tr>
+                <td><strong>Red Chris Expansion</strong><br><span style="font-size:0.8rem;">Northwestern BC</span></td>
+                <td>$2.6B</td>
+                <td>800</td>
+                <td>Tahltan Nation ($100M/yr)</td>
+                <td><span class="pill blue">MEDIUM</span></td>
+              </tr>
+              <tr>
+                <td><strong>Iqaluit Hydro</strong><br><span style="font-size:0.8rem;">Nunavut</span></td>
+                <td>~$500M</td>
+                <td>Hundreds</td>
+                <td>Qikiqtaaluk Corp (100%)</td>
+                <td><span class="pill blue">MEDIUM</span></td>
+              </tr>
+              <tr>
+                <td><strong>Sisson Mine</strong><br><span style="font-size:0.8rem;">New Brunswick</span></td>
+                <td>$579M+</td>
+                <td>300</td>
+                <td>Wolastoqey (opposition)</td>
+                <td><span class="pill red">AVOID</span></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h2 style="margin-top:1.5rem;">Priority Contacts Database</h2>
+          
+          <div class="component-section">
+            <h3>🏗️ Foran Mining (McIlvenna Bay) — Mid-2026 Production Launch</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Tracy Aitchison</strong> — VP HR, H&S and ESG<br>
+                <span style="font-size:0.75rem;">25+ yrs mining HR. Former Vale, Suncor. Harvard Leadership 2019.</span><br>
+                <a href="https://www.linkedin.com/in/tracy-aitchison/" target="_blank">LinkedIn</a> | ir@foranmining.com | 604-488-0008<br>
+                <em style="font-size:0.75rem;">Angle: Workforce development, safety programs, ESG initiatives</em>
+              </div>
+              <div class="contact-card">
+                <strong>Jonathan French, CFA</strong> — VP Capital Markets & External Affairs<br>
+                <span style="font-size:0.75rem;">Primary spokesperson. No separate VP Marketing—he handles all external comms.</span><br>
+                <a href="https://www.linkedin.com/in/jonathan-french-34152021/" target="_blank">LinkedIn</a> | ir@foranmining.com<br>
+                <em style="font-size:0.75rem;">Angle: Investor/media communications, company storytelling, critical minerals positioning</em>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>⛏️ Canada Nickel (Crawford) — $20M Indigenous Equity Deal</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Sydney Oakes</strong> — Director, Indigenous Relations & Public Affairs<br>
+                <span style="font-size:0.75rem;">Architected TTN's $20M investment—largest First Nations mining investment in Canada.</span><br>
+                <a href="https://ca.linkedin.com/in/sydney-oakes-3a00399a" target="_blank">LinkedIn</a> | sydneyoakes@canadanickel.com | 905-929-7151<br>
+                <em style="font-size:0.75rem;">Angle: Indigenous partnership storytelling, community engagement, public affairs</em>
+              </div>
+              <div class="contact-card">
+                <strong>Stacy Kimmett</strong> — Executive People Advisor (HR)<br>
+                <span style="font-size:0.75rem;">25+ yrs HR. Former VP HR at Wesdome Gold. BMO, CIBC, Manulife background.</span><br>
+                <a href="https://www.linkedin.com/in/stacy-kimmett-4116481/" target="_blank">LinkedIn</a> | stacykimmett@canadanickel.com<br>
+                <em style="font-size:0.75rem;">Angle: Talent management, Northern Ontario workforce, high-growth HR challenges</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>External PR:</strong> Melanie Paradis, Texture Communications — melanie@yourtexture.com | 416-399-7400</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>⚡ Nouveau Monde Graphite — Quebec, EV Supply Chain</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Patrice Boulanger, P.Eng., MBA</strong> — VP Sales, Marketing & Business Development<br>
+                <span style="font-size:0.75rem;">25+ yrs graphite industry. Speaking at Benchmark Week 2025 on anode supply chain.</span><br>
+                <a href="https://ca.linkedin.com/in/patrice-boulanger-1730aa3a" target="_blank">LinkedIn</a> | pboulanger@nmg.com<br>
+                <em style="font-size:0.75rem;">Angle: EV supply chain localization, Panasonic/GM offtakes, "Major Project" status</em>
+              </div>
+              <div class="contact-card">
+                <strong>Julie Paquet</strong> — VP Communications & ESG Strategy<br>
+                <span style="font-size:0.75rem;">Former McGill University Health Centre, Jacques Cartier Bridge comms. Harvard Sustainable Business.</span><br>
+                <a href="https://www.linkedin.com/in/juliepaquet/" target="_blank">LinkedIn</a> | jpaquet@nmg.com | 450-757-8905 x140<br>
+                <em style="font-size:0.75rem;">Angle: ESG thought leadership, carbon-neutrality narrative, major infrastructure background</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>HR:</strong> Karine Doucet, VP Human Resources — kdoucet@nmg.com (20+ yrs, Gildan, ArcelorMittal background)</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>🔋 Ontario Power Generation (Darlington SMR) — G7's First SMR</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Kathy Nosich</strong> — VP Stakeholder Relations<br>
+                <span style="font-size:0.75rem;">Leading "Recast Nuclear" public education campaign. 20 yrs Ontario government.</span><br>
+                Email: Kathy.Nosich@opg.com<br>
+                <em style="font-size:0.75rem;">Angle: Nuclear myth-busting, public education, climate solutions messaging</em>
+              </div>
+              <div class="contact-card">
+                <strong>Heather Ferguson</strong> — SVP Business Development & Corporate Affairs<br>
+                <span style="font-size:0.75rem;">25+ yrs energy. Assembled OPG's SMR team. Rotman MBA.</span><br>
+                Email: Heather.Ferguson@opg.com<br>
+                <em style="font-size:0.75rem;">Angle: Darlington milestones, Indigenous partnerships, northern community engagement</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>HR:</strong> Cynthia Domjancic, SVP HR & Chief Ethics Officer — jobs@opg.com | jobs.opg.com</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>🦅 Tahltan Nation Development Corporation (TNDC) — $100M/yr Contracts</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Todd den Engelsen</strong> — CEO<br>
+                <span style="font-size:0.75rem;">Métis. MBA Royal Roads. FCPHR. Featured in BC500 (2025). Started Jan 2024.</span><br>
+                <a href="https://www.linkedin.com/in/sirtodd/" target="_blank">LinkedIn</a> | info@tndc.ca | 250-771-5482<br>
+                <em style="font-size:0.75rem;">Angle: Partnership value, "Partner of Choice" positioning, 40th anniversary (2025)</em>
+              </div>
+              <div class="contact-card">
+                <strong>Calvin Carlick</strong> — VP Partnerships (Business Development)<br>
+                <span style="font-size:0.75rem;">Tahltan (Crow Clan). Former CAO Tahltan Central Government. 11 yrs TNDC Board.</span><br>
+                <a href="https://www.linkedin.com/in/calvincarlick/" target="_blank">LinkedIn</a><br>
+                <em style="font-size:0.75rem;">Angle: PRIMARY contact for new business partnerships. Growing revenues, contracting opps.</em>
+              </div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>🌊 Nisga'a Lisims Government (Ksi Lisims LNG) — Indigenous-Led $30B Project</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Andrew Robinson</strong> — CEO<br>
+                <span style="font-size:0.75rem;">Global Energy Show 2025 speaker. COP29 Canada Pavilion. 20 yrs Laxgalts'ap Village.</span><br>
+                <a href="https://ca.linkedin.com/in/andrew-robinson-0aaa49202" target="_blank">LinkedIn</a> | andrewr@nisgaanation.ca | 250-633-3000<br>
+                <em style="font-size:0.75rem;">Angle: Treaty context (25th anniversary), economic reconciliation, highly active speaker</em>
+              </div>
+              <div class="contact-card">
+                <strong>Raven Guno</strong> — Economic Development Manager<br>
+                <span style="font-size:0.75rem;">Also manages NEST (Nisga'a Employment, Skills & Training).</span><br>
+                raveng@nisgaanation.ca | 250-633-3000 x3066<br>
+                <em style="font-size:0.75rem;">Angle: PRIMARY for economic development inquiries. Business opps, employment partnerships.</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>Jobs Portal:</strong> opportunity@nisgaanation.ca | <strong>President:</strong> Eva Clayton (first woman President)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: INDIGENOUS PARTNERSHIPS -->
+      <section id="s5" class="cs-page">
+        <div class="cs-num">05.</div>
+        <div class="cs-content">
+          <h1>Indigenous Partnerships: The Critical Success Factor</h1>
+          
+          <div class="alert-box">
+            <p><strong>Without Indigenous partnership, most contracts are effectively closed.</strong> The $10B Indigenous Loan Guarantee Program, $40M capacity building fund, and 5% federal contract target (PSIB) make Indigenous partnership the single most important competitive differentiator.</p>
+          </div>
+          
+          <div class="two-col">
+            <div class="component-section">
+              <h3>Indigenous Partnership Success Models</h3>
+              <table style="font-size:0.8rem;">
+                <tr>
+                  <th>Project</th>
+                  <th>Partner</th>
+                  <th>Model</th>
+                </tr>
+                <tr>
+                  <td>LNG Canada</td>
+                  <td>Haisla Nation</td>
+                  <td>$3.8B+ JV contracts</td>
+                </tr>
+                <tr>
+                  <td>Ksi Lisims</td>
+                  <td>Nisga'a Nation</td>
+                  <td>Majority ownership</td>
+                </tr>
+                <tr>
+                  <td>Crawford</td>
+                  <td>Taykwa Tagamou</td>
+                  <td>$20M equity, Board seat</td>
+                </tr>
+                <tr>
+                  <td>Red Chris</td>
+                  <td>TNDC</td>
+                  <td>$100M/year contracts</td>
+                </tr>
+                <tr>
+                  <td>McIlvenna</td>
+                  <td>PBCN</td>
+                  <td>Employment priority</td>
+                </tr>
+                <tr>
+                  <td>Iqaluit</td>
+                  <td>Qikiqtaaluk</td>
+                  <td>100% Inuit ownership</td>
+                </tr>
+              </table>
+            </div>
+            <div class="component-section">
+              <h3>Funding Sources</h3>
+              <ul>
+                <li><strong>First Nations Finance Authority:</strong> $4B+ issued, Aa3/AA rated</li>
+                <li><strong>Indigenous Growth Fund:</strong> $153M through NACCA</li>
+                <li><strong>Canada Infrastructure Bank:</strong> Indigenous Equity Initiative</li>
+                <li><strong>Critical Minerals Fund:</strong> $13.5M Indigenous grants</li>
+                <li><strong>ISET Programs:</strong> Funded workforce training</li>
+              </ul>
+              <div class="success-box" style="margin-top:0.5rem;">
+                <p style="font-size:0.85rem;"><strong>Key Certification:</strong> CCIB (ccib.ca) provides market access and credibility for Indigenous business partnerships</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="warning-box">
+            <h4>⚠️ Critical Requirements</h4>
+            <ul>
+              <li><strong>PSIB Compliance:</strong> 51% Indigenous ownership + 33% Indigenous content for federal contracts</li>
+              <li><strong>500+ Active IBAs:</strong> Every major project has Impact Benefit Agreement obligations</li>
+              <li><strong>Trust-Building Required:</strong> Indigenous partnerships require relationship investment before contract pursuit</li>
+              <li><strong>Nunavut Projects:</strong> NNI Policy compliance—Inuit firms receive up to 21% bid adjustments</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: RECRUITMENT MARKETING -->
+      <section id="s6" class="cs-page">
+        <div class="cs-num">06.</div>
+        <div class="cs-content">
+          <h1>Recruitment Marketing Engine: Campaign Structure</h1>
+          
+          <div class="alert-box">
+            <p><strong>Canada's skilled trades crisis is the #1 pain point across all 10 projects.</strong> 222,000+ Red Seal journeypersons needed by 2028. Nuclear projects paying $70-110/hour. Projects competing for the same shrinking talent pool with no differentiated employer branding.</p>
+          </div>
+          
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$50-100M+</div>
+              <div class="label">Annual Market</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">222,000+</div>
+              <div class="label">Workers Needed</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$70-110/hr</div>
+              <div class="label">Nuclear PM Rates</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">LOW</div>
+              <div class="label">Competition</div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>GTW Recruitment Marketing Campaign Structure</h3>
+            <div class="terminal-output">
+RECRUITMENT CAMPAIGN ARCHITECTURE — GTW Framework
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 1: EMPLOYER BRAND DEVELOPMENT (Weeks 1-4)
+┌─────────────────────────────────────────────────────────┐
+│ DELIVERABLES:                                           │
+│ ├─ Employee Value Proposition (EVP) messaging           │
+│ ├─ Visual identity for recruitment (not corporate)      │
+│ ├─ 3-5 worker testimonial videos (60-90 sec each)       │
+│ ├─ Career site UX audit + recommendations               │
+│ ├─ Job posting optimization templates                   │
+│ └─ Competitor employer brand analysis                   │
+│                                                          │
+│ GTW APPROACH:                                           │
+│ • Interview 5-10 current employees (what makes them stay)│
+│ • Identify unique value props (location, culture, growth)│
+│ • Build creative that speaks to worker motivations      │
+│ • Test messaging with target audience before launch     │
+└─────────────────────────────────────────────────────────┘
+
+PHASE 2: PAID ACQUISITION CAMPAIGNS (Ongoing)
+┌─────────────────────────────────────────────────────────┐
+│ CHANNELS:                                               │
+│ ├─ Meta (Facebook/Instagram): Primary for trades        │
+│ ├─ LinkedIn: Professional/management roles              │
+│ ├─ Indeed Sponsored: Volume applications                │
+│ ├─ TikTok: Younger apprentices, career changers         │
+│ └─ Programmatic: Retargeting, job board syndication     │
+│                                                          │
+│ CREATIVE APPROACH (GTW Style):                          │
+│ • Lead with lifestyle, not just job specs               │
+│ • Show real workers, real sites, real conditions        │
+│ • Address objections upfront (remote, FIFO, safety)     │
+│ • Use short-form video (15-30 sec) for scroll-stopping  │
+│ • A/B test 3-5 variants per role category               │
+│                                                          │
+│ METRICS:                                                │
+│ • Cost per Application (target: $15-40)                 │
+│ • Cost per Qualified Lead (target: $50-150)             │
+│ • Cost per Hire (target: $500-2,000)                    │
+│ • Application-to-Interview Rate (target: 15-25%)        │
+│ • Time-to-Fill (target: reduce by 20-30%)               │
+└─────────────────────────────────────────────────────────┘
+
+PHASE 3: CONVERSION OPTIMIZATION (Months 2-6)
+┌─────────────────────────────────────────────────────────┐
+│ FUNNEL OPTIMIZATION:                                    │
+│ ├─ Landing page A/B testing (job-specific pages)        │
+│ ├─ Application form simplification                      │
+│ ├─ Mobile-first design (70%+ of trades job seekers)     │
+│ ├─ SMS follow-up sequences                              │
+│ └─ Email nurture for passive candidates                 │
+│                                                          │
+│ RETENTION LOOP:                                         │
+│ • Track application source to hire conversion           │
+│ • Build lookalike audiences from successful hires       │
+│ • Create referral programs with trackable links         │
+│ • Re-engage past applicants for new roles               │
+└─────────────────────────────────────────────────────────┘
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Example Creative Concepts (Infrastructure Recruitment)</h3>
+            <div class="three-col">
+              <div class="box">
+                <h4 style="margin-top:0;">Concept 1: "Build the Future"</h4>
+                <p style="font-size:0.8rem;">Hero shot of worker with landmark in background. Headline: "Your grandfather built the highways. You'll build Canada's energy independence."</p>
+                <p style="font-size:0.75rem; color:#666;">Target: Trades workers with family legacy in construction</p>
+              </div>
+              <div class="box">
+                <h4 style="margin-top:0;">Concept 2: "Numbers Don't Lie"</h4>
+                <p style="font-size:0.8rem;">Bold salary figures, benefits comparison. "$85/hour + camp provided + 14 days on/14 off." Direct, no fluff.</p>
+                <p style="font-size:0.75rem; color:#666;">Target: Workers currently underpaid, competitive poaching</p>
+              </div>
+              <div class="box">
+                <h4 style="margin-top:0;">Concept 3: "Indigenous First"</h4>
+                <p style="font-size:0.8rem;">Community members in leadership roles. "Built by our Nation, for our Nation." Partnership with ISET orgs.</p>
+                <p style="font-size:0.75rem; color:#666;">Target: Indigenous workers, funded training programs</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="success-box">
+            <h4>GTW Track Record in Acquisition Marketing</h4>
+            <ul>
+              <li><strong>Bello Water:</strong> Conversion rate 1.15% → 3.2% (2.8x improvement)</li>
+              <li><strong>Orseund Iris:</strong> 11.6x ROAS on paid acquisition</li>
+              <li><strong>Film3D:</strong> Scaled to 4M users through performance marketing</li>
+              <li><strong>Approach:</strong> First principles—what's the actual problem? Then design, build, measure.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: CONTENT PRODUCTION -->
+      <section id="s7" class="cs-page">
+        <div class="cs-num">07.</div>
+        <div class="cs-content">
+          <h1>Content Production System: Documentary + ESG Reports</h1>
+          
+          <div class="two-col">
+            <div class="component-section">
+              <h3>Documentary Opportunities</h3>
+              <ul>
+                <li><strong>TTN/Crawford Partnership:</strong> Largest direct First Nations mining investment in Canadian history ($20M equity)</li>
+                <li><strong>Haisla/LNG Canada:</strong> $3.8B+ in Indigenous contracts—economic reconciliation story</li>
+                <li><strong>G7's First SMR:</strong> Darlington construction globally significant</li>
+                <li><strong>Carbon-Neutral Mining:</strong> McIlvenna Bay + Crawford pioneering technology</li>
+                <li><strong>Arctic Sovereignty:</strong> Iqaluit hydro—Inuit-led clean energy</li>
+              </ul>
+              <p style="font-size:0.85rem;"><strong>Canada Media Fund POV Program:</strong> $7.74M invested in 26 documentary projects recently</p>
+            </div>
+            <div class="component-section">
+              <h3>ESG Reporting</h3>
+              <ul>
+                <li><strong>GRI/SASB-aligned reports</strong> required across all projects</li>
+                <li><strong>Indigenous reconciliation sections</strong> mandatory</li>
+                <li><strong>Bill S-211 supply chain compliance</strong> driving demand</li>
+                <li><strong>Carbon neutrality verification</strong> for McIlvenna/Crawford</li>
+                <li><strong>Annual partnership impact reports</strong></li>
+              </ul>
+              <p style="font-size:0.85rem;"><strong>Current providers:</strong> Carbonzero, Synergy Enterprises, WSP, Deloitte, EY</p>
+            </div>
+          </div>
+          
+          <div class="terminal-output">
+GTW CONTENT PRODUCTION — Service Packages
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENTARY:
+├─ Full production (30-60 min): $75-150K
+├─ Series (6x 15 min episodes): $150-300K
+├─ Short-form (3-5 min): $15-30K per piece
+└─ Timeline: 3-6 months production
+
+CORPORATE VIDEO:
+├─ Worker testimonials: $5-10K per video
+├─ Milestone announcements: $15-25K
+├─ Investor presentations: $10-20K
+└─ Construction progress: $8-15K monthly
+
+ESG/SUSTAINABILITY:
+├─ Annual report design: $25-50K
+├─ Impact storytelling: $15-30K
+├─ Data visualization: $10-20K
+└─ Indigenous reconciliation sections: $10-25K
+
+GTW ADVANTAGE:
+"We don't just make content that looks good—we make content 
+that works. Every piece ties to measurable outcomes."
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: QUEBEC ADVANTAGE -->
+      <section id="s8" class="cs-page">
+        <div class="cs-num">08.</div>
+        <div class="cs-content">
+          <h1>Quebec Advantage: Decision-Maker Contacts</h1>
+          
+          <div class="alert-box">
+            <p><strong>GTW's Montreal headquarters creates decisive competitive advantages for Quebec-based opportunities.</strong> Bill 96 compliance (fines starting at $3,000, escalating to $30,000/day), native French-first content capability, and same-day client meetings position GTW as the default partner for Contrecœur and Nouveau Monde.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>🏗️ Pomerleau Construction (Contrecœur) — $609M Contract</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Stéphanie Lassonde</strong> — VP Marketing & Communications<br>
+                <span style="font-size:0.75rem;">Former SNC-Lavalin. <strong>Managed Champlain Bridge comms.</strong> McGill Psychology, Harvard Med School Executive Ed.</span><br>
+                <a href="https://www.linkedin.com/in/stephanielassonde/" target="_blank">LinkedIn</a> | stephanie.lassonde@pomerleau.ca | 514-262-5211<br>
+                <em style="font-size:0.75rem;">Angle: Major infrastructure project communications, stakeholder engagement, bilingual campaigns</em>
+              </div>
+              <div class="contact-card">
+                <strong>Isabel Pouliot, LL.B.</strong> — EVP Talent, Culture & Sustainable Development<br>
+                <span style="font-size:0.75rem;">20 yrs Resolute Forest Products. Canada's Top 100 Employers (6 consecutive years).</span><br>
+                <a href="https://www.linkedin.com/in/isabel-pouliot-elle-she-her-6ba92842/" target="_blank">LinkedIn</a> | isabel.pouliot@pomerleau.ca<br>
+                <em style="font-size:0.75rem;">Angle: Employer branding, employee ownership program, transformation, culture-building</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>Active Job Posting:</strong> "Business Partner – Communications Marketing" (Halifax, reports to Director of External Communications) — <a href="https://jobs.pomerleau.ca/en_US/Jobs/JobDetail/2002/2035" target="_blank">Apply/Reference</a></p>
+            <p style="font-size:0.8rem;"><strong>Email Format:</strong> firstname.lastname@pomerleau.ca</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>⚓ Port of Montreal (Contrecœur) — $950M Expansion</h3>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+              <div class="contact-card">
+                <strong>Julien Baudry, MBA, ARP</strong> — VP Communications & External Relations + Chief of Staff<br>
+                <span style="font-size:0.75rem;">Former NATIONAL PR. City of Montreal comms. ESG UQAM MBA. Lectures at UdeM.</span><br>
+                <a href="https://www.linkedin.com/in/jbaudry/" target="_blank">LinkedIn</a> | julien.baudry@port-montreal.com<br>
+                <em style="font-size:0.75rem;">Angle: Direct Contrecœur spokesperson. Government relations, crisis comms expertise.</em>
+              </div>
+              <div class="contact-card">
+                <strong>Renée Larouche</strong> — Director of Communications<br>
+                <span style="font-size:0.75rem;">20+ yrs corporate comms. <strong>Former Global Director, Community & Social Performance at Rio Tinto.</strong></span><br>
+                <a href="https://www.linkedin.com/in/reneelarouche/" target="_blank">LinkedIn</a> | renee.larouche@port-montreal.com | 514-531-2410<br>
+                <em style="font-size:0.75rem;">Angle: Day-to-day media contact. Community/stakeholder relations. Crisis management.</em>
+              </div>
+            </div>
+            <div class="two-col" style="grid-template-columns: 1fr 1fr; margin-top:0.5rem;">
+              <div class="contact-card">
+                <strong>Mélanie Nadeau</strong> — VP Public Affairs & Community Relations<br>
+                <span style="font-size:0.75rem;">20+ yrs. Former 6 yrs at Port of Montreal. Board member Chambre de commerce de l'Est.</span><br>
+                <a href="https://www.linkedin.com/in/mélanie-nadeau-4a346019/" target="_blank">LinkedIn</a> | melanie.nadeau@port-montreal.com<br>
+                <em style="font-size:0.75rem;">Angle: <strong>Direct responsibility for community relations</strong>—critical for local opposition.</em>
+              </div>
+              <div class="contact-card">
+                <strong>Guillaume Brossard</strong> — VP Development, Marketing & International Relations<br>
+                <span style="font-size:0.75rem;">Lawyer. Former Énergir (LNG focus). Business development lead.</span><br>
+                <a href="https://www.linkedin.com/in/guillaume-brossard-a151a870/" target="_blank">LinkedIn</a> | guillaume.brossard@port-montreal.com<br>
+                <em style="font-size:0.75rem;">Angle: Trade corridor development, attracting new clients, distribution hub narrative.</em>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>Email Format:</strong> firstname.lastname@port-montreal.com</p>
+          </div>
+          
+          <div class="terminal-output">
+QUEBEC MARKET ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+BILL 96 REQUIREMENTS:
+├─ French-language workplace communications mandatory
+├─ Fines: $3,000 (first offense) → $30,000/day
+├─ OQLF (Office québécois de la langue française)
+└─ Toronto agencies must outsource → GTW advantage
+
+GTW POSITIONING:
+├─ Montreal HQ = native French execution
+├─ Same-day meetings with Pomerleau, Port of Montreal
+├─ Understanding of Quebec cultural context
+└─ Bilingual recruitment campaigns ready to deploy
+
+FEDERAL ADVANTAGE:
+├─ Buy Canadian Policy: 10% bid preference
+├─ 25% of evaluation scores tied to Canadian content
+└─ Montreal HQ = clear Canadian business presence
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: TECHNOLOGY PLATFORM -->
+      <section id="s9" class="cs-page">
+        <div class="cs-num">09.</div>
+        <div class="cs-content">
+          <h1>Technology Platform Opportunity</h1>
+          
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">$245M</div>
+              <div class="label">2025 Market</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">$675M</div>
+              <div class="label">2035 Market</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">10.64%</div>
+              <div class="label">CAGR</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">~$90M</div>
+              <div class="label">PM Segment</div>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>High-Value Technology Opportunities</h3>
+            <table style="font-size:0.85rem;">
+              <tr>
+                <th>Platform Type</th>
+                <th>Applicable Projects</th>
+                <th>Entry Model</th>
+              </tr>
+              <tr>
+                <td>Safety Training LMS</td>
+                <td>All 10 projects</td>
+                <td>Recurring licensing</td>
+              </tr>
+              <tr>
+                <td>Workforce Scheduling</td>
+                <td>LNG Canada, Contrecœur, Darlington</td>
+                <td>SaaS deployment</td>
+              </tr>
+              <tr>
+                <td>Indigenous Benefits Tracking</td>
+                <td>McIlvenna, Red Chris, Crawford, Ksi Lisims</td>
+                <td>Regulatory requirement</td>
+              </tr>
+              <tr>
+                <td>Community Engagement Platform</td>
+                <td>All 10 projects</td>
+                <td>Compliance driver</td>
+              </tr>
+              <tr>
+                <td>Carbon Verification System</td>
+                <td>Crawford, McIlvenna Bay</td>
+                <td>Novel technology</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="warning-box">
+            <h4>Technology Barriers to Entry</h4>
+            <ul>
+              <li><strong>Nuclear:</strong> CSA N299 certification (2-3 years), CSA N286 management systems, security clearances (6-12 months)</li>
+              <li><strong>Cybersecurity:</strong> CSA N290.7 compliance for nuclear OT/ICS</li>
+              <li><strong>Recommendation:</strong> Focus on implementation/integration services rather than platform development. Partner with existing providers (Procore, Oracle Primavera).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: COMPETITIVE LANDSCAPE -->
+      <section id="s10" class="cs-page">
+        <div class="cs-num">10.</div>
+        <div class="cs-content">
+          <h1>Competitive Landscape: Who GTW Displaces</h1>
+          
+          <div class="terminal-output">
+GTW COMPETITIVE POSITIONING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THE GAP GTW FILLS:
+┌─────────────────────────────────────────────────────────┐
+│                                                          │
+│   PR FIRMS          STAFFING         RECRUITMENT MKT    │
+│   ────────          ────────         ──────────────     │
+│   ✅ Storytelling   ✅ Workers       ✅ Employer Brand   │
+│   ❌ Performance    ❌ Branding      ❌ Infrastructure   │
+│   ❌ Digital        ❌ Marketing     ❌ French           │
+│                                                          │
+│                         ↓                                │
+│                                                          │
+│                    GTW POSITION                          │
+│                    ────────────                          │
+│                    ✅ Performance (11.6x ROAS)           │
+│                    ✅ Employer Branding                  │
+│                    ✅ Infrastructure Focus               │
+│                    ✅ French-First                       │
+│                    ✅ Indigenous Comms                   │
+│                    ✅ Enterprise Experience              │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+
+COMPETITORS BY CATEGORY:
+
+PR/COMMUNICATIONS:
+├─ NATIONAL Public Relations (Canada's largest, 49 yrs)
+├─ New West Public Affairs (Calgary, energy focus)
+├─ Weber Shandwick (global energy practice)
+└─ Gap: No performance marketing, no ROAS optimization
+
+STAFFING:
+├─ NES Fircroft (exclusive LNG Canada partner)
+├─ Airswift (global energy staffing)
+├─ Spirit Omega (Indigenous workforce)
+└─ Gap: No employer branding, commodity service
+
+EMPLOYER BRANDING:
+├─ Powerhouse Talent (EVP development)
+├─ Salt Canada (recruitment marketing)
+├─ Cielo Talent (data-driven)
+└─ Gap: No infrastructure specialization, Toronto-centric
+
+GTW WINS BECAUSE:
+"We're the only agency that treats your growth like a system,
+not a series of campaigns."
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 11: FINANCIAL MODEL -->
+      <section id="s11" class="cs-page">
+        <div class="cs-num">11.</div>
+        <div class="cs-content">
+          <h1>Financial Model: Revenue & Pricing</h1>
+          
+          <div class="alert-box">
+            <p><strong>Conservative estimate:</strong> GTW captures 0.5-1% of addressable market in recruitment marketing, Indigenous communications, and content production = $2-5M Year 1, scaling to $10-20M by Year 3.</p>
+          </div>
+          
+          <div class="component-section">
+            <h3>GTW Pricing Structure (from Knowledge Base)</h3>
+            <table>
+              <tr>
+                <th>Service Tier</th>
+                <th>Client Profile</th>
+                <th>Monthly Fee</th>
+                <th>Media Fee</th>
+              </tr>
+              <tr>
+                <td><strong>Tier 1</strong></td>
+                <td>Brands spending $25-50K/mo on ads</td>
+                <td>$15,000/month</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td><strong>Tier 2</strong></td>
+                <td>Brands spending $50-100K/mo</td>
+                <td>$20,000/month</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td><strong>Tier 3</strong></td>
+                <td>Brands spending $100K+/mo</td>
+                <td>$25,000/month</td>
+                <td>18% + performance bonus</td>
+              </tr>
+              <tr>
+                <td><strong>Minimum</strong></td>
+                <td>Any engagement</td>
+                <td>$10,000/month</td>
+                <td>—</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="component-section">
+            <h3>Competitor Pricing Benchmarks</h3>
+            <table style="font-size:0.85rem;">
+              <tr>
+                <th>Service</th>
+                <th>Market Rate</th>
+                <th>GTW Position</th>
+              </tr>
+              <tr>
+                <td>Employer Brand Development</td>
+                <td>$50-150K (project)</td>
+                <td>$50-100K (competitive)</td>
+              </tr>
+              <tr>
+                <td>Recruitment Marketing Retainer</td>
+                <td>$10-30K/month</td>
+                <td>$15-30K/month (market rate)</td>
+              </tr>
+              <tr>
+                <td>Indigenous Communications</td>
+                <td>$75-200/hour</td>
+                <td>$100-150/hour (mid-market)</td>
+              </tr>
+              <tr>
+                <td>Documentary Production</td>
+                <td>$100-300K (30-60 min)</td>
+                <td>$75-150K (value positioning)</td>
+              </tr>
+              <tr>
+                <td>ESG Report Design</td>
+                <td>$30-75K</td>
+                <td>$25-50K (competitive)</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="terminal-output">
+REVENUE PROJECTIONS — 3-Year Model
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YEAR 1 (2026) — FOUNDATION
+┌─────────────────────────────────────────────────────────┐
+│ Recruitment Marketing (3-4 clients @ $15-25K/mo)        │
+│ └─ Revenue: $600K-1.2M                                  │
+│                                                          │
+│ Content Production (5-8 projects @ $25-75K avg)         │
+│ └─ Revenue: $400K-800K                                  │
+│                                                          │
+│ Indigenous Communications (2-3 projects)                │
+│ └─ Revenue: $200K-400K                                  │
+│                                                          │
+│ Brand Development (1-2 projects)                        │
+│ └─ Revenue: $100K-200K                                  │
+│───────────────────────────────────────────────────────│
+│ YEAR 1 TOTAL: $1.3M-2.6M                                │
+│ Target Clients: 3-5 projects                            │
+│ Gross Margin: 40-60%                                    │
+└─────────────────────────────────────────────────────────┘
+
+YEAR 2 (2027) — SCALE
+├─ Expand to 6-8 project relationships
+├─ Add technology implementation services
+├─ Launch Indigenous partnership JV
+├─ Quebec projects at full construction
+└─ PROJECTED: $3M-5M
+
+YEAR 3 (2028) — ESTABLISH
+├─ Platform licensing revenue begins
+├─ Multi-year project retainers
+├─ Documentary distribution deals
+├─ Indigenous JV at scale
+└─ PROJECTED: $7M-12M
+          </div>
+          
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value">$2-5M</div>
+              <div class="metric-label">Year 1 Target</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">$7-12M</div>
+              <div class="metric-label">Year 3 Target</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">40-60%</div>
+              <div class="metric-label">Gross Margin</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">3-5</div>
+              <div class="metric-label">Project Clients Y1</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 12: IMPLEMENTATION + TEMPLATES -->
+      <section id="s12" class="cs-page">
+        <div class="cs-num">12.</div>
+        <div class="cs-content">
+          <h1>Implementation Roadmap + Outreach Templates</h1>
+          
+          <div class="mermaid">
+            gantt
+                title GTW Infrastructure Entry Timeline
+                dateFormat  YYYY-MM
+                section Foundation
+                Procurement Registration    :2026-01, 1M
+                CCIB Certification         :2026-01, 2M
+                Initial Outreach           :2026-01, 2M
+                section Entry
+                Contrecœur Pitch           :2026-02, 1M
+                Foran/McIlvenna Contact    :2026-02, 1M
+                NMG Relationship           :2026-03, 2M
+                section Scale
+                First Contract Close       :2026-03, 2M
+                PDAC/FNMPC Events          :2026-03, 2M
+                Indigenous JV Formation    :2026-04, 3M
+                section Deliver
+                Campaign Execution         :2026-05, 4M
+                Documentary Production     :2026-06, 6M
+          </div>
+          
+          <div class="component-section">
+            <h3>Week 1-2 Action Items</h3>
+            <table>
+              <tr>
+                <th>Action</th>
+                <th>Time</th>
+                <th>Link</th>
+              </tr>
+              <tr>
+                <td>Register CanadaBuys</td>
+                <td>30 mins</td>
+                <td><a href="https://canadabuys.canada.ca" target="_blank">canadabuys.canada.ca</a></td>
+              </tr>
+              <tr>
+                <td>Register LNG Canada</td>
+                <td>30 mins</td>
+                <td><a href="https://lngcanada.ca/supplier-registration" target="_blank">lngcanada.ca/supplier-registration</a></td>
+              </tr>
+              <tr>
+                <td>Register NMG Procurement</td>
+                <td>30 mins</td>
+                <td><a href="https://nmg.com/procurement" target="_blank">nmg.com/procurement</a></td>
+              </tr>
+              <tr>
+                <td>Register Indigenous Business Directory</td>
+                <td>1 hour</td>
+                <td><a href="https://sac-isc.gc.ca" target="_blank">sac-isc.gc.ca</a></td>
+              </tr>
+              <tr>
+                <td>PDAC Registration (March 1-4)</td>
+                <td>15 mins</td>
+                <td><a href="https://pdac.ca" target="_blank">pdac.ca</a></td>
+              </tr>
+            </table>
+          </div>
+          
+          <h2 style="margin-top:1.5rem;">📧 Outreach Email Templates</h2>
+          
+          <div class="email-template">
+            <div class="subject">TEMPLATE 1: Foran Mining (Tracy Aitchison) — Recruitment Marketing</div>
+            <p><strong>Subject:</strong> Workforce communications for McIlvenna Bay production launch</p>
+            <p>Hi Tracy,</p>
+            <p>Congrats on the mid-2026 production timeline—incredible to see McIlvenna Bay at 79% construction complete.</p>
+            <p>I run GTW, a Montreal-based growth studio. We've helped companies like Bello Water scale from $7K/mo to $160K in a quarter through performance marketing, and built Film3D to 4M users.</p>
+            <p>With 400 operations roles coming online, I imagine recruitment is top of mind. We specialize in employer branding and recruitment marketing campaigns that actually drive qualified applications—not just impressions.</p>
+            <p>Would a 15-minute call make sense to explore if we could support your hiring push? I'd also love to hear more about the PBCN partnership—that's the kind of story that deserves to be told well.</p>
+            <p>Best,<br>Mo<br>Go To War Strategy | go2war.com</p>
+          </div>
+          
+          <div class="email-template">
+            <div class="subject">TEMPLATE 2: Pomerleau (Stéphanie Lassonde) — French-First Communications</div>
+            <p><strong>Subject:</strong> Communications support for Contrecœur—bilingual, Montreal-based</p>
+            <p>Bonjour Stéphanie,</p>
+            <p>I noticed Pomerleau is hiring Communications & Marketing Business Partners for major infrastructure projects. As a Montreal-based agency, we specialize in exactly this work—bilingual content, stakeholder engagement, and recruitment marketing.</p>
+            <p>Our background: We've worked with Google, Amazon, and Nike on large-scale campaigns, and recently helped Orseund Iris achieve 11.6x ROAS on their marketing. My co-founder and I previously built Film3D to #1 on the App Store with 4M users.</p>
+            <p>With Contrecœur's scale (8,000+ jobs, 387 environmental conditions requiring ongoing consultation), I imagine the communications workload is significant. We could support either as a vendor or by augmenting your team's capacity.</p>
+            <p>Would you be open to a conversation about how GTW might help?</p>
+            <p>Merci,<br>Mo<br>Go To War Strategy | go2war.com</p>
+          </div>
+          
+          <div class="email-template">
+            <div class="subject">TEMPLATE 3: NMG (Patrice Boulanger) — EV Supply Chain Story</div>
+            <p><strong>Subject:</strong> Telling the North American EV supply chain story</p>
+            <p>Hi Patrice,</p>
+            <p>Saw your panel at Benchmark Week on anode supply chain security—the localization narrative is compelling, especially with the Panasonic and GM offtakes secured.</p>
+            <p>I run GTW, a Montreal-based growth studio (we're 120km from Saint-Michel-des-Saints). We specialize in performance marketing and content production for companies with complex stories to tell.</p>
+            <p>With NMG's "Major Project of National Interest" designation and the mid-2028 production timeline approaching, there's a real opportunity to own the "made in Canada" battery materials narrative. We've helped brands like Orseund Iris achieve 11.6x ROAS and built consumer apps to millions of users.</p>
+            <p>Would you be interested in a conversation about how we might support NMG's marketing and communications?</p>
+            <p>Best,<br>Mo<br>Go To War Strategy | go2war.com</p>
+          </div>
+          
+          <div class="email-template">
+            <div class="subject">TEMPLATE 4: TNDC (Calvin Carlick) — Indigenous Partnership Inquiry</div>
+            <p><strong>Subject:</strong> Partnership inquiry—communications and marketing services</p>
+            <p>Hello Calvin,</p>
+            <p>Congratulations to TNDC on 40 years—and on the BC500 recognition for Todd. The "Partner of Choice" positioning is clearly working.</p>
+            <p>I run GTW, a Montreal-based creative and growth studio. We're exploring partnerships with Indigenous business development corporations as we expand into infrastructure communications and recruitment marketing.</p>
+            <p>Our background includes scaling Film3D to 4M users (Apple Entrepreneur Camp), achieving 11.6x ROAS for fashion clients, and enterprise work with Google, Amazon, and Nike.</p>
+            <p>We're interested in understanding how TNDC approaches partnerships with non-Indigenous firms, particularly for communications and marketing services that support Tahltan economic development. Would you be open to an introductory conversation?</p>
+            <p>Respectfully,<br>Mo<br>Go To War Strategy | go2war.com</p>
+          </div>
+          
+          <div class="success-box">
+            <h4>Email Best Practices</h4>
+            <ul>
+              <li><strong>Lead with their win:</strong> Reference something specific they've accomplished</li>
+              <li><strong>Prove credibility fast:</strong> Film3D (4M users), Orseund Iris (11.6x ROAS), Enterprise (Google/Amazon/Nike)</li>
+              <li><strong>Name the pain:</strong> Connect your service to their specific challenge</li>
+              <li><strong>Light ask:</strong> 15-minute call, not a sales pitch</li>
+              <li><strong>French when appropriate:</strong> Pomerleau, Port of Montreal, NMG contacts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 13: RISK ANALYSIS -->
+      <section id="s13" class="cs-page">
+        <div class="cs-num">13.</div>
+        <div class="cs-content">
+          <h1>Risk Analysis: What Could Go Wrong</h1>
+          
+          <div class="two-col">
+            <div class="problem-box">
+              <h3 style="margin-top:0;">High Barriers</h3>
+              <ul>
+                <li><strong>Nuclear certification:</strong> 2-3 years to qualify (CSA N299)</li>
+                <li><strong>Security clearances:</strong> 6-12 months processing</li>
+                <li><strong>Environmental consulting:</strong> Major firms dominate through acquisition</li>
+                <li><strong>Indigenous partnerships:</strong> Trust-building required before contracts</li>
+              </ul>
+            </div>
+            <div class="warning-box">
+              <h3 style="margin-top:0;">Project-Specific Risks</h3>
+              <ul>
+                <li><strong>Sisson Mine:</strong> Significant Wolastoqey opposition — AVOID</li>
+                <li><strong>Ksi Lisims:</strong> Legal challenges pending from Lax Kw'alaams, Metlakatla</li>
+                <li><strong>Crawford:</strong> Awaiting final investment decision</li>
+                <li><strong>Building Canada Act:</strong> Constitutional challenges could invalidate framework</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="component-section">
+            <h3>Risk Mitigation Strategy</h3>
+            <div class="before-after">
+              <div class="before">
+                <h4>Don't Do</h4>
+                <ul>
+                  <li>Pursue nuclear certification (2-3 years)</li>
+                  <li>Invest heavily in Sisson Mine</li>
+                  <li>Build technology platforms from scratch</li>
+                  <li>Compete with WSP/Stantec on environmental</li>
+                  <li>Wait for Indigenous partnership "permission"</li>
+                </ul>
+              </div>
+              <div class="after">
+                <h4>Do Instead</h4>
+                <ul>
+                  <li>Focus on recruitment marketing (immediate)</li>
+                  <li>Prioritize projects with Indigenous support</li>
+                  <li>Partner with existing platform providers</li>
+                  <li>Own the French-first niche</li>
+                  <li>Initiate JV conversations immediately</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 14: CONCLUSION -->
+      <section id="s14" class="cs-page">
+        <div class="cs-num">14.</div>
+        <div class="cs-content">
+          <h1>Conclusion: The Window Is Now</h1>
+          
+          <div class="alert-box" style="margin-bottom:1.5rem;">
+            <p style="font-size:1.1rem; line-height:1.8;"><strong>$116 billion. 80,000+ jobs. 10 projects. 2-year approval timeline. Every major project understaffed, under-marketed, and racing against the clock.</strong></p>
+            <p style="line-height:1.8;">The Major Projects Office is designed for speed. The workforce crisis is immediate. Indigenous partnership requirements are creating new market categories. Quebec projects need French-first execution that Toronto agencies can't provide.</p>
+            <p style="line-height:1.8;"><strong>GTW is positioned to capture this opportunity. The question is not whether to enter—it's how fast.</strong></p>
+          </div>
+          
+          <div class="component-section">
+            <h3>This Week's Action Items</h3>
+            <table>
+              <tr>
+                <th>Action</th>
+                <th>Contact</th>
+                <th>Priority</th>
+              </tr>
+              <tr>
+                <td>Email Tracy Aitchison (Foran)</td>
+                <td>ir@foranmining.com</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td>Email Stéphanie Lassonde (Pomerleau)</td>
+                <td>stephanie.lassonde@pomerleau.ca</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td>Email Patrice Boulanger (NMG)</td>
+                <td>pboulanger@nmg.com</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+              <tr>
+                <td>Email Calvin Carlick (TNDC)</td>
+                <td>LinkedIn message → info@tndc.ca</td>
+                <td><span class="pill blue">MEDIUM</span></td>
+              </tr>
+              <tr>
+                <td>Register PDAC (March 1-4)</td>
+                <td>pdac.ca</td>
+                <td><span class="pill green">HIGH</span></td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="terminal-output">
+GTW INFRASTRUCTURE STRATEGY — SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MARKET SIZE:        $116B total | $50-100M+ addressable/year
+GTW TARGET:         $2-5M Year 1 | $10-20M Year 3
+CORE OFFERING:      Recruitment Marketing + Indigenous Comms
+COMPETITIVE MOAT:   Performance + French + Speed + Enterprise Experience
+
+GTW PROOF POINTS:
+├─ Film3D: 0 → 4M users, #1 App Store, Apple Entrepreneur Camp
+├─ Bello Water: $7K/mo → $160K Q4 (23x growth in 6 weeks)
+├─ Orseund Iris: 11.6x ROAS
+├─ Enterprise: Google Pixel, Amazon, Nike/Converse
+└─ Shopify SCIP: 87% prediction accuracy, 6.7x view growth
+
+PRIORITY CONTACTS:
+├─ Tracy Aitchison (Foran VP HR) — ir@foranmining.com
+├─ Stéphanie Lassonde (Pomerleau VP Marketing) — stephanie.lassonde@pomerleau.ca
+├─ Patrice Boulanger (NMG VP Marketing) — pboulanger@nmg.com
+├─ Calvin Carlick (TNDC VP Partnerships) — LinkedIn
+└─ Sydney Oakes (Canada Nickel Public Affairs) — sydneyoakes@canadanickel.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+THE WINDOW IS OPEN. MOVE NOW.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          </div>
+          
+          <blockquote style="margin-top:1.5rem;">
+            "We don't separate creative from performance. Every project starts with the same question: what's the actual problem? Then we design, build, and measure." — GTW can be the agency that infrastructure projects call when they need workers, when they need stories told, when they need French content, when they need Indigenous partnerships communicated. Start now.
+          </blockquote>
+          
+          <div class="success-box" style="margin-top:1.5rem; text-align:center;">
+            <h4 style="margin:0;">Go To War Strategy Inc.</h4>
+            <p style="margin:0.5rem 0 0 0;">Montreal, Quebec | January 2026 | go2war.com</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    // Initialize Mermaid
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#fff',
+        primaryBorderColor: '#000',
+        primaryTextColor: '#000',
+        lineColor: '#000',
+        secondaryColor: '#f5f5f5',
+        tertiaryColor: '#fff'
+      }
+    });
+    
+    // Smooth scroll for navigation
+    document.querySelectorAll('.cs-index a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Highlight current section in navigation
+    const sections = document.querySelectorAll('section.cs-page');
+    const navLinks = document.querySelectorAll('.cs-index a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.style.fontWeight = 'normal';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.fontWeight = 'bold';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
