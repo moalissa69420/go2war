@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aerial Activation Program — Drone Experiential Marketing for Fashion & Culture</title>
+  <style>
+    :root { --index-width: 280px; --content-max: 58rem; --border:#000; --accent:#000; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+
+    .wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+
+    /* Sidebar */
+    .index { position:sticky; top:0; align-self:start; height:100vh; padding:1rem; border-right:1px solid var(--border); background:#fafafa; overflow-y:auto; }
+    .index-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; color:#666; }
+    .index-logo { font-size:1.5rem; font-weight:800; margin-bottom:0.5rem; }
+    .index ol { list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.5; }
+    .index li { margin-bottom:0.35rem; }
+    .index a { color:#000; text-decoration:none; display:flex; gap:0.5rem; align-items:baseline; padding:0.25rem 0; -webkit-tap-highlight-color:rgba(0,0,0,0.1); }
+    .index a:hover, .index a:active { color:#666; }
+    .index .num { color:#999; width:1.5rem; display:inline-block; text-align:right; font-size:0.8rem; }
+    
+    /* Mobile menu toggle */
+    .mobile-menu-toggle { display:none; position:fixed; top:1rem; right:1rem; z-index:1000; background:#000; color:#fff; border:none; padding:0.5rem 0.75rem; border-radius:4px; font-size:0.9rem; cursor:pointer; -webkit-tap-highlight-color:rgba(255,255,255,0.2); }
+    .mobile-menu-toggle:active { background:#333; }
+    
+    /* Mobile menu backdrop */
+    .menu-backdrop { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; }
+    .menu-backdrop.active { display:block; }
+    
+    /* Image error handling */
+    .image-gallery img, .product-card img { object-fit:cover; background:#f5f5f5; }
+    .image-gallery img[src=""], .product-card img[src=""] { min-height:200px; display:flex; align-items:center; justify-content:center; }
+    .image-gallery img[src=""]::after, .product-card img[src=""]::after { content:"Image not available"; color:#999; font-size:0.8rem; }
+
+    /* Main content */
+    .sections { padding:2rem; display:flex; flex-direction:column; gap:0; }
+
+    section.page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.5rem 0; border-bottom:1px solid #eee; scroll-margin-top: 20px; }
+    section.page:last-child { border-bottom:none; }
+
+    .num-col { display:block; text-align:right; color:#999; font-size:0.85rem; padding-top:0.3rem; font-weight:600; }
+
+    .content h1 { font-size:1.5rem; margin:0 0 0.75rem 0; font-weight:700; color:#000; }
+    .content h2 { font-size:1.15rem; margin:1.25rem 0 0.5rem 0; font-weight:600; color:#000; }
+    .content h3 { font-size:1rem; margin:1rem 0 0.35rem 0; font-weight:600; color:#000; }
+    .content h4 { font-size:0.9rem; margin:0.75rem 0 0.25rem 0; font-weight:600; color:#333; }
+    .content p { margin:0 0 0.75rem 0; }
+    .content ul, .content ol { margin:0 0 0.75rem 0; padding-left:1.25rem; }
+    .content li { margin-bottom:0.35rem; }
+
+    /* Components */
+    .box { background:#fff; border:1px solid var(--border); padding:1rem; margin:0.75rem 0; }
+    .highlight-box { background:#f9f9f9; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .alert-box { background:#fff3cd; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .success-box { background:#d4edda; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:0.75rem 0; }
+    .three-col { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin:0.75rem 0; }
+
+    /* KPI Cards */
+    .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:0.75rem; margin:0.75rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:1rem; text-align:center; }
+    .kpi-card .big { font-size:1.75rem; font-weight:700; color:#000; line-height:1.2; }
+    .kpi-card .label { font-size:0.75rem; color:#666; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem; }
+
+    /* Tables */
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.9rem; }
+    th, td { border:1px solid #ddd; padding:0.5rem 0.75rem; text-align:left; }
+    th { background:#f5f5f5; font-weight:600; }
+    tr:nth-child(even) { background:#fafafa; }
+
+    /* Quote */
+    blockquote { margin:1rem 0; padding:1rem; background:#f9f9f9; border-left:4px solid #000; font-style:italic; }
+
+    /* Image Galleries */
+    .image-gallery { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin:1rem 0; }
+    .image-gallery.large { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .image-gallery img { width:100%; height:auto; border:1px solid #ddd; border-radius:4px; transition: transform 0.2s, box-shadow 0.2s; cursor:pointer; }
+    .image-gallery img:hover { transform:scale(1.02); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+    .gallery-item { text-align:center; }
+    .gallery-item img { margin-bottom:0.5rem; }
+    .gallery-item .caption { font-size:0.8rem; color:#666; font-weight:500; }
+
+    /* Concept Cards */
+    .concept-card { border:1px solid #000; padding:1rem; margin:0.75rem 0; background:#fff; }
+    .concept-card h4 { margin:0 0 0.5rem 0; font-size:1rem; }
+    .concept-card .output { background:#f9f9f9; padding:0.75rem; margin-top:0.5rem; font-size:0.85rem; border-left:3px solid #000; }
+
+    /* Table wrapper for horizontal scroll on mobile */
+    .table-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0.75rem 0; }
+    .table-wrapper table { min-width:100%; }
+
+    /* Responsive - Tablet and below */
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns:1fr; }
+      .index { position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); max-height:none; padding:1rem 0.75rem; }
+      .index ol { display:flex; flex-wrap:wrap; gap:0.5rem; }
+      .index li { margin-bottom:0; }
+      .index a { padding:0.5rem; border:1px solid #ddd; border-radius:4px; background:#fff; }
+      .sections { padding:1rem; }
+      section.page { grid-template-columns:2rem 1fr; gap:0.75rem; padding:1rem 0; }
+      .two-col, .three-col { grid-template-columns:1fr; }
+      .image-gallery { grid-template-columns: repeat(2, 1fr); }
+      .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+      body { font-size:14.5px; }
+      .content h1 { font-size:1.35rem; }
+      .content h2 { font-size:1.1rem; }
+      .content h3 { font-size:0.95rem; }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 600px) {
+      .mobile-menu-toggle { display:block; }
+      .menu-backdrop { display:block; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+      .menu-backdrop.active { opacity:1; pointer-events:auto; }
+      .index { position:fixed; top:0; left:-100%; width:80%; max-width:280px; height:100vh; z-index:999; transition:left 0.3s ease; box-shadow:2px 0 10px rgba(0,0,0,0.1); }
+      .index.open { left:0; }
+      .sections { padding:0.75rem; padding-top:3.5rem; }
+      section.page { grid-template-columns:1.5rem 1fr; gap:0.5rem; padding:0.75rem 0; }
+      .num-col { font-size:0.75rem; }
+      .index { padding:0.75rem 0.5rem; }
+      .index-logo { font-size:1.25rem; }
+      .index-title { font-size:0.7rem; }
+      .index a { font-size:0.8rem; padding:0.4rem; }
+      .index .num { width:1.2rem; font-size:0.75rem; }
+      .index ol { flex-direction:column; }
+      .index li { margin-bottom:0.25rem; }
+      .index a { border:0; background:transparent; }
+      .image-gallery { grid-template-columns: 1fr; gap:0.75rem; }
+      .image-gallery.large { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap:0.5rem; }
+      .kpi-card { padding:0.75rem 0.5rem; }
+      .kpi-card .big { font-size:1.4rem; }
+      .kpi-card .label { font-size:0.7rem; }
+      .box, .highlight-box, .alert-box, .success-box { padding:0.75rem; margin:0.5rem 0; }
+      table { font-size:0.8rem; }
+      th, td { padding:0.4rem 0.5rem; }
+      blockquote { padding:0.75rem; }
+      body { font-size:14px; line-height:1.6; }
+      .content h1 { font-size:1.25rem; }
+      .content h2 { font-size:1.05rem; }
+      .content h3 { font-size:0.9rem; }
+      .content h4 { font-size:0.85rem; }
+    }
+
+    /* Very small mobile devices */
+    @media (max-width: 400px) {
+      .sections { padding:0.5rem; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-card .big { font-size:1.25rem; }
+      table { font-size:0.75rem; }
+      th, td { padding:0.35rem 0.4rem; }
+    }
+
+    /* Print */
+    @media print {
+      .index { display:none; }
+      .wrapper { grid-template-columns:1fr; }
+      section.page { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">☰ Menu</button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="wrapper">
+    <aside class="index" id="indexNav">
+      <div class="index-logo">GTW</div>
+      <div class="index-title">Aerial Activation Program</div>
+      <ol>
+        <li><a href="#s0"><span class="num">00.</span> Executive Summary</a></li>
+        <li><a href="#s1"><span class="num">01.</span> Who We Are</a></li>
+        <li><a href="#s2"><span class="num">02.</span> The Opportunity</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Activation Concepts</a></li>
+        <li><a href="#s4"><span class="num">04.</span> Technical Approach</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Why DJI</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Partnership Vision</a></li>
+      </ol>
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; font-size:0.75rem; color:#999;">
+        Prepared for DJI<br>
+        January 2026
+      </div>
+    </aside>
+
+    <main class="sections">
+
+      <!-- Section 0: Executive Summary -->
+      <section id="s0" class="page">
+        <div class="num-col">00.</div>
+        <div class="content">
+          <h1>Aerial Activation Program: Drone Experiential Marketing for Fashion & Culture</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;"><strong>Go To War Strategy is building an in-house drone activation capability to offer experiential marketing services for fashion, music, and culture-driven brands.</strong> This program positions GTW as the first North American agency specializing in aerial brand activations for the streetwear and luxury fashion verticals.</p>
+          </div>
+
+          <h2>Key Value Propositions</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">First</div>
+              <div class="label">North American Agency</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">7</div>
+              <div class="label">Activation Concepts</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">4M+</div>
+              <div class="label">Users Experience</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">In-House</div>
+              <div class="label">Creative Control</div>
+            </div>
+          </div>
+
+          <h2>The Market Gap</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Current Landscape</h4>
+              <ul style="margin-bottom:0;">
+                <li>Louis Vuitton illuminated Miami with drones for Virgil Abloh</li>
+                <li>Nike Jordan deployed 600 drones over Dubai</li>
+                <li>Dolce & Gabbana sent drones down Milan Fashion Week runway</li>
+                <li>Market dominated by municipal fireworks replacements</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">GTW Opportunity</h4>
+              <ul style="margin-bottom:0;">
+                <li><strong>No North American agency</strong> specializes in fashion drone activations</li>
+                <li>Direct access to premium fashion and culture brands</li>
+                <li>Proven experience with Google, Amazon, and Apple</li>
+                <li>3D imaging technology background informs choreography</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="image-gallery">
+            <div class="gallery-item">
+              <img src="images/projects_xiaomi_hero.jpg" alt="Drone Activation Example">
+              <div class="caption">Drone Light Show Reference</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/PXL_20211201_000017244.webp" alt="Drone Formation">
+              <div class="caption">Synchronized Formation</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/images.jpeg" alt="Drone Display">
+              <div class="caption">Aerial Display</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Who We Are -->
+      <section id="s1" class="page">
+        <div class="num-col">01.</div>
+        <div class="content">
+          <h1>Who We Are</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0;">Go To War Strategy (GTW) is a Montreal-based growth consultancy specializing in performance marketing and experiential activations for fashion, music, and culture-driven brands.</p>
+          </div>
+
+          <h2>Our Foundation</h2>
+          <p>Our founders built their first company around 3D imaging technology — an app that enabled users to capture 3D images — scaling it from <strong>zero to 4 million users</strong> and reaching <strong>#3 globally on the App Store</strong>. This foundation in immersive technology directly informs our approach to experiential marketing.</p>
+
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Enterprise Experience</h4>
+              <p style="margin:0;">We have designed and executed immersive experiences for <strong>Google, Amazon, and Apple</strong>. Our team understands how to translate brand vision into spatial, multi-sensory moments that generate both emotional impact and measurable results.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Technology Background</h4>
+              <p style="margin:0;">Our background in 3D imaging technology and immersive experiences directly informs our approach to choreography design — we understand how to translate brand assets, product geometry, and motion design principles into aerial formations.</p>
+            </div>
+          </div>
+
+          <h2>Our Network</h2>
+          <p>We work with fashion, streetwear, and culture brands who are looking to push beyond traditional marketing into experiential territory. Our clients are actively seeking new ways to create memorable, shareable moments that cut through the noise.</p>
+
+          <div class="success-box">
+            <p style="margin:0;"><strong>They want to be tapped into experiential marketing.</strong> Drone activations represent the next frontier — and we are building the capability to deliver it.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: The Opportunity -->
+      <section id="s2" class="page">
+        <div class="num-col">02.</div>
+        <div class="content">
+          <h1>The Opportunity</h1>
+
+          <h2>Market Demand</h2>
+          <p>Fashion and culture brands are hungry for differentiated experiential moments. The market has seen:</p>
+
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Louis Vuitton</h4>
+              <p style="margin:0;">Illuminated Miami with drones for Virgil Abloh tribute</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Nike Jordan</h4>
+              <p style="margin:0;">Deployed 600 drones over Dubai for flagship launch</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Dolce & Gabbana</h4>
+              <p style="margin:0;">Sent drones down the Milan Fashion Week runway carrying handbags</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Market Gap</h4>
+              <p style="margin:0;">Yet no agency in North America specializes in drone activations for fashion and streetwear</p>
+            </div>
+          </div>
+
+          <h2>The Current Landscape</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">The space is dominated by <strong>municipal fireworks replacements</strong> and <strong>sports venue entertainment</strong>. Fashion and culture brands need specialized agencies that understand their aesthetic, audience, and objectives.</p>
+          </div>
+
+          <h2>GTW's Position</h2>
+          <p>We are building the capability to offer aerial brand activations as a core service — designed to execute intimate, high-impact activations that translate to:</p>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">Social</div>
+              <div class="label">Content</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">Editorial</div>
+              <div class="label">Coverage</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">Brand</div>
+              <div class="label">Mythology</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Activation Concepts -->
+      <section id="s3" class="page">
+        <div class="num-col">03.</div>
+        <div class="content">
+          <h1>Activation Concepts</h1>
+
+          <p>The following concepts illustrate how we plan to deploy drone technology for experiential activations. Each concept is designed to generate owned media assets, earned press coverage, and social amplification.</p>
+
+          <div class="concept-card">
+            <h4>01 — Product Launch Reveal</h4>
+            <p>Drones form a massive 3D product silhouette rotating in the night sky. The formation transitions from wireframe outline to solid shape, then explodes into individual points of light that swarm and reform as the brand logo. Timed to a custom soundtrack. Entire sequence captured by ground-based camera crew for campaign content.</p>
+            <div class="output">
+              <strong>Output:</strong> Hero video for paid social, Instagram Reels, press release imagery, influencer content.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>02 — Album / Collection Drop</h4>
+            <p>Midnight drone reveal timed to album or collection release. Drones form cover artwork, artist imagery, or brand wordmark over the city skyline. Street-level crowds capture organic content. No announcement — the activation itself becomes the press moment. Coordinated with geo-targeted social and influencer seeding.</p>
+            <div class="output">
+              <strong>Output:</strong> Viral social moment, user-generated content flood, cultural timestamp.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>03 — Private Event Activation</h4>
+            <p>Midnight drone ballet choreographed to ambient music for an intimate guest list. Drones form brand wordmark, then morph into abstract organic shapes — roses blooming, fabric flowing, geometric patterns. An 8-minute performance for invited guests including editors, stylists, artists, and tastemakers. The exclusivity is the point.</p>
+            <div class="output">
+              <strong>Output:</strong> Organic social coverage from attendees, editorial features, brand mythology.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>04 — Flagship Store Opening</h4>
+            <p>Grand opening spectacle with drones forming a scannable QR code in the sky, linking directly to exclusive product drop or AR experience. Formation includes brand logo, flagship product imagery, and countdown sequence. Street-level crowds capture organic content. Coordinated with influencer seeding and geo-targeted paid media.</p>
+            <div class="output">
+              <strong>Output:</strong> Viral social moment, direct conversion via QR code, local press coverage, user-generated content.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>05 — Editorial Campaign Shoot</h4>
+            <p>Drones as backdrop and lighting element for high-fashion photography. Models styled against drone formations creating geometric patterns, floating brand elements, or dynamic light paintings captured in long-exposure shots. Not a public activation — a production asset for campaign imagery.</p>
+            <div class="output">
+              <strong>Output:</strong> Lookbook imagery, billboard creative, magazine placements, social assets.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>06 — Concert / Festival Moment</h4>
+            <p>Drones deployed during headline set or brand-sponsored moment. Formation synced to music — logo reveal during drop, animated visuals during breakdown, artist silhouette during finale. Creates a once-in-a-lifetime moment that defines the event and lives forever in attendee content.</p>
+            <div class="output">
+              <strong>Output:</strong> Massive organic reach, brand-artist association, cultural moment.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <h4>07 — Runway Integration</h4>
+            <p>Drones as runway models and show elements. Drones carry hero products down the runway or form a floating canopy above models. Alternatively, drones create an immersive tunnel of light that models walk through. Indoor positioning technology enables precision choreography in controlled environments.</p>
+            <div class="output">
+              <strong>Output:</strong> Show-stopping runway moment, global press coverage, industry-defining creative direction.
+            </div>
+          </div>
+
+          <div class="image-gallery">
+            <div class="gallery-item">
+              <img src="images/images (1).jpeg" alt="Drone Activation Concept">
+              <div class="caption">Activation Concept</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/images (2).jpeg" alt="Drone Display">
+              <div class="caption">Aerial Display</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Technical Approach -->
+      <section id="s4" class="page">
+        <div class="num-col">04.</div>
+        <div class="content">
+          <h1>Technical Approach</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0;">We are building an <strong>in-house capability</strong> rather than outsourcing to existing drone show operators. This gives us creative control, faster iteration, and the ability to embed drone activations into our broader campaign strategy.</p>
+          </div>
+
+          <h2>Fleet Configuration</h2>
+          <table>
+            <tr>
+              <th>Specification</th>
+              <th>Requirement</th>
+            </tr>
+            <tr>
+              <td><strong>Primary Use</strong></td>
+              <td>Synchronized aerial light shows</td>
+            </tr>
+            <tr>
+              <td><strong>LED Payload</strong></td>
+              <td>High-brightness RGBW capability</td>
+            </tr>
+            <tr>
+              <td><strong>Flight Time</strong></td>
+              <td>15+ minutes with payload</td>
+            </tr>
+            <tr>
+              <td><strong>Positioning</strong></td>
+              <td>RTK GPS (outdoor) / Vision-based (indoor)</td>
+            </tr>
+            <tr>
+              <td><strong>Communication</strong></td>
+              <td>Swarm synchronization protocol</td>
+            </tr>
+            <tr>
+              <td><strong>Operating Regions</strong></td>
+              <td>North America, Europe</td>
+            </tr>
+          </table>
+
+          <h2>Operational Model</h2>
+          <p>We will staff a dedicated drone operations team including:</p>
+          <ul>
+            <li><strong>FAA Part 107 certified pilots</strong></li>
+            <li><strong>Visual observers</strong></li>
+            <li><strong>Technical director</strong></li>
+          </ul>
+
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Choreography Development</h4>
+              <p style="margin:0;">Choreography will be developed using industry-standard software with custom 3D assets designed in-house based on client brand guidelines.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Regulatory Compliance</h4>
+              <p style="margin:0;">All U.S. operations will be conducted under FAA Certificate of Waiver for nighttime operations (14 CFR § 107.29) and multi-drone operation (14 CFR § 107.35). Canadian operations will follow Transport Canada SFOC-RPAS protocols.</p>
+            </div>
+          </div>
+
+          <h2>Creative Advantage</h2>
+          <blockquote>
+            "Our background in 3D imaging technology and immersive experiences directly informs our approach to choreography design — we understand how to translate brand assets, product geometry, and motion design principles into aerial formations that photograph well and tell coherent visual stories."
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Section 5: Why DJI -->
+      <section id="s5" class="page">
+        <div class="num-col">05.</div>
+        <div class="content">
+          <h1>Why DJI</h1>
+
+          <p>We are choosing DJI because our clients demand reliability, precision, and a technology partner with proven enterprise credibility. DJI's global service network, hardware quality, and SDK ecosystem give us confidence to build a long-term capability.</p>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">Hardware</div>
+              <div class="label">Quality</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">Global</div>
+              <div class="label">Service</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">SDK</div>
+              <div class="label">Integration</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">Industry</div>
+              <div class="label">Standard</div>
+            </div>
+          </div>
+
+          <h2>Hardware Quality</h2>
+          <div class="box">
+            <p style="margin:0;"><strong>Experiential activations happen once.</strong> There are no retakes at a product launch or runway show. We need hardware we can trust absolutely.</p>
+          </div>
+
+          <h2>Global Service</h2>
+          <div class="box">
+            <p style="margin:0;">Our clients operate globally. DJI's worldwide presence ensures we can service and support our fleet anywhere.</p>
+          </div>
+
+          <h2>SDK & Integration</h2>
+          <div class="box">
+            <p style="margin:0;">We plan to integrate choreography software and develop custom applications. DJI's developer ecosystem enables this.</p>
+          </div>
+
+          <h2>Brand Alignment</h2>
+          <div class="success-box">
+            <p style="margin:0;">DJI is the industry standard. Our clients in fashion and music recognize and respect the DJI name.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Partnership Vision -->
+      <section id="s6" class="page">
+        <div class="num-col">06.</div>
+        <div class="content">
+          <h1>Partnership Vision</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;">This purchase is the beginning of a larger relationship. As we scale activations and prove the model, we anticipate expanding our fleet and potentially becoming a reference for DJI in the fashion and culture vertical.</p>
+          </div>
+
+          <h2>What We Bring</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Direct Access</h4>
+              <p style="margin:0;">Direct access to premium fashion and culture brands who are actively seeking differentiated experiential moments.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Proven Experience</h4>
+              <p style="margin:0;">A founding team with proven experience building 3D imaging technology, scaling consumer products to millions of users, and executing immersive experiences for Google, Amazon, and Apple.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Commercial Focus</h4>
+              <p style="margin:0;">We are serious buyers with immediate commercial applications and a clear path to scale.</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Vertical Expertise</h4>
+              <p style="margin:0;">Understanding of fashion, streetwear, and culture brands that goes beyond generic drone shows — we know what resonates with these audiences.</p>
+            </div>
+          </div>
+
+          <h2>What We Are Looking For</h2>
+          <ul>
+            <li><strong>Competitive pricing</strong> on our order with LED payload capabilities</li>
+            <li><strong>Technical consultation</strong> on optimal hardware configuration for synchronized light show operations</li>
+            <li><strong>Ongoing support relationship</strong> as we build and scale this capability</li>
+            <li><strong>Potential collaboration</strong> on case studies and marketing as we execute high-profile activations</li>
+          </ul>
+
+          <div class="success-box" style="margin-top:2rem;">
+            <h3 style="margin-top:0;">The Opportunity</h3>
+            <p style="margin:0;">We look forward to visiting your factory and discussing how GTW can become a valued customer and advocate for DJI in the fashion and culture industry.</p>
+          </div>
+
+          <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; text-align:center;">
+            <p style="margin:0; font-weight:600;">GO TO WAR STRATEGY INC.</p>
+            <p style="margin:0.5rem 0 0 0; color:#666;">Montreal, Canada | gotowarstrategy.com</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const indexNav = document.getElementById('indexNav');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    
+    if (menuToggle && indexNav && menuBackdrop) {
+      function toggleMenu() {
+        const isOpen = indexNav.classList.toggle('open');
+        menuBackdrop.classList.toggle('active', isOpen);
+      }
+      
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+      
+      menuBackdrop.addEventListener('click', () => {
+        toggleMenu();
+      });
+      
+      // Close menu when clicking a nav link on mobile
+      document.querySelectorAll('.index a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 600) {
+            toggleMenu();
+          }
+        });
+      });
+    }
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('.index a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Highlight current section in nav
+    const sections = document.querySelectorAll('section.page');
+    const navLinks = document.querySelectorAll('.index a');
+
+    function updateActiveSection() {
+      let current = '';
+      const scrollPos = window.scrollY || window.pageYOffset;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (scrollPos >= sectionTop - 150 && scrollPos < sectionTop + sectionHeight - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.style.fontWeight = 'normal';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.fontWeight = 'bold';
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection(); // Initial call
+  </script>
+</body>
+</html>
+
