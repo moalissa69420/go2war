@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMARA — Website Wireframes & Specifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --crimson: #940707;
+            --crimson-dark: #6d0505;
+            --cream: #FAF7F2;
+            --black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --gold: #C9A961;
+            --white: #FFFFFF;
+            --gray-100: #f8f8f8;
+            --gray-200: #e8e8e8;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           PRESENTATION NAVIGATION
+        ============================================ */
+        .presentation-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--black);
+            padding: 12px 40px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .presentation-nav h1 {
+            font-family: 'EB Garamond', serif;
+            color: var(--cream);
+            font-size: 1.3rem;
+            letter-spacing: 0.3em;
+        }
+
+        .presentation-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .presentation-nav a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            opacity: 0.8;
+        }
+
+        .presentation-nav a:hover { color: var(--gold); opacity: 1; }
+
+        /* ============================================
+           SECTION STYLES
+        ============================================ */
+        .section {
+            padding: 100px 60px;
+            min-height: 100vh;
+            border-bottom: 1px solid rgba(148, 7, 7, 0.15);
+        }
+
+        .section:first-of-type { margin-top: 60px; }
+
+        .section-header {
+            margin-bottom: 60px;
+            max-width: 700px;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 2.8rem;
+            color: var(--black);
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
+
+        .section-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           WIREFRAME CONTAINERS
+        ============================================ */
+        .wireframe-container {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .wireframe-label {
+            position: absolute;
+            top: -35px;
+            left: 0;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--crimson);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wireframe-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--crimson);
+        }
+
+        /* ============================================
+           BRAND ELEMENTS
+        ============================================ */
+        .wf-announcement {
+            background: var(--crimson);
+            color: var(--cream);
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .wf-announcement .discreet-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.9;
+        }
+
+        .wf-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            padding: 18px 40px;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--white);
+        }
+
+        .wf-logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.35em;
+            text-align: center;
+            color: var(--black);
+        }
+
+        .wf-nav {
+            display: flex;
+            gap: 35px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+        }
+
+        .wf-nav span { cursor: pointer; transition: color 0.3s; }
+        .wf-nav span:hover { color: var(--crimson); }
+
+        .wf-nav-right {
+            display: flex;
+            gap: 25px;
+            justify-content: flex-end;
+            font-size: 0.72rem;
+            color: var(--charcoal);
+        }
+
+        /* Icon styles */
+        .icon {
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* ============================================
+           BUTTONS
+        ============================================ */
+        .wf-button {
+            background: var(--crimson);
+            color: var(--cream);
+            padding: 16px 45px;
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .wf-button:hover { background: var(--crimson-dark); }
+
+        .wf-button.outline {
+            background: transparent;
+            border: 1px solid var(--black);
+            color: var(--black);
+        }
+
+        .wf-button.outline:hover {
+            background: var(--black);
+            color: var(--cream);
+        }
+
+        .wf-button.gold {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* ============================================
+           HERO SECTION
+        ============================================ */
+        .wf-hero {
+            height: 550px;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wf-hero::before {
+            content: 'VIDEO / LIFESTYLE HERO';
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            opacity: 0.4;
+            text-transform: uppercase;
+        }
+
+        .wf-hero h2 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 4.5rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+            color: var(--cream);
+        }
+
+        .wf-hero h3 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           PRODUCT GRID
+        ============================================ */
+        .wf-product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--gray-200);
+        }
+
+        .wf-product-card {
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wf-product-card::after {
+            content: 'QUICK ADD';
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            background: var(--crimson);
+            color: var(--cream);
+            padding: 12px;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .wf-product-card:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wf-product-image {
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--black);
+        }
+
+        .wf-product-info {
+            background: var(--white);
+            padding: 18px 15px;
+            text-align: center;
+        }
+
+        .wf-product-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--black);
+        }
+
+        .wf-product-info span {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* ============================================
+           SPLIT SECTIONS
+        ============================================ */
+        .wf-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .wf-split-image {
+            background: var(--gray-200);
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .wf-split-content {
+            padding: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .wf-split-content h3 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.8rem;
+            color: var(--crimson);
+            margin-bottom: 8px;
+        }
+
+        .wf-split-content h4 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--black);
+        }
+
+        .wf-split-content p {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            line-height: 1.9;
+            margin-bottom: 35px;
+            color: var(--charcoal);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .wf-footer {
+            background: var(--black);
+            color: var(--cream);
+            padding: 70px 50px 35px;
+        }
+
+        .wf-footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .wf-footer h5 {
+            font-family: 'EB Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .wf-footer ul {
+            list-style: none;
+            font-size: 0.8rem;
+            line-height: 2.2;
+            opacity: 0.7;
+        }
+
+        .wf-footer-bottom {
+            border-top: 1px solid rgba(250,247,242,0.15);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        /* ============================================
+           DESIGN NOTES (FOR DEVELOPERS)
+        ============================================ */
+        .dev-notes {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-left: 3px solid var(--gold);
+            padding: 25px 30px;
+            margin: 50px 0;
+            color: var(--cream);
+        }
+
+        .dev-notes h4 {
+            font-family: 'EB Garamond', serif;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dev-notes h4::before {
+            content: '{ }';
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .dev-notes ul {
+            margin-left: 20px;
+            line-height: 1.9;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .dev-notes code {
+            background: rgba(201, 169, 97, 0.2);
+            padding: 2px 6px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        /* ============================================
+           BRAND OVERVIEW CARDS
+        ============================================ */
+        .brand-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .brand-card {
+            background: var(--white);
+            padding: 35px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .brand-card h3 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--crimson);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .color-swatch {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .swatch {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 5px;
+            font-size: 0.55rem;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
+        }
+
+        .swatch span {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.5rem;
+            margin-top: 2px;
+            opacity: 0.8;
+        }
+
+        .font-sample {
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: var(--cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .font-sample small {
+            font-size: 0.65rem;
+            color: var(--gray-500);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ============================================
+           NEWSLETTER
+        ============================================ */
+        .wf-newsletter {
+            background: var(--cream);
+            padding: 80px 60px;
+            text-align: center;
+        }
+
+        .wf-newsletter h3 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.8rem;
+            color: var(--crimson);
+            margin-bottom: 8px;
+        }
+
+        .wf-newsletter h4 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .wf-newsletter p {
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
+        .wf-newsletter-form {
+            display: flex;
+            max-width: 480px;
+            margin: 0 auto;
+            gap: 0;
+        }
+
+        .wf-newsletter-form input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid var(--black);
+            border-right: none;
+            background: var(--white);
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .wf-newsletter-form input::placeholder {
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           CATEGORIES
+        ============================================ */
+        .wf-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--gray-200);
+        }
+
+        .wf-category-card {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: var(--gray-300);
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .wf-category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+        }
+
+        .wf-category-card span {
+            position: relative;
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--cream);
+        }
+
+        /* ============================================
+           PRESS LOGOS
+        ============================================ */
+        .wf-press {
+            background: var(--white);
+            padding: 50px;
+            text-align: center;
+        }
+
+        .wf-press h4 {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--gray-400);
+        }
+
+        .wf-press-logos {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           TESTIMONIALS
+        ============================================ */
+        .wf-testimonials {
+            padding: 70px 50px;
+            background: var(--white);
+        }
+
+        .wf-testimonials-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .wf-testimonials-header h3 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.2rem;
+            color: var(--crimson);
+            margin-bottom: 5px;
+        }
+
+        .wf-testimonials-header h4 {
+            font-family: 'EB Garamond', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--black);
+        }
+
+        .wf-testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .wf-testimonial {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .wf-testimonial .stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .wf-testimonial p {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.9;
+            color: var(--charcoal);
+            margin-bottom: 18px;
+        }
+
+        .wf-testimonial cite {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-style: normal;
+        }
+
+        /* ============================================
+           INTRO SECTION
+        ============================================ */
+        .wf-intro {
+            padding: 90px 60px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wf-intro .script {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.2rem;
+            color: var(--crimson);
+            margin-bottom: 8px;
+        }
+
+        .wf-intro h3 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--black);
+        }
+
+        .wf-intro p {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            line-height: 2;
+            color: var(--charcoal);
+        }
+
+        /* Print styles */
+        @media print {
+            .presentation-nav { display: none; }
+            .section { page-break-inside: avoid; padding: 40px; min-height: auto; }
+            .dev-notes { background: #f5f5f5 !important; color: #333 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="presentation-nav">
+    <h1>AMARA</h1>
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#homepage">Homepage</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#mobile">Mobile</a></li>
+        <li><a href="#specs">Dev Specs</a></li>
+    </ul>
+</nav>
+
+<!-- ============================================
+     SECTION: BRAND OVERVIEW
+============================================ -->
+<section id="overview" class="section">
+    <div class="section-header">
+        <span class="section-label">Brand Foundation</span>
+        <h2 class="section-title">Brand Overview</h2>
+        <p class="section-subtitle">Victorian boudoir meets modern luxury. A proud rebellion against shame, performative pleasure, and bad design.</p>
+    </div>
+
+    <div class="brand-overview">
+        <div class="brand-card">
+            <h3>Color Palette</h3>
+            <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 10px;">Crimson is dominant throughout — not just an accent. Creates warmth and seduction.</p>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #940707;">Crimson<span>#940707</span></div>
+                <div class="swatch" style="background: #FAF7F2; color: #333; text-shadow: none;">Cream<span>#FAF7F2</span></div>
+                <div class="swatch" style="background: #1A1A1A;">Black<span>#1A1A1A</span></div>
+                <div class="swatch" style="background: #C9A961;">Gold<span>#C9A961</span></div>
+            </div>
+        </div>
+
+        <div class="brand-card">
+            <h3>Typography</h3>
+            <div class="font-sample" style="font-family: 'EB Garamond', serif; font-size: 1.4rem; letter-spacing: 0.15em;">EB GARAMOND <small>Headlines</small></div>
+            <div class="font-sample" style="font-family: 'Pinyon Script', cursive; font-size: 1.6rem;">Pinyon Script <small>Accents</small></div>
+            <div class="font-sample" style="font-family: 'Playfair Display', serif; font-style: italic;">Playfair Display <small>Products</small></div>
+            <div class="font-sample" style="font-family: 'Work Sans', sans-serif;">Work Sans <small>Body</small></div>
+        </div>
+
+        <div class="brand-card">
+            <h3>Design Principles</h3>
+            <ul style="font-size: 0.85rem; line-height: 2.2; margin-left: 18px; color: var(--charcoal);">
+                <li>NO rounded corners — sharp edges only</li>
+                <li>Black product backgrounds (jewelry-style)</li>
+                <li>Generous whitespace throughout</li>
+                <li>Slow animations (300-500ms ease-out)</li>
+                <li>Ornate accents, not minimalist</li>
+                <li>Victorian boudoir aesthetic</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="background: var(--black); padding: 40px 50px; max-width: 1200px; margin: 0 auto;">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 25px;">Key Differentiators</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+            <div>
+                <h4 style="color: var(--cream); font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 10px;">vs. Maude</h4>
+                <p style="color: rgba(250,247,242,0.7); font-size: 0.85rem; line-height: 1.7;">AMARA is opulent and feminine — not minimalist or Aesop-clean.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--cream); font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 10px;">vs. Dame</h4>
+                <p style="color: rgba(250,247,242,0.7); font-size: 0.85rem; line-height: 1.7;">AMARA is sophisticated and darker — not pastel or playful.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--cream); font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 10px;">vs. Playground</h4>
+                <p style="color: rgba(250,247,242,0.7); font-size: 0.85rem; line-height: 1.7;">AMARA is seductive, not sweet — not whimsical or cute.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: HOMEPAGE
+============================================ -->
+<section id="homepage" class="section">
+    <div class="section-header">
+        <span class="section-label">Desktop — 1440px</span>
+        <h2 class="section-title">Homepage</h2>
+        <p class="section-subtitle">The first impression — luxurious, seductive, and empowering. Every element builds desire.</p>
+    </div>
+
+    <div class="wireframe-container">
+        <span class="wireframe-label">Homepage — Full Layout</span>
+
+        <!-- Announcement Bar -->
+        <div class="wf-announcement">
+            <span>Complimentary Shipping on Orders $75+</span>
+            <span class="discreet-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Discreet Packaging
+            </span>
+        </div>
+
+        <!-- Header -->
+        <div class="wf-header">
+            <div class="wf-nav">
+                <span>Shop</span>
+                <span>About</span>
+                <span>Community</span>
+                <span>Quiz</span>
+            </div>
+            <div class="wf-logo">AMARA</div>
+            <div class="wf-nav-right">
+                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="wf-hero">
+            <h2>Forever Yours</h2>
+            <h3>Forever Ours</h3>
+            <div class="wf-button">Begin Your Ritual</div>
+        </div>
+
+        <!-- Brand Intro -->
+        <div class="wf-intro">
+            <p class="script">Introducing</p>
+            <h3>A New Era of Intimacy</h3>
+            <p>Luxury rituals designed for the feminine experience. Science-led formulations meet boudoir-inspired elegance. Not for the male gaze — this one is for the girls.</p>
+        </div>
+
+        <!-- Featured Products -->
+        <div style="padding: 0 50px 20px;">
+            <h3 style="font-family: 'EB Garamond', serif; text-align: center; font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 30px;">The Collection</h3>
+        </div>
+        <div class="wf-product-grid">
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Product Image]</div>
+                <div class="wf-product-info">
+                    <h4>Echo Pendant</h4>
+                    <span>$187</span>
+                </div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Product Image]</div>
+                <div class="wf-product-info">
+                    <h4>Water Jelly</h4>
+                    <span>$33</span>
+                </div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Product Image]</div>
+                <div class="wf-product-info">
+                    <h4>Pheromone Enhancer</h4>
+                    <span>$78</span>
+                </div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Product Image]</div>
+                <div class="wf-product-info">
+                    <h4>Echo Ring</h4>
+                    <span>$187</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Split Section: Founder Story -->
+        <div class="wf-split">
+            <div class="wf-split-image">[Lifestyle / Editorial Image]</div>
+            <div class="wf-split-content">
+                <h3>Madam Amara</h3>
+                <h4>The Story</h4>
+                <p>"I created AMARA because I was done with intimacy products that burn, numb, disappoint, or ignore our bodies. Not for the male gaze. This one is for the girls."</p>
+                <div class="wf-button outline">Read Our Story</div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="wf-categories">
+            <div class="wf-category-card"><span>Devices</span></div>
+            <div class="wf-category-card"><span>Essentials</span></div>
+            <div class="wf-category-card"><span>Body & Scent</span></div>
+        </div>
+
+        <!-- Press -->
+        <div class="wf-press">
+            <h4>As Featured In</h4>
+            <div class="wf-press-logos">
+                <span>GOOP</span>
+                <span>VOGUE</span>
+                <span>FORBES</span>
+                <span>ELLE</span>
+                <span>REFINERY29</span>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="wf-testimonials">
+            <div class="wf-testimonials-header">
+                <h3>What They Say</h3>
+                <h4>Reviews</h4>
+            </div>
+            <div class="wf-testimonial-grid">
+                <div class="wf-testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Finally, a brand that understands elegance and efficacy can coexist."</p>
+                    <cite>— Sarah M., Verified Buyer</cite>
+                </div>
+                <div class="wf-testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"The packaging alone makes me feel luxurious. The products deliver."</p>
+                    <cite>— Jessica L., Verified Buyer</cite>
+                </div>
+                <div class="wf-testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Obsessed with the Echo Pendant. A total game changer."</p>
+                    <cite>— Michelle K., Verified Buyer</cite>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="wf-newsletter">
+            <h3>Join the Inner Circle</h3>
+            <h4>Newsletter</h4>
+            <p>Exclusive access to launches, events, and intimate conversations.</p>
+            <div class="wf-newsletter-form">
+                <input type="email" placeholder="Enter your email">
+                <div class="wf-button">Subscribe</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="wf-footer">
+            <div class="wf-footer-grid">
+                <div>
+                    <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; letter-spacing: 0.35em; margin-bottom: 20px;">AMARA</div>
+                    <p style="font-size: 0.8rem; line-height: 1.9; opacity: 0.7; max-width: 280px;">Forever Yours. Forever Ours.<br>Luxury intimacy rituals designed for the feminine experience.</p>
+                    <div style="margin-top: 25px; display: flex; gap: 15px; opacity: 0.6;">
+                        <span class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                        <span class="icon"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></span>
+                        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg></span>
+                    </div>
+                </div>
+                <div>
+                    <h5>Shop</h5>
+                    <ul>
+                        <li>All Products</li>
+                        <li>Devices</li>
+                        <li>Essentials</li>
+                        <li>Body & Scent</li>
+                        <li>Gift Sets</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Company</h5>
+                    <ul>
+                        <li>Our Story</li>
+                        <li>Community</li>
+                        <li>Press</li>
+                        <li>Careers</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Help</h5>
+                    <ul>
+                        <li>FAQ</li>
+                        <li>Shipping</li>
+                        <li>Returns</li>
+                        <li>Privacy Policy</li>
+                        <li>Terms of Service</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="wf-footer-bottom">
+                <span>© 2025 AMARA. All rights reserved.</span>
+                <span>Arrives in unmarked packaging</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-notes">
+        <h4>Developer Notes — Homepage</h4>
+        <ul>
+            <li><strong>Hero:</strong> Full-bleed video preferred (use campaign video from brand assets). Fallback to lifestyle image. Autoplay, muted, loop.</li>
+            <li><strong>Product Grid:</strong> All images on <code>background: #1A1A1A</code> — jewelry-style presentation</li>
+            <li><strong>Quick Add:</strong> On hover, slide up "Quick Add" overlay with <code>transition: 0.3s ease</code></li>
+            <li><strong>Mega Menu:</strong> On "Shop" hover, show dropdown with product images + category links</li>
+            <li><strong>Animations:</strong> All fade-ins use <code>300-500ms ease-out</code>. Parallax on lifestyle images.</li>
+            <li><strong>Discreet Badge:</strong> Include in announcement bar — critical for conversion</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: PRODUCT PAGE (SCROLL PREVIEW)
+============================================ -->
+<section id="product" class="section" style="background: #f0efed;">
+    <div class="section-header">
+        <span class="section-label">Product Detail Page</span>
+        <h2 class="section-title">Product Page</h2>
+        <p class="section-subtitle">The conversion page. Scroll through the full customer journey — gallery, details, cross-sells, reviews.</p>
+    </div>
+
+    <!-- Scroll Preview Container -->
+    <div style="display: grid; grid-template-columns: 1fr 200px; gap: 40px; max-width: 1400px; margin: 0 auto;">
+
+        <!-- Main Scrollable Wireframe -->
+        <div class="wireframe-container" style="max-height: 800px; overflow-y: auto; scroll-behavior: smooth;" id="pdp-scroll">
+            <span class="wireframe-label">Scroll to preview full page</span>
+
+            <!-- Announcement -->
+            <div class="wf-announcement">
+                <span>Complimentary Shipping on Orders $75+</span>
+                <span class="discreet-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    Arrives Unmarked
+                </span>
+            </div>
+
+            <!-- Header -->
+            <div class="wf-header">
+                <div class="wf-nav">
+                    <span>Shop</span>
+                    <span>About</span>
+                    <span>Community</span>
+                </div>
+                <div class="wf-logo">AMARA</div>
+                <div class="wf-nav-right">
+                    <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                    <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                    <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                </div>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div style="padding: 15px 40px; font-size: 0.75rem; color: var(--gray-500); border-bottom: 1px solid var(--gray-200);">
+                Home / Devices / <span style="color: var(--black);">Echo Pendant</span>
+            </div>
+
+            <!-- PDP Main Layout -->
+            <div style="display: grid; grid-template-columns: 55% 45%;">
+                <!-- Gallery (Sticky behavior indicated) -->
+                <div style="background: var(--black); padding: 30px; position: relative;">
+                    <div style="position: absolute; top: 15px; left: 15px; background: var(--crimson); color: var(--cream); padding: 5px 12px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Gallery Sticks on Scroll</div>
+
+                    <!-- Main Image -->
+                    <div style="aspect-ratio: 1; background: #2a2a2a; display: flex; align-items: center; justify-content: center; color: var(--gray-500); font-size: 0.7rem; margin-bottom: 15px;">
+                        [Main Product Image]
+                    </div>
+
+                    <!-- Thumbnails -->
+                    <div style="display: flex; gap: 10px;">
+                        <div style="width: 70px; height: 70px; background: #3a3a3a; border: 2px solid var(--gold);"></div>
+                        <div style="width: 70px; height: 70px; background: #3a3a3a;"></div>
+                        <div style="width: 70px; height: 70px; background: #3a3a3a;"></div>
+                        <div style="width: 70px; height: 70px; background: #3a3a3a; display: flex; align-items: center; justify-content: center;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div style="padding: 40px; background: var(--white);">
+                    <h1 style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; margin-bottom: 8px; color: var(--black);">Echo Pendant</h1>
+
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <span style="color: var(--gold); font-size: 0.85rem;">★★★★★</span>
+                        <span style="font-size: 0.8rem; color: var(--gray-500);">4.9 (128 reviews)</span>
+                    </div>
+
+                    <div style="font-size: 1.4rem; margin-bottom: 25px; color: var(--black);">$187 – $242</div>
+
+                    <!-- Variant: Material -->
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; color: var(--charcoal);">Material</label>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 55px; height: 55px; border: 2px solid var(--crimson); display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">Silver</div>
+                            <div style="width: 55px; height: 55px; border: 1px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">Gold</div>
+                        </div>
+                    </div>
+
+                    <!-- Variant: Chain Length -->
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; color: var(--charcoal);">Chain Length</label>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="padding: 12px 20px; border: 2px solid var(--crimson); font-size: 0.75rem;">16"</div>
+                            <div style="padding: 12px 20px; border: 1px solid var(--gray-300); font-size: 0.75rem;">18"</div>
+                            <div style="padding: 12px 20px; border: 1px solid var(--gray-300); font-size: 0.75rem;">20"</div>
+                        </div>
+                    </div>
+
+                    <!-- Subscription Toggle (for consumables - shown as option) -->
+                    <div style="background: var(--cream); padding: 18px; margin-bottom: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.8rem; font-weight: 500; margin-bottom: 3px;">Subscribe & Save 15%</div>
+                                <div style="font-size: 0.7rem; color: var(--gray-500);">Delivered every 30, 60, or 90 days</div>
+                            </div>
+                            <div style="width: 45px; height: 24px; background: var(--gray-300); border-radius: 12px; position: relative;">
+                                <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Bag -->
+                    <button style="width: 100%; background: var(--crimson); color: var(--cream); padding: 18px; border: none; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; margin-bottom: 15px; font-family: 'Work Sans', sans-serif;">Add to Bag — $187</button>
+
+                    <!-- Trust Signals -->
+                    <div style="display: flex; justify-content: center; gap: 25px; padding: 15px 0; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--gray-500);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                            Discreet
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--gray-500);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            1-Year Warranty
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--gray-500);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            Free Returns
+                        </div>
+                    </div>
+
+                    <!-- Short Description -->
+                    <p style="font-size: 0.85rem; line-height: 1.8; color: var(--charcoal); margin-bottom: 25px;">A discreet wearable vibrator crafted in Sterling Silver 925. Elegant enough for any occasion, powerful enough for your most intimate moments.</p>
+
+                    <!-- Benefits List -->
+                    <ul style="list-style: none; border-top: 1px solid var(--gray-200); padding-top: 20px;">
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">✓</span>
+                            Sterling Silver 925 — Hypoallergenic
+                        </li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">✓</span>
+                            Whisper-quiet motor
+                        </li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">✓</span>
+                            USB-C rechargeable
+                        </li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">✓</span>
+                            Waterproof (IPX7)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Accordion Section -->
+            <div style="padding: 0 40px; background: var(--white);">
+                <div style="border-bottom: 1px solid var(--gray-200); padding: 22px 0;">
+                    <div style="display: flex; justify-content: space-between; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;">
+                        Description <span>+</span>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid var(--gray-200); padding: 22px 0;">
+                    <div style="display: flex; justify-content: space-between; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;">
+                        Ingredients & Materials <span>+</span>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid var(--gray-200); padding: 22px 0;">
+                    <div style="display: flex; justify-content: space-between; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;">
+                        How to Use <span>+</span>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid var(--gray-200); padding: 22px 0;">
+                    <div style="display: flex; justify-content: space-between; font-family: 'EB Garamond', serif; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;">
+                        Shipping & Returns <span>+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete the Ritual -->
+            <div style="padding: 60px 40px; background: var(--cream);">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <p style="font-family: 'Pinyon Script', cursive; font-size: 2rem; color: var(--crimson); margin-bottom: 5px;">Complete</p>
+                    <h3 style="font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase;">The Ritual</h3>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                    <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                    <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                    <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                    <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div style="padding: 60px 40px; background: var(--white);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+                    <div>
+                        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px;">Customer Reviews</h3>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span style="font-size: 2.5rem; font-family: 'EB Garamond', serif;">4.9</span>
+                            <div>
+                                <div style="color: var(--gold);">★★★★★</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-500);">Based on 128 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button style="background: transparent; border: 1px solid var(--black); padding: 12px 25px; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;">Write a Review</button>
+                </div>
+
+                <!-- Photo Reviews -->
+                <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+                    <div style="width: 80px; height: 80px; background: var(--gray-200);"></div>
+                    <div style="width: 80px; height: 80px; background: var(--gray-200);"></div>
+                    <div style="width: 80px; height: 80px; background: var(--gray-200);"></div>
+                    <div style="width: 80px; height: 80px; background: var(--gray-200);"></div>
+                    <div style="width: 80px; height: 80px; background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--gray-500);">+24</div>
+                </div>
+
+                <!-- Individual Review -->
+                <div style="border-top: 1px solid var(--gray-200); padding: 25px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                        <span style="color: var(--gold); font-size: 0.85rem;">★★★★★</span>
+                        <span style="font-size: 0.75rem; color: var(--gray-500);">2 days ago</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 10px;">"Absolutely stunning piece. No one would ever guess its purpose. Elegant enough for everyday wear, powerful enough for special moments."</p>
+                    <span style="font-size: 0.75rem; color: var(--gray-500);">— Verified Buyer</span>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="wf-newsletter">
+                <h3>Join the Inner Circle</h3>
+                <h4>Newsletter</h4>
+                <p>Exclusive access to launches, events, and intimate conversations.</p>
+                <div class="wf-newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+                    <div class="wf-button">Subscribe</div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="wf-footer">
+                <div class="wf-footer-grid">
+                    <div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; letter-spacing: 0.35em; margin-bottom: 20px;">AMARA</div>
+                        <p style="font-size: 0.8rem; line-height: 1.9; opacity: 0.7; max-width: 280px;">Forever Yours. Forever Ours.</p>
+                    </div>
+                    <div>
+                        <h5>Shop</h5>
+                        <ul><li>All Products</li><li>Devices</li><li>Essentials</li></ul>
+                    </div>
+                    <div>
+                        <h5>Company</h5>
+                        <ul><li>Our Story</li><li>Community</li><li>Press</li></ul>
+                    </div>
+                    <div>
+                        <h5>Help</h5>
+                        <ul><li>FAQ</li><li>Shipping</li><li>Returns</li></ul>
+                    </div>
+                </div>
+                <div class="wf-footer-bottom">
+                    <span>© 2025 AMARA</span>
+                    <span>Arrives in unmarked packaging</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator Sidebar -->
+        <div style="position: sticky; top: 100px; height: fit-content;">
+            <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--crimson); margin-bottom: 20px;">Page Sections</div>
+            <div style="border-left: 2px solid var(--gray-300); padding-left: 20px;">
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--black); border-left: 2px solid var(--crimson); margin-left: -22px; padding-left: 20px;">Header</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Product Hero</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Variants & Add to Bag</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Product Details</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Accordions</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Cross-sells</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Reviews</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Newsletter</div>
+                <div style="padding: 12px 0; font-size: 0.75rem; color: var(--gray-500);">Footer</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-notes" style="max-width: 1400px; margin: 50px auto 0;">
+        <h4>Developer Notes — Product Page</h4>
+        <ul>
+            <li><strong>Gallery:</strong> Left column is <code>position: sticky; top: 80px;</code> — stays visible while user scrolls through info</li>
+            <li><strong>Thumbnails:</strong> Click to swap main image. Video thumbnail shows play icon overlay.</li>
+            <li><strong>Variants:</strong> Sharp-edged selectors. Active state: <code>border: 2px solid #940707</code></li>
+            <li><strong>Add to Bag:</strong> Button text updates dynamically with selected variant price</li>
+            <li><strong>Subscription Toggle:</strong> Show for consumable products (Water Jelly, Wipes, Shimmer Dust). Use ReCharge or Shopify Subscriptions.</li>
+            <li><strong>Trust Signals:</strong> Always visible below Add to Bag — discreet shipping is critical</li>
+            <li><strong>Accordions:</strong> Expand/collapse with <code>max-height</code> transition. First one open by default.</li>
+            <li><strong>Reviews:</strong> Judge.me integration. Enable photo reviews. Show photo grid above individual reviews.</li>
+            <li><strong>Mobile:</strong> Gallery becomes horizontal swipe carousel. Sticky "Add to Bag" bar at bottom.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: COLLECTION PAGE
+============================================ -->
+<section id="collection" class="section">
+    <div class="section-header">
+        <span class="section-label">Collection / Shop Page</span>
+        <h2 class="section-title">Collection Page</h2>
+        <p class="section-subtitle">Elegant browsing with quick-add functionality. Minimal filters, maximum impact.</p>
+    </div>
+
+    <div class="wireframe-container">
+        <span class="wireframe-label">Collection — All Products</span>
+
+        <div class="wf-announcement">
+            <span>Complimentary Shipping on Orders $75+</span>
+            <span class="discreet-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Discreet Packaging
+            </span>
+        </div>
+
+        <div class="wf-header">
+            <div class="wf-nav">
+                <span>Shop</span>
+                <span>About</span>
+                <span>Community</span>
+            </div>
+            <div class="wf-logo">AMARA</div>
+            <div class="wf-nav-right">
+                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+            </div>
+        </div>
+
+        <!-- Collection Hero -->
+        <div style="background: var(--black); color: var(--cream); padding: 80px 50px; text-align: center;">
+            <h1 style="font-family: 'EB Garamond', serif; font-size: 2.5rem; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 15px;">The Collection</h1>
+            <p style="font-family: 'Libre Baskerville', serif; font-style: italic; max-width: 550px; margin: 0 auto; opacity: 0.8; line-height: 1.8;">Luxury rituals designed for the feminine experience. Science-led formulations meet boudoir-inspired elegance.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; border-bottom: 1px solid var(--gray-200); background: var(--white);">
+            <span style="font-size: 0.8rem; color: var(--gray-500);">8 Products</span>
+            <div style="display: flex; gap: 20px;">
+                <select style="padding: 10px 25px; border: 1px solid var(--gray-300); background: transparent; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; font-family: 'Work Sans', sans-serif;">
+                    <option>Category</option>
+                </select>
+                <select style="padding: 10px 25px; border: 1px solid var(--gray-300); background: transparent; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; font-family: 'Work Sans', sans-serif;">
+                    <option>Price</option>
+                </select>
+                <select style="padding: 10px 25px; border: 1px solid var(--gray-300); background: transparent; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; font-family: 'Work Sans', sans-serif;">
+                    <option>Sort By</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="wf-product-grid">
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Echo Pendant]</div>
+                <div class="wf-product-info"><h4>Echo Pendant</h4><span>$187</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Echo Ring]</div>
+                <div class="wf-product-info"><h4>Echo Ring</h4><span>$187</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Water Jelly]</div>
+                <div class="wf-product-info"><h4>Water Jelly</h4><span>$33</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Afterglow Wipes]</div>
+                <div class="wf-product-info"><h4>Afterglow Wipes</h4><span>$18</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Pheromone Enhancer]</div>
+                <div class="wf-product-info"><h4>Pheromone Enhancer</h4><span>$78</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Mouthwatering Spray]</div>
+                <div class="wf-product-info"><h4>Mouthwatering Spray</h4><span>$34</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Edible Shimmer Dust]</div>
+                <div class="wf-product-info"><h4>Edible Shimmer Dust</h4><span>$37</span></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-image">[Intimacy Pouch]</div>
+                <div class="wf-product-info"><h4>Intimacy Pouch</h4><span>$62</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-notes">
+        <h4>Developer Notes — Collection Page</h4>
+        <ul>
+            <li><strong>Grid:</strong> 4 columns desktop, 2 columns tablet/mobile. <code>gap: 2px</code> for tight grid effect.</li>
+            <li><strong>Quick Add:</strong> On hover, slide up "Quick Add" button. For products with variants, open quick-view modal instead.</li>
+            <li><strong>Filters:</strong> Keep minimal — Category, Price, Sort only. Use Shopify native filtering.</li>
+            <li><strong>Loading:</strong> Infinite scroll OR "Load More" button (no pagination). Lazy load images.</li>
+            <li><strong>Category Hero:</strong> Each collection (Devices, Essentials, Body & Scent) gets unique hero image and copy.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: SUGGESTED FEATURES
+============================================ -->
+<section id="features" class="section" style="background: var(--black); color: var(--cream);">
+    <div class="section-header">
+        <span class="section-label" style="color: var(--gold);">Strategic Recommendations</span>
+        <h2 class="section-title" style="color: var(--cream);">Feature Suggestions</h2>
+        <p class="section-subtitle" style="color: rgba(250,247,242,0.7);">High-impact features based on your demographic and competitive positioning. These will increase conversion, AOV, and customer loyalty.</p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
+
+        <!-- Feature 1: Find Your Ritual Quiz -->
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border: 1px solid rgba(201,169,97,0.3);">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 50px; height: 50px; background: var(--crimson); display: flex; align-items: center; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <h3 style="font-family: 'EB Garamond', serif; font-size: 1.3rem; letter-spacing: 0.1em;">"Find Your Ritual" Quiz</h3>
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.8; opacity: 0.8; margin-bottom: 20px;">Personalized product recommendations based on experience level, preferences, and goals. Reduces decision paralysis for first-time buyers. Captures email for remarketing.</p>
+            <div style="background: var(--black); border: 1px solid rgba(255,255,255,0.1); padding: 25px; margin-top: 20px;">
+                <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Quiz Flow Preview</div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div style="width: 80px; height: 100px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Q1</div>
+                    <div style="color: var(--gold);">→</div>
+                    <div style="width: 80px; height: 100px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Q2</div>
+                    <div style="color: var(--gold);">→</div>
+                    <div style="width: 80px; height: 100px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Q3</div>
+                    <div style="color: var(--gold);">→</div>
+                    <div style="width: 80px; height: 100px; background: var(--crimson); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Results</div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.7rem; color: var(--gold); margin-bottom: 8px;">IMPACT</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">+25% email capture rate · +15% conversion from quiz completers</div>
+            </div>
+        </div>
+
+        <!-- Feature 2: Bundle Builder -->
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border: 1px solid rgba(201,169,97,0.3);">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 50px; height: 50px; background: var(--crimson); display: flex; align-items: center; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <h3 style="font-family: 'EB Garamond', serif; font-size: 1.3rem; letter-spacing: 0.1em;">Bundle Builder</h3>
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.8; opacity: 0.8; margin-bottom: 20px;">Curated sets with savings displayed. "Date Night Essentials" / "Self-Care Sunday" / "First Time" bundles. Increases AOV and introduces customers to multiple products.</p>
+            <div style="background: var(--black); border: 1px solid rgba(255,255,255,0.1); padding: 25px; margin-top: 20px;">
+                <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Bundle Example</div>
+                <div style="display: flex; gap: 10px; align-items: flex-end;">
+                    <div style="width: 60px; height: 80px; background: rgba(255,255,255,0.1);"></div>
+                    <div style="font-size: 1.2rem; color: var(--gold);">+</div>
+                    <div style="width: 60px; height: 80px; background: rgba(255,255,255,0.1);"></div>
+                    <div style="font-size: 1.2rem; color: var(--gold);">+</div>
+                    <div style="width: 60px; height: 80px; background: rgba(255,255,255,0.1);"></div>
+                    <div style="font-size: 1.2rem; color: var(--gold);">=</div>
+                    <div style="text-align: right;">
+                        <div style="text-decoration: line-through; opacity: 0.5; font-size: 0.8rem;">$238</div>
+                        <div style="font-size: 1.2rem; color: var(--gold);">$199</div>
+                        <div style="font-size: 0.7rem; color: var(--crimson);">Save $39</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.7rem; color: var(--gold); margin-bottom: 8px;">IMPACT</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">+35% average order value · Introduces 2.5 products per bundle purchase</div>
+            </div>
+        </div>
+
+        <!-- Feature 3: Gift Mode -->
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border: 1px solid rgba(201,169,97,0.3);">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 50px; height: 50px; background: var(--crimson); display: flex; align-items: center; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+                </div>
+                <h3 style="font-family: 'EB Garamond', serif; font-size: 1.3rem; letter-spacing: 0.1em;">Gift Mode</h3>
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.8; opacity: 0.8; margin-bottom: 20px;">Toggle for gift wrapping, anonymous sender option, and gift message. Critical for intimacy products — makes gifting comfortable. Perfect for Valentine's, anniversaries, bachelorettes.</p>
+            <div style="background: var(--black); border: 1px solid rgba(255,255,255,0.1); padding: 25px; margin-top: 20px;">
+                <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Cart Toggle</div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 45px; height: 24px; background: var(--crimson); border-radius: 12px; position: relative;">
+                        <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div>
+                    </div>
+                    <span style="font-size: 0.85rem;">This is a gift</span>
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(148,7,7,0.2); font-size: 0.8rem;">
+                    ✓ Gift wrapped in signature AMARA box<br>
+                    ✓ No pricing on packing slip<br>
+                    ✓ Add a personal message
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.7rem; color: var(--gold); margin-bottom: 8px;">IMPACT</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">Opens gifting market · +20% holiday season sales</div>
+            </div>
+        </div>
+
+        <!-- Feature 4: Subscription -->
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border: 1px solid rgba(201,169,97,0.3);">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 50px; height: 50px; background: var(--crimson); display: flex; align-items: center; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                </div>
+                <h3 style="font-family: 'EB Garamond', serif; font-size: 1.3rem; letter-spacing: 0.1em;">Subscribe & Save</h3>
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.8; opacity: 0.8; margin-bottom: 20px;">For consumables: Water Jelly, Afterglow Wipes, Shimmer Dust. "Never run out when you need it most." 15% savings, delivered every 30/60/90 days.</p>
+            <div style="background: var(--black); border: 1px solid rgba(255,255,255,0.1); padding: 25px; margin-top: 20px;">
+                <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">PDP Toggle</div>
+                <div style="display: flex; gap: 15px;">
+                    <div style="flex: 1; padding: 15px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">
+                        <div style="font-size: 0.75rem; margin-bottom: 5px;">One-time</div>
+                        <div style="font-size: 1.1rem;">$33</div>
+                    </div>
+                    <div style="flex: 1; padding: 15px; border: 2px solid var(--gold); text-align: center; position: relative;">
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--black); padding: 2px 10px; font-size: 0.6rem; text-transform: uppercase;">Save 15%</div>
+                        <div style="font-size: 0.75rem; margin-bottom: 5px;">Subscribe</div>
+                        <div style="font-size: 1.1rem;">$28</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.7rem; color: var(--gold); margin-bottom: 8px;">IMPACT</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">Recurring revenue · 70% of subscribers stay 6+ months · 3x LTV</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copy Suggestions -->
+    <div style="max-width: 1200px; margin: 60px auto 0; padding: 40px; border: 1px solid var(--gold);">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 25px;">COPY & MESSAGING RECOMMENDATIONS</h3>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+            <div>
+                <div style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 5px;">INSTEAD OF</div>
+                <div style="text-decoration: line-through; opacity: 0.5; margin-bottom: 10px;">"Add to Cart"</div>
+                <div style="font-size: 0.75rem; color: var(--gold); margin-bottom: 5px;">USE</div>
+                <div style="font-size: 1.1rem;">"Add to Bag"</div>
+            </div>
+            <div>
+                <div style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 5px;">INSTEAD OF</div>
+                <div style="text-decoration: line-through; opacity: 0.5; margin-bottom: 10px;">"Buy Now"</div>
+                <div style="font-size: 0.75rem; color: var(--gold); margin-bottom: 5px;">USE</div>
+                <div style="font-size: 1.1rem;">"Begin Your Ritual"</div>
+            </div>
+            <div>
+                <div style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 5px;">INSTEAD OF</div>
+                <div style="text-decoration: line-through; opacity: 0.5; margin-bottom: 10px;">"Free Shipping"</div>
+                <div style="font-size: 0.75rem; color: var(--gold); margin-bottom: 5px;">USE</div>
+                <div style="font-size: 1.1rem;">"Complimentary Shipping"</div>
+            </div>
+            <div>
+                <div style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 5px;">INSTEAD OF</div>
+                <div style="text-decoration: line-through; opacity: 0.5; margin-bottom: 10px;">"Discreet Shipping"</div>
+                <div style="font-size: 0.75rem; color: var(--gold); margin-bottom: 5px;">USE</div>
+                <div style="font-size: 1.1rem;">"Arrives in Unmarked Packaging"</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: MOBILE WIREFRAMES
+============================================ -->
+<section id="mobile" class="section">
+    <div class="section-header">
+        <span class="section-label">Mobile Experience</span>
+        <h2 class="section-title">Mobile Wireframes</h2>
+        <p class="section-subtitle">Mobile-first responsive design. 65%+ of traffic will be mobile — these screens must be flawless.</p>
+    </div>
+
+    <style>
+        .mobile-frame {
+            width: 280px;
+            background: var(--white);
+            border-radius: 35px;
+            border: 8px solid var(--black);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        .mobile-frame::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 25px;
+            background: var(--black);
+            border-radius: 15px;
+            z-index: 10;
+        }
+        .mobile-screen {
+            padding-top: 45px;
+            min-height: 580px;
+            overflow: hidden;
+        }
+        .mobile-label {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--crimson);
+        }
+        .mobile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .mobile-hamburger {
+            width: 20px;
+            height: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .mobile-hamburger span {
+            height: 2px;
+            background: var(--black);
+            display: block;
+        }
+        .mobile-logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.25em;
+        }
+        .mobile-icons {
+            display: flex;
+            gap: 12px;
+        }
+        .mobile-icons .icon {
+            width: 16px;
+            height: 16px;
+        }
+        .mobile-sticky-cart {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--crimson);
+            color: var(--cream);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    </style>
+
+    <div style="display: flex; gap: 50px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px;">
+
+        <!-- Mobile 1: Age Gate -->
+        <div>
+            <div class="mobile-label">Age Gate</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen" style="background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; text-align: center;">
+                    <div style="font-family: 'EB Garamond', serif; font-size: 1.2rem; letter-spacing: 0.3em; color: var(--cream); margin-bottom: 40px;">AMARA</div>
+                    <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; letter-spacing: 0.15em; color: var(--cream); margin-bottom: 15px;">WELCOME</div>
+                    <p style="font-size: 0.75rem; color: rgba(250,247,242,0.7); line-height: 1.7; margin-bottom: 35px;">This website contains adult content. Please confirm you are 18 years or older.</p>
+                    <button style="width: 100%; background: var(--crimson); color: var(--cream); padding: 16px; border: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;">I Am 18+</button>
+                    <button style="width: 100%; background: transparent; color: var(--cream); padding: 16px; border: 1px solid rgba(250,247,242,0.3); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;">Exit</button>
+                    <p style="font-size: 0.6rem; color: rgba(250,247,242,0.4); margin-top: 30px;">By entering, you agree to our Terms & Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 2: Homepage -->
+        <div>
+            <div class="mobile-label">Homepage</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div style="background: var(--crimson); color: var(--cream); text-align: center; padding: 8px; font-size: 0.6rem; letter-spacing: 0.1em;">FREE SHIPPING $75+ · DISCREET</div>
+                    <div class="mobile-header">
+                        <div class="mobile-hamburger"><span></span><span></span><span></span></div>
+                        <div class="mobile-logo">AMARA</div>
+                        <div class="mobile-icons">
+                            <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                            <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                        </div>
+                    </div>
+                    <div style="background: var(--black); height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--cream); text-align: center; padding: 20px;">
+                        <div style="font-family: 'Pinyon Script', cursive; font-size: 2rem;">Forever Yours</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 0.8rem; letter-spacing: 0.25em; margin: 10px 0 20px;">FOREVER OURS</div>
+                        <button style="background: var(--crimson); color: var(--cream); padding: 12px 25px; border: none; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;">Shop Now</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 2px;">
+                        <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                        <div style="background: var(--black); aspect-ratio: 3/4;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 3: Collection -->
+        <div>
+            <div class="mobile-label">Collection</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="mobile-header">
+                        <div class="mobile-hamburger"><span></span><span></span><span></span></div>
+                        <div class="mobile-logo">AMARA</div>
+                        <div class="mobile-icons">
+                            <span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                            <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                        </div>
+                    </div>
+                    <div style="background: var(--black); color: var(--cream); padding: 30px 20px; text-align: center;">
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.2rem; letter-spacing: 0.25em;">THE COLLECTION</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid var(--gray-200); font-size: 0.65rem;">
+                        <span style="color: var(--gray-500);">8 Products</span>
+                        <span>Filter & Sort</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 2px;">
+                        <div><div style="background: var(--black); aspect-ratio: 3/4;"></div><div style="padding: 10px; text-align: center; font-size: 0.75rem;"><div style="font-family: 'Playfair Display', serif; font-style: italic;">Echo Pendant</div><div style="color: var(--gray-500); font-size: 0.7rem;">$187</div></div></div>
+                        <div><div style="background: var(--black); aspect-ratio: 3/4;"></div><div style="padding: 10px; text-align: center; font-size: 0.75rem;"><div style="font-family: 'Playfair Display', serif; font-style: italic;">Water Jelly</div><div style="color: var(--gray-500); font-size: 0.7rem;">$33</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 4: Product Page -->
+        <div>
+            <div class="mobile-label">Product Page</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen" style="position: relative; padding-bottom: 55px;">
+                    <div class="mobile-header">
+                        <span class="icon"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+                        <div class="mobile-logo">AMARA</div>
+                        <div class="mobile-icons">
+                            <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                        </div>
+                    </div>
+                    <div style="background: var(--black); height: 220px; position: relative;">
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
+                            <div style="width: 8px; height: 8px; background: var(--cream); border-radius: 50%;"></div>
+                            <div style="width: 8px; height: 8px; background: rgba(250,247,242,0.3); border-radius: 50%;"></div>
+                            <div style="width: 8px; height: 8px; background: rgba(250,247,242,0.3); border-radius: 50%;"></div>
+                        </div>
+                        <div style="position: absolute; top: 10px; left: 10px; font-size: 0.55rem; color: rgba(250,247,242,0.5);">← Swipe</div>
+                    </div>
+                    <div style="padding: 18px;">
+                        <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; margin-bottom: 5px;">Echo Pendant</div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <span style="color: var(--gold); font-size: 0.7rem;">★★★★★</span>
+                            <span style="font-size: 0.65rem; color: var(--gray-500);">(128)</span>
+                        </div>
+                        <div style="font-size: 1.1rem; margin-bottom: 15px;">$187</div>
+                        <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; border: 2px solid var(--crimson); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Silver</div>
+                            <div style="width: 40px; height: 40px; border: 1px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">Gold</div>
+                        </div>
+                    </div>
+                    <div class="mobile-sticky-cart">
+                        <span>$187</span>
+                        <span>Add to Bag</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row of Mobile Screens -->
+    <div style="display: flex; gap: 50px; justify-content: center; flex-wrap: wrap;">
+
+        <!-- Mobile 5: Cart Drawer -->
+        <div>
+            <div class="mobile-label">Cart Drawer</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen" style="background: var(--white);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--gray-200);">
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.15em;">YOUR BAG (2)</div>
+                        <span class="icon" style="width: 20px; height: 20px;"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+                    </div>
+                    <div style="padding: 15px;">
+                        <div style="display: flex; gap: 12px; padding-bottom: 15px; border-bottom: 1px solid var(--gray-200);">
+                            <div style="width: 70px; height: 70px; background: var(--black);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem;">Echo Pendant</div>
+                                <div style="font-size: 0.7rem; color: var(--gray-500);">Silver / 18"</div>
+                                <div style="font-size: 0.85rem; margin-top: 5px;">$187</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--gray-200);">
+                            <div style="width: 70px; height: 70px; background: var(--black);"></div>
+                            <div style="flex: 1;">
+                                <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem;">Water Jelly</div>
+                                <div style="font-size: 0.7rem; color: var(--gray-500);">100ml</div>
+                                <div style="font-size: 0.85rem; margin-top: 5px;">$33</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--cream); padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="font-size: 0.85rem;">Total</span>
+                            <span style="font-size: 1rem; font-weight: 500;">$220</span>
+                        </div>
+                        <button style="width: 100%; background: var(--crimson); color: var(--cream); padding: 16px; border: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 6: Menu -->
+        <div>
+            <div class="mobile-label">Mobile Menu</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen" style="background: var(--black);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(250,247,242,0.1);">
+                        <span class="icon" style="width: 20px; height: 20px; color: var(--cream);"><svg viewBox="0 0 24 24" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; color: var(--cream);">AMARA</div>
+                        <span class="icon" style="width: 18px; height: 18px; color: var(--cream);"><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                    </div>
+                    <div style="padding: 30px 25px;">
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; padding: 18px 0; border-bottom: 1px solid rgba(250,247,242,0.1); color: var(--cream);">Shop</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; padding: 18px 0; border-bottom: 1px solid rgba(250,247,242,0.1); color: var(--cream);">About</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; padding: 18px 0; border-bottom: 1px solid rgba(250,247,242,0.1); color: var(--cream);">Community</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; padding: 18px 0; border-bottom: 1px solid rgba(250,247,242,0.1); color: var(--gold);">Find Your Ritual</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.4rem; padding: 18px 0; color: var(--cream);">Contact</div>
+                        <div style="margin-top: 40px;">
+                            <div style="font-size: 0.7rem; color: rgba(250,247,242,0.5); margin-bottom: 12px;">ACCOUNT</div>
+                            <div style="font-size: 0.85rem; color: var(--cream); padding: 8px 0;">Sign In</div>
+                            <div style="font-size: 0.85rem; color: var(--cream); padding: 8px 0;">Create Account</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 7: About -->
+        <div>
+            <div class="mobile-label">About Page</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen">
+                    <div class="mobile-header">
+                        <div class="mobile-hamburger"><span></span><span></span><span></span></div>
+                        <div class="mobile-logo">AMARA</div>
+                        <div class="mobile-icons">
+                            <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
+                        </div>
+                    </div>
+                    <div style="background: var(--gray-200); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 0.65rem;">[Founder Image]</div>
+                    <div style="background: var(--crimson); color: var(--cream); padding: 30px 20px; text-align: center;">
+                        <div style="font-family: 'Pinyon Script', cursive; font-size: 1.8rem; margin-bottom: 5px;">Madam Amara</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 15px;">THE VISIONARY</div>
+                        <p style="font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.75rem; line-height: 1.8;">"Not for the male gaze. This one is for the girls."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile 8: Quiz -->
+        <div>
+            <div class="mobile-label">Quiz</div>
+            <div class="mobile-frame">
+                <div class="mobile-screen" style="background: var(--cream);">
+                    <div style="background: var(--black); padding: 25px 20px; text-align: center;">
+                        <div style="font-family: 'Pinyon Script', cursive; font-size: 1.6rem; color: var(--cream); margin-bottom: 5px;">Find Your</div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.2em; color: var(--cream);">RITUAL</div>
+                    </div>
+                    <div style="padding: 30px 20px;">
+                        <div style="font-size: 0.65rem; color: var(--gray-500); margin-bottom: 5px;">QUESTION 1 OF 4</div>
+                        <div style="width: 25%; height: 3px; background: var(--crimson); margin-bottom: 25px;"></div>
+                        <div style="font-family: 'EB Garamond', serif; font-size: 1.1rem; margin-bottom: 25px;">What brings you here today?</div>
+                        <div style="border: 1px solid var(--gray-300); padding: 15px; margin-bottom: 10px; font-size: 0.8rem;">Exploring something new</div>
+                        <div style="border: 2px solid var(--crimson); padding: 15px; margin-bottom: 10px; font-size: 0.8rem; background: rgba(148,7,7,0.05);">Elevating my self-care</div>
+                        <div style="border: 1px solid var(--gray-300); padding: 15px; margin-bottom: 10px; font-size: 0.8rem;">A gift for someone special</div>
+                        <div style="border: 1px solid var(--gray-300); padding: 15px; font-size: 0.8rem;">Restocking favorites</div>
+                    </div>
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px;">
+                        <button style="width: 100%; background: var(--crimson); color: var(--cream); padding: 16px; border: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-notes">
+        <h4>Developer Notes — Mobile</h4>
+        <ul>
+            <li><strong>Breakpoints:</strong> Mobile: 0-767px · Tablet: 768-1023px · Desktop: 1024px+</li>
+            <li><strong>Touch Targets:</strong> All interactive elements minimum <code>44px × 44px</code></li>
+            <li><strong>Sticky Add to Bag:</strong> Fixed bottom bar on PDP with price + CTA. <code>z-index: 100</code></li>
+            <li><strong>Gallery:</strong> Horizontal swipe with dot pagination. Use Flickity or Swiper.js</li>
+            <li><strong>Menu:</strong> Full-screen overlay, slide in from left. <code>transition: transform 0.3s ease</code></li>
+            <li><strong>Cart Drawer:</strong> Slide in from right. Includes upsell products below items.</li>
+            <li><strong>Safe Areas:</strong> Respect iOS safe areas for Dynamic Island and home indicator</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION: DEVELOPER HANDOFF
+============================================ -->
+<section id="specs" class="section" style="background: var(--black); color: var(--cream);">
+    <div class="section-header">
+        <span class="section-label" style="color: var(--gold);">Technical Specifications</span>
+        <h2 class="section-title" style="color: var(--cream);">Developer Handoff</h2>
+        <p class="section-subtitle" style="color: rgba(250,247,242,0.7);">Complete specifications for Shopify implementation. All tokens, values, and requirements in one place.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+        <!-- Platform -->
+        <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+            <h3 style="font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 25px;">PLATFORM</h3>
+            <ul style="list-style: none; line-height: 2.2; font-size: 0.85rem; opacity: 0.9;">
+                <li>Shopify 2.0 Architecture</li>
+                <li>Custom Theme (Dawn base recommended)</li>
+                <li>Liquid + JSON Templates</li>
+                <li>Section-based customization</li>
+                <li>Online Store 2.0 features</li>
+            </ul>
+        </div>
+
+        <!-- Integrations -->
+        <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+            <h3 style="font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 25px;">INTEGRATIONS</h3>
+            <ul style="list-style: none; line-height: 2.2; font-size: 0.85rem; opacity: 0.9;">
+                <li>Klaviyo — Email Marketing</li>
+                <li>Judge.me — Reviews (photo enabled)</li>
+                <li>ReCharge — Subscriptions</li>
+                <li>Google Analytics 4</li>
+                <li>Meta Pixel</li>
+                <li>Age Verification App (AgeChecker.net)</li>
+            </ul>
+        </div>
+
+        <!-- Performance -->
+        <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+            <h3 style="font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 25px;">PERFORMANCE</h3>
+            <ul style="list-style: none; line-height: 2.2; font-size: 0.85rem; opacity: 0.9;">
+                <li>Lighthouse Score: 80+</li>
+                <li>First Contentful Paint: &lt;2s</li>
+                <li>Largest Contentful Paint: &lt;3s</li>
+                <li>WCAG 2.1 AA Compliant</li>
+                <li>Mobile-First Responsive</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Design Tokens -->
+    <div style="max-width: 1200px; margin: 60px auto 0;">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 30px; text-transform: uppercase;">Design Tokens</h3>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;">
+            <!-- Colors -->
+            <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+                <h4 style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 20px; color: var(--gold);">COLOR TOKENS</h4>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; line-height: 2.5;">
+                    <div><span style="color: var(--gray-400);">--color-primary:</span> <span style="color: #940707;">#940707</span></div>
+                    <div><span style="color: var(--gray-400);">--color-primary-dark:</span> <span style="color: #6d0505;">#6d0505</span></div>
+                    <div><span style="color: var(--gray-400);">--color-cream:</span> #FAF7F2</div>
+                    <div><span style="color: var(--gray-400);">--color-black:</span> #1A1A1A</div>
+                    <div><span style="color: var(--gray-400);">--color-charcoal:</span> #2D2D2D</div>
+                    <div><span style="color: var(--gray-400);">--color-gold:</span> <span style="color: #C9A961;">#C9A961</span></div>
+                    <div><span style="color: var(--gray-400);">--color-gray-100:</span> #f8f8f8</div>
+                    <div><span style="color: var(--gray-400);">--color-gray-200:</span> #e8e8e8</div>
+                    <div><span style="color: var(--gray-400);">--color-gray-300:</span> #d4d4d4</div>
+                    <div><span style="color: var(--gray-400);">--color-gray-400:</span> #a3a3a3</div>
+                    <div><span style="color: var(--gray-400);">--color-gray-500:</span> #737373</div>
+                </div>
+            </div>
+
+            <!-- Typography -->
+            <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+                <h4 style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 20px; color: var(--gold);">TYPOGRAPHY</h4>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; line-height: 2.5;">
+                    <div><span style="color: var(--gray-400);">--font-display:</span> 'EB Garamond', serif</div>
+                    <div><span style="color: var(--gray-400);">--font-script:</span> 'Pinyon Script', cursive</div>
+                    <div><span style="color: var(--gray-400);">--font-product:</span> 'Playfair Display', serif</div>
+                    <div><span style="color: var(--gray-400);">--font-body:</span> 'Work Sans', sans-serif</div>
+                    <div><span style="color: var(--gray-400);">--font-quote:</span> 'Libre Baskerville', serif</div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div><span style="color: var(--gray-400);">Headlines:</span> uppercase, letter-spacing: 0.15-0.3em</div>
+                        <div><span style="color: var(--gray-400);">Body:</span> 400 weight, line-height: 1.6-1.8</div>
+                        <div><span style="color: var(--gray-400);">Buttons:</span> 500 weight, uppercase, 0.15em</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing -->
+            <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+                <h4 style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 20px; color: var(--gold);">SPACING SYSTEM (8px base)</h4>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; line-height: 2.5;">
+                    <div><span style="color: var(--gray-400);">--space-1:</span> 8px</div>
+                    <div><span style="color: var(--gray-400);">--space-2:</span> 16px</div>
+                    <div><span style="color: var(--gray-400);">--space-3:</span> 24px</div>
+                    <div><span style="color: var(--gray-400);">--space-4:</span> 32px</div>
+                    <div><span style="color: var(--gray-400);">--space-5:</span> 40px</div>
+                    <div><span style="color: var(--gray-400);">--space-6:</span> 48px</div>
+                    <div><span style="color: var(--gray-400);">--space-8:</span> 64px</div>
+                    <div><span style="color: var(--gray-400);">--space-10:</span> 80px</div>
+                    <div><span style="color: var(--gray-400);">--space-12:</span> 96px</div>
+                </div>
+            </div>
+
+            <!-- Animations -->
+            <div style="background: rgba(255,255,255,0.03); padding: 35px; border: 1px solid rgba(201,169,97,0.2);">
+                <h4 style="font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 20px; color: var(--gold);">ANIMATIONS</h4>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; line-height: 2.5;">
+                    <div><span style="color: var(--gray-400);">--ease-out:</span> cubic-bezier(0.16, 1, 0.3, 1)</div>
+                    <div><span style="color: var(--gray-400);">--duration-fast:</span> 150ms</div>
+                    <div><span style="color: var(--gray-400);">--duration-normal:</span> 300ms</div>
+                    <div><span style="color: var(--gray-400);">--duration-slow:</span> 500ms</div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div><span style="color: var(--gray-400);">Hover states:</span> 300ms</div>
+                        <div><span style="color: var(--gray-400);">Fade-ins:</span> 500ms</div>
+                        <div><span style="color: var(--gray-400);">Slide transitions:</span> 300ms</div>
+                        <div><span style="color: var(--gray-400);">Page transitions:</span> 500ms</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breakpoints -->
+    <div style="max-width: 1200px; margin: 60px auto 0;">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 30px; text-transform: uppercase;">Breakpoints</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="background: rgba(255,255,255,0.03); padding: 25px; text-align: center; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 2rem; font-family: 'EB Garamond', serif; margin-bottom: 10px;">Mobile</div>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--gold);">0 - 767px</div>
+                <div style="font-size: 0.75rem; opacity: 0.6; margin-top: 10px;">2-col grid, hamburger menu</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 25px; text-align: center; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 2rem; font-family: 'EB Garamond', serif; margin-bottom: 10px;">Tablet</div>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--gold);">768 - 1023px</div>
+                <div style="font-size: 0.75rem; opacity: 0.6; margin-top: 10px;">3-col grid, condensed nav</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 25px; text-align: center; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 2rem; font-family: 'EB Garamond', serif; margin-bottom: 10px;">Desktop</div>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--gold);">1024 - 1439px</div>
+                <div style="font-size: 0.75rem; opacity: 0.6; margin-top: 10px;">4-col grid, full nav</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 25px; text-align: center; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 2rem; font-family: 'EB Garamond', serif; margin-bottom: 10px;">Wide</div>
+                <div style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--gold);">1440px+</div>
+                <div style="font-size: 0.75rem; opacity: 0.6; margin-top: 10px;">Max-width containers</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Component States -->
+    <div style="max-width: 1200px; margin: 60px auto 0;">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 30px; text-transform: uppercase;">Component States</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+            <!-- Button Primary -->
+            <div>
+                <div style="font-size: 0.7rem; letter-spacing: 0.1em; margin-bottom: 15px; color: var(--gray-400);">PRIMARY BUTTON</div>
+                <div style="background: var(--crimson); color: var(--cream); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Default</div>
+                <div style="background: #6d0505; color: var(--cream); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Hover</div>
+                <div style="background: #4a0404; color: var(--cream); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Active</div>
+                <div style="background: var(--gray-300); color: var(--gray-500); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;">Disabled</div>
+            </div>
+            <!-- Button Secondary -->
+            <div>
+                <div style="font-size: 0.7rem; letter-spacing: 0.1em; margin-bottom: 15px; color: var(--gray-400);">SECONDARY BUTTON</div>
+                <div style="background: transparent; border: 1px solid var(--cream); color: var(--cream); padding: 15px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Default</div>
+                <div style="background: var(--cream); color: var(--black); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Hover</div>
+                <div style="background: var(--gray-200); color: var(--black); padding: 16px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">Active</div>
+                <div style="background: transparent; border: 1px solid var(--gray-500); color: var(--gray-500); padding: 15px; text-align: center; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;">Disabled</div>
+            </div>
+            <!-- Input -->
+            <div>
+                <div style="font-size: 0.7rem; letter-spacing: 0.1em; margin-bottom: 15px; color: var(--gray-400);">INPUT FIELD</div>
+                <div style="background: var(--white); border: 1px solid var(--gray-300); padding: 14px 16px; font-size: 0.85rem; color: var(--gray-400); margin-bottom: 8px;">Placeholder</div>
+                <div style="background: var(--white); border: 2px solid var(--crimson); padding: 13px 15px; font-size: 0.85rem; color: var(--black); margin-bottom: 8px;">Focus</div>
+                <div style="background: var(--white); border: 1px solid var(--gray-300); padding: 14px 16px; font-size: 0.85rem; color: var(--black); margin-bottom: 8px;">Filled</div>
+                <div style="background: var(--white); border: 1px solid #dc2626; padding: 14px 16px; font-size: 0.85rem; color: var(--black);">Error</div>
+            </div>
+            <!-- Variant Selector -->
+            <div>
+                <div style="font-size: 0.7rem; letter-spacing: 0.1em; margin-bottom: 15px; color: var(--gray-400);">VARIANT SELECTOR</div>
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="width: 50px; height: 50px; border: 1px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; background: var(--white); color: var(--black);">Default</div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="width: 50px; height: 50px; border: 2px solid var(--crimson); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; background: var(--white); color: var(--black);">Selected</div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="width: 50px; height: 50px; border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; background: var(--gray-100); color: var(--gray-400); text-decoration: line-through;">Sold Out</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Checklist -->
+    <div style="max-width: 1200px; margin: 60px auto 0;">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 30px; text-transform: uppercase;">Pages to Build</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div style="background: rgba(255,255,255,0.03); padding: 20px; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 0.8rem; color: var(--gold); margin-bottom: 15px;">CORE PAGES</div>
+                <ul style="list-style: none; font-size: 0.8rem; line-height: 2;">
+                    <li>☐ Homepage</li>
+                    <li>☐ Collection Page (All Products)</li>
+                    <li>☐ Collection Page (Devices)</li>
+                    <li>☐ Collection Page (Essentials)</li>
+                    <li>☐ Collection Page (Body & Scent)</li>
+                    <li>☐ Product Page</li>
+                    <li>☐ Cart Page / Drawer</li>
+                </ul>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 20px; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 0.8rem; color: var(--gold); margin-bottom: 15px;">BRAND PAGES</div>
+                <ul style="list-style: none; font-size: 0.8rem; line-height: 2;">
+                    <li>☐ About / Our Story</li>
+                    <li>☐ Community</li>
+                    <li>☐ Contact</li>
+                    <li>☐ FAQ</li>
+                    <li>☐ Find Your Ritual Quiz</li>
+                </ul>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 20px; border: 1px solid rgba(201,169,97,0.2);">
+                <div style="font-size: 0.8rem; color: var(--gold); margin-bottom: 15px;">POLICY PAGES</div>
+                <ul style="list-style: none; font-size: 0.8rem; line-height: 2;">
+                    <li>☐ Privacy Policy</li>
+                    <li>☐ Terms of Service</li>
+                    <li>☐ Shipping & Returns</li>
+                    <li>☐ 404 Error Page</li>
+                    <li>☐ Password Page</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Sign-off -->
+    <div style="max-width: 800px; margin: 80px auto 0; text-align: center; padding-top: 60px; border-top: 1px solid rgba(201,169,97,0.3);">
+        <p style="font-family: 'Pinyon Script', cursive; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px;">Forever Yours. Forever Ours.</p>
+        <p style="font-family: 'EB Garamond', serif; letter-spacing: 0.4em; font-size: 1.2rem; margin-bottom: 40px;">AMARA</p>
+        <p style="font-size: 0.8rem; opacity: 0.5;">Wireframes v2.0 — Prepared for Client Review & Developer Handoff</p>
+        <p style="font-size: 0.75rem; opacity: 0.4; margin-top: 10px;">© 2025 Go To War Strategy Inc.</p>
+    </div>
+</section>
+
+</body>
+</html>
