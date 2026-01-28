@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle Shopify Store — Technical & Creative Audit</title>
+  <style>
+    :root { --index-width: 280px; --content-max: 58rem; --border:#000; --accent:#000; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+
+    .wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+
+    /* Sidebar */
+    .index { position:sticky; top:0; align-self:start; height:100vh; padding:1rem; border-right:1px solid var(--border); background:#fafafa; overflow-y:auto; }
+    .index-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; color:#666; }
+    .index-logo { font-size:1.5rem; font-weight:800; margin-bottom:0.5rem; }
+    .index ol { list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.5; }
+    .index li { margin-bottom:0.35rem; }
+    .index a { color:#000; text-decoration:none; display:flex; gap:0.5rem; align-items:baseline; padding:0.25rem 0; -webkit-tap-highlight-color:rgba(0,0,0,0.1); }
+    .index a:hover, .index a:active { color:#666; }
+    .index .num { color:#999; width:1.5rem; display:inline-block; text-align:right; font-size:0.8rem; }
+    
+    /* Mobile menu toggle */
+    .mobile-menu-toggle { display:none; position:fixed; top:1rem; right:1rem; z-index:1000; background:#000; color:#fff; border:none; padding:0.5rem 0.75rem; border-radius:4px; font-size:0.9rem; cursor:pointer; -webkit-tap-highlight-color:rgba(255,255,255,0.2); }
+    .mobile-menu-toggle:active { background:#333; }
+    
+    /* Mobile menu backdrop */
+    .menu-backdrop { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; }
+    .menu-backdrop.active { display:block; }
+    
+    /* Main content */
+    .sections { padding:2rem; display:flex; flex-direction:column; gap:0; }
+
+    section.page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.5rem 0; border-bottom:1px solid #eee; scroll-margin-top: 20px; }
+    section.page:last-child { border-bottom:none; }
+
+    .num-col { display:block; text-align:right; color:#999; font-size:0.85rem; padding-top:0.3rem; font-weight:600; }
+
+    .content h1 { font-size:1.5rem; margin:0 0 0.75rem 0; font-weight:700; color:#000; }
+    .content h2 { font-size:1.15rem; margin:1.25rem 0 0.5rem 0; font-weight:600; color:#000; }
+    .content h3 { font-size:1rem; margin:1rem 0 0.35rem 0; font-weight:600; color:#000; }
+    .content h4 { font-size:0.9rem; margin:0.75rem 0 0.25rem 0; font-weight:600; color:#333; }
+    .content p { margin:0 0 0.75rem 0; }
+    .content ul, .content ol { margin:0 0 0.75rem 0; padding-left:1.25rem; }
+    .content li { margin-bottom:0.35rem; }
+
+    /* Components */
+    .box { background:#fff; border:1px solid var(--border); padding:1rem; margin:0.75rem 0; }
+    .highlight-box { background:#f9f9f9; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .alert-box { background:#fff3cd; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .success-box { background:#d4edda; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:0.75rem 0; }
+    .three-col { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin:0.75rem 0; }
+
+    /* KPI Cards */
+    .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.75rem; margin:0.75rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:1rem; text-align:center; }
+    .kpi-card .big { font-size:1.6rem; font-weight:700; color:#000; line-height:1.2; }
+    .kpi-card .label { font-size:0.75rem; color:#666; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem; }
+
+    /* Tables */
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.9rem; }
+    th, td { border:1px solid #ddd; padding:0.5rem 0.75rem; text-align:left; }
+    th { background:#f5f5f5; font-weight:600; }
+    tr:nth-child(even) { background:#fafafa; }
+
+    .table-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0.75rem 0; }
+    .table-wrapper table { min-width:100%; }
+
+    blockquote { margin:1rem 0; padding:1rem; background:#f9f9f9; border-left:4px solid #000; font-style:italic; }
+
+    /* Responsive - Tablet and below */
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns:1fr; }
+      .index { position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); max-height:none; padding:1rem 0.75rem; }
+      .index ol { display:flex; flex-wrap:wrap; gap:0.5rem; }
+      .index li { margin-bottom:0; }
+      .index a { padding:0.5rem; border:1px solid #ddd; border-radius:4px; background:#fff; }
+      .sections { padding:1rem; }
+      section.page { grid-template-columns:2rem 1fr; gap:0.75rem; padding:1rem 0; }
+      .two-col, .three-col { grid-template-columns:1fr; }
+      .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      body { font-size:14.5px; }
+      .content h1 { font-size:1.35rem; }
+      .content h2 { font-size:1.1rem; }
+      .content h3 { font-size:0.95rem; }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 600px) {
+      .mobile-menu-toggle { display:block; }
+      .menu-backdrop { display:block; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+      .menu-backdrop.active { opacity:1; pointer-events:auto; }
+      .index { position:fixed; top:0; left:-100%; width:80%; max-width:280px; height:100vh; z-index:999; transition:left 0.3s ease; box-shadow:2px 0 10px rgba(0,0,0,0.1); }
+      .index.open { left:0; }
+      .sections { padding:0.75rem; padding-top:3.5rem; }
+      section.page { grid-template-columns:1.5rem 1fr; gap:0.5rem; padding:0.75rem 0; }
+      .num-col { font-size:0.75rem; }
+      .index { padding:0.75rem 0.5rem; }
+      .index-logo { font-size:1.25rem; }
+      .index-title { font-size:0.7rem; }
+      .index a { font-size:0.8rem; padding:0.4rem; }
+      .index .num { width:1.2rem; font-size:0.75rem; }
+      .index ol { flex-direction:column; }
+      .index li { margin-bottom:0.25rem; }
+      .index a { border:0; background:transparent; }
+      .box, .highlight-box, .alert-box, .success-box { padding:0.75rem; margin:0.5rem 0; }
+      table { font-size:0.8rem; }
+      th, td { padding:0.4rem 0.5rem; }
+      body { font-size:14px; line-height:1.6; }
+      .content h1 { font-size:1.25rem; }
+      .content h2 { font-size:1.05rem; }
+      .content h3 { font-size:0.9rem; }
+      .content h4 { font-size:0.85rem; }
+    }
+
+    /* Very small mobile devices */
+    @media (max-width: 400px) {
+      .sections { padding:0.5rem; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      table { font-size:0.75rem; }
+      th, td { padding:0.35rem 0.4rem; }
+    }
+
+    /* Print */
+    @media print {
+      .index { display:none; }
+      .wrapper { grid-template-columns:1fr; }
+      section.page { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">☰ Menu</button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="wrapper">
+    <aside class="index" id="indexNav">
+      <div class="index-logo">ALPHASTYLE</div>
+      <div class="index-title">Audit Report</div>
+      <ol>
+        <li><a href="#s0"><span class="num">00.</span> Executive Summary</a></li>
+        <li><a href="#s1"><span class="num">01.</span> Site Health Overview</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Business Impact</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Tracking & Analytics</a></li>
+        <li><a href="#s4"><span class="num">04.</span> Performance</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Conversion</a></li>
+        <li><a href="#s6"><span class="num">06.</span> SEO</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Brand & Creative</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Roadmap & Outcomes</a></li>
+      </ol>
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; font-size:0.75rem; color:#999;">
+        Orbit Collaborative<br>
+        January 2026
+      </div>
+    </aside>
+
+    <main class="sections">
+
+      <!-- Section 0: Executive Summary -->
+      <section id="s0" class="page">
+        <div class="num-col">00.</div>
+        <div class="content">
+          <h1>AlphaStyle Shopify Store — Technical & Creative Audit</h1>
+
+          <p><strong>Prepared for:</strong> AlphaStyle Leadership<br>
+          <strong>Date:</strong> January 2026<br>
+          <strong>Website:</strong> https://www.alphastyle.store</p>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;">
+              <strong>Overall Health Score: 68/100</strong><br>
+              AlphaStyle has a solid technical foundation but is currently underperforming its potential. The primary gaps are in tracking implementation, site performance, and—most critically—brand architecture alignment across Luxe, APSL, and Collaborations.
+            </p>
+          </div>
+
+          <h2>At a Glance</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">68/100</div>
+              <div class="label">Overall Health</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">600KB+</div>
+              <div class="label">JS per Page</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">0</div>
+              <div class="label">ViewContent / ATC Events</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">3</div>
+              <div class="label">Brand Lines</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Site Health Overview -->
+      <section id="s1" class="page">
+        <div class="num-col">01.</div>
+        <div class="content">
+          <h1>Site Health Overview</h1>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>Score</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tracking & Analytics</td>
+                  <td>75/100</td>
+                  <td>Good foundation, missing key events</td>
+                </tr>
+                <tr>
+                  <td>Site Performance</td>
+                  <td>55/100</td>
+                  <td>Needs optimization</td>
+                </tr>
+                <tr>
+                  <td>Conversion Optimization</td>
+                  <td>70/100</td>
+                  <td>Good basics, missing persuasion elements</td>
+                </tr>
+                <tr>
+                  <td>SEO</td>
+                  <td>75/100</td>
+                  <td>Solid foundation, missing rich snippets</td>
+                </tr>
+                <tr>
+                  <td>Code Quality</td>
+                  <td>60/100</td>
+                  <td>Technical debt present</td>
+                </tr>
+                <tr>
+                  <td>Brand Experience</td>
+                  <td>50/100</td>
+                  <td><strong>Biggest opportunity</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>What's Working Well</h2>
+          <ul>
+            <li><strong>KUDU Puffer has excellent hero treatment</strong> — dedicated templates, landing pages, custom promotions.</li>
+            <li><strong>Express checkout enabled</strong> — Apple Pay, Shop Pay, and dynamic checkout buttons are configured.</li>
+            <li><strong>Core tracking installed</strong> — Meta Pixel, GA4, TikTok, and Pinterest are present.</li>
+            <li><strong>Mobile foundation is solid</strong> — proper viewport, responsive images, mobile navigation.</li>
+            <li><strong>Cart experience is good</strong> — drawer with free shipping bar, upsells, and notes.</li>
+          </ul>
+
+          <h2>What Needs Attention (Critical Issues)</h2>
+          <ol>
+            <li><strong>Site Speed</strong> — Over 500KB of JavaScript is loading on every page, causing 4–6 second load times on mobile.</li>
+            <li><strong>Incomplete Tracking</strong> — Missing ViewContent and AddToCart events means ad platforms can't optimize properly.</li>
+            <li><strong>No Brand Differentiation</strong> — Luxe, APSL, and Collaborations all receive identical treatment.</li>
+            <li><strong>Missing Social Proof</strong> — No reviews, trust badges, or urgency indicators on product pages.</li>
+            <li><strong>Generic Email Capture</strong> — Same messaging for all customer types.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Section 2: Business Impact -->
+      <section id="s2" class="page">
+        <div class="num-col">02.</div>
+        <div class="content">
+          <h1>Understanding the Business Impact</h1>
+
+          <h2>Why Site Speed Matters</h2>
+          <p>Your current JavaScript payload exceeds <strong>600KB</strong>. Industry research shows:</p>
+          <ul>
+            <li>Every 1-second delay in load time reduces conversions by approximately 7%.</li>
+            <li>53% of mobile users abandon sites that take longer than 3 seconds to load.</li>
+            <li>Paid advertising traffic is particularly sensitive to slow load times.</li>
+          </ul>
+          <div class="alert-box">
+            <p style="margin:0;"><strong>Your mobile customers are likely leaving before they see your products.</strong></p>
+          </div>
+
+          <h2>Why Complete Tracking Matters</h2>
+          <p>Without ViewContent and AddToCart events:</p>
+          <ul>
+            <li>Meta and other ad platforms cannot optimize for purchase intent signals.</li>
+            <li>Retargeting audiences are incomplete.</li>
+            <li>Lookalike audiences are built on partial data.</li>
+            <li>You cannot accurately measure which products drive engagement.</li>
+          </ul>
+          <p><strong>Result:</strong> Higher customer acquisition costs and less efficient media spend.</p>
+
+          <h2>Why Brand Differentiation Matters</h2>
+          <p>Your brand architecture serves three distinct audiences:</p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Line</th>
+                  <th>Purpose</th>
+                  <th>Target Customer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>AlphaStyle Luxe</strong></td>
+                  <td>Brand elevation, fashion credibility</td>
+                  <td>Seeks discovery, editorial content, elevated experience</td>
+                </tr>
+                <tr>
+                  <td><strong>APSL</strong></td>
+                  <td>Volume sales, conversion</td>
+                  <td>Seeks efficiency, social proof, trust signals</td>
+                </tr>
+                <tr>
+                  <td><strong>Collaborations</strong></td>
+                  <td>Cultural relevance, drops</td>
+                  <td>Seeks exclusivity, urgency, community</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <p style="margin:0;">
+              Currently, all three receive identical digital treatment. Luxe customers find the experience too commercial, APSL customers don't see enough trust signals, and collaboration hunters miss the urgency and exclusivity they expect.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Tracking & Analytics -->
+      <section id="s3" class="page">
+        <div class="num-col">03.</div>
+        <div class="content">
+          <h1>Tracking & Analytics</h1>
+
+          <h2>Meta Pixel Status</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Base Pixel</td>
+                  <td>Installed</td>
+                  <td>Tracking visits</td>
+                </tr>
+                <tr>
+                  <td>PageView</td>
+                  <td>Working</td>
+                  <td>Basic analytics functional</td>
+                </tr>
+                <tr>
+                  <td>ViewContent</td>
+                  <td><strong>Not Found</strong></td>
+                  <td>Cannot retarget product viewers</td>
+                </tr>
+                <tr>
+                  <td>AddToCart</td>
+                  <td><strong>Not Found</strong></td>
+                  <td>Cannot optimize for cart events</td>
+                </tr>
+                <tr>
+                  <td>InitiateCheckout</td>
+                  <td>Via Shopify</td>
+                  <td>Functional</td>
+                </tr>
+                <tr>
+                  <td>Purchase</td>
+                  <td>Via Shopify</td>
+                  <td>Revenue tracking works</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>GA4, Klaviyo, and Additional Pixels</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Google Analytics (GA4)</h4>
+              <ul>
+                <li>GA4 installed and measurement ID confirmed.</li>
+                <li>Enhanced Ecommerce not configured in theme.</li>
+                <li>No differentiation by brand line (Luxe vs APSL).</li>
+              </ul>
+              <p><strong>Impact:</strong> cannot measure performance by brand line or answer “Is Luxe driving awareness? Is APSL converting?”</p>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Klaviyo & Other Pixels</h4>
+              <ul>
+                <li>Klaviyo app likely installed via Shopify, but theme-side events not found.</li>
+                <li>Browse and cart abandonment triggers not configured.</li>
+                <li>TikTok and Pinterest pixels present; Snapchat missing.</li>
+              </ul>
+              <p><strong>Impact:</strong> email flows may not trigger reliably; missing Snapchat is a gap for Gen Z and collab audiences.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Site Performance -->
+      <section id="s4" class="page">
+        <div class="num-col">04.</div>
+        <div class="content">
+          <h1>Site Performance</h1>
+
+          <h2>JavaScript Payload</h2>
+          <p>The theme loads several large JavaScript libraries on every page:</p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Library</th>
+                  <th>Size</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>jQuery (unminified)</td>
+                  <td>284KB</td>
+                  <td>DOM manipulation</td>
+                </tr>
+                <tr>
+                  <td>Swiper</td>
+                  <td>148KB</td>
+                  <td>Carousels and sliders</td>
+                </tr>
+                <tr>
+                  <td>GSAP</td>
+                  <td>70KB</td>
+                  <td>Animations</td>
+                </tr>
+                <tr>
+                  <td>ScrollTrigger</td>
+                  <td>41KB</td>
+                  <td>Scroll-based animations</td>
+                </tr>
+                <tr>
+                  <td>Theme JavaScript</td>
+                  <td>59KB</td>
+                  <td>Custom functionality</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Total: 600KB+ of JavaScript per page</strong>, plus duplicate files and console.log statements shipped to production.</p>
+          </div>
+
+          <h2>CSS & Images</h2>
+          <ul>
+            <li>347 <code>!important</code> declarations across 47 files — indicates specificity issues and technical debt.</li>
+            <li>Multiple CSS files loading per page, complicating customization.</li>
+            <li><strong>Images are well-optimized</strong>: proper lazy loading, responsive sizes, and CDN-backed formats.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 5: Conversion Optimization -->
+      <section id="s5" class="page">
+        <div class="num-col">05.</div>
+        <div class="content">
+          <h1>Conversion Optimization</h1>
+
+          <h2>Product Page Elements</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Status</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add to Cart Button</td>
+                  <td>Present</td>
+                  <td>Essential</td>
+                </tr>
+                <tr>
+                  <td>Sticky Add to Cart</td>
+                  <td>Implemented</td>
+                  <td>Good for long pages</td>
+                </tr>
+                <tr>
+                  <td>Size Selector & Size Guide</td>
+                  <td>Working / Present</td>
+                  <td>Critical for apparel and returns reduction</td>
+                </tr>
+                <tr>
+                  <td><strong>Trust Badges</strong></td>
+                  <td>Missing</td>
+                  <td>Customers need reassurance</td>
+                </tr>
+                <tr>
+                  <td><strong>Customer Reviews</strong></td>
+                  <td>Missing</td>
+                  <td>93% of customers read reviews before purchasing</td>
+                </tr>
+                <tr>
+                  <td><strong>Social Proof Indicators</strong></td>
+                  <td>Missing</td>
+                  <td>Urgency and validation (“X people viewing”)</td>
+                </tr>
+                <tr>
+                  <td><strong>Complete the Look</strong></td>
+                  <td>Missing</td>
+                  <td>Average order value opportunity</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>KUDU Puffer as Internal Benchmark</h2>
+          <p>The KUDU Puffer demonstrates what's possible within the current theme:</p>
+          <ul>
+            <li>Dedicated product template.</li>
+            <li>Multiple landing pages and promotional blocks.</li>
+            <li>USP badges and strong merchandising.</li>
+          </ul>
+          <p><strong>This level of treatment should be the standard for hero products across all lines.</strong></p>
+        </div>
+      </section>
+
+      <!-- Section 6: SEO & Schema -->
+      <section id="s6" class="page">
+        <div class="num-col">06.</div>
+        <div class="content">
+          <h1>SEO Analysis</h1>
+
+          <h2>Meta Tags & Social Sharing</h2>
+          <ul>
+            <li>Title tags and meta descriptions are dynamic and properly configured.</li>
+            <li>Open Graph tags and Twitter Cards are complete.</li>
+            <li>Canonical URLs are present.</li>
+          </ul>
+
+          <h2>Structured Data (Schema.org)</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Schema Type</th>
+                  <th>Status</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Organization</td>
+                  <td>Present</td>
+                  <td>Supports brand knowledge panel</td>
+                </tr>
+                <tr>
+                  <td>WebSite + SearchAction</td>
+                  <td>Present</td>
+                  <td>Enables site search in Google</td>
+                </tr>
+                <tr>
+                  <td><strong>Product</strong></td>
+                  <td>Missing</td>
+                  <td>No product rich snippets in search</td>
+                </tr>
+                <tr>
+                  <td><strong>BreadcrumbList</strong></td>
+                  <td>Missing</td>
+                  <td>No breadcrumb display in search</td>
+                </tr>
+                <tr>
+                  <td><strong>Review / Rating</strong></td>
+                  <td>Missing</td>
+                  <td>No star ratings in search results</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <blockquote>
+            Rich snippets typically increase click-through rates by 20–30%. Implementing Product and Review schema on hero products (KUDU, Luxe) should be prioritized.
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Section 7: Brand & Creative -->
+      <section id="s7" class="page">
+        <div class="num-col">07.</div>
+        <div class="content">
+          <h1>Brand & Creative Assessment</h1>
+
+          <h2>Brand Lines vs Benchmarks</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">AlphaStyle Luxe</h4>
+              <p><strong>Benchmarks:</strong> Acne Studios, Aimé Leon Dore, Sacai, KidSuper.</p>
+              <ul>
+                <li>Benchmarks use editorial-first imagery, 2–3 products per row, and strong storytelling.</li>
+                <li>Current implementation uses a dense 4-up grid with limited narrative or brand world-building.</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">APSL & Collaborations</h4>
+              <p><strong>Benchmarks:</strong> Represent, Entire Studios, Kith, Rhude (APSL) and Kith/Palace/ALD collabs.</p>
+              <ul>
+                <li>Missing: prominent trust badges, customer reviews, social proof, bundle options, countdowns, and drop mechanics.</li>
+                <li>Collaboration archive and behind-the-scenes content are limited.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Redesign Recommendation</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">
+              This is a <strong>strategic refresh</strong>, not a full rebuild. The current theme and KUDU treatment prove the platform can support differentiated experiences. The opportunity is to extend that level of intentionality across all brand lines.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Roadmap & Expected Outcomes -->
+      <section id="s8" class="page">
+        <div class="num-col">08.</div>
+        <div class="content">
+          <h1>Prioritized Roadmap & Expected Outcomes</h1>
+
+          <h2>Phased Implementation Plan</h2>
+          <div class="three-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Phase 1 — Critical Technical Fixes</h4>
+              <ul>
+                <li>Add ViewContent and AddToCart events.</li>
+                <li>Optimize JavaScript payload; replace unminified libraries.</li>
+                <li>Remove development code and duplicate files.</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Phase 2 — Conversion & Brand</h4>
+              <ul>
+                <li>Add trust badges, reviews, and social proof.</li>
+                <li>Create Luxe vs APSL templates and content.</li>
+                <li>Configure Klaviyo theme events and segmented capture.</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h4 style="margin-top:0;">Phase 3 — Content & Experience</h4>
+              <ul>
+                <li>Build “World of AlphaStyle”, Press, Collaborations archive.</li>
+                <li>Add countdowns and drops for collabs.</li>
+                <li>Implement “Complete the Look” and bundles.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Expected Outcomes</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">↑ Speed</div>
+              <div class="label">Faster Mobile Load</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">Full Funnel</div>
+              <div class="label">Tracking Coverage</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">↑ CR</div>
+              <div class="label">Conversion Rate</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">↑ AOV</div>
+              <div class="label">Bundling & Cross-Sell</div>
+            </div>
+          </div>
+
+          <p>Once this roadmap is implemented, AlphaStyle should expect:</p>
+          <ul>
+            <li>Significantly faster mobile performance and reduced bounce.</li>
+            <li>Near-complete visibility into the purchase funnel.</li>
+            <li>Higher conversion rates from trust, social proof, and better UX.</li>
+            <li>Improved brand perception and clearer line differentiation.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const indexNav = document.getElementById('indexNav');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function() {
+        indexNav.classList.toggle('open');
+        menuBackdrop.classList.toggle('active');
+      });
+
+      menuBackdrop.addEventListener('click', function() {
+        indexNav.classList.remove('open');
+        menuBackdrop.classList.remove('active');
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (window.innerWidth <= 600) {
+            indexNav.classList.remove('open');
+            menuBackdrop.classList.remove('active');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+

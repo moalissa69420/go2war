@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle — Case Studies</title>
+  <style>
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background:#f5f5f5;
+      color:#000;
+      line-height:1.6;
+    }
+    .wrapper { min-height:100vh; display:flex; flex-direction:column; }
+    header {
+      padding:1.5rem 2rem;
+      border-bottom:1px solid #ddd;
+      background:#fff;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .logo {
+      font-weight:800;
+      letter-spacing:0.15em;
+      font-size:1rem;
+    }
+    .tagline {
+      font-size:0.8rem;
+      color:#666;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+    }
+    main {
+      max-width:960px;
+      width:100%;
+      margin:0 auto;
+      padding:2rem 1.5rem 3rem;
+    }
+    h1 {
+      font-size:1.6rem;
+      margin-bottom:0.5rem;
+    }
+    p.lead {
+      font-size:0.95rem;
+      color:#555;
+      margin-bottom:1.75rem;
+    }
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:1.25rem;
+    }
+    .card {
+      background:#fff;
+      border:1px solid #ddd;
+      padding:1.25rem 1.25rem 1.5rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .card h2 {
+      font-size:1.05rem;
+      margin-bottom:0.35rem;
+    }
+    .badge {
+      display:inline-block;
+      font-size:0.7rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      padding:0.1rem 0.4rem;
+      border:1px solid #000;
+      margin-bottom:0.5rem;
+    }
+    .meta {
+      font-size:0.8rem;
+      color:#777;
+      margin-bottom:0.6rem;
+    }
+    .card p {
+      font-size:0.88rem;
+      color:#444;
+      margin-bottom:0.9rem;
+    }
+    .card a {
+      margin-top:auto;
+      align-self:flex-start;
+      font-size:0.8rem;
+      text-decoration:none;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      padding:0.45rem 0.9rem;
+      border:1px solid #000;
+      color:#000;
+      background:transparent;
+      transition:background 0.2s, color 0.2s;
+    }
+    .card a:hover {
+      background:#000;
+      color:#fff;
+    }
+    footer {
+      margin-top:auto;
+      padding:1.25rem 2rem;
+      font-size:0.75rem;
+      color:#888;
+      border-top:1px solid #ddd;
+      background:#fafafa;
+    }
+    @media (max-width:700px) {
+      header { padding:1rem 1.25rem; flex-direction:column; align-items:flex-start; gap:0.25rem; }
+      main { padding:1.5rem 1.1rem 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo">ALPHASTYLE</div>
+      <div class="tagline">Shopify Growth Case Studies</div>
+    </header>
+
+    <main>
+      <h1>AlphaStyle Case Studies</h1>
+      <p class="lead">
+        Two companion documents outlining the current AlphaStyle Shopify store, the technical & creative audit, and the proposed developer implementation scope.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div>
+            <div class="badge">Audit Report</div>
+            <h2>AlphaStyle Shopify Store — Technical & Creative Audit</h2>
+            <div class="meta">January 2026 · Orbit Collaborative</div>
+            <p>
+              Full diagnostic of AlphaStyle’s current Shopify implementation — tracking, performance, conversion, SEO, and brand experience.
+              Includes prioritized recommendations and expected outcomes.
+            </p>
+          </div>
+          <a href="/alphastyle/audit/">Open Audit Case Study</a>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="badge">Developer Scope</div>
+            <h2>AlphaStyle Shopify Theme — Developer Scope Document</h2>
+            <div class="meta">January 2026 · Orbit Collaborative</div>
+            <p>
+              Implementation playbook translating the audit into concrete developer tasks — critical fixes, tracking events, performance, SEO, templates,
+              and testing checklists.
+            </p>
+          </div>
+          <a href="/alphastyle/dev-scope/">Open Dev Scope</a>
+        </article>
+      </div>
+    </main>
+
+    <footer>
+      AlphaStyle Case Studies · Served from go2war.com/alphastyle
+    </footer>
+  </div>
+</body>
+</html>
+
+

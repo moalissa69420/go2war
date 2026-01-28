@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle Conversion Wireframes | Go To War</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; background: #f5f5f5; color: #1a1a1a; line-height: 1.5; }
+
+    .header { background: #1a1a1a; color: #fff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .header-logo { font-size: 1.5rem; font-weight: 800; }
+    .header-sub { color: #888; font-size: 0.9rem; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+
+    h1 { font-size: 2rem; margin-bottom: 10px; }
+    .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 40px; }
+
+    h2 { font-size: 1.5rem; margin: 60px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #1a1a1a; }
+    h3 { font-size: 1.1rem; margin: 30px 0 15px 0; color: #333; }
+
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+    .comparison-item { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .comparison-label { padding: 15px 20px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+    .comparison-label.current { background: #f8d7da; color: #721c24; }
+    .comparison-label.proposed { background: #d4edda; color: #155724; }
+    .comparison-content { padding: 20px; min-height: 400px; }
+
+    /* Wireframe styles */
+    .wireframe { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 4px; padding: 20px; }
+
+    .wf-header { height: 50px; background: #1a1a1a; margin: -20px -20px 20px -20px; display: flex; align-items: center; padding: 0 15px; }
+    .wf-logo { width: 100px; height: 20px; background: #fff; border-radius: 2px; }
+    .wf-nav { display: flex; gap: 15px; margin-left: auto; }
+    .wf-nav-item { width: 50px; height: 10px; background: #444; border-radius: 2px; }
+
+    .wf-breadcrumb { font-size: 0.75rem; color: #888; margin-bottom: 20px; }
+
+    .wf-product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .wf-product-image { background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%); aspect-ratio: 3/4; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.8rem; }
+    .wf-product-thumbs { display: flex; gap: 8px; margin-top: 10px; }
+    .wf-thumb { width: 50px; height: 50px; background: #e0e0e0; border-radius: 4px; }
+
+    .wf-product-info { display: flex; flex-direction: column; gap: 15px; }
+    .wf-product-title { font-size: 1.25rem; font-weight: 600; }
+    .wf-product-price { font-size: 1.1rem; font-weight: 600; }
+    .wf-product-price .compare { text-decoration: line-through; color: #999; font-weight: 400; margin-left: 10px; }
+
+    /* New elements - highlighted */
+    .new-element { border: 2px dashed #27ae60; background: rgba(39, 174, 96, 0.05); padding: 15px; border-radius: 6px; position: relative; }
+    .new-element::before { content: 'NEW'; position: absolute; top: -10px; left: 10px; background: #27ae60; color: #fff; font-size: 0.65rem; padding: 2px 8px; border-radius: 3px; font-weight: 600; }
+
+    .missing-element { border: 2px dashed #c0392b; background: rgba(192, 57, 43, 0.05); padding: 15px; border-radius: 6px; position: relative; opacity: 0.6; }
+    .missing-element::before { content: 'MISSING'; position: absolute; top: -10px; left: 10px; background: #c0392b; color: #fff; font-size: 0.65rem; padding: 2px 8px; border-radius: 3px; font-weight: 600; }
+
+    /* Trust badges */
+    .wf-trust-badges { display: flex; gap: 20px; padding: 15px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .wf-trust-badge { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+    .wf-trust-icon { width: 20px; height: 20px; background: #1a1a1a; border-radius: 50%; }
+
+    /* Size selector */
+    .wf-sizes { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-size { width: 40px; height: 40px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border-radius: 4px; cursor: pointer; }
+    .wf-size.selected { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+    .wf-size.oos { color: #ccc; text-decoration: line-through; }
+
+    /* Add to cart */
+    .wf-atc { background: #1a1a1a; color: #fff; padding: 15px 30px; border: none; font-size: 1rem; font-weight: 600; width: 100%; border-radius: 4px; cursor: pointer; }
+
+    /* Reviews */
+    .wf-reviews { display: flex; align-items: center; gap: 10px; }
+    .wf-stars { color: #f1c40f; letter-spacing: 2px; }
+    .wf-review-count { font-size: 0.85rem; color: #666; }
+
+    /* Social proof */
+    .wf-social-proof { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #666; padding: 10px 15px; background: #f9f9f9; border-radius: 4px; }
+    .wf-pulse { width: 8px; height: 8px; background: #27ae60; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    /* Urgency */
+    .wf-urgency { background: #fff3cd; padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+    .wf-urgency-icon { color: #856404; }
+
+    /* Complete the look */
+    .wf-complete-look { margin-top: 20px; }
+    .wf-complete-look-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+    .wf-complete-look-grid { display: flex; gap: 10px; }
+    .wf-complete-look-item { width: 80px; }
+    .wf-complete-look-img { width: 80px; height: 100px; background: #e0e0e0; border-radius: 4px; margin-bottom: 5px; }
+    .wf-complete-look-price { font-size: 0.75rem; }
+
+    /* Popup */
+    .wf-popup-overlay { position: relative; background: rgba(0,0,0,0.5); padding: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 350px; }
+    .wf-popup { background: #fff; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; text-align: center; }
+    .wf-popup-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+    .wf-popup-text { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+    .wf-popup-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; font-size: 0.9rem; }
+    .wf-popup-btn { width: 100%; padding: 12px; background: #1a1a1a; color: #fff; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+    .wf-popup-close { position: absolute; top: 50px; right: 50px; width: 30px; height: 30px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+
+    /* Collection grid */
+    .wf-collection-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .wf-collection-grid.luxe { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .wf-product-card { background: #fff; border-radius: 4px; overflow: hidden; }
+    .wf-product-card-img { aspect-ratio: 3/4; background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%); position: relative; }
+    .wf-product-card-info { padding: 10px; }
+    .wf-product-card-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; }
+    .wf-product-card-price { font-size: 0.85rem; }
+    .wf-quick-add { position: absolute; bottom: 10px; left: 10px; right: 10px; background: #fff; padding: 8px; text-align: center; font-size: 0.8rem; border-radius: 4px; opacity: 0; transition: opacity 0.2s; }
+    .wf-product-card:hover .wf-quick-add { opacity: 1; }
+    .wf-color-swatches { display: flex; gap: 5px; margin-top: 5px; }
+    .wf-swatch { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ddd; }
+
+    /* Filters */
+    .wf-filters { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+    .wf-filter { padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
+
+    /* Search result comparison */
+    .wf-serp { background: #fff; padding: 20px; border-radius: 8px; font-family: Arial, sans-serif; }
+    .wf-serp-title { color: #1a0dab; font-size: 1.1rem; margin-bottom: 3px; }
+    .wf-serp-url { color: #006621; font-size: 0.85rem; margin-bottom: 5px; }
+    .wf-serp-rich { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #70757a; margin-bottom: 5px; }
+    .wf-serp-stars { color: #fbbc04; }
+    .wf-serp-desc { color: #4d5156; font-size: 0.9rem; }
+
+    /* Annotation */
+    .annotation { background: #fffde7; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; font-size: 0.9rem; }
+    .annotation strong { color: #f57c00; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .comparison { grid-template-columns: 1fr; }
+      .wf-product-grid { grid-template-columns: 1fr; }
+      .wf-collection-grid { grid-template-columns: repeat(2, 1fr); }
+      .wf-trust-badges { flex-wrap: wrap; }
+    }
+
+    @media print {
+      .comparison { page-break-inside: avoid; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-logo">GO TO WAR</div>
+      <div class="header-sub">AlphaStyle Conversion Wireframes</div>
+    </div>
+    <div class="header-sub">January 2026</div>
+  </div>
+
+  <div class="container">
+    <h1>Conversion Optimization Wireframes</h1>
+    <p class="subtitle">Visual mockups showing proposed improvements to alphastyle.store</p>
+
+    <!-- ==================== PRODUCT PAGE ==================== -->
+    <h2>1. Product Page — Before & After</h2>
+    <p style="color:#666; margin-bottom:20px;">The product page is where conversion happens. Here's what's missing and what we'll add.</p>
+
+    <div class="comparison">
+      <!-- Current -->
+      <div class="comparison-item">
+        <div class="comparison-label current">Current State</div>
+        <div class="comparison-content">
+          <div class="wireframe">
+            <div class="wf-header">
+              <div class="wf-logo"></div>
+              <div class="wf-nav">
+                <div class="wf-nav-item"></div>
+                <div class="wf-nav-item"></div>
+                <div class="wf-nav-item"></div>
+              </div>
+            </div>
+
+            <div class="wf-product-grid">
+              <div>
+                <div class="wf-product-image">Product Image</div>
+                <div class="wf-product-thumbs">
+                  <div class="wf-thumb"></div>
+                  <div class="wf-thumb"></div>
+                  <div class="wf-thumb"></div>
+                </div>
+              </div>
+
+              <div class="wf-product-info">
+                <div class="wf-product-title">KUDU Double Hood Puffer</div>
+                <div class="wf-product-price">$299.00</div>
+
+                <div>
+                  <div style="font-size:0.85rem; margin-bottom:8px;">Size</div>
+                  <div class="wf-sizes">
+                    <div class="wf-size">S</div>
+                    <div class="wf-size selected">M</div>
+                    <div class="wf-size">L</div>
+                    <div class="wf-size">XL</div>
+                  </div>
+                </div>
+
+                <button class="wf-atc">Add to Cart</button>
+
+                <div class="missing-element">
+                  <div style="color:#999; font-size:0.85rem; text-align:center;">No trust badges</div>
+                </div>
+
+                <div class="missing-element">
+                  <div style="color:#999; font-size:0.85rem; text-align:center;">No reviews</div>
+                </div>
+
+                <div class="missing-element">
+                  <div style="color:#999; font-size:0.85rem; text-align:center;">No social proof</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proposed -->
+      <div class="comparison-item">
+        <div class="comparison-label proposed">Proposed State</div>
+        <div class="comparison-content">
+          <div class="wireframe">
+            <div class="wf-header">
+              <div class="wf-logo"></div>
+              <div class="wf-nav">
+                <div class="wf-nav-item"></div>
+                <div class="wf-nav-item"></div>
+                <div class="wf-nav-item"></div>
+              </div>
+            </div>
+
+            <div class="wf-product-grid">
+              <div>
+                <div class="wf-product-image">Product Image</div>
+                <div class="wf-product-thumbs">
+                  <div class="wf-thumb"></div>
+                  <div class="wf-thumb"></div>
+                  <div class="wf-thumb"></div>
+                </div>
+              </div>
+
+              <div class="wf-product-info">
+                <div class="wf-product-title">KUDU Double Hood Puffer</div>
+
+                <div class="new-element">
+                  <div class="wf-reviews">
+                    <span class="wf-stars">★★★★★</span>
+                    <span class="wf-review-count">4.8 (127 reviews)</span>
+                  </div>
+                </div>
+
+                <div class="wf-product-price">$299.00</div>
+
+                <div class="new-element">
+                  <div class="wf-social-proof">
+                    <span class="wf-pulse"></span>
+                    <span>23 people viewing this right now</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="font-size:0.85rem; margin-bottom:8px;">Size</div>
+                  <div class="wf-sizes">
+                    <div class="wf-size">S</div>
+                    <div class="wf-size selected">M</div>
+                    <div class="wf-size">L</div>
+                    <div class="wf-size oos">XL</div>
+                  </div>
+                </div>
+
+                <div class="new-element" style="padding:10px 15px;">
+                  <div class="wf-urgency">
+                    <span class="wf-urgency-icon">⚡</span>
+                    <span>Only 3 left in size M</span>
+                  </div>
+                </div>
+
+                <button class="wf-atc">Add to Cart</button>
+
+                <div class="new-element">
+                  <div class="wf-trust-badges">
+                    <div class="wf-trust-badge">
+                      <div class="wf-trust-icon"></div>
+                      <span>Free Shipping</span>
+                    </div>
+                    <div class="wf-trust-badge">
+                      <div class="wf-trust-icon"></div>
+                      <span>Easy Returns</span>
+                    </div>
+                    <div class="wf-trust-badge">
+                      <div class="wf-trust-icon"></div>
+                      <span>Secure Checkout</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Key Additions:</strong> Reviews & ratings, "X people viewing" social proof, low stock urgency, trust badges. These elements build confidence and create urgency without being pushy.
+    </div>
+
+    <!-- ==================== COMPLETE THE LOOK ==================== -->
+    <h2>2. "Complete the Look" Module</h2>
+    <p style="color:#666; margin-bottom:20px;">Cross-sell module to increase average order value.</p>
+
+    <div class="comparison">
+      <div class="comparison-item">
+        <div class="comparison-label current">Current: No Cross-Sell</div>
+        <div class="comparison-content">
+          <div class="wireframe" style="min-height:200px; display:flex; align-items:center; justify-content:center;">
+            <div class="missing-element" style="text-align:center; width:100%;">
+              <div style="color:#999; font-size:0.9rem;">Product page ends after description</div>
+              <div style="color:#999; font-size:0.8rem; margin-top:5px;">No styling suggestions or cross-sells</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-item">
+        <div class="comparison-label proposed">Proposed: Complete the Look</div>
+        <div class="comparison-content">
+          <div class="wireframe">
+            <div class="new-element">
+              <div class="wf-complete-look">
+                <div class="wf-complete-look-title">Complete the Look</div>
+                <div class="wf-complete-look-grid">
+                  <div class="wf-complete-look-item">
+                    <div class="wf-complete-look-img"></div>
+                    <div class="wf-complete-look-price">Hoodie · $89</div>
+                  </div>
+                  <div class="wf-complete-look-item">
+                    <div class="wf-complete-look-img"></div>
+                    <div class="wf-complete-look-price">Joggers · $79</div>
+                  </div>
+                  <div class="wf-complete-look-item">
+                    <div class="wf-complete-look-img"></div>
+                    <div class="wf-complete-look-price">Cap · $35</div>
+                  </div>
+                  <div class="wf-complete-look-item">
+                    <div class="wf-complete-look-img"></div>
+                    <div class="wf-complete-look-price">Tee · $45</div>
+                  </div>
+                </div>
+                <div style="margin-top:15px; padding-top:15px; border-top:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.9rem;">Add all 4 items</span>
+                  <button style="background:#1a1a1a; color:#fff; border:none; padding:8px 20px; border-radius:4px; font-size:0.85rem;">Add Bundle · $248</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Revenue Impact:</strong> "Complete the Look" modules typically increase AOV by 15-25%. A $299 purchase becomes a $547 purchase.
+    </div>
+
+    <!-- ==================== COLLECTION TEMPLATES ==================== -->
+    <h2>3. Collection Templates — Luxe vs APSL</h2>
+    <p style="color:#666; margin-bottom:20px;">Different presentations for different brand lines.</p>
+
+    <h3>APSL Collection (Commercial/Conversion-Focused)</h3>
+    <div class="comparison-item" style="margin-bottom:30px;">
+      <div class="comparison-label proposed">APSL Template — 4 Products Per Row, Full Filters</div>
+      <div class="comparison-content">
+        <div class="wireframe">
+          <div class="wf-header">
+            <div class="wf-logo"></div>
+          </div>
+
+          <div style="padding:15px 0; font-size:1.1rem; font-weight:600;">APSL Collection</div>
+
+          <div class="new-element" style="margin-bottom:20px;">
+            <div class="wf-filters">
+              <div class="wf-filter">Category ▾</div>
+              <div class="wf-filter">Size ▾</div>
+              <div class="wf-filter">Color ▾</div>
+              <div class="wf-filter">Price ▾</div>
+              <div class="wf-filter" style="margin-left:auto;">Sort: Best Selling ▾</div>
+            </div>
+          </div>
+
+          <div class="wf-collection-grid">
+            <div class="wf-product-card">
+              <div class="wf-product-card-img">
+                <div class="wf-quick-add">Quick Add</div>
+              </div>
+              <div class="wf-product-card-info">
+                <div class="wf-product-card-title">Essential Hoodie</div>
+                <div class="wf-product-card-price">$89.00</div>
+                <div class="wf-color-swatches">
+                  <div class="wf-swatch" style="background:#1a1a1a;"></div>
+                  <div class="wf-swatch" style="background:#8B4513;"></div>
+                  <div class="wf-swatch" style="background:#808080;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card-img">
+                <div class="wf-quick-add">Quick Add</div>
+              </div>
+              <div class="wf-product-card-info">
+                <div class="wf-product-card-title">Logo Tee</div>
+                <div class="wf-product-card-price">$45.00</div>
+                <div class="wf-color-swatches">
+                  <div class="wf-swatch" style="background:#fff; border-color:#ccc;"></div>
+                  <div class="wf-swatch" style="background:#1a1a1a;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card-img">
+                <div class="wf-quick-add">Quick Add</div>
+              </div>
+              <div class="wf-product-card-info">
+                <div class="wf-product-card-title">Track Pants</div>
+                <div class="wf-product-card-price">$79.00</div>
+                <div class="wf-color-swatches">
+                  <div class="wf-swatch" style="background:#1a1a1a;"></div>
+                  <div class="wf-swatch" style="background:#2c3e50;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card-img">
+                <div class="wf-quick-add">Quick Add</div>
+              </div>
+              <div class="wf-product-card-info">
+                <div class="wf-product-card-title">Crew Sweatshirt</div>
+                <div class="wf-product-card-price">$75.00</div>
+                <div class="wf-color-swatches">
+                  <div class="wf-swatch" style="background:#808080;"></div>
+                  <div class="wf-swatch" style="background:#1a1a1a;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Luxe Collection (Editorial/Brand-Focused)</h3>
+    <div class="comparison-item">
+      <div class="comparison-label proposed">Luxe Template — 2 Products Per Row, Minimal, Editorial</div>
+      <div class="comparison-content">
+        <div class="wireframe">
+          <div class="wf-header">
+            <div class="wf-logo"></div>
+          </div>
+
+          <div style="padding:30px 0 20px 0; text-align:center;">
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; color:#888; margin-bottom:5px;">AW25 Collection</div>
+            <div style="font-size:1.5rem; font-weight:300; letter-spacing:1px;">AlphaStyle Luxe</div>
+          </div>
+
+          <div class="new-element">
+            <div class="wf-collection-grid luxe">
+              <div class="wf-product-card" style="background:transparent;">
+                <div class="wf-product-card-img" style="aspect-ratio:2/3;"></div>
+                <div class="wf-product-card-info" style="text-align:center; padding:20px 10px;">
+                  <div class="wf-product-card-title" style="font-weight:400; font-size:1rem;">Structured Overcoat</div>
+                  <div class="wf-product-card-price" style="font-weight:400; color:#666;">$450.00</div>
+                </div>
+              </div>
+              <div class="wf-product-card" style="background:transparent;">
+                <div class="wf-product-card-img" style="aspect-ratio:2/3;"></div>
+                <div class="wf-product-card-info" style="text-align:center; padding:20px 10px;">
+                  <div class="wf-product-card-title" style="font-weight:400; font-size:1rem;">Tailored Trouser</div>
+                  <div class="wf-product-card-price" style="font-weight:400; color:#666;">$280.00</div>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:center; color:#888; font-size:0.8rem; margin-top:10px;">No filters, no quick-add — clean, editorial presentation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why Different Templates:</strong> Luxe customers want to browse and discover — they're not in a hurry. APSL customers want to find, filter, and buy quickly. Different experiences for different intents.
+    </div>
+
+    <!-- ==================== EMAIL POPUP ==================== -->
+    <h2>4. Email/SMS Capture — Differentiated Messaging</h2>
+    <p style="color:#666; margin-bottom:20px;">Different value propositions for different customer types.</p>
+
+    <div class="comparison">
+      <div class="comparison-item">
+        <div class="comparison-label current">Current: Generic for Everyone</div>
+        <div class="comparison-content">
+          <div class="wf-popup-overlay">
+            <div class="wf-popup-close">×</div>
+            <div class="wf-popup">
+              <div class="wf-popup-title">Join the Alpha Community</div>
+              <div class="wf-popup-text">Subscribe to our newsletter</div>
+              <input type="text" class="wf-popup-input" placeholder="Email address" />
+              <button class="wf-popup-btn">Subscribe</button>
+              <div class="missing-element" style="margin-top:15px; padding:10px;">
+                <div style="color:#999; font-size:0.8rem; text-align:center;">No SMS capture</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-item">
+        <div class="comparison-label proposed">Proposed: Tailored by Audience</div>
+        <div class="comparison-content">
+          <div style="display:flex; flex-direction:column; gap:20px;">
+
+            <!-- Luxe popup -->
+            <div class="new-element">
+              <div style="font-size:0.75rem; color:#27ae60; margin-bottom:10px;">For Luxe browsers:</div>
+              <div class="wf-popup" style="box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                <div class="wf-popup-title">Be First to Know</div>
+                <div class="wf-popup-text">Get early access to new collections and exclusive previews</div>
+                <input type="text" class="wf-popup-input" placeholder="Email address" />
+                <button class="wf-popup-btn">Get Early Access</button>
+              </div>
+            </div>
+
+            <!-- APSL popup -->
+            <div class="new-element">
+              <div style="font-size:0.75rem; color:#27ae60; margin-bottom:10px;">For APSL shoppers:</div>
+              <div class="wf-popup" style="box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                <div class="wf-popup-title">Get 10% Off</div>
+                <div class="wf-popup-text">Join and save on your first order</div>
+                <input type="text" class="wf-popup-input" placeholder="Email address" />
+                <button class="wf-popup-btn">Claim My 10% Off</button>
+              </div>
+            </div>
+
+            <!-- Collab popup -->
+            <div class="new-element">
+              <div style="font-size:0.75rem; color:#27ae60; margin-bottom:10px;">For Collab hunters:</div>
+              <div class="wf-popup" style="box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                <div class="wf-popup-title">Never Miss a Drop</div>
+                <div class="wf-popup-text">Get SMS alerts for limited releases</div>
+                <input type="text" class="wf-popup-input" placeholder="Email address" />
+                <input type="text" class="wf-popup-input" placeholder="Phone (for SMS alerts)" />
+                <button class="wf-popup-btn">Alert Me</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Conversion Impact:</strong> Tailored messaging typically improves popup conversion by 25-40%. "Get 10% Off" converts better than "Join our newsletter."
+    </div>
+
+    <!-- ==================== SEO/SEARCH ==================== -->
+    <h2>5. Google Search Results — With Product Schema</h2>
+    <p style="color:#666; margin-bottom:20px;">How your products will appear in search results with rich snippets.</p>
+
+    <div class="comparison">
+      <div class="comparison-item">
+        <div class="comparison-label current">Current: Basic Listing</div>
+        <div class="comparison-content">
+          <div class="wf-serp">
+            <div class="wf-serp-title">KUDU Double Hood Puffer – AlphaStyle</div>
+            <div class="wf-serp-url">https://alphastyle.store › products › kudu-puffer</div>
+            <div class="wf-serp-desc">Shop the iconic KUDU Double Hood Puffer. Premium outerwear designed for style and warmth. Free shipping on orders over $60.</div>
+          </div>
+          <div style="margin-top:15px; padding:15px; background:#f8d7da; border-radius:4px; font-size:0.85rem; color:#721c24;">
+            No price, no rating, no availability — competitors with rich snippets will get more clicks
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-item">
+        <div class="comparison-label proposed">Proposed: Rich Snippets</div>
+        <div class="comparison-content">
+          <div class="new-element">
+            <div class="wf-serp">
+              <div class="wf-serp-title">KUDU Double Hood Puffer – AlphaStyle</div>
+              <div class="wf-serp-url">https://alphastyle.store › products › kudu-puffer</div>
+              <div class="wf-serp-rich">
+                <span class="wf-serp-stars">★★★★★</span>
+                <span>4.8 (127 reviews)</span>
+                <span>·</span>
+                <span>$299.00</span>
+                <span>·</span>
+                <span style="color:#27ae60;">In Stock</span>
+              </div>
+              <div class="wf-serp-desc">Shop the iconic KUDU Double Hood Puffer. Premium outerwear designed for style and warmth. Free shipping on orders over $60.</div>
+            </div>
+          </div>
+          <div style="margin-top:15px; padding:15px; background:#d4edda; border-radius:4px; font-size:0.85rem; color:#155724;">
+            Rich snippets increase click-through rates by 20-30% — more visibility, more traffic
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== COUNTDOWN TIMER ==================== -->
+    <h2>6. Collaboration Drop Page — Countdown Timer</h2>
+    <p style="color:#666; margin-bottom:20px;">Urgency elements for limited releases.</p>
+
+    <div class="comparison-item" style="max-width:600px;">
+      <div class="comparison-label proposed">Drop Landing Page with Countdown</div>
+      <div class="comparison-content">
+        <div class="wireframe" style="text-align:center;">
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; color:#888; margin-bottom:10px;">Limited Release</div>
+          <div style="font-size:1.75rem; font-weight:700; margin-bottom:5px;">AlphaStyle × NBA</div>
+          <div style="font-size:1rem; color:#666; margin-bottom:25px;">Exclusive Championship Collection</div>
+
+          <div class="new-element">
+            <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#27ae60; margin-bottom:15px;">Dropping In</div>
+            <div style="display:flex; justify-content:center; gap:20px;">
+              <div>
+                <div style="font-size:2.5rem; font-weight:700;">02</div>
+                <div style="font-size:0.75rem; color:#666;">Days</div>
+              </div>
+              <div style="font-size:2.5rem; font-weight:300;">:</div>
+              <div>
+                <div style="font-size:2.5rem; font-weight:700;">14</div>
+                <div style="font-size:0.75rem; color:#666;">Hours</div>
+              </div>
+              <div style="font-size:2.5rem; font-weight:300;">:</div>
+              <div>
+                <div style="font-size:2.5rem; font-weight:700;">32</div>
+                <div style="font-size:0.75rem; color:#666;">Minutes</div>
+              </div>
+              <div style="font-size:2.5rem; font-weight:300;">:</div>
+              <div>
+                <div style="font-size:2.5rem; font-weight:700;">08</div>
+                <div style="font-size:0.75rem; color:#666;">Seconds</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="new-element" style="margin-top:25px;">
+            <div style="font-size:0.9rem; margin-bottom:15px;">Get notified when it drops</div>
+            <div style="display:flex; gap:10px; max-width:350px; margin:0 auto;">
+              <input type="text" class="wf-popup-input" placeholder="Phone number" style="margin:0;" />
+              <button class="wf-popup-btn" style="width:auto; white-space:nowrap;">Notify Me</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why Countdowns Work:</strong> Creates anticipation and FOMO. Collab audiences expect this experience — it's standard for Palace, Kith, and ALD drops.
+    </div>
+
+    <!-- ==================== SUMMARY ==================== -->
+    <h2>Summary of Visual Changes</h2>
+
+    <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+      <thead>
+        <tr>
+          <th style="background:#1a1a1a; color:#fff; padding:12px; text-align:left;">Element</th>
+          <th style="background:#1a1a1a; color:#fff; padding:12px; text-align:left;">Current</th>
+          <th style="background:#1a1a1a; color:#fff; padding:12px; text-align:left;">Proposed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Product Page</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Basic: image, title, price, sizes, ATC</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">+ Reviews, social proof, urgency, trust badges</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Cross-Sell</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">None</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">"Complete the Look" with bundle option</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Collection - APSL</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Generic grid</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">4-col, filters, quick-add, swatches</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Collection - Luxe</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Generic grid</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">2-col, editorial, minimal, no filters</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Email Popup</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Generic "Join newsletter"</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Tailored by audience + SMS capture</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Search Results</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Basic text listing</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Rich snippets: price, stars, availability</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border-bottom:1px solid #eee;"><strong>Collab Pages</strong></td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Standard collection</td>
+          <td style="padding:12px; border-bottom:1px solid #eee;">Countdown timer, SMS waitlist</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:40px; padding:30px; background:#1a1a1a; color:#fff; border-radius:8px; text-align:center;">
+      <div style="font-size:1.25rem; font-weight:600; margin-bottom:10px;">Ready to implement these changes?</div>
+      <div style="color:#888;">These wireframes are part of the Conversion Boost and Full Transformation packages.</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

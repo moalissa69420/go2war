@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle Dev Scope [INTERNAL] | Go To War</title>
+  <style>
+    :root { --index-width: 280px; --content-max: 62rem; --border:#000; --accent:#000; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "SF Mono", "Roboto Mono", Consolas, monospace; margin:0; padding:0; color:#000; background:#fff; font-size:14px; line-height:1.6; }
+
+    .wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+
+    /* Sidebar */
+    .index { position:sticky; top:0; align-self:start; height:100vh; padding:1rem; border-right:1px solid var(--border); background:#1a1a1a; color:#fff; overflow-y:auto; }
+    .index-title { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; color:#888; }
+    .index-logo { font-size:1.4rem; font-weight:800; margin-bottom:0.25rem; }
+    .index-sub { font-size:0.75rem; color:#f39c12; margin-bottom:0.5rem; font-weight:600; }
+    .index-client { font-size:0.8rem; color:#888; margin-bottom:1rem; }
+    .index ol { list-style:none; padding:0; margin:0; font-size:0.8rem; line-height:1.5; }
+    .index li { margin-bottom:0.3rem; }
+    .index a { color:#ccc; text-decoration:none; display:flex; gap:0.5rem; align-items:baseline; padding:0.2rem 0; }
+    .index a:hover { color:#fff; }
+    .index .num { color:#666; width:1.5rem; display:inline-block; text-align:right; font-size:0.75rem; }
+
+    .mobile-menu-toggle { display:none; position:fixed; top:1rem; right:1rem; z-index:1000; background:#000; color:#fff; border:none; padding:0.5rem 0.75rem; border-radius:4px; font-size:0.9rem; cursor:pointer; }
+    .menu-backdrop { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; }
+    .menu-backdrop.active { display:block; }
+
+    /* Main content */
+    .sections { padding:2rem; display:flex; flex-direction:column; gap:0; background:#fafafa; }
+
+    section.page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.5rem 0; border-bottom:1px solid #ddd; scroll-margin-top: 20px; }
+    section.page:last-child { border-bottom:none; }
+
+    .num-col { display:block; text-align:right; color:#999; font-size:0.8rem; padding-top:0.3rem; font-weight:600; }
+
+    .content h1 { font-size:1.4rem; margin:0 0 0.75rem 0; font-weight:700; color:#000; font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; }
+    .content h2 { font-size:1.1rem; margin:1.25rem 0 0.5rem 0; font-weight:600; color:#000; font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; border-bottom:1px solid #eee; padding-bottom:0.3rem; }
+    .content h3 { font-size:0.95rem; margin:1rem 0 0.35rem 0; font-weight:600; color:#333; }
+    .content h4 { font-size:0.85rem; margin:0.75rem 0 0.25rem 0; font-weight:600; color:#555; text-transform:uppercase; letter-spacing:0.5px; }
+    .content p { margin:0 0 0.75rem 0; }
+    .content ul, .content ol { margin:0 0 0.75rem 0; padding-left:1.25rem; }
+    .content li { margin-bottom:0.3rem; }
+
+    /* Code blocks */
+    pre { background:#1a1a1a; color:#f8f8f2; padding:1rem; border-radius:4px; overflow-x:auto; font-size:0.8rem; margin:0.75rem 0; }
+    code { background:#eee; padding:0.15rem 0.4rem; border-radius:3px; font-size:0.85rem; }
+    pre code { background:transparent; padding:0; }
+
+    .file-path { background:#2d2d2d; color:#8be9fd; padding:0.5rem 1rem; border-radius:4px 4px 0 0; font-size:0.75rem; margin-bottom:0; font-weight:600; }
+    .file-path + pre { border-radius:0 0 4px 4px; margin-top:0; }
+
+    /* Components */
+    .box { background:#fff; border:1px solid #ddd; padding:1rem; margin:0.75rem 0; border-radius:4px; }
+    .highlight-box { background:#fff; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .alert-box { background:#fff3cd; border:1px solid #f39c12; border-left:4px solid #f39c12; padding:1rem; margin:0.75rem 0; }
+    .success-box { background:#d4edda; border:1px solid #27ae60; border-left:4px solid #27ae60; padding:1rem; margin:0.75rem 0; }
+    .danger-box { background:#f8d7da; border:1px solid #c0392b; border-left:4px solid #c0392b; padding:1rem; margin:0.75rem 0; }
+    .internal-box { background:#e8f4fd; border:1px solid #3498db; border-left:4px solid #3498db; padding:1rem; margin:0.75rem 0; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:0.75rem 0; }
+
+    /* Tables */
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.85rem; }
+    th, td { border:1px solid #ddd; padding:0.5rem 0.75rem; text-align:left; }
+    th { background:#1a1a1a; color:#fff; font-weight:600; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; }
+    tr:nth-child(even) { background:#f5f5f5; }
+    .table-wrapper { overflow-x:auto; margin:0.75rem 0; }
+
+    .check { color:#27ae60; font-weight:700; }
+    .cross { color:#c0392b; font-weight:700; }
+    .warn { color:#f39c12; font-weight:700; }
+
+    /* Priority badges */
+    .priority { display:inline-block; padding:0.15rem 0.5rem; border-radius:3px; font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+    .priority.critical { background:#c0392b; color:#fff; }
+    .priority.high { background:#e74c3c; color:#fff; }
+    .priority.medium { background:#f39c12; color:#fff; }
+    .priority.low { background:#95a5a6; color:#fff; }
+
+    /* File tree */
+    .file-tree { font-family: "SF Mono", "Roboto Mono", Consolas, monospace; font-size:0.8rem; background:#1a1a1a; color:#f8f8f2; padding:1rem; border-radius:4px; }
+    .file-tree .folder { color:#f1c40f; }
+    .file-tree .file { color:#3498db; }
+    .file-tree .comment { color:#6c7a89; }
+
+    /* Checklist */
+    .checklist { list-style:none; padding:0; margin:0.75rem 0; }
+    .checklist li { padding:0.4rem 0; padding-left:1.75rem; position:relative; border-bottom:1px solid #eee; }
+    .checklist li:last-child { border-bottom:none; }
+    .checklist li::before { content:'☐'; position:absolute; left:0; color:#999; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns:1fr; }
+      .index { position:relative; height:auto; border-right:0; border-bottom:1px solid #333; }
+      .sections { padding:1rem; }
+      section.page { grid-template-columns:2rem 1fr; gap:0.75rem; }
+      .two-col { grid-template-columns:1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .mobile-menu-toggle { display:block; }
+      .index { position:fixed; top:0; left:-100%; width:85%; max-width:300px; height:100vh; z-index:999; transition:left 0.3s ease; }
+      .index.open { left:0; }
+      .sections { padding-top:3.5rem; }
+      section.page { grid-template-columns:1.5rem 1fr; gap:0.5rem; }
+    }
+
+    @media print {
+      .index { display:none; }
+      .mobile-menu-toggle { display:none; }
+      .wrapper { grid-template-columns:1fr; }
+      section.page { break-inside:avoid; }
+      pre { white-space:pre-wrap; word-wrap:break-word; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="menuToggle">☰ Menu</button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="wrapper">
+    <aside class="index" id="indexNav">
+      <div class="index-logo">GO TO WAR</div>
+      <div class="index-sub">INTERNAL DOCUMENT</div>
+      <div class="index-client">Client: AlphaStyle</div>
+      <div class="index-title">Dev Scope Index</div>
+      <ol>
+        <li><a href="#s0"><span class="num">00.</span> Overview & Pricing</a></li>
+        <li><a href="#s1"><span class="num">01.</span> Codebase Structure</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Phase 1: Critical Fixes</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Phase 2: Tracking</a></li>
+        <li><a href="#s4"><span class="num">04.</span> Phase 3: Performance</a></li>
+        <li><a href="#s5"><span class="num">05.</span> Phase 4: SEO</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Phase 5: Conversion</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Phase 6: Templates</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Phase 7: Email/SMS</a></li>
+        <li><a href="#s9"><span class="num">09.</span> Testing Checklist</a></li>
+        <li><a href="#s10"><span class="num">10.</span> Files Reference</a></li>
+      </ol>
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #333; font-size:0.7rem; color:#666;">
+        Prepared by Mo Alissa<br>
+        January 2026
+      </div>
+    </aside>
+
+    <main class="sections">
+
+      <!-- Section 0: Overview -->
+      <section id="s0" class="page">
+        <div class="num-col">00.</div>
+        <div class="content">
+          <h1>Project Overview & Internal Pricing</h1>
+
+          <div class="internal-box">
+            <p style="margin:0;"><strong>INTERNAL ONLY:</strong> This document contains implementation details for dev team review.</p>
+          </div>
+
+          <h2>Client Pricing Options</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>Client Price</th>
+                  <th>Est. Dev Hours</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Foundation Fix</strong></td>
+                  <td>$3,500</td>
+                  <td>15-20 hrs</td>
+                </tr>
+                <tr>
+                  <td><strong>Conversion Boost</strong></td>
+                  <td>$6,500</td>
+                  <td>30-35 hrs</td>
+                </tr>
+                <tr>
+                  <td><strong>Full Transformation</strong></td>
+                  <td>$12,000</td>
+                  <td>60-70 hrs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Recommendation to Client</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">Push <strong>Option 2: Conversion Boost ($6,500)</strong> — best balance of value for client + margin for us. If they hesitate, drop to Option 1 as starting point.</p>
+          </div>
+
+          <h2>Current Client Relationship</h2>
+          <ul>
+            <li>Paying <strong>$4K/month</strong> for email + ad growth</li>
+            <li>Asked for Shopify help</li>
+            <li>Audit provided <strong>free</strong> (ties into existing work)</li>
+            <li>Shopify work = <strong>upsell opportunity</strong></li>
+          </ul>
+
+          <h2>Key Findings Summary</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Issues</th>
+                  <th>Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tracking</td>
+                  <td>Missing ViewContent, AddToCart, Klaviyo events, Snapchat pixel</td>
+                  <td><span class="priority critical">Critical</span></td>
+                </tr>
+                <tr>
+                  <td>Performance</td>
+                  <td>600KB+ JS, unminified jQuery, duplicate files</td>
+                  <td><span class="priority high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Code Quality</td>
+                  <td>console.log in prod, 347 !important in CSS</td>
+                  <td><span class="priority medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>SEO</td>
+                  <td>Missing Product schema, BreadcrumbList</td>
+                  <td><span class="priority medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>Conversion</td>
+                  <td>No trust badges, reviews, social proof</td>
+                  <td><span class="priority high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Brand</td>
+                  <td>No differentiation between Luxe/APSL/Collabs</td>
+                  <td><span class="priority high">High</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Codebase Structure -->
+      <section id="s1" class="page">
+        <div class="num-col">01.</div>
+        <div class="content">
+          <h1>Codebase Structure</h1>
+
+          <h2>Theme Architecture</h2>
+          <div class="file-tree">
+<span class="folder">/layout</span>
+  └── theme.liquid          <span class="comment"># Main layout - tracking pixels here</span>
+  └── password.liquid
+
+<span class="folder">/sections</span>
+  └── main-product.liquid   <span class="comment"># Product page (1800+ lines)</span>
+  └── header.liquid         <span class="comment"># Contains Organization schema</span>
+  └── footer.liquid         <span class="comment"># Newsletter signup</span>
+  └── cart-drawer.liquid
+  └── popup.liquid          <span class="comment"># Email capture popup</span>
+
+<span class="folder">/snippets</span>
+  └── product-card.liquid
+  └── meta-tags.liquid      <span class="comment"># OG tags, Twitter cards</span>
+  └── facets.liquid
+
+<span class="folder">/assets</span>
+  └── <span class="file">global.js</span>             <span class="comment"># 59KB</span>
+  └── <span class="file">jquery-3.6.0.js</span>       <span class="comment"># 284KB - UNMINIFIED!</span>
+  └── <span class="file">swiper-bundle.min.js</span>  <span class="comment"># 148KB</span>
+  └── <span class="file">gsap.min.js</span>           <span class="comment"># 70KB</span>
+  └── <span class="file">cart.js</span>               <span class="comment"># Cart functionality</span>
+  └── <span class="file">product-form.js</span>       <span class="comment"># Add to cart handling</span>
+
+<span class="folder">/templates</span>
+  └── product.json                    <span class="comment"># Default product</span>
+  └── product.product-kuduhood.json   <span class="comment"># KUDU template (reference!)</span>
+  └── product.product-page-apex.json  <span class="comment"># APEX template</span>
+  └── collection.json                 <span class="comment"># Default collection</span>
+          </div>
+
+          <h2>Key Reference Files</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Purpose</th>
+                  <th>File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Main layout (pixels go here)</td>
+                  <td><code>layout/theme.liquid</code></td>
+                </tr>
+                <tr>
+                  <td>Product page logic</td>
+                  <td><code>sections/main-product.liquid</code></td>
+                </tr>
+                <tr>
+                  <td>Cart JS (AddToCart events)</td>
+                  <td><code>assets/cart.js</code></td>
+                </tr>
+                <tr>
+                  <td>Product form JS</td>
+                  <td><code>assets/product-form.js</code></td>
+                </tr>
+                <tr>
+                  <td>Email popup</td>
+                  <td><code>sections/popup.liquid</code></td>
+                </tr>
+                <tr>
+                  <td>KUDU template (gold standard)</td>
+                  <td><code>templates/product.product-kuduhood.json</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Phase 1 Critical Fixes -->
+      <section id="s2" class="page">
+        <div class="num-col">02.</div>
+        <div class="content">
+          <h1>Phase 1: Critical Fixes</h1>
+          <p><span class="priority critical">Critical</span> — Do these first, regardless of which option client chooses.</p>
+
+          <h2>1.1 Remove Console.log Statements</h2>
+
+          <div class="file-path">assets/load-more.js — Line 43</div>
+<pre><code><span style="color:#e74c3c;">// REMOVE THIS LINE:</span>
+console.log("I was called to animate images");</code></pre>
+
+          <div class="file-path">assets/collapsible-content.js — Line 46</div>
+<pre><code><span style="color:#e74c3c;">// REMOVE THIS LINE:</span>
+console.log("It was called");</code></pre>
+
+          <div class="file-path">assets/banner-with-tabs.js — Line 43</div>
+<pre><code><span style="color:#e74c3c;">// REMOVE THIS LINE:</span>
+console.log(window.getComputedStyle(...));</code></pre>
+
+          <h2>1.2 Delete Duplicate Files</h2>
+          <div class="danger-box">
+            <p style="margin:0;"><strong>Files to delete:</strong></p>
+            <ul style="margin:0.5rem 0 0 0;">
+              <li><code>assets/cart copy.js</code></li>
+              <li><code>assets/product-slider copy.js</code></li>
+              <li><code>assets/load-more - Copy.js</code></li>
+              <li><code>assets/collapsible-content copy.js</code></li>
+            </ul>
+          </div>
+
+          <p><strong>Before deleting:</strong> Search theme for any references to these filenames.</p>
+
+          <h2>1.3 Fix Schema URLs</h2>
+
+          <div class="file-path">sections/header.liquid — Lines 236, 286</div>
+<pre><code><span style="color:#e74c3c;">// CHANGE FROM:</span>
+"@context": "http://schema.org",
+
+<span style="color:#27ae60;">// CHANGE TO:</span>
+"@context": "https://schema.org",</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 3: Phase 2 Tracking -->
+      <section id="s3" class="page">
+        <div class="num-col">03.</div>
+        <div class="content">
+          <h1>Phase 2: Tracking Implementation</h1>
+          <p><span class="priority critical">Critical</span> — This is why their ads aren't optimizing properly.</p>
+
+          <h2>2.1 Meta ViewContent Event</h2>
+
+          <div class="file-path">sections/main-product.liquid — After line 28</div>
+<pre><code>{% comment %} Meta Pixel - ViewContent Event {% endcomment %}
+&lt;script&gt;
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_ids: ['{{ product.id }}'],
+        content_name: {{ product.title | json }},
+        content_type: 'product',
+        content_category: '{{ product.type }}',
+        value: {{ product.price | divided_by: 100.0 }},
+        currency: '{{ cart.currency.iso_code }}'
+      });
+    }
+  });
+&lt;/script&gt;</code></pre>
+
+          <h2>2.2 Meta AddToCart Event</h2>
+          <div class="file-path">assets/product-form.js — Inside success callback</div>
+<pre><code>// After successful cart add:
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'AddToCart', {
+    content_ids: [variantId.toString()],
+    content_name: productTitle,
+    content_type: 'product',
+    value: price,
+    currency: window.Shopify?.currency?.active || 'USD'
+  });
+}</code></pre>
+
+          <h2>2.3 Klaviyo Events</h2>
+          <div class="file-path">sections/main-product.liquid</div>
+<pre><code>{% comment %} Klaviyo - Viewed Product {% endcomment %}
+&lt;script&gt;
+  document.addEventListener('DOMContentLoaded', function() {
+    var _learnq = window._learnq || [];
+    _learnq.push(['track', 'Viewed Product', {
+      ProductName: {{ product.title | json }},
+      ProductID: {{ product.id | json }},
+      SKU: {{ product.selected_or_first_available_variant.sku | json }},
+      Categories: {{ product.collections | map: 'title' | json }},
+      ImageURL: '{{ product.featured_image | image_url: width: 1024 }}',
+      URL: '{{ shop.url }}{{ product.url }}',
+      Brand: {{ product.vendor | json }},
+      Price: {{ product.price | divided_by: 100.0 }}
+    }]);
+  });
+&lt;/script&gt;</code></pre>
+
+          <h2>2.4 Snapchat Pixel</h2>
+          <div class="alert-box">
+            <p style="margin:0;"><strong>Need from client:</strong> Snapchat Pixel ID from their Snapchat Ads account.</p>
+          </div>
+
+          <div class="file-path">layout/theme.liquid — Inside &lt;head&gt;</div>
+<pre><code>{% comment %} Snapchat Pixel {% endcomment %}
+&lt;script type="text/javascript"&gt;
+(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+r.src=n;var u=t.getElementsByTagName(s)[0];
+u.parentNode.insertBefore(r,u);})(window,document,
+'https://sc-static.net/scevent.min.js');
+
+snaptr('init', 'YOUR_SNAP_PIXEL_ID', {
+  'user_email': '{{ customer.email | default: "" }}'
+});
+snaptr('track', 'PAGE_VIEW');
+&lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 4: Phase 3 Performance -->
+      <section id="s4" class="page">
+        <div class="num-col">04.</div>
+        <div class="content">
+          <h1>Phase 3: Performance Optimization</h1>
+          <p><span class="priority high">High</span></p>
+
+          <h2>3.1 Replace Unminified jQuery</h2>
+          <div class="alert-box">
+            <p style="margin:0;"><strong>Current:</strong> <code>jquery-3.6.0.js</code> = 284KB<br>
+            <strong>Target:</strong> <code>jquery-3.6.0.min.js</code> = 87KB<br>
+            <strong>Savings:</strong> ~200KB</p>
+          </div>
+
+          <h3>Option A: Use CDN with Local Fallback</h3>
+          <div class="file-path">layout/theme.liquid</div>
+<pre><code><span style="color:#e74c3c;">// REPLACE:</span>
+&lt;script src="{{ 'jquery-3.6.0.js' | asset_url }}" defer="defer"&gt;&lt;/script&gt;
+
+<span style="color:#27ae60;">// WITH:</span>
+&lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  defer="defer"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;script&gt;window.jQuery || document.write('&lt;script src="{{ 'jquery-3.6.0.min.js' | asset_url }}" defer="defer"&gt;&lt;\/script&gt;')&lt;/script&gt;</code></pre>
+
+          <h3>Option B: Replace Asset File</h3>
+          <ol>
+            <li>Download minified from <code>https://code.jquery.com/jquery-3.6.0.min.js</code></li>
+            <li>Upload as <code>assets/jquery-3.6.0.min.js</code></li>
+            <li>Update reference in <code>layout/theme.liquid</code></li>
+            <li>Delete old <code>assets/jquery-3.6.0.js</code></li>
+          </ol>
+
+          <h2>3.2 Lazy Load Non-Critical JS</h2>
+          <div class="file-path">layout/theme.liquid — Conditional loading</div>
+<pre><code>{% comment %} Only load on collection pages {% endcomment %}
+{% if template contains 'collection' %}
+  &lt;script src="{{ 'facets.js' | asset_url }}" defer="defer"&gt;&lt;/script&gt;
+{% endif %}
+
+{% comment %} Only load on product pages {% endcomment %}
+{% if template contains 'product' %}
+  &lt;script src="{{ 'product-form.js' | asset_url }}" defer="defer"&gt;&lt;/script&gt;
+{% endif %}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 5: Phase 4 SEO -->
+      <section id="s5" class="page">
+        <div class="num-col">05.</div>
+        <div class="content">
+          <h1>Phase 4: SEO Enhancements</h1>
+          <p><span class="priority medium">Medium</span></p>
+
+          <h2>4.1 Add Product Schema</h2>
+          <div class="file-path">sections/main-product.liquid — Before closing &lt;/section&gt;</div>
+<pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "image": [
+    "{{ product.featured_image | image_url: width: 1024 }}"
+    {%- for image in product.images offset: 1 limit: 4 -%}
+    ,"{{ image | image_url: width: 1024 }}"
+    {%- endfor -%}
+  ],
+  "description": {{ product.description | strip_html | truncate: 5000 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | default: "AlphaStyle" | json }}
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "price": "{{ product.price | divided_by: 100.0 }}",
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+  }
+}
+&lt;/script&gt;</code></pre>
+
+          <h2>4.2 Add BreadcrumbList Schema</h2>
+          <div class="file-path">Create: snippets/breadcrumb-schema.liquid</div>
+<pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ shop.url }}"
+    }
+    {%- if template contains 'product' and product.collections.first -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.collections.first.title | json }},
+      "item": "{{ shop.url }}{{ product.collections.first.url }}"
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }},
+      "item": "{{ shop.url }}{{ product.url }}"
+    }
+    {%- endif -%}
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+          <p>Then include in <code>layout/theme.liquid</code>:</p>
+<pre><code>{% render 'breadcrumb-schema' %}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 6: Phase 5 Conversion -->
+      <section id="s6" class="page">
+        <div class="num-col">06.</div>
+        <div class="content">
+          <h1>Phase 5: Conversion Elements</h1>
+          <p><span class="priority high">High</span></p>
+
+          <h2>5.1 Create Trust Badges Snippet</h2>
+          <div class="file-path">Create: snippets/trust-badges.liquid</div>
+<pre><code>{% comment %} Trust Badges - Usage: {% render 'trust-badges' %} {% endcomment %}
+&lt;div class="trust-badges"&gt;
+  &lt;div class="trust-badge"&gt;
+    &lt;svg&gt;&lt;!-- shipping icon --&gt;&lt;/svg&gt;
+    &lt;span&gt;Free Shipping Over $60&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="trust-badge"&gt;
+    &lt;svg&gt;&lt;!-- return icon --&gt;&lt;/svg&gt;
+    &lt;span&gt;Easy Returns&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="trust-badge"&gt;
+    &lt;svg&gt;&lt;!-- secure icon --&gt;&lt;/svg&gt;
+    &lt;span&gt;Secure Checkout&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.trust-badge svg { width: 20px; height: 20px; }
+&lt;/style&gt;</code></pre>
+
+          <p>Add to product page after price block:</p>
+<pre><code>{% render 'trust-badges' %}</code></pre>
+
+          <h2>5.2 Increase Touch Targets</h2>
+          <div class="file-path">assets/base.css</div>
+<pre><code>/* Find buttons with min-height: 4rem (40px) */
+/* Update to min-height: 4.4rem (44px) for accessibility */
+
+.button,
+.btn,
+[type="submit"] {
+  min-height: 4.4rem; /* was 4rem */
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 7: Phase 6 Templates -->
+      <section id="s7" class="page">
+        <div class="num-col">07.</div>
+        <div class="content">
+          <h1>Phase 6: Template Differentiation</h1>
+          <p><span class="priority high">High</span> — Only in Full Transformation option</p>
+
+          <h2>6.1 Create Luxe Collection Template</h2>
+          <div class="file-path">Create: templates/collection.luxe.json</div>
+<pre><code>{
+  "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "products_to_show_row": 2,
+        "columns_mobile": "1",
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "show_vendor": false,
+        "show_color_count": false,
+        "show_size_count": false,
+        "enable_filtering": false,
+        "enable_sorting": false
+      }
+    }
+  },
+  "order": ["banner", "main"]
+}</code></pre>
+
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Key differentiators:</strong> 2 products per row, no filters, portrait images, clean editorial feel</p>
+          </div>
+
+          <h2>6.2 Create APSL Collection Template</h2>
+          <div class="file-path">Create: templates/collection.apsl.json</div>
+<pre><code>{
+  "sections": {
+    "main": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 24,
+        "products_to_show_row": 4,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "show_color_count": true,
+        "show_size_count": true,
+        "enable_filtering": true,
+        "enable_sorting": true
+      }
+    }
+  },
+  "order": ["main"]
+}</code></pre>
+
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Key differentiators:</strong> 4 products per row, full filtering, conversion-optimized</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Phase 7 Email/SMS -->
+      <section id="s8" class="page">
+        <div class="num-col">08.</div>
+        <div class="content">
+          <h1>Phase 7: Email/SMS Capture</h1>
+          <p><span class="priority medium">Medium</span></p>
+
+          <h2>7.1 Add SMS Field to Popup</h2>
+          <div class="file-path">sections/popup.liquid — After email input</div>
+<pre><code>&lt;div class="field"&gt;
+  &lt;input
+    id="PopupPhone--{{ section.id }}"
+    type="tel"
+    name="contact[phone]"
+    class="field__input field"
+    autocomplete="tel"
+    placeholder="Phone (for SMS alerts)"
+  &gt;
+  &lt;label class="visually-hidden" for="PopupPhone--{{ section.id }}"&gt;
+    Phone number
+  &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+          <h2>7.2 Conditional Popup Messaging</h2>
+          <div class="file-path">sections/popup.liquid — Add at top</div>
+<pre><code>{% assign popup_heading = section.settings.heading %}
+{% assign popup_text = section.settings.text %}
+
+{% if request.path contains 'luxe' %}
+  {% assign popup_heading = section.settings.luxe_heading | default: popup_heading %}
+  {% assign popup_text = section.settings.luxe_text | default: popup_text %}
+{% elsif request.path contains 'collab' %}
+  {% assign popup_heading = section.settings.collab_heading | default: popup_heading %}
+  {% assign popup_text = section.settings.collab_text | default: popup_text %}
+{% endif %}</code></pre>
+
+          <p>Then add to schema settings:</p>
+<pre><code>{
+  "type": "text",
+  "id": "luxe_heading",
+  "label": "Luxe Collection Heading",
+  "default": "Be First to Know"
+},
+{
+  "type": "text",
+  "id": "collab_heading",
+  "label": "Collaboration Heading",
+  "default": "Never Miss a Drop"
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 9: Testing Checklist -->
+      <section id="s9" class="page">
+        <div class="num-col">09.</div>
+        <div class="content">
+          <h1>Testing Checklist</h1>
+
+          <h2>Pre-Deployment</h2>
+
+          <h3>Tracking Verification</h3>
+          <ul class="checklist">
+            <li>Meta Pixel Helper shows ViewContent on product pages</li>
+            <li>Meta Pixel Helper shows AddToCart on cart add</li>
+            <li>GA4 DebugView shows events</li>
+            <li>Klaviyo shows real-time activity</li>
+            <li>Snapchat Pixel Helper confirms events</li>
+          </ul>
+
+          <h3>Performance</h3>
+          <ul class="checklist">
+            <li>Run Lighthouse before and after jQuery change</li>
+            <li>Test page load on 3G throttling</li>
+            <li>Verify no console errors</li>
+            <li>Check all pages for broken functionality</li>
+          </ul>
+
+          <h3>SEO</h3>
+          <ul class="checklist">
+            <li>Validate Product schema with Google Rich Results Test</li>
+            <li>Check structured data on all page types</li>
+            <li>Verify OG tags with Facebook Debugger</li>
+          </ul>
+
+          <h3>Functionality</h3>
+          <ul class="checklist">
+            <li>Add to cart works on all product templates</li>
+            <li>Cart drawer opens and functions</li>
+            <li>Checkout flow completes</li>
+            <li>Email popup appears and submits</li>
+            <li>Mobile navigation works</li>
+          </ul>
+
+          <h3>Cross-Browser</h3>
+          <ul class="checklist">
+            <li>Chrome</li>
+            <li>Safari</li>
+            <li>Firefox</li>
+            <li>Edge</li>
+            <li>iOS Safari</li>
+            <li>Android Chrome</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 10: Files Reference -->
+      <section id="s10" class="page">
+        <div class="num-col">10.</div>
+        <div class="content">
+          <h1>Files Reference</h1>
+
+          <h2>Files to Modify</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Changes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>layout/theme.liquid</code></td>
+                  <td>Snapchat pixel, jQuery swap, breadcrumb schema</td>
+                </tr>
+                <tr>
+                  <td><code>sections/main-product.liquid</code></td>
+                  <td>ViewContent event, Klaviyo event, Product schema, trust badges</td>
+                </tr>
+                <tr>
+                  <td><code>sections/header.liquid</code></td>
+                  <td>Schema URL fix (http → https)</td>
+                </tr>
+                <tr>
+                  <td><code>sections/popup.liquid</code></td>
+                  <td>SMS field, conditional messaging</td>
+                </tr>
+                <tr>
+                  <td><code>assets/product-form.js</code></td>
+                  <td>AddToCart event</td>
+                </tr>
+                <tr>
+                  <td><code>assets/load-more.js</code></td>
+                  <td>Remove console.log</td>
+                </tr>
+                <tr>
+                  <td><code>assets/collapsible-content.js</code></td>
+                  <td>Remove console.log</td>
+                </tr>
+                <tr>
+                  <td><code>assets/banner-with-tabs.js</code></td>
+                  <td>Remove console.log</td>
+                </tr>
+                <tr>
+                  <td><code>assets/base.css</code></td>
+                  <td>Touch target sizes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Files to Delete</h2>
+          <div class="danger-box">
+            <ul style="margin:0;">
+              <li><code>assets/cart copy.js</code></li>
+              <li><code>assets/product-slider copy.js</code></li>
+              <li><code>assets/load-more - Copy.js</code></li>
+              <li><code>assets/collapsible-content copy.js</code></li>
+            </ul>
+          </div>
+
+          <h2>Files to Create</h2>
+          <div class="success-box">
+            <ul style="margin:0;">
+              <li><code>snippets/trust-badges.liquid</code></li>
+              <li><code>snippets/breadcrumb-schema.liquid</code></li>
+              <li><code>templates/collection.luxe.json</code> (Full option only)</li>
+              <li><code>templates/collection.apsl.json</code> (Full option only)</li>
+            </ul>
+          </div>
+
+          <h2>Files to Replace</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Current</th>
+                  <th>Replace With</th>
+                  <th>Savings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>jquery-3.6.0.js</code> (284KB)</td>
+                  <td><code>jquery-3.6.0.min.js</code> (87KB)</td>
+                  <td>~200KB</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box" style="margin-top:2rem;">
+            <p style="margin:0;"><strong>Questions?</strong> Ping Mo before starting. Always test in development theme first.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const indexNav = document.getElementById('indexNav');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+
+    menuToggle.addEventListener('click', () => {
+      indexNav.classList.toggle('open');
+      menuBackdrop.classList.toggle('active');
+    });
+
+    menuBackdrop.addEventListener('click', () => {
+      indexNav.classList.remove('open');
+      menuBackdrop.classList.remove('active');
+    });
+
+    document.querySelectorAll('.index a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 600) {
+          indexNav.classList.remove('open');
+          menuBackdrop.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
