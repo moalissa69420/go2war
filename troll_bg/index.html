@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$TROLL Brand Guidelines</title>
+    <style>
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicLight.ttf') format('truetype');
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicBook.ttf') format('truetype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicMedium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicDemi.ttf') format('truetype');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicBold.ttf') format('truetype');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicHeavy.ttf') format('truetype');
+            font-weight: 800;
+        }
+        @font-face {
+            font-family: 'Futura PT';
+            src: url('assets/fonts/futura-pt/FuturaCyrillicExtraBold.ttf') format('truetype');
+            font-weight: 900;
+        }
+        @font-face {
+            font-family: 'Code 7X5';
+            src: url('assets/fonts/code-7x5-font/Code7X5Regular-ypBe.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --troll-green: #9EFC60;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray: #808080;
+        }
+
+        body {
+            font-family: 'Futura PT', 'Futura', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide.bg-black { background: var(--black); color: var(--white); }
+        .slide.bg-white { background: var(--white); color: var(--black); }
+        .slide.bg-green { background: var(--troll-green); color: var(--black); }
+
+        .label {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: var(--gray);
+        }
+
+        .slide.bg-black .label { color: var(--gray); }
+        .slide.bg-white .label { color: var(--gray); }
+        .slide.bg-green .label { color: var(--black); opacity: 0.6; }
+
+        .label-green { color: var(--troll-green) !important; }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        .text-green { color: var(--troll-green); }
+        .text-gray { color: var(--gray); }
+        .text-white { color: var(--white); }
+        .text-black { color: var(--black); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .flex-col { flex-direction: column; }
+
+        .card {
+            background: rgba(128, 128, 128, 0.1);
+            padding: 32px;
+            border-radius: 4px;
+        }
+
+        .slide.bg-black .card { background: rgba(255, 255, 255, 0.05); }
+        .slide.bg-white .card { background: rgba(0, 0, 0, 0.03); }
+
+        .logo-display {
+            background: rgba(128, 128, 128, 0.1);
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .logo-display img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .logo-display.invert img {
+            filter: invert(1);
+        }
+
+        /* SVG logos inherit color */
+        .logo-display img[src$=".svg"] {
+            color: currentColor;
+        }
+
+        .slide.bg-black .logo-display img[src$=".svg"],
+        .slide.bg-black .top-bar-logo img[src$=".svg"],
+        .slide.bg-black .credits img[src$=".svg"] {
+            filter: none;
+        }
+
+        .slide.bg-white .logo-display img[src$=".svg"] {
+            filter: none;
+        }
+
+        .color-swatch {
+            height: 120px;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px;
+            font-family: 'Code 7X5', monospace;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        .nav button {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--gray);
+            background: transparent;
+            color: var(--white);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .nav button:hover {
+            border-color: var(--troll-green);
+            color: var(--troll-green);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            font-family: 'Code 7X5', monospace;
+            font-size: 14px;
+            color: var(--gray);
+            letter-spacing: 2px;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .top-bar-logo img {
+            height: 40px;
+            filter: invert(1);
+        }
+
+        .top-bar-text {
+            text-align: right;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--gray);
+        }
+
+        .divider-text {
+            font-size: 96px;
+            font-weight: 900;
+            letter-spacing: -3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 32px;
+        }
+
+        th, td {
+            padding: 16px 24px;
+            text-align: left;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+            font-size: 16px;
+        }
+
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--gray);
+        }
+
+        .misuse-example {
+            position: relative;
+            padding: 32px;
+            background: rgba(128, 128, 128, 0.05);
+            border-radius: 4px;
+        }
+
+        .misuse-example::after {
+            content: '✕';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #FF4444;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .misuse-example img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .misuse-example.stretch img { transform: scaleX(1.5); }
+        .misuse-example.rotate img { transform: rotate(15deg); }
+        .misuse-example.lowcontrast { background: #666; }
+        .misuse-example.lowcontrast img { opacity: 0.3; }
+
+        .type-specimen {
+            margin-bottom: 48px;
+        }
+
+        .type-specimen h4 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .type-specimen .sample {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .type-weights {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .hierarchy-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .hierarchy-item:last-child {
+            border-bottom: none;
+        }
+
+        .hierarchy-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .hierarchy-specs {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 8px;
+        }
+
+        .code-font {
+            font-family: 'Code 7X5', monospace;
+            letter-spacing: 4px;
+        }
+
+        .be-this-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-top: 48px;
+        }
+
+        .be-this-col {
+            padding: 32px;
+        }
+
+        .be-this-col.green-header {
+            border-right: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .be-this-col h4 {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid;
+        }
+
+        .be-this-col.green-header h4 {
+            color: var(--troll-green);
+            border-color: var(--troll-green);
+        }
+
+        .be-this-col.red-header h4 {
+            color: #FF4444;
+            border-color: #FF4444;
+        }
+
+        .be-this-col ul {
+            list-style: none;
+        }
+
+        .be-this-col li {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .emotional-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .emotional-item {
+            font-size: 24px;
+            font-weight: 600;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--troll-green);
+        }
+
+        .avoid-box {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid #FF4444;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .avoid-box ul {
+            list-style: none;
+        }
+
+        .avoid-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .avoid-box li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+        }
+
+        .tagline-card {
+            background: rgba(0, 0, 0, 0.03);
+            padding: 32px;
+            border-radius: 4px;
+        }
+
+        .tagline-card h4 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .tagline-card .use-for {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .tagline-card .products {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .product-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .clearspace-diagram {
+            position: relative;
+            display: inline-block;
+            padding: 60px;
+            border: 2px dashed var(--troll-green);
+            margin: 32px 0;
+        }
+
+        .clearspace-diagram img {
+            max-height: 200px;
+        }
+
+        .clearspace-label {
+            position: absolute;
+            font-size: 12px;
+            color: var(--troll-green);
+            font-family: 'Code 7X5', monospace;
+        }
+
+        .clearspace-label.top { top: 8px; left: 50%; transform: translateX(-50%); }
+        .clearspace-label.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+        .clearspace-label.left { left: 8px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        .clearspace-label.right { right: 8px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+        .statement-large {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 32px;
+        }
+
+        .credits {
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .credits img {
+            height: 80px;
+            margin-bottom: 32px;
+            filter: invert(1);
+        }
+
+        .credits h3 {
+            font-size: 48px;
+            margin-bottom: 48px;
+        }
+
+        .credits p {
+            font-size: 14px;
+            color: var(--gray);
+            margin: 8px auto;
+        }
+
+        @media print {
+            .nav, .slide-counter { display: none; }
+            body { overflow: visible; }
+            .presentation { height: auto; }
+            .slide {
+                position: relative;
+                opacity: 1 !important;
+                visibility: visible !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                height: 100vh;
+                width: 100vw;
+            }
+        }
+
+        /* PDF export mode */
+        body.pdf-mode { overflow: visible; }
+        body.pdf-mode .presentation { height: auto; }
+        body.pdf-mode .nav, body.pdf-mode .slide-counter { display: none; }
+        body.pdf-mode .slide {
+            position: relative;
+            opacity: 1 !important;
+            visibility: visible !important;
+            page-break-after: always;
+            page-break-inside: avoid;
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+
+        <!-- SLIDE 01 — Cover -->
+        <div class="slide bg-black active" data-slide="1">
+            <div class="top-bar">
+                <div class="top-bar-logo">
+                    <img src="assets/logos/icon-only.png" alt="Troll Icon">
+                </div>
+                <div class="top-bar-text">
+                    Brand Guidelines<br>
+                    Version 1.0 — 2026
+                </div>
+            </div>
+            <div class="flex-center flex-col">
+                <h1><span class="text-green">$</span>TROLL</h1>
+                <p class="text-gray">Brand Guidelines</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 02 — Introduction -->
+        <div class="slide bg-white" data-slide="2">
+            <div class="label">INTRODUCTION</div>
+            <h2>Internet history that never asked for permission.</h2>
+            <p style="margin-bottom: 32px;">$TROLL is the only meme coin with exclusive worldwide intellectual property rights to the Trollface — the internet's oldest and most culturally significant meme, created in 2008 by Carlos Ramirez.</p>
+            <p class="text-gray">These guidelines ensure consistent, premium representation of the brand across all touchpoints.</p>
+        </div>
+
+        <!-- SLIDE 03 — Brand Essence -->
+        <div class="slide bg-black" data-slide="3">
+            <div class="label">BRAND ESSENCE</div>
+            <h2>Confidence earned through time, repetition, and survival across eras.</h2>
+            <p class="text-gray" style="margin-top: auto;">This is not merch that asks for attention. It assumes relevance.</p>
+        </div>
+
+        <!-- SLIDE 04 — Brand Values -->
+        <div class="slide bg-white" data-slide="4">
+            <div class="label">BRAND VALUES</div>
+            <h2>What we stand for</h2>
+            <div class="grid-4" style="margin-top: 48px;">
+                <div class="card">
+                    <h3>Confident</h3>
+                    <p style="font-size: 16px;">Quiet dominance. Self-assured without being loud.</p>
+                </div>
+                <div class="card">
+                    <h3>Irreverent</h3>
+                    <p style="font-size: 16px;">Doesn't take itself too seriously. Sharp, self-aware humor.</p>
+                </div>
+                <div class="card">
+                    <h3>Unbothered</h3>
+                    <p style="font-size: 16px;">Calm while others cope. Detached from the noise.</p>
+                </div>
+                <div class="card">
+                    <h3>Timeless</h3>
+                    <p style="font-size: 16px;">Predates every platform. Outlasts every trend.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 05 — Section Divider: Visual Identity -->
+        <div class="slide bg-green" data-slide="5">
+            <div class="flex-center">
+                <div class="divider-text">Visual Identity</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 06 — Primary Logo -->
+        <div class="slide bg-white" data-slide="6">
+            <div class="label">LOGO SYSTEM</div>
+            <h2>Primary Logo</h2>
+            <p>The primary logo combines the Trollface icon with the "U MAD BRO?" wordmark. Use when space permits and brand recognition is the priority.</p>
+            <div class="flex-center" style="flex: 1;">
+                <div class="logo-display" style="width: 100%; max-width: 600px;">
+                    <img src="assets/logos/primary-logo.png" alt="Primary Logo">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 07 — Logo Variations -->
+        <div class="slide bg-white" data-slide="7">
+            <div class="label">LOGO SYSTEM</div>
+            <h2>Logo Variations</h2>
+            <div class="grid-3" style="margin-top: 48px;">
+                <div>
+                    <div class="logo-display" style="height: 200px;">
+                        <img src="assets/logos/primary-logo.png" alt="Primary Logo" style="max-height: 160px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Primary</p>
+                </div>
+                <div>
+                    <div class="logo-display" style="height: 200px;">
+                        <img src="assets/logos/icon-only.png" alt="Icon Only" style="max-height: 160px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Icon Only</p>
+                </div>
+                <div>
+                    <div class="logo-display" style="height: 200px;">
+                        <img src="assets/logos/typed-logo.png" alt="Wordmark" style="max-height: 80px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Wordmark</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 08 — Logo on Dark -->
+        <div class="slide bg-black" data-slide="8">
+            <div class="label">LOGO SYSTEM</div>
+            <h2>Logo on Dark Backgrounds</h2>
+            <div class="grid-3" style="margin-top: 48px;">
+                <div>
+                    <div class="logo-display invert" style="height: 200px; background: rgba(255,255,255,0.05);">
+                        <img src="assets/logos/primary-logo.png" alt="Primary Logo Inverted" style="max-height: 160px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Primary — Inverted</p>
+                </div>
+                <div>
+                    <div class="logo-display invert" style="height: 200px; background: rgba(255,255,255,0.05);">
+                        <img src="assets/logos/icon-only.png" alt="Icon Inverted" style="max-height: 160px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Icon — Inverted</p>
+                </div>
+                <div>
+                    <div class="logo-display invert" style="height: 200px; background: rgba(255,255,255,0.05);">
+                        <img src="assets/logos/typed-logo.png" alt="Wordmark Inverted" style="max-height: 80px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-weight: 600;">Wordmark — Inverted</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 09 — Clear Space -->
+        <div class="slide bg-white" data-slide="9">
+            <div class="label">LOGO SYSTEM</div>
+            <h2>Clear Space</h2>
+            <p>Maintain minimum clear space around the logo equal to the height of the letter "U" in the wordmark. This ensures the logo remains legible and uncluttered.</p>
+            <div class="flex-center" style="flex: 1;">
+                <div class="clearspace-diagram">
+                    <span class="clearspace-label top">U</span>
+                    <span class="clearspace-label bottom">U</span>
+                    <span class="clearspace-label left">U</span>
+                    <span class="clearspace-label right">U</span>
+                    <img src="assets/logos/icon-only.png" alt="Icon with clearspace">
+                </div>
+            </div>
+            <p class="text-gray" style="text-align: center; font-size: 14px;">Minimum clear space = height of "U"</p>
+        </div>
+
+        <!-- SLIDE 10 — Logo Misuse -->
+        <div class="slide bg-white" data-slide="10">
+            <div class="label">LOGO SYSTEM</div>
+            <h2>Logo Misuse</h2>
+            <p>Protect the integrity of the logo. Never alter, distort, or compromise its appearance.</p>
+            <div class="grid-3" style="margin-top: 48px;">
+                <div>
+                    <div class="misuse-example stretch">
+                        <img src="assets/logos/icon-only.png" alt="Stretched logo">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--gray);">Don't stretch or distort</p>
+                </div>
+                <div>
+                    <div class="misuse-example rotate">
+                        <img src="assets/logos/icon-only.png" alt="Rotated logo">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--gray);">Don't rotate</p>
+                </div>
+                <div>
+                    <div class="misuse-example lowcontrast">
+                        <img src="assets/logos/icon-only.png" alt="Low contrast logo">
+                    </div>
+                    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--gray);">Don't use low contrast</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11 — Color Palette -->
+        <div class="slide bg-white" data-slide="11">
+            <div class="label">COLOR PALETTE</div>
+            <h2>Primary Colors</h2>
+            <p>A high-contrast palette that commands attention. Use Troll Green sparingly as an accent.</p>
+            <div class="grid-4" style="margin-top: 48px;">
+                <div>
+                    <div class="color-swatch" style="background: #9EFC60; color: #000;">#9EFC60</div>
+                    <p style="margin-top: 16px; font-weight: 600;">Troll Green</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: #000000; color: #fff;">#000000</div>
+                    <p style="margin-top: 16px; font-weight: 600;">Black</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: #FFFFFF; color: #000; border: 1px solid #eee;">#FFFFFF</div>
+                    <p style="margin-top: 16px; font-weight: 600;">White</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: #808080; color: #fff;">#808080</div>
+                    <p style="margin-top: 16px; font-weight: 600;">Gray</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12 — Color Usage -->
+        <div class="slide bg-black" data-slide="12">
+            <div class="label">COLOR PALETTE</div>
+            <h2>Color Usage</h2>
+            <table style="margin-top: 48px;">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Primary Use</th>
+                        <th>Avoid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span style="display: inline-block; width: 16px; height: 16px; background: #9EFC60; border-radius: 2px; vertical-align: middle; margin-right: 8px;"></span>Troll Green</td>
+                        <td>Accents, highlights, CTAs, energy moments</td>
+                        <td>Large background areas, body text</td>
+                    </tr>
+                    <tr>
+                        <td><span style="display: inline-block; width: 16px; height: 16px; background: #000; border: 1px solid #333; border-radius: 2px; vertical-align: middle; margin-right: 8px;"></span>Black</td>
+                        <td>Primary backgrounds, text, logo default</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><span style="display: inline-block; width: 16px; height: 16px; background: #fff; border-radius: 2px; vertical-align: middle; margin-right: 8px;"></span>White</td>
+                        <td>Backgrounds, negative space, text on dark</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><span style="display: inline-block; width: 16px; height: 16px; background: #808080; border-radius: 2px; vertical-align: middle; margin-right: 8px;"></span>Gray</td>
+                        <td>Secondary text, borders, subtle elements</td>
+                        <td>Primary headings</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SLIDE 13 — Typography System -->
+        <div class="slide bg-white" data-slide="13">
+            <div class="label">TYPOGRAPHY</div>
+            <h2>Type System</h2>
+            <div style="margin-top: 48px;">
+                <div class="type-specimen">
+                    <h4>PRIMARY — FUTURA PT</h4>
+                    <div class="sample" style="font-weight: 700;">The quick brown fox jumps over the lazy dog</div>
+                    <div class="type-weights">
+                        <span style="font-weight: 300;">Light</span>
+                        <span style="font-weight: 400;">Book</span>
+                        <span style="font-weight: 500;">Medium</span>
+                        <span style="font-weight: 600;">Demi</span>
+                        <span style="font-weight: 700;">Bold</span>
+                        <span style="font-weight: 800;">Heavy</span>
+                        <span style="font-weight: 900;">ExtraBold</span>
+                    </div>
+                </div>
+                <div class="type-specimen">
+                    <h4>DISPLAY — IMPACT</h4>
+                    <div class="sample" style="font-family: Impact, sans-serif; font-size: 48px;">U MAD BRO?</div>
+                    <p style="font-size: 14px; color: var(--gray);">Reserved for wordmark and meme-style applications only.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14 — Typography Hierarchy -->
+        <div class="slide bg-white" data-slide="14">
+            <div class="label">TYPOGRAPHY</div>
+            <h2>Hierarchy</h2>
+            <div style="margin-top: 48px;">
+                <div class="hierarchy-item">
+                    <div class="hierarchy-label">H1 — Headlines</div>
+                    <div style="font-size: 48px; font-weight: 900; letter-spacing: -1px;">Display Headline</div>
+                    <div class="hierarchy-specs">Futura PT ExtraBold / 48px / -1px tracking</div>
+                </div>
+                <div class="hierarchy-item">
+                    <div class="hierarchy-label">H2 — Section Headers</div>
+                    <div style="font-size: 32px; font-weight: 700;">Section Header</div>
+                    <div class="hierarchy-specs">Futura PT Bold / 32px / 0 tracking</div>
+                </div>
+                <div class="hierarchy-item">
+                    <div class="hierarchy-label">H3 — Labels</div>
+                    <div style="font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">LABEL TEXT</div>
+                    <div class="hierarchy-specs">Futura PT Demi / 14px / +2px tracking / Uppercase</div>
+                </div>
+                <div class="hierarchy-item">
+                    <div class="hierarchy-label">Body</div>
+                    <div style="font-size: 16px; font-weight: 400; line-height: 1.6;">Body text for longer form content and descriptions. Keep it clean and readable.</div>
+                    <div class="hierarchy-specs">Futura PT Book / 16px / 160% line height</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15 — Utility Font -->
+        <div class="slide bg-black" data-slide="15">
+            <div class="label label-green">TYPOGRAPHY</div>
+            <h2>Utility Font</h2>
+            <div style="margin-top: 48px;">
+                <h4 style="font-size: 14px; letter-spacing: 2px; color: var(--gray); margin-bottom: 24px;">CODE 7X5</h4>
+                <div class="code-font text-green" style="font-size: 48px; margin-bottom: 32px;">HEXCODE: 9EFC60</div>
+                <p class="text-gray">Use for hex codes, technical specifications, retro/pixel aesthetic moments, and utility text.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 16 — Section Divider: Tone & Voice -->
+        <div class="slide bg-green" data-slide="16">
+            <div class="flex-center">
+                <div class="divider-text">Tone & Voice</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17 — Be This, Not That -->
+        <div class="slide bg-black" data-slide="17">
+            <div class="label">TONE & VOICE</div>
+            <h2>Be This, Not That</h2>
+            <div class="be-this-grid">
+                <div class="be-this-col green-header">
+                    <h4>Be This</h4>
+                    <ul>
+                        <li>Smug</li>
+                        <li>Playful</li>
+                        <li>Observant</li>
+                        <li>Minimal</li>
+                    </ul>
+                </div>
+                <div class="be-this-col red-header">
+                    <h4>Not That</h4>
+                    <ul>
+                        <li>Loud</li>
+                        <li>Silly</li>
+                        <li>Reactive</li>
+                        <li>Empty</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 18 — Emotional Signal -->
+        <div class="slide bg-white" data-slide="18">
+            <div class="label">TONE & VOICE</div>
+            <h2>Emotional Signal</h2>
+            <p>Wearing $TROLL should make the wearer feel:</p>
+            <div class="emotional-grid">
+                <div class="emotional-item">In on the joke</div>
+                <div class="emotional-item">Ahead of the argument</div>
+                <div class="emotional-item">Detached from the noise</div>
+                <div class="emotional-item">Calm while others cope</div>
+            </div>
+            <p style="margin-top: auto; font-style: italic; color: var(--gray);">"It signals status through recognition."</p>
+        </div>
+
+        <!-- SLIDE 19 — What to Avoid -->
+        <div class="slide bg-white" data-slide="19">
+            <div class="label">TONE & VOICE</div>
+            <h2>What to Avoid</h2>
+            <div class="grid-2" style="margin-top: 48px; align-items: start;">
+                <div class="avoid-box">
+                    <ul>
+                        <li>Memey punchlines</li>
+                        <li>Trend slang</li>
+                        <li>Overly ironic phrasing</li>
+                        <li>Call-to-action language</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px;">If it looks like typical crypto merch, it is wrong.</h3>
+                    <p class="text-gray">Merch should feel less like apparel and more like evidence.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 20 — Section Divider: Taglines -->
+        <div class="slide bg-black" data-slide="20">
+            <div class="flex-center">
+                <div class="divider-text text-green">Taglines</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 21 — Tagline Usage Matrix -->
+        <div class="slide bg-white" data-slide="21">
+            <div class="label">TAGLINES</div>
+            <h2>Usage Matrix</h2>
+            <div class="grid-3" style="margin-top: 48px;">
+                <div class="tagline-card">
+                    <h4>"u mad bro?"</h4>
+                    <div class="use-for">Use For</div>
+                    <p style="font-size: 14px;">Premium items, collaborations, art installations, viral activations</p>
+                    <div class="products">
+                        <strong>Products:</strong> Jackets, boots, sculptures, partnership pieces
+                    </div>
+                </div>
+                <div class="tagline-card">
+                    <h4>"mad?"</h4>
+                    <div class="use-for">Use For</div>
+                    <p style="font-size: 14px;">Limited space, hidden placements, special events</p>
+                    <div class="products">
+                        <strong>Products:</strong> Keychains, inside pockets, collaborated pieces
+                    </div>
+                </div>
+                <div class="tagline-card">
+                    <h4>"problem?"</h4>
+                    <div class="use-for">Use For</div>
+                    <p style="font-size: 14px;">Silly/fun items, household products, lower-cost merch</p>
+                    <div class="products">
+                        <strong>Products:</strong> Mugs, door stoppers, fidget spinners, inflatables
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 22 — Section Divider: Photography -->
+        <div class="slide bg-green" data-slide="22">
+            <div class="flex-center">
+                <div class="divider-text">Photography</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 23 — Photography Direction -->
+        <div class="slide bg-white" data-slide="23">
+            <div class="label">PHOTOGRAPHY</div>
+            <h2>Visual Direction</h2>
+            <div class="grid-2" style="margin-top: 32px;">
+                <div>
+                    <h4 style="font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 16px;">Characteristics</h4>
+                    <ul style="list-style: none; font-size: 16px; line-height: 2;">
+                        <li>Street fashion aesthetic</li>
+                        <li>Masks & face coverings</li>
+                        <li>Unconventional poses</li>
+                        <li>Documentary/candid energy</li>
+                        <li>High engagement potential</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: #FF4444; margin-bottom: 16px;">Avoid</h4>
+                    <ul style="list-style: none; font-size: 16px; line-height: 2; color: var(--gray);">
+                        <li>Generic studio setups</li>
+                        <li>Typical influencer poses</li>
+                        <li>Over-produced aesthetics</li>
+                        <li>Stock photo energy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="photo-grid">
+                <img src="assets/photography/photo-01.png" alt="Photo reference 1">
+                <img src="assets/photography/photo-02.png" alt="Photo reference 2">
+                <img src="assets/photography/photo-03.png" alt="Photo reference 3">
+                <img src="assets/photography/photo-04.png" alt="Photo reference 4">
+                <img src="assets/photography/photo-05.png" alt="Photo reference 5">
+                <img src="assets/photography/photo-06.png" alt="Photo reference 6">
+            </div>
+        </div>
+
+        <!-- SLIDE 24 — Section Divider: Applications -->
+        <div class="slide bg-black" data-slide="24">
+            <div class="flex-center">
+                <div class="divider-text">Applications</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 25 — Merchandise Guidelines -->
+        <div class="slide bg-white" data-slide="25">
+            <div class="label">APPLICATIONS</div>
+            <h2>Merchandise</h2>
+            <table style="margin-top: 32px;">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Logo Treatment</th>
+                        <th>Tagline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Premium Apparel</td>
+                        <td>Small chest icon front, statement back</td>
+                        <td>u mad bro?</td>
+                    </tr>
+                    <tr>
+                        <td>Everyday Apparel</td>
+                        <td>Flexible — full logo or icon only</td>
+                        <td>Varies</td>
+                    </tr>
+                    <tr>
+                        <td>Headwear</td>
+                        <td>Large front placement</td>
+                        <td>mad?</td>
+                    </tr>
+                    <tr>
+                        <td>Accessories</td>
+                        <td>Die-cut icon shape</td>
+                        <td>mad?</td>
+                    </tr>
+                    <tr>
+                        <td>Home/Novelty</td>
+                        <td>Icon as primary shape</td>
+                        <td>problem?</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SLIDE 26 — Product Examples -->
+        <div class="slide bg-white" data-slide="26">
+            <div class="label">APPLICATIONS</div>
+            <h2>Product Examples</h2>
+            <div class="product-grid">
+                <img src="assets/applications/tshirt.png" alt="Tees">
+                <img src="assets/applications/outerwear.png" alt="Outerwear">
+                <img src="assets/applications/product3.png" alt="Bottoms">
+                <img src="assets/applications/bracelet.png" alt="Accessories">
+                <img src="assets/applications/product5.png" alt="Product">
+                <img src="assets/applications/product6.png" alt="Product">
+                <img src="assets/applications/product7.png" alt="Product">
+                <img src="assets/applications/product8.png" alt="Product">
+            </div>
+        </div>
+
+        <!-- SLIDE 27 — Quality Standard -->
+        <div class="slide bg-black" data-slide="27">
+            <div class="label">APPLICATIONS</div>
+            <h2>Quality Standard</h2>
+            <div class="flex-center flex-col" style="flex: 1;">
+                <div class="statement-large">
+                    Anti-corporate in spirit.<br>
+                    <span class="text-green">Premium in execution.</span>
+                </div>
+                <p class="text-gray">Materials, print, and construction must justify the confidence of the tone.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 28 — The One-Line Rule -->
+        <div class="slide bg-green" data-slide="28">
+            <div class="label">THE ONE-LINE RULE</div>
+            <div class="flex-center">
+                <h2 style="font-size: 56px; max-width: 900px; text-align: center;">$TROLL merchandise looks like internet history that never asked for permission.</h2>
+            </div>
+        </div>
+
+        <!-- SLIDE 29 — Contact / Credits -->
+        <div class="slide bg-black" data-slide="29">
+            <div class="flex-center flex-col credits">
+                <img src="assets/logos/icon-only.png" alt="Troll Icon">
+                <h3>$TROLL</h3>
+                <p>Brand Guidelines v1.0</p>
+                <p>Prepared by Go To War Strategy Inc.</p>
+                <p>January 2026</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slide-counter">
+        <span id="current">01</span> / 29
+    </div>
+
+    <div class="nav">
+        <button id="prev">←</button>
+        <button id="next">→</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('current');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            counter.textContent = String(index + 1).padStart(2, '0');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.getElementById('next').addEventListener('click', nextSlide);
+        document.getElementById('prev').addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+        });
+
+        // Press 'P' to toggle PDF export mode
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'p' || e.key === 'P') {
+                document.body.classList.toggle('pdf-mode');
+                if (document.body.classList.contains('pdf-mode')) {
+                    alert('PDF Mode ON - Now press Cmd+P to print/save as PDF');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

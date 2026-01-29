@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" fill="currentColor">
+  <!-- Trollface + U MAD BRO? wordmark -->
+
+  <!-- Trollface Icon -->
+  <g transform="translate(50, 20) scale(0.8)">
+    <!-- Head outline -->
+    <path d="M225 10 C340 10, 420 80, 440 180 C460 280, 440 360, 380 410 C320 460, 200 470, 120 440 C40 410, 10 340, 10 260 C10 180, 40 100, 100 50 C160 0, 225 10, 225 10 Z" fill="none" stroke="currentColor" stroke-width="14"/>
+
+    <!-- Inner face outline -->
+    <path d="M225 30 C320 30, 400 90, 420 180 C440 270, 420 340, 365 385 C310 430, 200 440, 135 415 C70 390, 35 330, 35 260 C35 190, 60 115, 115 70 C170 25, 225 30, 225 30 Z" fill="none" stroke="currentColor" stroke-width="7"/>
+
+    <!-- Left eye -->
+    <ellipse cx="145" cy="175" rx="45" ry="55" fill="none" stroke="currentColor" stroke-width="9"/>
+    <ellipse cx="155" cy="185" rx="18" ry="22" fill="currentColor"/>
+
+    <!-- Right eye -->
+    <ellipse cx="305" cy="175" rx="45" ry="55" fill="none" stroke="currentColor" stroke-width="9"/>
+    <ellipse cx="295" cy="185" rx="18" ry="22" fill="currentColor"/>
+
+    <!-- Left eyebrow -->
+    <path d="M90 115 Q145 85, 200 110" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+
+    <!-- Right eyebrow -->
+    <path d="M250 110 Q305 85, 360 115" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+
+    <!-- Nose -->
+    <path d="M225 200 Q240 240, 225 270 Q210 250, 200 270" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Mouth outline -->
+    <path d="M80 290 Q120 260, 180 270 Q225 275, 280 270 Q340 265, 380 300 Q360 380, 280 390 Q225 395, 160 385 Q100 375, 80 290 Z" fill="none" stroke="currentColor" stroke-width="11"/>
+
+    <!-- Teeth top row -->
+    <path d="M100 310 L100 340 M140 305 L140 345 M180 305 L180 350 M220 305 L220 350 M260 305 L260 350 M300 305 L300 345 M340 310 L340 340" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Teeth bottom row -->
+    <path d="M120 355 L120 375 M160 360 L160 380 M200 360 L200 382 M240 360 L240 382 M280 360 L280 380 M320 355 L320 375" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Gum line -->
+    <path d="M95 340 Q225 365, 355 340" fill="none" stroke="currentColor" stroke-width="5"/>
+
+    <!-- Chin wrinkle -->
+    <path d="M160 420 Q225 440, 290 420" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Cheek lines -->
+    <path d="M60 300 Q50 340, 65 380" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    <path d="M390 300 Q400 340, 385 380" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- U MAD BRO? Wordmark -->
+  <text x="250" y="560" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="72" font-weight="900" fill="currentColor">U MAD BRO?</text>
+</svg>
