@@ -11,6 +11,7 @@
   const media = document.getElementById("media");
   const statusEl = document.getElementById("status");
   const noteListEl = document.getElementById("noteList");
+  if (!canvas || !viewer || !media) return;
 
   const ACCESS_PREFIX = "gtw_client_access_";
   const tokenKey = ACCESS_PREFIX + client + "_token";
@@ -26,6 +27,7 @@
   const apiUrl = (apiBase ? apiBase.replace(/\/$/, "") : "") + "/api/annotations";
 
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   const state = {
     tool: "select",
     shapes: [],
