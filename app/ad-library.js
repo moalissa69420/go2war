@@ -133,7 +133,9 @@
           return `
             <div class="asset-card${approvedCardClass}">
               <a href="#" data-asset-url="${url}" data-asset-key="${item.key}" data-kind="video">
-                <video src="${url}" muted playsinline preload="metadata" style="max-width:100%; display:block;"></video>
+                <div class="asset-thumb">
+                  <video data-thumb-video="1" src="${url}" muted playsinline preload="metadata"></video>
+                </div>
                 <div class="meta" style="margin-top:6px;">${label}</div>
               </a>
               <div class="asset-card-actions">${approveBtn}${noteBtn}</div>
@@ -145,7 +147,9 @@
         return `
           <div class="asset-card${approvedCardClass}">
             <a href="#" data-asset-url="${url}" data-asset-key="${item.key}" data-kind="image">
-              <img src="${url}" alt="${label}" style="max-width:100%; display:block;" />
+              <div class="asset-thumb">
+                <img src="${url}" alt="${label}" loading="lazy" />
+              </div>
               <div class="meta" style="margin-top:6px;">${label}</div>
             </a>
             <div class="asset-card-actions">${approveBtn}${noteBtn}</div>
@@ -155,6 +159,24 @@
         `;
       })
       .join("");
+
+    // Ensure video cards show a first-frame preview.
+    grid.querySelectorAll("video[data-thumb-video]").forEach((v) => {
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = "metadata";
+      v.addEventListener(
+        "loadedmetadata",
+        () => {
+          try {
+            v.currentTime = Math.min(0.1, (v.duration || 0) * 0.02);
+          } catch {
+            // ignore
+          }
+        },
+        { once: true }
+      );
+    });
 
     grid.querySelectorAll("a[data-asset-url]").forEach((a) => {
       a.addEventListener("click", (e) => {
