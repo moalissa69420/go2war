@@ -7,24 +7,9 @@
   <link rel="stylesheet" href="../../styles.css" />
 </head>
 <body>
-  <div class="portal">
-    <aside class="portal-index">
-      <div class="portal-index-title">Troll</div>
-      <div class="portal-index-meta">Shared review board</div>
-      <ul>
-        <li><a href="../" style="color:var(--muted);"><span class="num">←</span> Back</a></li>
-        <li style="margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--border);">
-          <a href="#asset_01" data-asset="asset_01"><span class="num">01.</span> Brand Guidelines Cover</a>
-        </li>
-      </ul>
-      <div style="margin-top:1.25rem; font-size:0.75rem; color:var(--muted);">
-        Tip: draw circle/box, then add a note.
-      </div>
-    </aside>
-
-    <main class="portal-content">
-      <div class="title">Troll</div>
-      <div class="subtitle">Password-gated. Markup + notes are shared.</div>
+  <div class="page">
+      <div class="site-title">Go To War Strategy</div>
+      <div class="meta">Client: Troll (shared markup + notes)</div>
 
       <div class="toolbar" role="toolbar" aria-label="Annotation tools">
         <span style="color:var(--muted); margin-right:6px;">Tool:</span>
@@ -45,13 +30,13 @@
         </div>
 
         <div class="notes" id="notes">
-          <div class="subtitle" style="margin-bottom:0.35rem;">Notes</div>
+          <div class="meta" style="margin-bottom:0.35rem;">Notes</div>
           <div id="noteList"></div>
         </div>
       </section>
 
       <section style="margin-top:1.25rem;">
-        <div class="subtitle" style="margin-bottom:0.35rem;">Gallery</div>
+        <div class="meta" style="margin-bottom:0.35rem;">Gallery</div>
         <div class="asset-grid" id="assetGrid">
           <div class="asset-card">
             <a href="#" data-asset="asset_01" data-src="../../troll_bg/assets/logos/primary-logo.png" data-type="image">Primary Logo</a>
@@ -70,7 +55,7 @@
           </div>
         </div>
       </section>
-    </main>
+      <div class="meta" style="margin-top:1.25rem;"><a href="../">Back</a></div>
   </div>
 
   <script>
