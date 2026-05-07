@@ -44,7 +44,17 @@
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ client, password }),
     });
-    if (!res.ok) throw new Error("auth_failed");
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      let detail = text;
+      try {
+        const j = JSON.parse(text);
+        if (j && typeof j === "object" && "error" in j) detail = String(j.error);
+      } catch {
+        // ignore
+      }
+      throw new Error(`auth_failed:${res.status}:${detail || "unknown"}`);
+    }
     const json = await res.json();
     if (!json?.token) throw new Error("missing_token");
     return json.token;
@@ -64,8 +74,9 @@
       setAccess(token);
       // Reload so scripts that read token at startup can sync.
       window.location.reload();
-    } catch {
-      alert("Incorrect password");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      alert(`Password failed for "${client}".\n\n${msg}\n\nTry hard refresh (Cmd+Shift+R).`);
       window.location.href = "/clients/";
     }
   }

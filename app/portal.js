@@ -51,8 +51,15 @@
       body: JSON.stringify({ client: slug, password }),
     });
     if (!res.ok) {
-      const msg = await res.text().catch(() => "");
-      throw new Error(msg || "Auth failed");
+      const text = await res.text().catch(() => "");
+      let detail = text;
+      try {
+        const j = JSON.parse(text);
+        if (j && typeof j === "object" && "error" in j) detail = String(j.error);
+      } catch {
+        // ignore
+      }
+      throw new Error(`auth_failed:${res.status}:${detail || "unknown"}`);
     }
     const json = await res.json();
     if (!json?.token) throw new Error("Missing token");
@@ -84,7 +91,8 @@
         setAccess(slug, token);
         window.location.href = dest;
       } catch (err) {
-        alert("Incorrect password");
+        const msg = err instanceof Error ? err.message : String(err);
+        alert(`Password failed for "${slug}".\n\n${msg}\n\nIf this keeps happening, hard refresh (Cmd+Shift+R).`);
       }
     });
   }
