@@ -128,9 +128,10 @@
         const del = `<button type="button" data-delete-key="${item.key}" style="margin-top:6px;">Delete</button>`;
         const approveBtn = `<button type="button" class="asset-approve ${approved ? "is-approved" : ""}" data-approve-asset="${assetId}" aria-label="Approve">${approved ? "✓ Approved" : "✓ Approve"}</button>`;
         const noteBtn = `<button type="button" class="asset-note-btn" data-note-asset="${assetId}">Add note</button>`;
+        const approvedCardClass = approved ? " is-approved" : "";
         if (isVideo(item)) {
           return `
-            <div class="asset-card">
+            <div class="asset-card${approvedCardClass}">
               <a href="#" data-asset-url="${url}" data-asset-key="${item.key}" data-kind="video">
                 <video src="${url}" muted playsinline preload="metadata" style="max-width:100%; display:block;"></video>
                 <div class="meta" style="margin-top:6px;">${label}</div>
@@ -142,7 +143,7 @@
           `;
         }
         return `
-          <div class="asset-card">
+          <div class="asset-card${approvedCardClass}">
             <a href="#" data-asset-url="${url}" data-asset-key="${item.key}" data-kind="image">
               <img src="${url}" alt="${label}" style="max-width:100%; display:block;" />
               <div class="meta" style="margin-top:6px;">${label}</div>
@@ -178,13 +179,16 @@
         const assetId = btn.getAttribute("data-approve-asset") || "";
         if (!assetId) return;
         const nextApproved = !btn.classList.contains("is-approved");
+        const card = btn.closest(".asset-card");
         try {
           btn.disabled = true;
           await setApproved(assetId, nextApproved);
           btn.classList.toggle("is-approved", nextApproved);
           btn.textContent = nextApproved ? "✓ Approved" : "✓ Approve";
-        } catch {
-          alert("Approve failed");
+          if (card) card.classList.toggle("is-approved", nextApproved);
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          alert(`Approve failed\n\n${msg}`);
         } finally {
           btn.disabled = false;
         }
@@ -202,8 +206,9 @@
           btn.disabled = true;
           await addComment(assetId, String(text).trim());
           await refresh();
-        } catch {
-          alert("Note failed");
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          alert(`Note failed\n\n${msg}`);
         } finally {
           btn.disabled = false;
         }
