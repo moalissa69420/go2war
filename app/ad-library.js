@@ -44,7 +44,10 @@
       headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify({ client, assets: assetIds }),
     });
-    if (!res.ok) throw new Error("batch_failed");
+    if (!res.ok) {
+      const msg = await res.text().catch(() => "");
+      throw new Error(msg || `batch_failed:${res.status}`);
+    }
     return await res.json();
   }
 
@@ -56,7 +59,10 @@
       headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify({ client, asset: assetId, approved: Boolean(approved) }),
     });
-    if (!res.ok) throw new Error("flag_failed");
+    if (!res.ok) {
+      const msg = await res.text().catch(() => "");
+      throw new Error(msg || `flag_failed:${res.status}`);
+    }
     return await res.json();
   }
 
@@ -68,7 +74,10 @@
       headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify({ client, asset: assetId, text: String(text || "") }),
     });
-    if (!res.ok) throw new Error("comment_failed");
+    if (!res.ok) {
+      const msg = await res.text().catch(() => "");
+      throw new Error(msg || `comment_failed:${res.status}`);
+    }
     return await res.json();
   }
 
@@ -80,7 +89,10 @@
       headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify({ client, asset: assetId, id: String(id || "") }),
     });
-    if (!res.ok) throw new Error("comment_delete_failed");
+    if (!res.ok) {
+      const msg = await res.text().catch(() => "");
+      throw new Error(msg || `comment_delete_failed:${res.status}`);
+    }
     return await res.json();
   }
 
