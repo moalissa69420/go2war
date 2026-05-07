@@ -18,10 +18,9 @@
   const apiBase = window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
   const uploader = document.getElementById("uploader");
   const grid = document.getElementById("assetGrid");
-  const media = document.getElementById("media");
   const statusEl = document.getElementById("status");
 
-  if (!apiBase || !grid || !media) return;
+  if (!apiBase || !grid) return;
 
   function setStatus(msg) {
     if (statusEl) statusEl.textContent = msg || "";
@@ -151,19 +150,13 @@
         const kind = a.getAttribute("data-kind");
         if (!url) return;
 
-        const key = a.getAttribute("data-asset-key") || "";
-
-        // MVP: we annotate images. For video, we just open in a new tab for now.
+        // Grid-only review: open the asset for full view.
+        // (Video opens as video; image opens as image)
         if (kind === "video") {
           window.open(url, "_blank", "noreferrer");
           return;
         }
-
-        media.setAttribute("src", url);
-        // Save notes per creative (per asset key)
-        if (key && window.GTW_ANNOTATE?.setAssetId) {
-          window.GTW_ANNOTATE.setAssetId(`r2:${key}`);
-        }
+        window.open(url, "_blank", "noreferrer");
       });
     });
 
