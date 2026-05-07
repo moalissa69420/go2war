@@ -218,13 +218,17 @@ export default {
       if (!env.GTW_TOKEN_SECRET) return bad(500, "missing_GTW_TOKEN_SECRET");
       if (!env.ASSETS) return bad(500, "missing_R2_binding");
 
-      const auth = req.headers.get("authorization") || "";
-      const m = auth.match(/^Bearer\s+(.+)$/i);
-      if (!m) return bad(401, "unauthorized");
+      async function getTokenPayload() {
+        const auth = req.headers.get("authorization") || "";
+        const m = auth.match(/^Bearer\s+(.+)$/i);
+        const token = m?.[1] || String(url.searchParams.get("t") || "").trim();
+        if (!token) throw new Error("unauthorized");
+        return await verifyToken(token, env.GTW_TOKEN_SECRET);
+      }
 
       let tokenPayload;
       try {
-        tokenPayload = await verifyToken(m[1], env.GTW_TOKEN_SECRET);
+        tokenPayload = await getTokenPayload();
       } catch {
         return bad(401, "unauthorized");
       }

@@ -42,6 +42,7 @@
   }
 
   function render(items) {
+    const token = getToken();
     if (!items?.length) {
       grid.innerHTML = `<div class="asset-card"><div class="meta">No assets yet. Use Upload.</div></div>`;
       return;
@@ -49,7 +50,7 @@
 
     grid.innerHTML = items
       .map((item) => {
-        const url = `${apiBase.replace(/\/$/, "")}${item.url}`;
+        const url = `${apiBase.replace(/\/$/, "")}${item.url}&t=${encodeURIComponent(token)}`;
         const label = (item.name || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
         if (isVideo(item)) {
           return `
