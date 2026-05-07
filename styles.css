@@ -130,6 +130,48 @@ a:hover { text-decoration: underline; }
   padding: 8px;
 }
 
+.asset-card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.asset-approve {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #000;
+  padding: 0.25rem 0.45rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.asset-note-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #000;
+  padding: 0.25rem 0.45rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.asset-approve.is-approved {
+  border-color: #000;
+  font-weight: 700;
+}
+
+.asset-notes {
+  margin-top: 6px;
+}
+
+.asset-note {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  margin-top: 4px;
+  color: #000;
+  word-break: break-word;
+}
+
 .asset-card img, .asset-card video {
   width: 100%;
   height: auto;

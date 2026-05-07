@@ -33,6 +33,7 @@
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   const state = {
+    assetId,
     tool: "select",
     shapes: [],
     selectedId: null,
@@ -261,7 +262,7 @@
       return;
     }
     setStatus("Loading…");
-    const res = await fetch(`${apiUrl}?client=${encodeURIComponent(client)}&asset=${encodeURIComponent(assetId)}`, {
+    const res = await fetch(`${apiUrl}?client=${encodeURIComponent(client)}&asset=${encodeURIComponent(state.assetId)}`, {
       headers: { authorization: `Bearer ${token}` },
     });
     if (!res.ok) {
@@ -290,7 +291,7 @@
     const res = await fetch(apiUrl, {
       method: "PUT",
       headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
-      body: JSON.stringify({ client, asset: assetId, shapes: state.shapes }),
+      body: JSON.stringify({ client, asset: state.assetId, shapes: state.shapes }),
     });
     if (!res.ok) {
       setStatus("Save failed");
@@ -414,7 +415,9 @@
   async function pollOnce() {
     if (!canSync()) return;
     if (state.dirty || state.drag) return;
-    const res = await fetch(`${apiUrl}?client=${encodeURIComponent(client)}&asset=${encodeURIComponent(assetId)}`, {
+    const token = getToken();
+    if (!token) return;
+    const res = await fetch(`${apiUrl}?client=${encodeURIComponent(client)}&asset=${encodeURIComponent(state.assetId)}`, {
       headers: { authorization: `Bearer ${token}` },
     });
     if (!res.ok) return;
@@ -434,6 +437,23 @@
   bindUI();
   resizeCanvas();
   loadRemote();
+
+  function setAssetId(nextAssetId) {
+    const next = String(nextAssetId || "").trim();
+    if (!next || next === state.assetId) return;
+    state.assetId = next;
+    state.selectedId = null;
+    state.drag = null;
+    state.dirty = false;
+    state.remoteUpdatedAt = "";
+    state.shapes = [];
+    renderNotes();
+    draw();
+    loadRemote();
+  }
+
+  window.GTW_ANNOTATE = window.GTW_ANNOTATE || {};
+  window.GTW_ANNOTATE.setAssetId = setAssetId;
 
   // Near-live collaboration: poll for updates.
   state.pollTimer = window.setInterval(() => {

@@ -5,6 +5,9 @@
  * - POST /api/auth        { client, password } -> { token, expiresIn }
  * - GET  /api/annotations?client=...&asset=...  (Bearer token) -> { shapes: [] }
  * - PUT  /api/annotations { client, asset, shapes } (Bearer token) -> { ok: true }
+ * - POST /api/annotations/batch { client, assets: [] } (Bearer token) -> { items: { [assetId]: { notes: [], approved: bool, updatedAt: string } } }
+ * - POST /api/annotations/flag  { client, asset, approved } (Bearer token) -> { ok: true, updatedAt }
+ * - POST /api/annotations/comment { client, asset, text } (Bearer token) -> { ok: true, updatedAt }
  * - GET  /api/assets?client=...                (Bearer token) -> { items: [...] }
  * - POST /api/assets/upload                    (Bearer token, multipart) -> { item }
  * - GET  /api/assets/file?key=...              (Bearer token) -> file bytes
@@ -209,6 +212,131 @@ export default {
       }
 
       return bad(405, "method_not_allowed");
+    }
+
+    if (path === "/api/annotations/batch" || path === "/api/annotations/flag" || path === "/api/annotations/comment") {
+      if (!env.GTW_TOKEN_SECRET) return bad(500, "missing_GTW_TOKEN_SECRET");
+
+      const auth = req.headers.get("authorization") || "";
+      const m = auth.match(/^Bearer\s+(.+)$/i);
+      if (!m) return bad(401, "unauthorized");
+
+      let tokenPayload;
+      try {
+        tokenPayload = await verifyToken(m[1], env.GTW_TOKEN_SECRET);
+      } catch {
+        return bad(401, "unauthorized");
+      }
+
+      function summarizeShapes(shapes) {
+        const notes = [];
+        let approved = false;
+        for (const s of shapes || []) {
+          if (s && s.type === "note") {
+            const t = String(s.text || "").trim();
+            if (t) notes.push(t);
+          }
+          if (s && s.type === "comment") {
+            const t = String(s.text || "").trim();
+            if (t) notes.push(t);
+          }
+          if (s && s.type === "meta" && s.approved === true) approved = true;
+        }
+        return { notes, approved };
+      }
+
+      if (path === "/api/annotations/batch") {
+        if (req.method !== "POST") return bad(405, "method_not_allowed");
+        let parsed;
+        try {
+          parsed = await req.json();
+        } catch {
+          return bad(400, "bad_json");
+        }
+        const client = String(parsed.client || "").trim().toLowerCase();
+        const assets = Array.isArray(parsed.assets) ? parsed.assets.map((a) => String(a || "").trim()).filter(Boolean) : [];
+        if (!client) return bad(400, "missing_fields");
+        if (client !== tokenPayload.client) return bad(403, "forbidden");
+        if (!assets.length) return json({ client, items: {} });
+
+        // Limit to keep queries safe.
+        const uniq = Array.from(new Set(assets)).slice(0, 200);
+        const placeholders = uniq.map((_, i) => `?${i + 2}`).join(", ");
+        const stmt = env.DB.prepare(
+          `SELECT asset_id, shapes_json, updated_at FROM annotations WHERE client_slug = ?1 AND asset_id IN (${placeholders})`
+        ).bind(client, ...uniq);
+        const rows = await stmt.all();
+        const items = {};
+        for (const r of rows.results || []) {
+          let shapes = [];
+          try {
+            shapes = JSON.parse(r.shapes_json || "[]");
+          } catch {
+            shapes = [];
+          }
+          const sum = summarizeShapes(shapes);
+          items[String(r.asset_id)] = { ...sum, updatedAt: r.updated_at };
+        }
+        return json({ client, items });
+      }
+
+      // /api/annotations/flag
+      if (req.method !== "POST") return bad(405, "method_not_allowed");
+      let parsed;
+      try {
+        parsed = await req.json();
+      } catch {
+        return bad(400, "bad_json");
+      }
+      const client = String(parsed.client || "").trim().toLowerCase();
+      const asset = String(parsed.asset || "").trim();
+      if (!client || !asset) return bad(400, "missing_fields");
+      if (client !== tokenPayload.client) return bad(403, "forbidden");
+
+      const row = await env.DB.prepare(
+        "SELECT shapes_json FROM annotations WHERE client_slug = ?1 AND asset_id = ?2"
+      )
+        .bind(client, asset)
+        .first();
+
+      let shapes = [];
+      try {
+        shapes = JSON.parse((row && row.shapes_json) || "[]");
+      } catch {
+        shapes = [];
+      }
+      shapes = Array.isArray(shapes) ? shapes : [];
+
+      if (path === "/api/annotations/flag") {
+        const approved = Boolean(parsed.approved);
+        // Upsert a single meta shape.
+        let found = false;
+        for (const s of shapes) {
+          if (s && s.type === "meta") {
+            s.approved = approved;
+            found = true;
+            break;
+          }
+        }
+        if (!found) shapes.push({ id: "meta", type: "meta", approved });
+      }
+
+      if (path === "/api/annotations/comment") {
+        const text = String(parsed.text || "").trim();
+        if (!text) return bad(400, "missing_text");
+        const id = `c_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
+        shapes.push({ id, type: "comment", text, createdAt: new Date().toISOString() });
+      }
+
+      const updatedAt = new Date().toISOString();
+      await env.DB.prepare(
+        "INSERT INTO annotations (client_slug, asset_id, shapes_json, updated_at) VALUES (?1, ?2, ?3, ?4)\n" +
+          "ON CONFLICT(client_slug, asset_id) DO UPDATE SET shapes_json = excluded.shapes_json, updated_at = excluded.updated_at"
+      )
+        .bind(client, asset, JSON.stringify(shapes), updatedAt)
+        .run();
+
+      return json({ ok: true, updatedAt });
     }
 
     // --------------------
