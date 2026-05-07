@@ -391,7 +391,8 @@ export default {
             size: o.size,
             uploaded: o.uploaded ? new Date(o.uploaded).toISOString() : undefined,
             url: `/api/assets/file?key=${encodeURIComponent(key)}`,
-            contentType: guessContentType(name),
+            // Prefer stored metadata (set at upload time) since filename-based guessing is imperfect.
+            contentType: String(o.customMetadata?.contentType || "").trim() || guessContentType(name),
           };
         });
 
@@ -425,7 +426,7 @@ export default {
         const ct = file.type || guessContentType(original);
         await env.ASSETS.put(key, file.stream(), {
           httpMetadata: { contentType: ct },
-          customMetadata: { client },
+          customMetadata: { client, contentType: ct },
         });
 
         const item = {
