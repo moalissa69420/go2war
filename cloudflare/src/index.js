@@ -74,6 +74,18 @@ function getClientPassword(env, slug) {
   return env[key] || "";
 }
 
+function constantTimeEqual(a, b) {
+  const enc = new TextEncoder();
+  const ab = enc.encode(String(a));
+  const bb = enc.encode(String(b));
+  const max = Math.max(ab.length, bb.length);
+  let diff = ab.length ^ bb.length;
+  for (let i = 0; i < max; i++) {
+    diff |= (ab[i] || 0) ^ (bb[i] || 0);
+  }
+  return diff === 0;
+}
+
 export default {
   async fetch(req, env) {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*" } });
@@ -95,7 +107,7 @@ export default {
 
       const expected = getClientPassword(env, client);
       if (!expected) return bad(403, "unknown_client");
-      if (password !== expected) return bad(403, "wrong_password");
+      if (!constantTimeEqual(password, expected)) return bad(403, "wrong_password");
 
       const now = Math.floor(Date.now() / 1000);
       const expiresIn = 60 * 60 * 8;
