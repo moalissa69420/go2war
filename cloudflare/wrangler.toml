@@ -4,7 +4,7 @@ compatibility_date = "2026-05-07"
 
 # Create the D1 database and bind it as "DB"
 d1_databases = [
-  { binding = "DB", database_name = "go2war-client-portal", database_id = "REPLACE_WITH_D1_DATABASE_ID" }
+  { binding = "DB", database_name = "go2war-client-portal", database_id = "03af6ed4-9075-4cf1-9f59-91af72e736ed" }
 ]
 
 [vars]
