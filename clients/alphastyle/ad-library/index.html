@@ -10,7 +10,7 @@
   <div class="page">
     <div class="site-title">GO TO WAR</div>
     <div class="subtitle">AlphaStyle — Ad Library</div>
-    <div class="meta">Add creative into <code>assets/clients/alphastyle/ad-library/</code> then select + annotate here.</div>
+    <div class="meta">Upload assets, then select + annotate.</div>
 
     <div class="toolbar" role="toolbar" aria-label="Annotation tools">
       <span style="color:var(--muted); margin-right:6px;">Tool</span>
@@ -21,6 +21,10 @@
       <button type="button" data-action="undo">Undo</button>
       <button type="button" data-action="delete">Delete</button>
       <button type="button" data-action="save">Save</button>
+      <label style="margin-left:8px; display:inline-flex; gap:8px; align-items:center;">
+        <span style="color:var(--muted);">Upload</span>
+        <input id="uploader" type="file" multiple accept="image/*,video/*,.gif" />
+      </label>
       <span id="status" style="margin-left:auto; color:var(--muted); font-size:0.85rem;"></span>
     </div>
 
@@ -45,9 +49,7 @@
       <div class="meta" style="margin-bottom:0.35rem;">Gallery</div>
       <div class="asset-grid" id="assetGrid">
         <div class="asset-card">
-          <div class="meta">No images found yet.</div>
-          <div class="meta">Put JPG/PNG/GIF/WEBP into:</div>
-          <div class="meta"><code>assets/clients/alphastyle/ad-library/</code></div>
+          <div class="meta">No assets yet. Use Upload.</div>
         </div>
       </div>
     </section>
@@ -62,6 +64,7 @@
   </script>
   <script src="../../../app/guard.js"></script>
   <script src="../../../app/annotate.js"></script>
+  <script src="../../../app/ad-library.js"></script>
 </body>
 </html>
 

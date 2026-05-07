@@ -7,6 +7,10 @@ d1_databases = [
   { binding = "DB", database_name = "go2war-client-portal", database_id = "03af6ed4-9075-4cf1-9f59-91af72e736ed" }
 ]
 
+[[r2_buckets]]
+bucket_name = "go2war-client-assets"
+binding = "ASSETS"
+
 [vars]
 # Add per-client passwords as vars (or use secrets):
 # CLIENT_PASSWORD_TROLL = "troll100"

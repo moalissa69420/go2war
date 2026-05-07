@@ -5,6 +5,9 @@
  * - POST /api/auth        { client, password } -> { token, expiresIn }
  * - GET  /api/annotations?client=...&asset=...  (Bearer token) -> { shapes: [] }
  * - PUT  /api/annotations { client, asset, shapes } (Bearer token) -> { ok: true }
+ * - GET  /api/assets?client=...                (Bearer token) -> { items: [...] }
+ * - POST /api/assets/upload                    (Bearer token, multipart) -> { item }
+ * - GET  /api/assets/file?key=...              (Bearer token) -> file bytes
  */
 
 function json(body, status = 200, extraHeaders = {}) {
@@ -84,6 +87,27 @@ function constantTimeEqual(a, b) {
     diff |= (ab[i] || 0) ^ (bb[i] || 0);
   }
   return diff === 0;
+}
+
+function safeKeyPart(s) {
+  return String(s || "")
+    .trim()
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 120);
+}
+
+function guessContentType(name) {
+  const n = String(name || "").toLowerCase();
+  if (n.endsWith(".png")) return "image/png";
+  if (n.endsWith(".jpg") || n.endsWith(".jpeg")) return "image/jpeg";
+  if (n.endsWith(".webp")) return "image/webp";
+  if (n.endsWith(".gif")) return "image/gif";
+  if (n.endsWith(".mp4")) return "video/mp4";
+  if (n.endsWith(".webm")) return "video/webm";
+  if (n.endsWith(".mov")) return "video/quicktime";
+  return "application/octet-stream";
 }
 
 export default {
@@ -182,6 +206,108 @@ export default {
           .run();
 
         return json({ ok: true, updatedAt });
+      }
+
+      return bad(405, "method_not_allowed");
+    }
+
+    // --------------------
+    // Assets (R2 uploads)
+    // --------------------
+    if (path === "/api/assets" || path === "/api/assets/upload" || path === "/api/assets/file") {
+      if (!env.GTW_TOKEN_SECRET) return bad(500, "missing_GTW_TOKEN_SECRET");
+      if (!env.ASSETS) return bad(500, "missing_R2_binding");
+
+      const auth = req.headers.get("authorization") || "";
+      const m = auth.match(/^Bearer\s+(.+)$/i);
+      if (!m) return bad(401, "unauthorized");
+
+      let tokenPayload;
+      try {
+        tokenPayload = await verifyToken(m[1], env.GTW_TOKEN_SECRET);
+      } catch {
+        return bad(401, "unauthorized");
+      }
+
+      if (path === "/api/assets" && req.method === "GET") {
+        const client = String(url.searchParams.get("client") || "").trim().toLowerCase();
+        if (!client) return bad(400, "missing_query");
+        if (client !== tokenPayload.client) return bad(403, "forbidden");
+
+        const prefix = `${client}/`;
+        const listed = await env.ASSETS.list({ prefix });
+        const items = (listed.objects || []).map((o) => {
+          const key = o.key;
+          const name = key.slice(prefix.length);
+          return {
+            key,
+            name,
+            size: o.size,
+            uploaded: o.uploaded ? new Date(o.uploaded).toISOString() : undefined,
+            url: `/api/assets/file?key=${encodeURIComponent(key)}`,
+            contentType: guessContentType(name),
+          };
+        });
+
+        // newest first
+        items.sort((a, b) => (b.uploaded || "").localeCompare(a.uploaded || ""));
+        return json({ client, items });
+      }
+
+      if (path === "/api/assets/upload" && req.method === "POST") {
+        const contentType = req.headers.get("content-type") || "";
+        if (!contentType.includes("multipart/form-data")) return bad(415, "expected_multipart");
+
+        let form;
+        try {
+          form = await req.formData();
+        } catch {
+          return bad(400, "bad_form_data");
+        }
+
+        const client = String(form.get("client") || "").trim().toLowerCase();
+        if (!client) return bad(400, "missing_client");
+        if (client !== tokenPayload.client) return bad(403, "forbidden");
+
+        const file = form.get("file");
+        if (!(file instanceof File)) return bad(400, "missing_file");
+
+        const original = safeKeyPart(file.name || "upload");
+        const ts = Date.now();
+        const key = `${client}/${ts}-${original || "upload"}`;
+
+        const ct = file.type || guessContentType(original);
+        await env.ASSETS.put(key, file.stream(), {
+          httpMetadata: { contentType: ct },
+          customMetadata: { client },
+        });
+
+        const item = {
+          key,
+          name: key.slice((client + "/").length),
+          size: file.size,
+          url: `/api/assets/file?key=${encodeURIComponent(key)}`,
+          contentType: ct,
+        };
+        return json({ ok: true, item });
+      }
+
+      if (path === "/api/assets/file" && req.method === "GET") {
+        const key = String(url.searchParams.get("key") || "").trim();
+        if (!key) return bad(400, "missing_key");
+
+        const clientPrefix = `${tokenPayload.client}/`;
+        if (!key.startsWith(clientPrefix)) return bad(403, "forbidden");
+
+        const obj = await env.ASSETS.get(key);
+        if (!obj) return bad(404, "not_found");
+
+        const headers = new Headers();
+        headers.set("access-control-allow-origin", "*");
+        if (obj.httpMetadata?.contentType) headers.set("content-type", obj.httpMetadata.contentType);
+        // Cache a bit (safe because key includes timestamp)
+        headers.set("cache-control", "public, max-age=3600");
+        return new Response(obj.body, { status: 200, headers });
       }
 
       return bad(405, "method_not_allowed");
