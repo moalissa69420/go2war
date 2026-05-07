@@ -52,6 +52,7 @@
       .map((item) => {
         const url = `${apiBase.replace(/\/$/, "")}${item.url}&t=${encodeURIComponent(token)}`;
         const label = (item.name || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+        const del = `<button type="button" data-delete-key="${item.key}" style="margin-top:6px;">Delete</button>`;
         if (isVideo(item)) {
           return `
             <div class="asset-card">
@@ -59,6 +60,7 @@
                 <video src="${url}" muted playsinline preload="metadata" style="max-width:100%; display:block;"></video>
                 <div class="meta" style="margin-top:6px;">${label}</div>
               </a>
+              ${del}
             </div>
           `;
         }
@@ -68,6 +70,7 @@
               <img src="${url}" alt="${label}" style="max-width:100%; display:block;" />
               <div class="meta" style="margin-top:6px;">${label}</div>
             </a>
+            ${del}
           </div>
         `;
       })
@@ -90,14 +93,35 @@
         // Keep same asset id for now (single shared board). We can evolve to per-asset ids later.
       });
     });
+
+    grid.querySelectorAll("button[data-delete-key]").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const key = btn.getAttribute("data-delete-key");
+        if (!key) return;
+        if (!confirm("Delete this asset?")) return;
+        try {
+          await deleteAsset(key);
+          await refresh();
+        } catch {
+          alert("Delete failed");
+        }
+      });
+    });
   }
 
   async function refresh() {
     try {
+      const token = getToken();
+      if (!token) {
+        setStatus("Enter password to load assets…");
+        setTimeout(() => refresh(), 500);
+        return;
+      }
       const data = await listAssets();
       render(data.items || []);
-    } catch {
-      // ignore
+    } catch (e) {
+      setStatus("Failed to load assets");
     }
   }
 
@@ -118,6 +142,17 @@
       const text = await res.text().catch(() => "");
       throw new Error(text || "upload_failed");
     }
+  }
+
+  async function deleteAsset(key) {
+    const token = getToken();
+    if (!token) throw new Error("no_token");
+    const res = await fetch(`${apiBase.replace(/\/$/, "")}/api/assets/delete`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+      body: JSON.stringify({ key }),
+    });
+    if (!res.ok) throw new Error("delete_failed");
   }
 
   if (uploader) {

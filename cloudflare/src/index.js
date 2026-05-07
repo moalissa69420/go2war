@@ -214,7 +214,7 @@ export default {
     // --------------------
     // Assets (R2 uploads)
     // --------------------
-    if (path === "/api/assets" || path === "/api/assets/upload" || path === "/api/assets/file") {
+    if (path === "/api/assets" || path === "/api/assets/upload" || path === "/api/assets/file" || path === "/api/assets/delete") {
       if (!env.GTW_TOKEN_SECRET) return bad(500, "missing_GTW_TOKEN_SECRET");
       if (!env.ASSETS) return bad(500, "missing_R2_binding");
 
@@ -312,6 +312,23 @@ export default {
         // Cache a bit (safe because key includes timestamp)
         headers.set("cache-control", "public, max-age=3600");
         return new Response(obj.body, { status: 200, headers });
+      }
+
+      if (path === "/api/assets/delete" && req.method === "POST") {
+        let parsed;
+        try {
+          parsed = await req.json();
+        } catch {
+          return bad(400, "bad_json");
+        }
+        const key = String(parsed.key || "").trim();
+        if (!key) return bad(400, "missing_key");
+
+        const clientPrefix = `${tokenPayload.client}/`;
+        if (!key.startsWith(clientPrefix)) return bad(403, "forbidden");
+
+        await env.ASSETS.delete(key);
+        return json({ ok: true });
       }
 
       return bad(405, "method_not_allowed");
