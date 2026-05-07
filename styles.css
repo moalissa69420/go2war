@@ -5,18 +5,31 @@
   --border: #e9e9ec;
 }
 
+html {
+  font-size: 16px;
+  overflow-y: scroll;
+  min-height: 100%;
+  -webkit-text-size-adjust: none;
+  overflow-x: hidden !important;
+}
+
 body {
   margin: 0;
   padding: 1.5em 10px 0 10px;
   max-width: none;
   font-family: "Times New Roman", Times, serif;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1;
   color: #000;
   text-align: left;
   letter-spacing: 0em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+p, div {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 a { color: #000; text-decoration: none; }
@@ -29,7 +42,8 @@ a:hover { text-decoration: underline; }
 .site-title {
   font-size: 0.8125rem;
   margin-bottom: 0.3em;
-  font-weight: 700;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .meta {
