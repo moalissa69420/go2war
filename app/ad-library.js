@@ -73,6 +73,18 @@
     return await res.json();
   }
 
+  async function deleteComment(assetId, id) {
+    const token = getToken();
+    if (!token) throw new Error("no_token");
+    const res = await fetch(`${apiBase.replace(/\/$/, "")}/api/annotations/comment/delete`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+      body: JSON.stringify({ client, asset: assetId, id: String(id || "") }),
+    });
+    if (!res.ok) throw new Error("comment_delete_failed");
+    return await res.json();
+  }
+
   function isVideo(item) {
     return String(item.contentType || "").startsWith("video/");
   }
@@ -89,9 +101,17 @@
         const assetId = `r2:${item.key}`;
         const summary = summariesByAssetId?.[assetId] || {};
         const approved = summary.approved === true;
+        const comments = Array.isArray(summary.comments) ? summary.comments : [];
         const notes = Array.isArray(summary.notes) ? summary.notes : [];
-        const notePreview = notes.slice(0, 2).map((t) => `<div class="asset-note">${escapeHtml(t)}</div>`).join("");
-        const more = notes.length > 2 ? `<div class="asset-note meta">+${notes.length - 2} more</div>` : "";
+        const preview = (comments.length ? comments.map((c) => c?.text).filter(Boolean) : notes).slice(0, 3);
+        const notePreview = preview
+          .map((t, idx) => {
+            const c = comments[idx];
+            const del = c?.id ? `<button type="button" class="asset-note-del" data-note-del-asset="${assetId}" data-note-del-id="${escapeAttr(c.id)}" aria-label="Delete note">×</button>` : "";
+            return `<div class="asset-note-row"><div class="asset-note">${escapeHtml(t)}</div>${del}</div>`;
+          })
+          .join("");
+        const more = (comments.length ? comments.length : notes.length) > 3 ? `<div class="asset-note meta">+more</div>` : "";
         const url = `${apiBase.replace(/\/$/, "")}${item.url}&t=${encodeURIComponent(token)}`;
         const label = (item.name || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
         const del = `<button type="button" data-delete-key="${item.key}" style="margin-top:6px;">Delete</button>`;
@@ -185,6 +205,25 @@
       });
     });
 
+    grid.querySelectorAll("button[data-note-del-id]").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const assetId = btn.getAttribute("data-note-del-asset") || "";
+        const id = btn.getAttribute("data-note-del-id") || "";
+        if (!assetId || !id) return;
+        try {
+          btn.disabled = true;
+          await deleteComment(assetId, id);
+          await refresh();
+        } catch {
+          alert("Delete note failed");
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    });
+
     grid.querySelectorAll("button[data-delete-key]").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -221,6 +260,10 @@
 
   function escapeHtml(s) {
     return String(s || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  }
+
+  function escapeAttr(s) {
+    return String(s || "").replace(/["&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   }
 
   async function uploadFile(file) {

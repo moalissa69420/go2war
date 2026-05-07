@@ -8,6 +8,7 @@
  * - POST /api/annotations/batch { client, assets: [] } (Bearer token) -> { items: { [assetId]: { notes: [], approved: bool, updatedAt: string } } }
  * - POST /api/annotations/flag  { client, asset, approved } (Bearer token) -> { ok: true, updatedAt }
  * - POST /api/annotations/comment { client, asset, text } (Bearer token) -> { ok: true, updatedAt }
+ * - POST /api/annotations/comment/delete { client, asset, id } (Bearer token) -> { ok: true, updatedAt }
  * - GET  /api/assets?client=...                (Bearer token) -> { items: [...] }
  * - POST /api/assets/upload                    (Bearer token, multipart) -> { item }
  * - GET  /api/assets/file?key=...              (Bearer token) -> file bytes
@@ -214,7 +215,12 @@ export default {
       return bad(405, "method_not_allowed");
     }
 
-    if (path === "/api/annotations/batch" || path === "/api/annotations/flag" || path === "/api/annotations/comment") {
+    if (
+      path === "/api/annotations/batch" ||
+      path === "/api/annotations/flag" ||
+      path === "/api/annotations/comment" ||
+      path === "/api/annotations/comment/delete"
+    ) {
       if (!env.GTW_TOKEN_SECRET) return bad(500, "missing_GTW_TOKEN_SECRET");
 
       const auth = req.headers.get("authorization") || "";
@@ -230,6 +236,7 @@ export default {
 
       function summarizeShapes(shapes) {
         const notes = [];
+        const comments = [];
         let approved = false;
         for (const s of shapes || []) {
           if (s && s.type === "note") {
@@ -239,10 +246,11 @@ export default {
           if (s && s.type === "comment") {
             const t = String(s.text || "").trim();
             if (t) notes.push(t);
+            if (t && s.id) comments.push({ id: String(s.id), text: t });
           }
           if (s && s.type === "meta" && s.approved === true) approved = true;
         }
-        return { notes, approved };
+        return { notes, comments, approved };
       }
 
       if (path === "/api/annotations/batch") {
@@ -326,6 +334,12 @@ export default {
         if (!text) return bad(400, "missing_text");
         const id = `c_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
         shapes.push({ id, type: "comment", text, createdAt: new Date().toISOString() });
+      }
+
+      if (path === "/api/annotations/comment/delete") {
+        const id = String(parsed.id || "").trim();
+        if (!id) return bad(400, "missing_id");
+        shapes = shapes.filter((s) => !(s && s.type === "comment" && String(s.id) === id));
       }
 
       const updatedAt = new Date().toISOString();
