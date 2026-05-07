@@ -15,7 +15,9 @@
 
   function haveAccess() {
     try {
-      return sessionStorage.getItem(accessKey) === "true" && Boolean(sessionStorage.getItem(tokenKey));
+      const ok = sessionStorage.getItem(accessKey) === "true" || localStorage.getItem(accessKey) === "true";
+      const token = sessionStorage.getItem(tokenKey) || localStorage.getItem(tokenKey) || "";
+      return ok && Boolean(token);
     } catch {
       return false;
     }
@@ -23,6 +25,8 @@
 
   function setAccess(token) {
     try {
+      localStorage.setItem(accessKey, "true");
+      localStorage.setItem(tokenKey, token);
       sessionStorage.setItem(accessKey, "true");
       sessionStorage.setItem(tokenKey, token);
     } catch {
@@ -57,7 +61,8 @@
     try {
       const token = await requestToken(input.trim());
       setAccess(token);
-      // Stay on page; other scripts will read sessionStorage.
+      // Reload so scripts that read token at startup can sync.
+      window.location.reload();
     } catch {
       alert("Incorrect password");
       window.location.href = "/clients/";

@@ -11,7 +11,11 @@
 
   function haveAccess(slug) {
     try {
-      return sessionStorage.getItem(getClientKey(slug)) === "true";
+      const k = getClientKey(slug);
+      const tk = k + "_token";
+      const ok = sessionStorage.getItem(k) === "true" || localStorage.getItem(k) === "true";
+      const token = sessionStorage.getItem(tk) || localStorage.getItem(tk) || "";
+      return ok && Boolean(token);
     } catch {
       return false;
     }
@@ -19,8 +23,14 @@
 
   function setAccess(slug, token) {
     try {
-      sessionStorage.setItem(getClientKey(slug), "true");
-      sessionStorage.setItem(getClientKey(slug) + "_token", token);
+      const k = getClientKey(slug);
+      const tk = k + "_token";
+      // localStorage lets it work across tabs in the same browser
+      localStorage.setItem(k, "true");
+      localStorage.setItem(tk, token);
+      // sessionStorage keeps behavior consistent even if localStorage is blocked
+      sessionStorage.setItem(k, "true");
+      sessionStorage.setItem(tk, token);
     } catch {
       // ignore
     }

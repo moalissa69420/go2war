@@ -15,13 +15,17 @@
 
   const ACCESS_PREFIX = "gtw_client_access_";
   const tokenKey = ACCESS_PREFIX + client + "_token";
-  const token = (() => {
+  function getToken() {
     try {
-      return sessionStorage.getItem(tokenKey) || "";
+      return (
+        sessionStorage.getItem(tokenKey) ||
+        localStorage.getItem(tokenKey) ||
+        ""
+      );
     } catch {
       return "";
     }
-  })();
+  }
 
   const apiBase = window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
   const apiUrl = (apiBase ? apiBase.replace(/\/$/, "") : "") + "/api/annotations";
@@ -46,7 +50,8 @@
 
   function canSync() {
     // "local" token means we used the fallback password flow without an API.
-    return Boolean(token && token !== "local" && apiBase);
+    const t = getToken();
+    return Boolean(t && t !== "local" && apiBase);
   }
 
   function pxRect() {
@@ -245,6 +250,7 @@
   }
 
   async function loadRemote() {
+    const token = getToken();
     if (!token) {
       setStatus("No access token. Go back and enter password.");
       return;
@@ -274,6 +280,7 @@
   }
 
   async function saveRemote() {
+    const token = getToken();
     if (!token) {
       alert("No access token. Go back and enter password.");
       return;
