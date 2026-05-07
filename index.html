@@ -15,9 +15,9 @@
     <div class="section-title">Clients</div>
     <ul class="list">
       <li>Advenes</li>
-      <li>AlphaStyle</li>
+      <li><a href="clients/alphastyle/" data-client="alphastyle" data-dest="clients/alphastyle/">AlphaStyle</a></li>
       <li>Amiri</li>
-      <li>Amazon Prime Video</li>
+      <li><a href="clients/amazon/" data-client="amazon" data-dest="clients/amazon/">Amazon</a></li>
       <li>Apple</li>
       <li>Arc’teryx</li>
       <li>Australian Open</li>
@@ -30,7 +30,7 @@
       <li>Converse</li>
       <li>FILM3D</li>
       <li>GoatFarm</li>
-      <li>Google Pixel</li>
+      <li><a href="clients/google/" data-client="google" data-dest="clients/google/">Google</a></li>
       <li>H&amp;M</li>
       <li>IDM</li>
       <li>Julia Gin</li>
@@ -41,7 +41,7 @@
       <li>MSCHF</li>
       <li>MTO</li>
       <li>Netta</li>
-      <li>Nike</li>
+      <li><a href="clients/nike/" data-client="nike" data-dest="clients/nike/">Nike</a></li>
       <li>Orseund Iris</li>
       <li>OVO</li>
       <li>PierreBasseneWorld</li>
@@ -60,6 +60,12 @@
       <li>XO</li>
     </ul>
   </div>
+
+  <script>
+    // When deployed, set this to your Cloudflare Worker URL.
+    window.GTW_API_BASE = window.GTW_API_BASE || "";
+  </script>
+  <script src="app/portal.js"></script>
 </body>
 </html>
 
