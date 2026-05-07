@@ -4,6 +4,7 @@
 (function () {
   const ACCESS_PREFIX = "gtw_client_access_";
   const FALLBACK_PASSWORD = "g2w";
+  const DEFAULT_API_BASE = "https://go2war-client-portal-api.moodiealissa.workers.dev";
 
   function getClientKey(slug) {
     return ACCESS_PREFIX + slug;
@@ -37,7 +38,7 @@
   }
 
   function getApiBase() {
-    return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
+    return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || DEFAULT_API_BASE;
   }
 
   async function requestToken(slug, password) {

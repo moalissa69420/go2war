@@ -4,13 +4,14 @@
 (function () {
   const client = String(window.GTW_CLIENT || "").trim().toLowerCase();
   if (!client) return;
+  const DEFAULT_API_BASE = "https://go2war-client-portal-api.moodiealissa.workers.dev";
 
   const ACCESS_PREFIX = "gtw_client_access_";
   const accessKey = ACCESS_PREFIX + client;
   const tokenKey = ACCESS_PREFIX + client + "_token";
 
   function getApiBase() {
-    return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
+    return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || DEFAULT_API_BASE;
   }
 
   function haveAccess() {
