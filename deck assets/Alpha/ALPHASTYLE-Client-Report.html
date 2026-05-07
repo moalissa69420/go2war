@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle Shopify Audit Report | Go To War</title>
+  <style>
+    :root { --index-width: 280px; --content-max: 58rem; --border:#000; --accent:#000; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; margin:0; padding:0; color:#000; background:#fff; font-size:15.5px; line-height:1.65; }
+
+    .wrapper { display:grid; grid-template-columns: var(--index-width) 1fr; min-height:100vh; }
+
+    /* Sidebar */
+    .index { position:sticky; top:0; align-self:start; height:100vh; padding:1rem; border-right:1px solid var(--border); background:#fafafa; overflow-y:auto; }
+    .index-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; color:#666; }
+    .index-logo { font-size:1.5rem; font-weight:800; margin-bottom:0.5rem; }
+    .index-sub { font-size:0.8rem; color:#666; margin-bottom:1rem; }
+    .index ol { list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.5; }
+    .index li { margin-bottom:0.35rem; }
+    .index a { color:#000; text-decoration:none; display:flex; gap:0.5rem; align-items:baseline; padding:0.25rem 0; }
+    .index a:hover, .index a:active { color:#666; }
+    .index .num { color:#999; width:1.5rem; display:inline-block; text-align:right; font-size:0.8rem; }
+
+    /* Mobile menu toggle */
+    .mobile-menu-toggle { display:none; position:fixed; top:1rem; right:1rem; z-index:1000; background:#000; color:#fff; border:none; padding:0.5rem 0.75rem; border-radius:4px; font-size:0.9rem; cursor:pointer; }
+
+    /* Mobile menu backdrop */
+    .menu-backdrop { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; }
+    .menu-backdrop.active { display:block; }
+
+    /* Main content */
+    .sections { padding:2rem; display:flex; flex-direction:column; gap:0; }
+
+    section.page { width:min(100%, var(--content-max)); display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.5rem 0; border-bottom:1px solid #eee; scroll-margin-top: 20px; }
+    section.page:last-child { border-bottom:none; }
+
+    .num-col { display:block; text-align:right; color:#999; font-size:0.85rem; padding-top:0.3rem; font-weight:600; }
+
+    .content h1 { font-size:1.5rem; margin:0 0 0.75rem 0; font-weight:700; color:#000; }
+    .content h2 { font-size:1.15rem; margin:1.25rem 0 0.5rem 0; font-weight:600; color:#000; }
+    .content h3 { font-size:1rem; margin:1rem 0 0.35rem 0; font-weight:600; color:#000; }
+    .content h4 { font-size:0.9rem; margin:0.75rem 0 0.25rem 0; font-weight:600; color:#333; }
+    .content p { margin:0 0 0.75rem 0; }
+    .content ul, .content ol { margin:0 0 0.75rem 0; padding-left:1.25rem; }
+    .content li { margin-bottom:0.35rem; }
+
+    /* Components */
+    .box { background:#fff; border:1px solid var(--border); padding:1rem; margin:0.75rem 0; }
+    .highlight-box { background:#f9f9f9; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .alert-box { background:#fff3cd; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .success-box { background:#d4edda; border:1px solid #000; border-left:4px solid #000; padding:1rem; margin:0.75rem 0; }
+    .danger-box { background:#f8d7da; border:1px solid #000; border-left:4px solid #c0392b; padding:1rem; margin:0.75rem 0; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:0.75rem 0; }
+    .three-col { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin:0.75rem 0; }
+
+    /* KPI Cards */
+    .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:0.75rem; margin:0.75rem 0; }
+    .kpi-card { border:1px solid #000; background:#fff; padding:1rem; text-align:center; }
+    .kpi-card .big { font-size:1.75rem; font-weight:700; color:#000; line-height:1.2; }
+    .kpi-card .label { font-size:0.75rem; color:#666; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem; }
+    .kpi-card.good { background:#d4edda; }
+    .kpi-card.warning { background:#fff3cd; }
+    .kpi-card.bad { background:#f8d7da; }
+
+    /* Tables */
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; font-size:0.9rem; }
+    th, td { border:1px solid #ddd; padding:0.5rem 0.75rem; text-align:left; }
+    th { background:#f5f5f5; font-weight:600; }
+    tr:nth-child(even) { background:#fafafa; }
+
+    .table-wrapper { overflow-x:auto; margin:0.75rem 0; }
+
+    .check { color:#27ae60; font-weight:700; }
+    .cross { color:#c0392b; font-weight:700; }
+    .warn { color:#f39c12; font-weight:700; }
+
+    /* Quote */
+    blockquote { margin:1rem 0; padding:1rem; background:#f9f9f9; border-left:4px solid #000; font-style:italic; }
+
+    /* Score bar */
+    .score-bar { background:#eee; height:24px; border-radius:12px; overflow:hidden; margin:0.5rem 0; }
+    .score-fill { height:100%; background:#000; display:flex; align-items:center; justify-content:flex-end; padding-right:0.5rem; color:#fff; font-size:0.75rem; font-weight:600; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns:1fr; }
+      .index { position:relative; height:auto; border-right:0; border-bottom:1px solid var(--border); }
+      .index ol { display:flex; flex-wrap:wrap; gap:0.5rem; }
+      .index li { margin-bottom:0; }
+      .index a { padding:0.5rem; border:1px solid #ddd; border-radius:4px; background:#fff; }
+      .sections { padding:1rem; }
+      section.page { grid-template-columns:2rem 1fr; gap:0.75rem; padding:1rem 0; }
+      .two-col, .three-col { grid-template-columns:1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .mobile-menu-toggle { display:block; }
+      .index { position:fixed; top:0; left:-100%; width:80%; max-width:280px; height:100vh; z-index:999; transition:left 0.3s ease; }
+      .index.open { left:0; }
+      .sections { padding-top:3.5rem; }
+      section.page { grid-template-columns:1.5rem 1fr; gap:0.5rem; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media print {
+      .index { display:none; }
+      .mobile-menu-toggle { display:none; }
+      .wrapper { grid-template-columns:1fr; }
+      section.page { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-menu-toggle" id="menuToggle">☰ Menu</button>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="wrapper">
+    <aside class="index" id="indexNav">
+      <div class="index-logo">GO TO WAR</div>
+      <div class="index-sub">for AlphaStyle</div>
+      <div class="index-title">Audit Report</div>
+      <ol>
+        <li><a href="#s0"><span class="num">00.</span> Executive Summary</a></li>
+        <li><a href="#s1"><span class="num">01.</span> Business Impact</a></li>
+        <li><a href="#s2"><span class="num">02.</span> Tracking & Analytics</a></li>
+        <li><a href="#s3"><span class="num">03.</span> Site Performance</a></li>
+        <li><a href="#s4"><span class="num">04.</span> Conversion Optimization</a></li>
+        <li><a href="#s5"><span class="num">05.</span> SEO Analysis</a></li>
+        <li><a href="#s6"><span class="num">06.</span> Email & SMS Capture</a></li>
+        <li><a href="#s7"><span class="num">07.</span> Brand Assessment</a></li>
+        <li><a href="#s8"><span class="num">08.</span> Recommendations</a></li>
+      </ol>
+      <div style="margin-top:2rem; padding-top:1rem; border-top:1px solid #ddd; font-size:0.75rem; color:#999;">
+        Prepared by Mo Alissa<br>
+        January 2026
+      </div>
+    </aside>
+
+    <main class="sections">
+
+      <!-- Section 0: Executive Summary -->
+      <section id="s0" class="page">
+        <div class="num-col">00.</div>
+        <div class="content">
+          <h1>AlphaStyle Shopify Store Audit</h1>
+
+          <div class="highlight-box">
+            <p style="margin:0; font-size:1.05rem;"><strong>Your Shopify store has a solid technical foundation but is currently underperforming its potential.</strong> The primary gaps are in tracking implementation, site performance, and—most critically—brand architecture alignment.</p>
+          </div>
+
+          <h2>Overall Health Score</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="big">68/100</div>
+              <div class="label">Overall Score</div>
+            </div>
+            <div class="kpi-card good">
+              <div class="big">75/100</div>
+              <div class="label">Tracking</div>
+            </div>
+            <div class="kpi-card warning">
+              <div class="big">55/100</div>
+              <div class="label">Performance</div>
+            </div>
+            <div class="kpi-card">
+              <div class="big">70/100</div>
+              <div class="label">Conversion</div>
+            </div>
+            <div class="kpi-card good">
+              <div class="big">75/100</div>
+              <div class="label">SEO</div>
+            </div>
+            <div class="kpi-card bad">
+              <div class="big">50/100</div>
+              <div class="label">Brand</div>
+            </div>
+          </div>
+
+          <h2>What's Working Well</h2>
+          <div class="success-box">
+            <ul style="margin:0;">
+              <li><strong>KUDU Puffer has excellent hero treatment</strong> — dedicated templates, landing pages, custom promotions</li>
+              <li><strong>Express checkout enabled</strong> — Apple Pay, Shop Pay, dynamic checkout buttons</li>
+              <li><strong>Core tracking installed</strong> — Meta Pixel, GA4, TikTok, Pinterest</li>
+              <li><strong>Mobile foundation is solid</strong> — proper viewport, responsive images</li>
+              <li><strong>Cart experience is good</strong> — drawer with free shipping bar and upsells</li>
+            </ul>
+          </div>
+
+          <h2>Critical Issues Found</h2>
+          <div class="danger-box">
+            <ul style="margin:0;">
+              <li><strong>Site Speed</strong> — 600KB+ JavaScript causing 4-6 second mobile load times</li>
+              <li><strong>Incomplete Tracking</strong> — Missing ViewContent and AddToCart events</li>
+              <li><strong>No Brand Differentiation</strong> — Luxe, APSL, Collabs all treated identically</li>
+              <li><strong>Missing Social Proof</strong> — No reviews, trust badges, or urgency indicators</li>
+              <li><strong>Generic Email Capture</strong> — Same messaging for all customer types</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Business Impact -->
+      <section id="s1" class="page">
+        <div class="num-col">01.</div>
+        <div class="content">
+          <h1>Understanding the Business Impact</h1>
+
+          <h2>Why Site Speed Matters</h2>
+          <div class="highlight-box">
+            <p style="margin:0;">Your current JavaScript payload exceeds <strong>600KB</strong>. Every 1-second delay in load time reduces conversions by approximately <strong>7%</strong>.</p>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card bad">
+              <div class="big">600KB+</div>
+              <div class="label">JS Payload</div>
+            </div>
+            <div class="kpi-card bad">
+              <div class="big">4-6s</div>
+              <div class="label">Mobile Load</div>
+            </div>
+            <div class="kpi-card warning">
+              <div class="big">53%</div>
+              <div class="label">Abandon Rate</div>
+            </div>
+          </div>
+
+          <p>Industry research shows that <strong>53% of mobile users abandon sites that take longer than 3 seconds to load</strong>. Your mobile customers are likely leaving before they see your products.</p>
+
+          <h2>Why Complete Tracking Matters</h2>
+          <p>Without ViewContent and AddToCart events:</p>
+          <ul>
+            <li>Meta and other ad platforms <strong>cannot optimize</strong> for purchase intent signals</li>
+            <li>Retargeting audiences are <strong>incomplete</strong></li>
+            <li>Lookalike audiences are built on <strong>partial data</strong></li>
+            <li>You cannot accurately measure which products drive engagement</li>
+          </ul>
+
+          <div class="alert-box">
+            <p style="margin:0;"><strong>Impact:</strong> Incomplete tracking typically results in significantly higher customer acquisition costs because ad platforms can't optimize properly.</p>
+          </div>
+
+          <h2>Why Brand Differentiation Matters</h2>
+          <p>Your brand architecture serves three distinct audiences:</p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Line</th>
+                  <th>Purpose</th>
+                  <th>Target Customer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>AlphaStyle Luxe</strong></td>
+                  <td>Brand elevation, fashion credibility</td>
+                  <td>Seeks discovery, editorial content</td>
+                </tr>
+                <tr>
+                  <td><strong>APSL</strong></td>
+                  <td>Volume sales, conversion</td>
+                  <td>Seeks efficiency, social proof</td>
+                </tr>
+                <tr>
+                  <td><strong>Collaborations</strong></td>
+                  <td>Cultural relevance, drops</td>
+                  <td>Seeks exclusivity, urgency</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><strong>Currently, all three receive identical digital treatment.</strong> This means Luxe customers find the experience too commercial, while APSL customers don't see enough trust signals to convert.</p>
+        </div>
+      </section>
+
+      <!-- Section 2: Tracking & Analytics -->
+      <section id="s2" class="page">
+        <div class="num-col">02.</div>
+        <div class="content">
+          <h1>Tracking & Analytics</h1>
+
+          <h2>Meta Pixel Status</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Base Pixel</td>
+                  <td><span class="check">✓ Installed</span></td>
+                  <td>Tracking visits</td>
+                </tr>
+                <tr>
+                  <td>PageView</td>
+                  <td><span class="check">✓ Working</span></td>
+                  <td>Basic analytics functional</td>
+                </tr>
+                <tr>
+                  <td>ViewContent</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>Cannot retarget product viewers</td>
+                </tr>
+                <tr>
+                  <td>AddToCart</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>Cannot optimize for cart events</td>
+                </tr>
+                <tr>
+                  <td>InitiateCheckout</td>
+                  <td><span class="warn">⚠ Via Shopify</span></td>
+                  <td>Functional</td>
+                </tr>
+                <tr>
+                  <td>Purchase</td>
+                  <td><span class="check">✓ Via Shopify</span></td>
+                  <td>Revenue tracking works</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Google Analytics (GA4)</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Check</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>GA4 Installed</td>
+                  <td><span class="check">✓ Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>Enhanced Ecommerce</td>
+                  <td><span class="cross">✗ Not in theme</span></td>
+                </tr>
+                <tr>
+                  <td>Brand Line Tracking</td>
+                  <td><span class="cross">✗ No differentiation</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Email Platform (Klaviyo)</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Check</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>App Integration</td>
+                  <td><span class="check">✓ Likely installed</span></td>
+                </tr>
+                <tr>
+                  <td>Theme-Side Events</td>
+                  <td><span class="cross">✗ Not found</span></td>
+                </tr>
+                <tr>
+                  <td>Browse Abandonment Triggers</td>
+                  <td><span class="cross">✗ Not configured</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Other Pixels</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TikTok</td>
+                  <td><span class="check">✓ Present</span></td>
+                  <td>Good for younger demographic</td>
+                </tr>
+                <tr>
+                  <td>Pinterest</td>
+                  <td><span class="check">✓ Present</span></td>
+                  <td>Good for fashion discovery</td>
+                </tr>
+                <tr>
+                  <td>Snapchat</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>Critical gap for Gen Z / collab audience</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Site Performance -->
+      <section id="s3" class="page">
+        <div class="num-col">03.</div>
+        <div class="content">
+          <h1>Site Performance</h1>
+
+          <h2>JavaScript Analysis</h2>
+          <p>The theme loads several large JavaScript libraries on every page:</p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Library</th>
+                  <th>Size</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>jQuery</td>
+                  <td><strong>284KB</strong></td>
+                  <td>DOM manipulation (unminified!)</td>
+                </tr>
+                <tr>
+                  <td>Swiper</td>
+                  <td>148KB</td>
+                  <td>Carousels and sliders</td>
+                </tr>
+                <tr>
+                  <td>GSAP</td>
+                  <td>70KB</td>
+                  <td>Animations</td>
+                </tr>
+                <tr>
+                  <td>ScrollTrigger</td>
+                  <td>41KB</td>
+                  <td>Scroll-based animations</td>
+                </tr>
+                <tr>
+                  <td>Theme JavaScript</td>
+                  <td>59KB</td>
+                  <td>Custom functionality</td>
+                </tr>
+                <tr style="background:#f8d7da;">
+                  <td><strong>Total</strong></td>
+                  <td><strong>602KB+</strong></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert-box">
+            <p style="margin:0;"><strong>Key Issue:</strong> jQuery is loading as an <strong>unminified 284KB file</strong>. The minified version is only 87KB — a savings of ~200KB.</p>
+          </div>
+
+          <h2>Additional Issues Found</h2>
+          <ul>
+            <li>Duplicate JavaScript files that should be removed</li>
+            <li>Development <code>console.log</code> statements in production code</li>
+            <li>347 <code>!important</code> declarations across CSS files (technical debt)</li>
+          </ul>
+
+          <h2>Image Handling</h2>
+          <div class="success-box">
+            <p style="margin:0;"><strong>Good news:</strong> Images are well-optimized with lazy loading and responsive srcset properly implemented.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Conversion Optimization -->
+      <section id="s4" class="page">
+        <div class="num-col">04.</div>
+        <div class="content">
+          <h1>Conversion Optimization</h1>
+
+          <h2>Product Page Elements</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Status</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add to Cart Button</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Essential</td>
+                </tr>
+                <tr>
+                  <td>Sticky Add to Cart</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Good for long pages</td>
+                </tr>
+                <tr>
+                  <td>Size Selector</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Essential for apparel</td>
+                </tr>
+                <tr>
+                  <td>Size Guide</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Reduces returns</td>
+                </tr>
+                <tr>
+                  <td>Trust Badges</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>Customers need reassurance</td>
+                </tr>
+                <tr>
+                  <td>Customer Reviews</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>93% of customers read reviews</td>
+                </tr>
+                <tr>
+                  <td>Social Proof</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>"X people viewing" creates urgency</td>
+                </tr>
+                <tr>
+                  <td>Complete the Look</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>AOV opportunity</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>KUDU Puffer: Your Standard for Excellence</h2>
+          <div class="success-box">
+            <p><strong>The KUDU Puffer demonstrates what's possible within your current theme:</strong></p>
+            <ul style="margin-bottom:0;">
+              <li>Dedicated product template</li>
+              <li>Multiple landing pages (5 different pages)</li>
+              <li>Custom promotional block ("Buy any Puffer get free gift")</li>
+              <li>USP badges (Easy returns, Fast shipping, Secure checkout)</li>
+              <li>Size guide integration</li>
+              <li>Product recommendations</li>
+            </ul>
+          </div>
+
+          <p><strong>This level of treatment should be the standard for hero products across all lines.</strong></p>
+        </div>
+      </section>
+
+      <!-- Section 5: SEO Analysis -->
+      <section id="s5" class="page">
+        <div class="num-col">05.</div>
+        <div class="content">
+          <h1>SEO Analysis</h1>
+
+          <h2>Meta Tags & Social Sharing</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Title Tags</td>
+                  <td><span class="check">✓ Dynamic</span></td>
+                </tr>
+                <tr>
+                  <td>Meta Descriptions</td>
+                  <td><span class="check">✓ Dynamic</span></td>
+                </tr>
+                <tr>
+                  <td>Open Graph Tags</td>
+                  <td><span class="check">✓ Complete</span></td>
+                </tr>
+                <tr>
+                  <td>Twitter Cards</td>
+                  <td><span class="check">✓ Complete</span></td>
+                </tr>
+                <tr>
+                  <td>Canonical URLs</td>
+                  <td><span class="check">✓ Present</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Structured Data (Schema.org)</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Schema Type</th>
+                  <th>Status</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Organization</td>
+                  <td><span class="check">✓ Present</span></td>
+                  <td>Brand knowledge panel</td>
+                </tr>
+                <tr>
+                  <td>WebSite + SearchAction</td>
+                  <td><span class="check">✓ Present</span></td>
+                  <td>Site search in Google</td>
+                </tr>
+                <tr>
+                  <td>Product</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>No rich snippets in search</td>
+                </tr>
+                <tr>
+                  <td>BreadcrumbList</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>No breadcrumb display</td>
+                </tr>
+                <tr>
+                  <td>Review/Rating</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>No stars in search results</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Impact of Missing Product Schema</h2>
+          <div class="two-col">
+            <div class="box">
+              <h4 style="margin-top:0;">Current Search Result</h4>
+              <p style="font-family:monospace; font-size:0.85rem; margin:0;">
+                AlphaStyle KUDU Puffer<br>
+                <span style="color:#006621;">alphastyle.store/products/kudu</span><br>
+                Shop the iconic double hood puffer...
+              </p>
+            </div>
+            <div class="box" style="background:#d4edda;">
+              <h4 style="margin-top:0;">With Product Schema</h4>
+              <p style="font-family:monospace; font-size:0.85rem; margin:0;">
+                AlphaStyle KUDU Puffer<br>
+                <span style="color:#006621;">alphastyle.store/products/kudu</span><br>
+                ★★★★★ (47) · $299.00 · In Stock<br>
+                Shop the iconic double hood puffer...
+              </p>
+            </div>
+          </div>
+
+          <p><strong>Rich snippets typically increase click-through rates by 20-30%.</strong></p>
+        </div>
+      </section>
+
+      <!-- Section 6: Email & SMS Capture -->
+      <section id="s6" class="page">
+        <div class="num-col">06.</div>
+        <div class="content">
+          <h1>Email & SMS Capture</h1>
+
+          <h2>Current Implementation</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Status</th>
+                  <th>Issue</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Welcome Popup</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Generic messaging</td>
+                </tr>
+                <tr>
+                  <td>Footer Signup</td>
+                  <td><span class="check">✓</span></td>
+                  <td>No value proposition</td>
+                </tr>
+                <tr>
+                  <td>Exit Intent</td>
+                  <td><span class="check">✓</span></td>
+                  <td>Same generic offer</td>
+                </tr>
+                <tr>
+                  <td>SMS Capture</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>Missing channel entirely</td>
+                </tr>
+                <tr>
+                  <td>Segmented Offers</td>
+                  <td><span class="cross">✗ Missing</span></td>
+                  <td>One message for all</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>The Opportunity</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer Type</th>
+                  <th>Current Message</th>
+                  <th>Recommended</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Luxe Browser</td>
+                  <td>"Join the Alpha Community"</td>
+                  <td>"Be first to access new collections"</td>
+                </tr>
+                <tr>
+                  <td>APSL Shopper</td>
+                  <td>"Join the Alpha Community"</td>
+                  <td>"Get 10% off your first order"</td>
+                </tr>
+                <tr>
+                  <td>Collab Hunter</td>
+                  <td>"Join the Alpha Community"</td>
+                  <td>"Never miss a drop — get SMS alerts"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Tailored messaging significantly improves signup rates.</strong> You're leaving email subscribers on the table by not differentiating your message.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Brand Assessment -->
+      <section id="s7" class="page">
+        <div class="num-col">07.</div>
+        <div class="content">
+          <h1>Brand & Creative Assessment</h1>
+
+          <h2>Comparison to Benchmark Brands</h2>
+
+          <h3>For AlphaStyle Luxe</h3>
+          <p><em>Benchmarks: Acne Studios, Aimé Leon Dore, Sacai, KidSuper</em></p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Benchmark Practice</th>
+                  <th>Current Implementation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Editorial-first imagery</td>
+                  <td><span class="cross">Standard product grid</span></td>
+                </tr>
+                <tr>
+                  <td>2-3 products per row with whitespace</td>
+                  <td><span class="cross">4 products per row, dense</span></td>
+                </tr>
+                <tr>
+                  <td>Brand storytelling sections</td>
+                  <td><span class="cross">Not present</span></td>
+                </tr>
+                <tr>
+                  <td>Video/campaign content</td>
+                  <td><span class="warn">Limited</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>For APSL (Commercial Line)</h3>
+          <p><em>Benchmarks: Represent, Entire Studios, Kith, Rhude</em></p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Benchmark Practice</th>
+                  <th>Current Implementation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Trust badges prominently displayed</td>
+                  <td><span class="cross">Not present</span></td>
+                </tr>
+                <tr>
+                  <td>Customer reviews integration</td>
+                  <td><span class="cross">Not present</span></td>
+                </tr>
+                <tr>
+                  <td>Social proof indicators</td>
+                  <td><span class="cross">Not present</span></td>
+                </tr>
+                <tr>
+                  <td>Bundle/kit options</td>
+                  <td><span class="cross">Not present</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Redesign Assessment</h2>
+          <div class="highlight-box">
+            <p style="margin:0;"><strong>Our recommendation: Strategic refresh, not full rebuild.</strong></p>
+          </div>
+
+          <p>A complete site redesign is <strong>not necessary</strong>. Your theme's technical foundation is adequate, and your KUDU product treatment proves the platform can support differentiated experiences.</p>
+
+          <h3>What is needed:</h3>
+          <ol>
+            <li><strong>Template Differentiation</strong> — Create distinct collection and product templates for Luxe vs APSL</li>
+            <li><strong>Missing Conversion Elements</strong> — Add trust badges, reviews, and social proof</li>
+            <li><strong>Brand Content</strong> — Build out "World of AlphaStyle," Press, and Collaboration Archive pages</li>
+            <li><strong>Technical Optimization</strong> — Fix tracking, improve performance, clean up code</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Section 8: Recommendations -->
+      <section id="s8" class="page">
+        <div class="num-col">08.</div>
+        <div class="content">
+          <h1>Prioritized Recommendations</h1>
+
+          <h2>Phase 1: Critical Technical Fixes</h2>
+          <p>These items directly impact revenue and should be addressed immediately:</p>
+          <div class="box">
+            <ol style="margin:0;">
+              <li>Add ViewContent tracking event to product pages</li>
+              <li>Add AddToCart tracking event to cart functionality</li>
+              <li>Optimize JavaScript payload (replace unminified libraries)</li>
+              <li>Remove development code from production</li>
+              <li>Delete duplicate files</li>
+            </ol>
+          </div>
+
+          <h2>Phase 2: Conversion Improvements</h2>
+          <p>These items will improve conversion rate:</p>
+          <div class="box">
+            <ol style="margin:0;">
+              <li>Add trust badges to all product pages</li>
+              <li>Implement Product schema for rich search results</li>
+              <li>Add Snapchat pixel for collaboration audience tracking</li>
+              <li>Configure Klaviyo theme events</li>
+              <li>Create differentiated email capture messaging</li>
+            </ol>
+          </div>
+
+          <h2>Phase 3: Brand Differentiation</h2>
+          <p>These items address the brand architecture gap:</p>
+          <div class="box">
+            <ol style="margin:0;">
+              <li>Create Luxe collection template (editorial, 2-3 products per row)</li>
+              <li>Create APSL collection template (conversion-optimized, 4 per row)</li>
+              <li>Integrate reviews platform</li>
+              <li>Add SMS capture</li>
+              <li>Build Collaborations archive page</li>
+            </ol>
+          </div>
+
+          <h2>Phase 4: Content & Experience</h2>
+          <p>These items complete the brand experience:</p>
+          <div class="box">
+            <ol style="margin:0;">
+              <li>Develop "World of AlphaStyle" brand story page</li>
+              <li>Add countdown timers for collaboration drops</li>
+              <li>Create Press/Stockist page</li>
+              <li>Implement "Complete the Look" on product pages</li>
+            </ol>
+          </div>
+
+          <h2>Expected Outcomes</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Expected Improvement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mobile Page Load</td>
+                  <td>Significantly faster</td>
+                </tr>
+                <tr>
+                  <td>Tracking Completeness</td>
+                  <td>Near-complete funnel visibility</td>
+                </tr>
+                <tr>
+                  <td>Conversion Rate</td>
+                  <td>Measurable improvement expected</td>
+                </tr>
+                <tr>
+                  <td>Email Capture Rate</td>
+                  <td>Higher with segmented messaging</td>
+                </tr>
+                <tr>
+                  <td>Brand Perception</td>
+                  <td>Differentiated by line</td>
+                </tr>
+                <tr>
+                  <td>Search Visibility</td>
+                  <td>Enhanced with rich snippets</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box" style="margin-top:2rem;">
+            <p style="margin:0; font-size:1.05rem;"><strong>Ready to move forward?</strong> We've prepared a detailed implementation scope and proposal. Let's discuss which phase makes sense for your current priorities.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const indexNav = document.getElementById('indexNav');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+
+    menuToggle.addEventListener('click', () => {
+      indexNav.classList.toggle('open');
+      menuBackdrop.classList.toggle('active');
+    });
+
+    menuBackdrop.addEventListener('click', () => {
+      indexNav.classList.remove('open');
+      menuBackdrop.classList.remove('active');
+    });
+
+    document.querySelectorAll('.index a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 600) {
+          indexNav.classList.remove('open');
+          menuBackdrop.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

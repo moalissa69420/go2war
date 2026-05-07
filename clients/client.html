@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client — Go To War</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="site-title">GO TO WAR</div>
+    <div class="meta" id="clientMeta">Client</div>
+
+    <div class="section-title">Deliverables</div>
+    <ul class="list">
+      <li>Case Study</li>
+      <li>Branding Deck</li>
+      <li>Results</li>
+      <li>Wire Frames</li>
+      <li>Field Manual</li>
+      <li>CRO</li>
+      <li>Email Designs</li>
+      <li>Ad Library</li>
+    </ul>
+
+    <div class="meta" style="margin-top:1.25rem;"><a href="./">Back</a></div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const slug = String(params.get("c") || "").trim();
+      const pretty = slug
+        .split("-")
+        .filter(Boolean)
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+
+      const meta = document.getElementById("clientMeta");
+      if (meta) meta.textContent = pretty ? `Client: ${pretty}` : "Client";
+      document.title = pretty ? `${pretty} — Client Portal` : "Client — Go To War";
+    })();
+  </script>
+</body>
+</html>
+

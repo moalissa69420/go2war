@@ -34,10 +34,19 @@
     selectedId: null,
     drag: null,
     dirty: false,
+    remoteUpdatedAt: "",
+    autosaveTimer: null,
+    pollTimer: null,
+    color: "#000000",
   };
 
   function setStatus(msg) {
     if (statusEl) statusEl.textContent = msg || "";
+  }
+
+  function canSync() {
+    // "local" token means we used the fallback password flow without an API.
+    return Boolean(token && token !== "local" && apiBase);
   }
 
   function pxRect() {
@@ -129,7 +138,8 @@
 
     state.shapes.forEach((s) => {
       const selected = s.id === state.selectedId;
-      const stroke = selected ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0.75)";
+      const base = s.color || "#000000";
+      const stroke = selected ? base : base;
 
       if (s.type === "circle") {
         ctx.beginPath();
@@ -142,7 +152,8 @@
         const y = toPxY(Math.min(s.y1, s.y2));
         const w = Math.abs(s.x2 - s.x1) * p.w;
         const h = Math.abs(s.y2 - s.y1) * p.h;
-        ctx.fillStyle = "rgba(0,0,0,0.08)";
+        // Use a subtle fill based on stroke color.
+        ctx.fillStyle = base === "#000000" ? "rgba(0,0,0,0.08)" : "rgba(0,0,0,0.06)";
         ctx.fillRect(x, y, w, h);
         ctx.strokeStyle = stroke;
         ctx.lineWidth = selected ? 3 : 2;
@@ -150,7 +161,7 @@
       } else if (s.type === "note") {
         const x = toPxX(s.x);
         const y = toPxY(s.y);
-        ctx.fillStyle = selected ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0.75)";
+        ctx.fillStyle = stroke;
         ctx.beginPath();
         ctx.arc(x, y, selected ? 7 : 6, 0, Math.PI * 2);
         ctx.fill();
@@ -190,10 +201,24 @@
     });
   }
 
+  function setDirty() {
+    state.dirty = true;
+    scheduleAutosave();
+  }
+
+  function scheduleAutosave() {
+    if (!canSync()) return;
+    if (state.autosaveTimer) window.clearTimeout(state.autosaveTimer);
+    state.autosaveTimer = window.setTimeout(() => {
+      if (!state.dirty) return;
+      saveRemote().catch(() => {});
+    }, 1000);
+  }
+
   function addShape(s) {
     state.shapes.push(s);
     state.selectedId = s.id;
-    state.dirty = true;
+    setDirty();
     renderNotes();
     draw();
   }
@@ -204,7 +229,7 @@
     state.shapes = state.shapes.filter((s) => s.id !== state.selectedId);
     if (state.shapes.length !== before) {
       state.selectedId = null;
-      state.dirty = true;
+      setDirty();
       renderNotes();
       draw();
     }
@@ -214,7 +239,7 @@
     if (!state.shapes.length) return;
     const removed = state.shapes.pop();
     if (removed?.id === state.selectedId) state.selectedId = null;
-    state.dirty = true;
+    setDirty();
     renderNotes();
     draw();
   }
@@ -222,6 +247,11 @@
   async function loadRemote() {
     if (!token) {
       setStatus("No access token. Go back and enter password.");
+      return;
+    }
+    if (!canSync()) {
+      setStatus("Local mode (no sync).");
+      setTimeout(() => setStatus(""), 1200);
       return;
     }
     setStatus("Loading…");
@@ -236,6 +266,7 @@
     state.shapes = Array.isArray(json?.shapes) ? json.shapes : [];
     state.selectedId = null;
     state.dirty = false;
+    state.remoteUpdatedAt = String(json?.updatedAt || "");
     renderNotes();
     draw();
     setStatus("Loaded");
@@ -247,6 +278,7 @@
       alert("No access token. Go back and enter password.");
       return;
     }
+    if (!canSync()) return;
     setStatus("Saving…");
     const res = await fetch(apiUrl, {
       method: "PUT",
@@ -257,6 +289,8 @@
       setStatus("Save failed");
       return;
     }
+    const json = await res.json().catch(() => null);
+    state.remoteUpdatedAt = String(json?.updatedAt || state.remoteUpdatedAt || "");
     state.dirty = false;
     setStatus("Saved");
     setTimeout(() => setStatus(""), 1200);
@@ -280,13 +314,13 @@
     if (state.tool === "note") {
       const text = prompt("Note:");
       if (text === null) return;
-      addShape({ id: uid(), type: "note", x: pt.nx, y: pt.ny, text: text.trim() });
+      addShape({ id: uid(), type: "note", x: pt.nx, y: pt.ny, text: text.trim(), color: state.color });
       return;
     }
 
     if (state.tool === "circle") {
       const id = uid();
-      const s = { id, type: "circle", cx: pt.nx, cy: pt.ny, r: 0.0001 };
+      const s = { id, type: "circle", cx: pt.nx, cy: pt.ny, r: 0.0001, color: state.color };
       addShape(s);
       state.drag = { kind: "circle", id, start: pt };
       return;
@@ -294,7 +328,7 @@
 
     if (state.tool === "rect") {
       const id = uid();
-      const s = { id, type: "rect", x1: pt.nx, y1: pt.ny, x2: pt.nx, y2: pt.ny };
+      const s = { id, type: "rect", x1: pt.nx, y1: pt.ny, x2: pt.nx, y2: pt.ny, color: state.color };
       addShape(s);
       state.drag = { kind: "rect", id, start: pt };
       return;
@@ -313,7 +347,7 @@
       const dx = pt.nx - s.cx;
       const dy = pt.ny - s.cy;
       s.r = Math.max(0.0001, Math.sqrt(dx * dx + dy * dy));
-      state.dirty = true;
+      setDirty();
       draw();
       return;
     }
@@ -321,7 +355,7 @@
     if (state.drag.kind === "rect" && s.type === "rect") {
       s.x2 = pt.nx;
       s.y2 = pt.ny;
-      state.dirty = true;
+      setDirty();
       draw();
       return;
     }
@@ -331,7 +365,7 @@
       if (s.type !== "note") return;
       s.x = pt.nx;
       s.y = pt.ny;
-      state.dirty = true;
+      setDirty();
       draw();
       renderNotes();
       return;
@@ -353,15 +387,50 @@
       if (a === "save") b.addEventListener("click", saveRemote);
     });
 
+    const colorPicker = document.getElementById("colorPicker");
+    if (colorPicker && colorPicker instanceof HTMLInputElement) {
+      const next = String(colorPicker.value || "").trim();
+      if (next) state.color = next;
+      colorPicker.addEventListener("input", () => {
+        state.color = String(colorPicker.value || "").trim() || "#000000";
+      });
+    }
+
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("resize", resizeCanvas);
     media.addEventListener("load", resizeCanvas);
+    media.addEventListener("loadedmetadata", resizeCanvas);
+  }
+
+  async function pollOnce() {
+    if (!canSync()) return;
+    if (state.dirty || state.drag) return;
+    const res = await fetch(`${apiUrl}?client=${encodeURIComponent(client)}&asset=${encodeURIComponent(assetId)}`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return;
+    const json = await res.json();
+    const updatedAt = String(json?.updatedAt || "");
+    if (updatedAt && updatedAt === state.remoteUpdatedAt) return;
+    state.shapes = Array.isArray(json?.shapes) ? json.shapes : [];
+    state.remoteUpdatedAt = updatedAt;
+    state.selectedId = null;
+    state.dirty = false;
+    renderNotes();
+    draw();
+    setStatus("Updated");
+    setTimeout(() => setStatus(""), 800);
   }
 
   bindUI();
   resizeCanvas();
   loadRemote();
+
+  // Near-live collaboration: poll for updates.
+  state.pollTimer = window.setInterval(() => {
+    pollOnce().catch(() => {});
+  }, 4000);
 })();
 

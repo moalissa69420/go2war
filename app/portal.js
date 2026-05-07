@@ -3,6 +3,7 @@
 
 (function () {
   const ACCESS_PREFIX = "gtw_client_access_";
+  const FALLBACK_PASSWORD = "g2w";
 
   function getClientKey(slug) {
     return ACCESS_PREFIX + slug;
@@ -25,9 +26,12 @@
     }
   }
 
+  function getApiBase() {
+    return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
+  }
+
   async function requestToken(slug, password) {
-    // Set this to your Vercel API base, e.g. https://gtw-api.vercel.app
-    const apiBase = window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || "";
+    const apiBase = getApiBase();
     const url = (apiBase ? apiBase.replace(/\/$/, "") : "") + "/api/auth";
 
     const res = await fetch(url, {
@@ -58,9 +62,14 @@
 
       const input = prompt(`Enter password for ${slug}:`);
       if (input === null) return;
+      const password = input.trim();
 
       try {
-        const token = await requestToken(slug, input.trim());
+        // If API base isn't configured yet, allow a simple local fallback so
+        // the portal works immediately during setup.
+        const apiBase = getApiBase();
+        const token = apiBase ? await requestToken(slug, password) : password === FALLBACK_PASSWORD ? "local" : "";
+        if (!token) throw new Error("Auth failed");
         setAccess(slug, token);
         window.location.href = dest;
       } catch (err) {

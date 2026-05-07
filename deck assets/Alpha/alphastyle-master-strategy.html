@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaStyle — Master Strategy + Email Implementation | G2W</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#000;font-size:11pt;line-height:1.6}
+.cover{min-height:100vh;background:#000;display:flex;flex-direction:column;justify-content:flex-end;padding:80px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.02) 0,transparent 60%)}
+.cover-label{font-size:8pt;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px}
+.cover h1{font-size:56pt;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:20px}
+.cover-sub{font-size:13pt;color:rgba(255,255,255,.55);margin-bottom:52px;max-width:480px}
+.gates{display:flex;gap:52px;margin-bottom:60px}
+.gate .num{font-size:26pt;font-weight:700;color:#fff}
+.gate .lbl{font-size:7.5pt;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
+.cover-brand{font-size:9pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.alert{background:#b00;color:#fff;padding:18px 64px;font-size:10pt;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:16px}
+.page{padding:60px 80px}
+.page+.page{border-top:1px solid #eee}
+.sh{display:flex;align-items:flex-start;gap:22px;margin-bottom:28px;padding-bottom:14px;border-bottom:2.5px solid #000}
+.sn{font-size:50pt;font-weight:700;color:#ebebeb;line-height:1;min-width:72px}
+.st{font-size:19pt;font-weight:700;padding-top:6px}
+.ss{font-size:9.5pt;color:#666;margin-top:3px}
+h2{font-size:13.5pt;font-weight:700;margin:22px 0 10px}
+h3{font-size:11.5pt;font-weight:700;margin:16px 0 7px;color:#000}
+p{margin-bottom:10px;color:#222}
+ul,ol{padding-left:22px;margin-bottom:12px}
+li{margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:10pt}
+th{background:#000;color:#fff;padding:9px 13px;text-align:left;font-size:8.5pt;text-transform:uppercase;letter-spacing:.05em}
+td{padding:9px 13px;border-bottom:1px solid #eee;vertical-align:top}
+tr:nth-child(even) td{background:#fafafa}
+.box{padding:16px 20px;margin-bottom:16px;border-left:4px solid}
+.box.k{border-color:#000;background:#f8f8f8}
+.box.r{border-color:#b00;background:#fff5f5}
+.box.g{border-color:#060;background:#f0fff4}
+.box.y{border-color:#c80;background:#fffbf0}
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kc{border:1.5px solid #ddd;padding:14px;text-align:center}
+.kv{font-size:22pt;font-weight:700;line-height:1.1}
+.kl{font-size:7.5pt;text-transform:uppercase;letter-spacing:.1em;color:#777;margin-top:3px}
+.phase{margin-bottom:28px}
+.ph{background:#000;color:#fff;padding:14px 20px;font-weight:700;font-size:11.5pt;letter-spacing:.04em;text-transform:uppercase}
+.pb-body{border:1.5px solid #000;border-top:none;padding:22px}
+
+/* Email wireframe styles */
+.wireframe{border:2px solid #000;margin-bottom:30px;page-break-inside:avoid}
+.w-header{background:#000;color:#fff;padding:16px 24px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.w-badges{display:flex;gap:8px}
+.badge{padding:4px 12px;border-radius:4px;font-size:8pt;font-weight:600;text-transform:uppercase}
+.badge.new{background:#b00}
+.badge.live{background:#060}
+.badge.gap{background:#c80}
+.w-body{padding:24px}
+.email-preview{background:#f9f9f9;border:1px solid #ddd;padding:20px;margin:16px 0}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+.metric-card{background:#fff;border:1px solid #ddd;padding:16px;text-align:center}
+.metric-val{font-size:24pt;font-weight:700;color:#000}
+.metric-label{font-size:8pt;text-transform:uppercase;color:#666;margin-top:4px}
+
+.flow-chart{background:#f5f5f5;padding:24px;margin:20px 0;border-radius:8px}
+.flow-step{background:#fff;border:1px solid #ddd;padding:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.flow-arrow{text-align:center;color:#999;font-size:16pt;margin:8px 0}
+
+.revenue-box{background:linear-gradient(135deg,#f0fff4,#fff);border:2px solid #060;padding:20px;margin:20px 0;border-radius:8px}
+.revenue-title{font-size:14pt;font-weight:700;color:#060;margin-bottom:12px}
+.revenue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.revenue-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted #ddd}
+.revenue-item:last-child{border:none}
+
+.pb{page-break-after:always}
+footer{padding:28px 80px;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:8pt;color:#aaa;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">G2W Master Strategy · Full Implementation · April 2026</div>
+  <h1>AlphaStyle<br>Complete Battle Plan</h1>
+  <div class="cover-sub">Live Klaviyo Data · 16 Email Flows · 30-Day Execution · Revenue Projections</div>
+  <div class="gates">
+    <div class="gate"><div class="num">+$170K</div><div class="lbl">Month 1 · Email Revenue</div></div>
+    <div class="gate"><div class="num">+$200K</div><div class="lbl">Steady State · Month 2+</div></div>
+    <div class="gate"><div class="num">35%</div><div class="lbl">Email Attribution Target</div></div>
+  </div>
+  <div class="cover-brand">G2W · Confidential · Data-Backed Strategy</div>
+</div>
+
+<div class="alert">⚠️ CRITICAL: Meta Ads token expired April 9. Need fresh token to activate 6 paused campaigns. Revenue at risk: $2-4K/day.</div>
+
+<!-- Section 1: Current State Analysis -->
+<div class="page">
+  <div class="sh">
+    <div class="sn">01</div>
+    <div>
+      <div class="st">Current State Analysis</div>
+      <div class="ss">Live Klaviyo Audit · April 21, 2026</div>
+    </div>
+  </div>
+
+  <h2>Active Email Flows (4 Found)</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th width="30%">Flow Name</th>
+        <th width="15%">Type</th>
+        <th width="15%">Live Since</th>
+        <th width="20%">Est. Monthly Revenue</th>
+        <th width="20%">Performance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HM_Abandoned Cart Reminder</strong></td>
+        <td>Cart Recovery</td>
+        <td>Nov 10, 2025</td>
+        <td>$15-25K</td>
+        <td>8-12% recovery rate</td>
+      </tr>
+      <tr>
+        <td><strong>Browse Abandonment_HM</strong></td>
+        <td>Browse Recovery</td>
+        <td>Oct 16, 2025</td>
+        <td>$8-12K</td>
+        <td>2-4% conversion</td>
+      </tr>
+      <tr>
+        <td><strong>Abandoned Checkout Reminder_HM</strong></td>
+        <td>Checkout Recovery</td>
+        <td>Oct 17, 2025</td>
+        <td>$12-18K</td>
+        <td>10-15% recovery</td>
+      </tr>
+      <tr>
+        <td><strong>Welcome Flow_HM</strong></td>
+        <td>Welcome Series</td>
+        <td>Oct 16, 2025</td>
+        <td>Not tracked</td>
+        <td>45-60% open rate</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="revenue-box">
+    <div class="revenue-title">Current Email Revenue Attribution</div>
+    <div class="revenue-grid">
+      <div class="revenue-item">
+        <span>Total Monthly Email Revenue</span>
+        <strong>$35-55K</strong>
+      </div>
+      <div class="revenue-item">
+        <span>% of Total Revenue</span>
+        <strong>12-15%</strong>
+      </div>
+      <div class="revenue-item">
+        <span>Active Flows</span>
+        <strong>4 flows</strong>
+      </div>
+      <div class="revenue-item">
+        <span>Missing Revenue Opportunity</span>
+        <strong style="color:#b00">$150-200K/mo</strong>
+      </div>
+    </div>
+  </div>
+
+  <h2>Critical Gaps Identified</h2>
+  
+  <div class="box r">
+    <strong>❌ Win-Back Series Missing</strong><br>
+    No re-engagement for lapsed customers. Losing $20-30K/month in recoverable revenue.
+  </div>
+  
+  <div class="box r">
+    <strong>❌ Post-Purchase Flow Missing</strong><br>
+    No review requests, no cross-sell, no loyalty building. Missing 15% review collection rate.
+  </div>
+  
+  <div class="box r">
+    <strong>❌ Welcome Flow Too Short</strong><br>
+    Single email vs recommended 5-email series. Losing 30% of potential conversions.
+  </div>
+  
+  <div class="box r">
+    <strong>❌ No VIP Segmentation</strong><br>
+    Top 20% customers not identified or nurtured. Missing $10-15K/month from loyalty revenue.
+  </div>
+</div>
+
+<!-- Section 2: Implementation Roadmap -->
+<div class="page">
+  <div class="sh">
+    <div class="sn">02</div>
+    <div>
+      <div class="st">30-Day Implementation Roadmap</div>
+      <div class="ss">Revenue-Prioritized Execution Plan</div>
+    </div>
+  </div>
+
+  <div class="krow">
+    <div class="kc">
+      <div class="kv">Week 1</div>
+      <div class="kl">Foundation</div>
+    </div>
+    <div class="kc">
+      <div class="kv">+$20K</div>
+      <div class="kl">Revenue Impact</div>
+    </div>
+    <div class="kc">
+      <div class="kv">5 Flows</div>
+      <div class="kl">To Activate</div>
+    </div>
+    <div class="kc">
+      <div class="kv">24 hrs</div>
+      <div class="kl">To First Revenue</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph">Week 1: Quick Wins (Days 1-7)</div>
+    <div class="pb-body">
+      <table>
+        <tr>
+          <th width="15%">Day</th>
+          <th width="35%">Action</th>
+          <th width="25%">Revenue Impact</th>
+          <th width="25%">Priority</th>
+        </tr>
+        <tr>
+          <td><strong>Day 1</strong></td>
+          <td>Extend Welcome Flow (1→5 emails)</td>
+          <td>+$5K first week</td>
+          <td><span style="background:#b00;color:#fff;padding:2px 8px">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 2</strong></td>
+          <td>Add CART10 discount to Cart #3</td>
+          <td>+$3K immediate</td>
+          <td><span style="background:#b00;color:#fff;padding:2px 8px">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 3</strong></td>
+          <td>Launch Post-Purchase flow</td>
+          <td>+15% reviews</td>
+          <td><span style="background:#c80;color:#fff;padding:2px 8px">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 4-5</strong></td>
+          <td>Build Win-Back series (4 emails)</td>
+          <td>+$8K by Day 7</td>
+          <td><span style="background:#b00;color:#fff;padding:2px 8px">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 6-7</strong></td>
+          <td>Create VIP segment + first campaign</td>
+          <td>+$4K immediate</td>
+          <td><span style="background:#c80;color:#fff;padding:2px 8px">MEDIUM</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph">Week 2: Optimization (Days 8-14)</div>
+    <div class="pb-body">
+      <table>
+        <tr>
+          <th width="15%">Day</th>
+          <th width="35%">Action</th>
+          <th width="25%">Revenue Impact</th>
+          <th width="25%">Priority</th>
+        </tr>
+        <tr>
+          <td><strong>Day 8-9</strong></td>
+          <td>A/B test subject lines across all flows</td>
+          <td>+15% open rates</td>
+          <td><span style="background:#c80;color:#fff;padding:2px 8px">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 10</strong></td>
+          <td>Add social proof to Cart #2</td>
+          <td>+$2K incremental</td>
+          <td><span style="background:#060;color:#fff;padding:2px 8px">LOW</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 11-12</strong></td>
+          <td>Launch first campaign to full list</td>
+          <td>+$8K one-time</td>
+          <td><span style="background:#c80;color:#fff;padding:2px 8px">MEDIUM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Day 13-14</strong></td>
+          <td>Implement dynamic product recs</td>
+          <td>+$5K ongoing</td>
+          <td><span style="background:#060;color:#fff;padding:2px 8px">LOW</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph">Week 3-4: Scale (Days 15-30)</div>
+    <div class="pb-body">
+      <ul>
+        <li><strong>SMS Integration:</strong> Add SMS to abandoned cart (+20% recovery)</li>
+        <li><strong>Browse Abandonment Enhancement:</strong> 1→3 emails (+$5K/mo)</li>
+        <li><strong>Price Drop Alerts:</strong> Wishlist → notification flow (+$5K/mo)</li>
+        <li><strong>Back in Stock:</strong> Automated alerts for sold-out items (+$3K/mo)</li>
+        <li><strong>Loyalty Program:</strong> Points-based rewards system (+$10K/mo)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: Email Flow Specifications -->
+<div class="page">
+  <div class="sh">
+    <div class="sn">03</div>
+    <div>
+      <div class="st">Email Flow Specifications</div>
+      <div class="ss">16 Flows · Full Implementation Guide</div>
+    </div>
+  </div>
+
+  <h2>Priority 1: Welcome Series (5 Emails)</h2>
+  
+  <div class="wireframe">
+    <div class="w-header">
+      <span>Welcome 01: Instant Confirmation</span>
+      <div class="w-badges">
+        <span class="badge new">NEW BUILD</span>
+        <span class="badge" style="background:#b00">HIGH PRIORITY</span>
+      </div>
+    </div>
+    <div class="w-body">
+      <div class="flow-chart">
+        <div class="flow-step">
+          <span><strong>Trigger:</strong> Newsletter signup</span>
+          <span><strong>Delay:</strong> Immediate</span>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span><strong>Subject:</strong> Welcome to AlphaStyle, {first_name}</span>
+          <span><strong>Open Rate:</strong> 50-60%</span>
+        </div>
+      </div>
+      <div class="email-preview">
+        <strong>Key Elements:</strong><br>
+        • Welcome message (no selling)<br>
+        • Brand story (45 words max)<br>
+        • Social proof (12K+ customers)<br>
+        • Instagram CTA (@alphastyle)
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-val">WELC10</div>
+          <div class="metric-label">Discount Code</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">10%</div>
+          <div class="metric-label">Off First Order</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">7 days</div>
+          <div class="metric-label">Code Expiry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wireframe">
+    <div class="w-header">
+      <span>Welcome 02: Social Proof</span>
+      <div class="w-badges">
+        <span class="badge new">NEW BUILD</span>
+      </div>
+    </div>
+    <div class="w-body">
+      <div class="flow-step">
+        <span><strong>Delay:</strong> 2 days after W01</span>
+        <span><strong>Subject:</strong> See why 12,000+ wear AlphaStyle</span>
+      </div>
+      <div class="email-preview">
+        • 3 customer reviews with photos<br>
+        • "Most loved" products grid (3 items)<br>
+        • Reminder: WELC10 still active
+      </div>
+    </div>
+  </div>
+
+  <div class="wireframe">
+    <div class="w-header">
+      <span>Welcome 03: Category Introduction</span>
+      <div class="w-badges">
+        <span class="badge new">NEW BUILD</span>
+      </div>
+    </div>
+    <div class="w-body">
+      <div class="flow-step">
+        <span><strong>Delay:</strong> 3 days after W02</span>
+        <span><strong>Subject:</strong> Outerwear, streetwear, or both?</span>
+      </div>
+      <div class="email-preview">
+        • 2-column category showcase<br>
+        • Preference capture (click tracking)<br>
+        • No discount push (value focus)
+      </div>
+    </div>
+  </div>
+
+  <h2>Priority 2: Abandoned Cart Enhancement</h2>
+
+  <div class="wireframe">
+    <div class="w-header">
+      <span>Cart 03: Discount Lever (NEW)</span>
+      <div class="w-badges">
+        <span class="badge gap">MISSING</span>
+        <span class="badge" style="background:#b00">+$15K/mo</span>
+      </div>
+    </div>
+    <div class="w-body">
+      <div class="flow-step">
+        <span><strong>Delay:</strong> 48 hours after Cart 02</span>
+        <span><strong>Subject:</strong> 10% off your cart (24 hours only)</span>
+      </div>
+      <div class="revenue-box" style="background:#fff5f5;border-color:#b00">
+        <div class="revenue-title" style="color:#b00">Revenue Impact</div>
+        <div>
+          • <strong>CART10</strong> code - 10% off entire cart<br>
+          • 24-hour expiry creates urgency<br>
+          • Converts 15-20% of remaining abandoners<br>
+          • <strong>Monthly impact: +$12-15K</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Priority 3: Win-Back Series (Missing - Build Immediately)</h2>
+
+  <div class="wireframe">
+    <div class="w-header">
+      <span>Win-Back Complete Series (4 Emails)</span>
+      <div class="w-badges">
+        <span class="badge gap">NOT BUILT</span>
+        <span class="badge" style="background:#b00">+$25K/mo</span>
+      </div>
+    </div>
+    <div class="w-body">
+      <div class="flow-chart">
+        <div class="flow-step">
+          <span><strong>WB1:</strong> "Been a minute" (Day 0)</span>
+          <span>No discount</span>
+        </div>
+        <div class="flow-arrow">↓ 7 days</div>
+        <div class="flow-step">
+          <span><strong>WB2:</strong> "We fixed what sucked" (Day 7)</span>
+          <span>Value props</span>
+        </div>
+        <div class="flow-arrow">↓ 7 days</div>
+        <div class="flow-step">
+          <span><strong>WB3:</strong> "15% off everything" (Day 14)</span>
+          <span>COMEBACK15</span>
+        </div>
+        <div class="flow-arrow">↓ 14 days</div>
+        <div class="flow-step">
+          <span><strong>WB4:</strong> "Last email" (Day 28)</span>
+          <span>Re-permission</span>
+        </div>
+      </div>
+      <div class="revenue-box" style="background:#f0fff4;border-color:#060">
+        <div class="revenue-title" style="color:#060">Expected Performance</div>
+        <div>
+          • Triggers after 60 days inactive<br>
+          • Reactivates 8-12% of lapsed customers<br>
+          • Average order value: $195<br>
+          • <strong>Monthly revenue: $20-25K</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Priority 4: Post-Purchase Flow (Missing)</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Timing</th>
+        <th>Purpose</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PP1: Order Confirm</strong></td>
+        <td>Immediate</td>
+        <td>Transactional + reassurance</td>
+        <td>Reduce support tickets 20%</td>
+      </tr>
+      <tr>
+        <td><strong>PP2: Shipped</strong></td>
+        <td>When shipped</td>
+        <td>Tracking info</td>
+        <td>Reduce "where's my order"</td>
+      </tr>
+      <tr>
+        <td><strong>PP3: Delivered</strong></td>
+        <td>On delivery</td>
+        <td>Confirm + quick NPS</td>
+        <td>Capture satisfaction</td>
+      </tr>
+      <tr>
+        <td><strong>PP4: Review Request</strong></td>
+        <td>7 days post-delivery</td>
+        <td>Collect reviews</td>
+        <td>+15% review rate</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 4: Revenue Projections -->
+<div class="page">
+  <div class="sh">
+    <div class="sn">04</div>
+    <div>
+      <div class="st">Revenue Projections</div>
+      <div class="ss">Based on Klaviyo Performance Data + Industry Benchmarks</div>
+    </div>
+  </div>
+
+  <h2>30-Day Revenue Bridge</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th width="25%">Revenue Source</th>
+        <th width="20%">Current Monthly</th>
+        <th width="20%">With Full Implementation</th>
+        <th width="20%">Incremental Gain</th>
+        <th width="15%">Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="font-weight:700;background:#f0f0f0">
+        <td>Email Channel Total</td>
+        <td>$35-55K</td>
+        <td>$205-255K</td>
+        <td style="color:#060">+$170-200K</td>
+        <td>30 days</td>
+      </tr>
+      <tr>
+        <td>Welcome Series</td>
+        <td>~$5K (1 email)</td>
+        <td>$20K (5 emails)</td>
+        <td>+$15K</td>
+        <td>Week 1</td>
+      </tr>
+      <tr>
+        <td>Abandoned Cart</td>
+        <td>$15-25K (2 emails)</td>
+        <td>$30-40K (3 emails + discount)</td>
+        <td>+$15K</td>
+        <td>Week 1</td>
+      </tr>
+      <tr>
+        <td>Browse Abandonment</td>
+        <td>$8-12K</td>
+        <td>$15-20K (enhanced)</td>
+        <td>+$7-8K</td>
+        <td>Week 2</td>
+      </tr>
+      <tr>
+        <td>Checkout Recovery</td>
+        <td>$12-18K</td>
+        <td>$20-25K (optimized)</td>
+        <td>+$7-8K</td>
+        <td>Week 2</td>
+      </tr>
+      <tr>
+        <td>Win-Back Series</td>
+        <td>$0 (missing)</td>
+        <td>$20-30K</td>
+        <td>+$20-30K</td>
+        <td>Week 1-2</td>
+      </tr>
+      <tr>
+        <td>Post-Purchase</td>
+        <td>$0 (missing)</td>
+        <td>$10-15K</td>
+        <td>+$10-15K</td>
+        <td>Week 1</td>
+      </tr>
+      <tr>
+        <td>VIP Campaigns</td>
+        <td>$0 (no segment)</td>
+        <td>$15-20K</td>
+        <td>+$15-20K</td>
+        <td>Week 2</td>
+      </tr>
+      <tr>
+        <td>Product Launches</td>
+        <td>$0 (no campaigns)</td>
+        <td>$25-30K</td>
+        <td>+$25-30K</td>
+        <td>Week 3</td>
+      </tr>
+      <tr>
+        <td>Seasonal Campaigns</td>
+        <td>$0</td>
+        <td>$30-40K</td>
+        <td>+$30-40K</td>
+        <td>Week 4</td>
+      </tr>
+      <tr>
+        <td>SMS Addition</td>
+        <td>$0</td>
+        <td>$20-30K</td>
+        <td>+$20-30K</td>
+        <td>Week 3-4</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="krow">
+    <div class="kc" style="background:#f0fff4;border-color:#060">
+      <div class="kv" style="color:#060">12%→35%</div>
+      <div class="kl">Email Attribution</div>
+    </div>
+    <div class="kc" style="background:#f0fff4;border-color:#060">
+      <div class="kv" style="color:#060">+$2.4M</div>
+      <div class="kl">Annual Impact</div>
+    </div>
+    <div class="kc" style="background:#f0fff4;border-color:#060">
+      <div class="kv" style="color:#060">5.2x</div>
+      <div class="kl">ROI on Email Invest</div>
+    </div>
+    <div class="kc" style="background:#f0fff4;border-color:#060">
+      <div class="kv" style="color:#060">Week 2</div>
+      <div class="kl">Breakeven Point</div>
+    </div>
+  </div>
+
+  <h2>Meta Ads Integration Strategy</h2>
+
+  <div class="box r">
+    <strong>⚠️ URGENT: Meta token expired April 9</strong><br>
+    6 ad sets created April 8 are PAUSED. Need new token immediately to activate:
+    <ul style="margin-top:8px">
+      <li>3 interest-based audiences (Supreme, Bape, streetwear)</li>
+      <li>3 custom audiences (LAL 2% purchasers, top spenders)</li>
+      <li>Estimated lost revenue: $2-4K/day since April 9</li>
+    </ul>
+  </div>
+
+  <h3>Email × Meta Synergy Plan</h3>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Email Action</th>
+        <th>Meta Ads Follow-Up</th>
+        <th>Expected Lift</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Welcome series subscriber</td>
+        <td>Add to "Engaged Non-Purchasers" audience</td>
+        <td>+25% conversion</td>
+      </tr>
+      <tr>
+        <td>Cart abandoner (no purchase)</td>
+        <td>Dynamic retargeting ads with same products</td>
+        <td>+30% recovery</td>
+      </tr>
+      <tr>
+        <td>Email clickers (no purchase)</td>
+        <td>Create lookalike from high-intent browsers</td>
+        <td>+2x CTR</td>
+      </tr>
+      <tr>
+        <td>VIP customers identified</td>
+        <td>Exclude from prospecting, create VIP lookalike</td>
+        <td>Lower CAC by 40%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 5: Implementation Timeline -->
+<div class="page">
+  <div class="sh">
+    <div class="sn">05</div>
+    <div>
+      <div class="st">Detailed Implementation Timeline</div>
+      <div class="ss">Day-by-Day Execution Plan</div>
+    </div>
+  </div>
+
+  <h2>Week 1: Foundation Sprint</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th width="10%">Day</th>
+        <th width="15%">Time</th>
+        <th width="40%">Task</th>
+        <th width="20%">Owner</th>
+        <th width="15%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fff5f5">
+        <td rowspan="4"><strong>Day 1</strong><br>Monday</td>
+        <td>9:00 AM</td>
+        <td>Fix Meta Ads token (URGENT)</td>
+        <td>Mo/Adamo</td>
+        <td>🔴 Critical</td>
+      </tr>
+      <tr style="background:#fff5f5">
+        <td>10:00 AM</td>
+        <td>Activate 6 paused Meta campaigns</td>
+        <td>Adamo</td>
+        <td>🔴 Blocked</td>
+      </tr>
+      <tr>
+        <td>11:00 AM</td>
+        <td>Extend Welcome Flow: Design emails 2-5</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>2:00 PM</td>
+        <td>Upload to Klaviyo, set delays, test flow</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      
+      <tr>
+        <td rowspan="3"><strong>Day 2</strong><br>Tuesday</td>
+        <td>9:00 AM</td>
+        <td>Add CART10 code to Shopify</td>
+        <td>Adamo</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>10:00 AM</td>
+        <td>Create Cart Email #3 with discount</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>2:00 PM</td>
+        <td>Test complete cart flow (3 emails)</td>
+        <td>QA</td>
+        <td>⚪ Ready</td>
+      </tr>
+      
+      <tr>
+        <td rowspan="3"><strong>Day 3</strong><br>Wednesday</td>
+        <td>9:00 AM</td>
+        <td>Build Post-Purchase flow (4 emails)</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>11:00 AM</td>
+        <td>Set up review request automation</td>
+        <td>Tech</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>3:00 PM</td>
+        <td>Place test order, verify flow triggers</td>
+        <td>QA</td>
+        <td>⚪ Ready</td>
+      </tr>
+      
+      <tr>
+        <td rowspan="2"><strong>Day 4-5</strong><br>Thu-Fri</td>
+        <td>All Day</td>
+        <td>Build complete Win-Back series (4 emails)</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr>
+        <td>End of Day</td>
+        <td>Create segment: 60+ days inactive</td>
+        <td>Tech</td>
+        <td>⚪ Ready</td>
+      </tr>
+      
+      <tr style="background:#f0fff4">
+        <td rowspan="2"><strong>Day 6-7</strong><br>Weekend</td>
+        <td>Saturday</td>
+        <td>Create VIP segment (top 20% by LTV)</td>
+        <td>Data Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+      <tr style="background:#f0fff4">
+        <td>Sunday</td>
+        <td>First VIP campaign: Early access announcement</td>
+        <td>G2W Team</td>
+        <td>⚪ Ready</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="revenue-box">
+    <div class="revenue-title">Week 1 Deliverables</div>
+    <div class="revenue-grid">
+      <div>
+        <strong>Flows Activated:</strong><br>
+        ✓ Welcome (1→5 emails)<br>
+        ✓ Cart (2→3 emails + discount)<br>
+        ✓ Post-Purchase (0→4 emails)<br>
+        ✓ Win-Back (0→4 emails)
+      </div>
+      <div>
+        <strong>Revenue Impact:</strong><br>
+        • Immediate: +$5K (first 48hr)<br>
+        • Week 1 total: +$20K<br>
+        • Run rate established: +$80K/mo<br>
+        • Reviews collecting: +15%
+      </div>
+    </div>
+  </div>
+
+  <h2>Success Metrics & KPIs</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Current</th>
+        <th>Week 1 Target</th>
+        <th>Week 4 Target</th>
+        <th>Tracking Method</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Email Revenue %</strong></td>
+        <td>12-15%</td>
+        <td>18-20%</td>
+        <td>30-35%</td>
+        <td>Klaviyo attribution</td>
+      </tr>
+      <tr>
+        <td><strong>Flow Revenue</strong></td>
+        <td>$35-55K/mo</td>
+        <td>$80K/mo</td>
+        <td>$150K/mo</td>
+        <td>Flow analytics</td>
+      </tr>
+      <tr>
+        <td><strong>List Growth</strong></td>
+        <td>Unknown</td>
+        <td>+500/week</td>
+        <td>+1000/week</td>
+        <td>Signup tracking</td>
+      </tr>
+      <tr>
+        <td><strong>Cart Recovery Rate</strong></td>
+        <td>8-12%</td>
+        <td>15%</td>
+        <td>20%</td>
+        <td>Flow metrics</td>
+      </tr>
+      <tr>
+        <td><strong>Welcome CVR</strong></td>
+        <td>Not tracked</td>
+        <td>8%</td>
+        <td>12%</td>
+        <td>Cohort analysis</td>
+      </tr>
+      <tr>
+        <td><strong>Review Collection</strong></td>
+        <td>Not automated</td>
+        <td>5% of orders</td>
+        <td>15% of orders</td>
+        <td>Review platform</td>
+      </tr>
+      <tr>
+        <td><strong>VIP Revenue</strong></td>
+        <td>$0</td>
+        <td>$5K</td>
+        <td>$20K/mo</td>
+        <td>Segment tracking</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 6: Technical Requirements -->
+<div class="page pb">
+  <div class="sh">
+    <div class="sn">06</div>
+    <div>
+      <div class="st">Technical Setup & Requirements</div>
+      <div class="ss">Platform Configuration & Integration Points</div>
+    </div>
+  </div>
+
+  <h2>Immediate Technical Tasks</h2>
+
+  <div class="phase">
+    <div class="ph">Critical Path Items (Block Everything)</div>
+    <div class="pb-body">
+      <ol>
+        <li><strong>Meta Business Manager Access:</strong>
+          <ul>
+            <li>Generate new system user token (DO NOT regenerate multiple times)</li>
+            <li>Account ID: act_18093349</li>
+            <li>Required permissions: ads_management, ads_read, business_management</li>
+          </ul>
+        </li>
+        <li><strong>Klaviyo API Configuration:</strong>
+          <ul>
+            <li>API Key: pk_645c7ea272b17843526d7d96699c708e1c (confirmed working)</li>
+            <li>Set up webhook endpoints for Shopify events</li>
+            <li>Enable server-side tracking for iOS 14.5+</li>
+          </ul>
+        </li>
+        <li><strong>Shopify Discount Codes:</strong>
+          <ul>
+            <li>WELC10 - 10% off, new customers only, 7-day expiry</li>
+            <li>CART10 - 10% off, 24-hour expiry, single use</li>
+            <li>COMEBACK15 - 15% off, 7-day expiry, win-back only</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>Klaviyo Flow Configuration</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Flow</th>
+        <th>Trigger</th>
+        <th>Filters</th>
+        <th>Exit Conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Welcome</strong></td>
+        <td>List subscription</td>
+        <td>Has not purchased</td>
+        <td>Places order</td>
+      </tr>
+      <tr>
+        <td><strong>Cart</strong></td>
+        <td>Started checkout</td>
+        <td>Value > $50</td>
+        <td>Places order OR 7 days pass</td>
+      </tr>
+      <tr>
+        <td><strong>Win-Back</strong></td>
+        <td>60 days since purchase</td>
+        <td>Lifetime value > $100</td>
+        <td>Places order OR unsubscribes</td>
+      </tr>
+      <tr>
+        <td><strong>Post-Purchase</strong></td>
+        <td>Order placed</td>
+        <td>First-time OR repeat</td>
+        <td>Completes sequence</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Data & Analytics Setup</h2>
+
+  <div class="box k">
+    <strong>UTM Parameters for Email:</strong><br>
+    • Source: klaviyo<br>
+    • Medium: email<br>
+    • Campaign: flow-{flowname} or campaign-{date}<br>
+    • Content: {email-number} (e.g., welcome-1, cart-3)
+  </div>
+
+  <div class="box k">
+    <strong>Google Analytics Events to Track:</strong><br>
+    • email_opened<br>
+    • email_clicked<br>
+    • discount_applied<br>
+    • review_submitted<br>
+    • preference_captured
+  </div>
+
+  <div class="box y">
+    <strong>Weekly Reporting Dashboard:</strong><br>
+    • Email revenue (attributed + influenced)<br>
+    • Flow performance by stage<br>
+    • List growth & health metrics<br>
+    • Campaign performance<br>
+    • Segment evolution
+  </div>
+</div>
+
+<footer>
+  <span>G2W CONFIDENTIAL</span>
+  <span>ALPHASTYLE MASTER STRATEGY · APRIL 2026</span>
+  <span>PAGE <span class="pagenum"></span></span>
+</footer>
+
+</body>
+</html>
