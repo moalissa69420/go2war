@@ -88,7 +88,16 @@ function constantTimeEqual(a, b) {
 
 export default {
   async fetch(req, env) {
-    if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*" } });
+    if (req.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "authorization, content-type",
+          "access-control-allow-methods": "GET,PUT,POST,OPTIONS",
+        },
+      });
+    }
 
     const url = new URL(req.url);
     const path = url.pathname;
