@@ -10,6 +10,47 @@
   const accessKey = ACCESS_PREFIX + client;
   const tokenKey = ACCESS_PREFIX + client + "_token";
 
+  function safeJsonParse(s) {
+    try {
+      return JSON.parse(s);
+    } catch {
+      return null;
+    }
+  }
+
+  function b64urlToJson(str) {
+    try {
+      const base = String(str || "").replace(/-/g, "+").replace(/_/g, "/");
+      const padded = base + "===".slice((base.length + 3) % 4);
+      const json = atob(padded);
+      return safeJsonParse(json);
+    } catch {
+      return null;
+    }
+  }
+
+  function isTokenExpired(token) {
+    // We don't need to verify signature client-side; just use exp to decide if we should re-auth.
+    const parts = String(token || "").split(".");
+    if (parts.length !== 3) return true;
+    const payload = b64urlToJson(parts[1]);
+    const exp = payload && typeof payload.exp === "number" ? payload.exp : 0;
+    if (!exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return now >= exp - 15; // small skew
+  }
+
+  function clearAccess() {
+    try {
+      localStorage.removeItem(accessKey);
+      localStorage.removeItem(tokenKey);
+      sessionStorage.removeItem(accessKey);
+      sessionStorage.removeItem(tokenKey);
+    } catch {
+      // ignore
+    }
+  }
+
   function getApiBase() {
     return window.GTW_API_BASE || localStorage.getItem("GTW_API_BASE") || DEFAULT_API_BASE;
   }
@@ -18,7 +59,12 @@
     try {
       const ok = sessionStorage.getItem(accessKey) === "true" || localStorage.getItem(accessKey) === "true";
       const token = sessionStorage.getItem(tokenKey) || localStorage.getItem(tokenKey) || "";
-      return ok && Boolean(token);
+      if (!ok || !token) return false;
+      if (isTokenExpired(token)) {
+        clearAccess();
+        return false;
+      }
+      return true;
     } catch {
       return false;
     }
