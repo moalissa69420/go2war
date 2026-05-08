@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../../styles.css" />
 </head>
 <body>
-  <div class="page">
+  <div class="page page-wide">
     <div class="site-title">GO TO WAR</div>
     <div class="subtitle">PRNGRPHY — Ad Library</div>
     <div class="meta">Approve creatives + leave notes directly on each asset.</div>
@@ -20,14 +20,28 @@
       <span id="status" style="margin-left:auto; color:var(--muted); font-size:0.85rem;"></span>
     </div>
 
-    <section style="margin-top:1.25rem;">
-      <div class="meta" style="margin-bottom:0.35rem;">Gallery</div>
-      <div class="asset-grid" id="assetGrid">
-        <div class="asset-card">
-          <div class="meta">No assets yet. Use Upload.</div>
+    <div class="library-split" style="margin-top:1.25rem;">
+      <section>
+        <div class="meta" style="margin-bottom:0.35rem;">Gallery</div>
+        <div class="asset-grid is-4col" id="assetGrid">
+          <div class="asset-card">
+            <div class="meta">No assets yet. Use Upload.</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <aside class="library-preview" aria-label="Product reference">
+        <div class="library-preview-title">PRN LATEX SOCKS</div>
+        <div class="library-preview-media" style="display:grid; place-items:center;">
+          <img
+            src="../prngrphy/2026-05-08%2006.02.39.jpg"
+            alt="PRN LATEX SOCKS product reference"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </aside>
+    </div>
 
     <div class="meta" style="margin-top:1.25rem;"><a href="../">Back</a></div>
   </div>
