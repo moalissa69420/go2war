@@ -58,10 +58,12 @@ wrangler secret put GTW_TOKEN_SECRET
 ```bash
 wrangler secret put CLIENT_PASSWORD_TROLL
 wrangler secret put CLIENT_PASSWORD_PIERREBASSE
+wrangler secret put CLIENT_PASSWORD_PRNGRPHY
 ```
 
 Set value to `troll100` (or whatever you want).
 Set Pierre Basse password value to `g2w`.
+Set PRNGRPHY password value to `gtw`.
 
 7. Deploy the Worker:
 
