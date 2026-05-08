@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PRN LATEX SOCKS — Ad Library</title>
+  <link rel="stylesheet" href="../../../styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="site-title">GO TO WAR</div>
+    <div class="subtitle">PRNGRPHY — Ad Library</div>
+    <div class="meta">Approve creatives + leave notes directly on each asset.</div>
+
+    <div class="toolbar" role="toolbar" aria-label="Ad Library tools">
+      <label style="display:inline-flex; gap:8px; align-items:center;">
+        <span style="color:var(--muted);">Upload</span>
+        <input id="uploader" type="file" multiple accept="image/*,image/gif,video/*" />
+      </label>
+      <span id="status" style="margin-left:auto; color:var(--muted); font-size:0.85rem;"></span>
+    </div>
+
+    <div class="library-split" style="margin-top:1.25rem;">
+      <section>
+        <div class="meta" style="margin-bottom:0.35rem;">Gallery</div>
+        <div class="asset-grid" id="assetGrid">
+          <div class="asset-card">
+            <div class="meta">No assets yet. Use Upload.</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="library-preview" id="previewPane">
+        <div class="library-preview-title" id="previewTitle">PRN LATEX SOCKS: Thigh high + Low</div>
+        <div class="library-preview-media">
+          <img id="previewImg" alt="Selected creative" />
+          <video id="previewVideo" muted playsinline controls style="display:none;"></video>
+        </div>
+      </aside>
+    </div>
+
+    <div class="meta" style="margin-top:1.25rem;"><a href="../">Back</a></div>
+  </div>
+
+  <script>
+    window.GTW_CLIENT = "prngrphy";
+    window.GTW_PREVIEW_TITLE = "PRN LATEX SOCKS: Thigh high + Low";
+    window.GTW_API_BASE = window.GTW_API_BASE || "https://go2war-client-portal-api.moodiealissa.workers.dev";
+  </script>
+  <script src="../../../app/guard.js"></script>
+  <script src="../../../app/ad-library.js"></script>
+</body>
+</html>
+

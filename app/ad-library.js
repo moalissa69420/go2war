@@ -19,6 +19,10 @@
   const uploader = document.getElementById("uploader");
   const grid = document.getElementById("assetGrid");
   const statusEl = document.getElementById("status");
+  const previewPane = document.getElementById("previewPane");
+  const previewTitle = document.getElementById("previewTitle");
+  const previewImg = document.getElementById("previewImg");
+  const previewVideo = document.getElementById("previewVideo");
 
   if (!apiBase || !grid) return;
 
@@ -98,6 +102,38 @@
 
   function isVideo(item) {
     return String(item.contentType || "").startsWith("video/");
+  }
+
+  function setPreviewTitle() {
+    if (!previewTitle) return;
+    const t = String(window.GTW_PREVIEW_TITLE || "").trim();
+    previewTitle.textContent = t || "";
+  }
+
+  function setPreview(url, kind) {
+    if (!previewPane) return false;
+    setPreviewTitle();
+    if (kind === "video") {
+      if (previewVideo) {
+        previewVideo.src = url;
+        previewVideo.style.display = "block";
+      }
+      if (previewImg) {
+        previewImg.removeAttribute("src");
+        previewImg.style.display = "none";
+      }
+    } else {
+      if (previewImg) {
+        previewImg.src = url;
+        previewImg.style.display = "block";
+      }
+      if (previewVideo) {
+        previewVideo.removeAttribute("src");
+        previewVideo.style.display = "none";
+      }
+    }
+    previewPane.classList.add("has-selection");
+    return true;
   }
 
   function render(items, summariesByAssetId) {
@@ -185,12 +221,8 @@
         const kind = a.getAttribute("data-kind");
         if (!url) return;
 
-        // Grid-only review: open the asset for full view.
-        // (Video opens as video; image opens as image)
-        if (kind === "video") {
-          window.open(url, "_blank", "noreferrer");
-          return;
-        }
+        // If a sticky preview pane exists, use it. Otherwise open in new tab.
+        if (setPreview(url, kind)) return;
         window.open(url, "_blank", "noreferrer");
       });
     });
