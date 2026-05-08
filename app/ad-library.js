@@ -334,15 +334,28 @@
     const token = getToken();
     if (!token) throw new Error("no_token");
 
-    const fd = new FormData();
-    fd.append("client", client);
-    fd.append("file", file, file.name);
-
-    const res = await fetch(`${apiBase.replace(/\/$/, "")}/api/assets/upload`, {
-      method: "POST",
-      headers: { authorization: `Bearer ${token}` },
-      body: fd,
+    // Prefer raw streaming upload (faster + avoids multipart parsing limits in Workers).
+    // Fallback: if the API doesn't support PUT yet, try the legacy multipart POST.
+    const base = apiBase.replace(/\/$/, "");
+    const putUrl = `${base}/api/assets/upload?client=${encodeURIComponent(client)}&name=${encodeURIComponent(file.name || "upload")}`;
+    let res = await fetch(putUrl, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "content-type": file.type || "application/octet-stream",
+      },
+      body: file,
     });
+    if (res.status === 405 || res.status === 415 || res.status === 404) {
+      const fd = new FormData();
+      fd.append("client", client);
+      fd.append("file", file, file.name);
+      res = await fetch(`${base}/api/assets/upload`, {
+        method: "POST",
+        headers: { authorization: `Bearer ${token}` },
+        body: fd,
+      });
+    }
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       throw new Error(text || "upload_failed");

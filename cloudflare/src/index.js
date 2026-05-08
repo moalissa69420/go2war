@@ -439,6 +439,35 @@ export default {
         return json({ ok: true, item });
       }
 
+      // Faster upload path: stream raw bytes (no multipart parsing).
+      // PUT /api/assets/upload?client=...&name=...  (Bearer token)
+      if (path === "/api/assets/upload" && req.method === "PUT") {
+        const client = String(url.searchParams.get("client") || "").trim().toLowerCase();
+        const name = String(url.searchParams.get("name") || "upload").trim();
+        if (!client) return bad(400, "missing_client");
+        if (client !== tokenPayload.client) return bad(403, "forbidden");
+        if (!req.body) return bad(400, "missing_body");
+
+        const original = safeKeyPart(name || "upload");
+        const ts = Date.now();
+        const key = `${client}/${ts}-${original || "upload"}`;
+
+        const ctHeader = String(req.headers.get("content-type") || "").trim();
+        const ct = ctHeader && ctHeader !== "application/octet-stream" ? ctHeader : guessContentType(original);
+        await env.ASSETS.put(key, req.body, {
+          httpMetadata: { contentType: ct },
+          customMetadata: { client, contentType: ct },
+        });
+
+        const item = {
+          key,
+          name: key.slice((client + "/").length),
+          url: `/api/assets/file?key=${encodeURIComponent(key)}`,
+          contentType: ct,
+        };
+        return json({ ok: true, item });
+      }
+
       if (path === "/api/assets/file" && req.method === "GET") {
         const key = String(url.searchParams.get("key") || "").trim();
         if (!key) return bad(400, "missing_key");
