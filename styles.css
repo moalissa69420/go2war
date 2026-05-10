@@ -408,24 +408,19 @@ a:hover { text-decoration: underline; }
 .klaviyo-slot-preview-frame {
   position: relative;
   width: 100%;
+  height: 380px;
   border: 1px solid var(--border);
   overflow: hidden;
   background: #fafafa;
 }
 
-.klaviyo-slot-preview-scalewrap {
-  overflow: hidden;
-  line-height: 0;
-  margin: 0 auto;
-  min-height: 120px;
-}
-
 .klaviyo-slot-iframe {
   width: 600px;
-  height: 2000px;
+  height: 1100px;
   border: 0;
   display: block;
   pointer-events: none;
+  transform: scale(0.5);
   transform-origin: 0 0;
 }
 
@@ -466,6 +461,14 @@ a:hover { text-decoration: underline; }
 @media (max-width: 900px) {
   .klaviyo-slot-body {
     grid-template-columns: 1fr;
+  }
+
+  .klaviyo-slot-preview-frame {
+    height: 300px;
+  }
+
+  .klaviyo-slot-iframe {
+    transform: scale(0.44);
   }
 }
 
