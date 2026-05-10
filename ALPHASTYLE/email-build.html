@@ -54,7 +54,7 @@
 <header>
   <div class="ey">AlphaStyle × GTW · Phase 1 Build</div>
   <h1>Email Templates — 16 Builds, Two Formats</h1>
-  <p class="sub">Each Phase 1 email rendered as both a <strong>visual mockup</strong> (modern HTML for Figma import) and a <strong>Klaviyo-ready production version</strong> (table-based, paste into Klaviyo's HTML editor). Real Shopify CDN imagery, refined to alphastyle.store voice, all merge tags wired up.</p>
+  <p class="sub">Each Phase 1 email rendered as both a <strong>visual mockup</strong> (modern HTML for Figma import) and a <strong>Klaviyo-ready production version</strong> (table-based, paste into Klaviyo's HTML editor). Real Shopify CDN imagery, refined to alphastyle.store voice, all merge tags wired up. <strong>Browser preview:</strong> cart and order emails use <em>static</em> product image URLs in <code>&lt;img&gt;</code> and CSS heroes so previews load here and in the iframes below; when pasting into Klaviyo for live cart/order flows, swap those <code>src</code> values back to <code>{{ event.extra.line_items.0.product.images.0.src|default:'…same URL…' }}</code> so each send pulls the real line item.</p>
   <div class="meta">
     <div><strong>16</strong> emails</div>
     <div><strong>4</strong> flows · <strong>32</strong> files</div>
