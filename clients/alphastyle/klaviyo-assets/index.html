@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaStyle — Klaviyo email assets</title>
+  <link rel="stylesheet" href="../../../styles.css" />
+</head>
+<body>
+  <div class="page page-wide">
+    <div class="site-title">GO TO WAR</div>
+    <div class="subtitle">AlphaStyle — Klaviyo email assets</div>
+    <div class="meta">
+      Upload images or video per email template. Each file is tagged to that template (for use in Klaviyo / design). Approve and notes match the ad library.
+    </div>
+    <div class="meta" style="margin-top:0.5rem;">
+      <a href="../../../ALPHASTYLE/email-build.html">Email hub — 16 templates (visual + Klaviyo)</a>
+      · <a href="../ad-library/">Ad Library</a>
+      · <a href="../">Back</a>
+    </div>
+    <div id="status" class="meta" style="margin-top:0.75rem;"></div>
+    <div id="klaviyoAssetPortal"></div>
+  </div>
+
+  <script>
+    window.GTW_CLIENT = "alphastyle";
+    window.GTW_API_BASE = window.GTW_API_BASE || "https://go2war-client-portal-api.moodiealissa.workers.dev";
+  </script>
+  <script src="../../../app/guard.js"></script>
+  <script src="../../../app/klaviyo-assets.js"></script>
+</body>
+</html>

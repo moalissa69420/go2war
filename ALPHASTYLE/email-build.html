@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AlphaStyle × GTW — Phase 1 Email Build</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:48px 32px 80px}
+  header{margin-bottom:48px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:11px;font-weight:700}
+  h1{font-size:42px;font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
+  .sub{font-size:16px;color:#555;max-width:720px;line-height:1.6;margin-bottom:18px}
+  .meta{display:flex;flex-wrap:wrap;gap:20px;font-size:12px;color:#666}
+  .meta strong{color:#0A0A0A}
+  .flow{margin-top:48px;padding-top:32px;border-top:1px solid #ddd}
+  .flow h2{font-size:24px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .flow .desc{font-size:13px;color:#777;margin-bottom:20px;max-width:720px;line-height:1.55}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .card{background:#fff;border:1px solid #E0DCD3;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .15s,transform .15s,box-shadow .15s;overflow:hidden}
+  .card:hover{border-color:#0A0A0A;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+  .card-top{padding:14px 16px 12px;border-bottom:1px solid #f0ece5;display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+  .id{font-weight:700;color:#0A0A0A}
+  .tpl{padding:2px 8px;border-radius:2px;font-size:9px;font-weight:700;letter-spacing:.1em}
+  .tpl.er{background:#F3E5F5;color:#6A1B9A}
+  .tpl.dm{background:#0A0A0A;color:#fff}
+  .tpl.tr{background:#E3F2FD;color:#1565C0}
+  iframe{width:100%;height:380px;border:none;background:#fafafa;pointer-events:none}
+  .card-body{padding:13px 16px 16px;flex:1}
+  .card-title{font-size:15px;font-weight:600;margin-bottom:5px;color:#0A0A0A}
+  .card-subj{font-size:12px;color:#555;line-height:1.5;margin-bottom:6px;font-style:italic}
+  .card-prev{font-size:11px;color:#888;line-height:1.5}
+  .links{display:flex;gap:8px;padding:10px 16px;background:#FAF8F5;border-top:1px solid #f0ece5}
+  .lnk{flex:1;text-align:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:6px 8px;background:#fff;border:1px solid #ddd;color:#0A0A0A;text-decoration:none}
+  .lnk:hover{background:#0A0A0A;color:#fff;border-color:#0A0A0A}
+  .toc{position:sticky;top:0;background:#EEEAE3;padding:14px 0 12px;margin-bottom:24px;border-bottom:2px solid #0A0A0A;z-index:10;display:flex;flex-wrap:wrap;gap:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .toc a{color:#666;text-decoration:none}
+  .toc a:hover{color:#0A0A0A}
+  .toc strong{color:#0A0A0A}
+  .nope{padding:24px;background:#fff;border:1px solid #E0DCD3;font-size:13px;color:#666;line-height:1.6;margin-top:18px}
+  .nope strong{color:#0A0A0A}
+  .nope ul{margin:8px 0 0 18px}
+  table.send{width:100%;border-collapse:collapse;margin-top:16px;font-size:12px;background:#fff;border:1px solid #E0DCD3}
+  table.send th{background:#0A0A0A;color:#fff;text-align:left;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+  table.send td{padding:10px 14px;border-bottom:1px solid #f0ece5;vertical-align:top;line-height:1.5}
+  table.send tr:last-child td{border-bottom:none}
+  table.send code{font-family:'SF Mono','Menlo',Consolas,monospace;font-size:11px;background:#f5f1ea;padding:1px 5px;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="ey">AlphaStyle × GTW · Phase 1 Build</div>
+  <h1>Email Templates — 16 Builds, Two Formats</h1>
+  <p class="sub">Each Phase 1 email rendered as both a <strong>visual mockup</strong> (modern HTML for Figma import) and a <strong>Klaviyo-ready production version</strong> (table-based, paste into Klaviyo's HTML editor). Real Shopify CDN imagery, refined to alphastyle.store voice, all merge tags wired up.</p>
+  <div class="meta">
+    <div><strong>16</strong> emails</div>
+    <div><strong>4</strong> flows · <strong>32</strong> files</div>
+    <div><strong>2</strong> templates (Editorial Refined · Drop Mode)</div>
+    <div><strong>0</strong> public discount codes (kill before launch)</div>
+    <div><strong><a href="../clients/alphastyle/klaviyo-assets/" style="color:#0A0A0A;text-decoration:underline;">Client uploads</a></strong> · per-email assets + approve / notes</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Jump to:</strong>
+  <a href="../clients/alphastyle/klaviyo-assets/">Uploads</a>
+  <a href="#welcome">Welcome (5)</a>
+  <a href="#cart">Abandoned Cart (3)</a>
+  <a href="#postpurchase">Post-Purchase (4)</a>
+  <a href="#winback">Win-Back (4)</a>
+  <a href="#sendsettings">Send Settings</a>
+  <a href="#tokens">Tokens</a>
+</nav>
+
+<!-- ============== WELCOME ============== -->
+<section class="flow" id="welcome">
+  <h2>Welcome Series · 5 Emails</h2>
+  <p class="desc">Trigger: List Subscribed (newsletter). Madhappy → Represent → Moose Knuckles → discount → final nudge. Code WELCOME10 lives only in Email 4.</p>
+  <div class="grid">
+
+    <div class="card-wrap"><a class="card" href="visual/welcome-01-brand-welcome.html" target="_blank">
+      <div class="card-top"><span class="id">Welcome 01</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/welcome-01-brand-welcome.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Brand Welcome</div>
+        <div class="card-subj">"Welcome to AlphaStyle."</div>
+        <div class="card-prev">We don't do basics. Here's why.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/welcome-01-brand-welcome.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/welcome-01-brand-welcome.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/welcome-02-founder-note.html" target="_blank">
+      <div class="card-top"><span class="id">Welcome 02</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/welcome-02-founder-note.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Founder Note · Kudu Origin</div>
+        <div class="card-subj">"Why we built the Kudu."</div>
+        <div class="card-prev">Nothing existed at this price. So we built it.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/welcome-02-founder-note.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/welcome-02-founder-note.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/welcome-03-bestsellers.html" target="_blank">
+      <div class="card-top"><span class="id">Welcome 03</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/welcome-03-bestsellers.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Bestsellers + Social Proof</div>
+        <div class="card-subj">"What customers are wearing."</div>
+        <div class="card-prev">Built for –40°C. Worn on the 6 train.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/welcome-03-bestsellers.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/welcome-03-bestsellers.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/welcome-04-welcome10-offer.html" target="_blank">
+      <div class="card-top"><span class="id">Welcome 04</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/welcome-04-welcome10-offer.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">WELCOME10 Offer</div>
+        <div class="card-subj">"10% off your first order — WELCOME10"</div>
+        <div class="card-prev">Expires in 72 hours. The only place this code lives is here.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/welcome-04-welcome10-offer.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/welcome-04-welcome10-offer.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/welcome-05-final-nudge.html" target="_blank">
+      <div class="card-top"><span class="id">Welcome 05</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/welcome-05-final-nudge.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Final Nudge</div>
+        <div class="card-subj">"One last thing."</div>
+        <div class="card-prev">The pieces that disappear first, and why.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/welcome-05-final-nudge.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/welcome-05-final-nudge.html" target="_blank">Klaviyo</a></div></div>
+
+  </div>
+</section>
+
+<!-- ============== CART ============== -->
+<section class="flow" id="cart">
+  <h2>Abandoned Cart · 3 Emails</h2>
+  <p class="desc">Trigger: Started Checkout (no order). Gentle reminder → social proof (Drop Mode) → CART10 lever. Code lives only in Email 3, 24-hour expiry.</p>
+  <div class="grid">
+
+    <div class="card-wrap"><a class="card" href="visual/cart-01-gentle-reminder.html" target="_blank">
+      <div class="card-top"><span class="id">Cart 01</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/cart-01-gentle-reminder.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Gentle Reminder</div>
+        <div class="card-subj">"Still there, {{ first_name }}?"</div>
+        <div class="card-prev">Your cart is saved. No pressure.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/cart-01-gentle-reminder.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/cart-01-gentle-reminder.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/cart-02-social-proof.html" target="_blank">
+      <div class="card-top"><span class="id">Cart 02</span><span class="tpl dm">Drop Mode</span></div>
+      <iframe src="visual/cart-02-social-proof.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Social Proof</div>
+        <div class="card-subj">"What's holding you back?"</div>
+        <div class="card-prev">You're not the first one to think about it.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/cart-02-social-proof.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/cart-02-social-proof.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/cart-03-discount-lever.html" target="_blank">
+      <div class="card-top"><span class="id">Cart 03</span><span class="tpl dm">Drop Mode</span></div>
+      <iframe src="visual/cart-03-discount-lever.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">CART10 Discount Lever</div>
+        <div class="card-subj">"One last try, {{ first_name }} — 10% off, 24 hours."</div>
+        <div class="card-prev">The first and last code we'll send for this cart.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/cart-03-discount-lever.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/cart-03-discount-lever.html" target="_blank">Klaviyo</a></div></div>
+
+  </div>
+</section>
+
+<!-- ============== POST-PURCHASE ============== -->
+<section class="flow" id="postpurchase">
+  <h2>Post-Purchase · 4 Emails</h2>
+  <p class="desc">Trigger: Placed Order. Confirm → ship → deliver → review request. Email 4 (review) is gated on Judge.me / Loox going live.</p>
+  <div class="grid">
+
+    <div class="card-wrap"><a class="card" href="visual/postpurchase-01-confirmation.html" target="_blank">
+      <div class="card-top"><span class="id">Post-Purchase 01</span><span class="tpl tr">Transactional</span></div>
+      <iframe src="visual/postpurchase-01-confirmation.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Order Confirmation</div>
+        <div class="card-subj">"Order confirmed · #{{ event.order_id }}"</div>
+        <div class="card-prev">Order #{{ event.order_id }} · we're packing it now.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/postpurchase-01-confirmation.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/postpurchase-01-confirmation.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/postpurchase-02-shipping.html" target="_blank">
+      <div class="card-top"><span class="id">Post-Purchase 02</span><span class="tpl tr">Transactional</span></div>
+      <iframe src="visual/postpurchase-02-shipping.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Shipping Notification</div>
+        <div class="card-subj">"It's on the way."</div>
+        <div class="card-prev">Tracking attached. Should be with you in 3–5 days.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/postpurchase-02-shipping.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/postpurchase-02-shipping.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/postpurchase-03-delivered.html" target="_blank">
+      <div class="card-top"><span class="id">Post-Purchase 03</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/postpurchase-03-delivered.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Delivered + Style Guide</div>
+        <div class="card-subj">"It's there."</div>
+        <div class="card-prev">A few ways to style what you just got.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/postpurchase-03-delivered.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/postpurchase-03-delivered.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/postpurchase-04-review-request.html" target="_blank">
+      <div class="card-top"><span class="id">Post-Purchase 04</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/postpurchase-04-review-request.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Review Request</div>
+        <div class="card-subj">"How's the {{ product }}?"</div>
+        <div class="card-prev">Two weeks in — how's it working out?</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/postpurchase-04-review-request.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/postpurchase-04-review-request.html" target="_blank">Klaviyo</a></div></div>
+
+  </div>
+</section>
+
+<!-- ============== WIN-BACK ============== -->
+<section class="flow" id="winback">
+  <h2>Win-Back · 4 Emails</h2>
+  <p class="desc">Trigger: Day 60 since last order. Day 60 → 90 → 120 → 135. Voice refined from the design book's casual profanity to alphastyle.store's editorial register.</p>
+  <div class="grid">
+
+    <div class="card-wrap"><a class="card" href="visual/winback-01-check-in.html" target="_blank">
+      <div class="card-top"><span class="id">Win-Back 01</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/winback-01-check-in.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Check In · Day 60</div>
+        <div class="card-subj">"It's been a minute."</div>
+        <div class="card-prev">No discount. No pitch. Just what's new.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/winback-01-check-in.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/winback-01-check-in.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/winback-02-what-changed.html" target="_blank">
+      <div class="card-top"><span class="id">Win-Back 02</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/winback-02-what-changed.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">What Changed · Day 90</div>
+        <div class="card-subj">"A few things changed."</div>
+        <div class="card-prev">The friction we used to have is gone.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/winback-02-what-changed.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/winback-02-what-changed.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/winback-03-comeback-offer.html" target="_blank">
+      <div class="card-top"><span class="id">Win-Back 03</span><span class="tpl dm">Drop Mode</span></div>
+      <iframe src="visual/winback-03-comeback-offer.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">COMEBACK15 · Day 120</div>
+        <div class="card-subj">"15% off — welcome back."</div>
+        <div class="card-prev">No minimum. No exclusions. Just the offer.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/winback-03-comeback-offer.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/winback-03-comeback-offer.html" target="_blank">Klaviyo</a></div></div>
+
+    <div class="card-wrap"><a class="card" href="visual/winback-04-last-touch.html" target="_blank">
+      <div class="card-top"><span class="id">Win-Back 04</span><span class="tpl er">Editorial</span></div>
+      <iframe src="visual/winback-04-last-touch.html" loading="lazy"></iframe>
+      <div class="card-body">
+        <div class="card-title">Last Touch · Re-permission</div>
+        <div class="card-subj">"This is goodbye, unless…"</div>
+        <div class="card-prev">No more emails after this. Promise.</div>
+      </div>
+    </a><div class="links"><a class="lnk" href="visual/winback-04-last-touch.html" target="_blank">Visual</a><a class="lnk" href="klaviyo/winback-04-last-touch.html" target="_blank">Klaviyo</a></div></div>
+
+  </div>
+</section>
+
+<!-- ============== SEND SETTINGS ============== -->
+<section class="flow" id="sendsettings">
+  <h2>Send Settings — Subject Lines + Preview Text</h2>
+  <p class="desc">Paste these into Klaviyo's send settings for each campaign. A/B variants included where it makes sense to test.</p>
+  <table class="send">
+    <thead><tr><th>Email</th><th>Subject A (primary)</th><th>Subject B (test)</th><th>Preview</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Welcome 01</strong></td><td>Welcome to AlphaStyle.</td><td>You're in.</td><td>We don't do basics. Here's why.</td></tr>
+      <tr><td><strong>Welcome 02</strong></td><td>Why we built the Kudu.</td><td>A note from the founder.</td><td>Nothing existed at this price. So we built it.</td></tr>
+      <tr><td><strong>Welcome 03</strong></td><td>What customers are wearing.</td><td>The lineup, right now.</td><td>Built for –40°C. Worn on the 6 train.</td></tr>
+      <tr><td><strong>Welcome 04</strong></td><td>10% off your first order — WELCOME10</td><td>Your welcome gift.</td><td>Expires in 72 hours. The only place this code lives is here.</td></tr>
+      <tr><td><strong>Welcome 05</strong></td><td>One last thing.</td><td>The Kudu sells out. Every winter.</td><td>The pieces that disappear first, and why.</td></tr>
+      <tr><td><strong>Cart 01</strong></td><td>Still there, <code>{{ first_name }}</code>?</td><td>Your cart is waiting.</td><td>Your cart is saved. No pressure.</td></tr>
+      <tr><td><strong>Cart 02</strong></td><td>What's holding you back?</td><td>Others are buying it.</td><td>You're not the first one to think about it.</td></tr>
+      <tr><td><strong>Cart 03</strong></td><td>One last try, <code>{{ first_name }}</code> — 10% off, 24 hours.</td><td>We rarely do this. CART10 inside.</td><td>The first and last code we'll send for this cart.</td></tr>
+      <tr><td><strong>Post-Purchase 01</strong></td><td>Order confirmed · #<code>{{ event.order_id }}</code></td><td>We've got your order, <code>{{ first_name }}</code>.</td><td>Order #<code>{{ event.order_id }}</code> · we're packing it now.</td></tr>
+      <tr><td><strong>Post-Purchase 02</strong></td><td>It's on the way.</td><td>Your AlphaStyle shipped.</td><td>Tracking attached. Should be with you in 3–5 days.</td></tr>
+      <tr><td><strong>Post-Purchase 03</strong></td><td>It's there.</td><td>Your AlphaStyle arrived.</td><td>A few ways to style what you just got.</td></tr>
+      <tr><td><strong>Post-Purchase 04</strong></td><td>How's the <code>{{ event.extra.line_items.0.product.title }}</code>?</td><td>Quick review?</td><td>Two weeks in — how's it working out?</td></tr>
+      <tr><td><strong>Win-Back 01</strong></td><td>It's been a minute.</td><td>A few new things since you were last here.</td><td>No discount. No pitch. Just what's new.</td></tr>
+      <tr><td><strong>Win-Back 02</strong></td><td>A few things changed.</td><td>Free shipping. 60-day returns.</td><td>The friction we used to have is gone.</td></tr>
+      <tr><td><strong>Win-Back 03</strong></td><td>15% off — welcome back.</td><td>COMEBACK15. One week.</td><td>No minimum. No exclusions. Just the offer.</td></tr>
+      <tr><td><strong>Win-Back 04</strong></td><td>This is goodbye, unless…</td><td>We'll stop after this.</td><td>No more emails after this. Promise.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== TOKENS ============== -->
+<section class="flow" id="tokens">
+  <h2>Klaviyo Merge Tags Used</h2>
+  <p class="desc">Every dynamic field across the 16 emails. Make sure these profile properties + event variables are populated before activating each flow.</p>
+  <table class="send">
+    <thead><tr><th>Token</th><th>Type</th><th>Used In</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>{{ first_name }}</code></td><td>Profile property</td><td>All flows</td><td>Always wrap with <code>|default:''</code> — empty string is better than "Hi ,"</td></tr>
+      <tr><td><code>{{ organization.url }}</code></td><td>Org setting</td><td>All emails</td><td>Klaviyo built-in. Set in Klaviyo &gt; Settings &gt; Account.</td></tr>
+      <tr><td><code>{{ event.checkout_url }}</code></td><td>Event variable</td><td>Cart 01, 02, 03</td><td>From Started Checkout / Checkout Started events. Direct resume link, not homepage.</td></tr>
+      <tr><td><code>{{ event.extra.line_items.0.product.title }}</code></td><td>Event variable</td><td>Cart, Post-Purchase</td><td>First line item. For multi-item carts, loop in Klaviyo dynamic blocks.</td></tr>
+      <tr><td><code>{{ event.extra.line_items.0.variant.title }}</code></td><td>Event variable</td><td>Cart, Post-Purchase</td><td>Color/size combo. Empty if product has no variants.</td></tr>
+      <tr><td><code>{{ event.extra.line_items.0.quantity }}</code></td><td>Event variable</td><td>Cart, Post-Purchase</td><td>Falls back to '1' in defaults.</td></tr>
+      <tr><td><code>{{ event.extra.line_items.0.product.images.0.src }}</code></td><td>Event variable</td><td>Cart, Post-Purchase</td><td>Falls back to Kudu hero if missing.</td></tr>
+      <tr><td><code>{{ event.extra.line_items.0.line_price }}</code></td><td>Event variable</td><td>Post-Purchase 01</td><td>Per-line price.</td></tr>
+      <tr><td><code>{{ event.extra.value }}</code></td><td>Event variable</td><td>Cart 01, 02, 03</td><td>Total cart value. Use <code>|floatformat:2</code> for $X.XX format.</td></tr>
+      <tr><td><code>{{ event.order_id }}</code></td><td>Event variable</td><td>Post-Purchase 01–04</td><td>Shopify order number.</td></tr>
+      <tr><td><code>{{ event.extra.subtotal_price }}</code></td><td>Event variable</td><td>Post-Purchase 01</td><td>Pre-tax / pre-shipping total.</td></tr>
+      <tr><td><code>{{ event.extra.total_tax }}</code></td><td>Event variable</td><td>Post-Purchase 01</td><td>Calculated tax.</td></tr>
+      <tr><td><code>{{ event.extra.total_price }}</code></td><td>Event variable</td><td>Post-Purchase 01</td><td>Final order total.</td></tr>
+      <tr><td><code>{{ event.extra.shipping_address.* }}</code></td><td>Event variable</td><td>Post-Purchase 01</td><td><code>name</code>, <code>address1</code>, <code>city</code>, <code>province_code</code>, <code>zip</code>.</td></tr>
+      <tr><td><code>{{ event.extra.tracking_number }}</code></td><td>Event variable</td><td>Post-Purchase 02</td><td>From Shopify Fulfilled webhook.</td></tr>
+      <tr><td><code>{{ event.extra.tracking_url }}</code></td><td>Event variable</td><td>Post-Purchase 02</td><td>Carrier-specific tracking URL.</td></tr>
+      <tr><td><code>{{ event.extra.carrier }}</code></td><td>Event variable</td><td>Post-Purchase 02</td><td>UPS, USPS, Canada Post, etc.</td></tr>
+      <tr><td><code>{{ event.extra.delivered_at }}</code></td><td>Event variable</td><td>Post-Purchase 03</td><td>Date delivered. Use Klaviyo date filter.</td></tr>
+      <tr><td><code>{{ event.extra.delivery_location }}</code></td><td>Event variable</td><td>Post-Purchase 03</td><td>"Front door", "Mailroom", etc.</td></tr>
+      <tr><td><code>{{ event.extra.review_url }}</code></td><td>Event variable</td><td>Post-Purchase 04</td><td><strong>SWAP THIS</strong> for actual Judge.me / Loox URL before activation.</td></tr>
+      <tr><td><code>{{ person.last_order_days }}</code></td><td>Profile property</td><td>Win-Back 01</td><td>Custom property — set via Klaviyo segment query at flow entry.</td></tr>
+      <tr><td><code>{% unsubscribe %}</code></td><td>Klaviyo tag</td><td>Footer of every email</td><td>Built-in. Renders as one-click unsubscribe link (CASL-compliant).</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== NOT BUILT ============== -->
+<section class="flow">
+  <h2>Phase 1 Pre-Activation Checklist</h2>
+  <div class="nope">
+    <strong>Before any flow goes live:</strong>
+    <ul>
+      <li>Replace <code>[PHYSICAL ADDRESS]</code> in every footer with AlphaStyle Inc.'s real mailing address (CASL requirement)</li>
+      <li>Kill every public discount code in Shopify (WELCOME10, CART10, COMEBACK15 should all be unique-per-profile via Klaviyo)</li>
+      <li>Configure Judge.me OR Loox; swap <code>{{ event.extra.review_url }}</code> default in Post-Purchase 04</li>
+      <li>Verify CASL double opt-in is enabled for Canadian subscribers before any SMS node fires</li>
+      <li>Confirm Shopify "Fulfilled" + "Delivered" webhooks fire into Klaviyo for Post-Purchase 02/03</li>
+      <li>Set <code>person.last_order_days</code> as a Klaviyo segment query for Win-Back 01 enrolment</li>
+      <li>Smart sending ON for all flows — no sends 10pm–8am local time</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

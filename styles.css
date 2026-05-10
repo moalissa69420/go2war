@@ -331,3 +331,57 @@ a:hover { text-decoration: underline; }
   .asset-grid.is-4col { grid-template-columns: repeat(2, 180px); }
 }
 
+/* AlphaStyle Klaviyo — per-template asset slots */
+.klaviyo-flow {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.klaviyo-flow h3 {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.klaviyo-slot {
+  border: 1px solid var(--border);
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.klaviyo-slot-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.75rem;
+}
+
+.klaviyo-slot-head strong {
+  font-size: 0.8125rem;
+  color: #000;
+  margin-right: auto;
+}
+
+.klaviyo-slot-head a {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.klaviyo-slot-head label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.klaviyo-slot .asset-grid {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
