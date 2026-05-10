@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Post-Purchase 01: Order Confirmation
+  Flow: Post-Purchase · Email 1 of 4 · Editorial Refined · Transactional
+  Trigger: Immediate on Placed Order
+
+  Subject A: Order confirmed · #{order_number}
+  Subject B: We've got your order, {first_name}.
+  Subject C: Order confirmed — packing it now.
+  Preview:   Order #{{ event.order_id }} · we're packing it now.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ event.order_id }}
+    {{ event.extra.line_items.0.product.title }}
+    {{ event.extra.line_items.0.variant.title }}
+    {{ event.extra.line_items.0.quantity }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ event.extra.line_items.0.line_price }}
+    {{ event.extra.subtotal_price|floatformat:2 }}
+    {{ event.extra.total_tax|floatformat:2 }}
+    {{ event.extra.total_price|floatformat:2 }}
+    {{ event.extra.shipping_address.name }}
+    {{ event.extra.shipping_address.address1 }}
+    {{ event.extra.shipping_address.city }}
+    {{ event.extra.shipping_address.province_code }}
+    {{ event.extra.shipping_address.zip }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order confirmed — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .pad{padding:46px 44px 14px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#333;margin-bottom:24px}
+  .body strong{color:#0A0A0A;font-weight:600}
+  .order{background:#FAF8F5;padding:22px 24px;margin-bottom:22px}
+  .ohd{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:14px}
+  .item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid #E8E6E1}
+  .ithumb{width:60px;height:60px;background:#fff center/cover no-repeat;flex-shrink:0;border:1px solid #E8E6E1}
+  .imid{flex:1}
+  .iname{font-size:14px;font-weight:600;color:#0A0A0A;margin-bottom:3px}
+  .imeta{font-size:11px;color:#777}
+  .iprice{font-size:14px;font-weight:700;color:#0A0A0A;text-align:right;white-space:nowrap}
+  .totals{padding-top:14px;font-size:13px}
+  .totalrow{display:flex;justify-content:space-between;padding:5px 0;color:#555}
+  .totalrow.grand{padding-top:10px;border-top:1px solid #E8E6E1;margin-top:6px;font-weight:700;color:#0A0A0A;font-size:15px}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 0 22px}
+  .infoblk{padding:0}
+  .ihl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:7px}
+  .ibd{font-size:13px;line-height:1.55;color:#333}
+  .cta-link{display:inline-block;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px;margin-bottom:30px}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:34px 26px 10px}
+    .h1{font-size:26px}
+    .info{grid-template-columns:1fr;gap:16px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">Order confirmed</div>
+      <div class="h1">Thanks, {{ first_name|default:'' }}.</div>
+      <div class="body">Order <strong>#{{ event.order_id|default:'1024' }}</strong> is confirmed and packing now. You'll get a tracking link the moment it ships.</div>
+      <div class="order">
+        <div class="ohd">Order Details</div>
+        <div class="item">
+          <div class="ithumb" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}')"></div>
+          <div class="imid">
+            <div class="iname">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</div>
+            <div class="imeta">{{ event.extra.line_items.0.variant.title|default:'Black / M' }} · Qty {{ event.extra.line_items.0.quantity|default:'1' }}</div>
+          </div>
+          <div class="iprice">${{ event.extra.line_items.0.line_price|default:'456.00' }}</div>
+        </div>
+        <div class="totals">
+          <div class="totalrow"><span>Subtotal</span><span>${{ event.extra.subtotal_price|default:'456.00' }}</span></div>
+          <div class="totalrow"><span>Shipping</span><span>FREE</span></div>
+          <div class="totalrow"><span>Tax</span><span>${{ event.extra.total_tax|default:'59.28' }}</span></div>
+          <div class="totalrow grand"><span>Total</span><span>${{ event.extra.total_price|default:'515.28' }}</span></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="infoblk">
+          <div class="ihl">Ships To</div>
+          <div class="ibd">{{ event.extra.shipping_address.name|default:'Customer Name' }}<br>{{ event.extra.shipping_address.address1|default:'1234 Example Street' }}<br>{{ event.extra.shipping_address.city|default:'New York' }}, {{ event.extra.shipping_address.province_code|default:'NY' }} {{ event.extra.shipping_address.zip|default:'10001' }}</div>
+        </div>
+        <div class="infoblk">
+          <div class="ihl">Delivery</div>
+          <div class="ibd">3–5 business days<br>Tracking sent on dispatch</div>
+        </div>
+      </div>
+      <a href="{{ organization.url }}/account" class="cta-link">View order status &rarr;</a>
+    </div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{{ organization.url }}/pages/contact">Support</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · Order #{{ event.order_id|default:'1024' }}</div>
+    </div>
+  </div>
+</body>
+</html>

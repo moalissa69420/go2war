@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Post-Purchase 04: Review Request
+  Flow: Post-Purchase · Email 4 of 4 · Editorial Refined
+  Trigger: 14 days after delivered (must be after review platform — Judge.me/Loox — is LIVE)
+
+  Subject A: How's the {product}?
+  Subject B: Quick review?
+  Subject C: Help the next person decide.
+  Preview:   Two weeks in — how's it working out?
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ event.order_id }}
+    {{ event.extra.line_items.0.product.title }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ event.extra.line_items.0.product.url }}
+    {{ organization.url }}
+
+  IMPORTANT: Review CTA URL needs to be swapped to actual Judge.me / Loox review form URL before activation.
+  Replace: {{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How's the fit? — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .pad{padding:46px 44px 14px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#333;margin-bottom:22px}
+  .reviewbox{background:#FAF8F5;padding:30px 24px 26px;text-align:center;margin:0 0 20px}
+  .rimg{width:200px;height:200px;background:#fff center/cover no-repeat;margin:0 auto 16px;border:1px solid #E8E6E1}
+  .rname{font-size:15px;font-weight:600;color:#0A0A0A;margin-bottom:14px}
+  .stars{display:inline-block;font-size:24px;letter-spacing:.18em;color:#0A0A0A;margin-bottom:18px}
+  .star{display:inline-block;color:#ddd;cursor:pointer;text-decoration:none}
+  .star:hover{color:#B8935A}
+  .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:14px 32px}
+  .ps{padding:0 44px 30px;font-size:13px;line-height:1.65;color:#777}
+  .ps a{color:#0A0A0A;text-decoration:underline}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:32px 26px 12px}
+    .ps{padding:0 26px 24px}
+    .h1{font-size:26px}
+    .rimg{width:160px;height:160px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">Order #{{ event.order_id|default:'1024' }}</div>
+      <div class="h1">Real question — how is it?</div>
+      <div class="body">It's been about two weeks since your <strong>{{ event.extra.line_items.0.product.title|default:'AlphaStyle order' }}</strong> arrived. Long enough to know if it's actually living up to it. Tell us — and the next person — what you think.</div>
+      <div class="reviewbox">
+        <div class="rimg" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}')"></div>
+        <div class="rname">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</div>
+        <div class="stars">
+          <a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="star">★</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="star">★</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="star">★</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="star">★</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="star">★</a>
+        </div>
+        <div><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" class="cta">Write a Review</a></div>
+      </div>
+    </div>
+    <div class="ps">P.S. — If something's wrong, <a href="{{ organization.url }}/pages/contact">tell us directly</a>. We'll fix it before any star rating gets written.</div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You received this because you ordered from AlphaStyle.</div>
+    </div>
+  </div>
+</body>
+</html>

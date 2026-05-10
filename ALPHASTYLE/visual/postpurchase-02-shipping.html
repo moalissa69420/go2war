@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Post-Purchase 02: Shipping Notification
+  Flow: Post-Purchase · Email 2 of 4 · Editorial Refined · Represent steal (in-context shot, headline below)
+  Trigger: Fulfilled event (Shopify webhook)
+
+  Subject A: It's on the way.
+  Subject B: Your AlphaStyle shipped.
+  Subject C: Tracking inside.
+  Preview:   Tracking attached. Should be with you in 3–5 days.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ event.order_id }}
+    {{ event.extra.tracking_number }}
+    {{ event.extra.tracking_url }}
+    {{ event.extra.carrier|default:'Carrier' }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your order shipped — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .hero{width:100%;height:300px;background:#0A0A0A center/cover no-repeat}
+  .pad{padding:42px 44px 12px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#333;margin-bottom:22px}
+  .track{background:#FAF8F5;padding:24px;margin:0 0 20px}
+  .track-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:8px}
+  .track-num{font-family:'SF Mono','Menlo','Monaco',monospace;font-size:18px;font-weight:600;color:#0A0A0A;margin-bottom:6px;letter-spacing:.04em}
+  .track-car{font-size:13px;color:#777}
+  .progress{margin:18px 0 4px}
+  .pbar{position:relative;background:#E8E6E1;height:3px;margin:6px 0}
+  .pfill{position:absolute;top:0;left:0;height:3px;background:#0A0A0A;width:50%}
+  .psteps{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-top:8px}
+  .pstep.on{color:#0A0A0A;font-weight:700}
+  .cta-wrap{text-align:center;padding:6px 0 22px}
+  .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:15px 38px}
+  .note{padding:0 44px 30px;font-size:13px;line-height:1.6;color:#777}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .hero{height:240px}
+    .pad{padding:30px 26px 10px}
+    .note{padding:0 26px 26px}
+    .h1{font-size:26px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="hero" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-336561747.jpg?v=1764259796' }}')"></div>
+    <div class="pad">
+      <div class="ey">Order #{{ event.order_id|default:'1024' }}</div>
+      <div class="h1">It's on the way, {{ first_name|default:'' }}.</div>
+      <div class="body">Your order just left the warehouse. Estimated 3–5 business days.</div>
+      <div class="track">
+        <div class="track-lbl">Tracking Number</div>
+        <div class="track-num">{{ event.extra.tracking_number|default:'1Z999AA10123456784' }}</div>
+        <div class="track-car">{{ event.extra.carrier|default:'UPS' }}</div>
+        <div class="progress">
+          <div class="pbar"><div class="pfill"></div></div>
+          <div class="psteps">
+            <div class="pstep on">Confirmed</div>
+            <div class="pstep on">Shipped</div>
+            <div class="pstep">Out for delivery</div>
+            <div class="pstep">Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-wrap"><a href="{{ event.extra.tracking_url|default:'#' }}" class="cta">Track Package</a></div>
+    <div class="note">You'll get one more email when it arrives. After that, we'll leave you alone.</div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{{ organization.url }}/pages/contact">Support</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · Order #{{ event.order_id|default:'1024' }}</div>
+    </div>
+  </div>
+</body>
+</html>

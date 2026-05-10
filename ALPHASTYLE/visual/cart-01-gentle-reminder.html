@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Cart 01: Gentle Reminder
+  Flow: Abandoned Cart · Email 1 of 3 · Editorial Refined · Madhappy steal (relationship before transaction)
+  Trigger: 1h after Started Checkout (no order)
+
+  Subject A: Still there, {first_name}?
+  Subject B: Your cart is waiting.
+  Subject C: Left something behind.
+  Preview:   Your {product_name} is still in your cart. No pressure — just a heads up.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ event.extra.line_items.0.product.title }}
+    {{ event.extra.line_items.0.variant.title|default:'' }}
+    {{ event.extra.line_items.0.quantity }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ event.extra.value|floatformat:2 }}
+    {{ event.checkout_url }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Still there? — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .hero{width:100%;height:340px;background:#0A0A0A center/cover no-repeat}
+  .pad{padding:46px 44px 28px;background:#FAF8F5}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:20px}
+  .body{font-size:15px;line-height:1.78;color:#333;margin-bottom:22px}
+  .cart{background:#fff;border:1px solid #E8E6E1;padding:18px 20px;margin-bottom:24px}
+  .carthd{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:12px}
+  .cartrow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:6px 0}
+  .cartthumb{width:64px;height:64px;background:#f4f1ec center/cover no-repeat;flex-shrink:0}
+  .cartmid{flex:1}
+  .cartname{font-size:14px;font-weight:600;color:#0A0A0A;margin-bottom:3px}
+  .cartmeta{font-size:11px;color:#777}
+  .cartprice{font-size:14px;font-weight:700;color:#0A0A0A;text-align:right;white-space:nowrap}
+  .cta-link{display:block;text-align:center;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px;margin:8px auto 0;width:fit-content}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .hero{height:280px}
+    .pad{padding:32px 26px 22px}
+    .h1{font-size:28px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="hero" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}')"></div>
+    <div class="pad">
+      <div class="ey">Your Cart</div>
+      <div class="h1">Still there, {{ first_name|default:'' }}?</div>
+      <div class="body">You left something behind. No pitch — just a heads-up that your cart is saved and the price hasn't moved. Pick up where you left off whenever you're ready.</div>
+      <div class="cart">
+        <div class="carthd">In Your Cart</div>
+        <div class="cartrow">
+          <div class="cartthumb" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}')"></div>
+          <div class="cartmid">
+            <div class="cartname">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</div>
+            <div class="cartmeta">{{ event.extra.line_items.0.variant.title|default:'Black / M' }} · Qty {{ event.extra.line_items.0.quantity|default:'1' }}</div>
+          </div>
+          <div class="cartprice">${{ event.extra.value|default:'456.00' }}</div>
+        </div>
+      </div>
+      <a href="{{ event.checkout_url|default:organization.url }}" class="cta-link">Complete your order &rarr;</a>
+    </div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You received this because you started checkout at AlphaStyle.</div>
+    </div>
+  </div>
+</body>
+</html>

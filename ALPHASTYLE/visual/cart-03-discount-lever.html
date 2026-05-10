@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Cart 03: CART10 Discount Lever
+  Flow: Abandoned Cart · Email 3 of 3 · Drop Mode template
+  Trigger: 71h after Started Checkout (no order, Cart 01 + Cart 02 sent)
+
+  Subject A: One last try, {first_name} — 10% off, 24 hours.
+  Subject B: We rarely do this. CART10 inside.
+  Subject C: Your cart, with 10% off — expires tonight.
+  Preview:   The first and last code we'll send for this cart.
+
+  Klaviyo merge tags used:
+    {{ first_name|default:'' }}
+    {{ event.extra.line_items.0.product.title }}
+    {{ event.extra.line_items.0.variant.title|default:'' }}
+    {{ event.extra.line_items.0.quantity }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ event.extra.value|floatformat:2 }}            // original cart total
+    {{ event.checkout_url }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10% off your cart — expires in 24 hours</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#0A0A0A;color:#fff;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#0A0A0A;box-shadow:0 2px 24px rgba(0,0,0,.4)}
+  .urgency{background:#B00000;color:#fff;text-align:center;padding:11px 22px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #222}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#fff}
+  .pad{padding:42px 44px 8px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:11px}
+  .h1{font-family:'Arial Black','Helvetica',Arial,sans-serif;font-size:38px;font-weight:900;line-height:1.05;letter-spacing:.01em;text-transform:uppercase;color:#fff;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#bbb;margin-bottom:24px}
+  .body strong{color:#fff}
+  .codebox{border:2px dashed #B8935A;background:#111;text-align:center;padding:26px 18px;margin:8px 0 22px}
+  .codelbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:10px}
+  .code{font-family:'Arial Black','Helvetica',Arial,sans-serif;font-size:36px;font-weight:900;letter-spacing:.14em;color:#B8935A}
+  .codenote{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-top:10px}
+  .cart{background:#141414;border:1px solid #222;padding:18px 20px;margin-bottom:22px}
+  .carthd{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:12px}
+  .cartrow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0}
+  .cartthumb{width:60px;height:60px;background:#222 center/cover no-repeat;flex-shrink:0}
+  .cartmid{flex:1}
+  .cartname{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+  .cartmeta{font-size:11px;color:#888}
+  .cartprice{font-size:14px;font-weight:700;color:#fff;text-align:right;white-space:nowrap}
+  .cartprice .strike{display:block;font-size:11px;font-weight:400;color:#666;text-decoration:line-through;margin-bottom:2px}
+  .cta-wrap{text-align:center;padding:6px 0 36px}
+  .cta{display:inline-block;background:#fff;color:#0A0A0A;font-family:'Arial Black','Helvetica',Arial,sans-serif;font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:18px 44px}
+  .footer{background:#0A0A0A;padding:22px 44px 28px;text-align:center;border-top:1px solid #222}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#444;margin-bottom:11px}
+  .fnav{font-size:11px;color:#666;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#555;line-height:1.6}
+  .fmeta a{color:#777;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:32px 26px 6px}
+    .h1{font-size:30px}
+    .footer{padding:22px 26px}
+    .codebox{padding:22px 14px}
+    .code{font-size:30px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="urgency">Final Cart Reminder &middot; 24 Hours</div>
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">For {{ first_name|default:'you' }}</div>
+      <div class="h1">10% off — that's the lever.</div>
+      <div class="body">We don't run public codes. We'd rather you wear it than we hold it. Use <strong>CART10</strong> at checkout — 10% off your cart, valid for 24 hours, then it's gone.</div>
+      <div class="codebox">
+        <div class="codelbl">Single-Use Code</div>
+        <div class="code">CART10</div>
+        <div class="codenote">10% off · expires in 24 hours</div>
+      </div>
+      <div class="cart">
+        <div class="carthd">Your Cart</div>
+        <div class="cartrow">
+          <div class="cartthumb" style="background-image:url('{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}')"></div>
+          <div class="cartmid">
+            <div class="cartname">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</div>
+            <div class="cartmeta">{{ event.extra.line_items.0.variant.title|default:'Black / M' }} · Qty {{ event.extra.line_items.0.quantity|default:'1' }}</div>
+          </div>
+          <div class="cartprice"><span class="strike">${{ event.extra.value|default:'456.00' }}</span><span style="color:#B8935A">${{ event.extra.value|default:'456.00' }}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-wrap"><a href="{{ event.checkout_url|default:organization.url }}" class="cta">Use CART10 &rarr;</a></div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You received this because you started checkout at AlphaStyle.</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Win-Back 02: What Changed
+  Flow: Win-Back · Email 2 of 4 · Editorial Refined · Moose Knuckles steal (function over hype)
+  Trigger: Day 90 from last order (no purchase since Win-Back 01)
+
+  Subject A: We made some changes.
+  Subject B: A few things are different now.
+  Subject C: Free shipping. 60-day returns. The basics, fixed.
+  Preview:   The friction we used to have is gone.
+
+  VOICE NOTE: Refined from design book — original copy used profanity ("we fixed the shit that sucked").
+  Replaced with editorial honesty matching brand voice.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A few things changed — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .pad{padding:46px 44px 14px;background:#FAF8F5}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.78;color:#333;margin-bottom:22px}
+  .benefits{margin:0 0 18px}
+  .benefit{padding:18px 22px;border-left:3px solid #B8935A;margin-bottom:12px;background:#fff}
+  .bn{font-size:15px;font-weight:600;color:#0A0A0A;margin-bottom:5px}
+  .bd{font-size:13px;color:#666;line-height:1.6}
+  .bd em{color:#444;font-style:italic}
+  .closer{padding:14px 44px 32px;background:#FAF8F5;text-align:center}
+  .cta-link{display:inline-block;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:32px 26px 10px}
+    .closer{padding:12px 26px 26px}
+    .h1{font-size:28px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">An Update, {{ first_name|default:'' }}</div>
+      <div class="h1">A few things have changed.</div>
+      <div class="body">If you stopped buying because the order experience wasn't there yet, that's fair — and that's mostly fixed. Three concrete updates since you were last here.</div>
+      <div class="benefits">
+        <div class="benefit">
+          <div class="bn">Free shipping on every order</div>
+          <div class="bd">There's no minimum and no fine print. Same in the US, same in Canada. <em>Used to be $150 minimum.</em></div>
+        </div>
+        <div class="benefit">
+          <div class="bn">60-day returns</div>
+          <div class="bd">Doubled from 30. Two months to live with the piece and decide if it's right.</div>
+        </div>
+        <div class="benefit">
+          <div class="bn">SMS that's only when it matters</div>
+          <div class="bd">Order updates only — not marketing. Opt in to delivery alerts without the noise.</div>
+        </div>
+      </div>
+    </div>
+    <div class="closer">
+      <a href="{{ organization.url }}" class="cta-link">Take another look &rarr;</a>
+    </div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you've ordered from AlphaStyle before.</div>
+    </div>
+  </div>
+</body>
+</html>

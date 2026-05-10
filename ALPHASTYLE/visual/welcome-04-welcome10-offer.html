@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Welcome 04: WELCOME10 Offer
+  Flow: Welcome Series · Email 4 of 5 · Editorial Refined template
+  Trigger: 6 days after List Subscribed (no purchase, ER 1-3 sent)
+
+  Subject A: 10% off your first order — WELCOME10
+  Subject B: Your welcome gift.
+  Subject C: A small thank you for joining.
+  Preview:   Expires in 72 hours. The only place this code lives is here.
+
+  Klaviyo merge tags used:
+    {{ first_name|default:'' }}
+    {{ event.welcome_code|default:'WELCOME10' }}     // Unique-per-profile preferred
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10% off, just for joining — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .hero{width:100%;height:340px;background:#0A0A0A center/cover no-repeat}
+  .pad{padding:40px 44px 8px;background:#FAF8F5}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:11px}
+  .h1{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#333;margin-bottom:24px}
+  .codebox{background:#0A0A0A;color:#fff;text-align:center;padding:26px 18px;margin:20px 0}
+  .codelbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#999;margin-bottom:10px}
+  .code{font-family:'Arial Black','Helvetica',Arial,sans-serif;font-size:30px;font-weight:900;letter-spacing:.14em}
+  .codenote{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-top:10px}
+  .cta-wrap{text-align:center;padding:6px 0 36px;background:#FAF8F5}
+  .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:15px 38px;border-radius:1px}
+  .div{height:1px;background:#E8E6E1;margin:0 44px}
+  .lineup{padding:30px 44px 14px}
+  .lineup-ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .pc{display:flex;flex-direction:column}
+  .pi{width:100%;height:230px;background:#f4f1ec center/cover no-repeat}
+  .pn{font-size:14px;font-weight:600;margin-top:11px;color:#0A0A0A}
+  .pp{font-size:13px;color:#777;margin-top:2px}
+  .pl{font-size:11px;letter-spacing:.06em;color:#0A0A0A;text-decoration:none;border-bottom:1px solid #ccc;padding-bottom:1px;margin-top:8px;display:inline-block;align-self:flex-start}
+  .fineprint{padding:18px 44px 30px;font-size:11px;line-height:1.6;color:#999}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .hero{height:280px}
+    .pad{padding:30px 26px 6px}
+    .lineup{padding:24px 26px 12px}
+    .div{margin:0 26px}
+    .grid{grid-template-columns:1fr;gap:22px}
+    .pi{height:300px}
+    .h1{font-size:28px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="hero" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Sevier-Knitted-Beanie-AlphaStyle-311667527.jpg?v=1759363809')"></div>
+    <div class="pad">
+      <div class="ey">Your Welcome Gift, {{ first_name|default:'' }}</div>
+      <div class="h1">10% off, just for joining.</div>
+      <div class="body">A small thank-you for being on the list. Every public code is gone — this one is yours, it works once, and it expires in 72 hours. Use it on the piece you've had in mind since you signed up.</div>
+      <div class="codebox">
+        <div class="codelbl">Your Code</div>
+        <div class="code">WELCOME10</div>
+        <div class="codenote">10% off · expires in 72 hours · one-time use</div>
+      </div>
+    </div>
+    <div class="cta-wrap"><a href="{{ organization.url }}" class="cta">Shop Now</a></div>
+    <div class="div"></div>
+    <div class="lineup">
+      <div class="lineup-ey">Use it on</div>
+      <div class="grid">
+        <div class="pc">
+          <a href="{{ organization.url }}/products/kudu-double-hood-down-jacket"><div class="pi" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279')"></div></a>
+          <div class="pn">Kudu Double Hood Down</div>
+          <div class="pp">$456</div>
+          <a href="{{ organization.url }}/products/kudu-double-hood-down-jacket" class="pl">Shop &rarr;</a>
+        </div>
+        <div class="pc">
+          <a href="{{ organization.url }}/products/yance-cargo-zip-joggers"><div class="pi" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Yance-Cargo-Zip-Joggers-AlphaStyle-315703164.png?v=1773163721')"></div></a>
+          <div class="pn">Yance Cargo Zip Joggers</div>
+          <div class="pp">$128</div>
+          <a href="{{ organization.url }}/products/yance-cargo-zip-joggers" class="pl">Shop &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="fineprint">Code applies to one order, no minimum, ineligible on already-discounted styles. Returns honoured at the discounted price.</div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you joined the AlphaStyle list.</div>
+    </div>
+  </div>
+</body>
+</html>

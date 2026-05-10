@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Post-Purchase 03: Delivered
+  Flow: Post-Purchase · Email 3 of 4 · Editorial Refined · Style guide + cross-sell
+  Trigger: 1h after Order Fulfilled → Delivered (Shopify webhook), or 7 days estimated
+
+  Subject A: It's there.
+  Subject B: Your AlphaStyle arrived.
+  Subject C: How to wear it.
+  Preview:   A few ways to style what you just got.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ event.order_id }}
+    {{ event.extra.line_items.0.product.title }}
+    {{ event.extra.line_items.0.product.images.0.src }}
+    {{ event.extra.delivered_at|date:'M j' }}
+    {{ event.extra.delivery_location|default:'your door' }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>It's there — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .pad{padding:46px 44px 14px}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:18px}
+  .body{font-size:15px;line-height:1.72;color:#333;margin-bottom:22px}
+  .delivered{background:#F1F5EE;border-left:3px solid #2E7D32;padding:18px 22px;margin:0 0 24px}
+  .dl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#2E7D32;font-weight:700;margin-bottom:6px}
+  .dm{font-size:14px;color:#222;line-height:1.5}
+  .style-pad{padding:0 44px 16px}
+  .style-ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .pc{display:flex;flex-direction:column}
+  .pi{width:100%;height:230px;background:#f4f1ec center/cover no-repeat}
+  .pn{font-size:14px;font-weight:600;margin-top:11px;color:#0A0A0A}
+  .pp{font-size:13px;color:#777;margin-top:2px}
+  .pl{font-size:11px;letter-spacing:.06em;color:#0A0A0A;text-decoration:none;border-bottom:1px solid #ccc;padding-bottom:1px;margin-top:8px;display:inline-block;align-self:flex-start}
+  .closer{padding:18px 44px 30px;font-size:13px;line-height:1.65;color:#777}
+  .closer a{color:#0A0A0A;text-decoration:underline}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:32px 26px 12px}
+    .style-pad{padding:0 26px 12px}
+    .closer{padding:14px 26px 24px}
+    .grid{grid-template-columns:1fr;gap:22px}
+    .pi{height:300px}
+    .h1{font-size:26px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">Order #{{ event.order_id|default:'1024' }}</div>
+      <div class="h1">It's there, {{ first_name|default:'' }}.</div>
+      <div class="body">Your order was just delivered. We hope it's everything you wanted from it — and then some.</div>
+      <div class="delivered">
+        <div class="dl">Delivered {{ event.extra.delivered_at|default:'today' }}</div>
+        <div class="dm">{{ event.extra.delivery_location|default:'Front door · signature not required' }}</div>
+      </div>
+    </div>
+    <div class="style-pad">
+      <div class="style-ey">A few ways to wear it</div>
+      <div class="grid">
+        <div class="pc">
+          <a href="{{ organization.url }}/products/sevier-knitted-beanie"><div class="pi" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Sevier-Knitted-Beanie-AlphaStyle-311667527.jpg?v=1759363809')"></div></a>
+          <div class="pn">Sevier Knitted Beanie</div>
+          <div class="pp">$38 · pairs 18× with the Kudu</div>
+          <a href="{{ organization.url }}/products/sevier-knitted-beanie" class="pl">Add it &rarr;</a>
+        </div>
+        <div class="pc">
+          <a href="{{ organization.url }}/products/yance-cargo-zip-joggers"><div class="pi" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Yance-Cargo-Zip-Joggers-AlphaStyle-315703164.png?v=1773163721')"></div></a>
+          <div class="pn">Yance Cargo Zip Joggers</div>
+          <div class="pp">$128 · the rotation finisher</div>
+          <a href="{{ organization.url }}/products/yance-cargo-zip-joggers" class="pl">Add it &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="closer">Anything off? <a href="{{ organization.url }}/pages/contact">Reply or contact support</a> — we'll fix it.</div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{{ organization.url }}/pages/contact">Support</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · Order #{{ event.order_id|default:'1024' }}</div>
+    </div>
+  </div>
+</body>
+</html>

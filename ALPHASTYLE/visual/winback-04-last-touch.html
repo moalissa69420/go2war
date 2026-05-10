@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Win-Back 04: Last Touch (Re-permission)
+  Flow: Win-Back · Email 4 of 4 · Editorial Refined
+  Trigger: Day 135 from last order (no purchase or engagement since COMEBACK15)
+  Purpose: Last graceful exit — get explicit opt-in or remove from active list
+
+  Subject A: This is goodbye, unless…
+  Subject B: We'll stop after this.
+  Subject C: One more thing before we go.
+  Preview:   No more emails after this. Promise.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>This is goodbye — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .pad{padding:54px 44px 28px;background:#FAF8F5}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.2;margin-bottom:22px}
+  .body{font-size:15px;line-height:1.78;color:#333;margin-bottom:18px}
+  .actions{margin:28px 0 8px;text-align:center}
+  .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:15px 38px}
+  .unsub{display:block;margin-top:18px;font-size:13px;color:#888;text-decoration:underline}
+  .ps{margin-top:32px;padding-top:22px;border-top:1px solid #E8E6E1;font-size:13px;line-height:1.65;color:#888;font-style:italic}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .pad{padding:38px 26px 24px}
+    .h1{font-size:26px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="pad">
+      <div class="ey">Last Touch, {{ first_name|default:'' }}</div>
+      <div class="h1">This is goodbye — unless you tell us otherwise.</div>
+      <div class="body">We've reached out a few times now without much back from you. That's allowed. People grow out of brands, and we'd rather respect your inbox than keep filling it.</div>
+      <div class="body">After this email, we'll stop sending marketing. No more new arrivals, no more reminders, no more codes. If that's what you want, you don't need to do anything.</div>
+      <div class="body">If you'd like to stay on the list — even just for the occasional update — let us know with one click below.</div>
+      <div class="actions">
+        <a href="{{ organization.url }}/pages/preferences?stay=true" class="cta">Stay Subscribed</a>
+        <a href="{% unsubscribe %}" class="unsub">Or, unsubscribe me</a>
+      </div>
+      <div class="ps">P.S. — That 15% off code from last week (COMEBACK15) is still good for 48 more hours if you want to use it on the way out.</div>
+    </div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you've ordered from AlphaStyle before.</div>
+    </div>
+  </div>
+</body>
+</html>

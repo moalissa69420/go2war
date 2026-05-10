@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+  AlphaStyle × GTW — Welcome 05: Final Nudge
+  Flow: Welcome Series · Email 5 of 5 · Editorial Refined
+  Trigger: 9 days after List Subscribed (no purchase, code expired)
+
+  Subject A: One last thing.
+  Subject B: The Kudu sells out. Every winter.
+  Subject C: This isn't urgency copy.
+  Preview:   The pieces that disappear first, and why.
+
+  Klaviyo merge tags:
+    {{ first_name|default:'' }}
+    {{ organization.url }}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One last thing — AlphaStyle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;background:#EEEAE3;color:#0A0A0A;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .em{max-width:600px;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+  .top{text-align:center;padding:18px 28px 14px;border-bottom:1px solid #eee}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:#0A0A0A}
+  .hero{width:100%;height:380px;background:#0A0A0A center top/cover no-repeat}
+  .pad{padding:46px 44px 32px;background:#FAF8F5}
+  .ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:13px}
+  .h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.18;margin-bottom:20px}
+  .body{font-size:15px;line-height:1.78;color:#333;margin-bottom:18px}
+  .body strong{color:#0A0A0A;font-weight:600}
+  .cta-link{display:inline-block;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px;margin-top:6px;margin-bottom:24px}
+  .review{border-left:3px solid #0A0A0A;padding:6px 0 6px 18px;margin-top:24px}
+  .rquote{font-size:16px;line-height:1.55;font-style:italic;color:#0A0A0A;margin-bottom:8px}
+  .rauthor{font-size:12px;color:#777;letter-spacing:.04em}
+  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
+  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
+  .fnav{font-size:11px;color:#888;margin-bottom:10px}
+  .fnav a{color:#888;text-decoration:none;margin:0 7px}
+  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
+  .fmeta a{color:#999;text-decoration:underline}
+  @media(max-width:520px){
+    .hero{height:300px}
+    .pad{padding:32px 26px 24px}
+    .h1{font-size:28px}
+    .footer{padding:24px 26px}
+  }
+</style>
+</head>
+<body>
+  <div class="em">
+    <div class="top"><div class="logo">ALPHASTYLE</div></div>
+    <div class="hero" style="background-image:url('https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Gen-Double-Hood-Puffer-Jacket-2.0-AlphaStyle-336632594.jpg?v=1766326688')"></div>
+    <div class="pad">
+      <div class="ey">One last thing, {{ first_name|default:'' }}</div>
+      <div class="h1">The jacket sells out. Every winter.</div>
+      <div class="body">This isn't urgency copy. The Kudu sold out last November. The Kudu Gen sold out in December. We make them in small runs on purpose — the construction time and material cost don't allow for warehousing thousands.</div>
+      <div class="body">If you've been waiting for a better moment to pick one up, <strong>this is the moment</strong>. Sizes thin out fastest in the next two weeks, and we don't restock until next season.</div>
+      <a href="{{ organization.url }}/collections/all" class="cta-link">See what's left &rarr;</a>
+      <div class="review">
+        <div class="rquote">"Waited too long last year. Watched it sell out in my size. Not making that mistake again."</div>
+        <div class="rauthor">— Mike D., Montreal</div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="flogo">ALPHASTYLE</div>
+      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
+      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you joined the AlphaStyle list.</div>
+    </div>
+  </div>
+</body>
+</html>

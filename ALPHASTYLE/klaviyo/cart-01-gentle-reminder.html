@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+  AlphaStyle × GTW — Cart 01: Gentle Reminder (KLAVIYO HTML)
+  Subject A: Still there, {{ first_name }}?
+  Preview:   Your cart is saved. No pressure.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="x-apple-disable-message-reformatting" />
+<meta name="color-scheme" content="light" />
+<meta name="supported-color-schemes" content="light" />
+<title>Still there?</title>
+<!--[if mso]>
+<style type="text/css">table,td,div,p,a{font-family:Arial,Helvetica,sans-serif !important}</style>
+<xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+<![endif]-->
+<style type="text/css">
+  body,table,td{font-family:Arial,Helvetica,sans-serif}
+  img{-ms-interpolation-mode:bicubic;border:0;outline:none;text-decoration:none;display:block}
+  a{color:#0A0A0A;text-decoration:none}
+  table{border-collapse:collapse !important}
+  body{margin:0;padding:0;width:100% !important;background:#EEEAE3;-webkit-font-smoothing:antialiased}
+  .ExternalClass,.ExternalClass *{line-height:100%}
+  @media only screen and (max-width:600px){
+    .container{width:100% !important}
+    .px{padding-left:26px !important;padding-right:26px !important}
+    .h1{font-size:28px !important;line-height:34px !important}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#EEEAE3;">
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#EEEAE3;opacity:0;">Your cart is saved. No pressure.</div>
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EEEAE3">
+  <tr><td align="center" style="padding:24px 12px;">
+    <table role="presentation" class="container" width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" style="width:600px;max-width:600px;background:#ffffff;">
+
+      <tr><td align="center" style="padding:18px 28px 14px;border-bottom:1px solid #eeeeee;">
+        <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#0A0A0A;">ALPHASTYLE</span>
+      </td></tr>
+
+      <tr><td style="padding:0;">
+        <a href="{{ event.checkout_url|default:organization.url }}" style="text-decoration:none;">
+          <img src="{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}" width="600" height="340" alt="" style="display:block;width:100%;max-width:600px;height:340px;object-fit:cover;border:0;" />
+        </a>
+      </td></tr>
+
+      <tr><td class="px" bgcolor="#FAF8F5" style="padding:46px 44px 28px;background:#FAF8F5;">
+        <p style="margin:0 0 13px;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#888888;">Your Cart</p>
+        <h1 class="h1" style="margin:0 0 20px;font-family:Arial,Helvetica,sans-serif;font-size:34px;line-height:40px;font-weight:700;letter-spacing:-0.5px;color:#0A0A0A;">Still there, {{ first_name|default:'' }}?</h1>
+        <p style="margin:0 0 22px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:27px;color:#333333;">You left something behind. No pitch &mdash; just a heads-up that your cart is saved and the price hasn't moved. Pick up where you left off whenever you're ready.</p>
+
+        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" style="background:#FFFFFF;border:1px solid #E8E6E1;margin:0 0 24px;">
+          <tr><td style="padding:18px 20px;">
+            <p style="margin:0 0 12px;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#888888;">In Your Cart</p>
+            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="middle" width="64" style="width:64px;">
+                  <img src="{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}" width="64" height="64" alt="" style="display:block;width:64px;height:64px;object-fit:cover;border:0;" />
+                </td>
+                <td valign="middle" style="padding:0 12px;">
+                  <p style="margin:0 0 3px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#0A0A0A;">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</p>
+                  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#777777;">{{ event.extra.line_items.0.variant.title|default:'Black / M' }} &middot; Qty {{ event.extra.line_items.0.quantity|default:'1' }}</p>
+                </td>
+                <td valign="middle" align="right" style="white-space:nowrap;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;color:#0A0A0A;">
+                  ${{ event.extra.value|default:'456.00' }}
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+        </table>
+
+        <table role="presentation" align="center" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+          <tr><td align="center">
+            <a href="{{ event.checkout_url|default:organization.url }}" style="display:inline-block;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px;">Complete your order &rarr;</a>
+          </td></tr>
+        </table>
+      </td></tr>
+
+      <tr><td bgcolor="#F8F8F7" align="center" style="padding:26px 44px 28px;background:#F8F8F7;border-top:1px solid #eeeeee;">
+        <p style="margin:0 0 11px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;color:#0A0A0A;">ALPHASTYLE</p>
+        <p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#888888;">
+          <a href="{{ organization.url }}" style="color:#888888;text-decoration:none;margin:0 7px;">Shop</a> &middot;
+          <a href="{{ organization.url }}/pages/returns" style="color:#888888;text-decoration:none;margin:0 7px;">Returns</a> &middot;
+          <a href="https://instagram.com/alphastyle" style="color:#888888;text-decoration:none;margin:0 7px;">Instagram</a> &middot;
+          <a href="{% unsubscribe %}" style="color:#888888;text-decoration:none;margin:0 7px;">Unsubscribe</a>
+        </p>
+        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:16px;color:#bbbbbb;">AlphaStyle Inc. &middot; [PHYSICAL ADDRESS] &middot; You received this because you started checkout at AlphaStyle.</p>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>

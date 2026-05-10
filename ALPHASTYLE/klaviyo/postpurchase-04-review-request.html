@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+  AlphaStyle × GTW — Post-Purchase 04: Review Request (KLAVIYO HTML)
+  Subject A: How's the {{ event.extra.line_items.0.product.title }}?
+  Preview:   Two weeks in — how's it working out?
+
+  IMPORTANT: Swap {{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }} to the actual Judge.me / Loox review form URL before activation.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="x-apple-disable-message-reformatting" />
+<meta name="color-scheme" content="light" />
+<meta name="supported-color-schemes" content="light" />
+<title>How's the fit?</title>
+<!--[if mso]>
+<style type="text/css">table,td,div,p,a{font-family:Arial,Helvetica,sans-serif !important}</style>
+<xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+<![endif]-->
+<style type="text/css">
+  body,table,td{font-family:Arial,Helvetica,sans-serif}
+  img{-ms-interpolation-mode:bicubic;border:0;outline:none;text-decoration:none;display:block}
+  a{color:#0A0A0A;text-decoration:none}
+  table{border-collapse:collapse !important}
+  body{margin:0;padding:0;width:100% !important;background:#EEEAE3;-webkit-font-smoothing:antialiased}
+  .ExternalClass,.ExternalClass *{line-height:100%}
+  @media only screen and (max-width:600px){
+    .container{width:100% !important}
+    .px{padding-left:26px !important;padding-right:26px !important}
+    .h1{font-size:26px !important;line-height:32px !important}
+    .rimg{width:160px !important;height:160px !important}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#EEEAE3;">
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#EEEAE3;opacity:0;">Two weeks in &mdash; how's it working out?</div>
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EEEAE3">
+  <tr><td align="center" style="padding:24px 12px;">
+    <table role="presentation" class="container" width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" style="width:600px;max-width:600px;background:#ffffff;">
+
+      <tr><td align="center" style="padding:18px 28px 14px;border-bottom:1px solid #eeeeee;">
+        <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#0A0A0A;">ALPHASTYLE</span>
+      </td></tr>
+
+      <tr><td class="px" style="padding:46px 44px 14px;">
+        <p style="margin:0 0 13px;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#888888;">Order #{{ event.order_id|default:'1024' }}</p>
+        <h1 class="h1" style="margin:0 0 18px;font-family:Arial,Helvetica,sans-serif;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.5px;color:#0A0A0A;">Real question &mdash; how is it?</h1>
+        <p style="margin:0 0 22px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:26px;color:#333333;">It's been about two weeks since your <strong style="color:#0A0A0A;font-weight:600;">{{ event.extra.line_items.0.product.title|default:'AlphaStyle order' }}</strong> arrived. Long enough to know if it's actually living up to it. Tell us &mdash; and the next person &mdash; what you think.</p>
+      </td></tr>
+
+      <tr><td class="px" style="padding:0 44px 20px;">
+        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FAF8F5" style="background:#FAF8F5;">
+          <tr><td align="center" style="padding:30px 24px 26px;">
+            <img class="rimg" src="{{ event.extra.line_items.0.product.images.0.src|default:'https://cdn.shopify.com/s/files/1/0266/7465/9403/files/Kudu-Double-Hood-Down-Jacket-AlphaStyle-311762973.jpg?v=1758325279' }}" width="200" height="200" alt="{{ event.extra.line_items.0.product.title|default:'Your AlphaStyle order' }}" style="display:block;width:200px;height:200px;object-fit:cover;border:1px solid #E8E6E1;margin:0 auto 16px;" />
+            <p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:600;color:#0A0A0A;">{{ event.extra.line_items.0.product.title|default:'Kudu Double Hood Down' }}</p>
+            <p style="margin:0 0 18px;font-family:Arial,Helvetica,sans-serif;font-size:24px;letter-spacing:5px;color:#0A0A0A;">
+              <a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" style="color:#dddddd;text-decoration:none;">&#9733;</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" style="color:#dddddd;text-decoration:none;">&#9733;</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" style="color:#dddddd;text-decoration:none;">&#9733;</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" style="color:#dddddd;text-decoration:none;">&#9733;</a><a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" style="color:#dddddd;text-decoration:none;">&#9733;</a>
+            </p>
+            <table role="presentation" border="0" cellspacing="0" cellpadding="0" align="center">
+              <tr><td bgcolor="#0A0A0A" style="background:#0A0A0A;">
+                <a href="{{ event.extra.review_url|default:'#REVIEW_PLATFORM_URL' }}" target="_blank" style="display:inline-block;padding:14px 32px;background:#0A0A0A;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">Write a Review</a>
+              </td></tr>
+            </table>
+          </td></tr>
+        </table>
+      </td></tr>
+
+      <tr><td class="px" style="padding:0 44px 30px;">
+        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:21px;color:#777777;">P.S. &mdash; If something's wrong, <a href="{{ organization.url }}/pages/contact" style="color:#0A0A0A;text-decoration:underline;">tell us directly</a>. We'll fix it before any star rating gets written.</p>
+      </td></tr>
+
+      <tr><td bgcolor="#F8F8F7" align="center" style="padding:26px 44px 28px;background:#F8F8F7;border-top:1px solid #eeeeee;">
+        <p style="margin:0 0 11px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;color:#0A0A0A;">ALPHASTYLE</p>
+        <p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#888888;">
+          <a href="{{ organization.url }}" style="color:#888888;text-decoration:none;margin:0 7px;">Shop</a> &middot;
+          <a href="{{ organization.url }}/pages/returns" style="color:#888888;text-decoration:none;margin:0 7px;">Returns</a> &middot;
+          <a href="https://instagram.com/alphastyle" style="color:#888888;text-decoration:none;margin:0 7px;">Instagram</a> &middot;
+          <a href="{% unsubscribe %}" style="color:#888888;text-decoration:none;margin:0 7px;">Unsubscribe</a>
+        </p>
+        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:16px;color:#bbbbbb;">AlphaStyle Inc. &middot; [PHYSICAL ADDRESS] &middot; You received this because you ordered from AlphaStyle.</p>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
