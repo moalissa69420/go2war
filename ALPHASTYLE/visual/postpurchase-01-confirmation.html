@@ -59,18 +59,12 @@
   .ihl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:7px}
   .ibd{font-size:13px;line-height:1.55;color:#333}
   .cta-link{display:inline-block;font-size:14px;color:#0A0A0A;text-decoration:none;border-bottom:1.5px solid #0A0A0A;padding-bottom:2px;margin-bottom:30px}
-  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
-  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
-  .fnav{font-size:11px;color:#888;margin-bottom:10px}
-  .fnav a{color:#888;text-decoration:none;margin:0 7px}
-  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
-  .fmeta a{color:#999;text-decoration:underline}
+
   @media(max-width:520px){
     .pad{padding:34px 26px 10px}
     .h1{font-size:26px}
     .info{grid-template-columns:1fr;gap:16px}
-    .footer{padding:24px 26px}
-  }
+}
 </style>
 </head>
 <body>
@@ -108,11 +102,6 @@
         </div>
       </div>
       <a href="{{ organization.url }}/account" class="cta-link">View order status &rarr;</a>
-    </div>
-    <div class="footer">
-      <div class="flogo">ALPHASTYLE</div>
-      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{{ organization.url }}/pages/contact">Support</a></div>
-      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · Order #{{ event.order_id|default:'1024' }}</div>
     </div>
   </div>
 </body>

@@ -36,18 +36,12 @@
   .small{font-size:13px;color:#999;font-style:italic;margin-bottom:24px}
   .cta-wrap{text-align:center;padding:6px 0 40px}
   .cta{display:inline-block;background:#fff;color:#0A0A0A;font-family:'Arial Black','Helvetica',Arial,sans-serif;font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:18px 50px}
-  .footer{background:#0A0A0A;padding:22px 44px 28px;text-align:center;border-top:1px solid #222}
-  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#444;margin-bottom:11px}
-  .fnav{font-size:11px;color:#666;margin-bottom:10px}
-  .fnav a{color:#888;text-decoration:none;margin:0 7px}
-  .fmeta{font-size:10px;color:#555;line-height:1.6}
-  .fmeta a{color:#777;text-decoration:underline}
+
   @media(max-width:520px){
     .pad{padding:36px 26px 10px}
     .h1{font-size:32px}
     .code{font-size:34px}
-    .footer{padding:22px 26px}
-  }
+}
 </style>
 </head>
 <body>
@@ -65,11 +59,6 @@
       <div class="small">This code is only valid for the next seven days. It won't reappear.</div>
     </div>
     <div class="cta-wrap"><a href="{{ organization.url }}" class="cta">Use COMEBACK15</a></div>
-    <div class="footer">
-      <div class="flogo">ALPHASTYLE</div>
-      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
-      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you've ordered from AlphaStyle before.</div>
-    </div>
   </div>
 </body>
 </html>

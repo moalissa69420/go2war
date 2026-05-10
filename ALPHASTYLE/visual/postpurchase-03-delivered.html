@@ -46,12 +46,7 @@
   .pl{font-size:11px;letter-spacing:.06em;color:#0A0A0A;text-decoration:none;border-bottom:1px solid #ccc;padding-bottom:1px;margin-top:8px;display:inline-block;align-self:flex-start}
   .closer{padding:18px 44px 30px;font-size:13px;line-height:1.65;color:#777}
   .closer a{color:#0A0A0A;text-decoration:underline}
-  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
-  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
-  .fnav{font-size:11px;color:#888;margin-bottom:10px}
-  .fnav a{color:#888;text-decoration:none;margin:0 7px}
-  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
-  .fmeta a{color:#999;text-decoration:underline}
+
   @media(max-width:520px){
     .pad{padding:32px 26px 12px}
     .style-pad{padding:0 26px 12px}
@@ -59,8 +54,7 @@
     .grid{grid-template-columns:1fr;gap:22px}
     .pi{height:300px}
     .h1{font-size:26px}
-    .footer{padding:24px 26px}
-  }
+}
 </style>
 </head>
 <body>
@@ -93,11 +87,6 @@
       </div>
     </div>
     <div class="closer">Anything off? <a href="{{ organization.url }}/pages/contact">Reply or contact support</a> — we'll fix it.</div>
-    <div class="footer">
-      <div class="flogo">ALPHASTYLE</div>
-      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{{ organization.url }}/pages/contact">Support</a></div>
-      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · Order #{{ event.order_id|default:'1024' }}</div>
-    </div>
   </div>
 </body>
 </html>

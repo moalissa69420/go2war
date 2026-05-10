@@ -33,17 +33,11 @@
   .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:15px 38px}
   .unsub{display:block;margin-top:18px;font-size:13px;color:#888;text-decoration:underline}
   .ps{margin-top:32px;padding-top:22px;border-top:1px solid #E8E6E1;font-size:13px;line-height:1.65;color:#888;font-style:italic}
-  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
-  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
-  .fnav{font-size:11px;color:#888;margin-bottom:10px}
-  .fnav a{color:#888;text-decoration:none;margin:0 7px}
-  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
-  .fmeta a{color:#999;text-decoration:underline}
+
   @media(max-width:520px){
     .pad{padding:38px 26px 24px}
     .h1{font-size:26px}
-    .footer{padding:24px 26px}
-  }
+}
 </style>
 </head>
 <body>
@@ -60,11 +54,6 @@
         <a href="{% unsubscribe %}" class="unsub">Or, unsubscribe me</a>
       </div>
       <div class="ps">P.S. — That 15% off code from last week (COMEBACK15) is still good for 48 more hours if you want to use it on the way out.</div>
-    </div>
-    <div class="footer">
-      <div class="flogo">ALPHASTYLE</div>
-      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
-      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You're receiving this because you've ordered from AlphaStyle before.</div>
     </div>
   </div>
 </body>

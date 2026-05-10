@@ -44,19 +44,13 @@
   .cta{display:inline-block;background:#0A0A0A;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:14px 32px}
   .ps{padding:0 44px 30px;font-size:13px;line-height:1.65;color:#777}
   .ps a{color:#0A0A0A;text-decoration:underline}
-  .footer{background:#F8F8F7;padding:26px 44px 28px;text-align:center;border-top:1px solid #eee}
-  .flogo{font-size:11px;font-weight:700;letter-spacing:.32em;color:#0A0A0A;margin-bottom:11px}
-  .fnav{font-size:11px;color:#888;margin-bottom:10px}
-  .fnav a{color:#888;text-decoration:none;margin:0 7px}
-  .fmeta{font-size:10px;color:#bbb;line-height:1.6}
-  .fmeta a{color:#999;text-decoration:underline}
+
   @media(max-width:520px){
     .pad{padding:32px 26px 12px}
     .ps{padding:0 26px 24px}
     .h1{font-size:26px}
     .rimg{width:160px;height:160px}
-    .footer{padding:24px 26px}
-  }
+}
 </style>
 </head>
 <body>
@@ -76,11 +70,6 @@
       </div>
     </div>
     <div class="ps">P.S. — If something's wrong, <a href="{{ organization.url }}/pages/contact">tell us directly</a>. We'll fix it before any star rating gets written.</div>
-    <div class="footer">
-      <div class="flogo">ALPHASTYLE</div>
-      <div class="fnav"><a href="{{ organization.url }}">Shop</a> · <a href="{{ organization.url }}/pages/returns">Returns</a> · <a href="https://instagram.com/alphastyle">Instagram</a> · <a href="{% unsubscribe %}">Unsubscribe</a></div>
-      <div class="fmeta">AlphaStyle Inc. · [PHYSICAL ADDRESS] · You received this because you ordered from AlphaStyle.</div>
-    </div>
   </div>
 </body>
 </html>
