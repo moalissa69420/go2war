@@ -168,6 +168,76 @@
     if (!res.ok) throw new Error("delete_failed");
   }
 
+  function measureIframeDocHeight(iframe) {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!doc?.body) return 0;
+      const html = doc.documentElement;
+      return Math.max(
+        doc.body.scrollHeight,
+        html ? html.scrollHeight : 0,
+        doc.body.offsetHeight,
+        html ? html.offsetHeight : 0
+      );
+    } catch {
+      return 0;
+    }
+  }
+
+  function fitKlaviyoIframe(iframe) {
+    const frame = iframe.closest(".klaviyo-slot-preview-frame");
+    const wrap = iframe.closest(".klaviyo-slot-preview-scalewrap");
+    if (!frame || !wrap) return;
+
+    const contentW = 600;
+    const maxW = Math.max(Math.floor(frame.getBoundingClientRect().width), 160);
+    const scale = maxW / contentW;
+
+    let docH = measureIframeDocHeight(iframe);
+    if (!docH || docH < 320) {
+      docH = 2600;
+    }
+    const cap = 9000;
+    if (docH > cap) docH = cap;
+
+    iframe.style.width = `${contentW}px`;
+    iframe.style.height = `${docH}px`;
+    iframe.style.transform = `scale(${scale})`;
+    iframe.style.transformOrigin = "top left";
+    wrap.style.width = `${maxW}px`;
+    wrap.style.height = `${Math.ceil(docH * scale)}px`;
+  }
+
+  function setupKlaviyoPreviewSizing() {
+    function bind(iframe) {
+      const refit = () => {
+        fitKlaviyoIframe(iframe);
+        setTimeout(() => fitKlaviyoIframe(iframe), 400);
+        setTimeout(() => fitKlaviyoIframe(iframe), 1200);
+      };
+      iframe.addEventListener("load", refit);
+      try {
+        if (iframe.contentDocument?.readyState === "complete") refit();
+      } catch {
+        // ignore
+      }
+    }
+
+    root.querySelectorAll(".klaviyo-slot-iframe").forEach((el) => {
+      if (el instanceof HTMLIFrameElement) bind(el);
+    });
+
+    let resizeT = 0;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeT);
+      resizeT = window.setTimeout(() => {
+        root.querySelectorAll(".klaviyo-slot-iframe").forEach((el) => {
+          if (el instanceof HTMLIFrameElement) fitKlaviyoIframe(el);
+        });
+      }, 150);
+    });
+  }
+
   async function uploadFileRaw(file) {
     const token = getToken();
     if (!token) throw new Error("no_token");
@@ -212,14 +282,16 @@
         </div>
         <div class="klaviyo-slot-body">
           <div class="klaviyo-slot-preview">
-            <div class="klaviyo-slot-preview-label">Design preview (visual template)</div>
+            <div class="klaviyo-slot-preview-label">Full email preview (scaled to fit width)</div>
             <div class="klaviyo-slot-preview-frame">
-              <iframe
-                class="klaviyo-slot-iframe"
-                title="${escapeAttr(s.label)} visual mockup"
-                src="${KLAVIYO_BASE}visual/${vid}.html"
-                loading="lazy"
-              ></iframe>
+              <div class="klaviyo-slot-preview-scalewrap">
+                <iframe
+                  class="klaviyo-slot-iframe"
+                  title="${escapeAttr(s.label)} visual mockup"
+                  src="${KLAVIYO_BASE}visual/${vid}.html"
+                  loading="lazy"
+                ></iframe>
+              </div>
             </div>
             <p class="klaviyo-slot-preview-meta">
               Uploads for this row are stored as <code>${escapeHtml(s.id)}__yourfile.jpg</code> and map to this email’s hero / product art in Klaviyo.
@@ -459,5 +531,6 @@
   });
 
   buildLayout();
+  setupKlaviyoPreviewSizing();
   refresh();
 })();

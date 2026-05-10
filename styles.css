@@ -407,20 +407,26 @@ a:hover { text-decoration: underline; }
 
 .klaviyo-slot-preview-frame {
   position: relative;
-  height: 360px;
+  width: 100%;
   border: 1px solid var(--border);
   overflow: hidden;
   background: #fafafa;
 }
 
+.klaviyo-slot-preview-scalewrap {
+  overflow: hidden;
+  line-height: 0;
+  margin: 0 auto;
+  min-height: 120px;
+}
+
 .klaviyo-slot-iframe {
   width: 600px;
-  height: 1100px;
+  height: 2000px;
   border: 0;
   display: block;
-  transform: scale(0.5);
-  transform-origin: 0 0;
   pointer-events: none;
+  transform-origin: 0 0;
 }
 
 .klaviyo-slot-preview-meta {
@@ -460,14 +466,6 @@ a:hover { text-decoration: underline; }
 @media (max-width: 900px) {
   .klaviyo-slot-body {
     grid-template-columns: 1fr;
-  }
-
-  .klaviyo-slot-preview-frame {
-    height: 300px;
-  }
-
-  .klaviyo-slot-iframe {
-    transform: scale(0.44);
   }
 }
 
