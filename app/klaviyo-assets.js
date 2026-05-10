@@ -206,15 +206,36 @@
       <div class="klaviyo-slot" data-slot-wrap="${vid}">
         <div class="klaviyo-slot-head">
           <strong>${escapeHtml(s.label)}</strong>
-          <a href="${KLAVIYO_BASE}visual/${vid}.html" target="_blank" rel="noreferrer">Visual</a>
+          <a href="${KLAVIYO_BASE}visual/${vid}.html" target="_blank" rel="noreferrer">Open visual</a>
           <span aria-hidden="true" style="color:var(--muted);">·</span>
-          <a href="${KLAVIYO_BASE}klaviyo/${vid}.html" target="_blank" rel="noreferrer">Klaviyo HTML</a>
-          <label>
-            <span>Upload</span>
-            <input type="file" accept="image/*,image/gif,video/*" multiple data-kl-upload="${vid}" />
-          </label>
+          <a href="${KLAVIYO_BASE}klaviyo/${vid}.html" target="_blank" rel="noreferrer">Open Klaviyo HTML</a>
         </div>
-        <div class="asset-grid" data-slot-grid="${vid}"></div>
+        <div class="klaviyo-slot-body">
+          <div class="klaviyo-slot-preview">
+            <div class="klaviyo-slot-preview-label">Design preview (visual template)</div>
+            <div class="klaviyo-slot-preview-frame">
+              <iframe
+                class="klaviyo-slot-iframe"
+                title="${escapeAttr(s.label)} visual mockup"
+                src="${KLAVIYO_BASE}visual/${vid}.html"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <p class="klaviyo-slot-preview-meta">
+              Uploads for this row are stored as <code>${escapeHtml(s.id)}__yourfile.jpg</code> and map to this email’s hero / product art in Klaviyo.
+            </p>
+          </div>
+          <div class="klaviyo-slot-actions">
+            <div class="klaviyo-slot-upload-row">
+              <label>
+                <span>Upload creative</span>
+                <input type="file" accept="image/*,image/gif,video/*" multiple data-kl-upload="${vid}" />
+              </label>
+            </div>
+            <div class="meta" style="margin-bottom:8px;">Client assets · approve each file and add notes (same as ad library).</div>
+            <div class="asset-grid" data-slot-grid="${vid}"></div>
+          </div>
+        </div>
       </div>`;
         })
         .join("");
