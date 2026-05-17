@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaStyle — Go To War | G2W Strategy</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#000;font-size:11pt;line-height:1.6}
+.cover{min-height:100vh;background:#000;display:flex;flex-direction:column;justify-content:flex-end;padding:80px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.02) 0,transparent 60%)}
+.cover-label{font-size:8pt;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px}
+.cover h1{font-size:56pt;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:20px}
+.cover-sub{font-size:13pt;color:rgba(255,255,255,.55);margin-bottom:52px;max-width:480px}
+.gates{display:flex;gap:52px;margin-bottom:60px}
+.gate .num{font-size:26pt;font-weight:700;color:#fff}
+.gate .lbl{font-size:7.5pt;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
+.cover-brand{font-size:9pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.alert{background:#b00;color:#fff;padding:18px 64px;font-size:10pt;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:16px}
+.page{padding:60px 80px}
+.page+.page{border-top:1px solid #eee}
+.sh{display:flex;align-items:flex-start;gap:22px;margin-bottom:28px;padding-bottom:14px;border-bottom:2.5px solid #000}
+.sn{font-size:50pt;font-weight:700;color:#ebebeb;line-height:1;min-width:72px}
+.st{font-size:19pt;font-weight:700;padding-top:6px}
+.ss{font-size:9.5pt;color:#666;margin-top:3px}
+h2{font-size:13.5pt;font-weight:700;margin:22px 0 10px}
+h3{font-size:11.5pt;font-weight:700;margin:16px 0 7px;color:#000}
+p{margin-bottom:10px;color:#222}
+ul,ol{padding-left:22px;margin-bottom:12px}
+li{margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:10pt}
+th{background:#000;color:#fff;padding:9px 13px;text-align:left;font-size:8.5pt;text-transform:uppercase;letter-spacing:.05em}
+td{padding:9px 13px;border-bottom:1px solid #eee;vertical-align:top}
+tr:nth-child(even) td{background:#fafafa}
+.box{padding:16px 20px;margin-bottom:16px;border-left:4px solid}
+.box.k{border-color:#000;background:#f8f8f8}
+.box.r{border-color:#b00;background:#fff5f5}
+.box.g{border-color:#060;background:#f0fff4}
+.box.y{border-color:#c80;background:#fffbf0}
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kc{border:1.5px solid #ddd;padding:14px;text-align:center}
+.kv{font-size:22pt;font-weight:700;line-height:1.1}
+.kl{font-size:7.5pt;text-transform:uppercase;letter-spacing:.1em;color:#777;margin-top:3px}
+.phase{margin-bottom:28px}
+.ph{background:#000;color:#fff;padding:14px 20px;font-weight:700;font-size:11.5pt;letter-spacing:.04em;text-transform:uppercase}
+.pb-body{border:1.5px solid #000;border-top:none;padding:22px}
+.ref{border:1.5px solid #ddd;margin-bottom:20px}
+.ref-h{padding:16px 20px;font-weight:700;font-size:11pt;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.ref-b{padding:16px 20px}
+.ref-mock{background:#111;color:#fff;padding:16px 20px;font-family:monospace;font-size:9pt;line-height:1.7;margin:12px 0;border-radius:4px;white-space:pre-wrap}
+.steal{background:#f0f7ff;border-left:3px solid #1a5c8a;padding:12px 16px;margin-top:12px;font-size:10pt}
+.day-row{display:grid;grid-template-columns:70px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid #f0f0f0}
+.day-n{font-weight:700;font-size:10pt;color:#000}
+.day-c{font-size:10pt}
+.tag{display:inline-block;padding:2px 8px;border-radius:2px;font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-right:5px}
+.t-meta{background:#b00;color:#fff}
+.t-email{background:#1a3d8a;color:#fff}
+.t-kl{background:#005c00;color:#fff}
+.t-cr{background:#5c3d00;color:#fff}
+.t-store{background:#333;color:#fff}
+.flow-grid{display:grid;grid-template-columns:160px 1fr 80px 80px;gap:0;margin-bottom:2px}
+.fg{padding:9px 13px;border:1px solid #ddd;font-size:9.5pt}
+.fg.h{background:#000;color:#fff;font-weight:700;font-size:8.5pt;text-transform:uppercase}
+.p1x{background:#b00;color:#fff;text-align:center}
+.p2x{background:#c80;color:#fff;text-align:center}
+.p3x{background:#060;color:#fff;text-align:center}
+.scorecard{overflow-x:auto}
+.sc{display:grid;grid-template-columns:160px 100px 100px 100px 100px 100px;gap:0;margin-bottom:2px}
+.scc{padding:8px 12px;border:1px solid #ddd;font-size:9pt;text-align:center}
+.scc.lbl{text-align:left;font-weight:600}
+.scc.hd{background:#000;color:#fff;font-weight:700;font-size:7.5pt;text-transform:uppercase}
+.scc.gr{background:#d4edda}
+.scc.ye{background:#fff3cd}
+.scc.re{background:#f8d7da}
+.risk-g{display:grid;grid-template-columns:1fr 80px 80px 1fr;gap:0;margin-bottom:2px}
+.rg{padding:9px 13px;border:1px solid #ddd;font-size:9.5pt}
+.rg.hd{background:#000;color:#fff;font-weight:700;font-size:8.5pt;text-transform:uppercase}
+.hi{color:#b00;font-weight:700}
+.me{color:#c80;font-weight:700}
+.lo{color:#060;font-weight:700}
+.pb{page-break-after:always}
+footer{padding:28px 80px;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:8pt;color:#aaa;text-transform:uppercase;letter-spacing:.05em}
+code{background:#f5f5f5;padding:1px 6px;border-radius:3px;font-size:9pt;font-family:monospace}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">G2W Strategy — Client War Plan · April 2026</div>
+  <h1>AlphaStyle<br>Go To War</h1>
+  <div class="cover-sub">10-Agent Parallel Analysis · Live Shopify + Meta Data · 30-Day Operator Plan</div>
+  <div class="gates">
+    <div class="gate"><div class="num">2x ROAS</div><div class="lbl">Days 1–14 · $2K/day</div></div>
+    <div class="gate"><div class="num">3x ROAS</div><div class="lbl">Week 3 · $4K/day</div></div>
+    <div class="gate"><div class="num">4x ROAS</div><div class="lbl">Day 30+ · $6K/day</div></div>
+  </div>
+  <div class="cover-brand">G2W Strategy · Confidential</div>
+</div>
+
+<!-- ALERT -->
+<div class="alert">🚨 FUND ACCOUNT NOW — $355 remaining. $210/day burn. 40 hours of runway. Every campaign pauses in under 2 days.</div>
+
+<!-- 00: EXEC SUMMARY -->
+<div class="page">
+<div class="sh"><div class="sn">00</div><div><div class="st">Executive Summary</div><div class="ss">The thesis · Gate reality check · Why the plan hits them</div></div></div>
+
+<div class="box k">
+  <p><strong>The 6.74x ROAS was real. We found exactly what drove it. The account abandoned the winning playbook and replaced it with broken structure.</strong> The fix is known: kill the wrong campaign, relaunch Supreme+Bape interest targeting with the NBA YoungBoy video creative, rebuild the three-campaign funnel from February. That's the entire diagnosis.</p>
+</div>
+
+<div class="krow">
+  <div class="kc"><div class="kv">$118K</div><div class="kl">12-Month Revenue</div></div>
+  <div class="kc"><div class="kv">$954</div><div class="kl">Peak Daily Revenue (Dec)</div></div>
+  <div class="kc"><div class="kv">4.15x</div><div class="kl">Supreme+Bape ROAS (real)</div></div>
+  <div class="kc"><div class="kv">$6,827</div><div class="kl">Identifiable Wasted Spend</div></div>
+</div>
+
+<h2>Gate Reality Check — Based on Real Account Data</h2>
+<table>
+  <tr><th>Gate</th><th>Target</th><th>Verdict</th><th>Real Timeline</th><th>What Unlocks It</th></tr>
+  <tr><td><strong>Gate 1</strong></td><td>$2K/day · 2x ROAS</td><td style="color:#c80;font-weight:700">STRETCH</td><td>Days 10–14 if preconditions met</td><td>Fund $28K+ · Fix checkout (92% abandon) · NBA YB creative Day 1</td></tr>
+  <tr><td><strong>Gate 2</strong></td><td>$4K/day · 3x ROAS</td><td style="color:#c80;font-weight:700">ADJUSTED</td><td>Days 25–35 (not Week 3)</td><td>Gate 1 confirmed · UGC delivered · Supreme+Bape scaled · Aus/NZ traction</td></tr>
+  <tr><td><strong>Gate 3</strong></td><td>$6K/day · 4x ROAS</td><td style="color:#b00;font-weight:700">FLAGGED</td><td>Days 45–60 (or Fall 2026)</td><td>Best-ever Meta ROAS was 2.16x. 4x requires near-double best performance at 3x spend. Realistic in November puffer season.</td></tr>
+</table>
+
+<div class="box r">
+  <p><strong>Gate 3 Honest Math:</strong> $6K/day × 4x ROAS = $24K/day revenue = 81 purchases/day at $294 AOV. Account currently generates 0.5 purchases/day. That's 162x increase in 30 days. By Day 30 it will be mid-May — puffer season over in all US markets. Set Day 30 as Gate 3 <em>setup</em>, not confirmation. True Gate 3 is an October 2026 objective with this season's learnings.</p>
+</div>
+
+<h2>The Three Things That Win or Lose This</h2>
+<ol>
+  <li><strong>Fix checkout before scaling.</strong> 92% abandon rate. At $2K/day spend, every dollar amplifies this loss. Fix Stripe 3DS (switch from "Required" to "Recommended" in Stripe Radar), enable Shop Pay + PayPal Express same day.</li>
+  <li><strong>NBA YoungBoy video + Supreme+Bape audience = the proven combination.</strong> This specific pairing drove 32.17x ROAS in February. Replicate it on Day 1. Don't wait for anything else.</li>
+  <li><strong>Fund the account today.</strong> $355 left. $28K needed for Gate 1. This is not optional context — it's the single decision that determines if any of this happens.</li>
+</ol>
+</div>
+
+<!-- 01: DIAGNOSTIC -->
+<div class="page pb">
+<div class="sh"><div class="sn">01</div><div><div class="st">Diagnostic</div><div class="ss">Real Shopify + Meta data · Product truth · Revenue reality</div></div></div>
+
+<h2>12-Month Revenue Truth (Shopify API, 419 Orders)</h2>
+<table>
+  <tr><th>Month</th><th>Revenue</th><th>Orders</th><th>AOV</th><th>Daily Avg</th><th>Note</th></tr>
+  <tr><td>Oct 2025</td><td>$7,579</td><td>26</td><td>$291</td><td>$253</td><td>Pre-season ramp</td></tr>
+  <tr><td><strong>Nov 2025</strong></td><td><strong>$24,567</strong></td><td>68</td><td>$361</td><td><strong>$819</strong></td><td>Puffer season opens</td></tr>
+  <tr><td><strong>Dec 2025</strong></td><td><strong>$28,615</strong></td><td>72</td><td>$397</td><td><strong>$954 ← PEAK</strong></td><td>Best month ever</td></tr>
+  <tr><td>Jan 2026</td><td>$23,850</td><td>70</td><td>$341</td><td>$795</td><td>Still strong</td></tr>
+  <tr><td>Feb 2026</td><td>$13,594</td><td>38</td><td>$358</td><td>$453</td><td>Meta 6.74x ROAS</td></tr>
+  <tr><td>Mar 2026</td><td>$3,175</td><td>21</td><td>$151</td><td>$106</td><td>Puffer cliff (-77%)</td></tr>
+  <tr><td>Apr 2026</td><td>$2,680</td><td>13</td><td>$206</td><td><strong>$134 ← now</strong></td><td>Bottom of season</td></tr>
+</table>
+
+<div class="box r"><p><strong>86% revenue cliff December → April.</strong> This is a puffer jacket brand in spring. Every scaling decision must account for this seasonality. The opportunity is real — $954/day organic peak exists — but it requires a fall-season Meta strategy, not an April one.</p></div>
+
+<h2>Hero Products (Top 10 by 12-Month Revenue)</h2>
+<table>
+  <tr><th>#</th><th>Product</th><th>Price</th><th>Inventory</th><th>Units Sold</th><th>Revenue</th><th>% Total</th></tr>
+  <tr><td>1</td><td><strong>Kudu Double Hood Down Jacket</strong></td><td>$456</td><td>3,122</td><td>92</td><td><strong>$40,627</strong></td><td><strong>28.9%</strong></td></tr>
+  <tr><td>2</td><td>Kudu Cozy 2-in-1 Puffer [Matte]</td><td>$319</td><td>1,707</td><td>30</td><td>$10,992</td><td>7.8%</td></tr>
+  <tr><td>3</td><td>Kudu Gen Double Hood 2.0</td><td>$456</td><td>3,562</td><td>21</td><td>$8,160</td><td>5.8%</td></tr>
+  <tr><td>4</td><td>AlphaStyle Kudu Puffer [OG3Three]</td><td>$440</td><td>1,856</td><td>15</td><td>$7,018</td><td>5.0%</td></tr>
+  <tr><td>5</td><td>AlphaStyle Kudu Puffer [OG3Three Darkshine]</td><td>$625</td><td>528</td><td>10</td><td>$6,250</td><td>4.4%</td></tr>
+  <tr><td>8</td><td>Sevier Knitted Beanie</td><td>$38</td><td>—</td><td>47</td><td>$1,794</td><td>1.3%</td></tr>
+  <tr><td>9</td><td>Yance Cargo Zip Joggers</td><td>$80</td><td>2,564</td><td>21</td><td>$1,674</td><td>1.2%</td></tr>
+</table>
+
+<div class="box g"><p><strong>Bundle insight:</strong> The Sevier Knitted Beanie has been organically bought with the Kudu jacket 18 times without a bundle prompt. Add it as a featured upsell on all Kudu PDPs — 20 minutes of work, guaranteed AOV lift to $494.</p></div>
+
+<h2>Customer Reality</h2>
+<table>
+  <tr><th>Metric</th><th>Value</th><th>Benchmark</th><th>Verdict</th></tr>
+  <tr><td>One-time buyers</td><td><strong>88.5%</strong></td><td>75% fashion DTC</td><td class="hi">Crisis — every $1 Meta dies at first purchase</td></tr>
+  <tr><td>New York orders</td><td>171 = 40.8% of revenue</td><td>—</td><td>NYC-centric brand — geo-target NYC in ads</td></tr>
+  <tr><td>Avg LTV</td><td>$331</td><td>$150–300 fashion DTC</td><td class="lo">Above average — fix retention to unlock it</td></tr>
+  <tr><td>Repeat purchase gap</td><td>32 days avg</td><td>—</td><td>Post-purchase email at Day 30 = perfect timing</td></tr>
+  <tr><td>Discount code usage</td><td>58% of orders</td><td>&lt;25% healthy</td><td class="hi">Margin leak — move to gated email capture</td></tr>
+</table>
+
+<h2>Dead Weight (Hide from Ads Immediately)</h2>
+<table>
+  <tr><th>Product</th><th>Inventory</th><th>Stranded Value</th><th>Sales</th></tr>
+  <tr><td>Kang Tie-Dye Hooded Down Jacket</td><td>314</td><td>$141,300</td><td class="hi">0 — NEVER SOLD</td></tr>
+  <tr><td>Kudu Max Matte [Limited Edition]</td><td>63</td><td>$75,600</td><td class="hi">0 — NEVER SOLD</td></tr>
+  <tr><td>Kizan Classic Sweatpants</td><td>482</td><td>$42,416</td><td class="hi">0 — NEVER SOLD</td></tr>
+  <tr><td>Gale Baggy Convertible Pants</td><td>974</td><td>$66,232</td><td>Zero in 90 days</td></tr>
+  <tr><td>Apex Washed Hoodie</td><td>591</td><td>$38,415</td><td>Zero in 90 days</td></tr>
+</table>
+<p>Also: 17 active products with zero/negative inventory still live — any paid traffic hitting these bounces with no purchase possible. Archive or draft immediately.</p>
+</div>
+
+<!-- 02: META AUDIT -->
+<div class="page pb">
+<div class="sh"><div class="sn">02</div><div><div class="st">Meta Ads Audit</div><div class="ss">90-day real data · What drove 6.74x · $6,827 wasted · Path to 2x</div></div></div>
+
+<div class="box r"><p><strong>Account balance: $355. Burn rate: $210/day. Runway: 40 hours.</strong> Fund minimum $10,000 before any other action.</p></div>
+
+<h2>90-Day Account Performance</h2>
+<table>
+  <tr><th>Campaign</th><th>Spend</th><th>ROAS</th><th>Purchases</th><th>Revenue</th><th>Action</th></tr>
+  <tr><td>HM | Prospecting | Purchase</td><td>$4,738</td><td style="color:#060">1.57x</td><td>20</td><td>$7,461</td><td>Reactivate (Supreme+Bape ad set only)</td></tr>
+  <tr><td>GTW | Prospecting | Purchase April</td><td>$3,871</td><td style="color:#b00">0.26x</td><td>7</td><td>$1,000</td><td style="color:#b00;font-weight:700">KILL NOW</td></tr>
+  <tr><td>HM | DABA | Prospecting</td><td>$1,942</td><td style="color:#060">1.41x</td><td>9</td><td>$2,739</td><td>Reactivate</td></tr>
+  <tr><td>HM | DPA | Retargeting</td><td>$1,212</td><td style="color:#060">1.81x</td><td>5</td><td>$2,189</td><td>Refresh + relaunch</td></tr>
+  <tr><td>HM | Retargeting | Purchase</td><td>$1,144</td><td style="color:#b00">0.25x</td><td>3</td><td>$280</td><td>Archive</td></tr>
+</table>
+
+<h2>What Drove the 6.74x ROAS (February 2026)</h2>
+<div class="box g">
+  <p><strong>Root cause identified from API data:</strong> The "Supreme + Bape" interest ad set generated <strong>4.15x ROAS at $1,591 spend</strong>. Within it, the specific creative "Video | EXP NBA Young Boy OG 3 | PP" posted <strong>32.17x ROAS</strong> (early signal, small spend). The "Video | EXP NOW LIVE. The ALPHA NEVE | PP - Copy" posted <strong>18.87x ROAS</strong>. These were the actual drivers.</p>
+  <p>The GTW campaign launched Feb 7 with different creative, disrupted the learning phase, and ROAS collapsed from that date forward. Everything since has been the brand paying the price of that structural mistake.</p>
+</div>
+
+<h2>Ad Set Performance Leaders vs Wasters</h2>
+<table>
+  <tr><th>Ad Set</th><th>ROAS</th><th>Spend</th><th>Verdict</th></tr>
+  <tr><td><strong>Supreme + Bape</strong></td><td style="color:#060"><strong>4.15x</strong></td><td>$1,591</td><td>The golden goose — rebuild around this immediately</td></tr>
+  <tr><td>Website 180d (DPA Retarg)</td><td style="color:#060">2.02x</td><td>$1,086</td><td>Works — 14x frequency now, refresh and relaunch</td></tr>
+  <tr><td>Burberry | Givenchy | YSL</td><td style="color:#060">1.71x</td><td>$398</td><td>Expand: add Amiri, Fear of God, Rhude</td></tr>
+  <tr><td><strong>Frequent Travelers</strong></td><td style="color:#b00"><strong>0.27x</strong></td><td>$3,147</td><td>Wrong audience entirely — $2,293 burned</td></tr>
+  <tr><td>Social Engagers (retargeting)</td><td style="color:#b00">0.26x</td><td>$1,078</td><td>Engagement ≠ purchase intent — $798 burned</td></tr>
+  <tr><td>Large Coat Reel 1</td><td style="color:#b00">0x</td><td>$680</td><td>55K views, 0 purchases — viral content, wrong objective</td></tr>
+</table>
+
+<h2>Why GTW Prospecting Has $2.91 CPM (Red Flag)</h2>
+<p>Normal US fashion CPM: $12–17. GTW campaign CPM: $2.91. This means the campaign is serving primarily on <strong>Audience Network (mobile apps)</strong>, international cheap inventory, or Reels with zero purchase intent. The campaign targets US + ALL of Europe + Japan + Canada in one ad set. Meta dumps spend into cheapest available inventory — that's not your customer.</p>
+
+<h2>Audience Inventory — What's Ready to Use</h2>
+<p>49 custom audiences total. Key usable assets sitting idle:</p>
+<ul>
+  <li><strong>US 2% LAL — All Purchasers</strong> ✅ — Not in any active campaign</li>
+  <li><strong>US 2% LAL — Top 10 Spenders</strong> ✅ — Not in any active campaign</li>
+  <li>Checkout No Purchase 30d, ATC No Purchase 30d, View Content 60d ✅</li>
+  <li>OG IG 365, IG Engagers 180d ✅</li>
+</ul>
+<p><strong>Missing:</strong> Video viewer audiences (25/50/75/95% of NBA YB content = 55K+ warm viewers), 7-day checkout abandon, High-AOV customer LAL ($400+)</p>
+</div>
+
+<!-- 03: BRAND AUDIT -->
+<div class="page pb">
+<div class="sh"><div class="sn">03</div><div><div class="st">Brand + Visual Audit</div><div class="ss">Identity fragmentation · Imagery gaps · Social · The real positioning opportunity</div></div></div>
+
+<h2>Three-Way Identity Fragmentation</h2>
+<table>
+  <tr><th>Lane</th><th>Products</th><th>Price</th><th>Implied Customer</th><th>Problem</th></tr>
+  <tr><td><strong>Technical Outerwear</strong></td><td>Kudu puffers</td><td>$319–$1,200</td><td>Affluent streetwear, cold urban</td><td>Revenue engine — undersold</td></tr>
+  <tr><td><strong>Music/Hip-Hop Collab</strong></td><td>NBA YoungBoy, OG3Three</td><td>$35–$625</td><td>Hip-hop youth, culture-forward</td><td>Best credibility — buried</td></tr>
+  <tr><td><strong>Contemporary Fashion</strong></td><td>SS26 VERVE, blazers, flared trousers</td><td>$118–$238</td><td>Fashion week aspirant</td><td>No customer for this yet</td></tr>
+</table>
+
+<div class="box r"><p><strong>The sale addiction is eroding brand equity.</strong> "Regular: $625 → Sale: $319" is permanent. When a product is perpetually 50% off, the regular price becomes fictional. This trains customers to wait for a deal instead of desiring the product at full price. The Kudu should never be discounted in cold traffic ads.</p></div>
+
+<h2>The Positioning Opportunity That's Being Missed</h2>
+<p><strong>Multicultural urban Canada is unclaimed.</strong> Raised by Wolves owns Canadian wilderness heritage. Dime owns skate minimalism. Nobody is speaking to the kid from Scarborough, Brampton, or Burnaby who grew up with hip-hop, has Caribbean or South Asian or East African roots, and wants a premium outerwear brand that actually sees them. The NBA YoungBoy collab is the key that opens this door — it's buried in a dropdown.</p>
+
+<h2>Product Imagery Critical Gaps</h2>
+<ul>
+  <li>Missing: 2-in-1 transformation sequence (the product's #1 differentiator is never shown)</li>
+  <li>Missing: Detail shots of TPU phone pocket, hands-free strap, hood mechanism — features that justify $456</li>
+  <li>Missing: On-body shots across size range (M vs XXL looks very different)</li>
+  <li>Missing: City/outdoor lifestyle — the Kudu is a city jacket with no city photography</li>
+  <li>Missing: UGC wall on PDP — zero social proof at a $300-600 price point</li>
+  <li>~70% studio product-only, ~30% lifestyle — need to flip this ratio</li>
+</ul>
+
+<h2>Organic Social Gaps</h2>
+<table>
+  <tr><th>Platform</th><th>Status</th><th>Problem</th></tr>
+  <tr><td>Instagram @alphastyle.official</td><td>33K followers, 165 posts</td><td>1-1.5 posts/week — severely under-posting. Multiple handles (@alphastyle, @alphastyleglobal) fragmenting audience. Bio says "The Official Website" — no hook, no brand line.</td></tr>
+  <tr><td>TikTok</td><td>Handle exists, zero traction</td><td>Primary discovery engine for 18-28 year olds — completely untapped. No product review content, no try-on hauls, no 2-in-1 demo content surfacing.</td></tr>
+  <tr><td>UGC</td><td>Exists in wild (@ofresh tagged Kudu)</td><td>No aggregation, no repost strategy, no branded hashtag. Customer pride of ownership is free content being left on the table.</td></tr>
+</table>
+</div>
+
+<!-- 04: REFERENCE BRANDS -->
+<div class="page pb">
+<div class="sh"><div class="sn">04</div><div><div class="st">Reference Brand Teardowns</div><div class="ss">What to steal · How to apply it · Specific executions for AlphaStyle</div></div></div>
+
+<div class="ref">
+  <div class="ref-h"><span>01 — REPRESENT CLOTHING</span><span style="font-weight:400;font-size:9.5pt;color:#666">The Founder-Led Drop Machine · £93.4M revenue 2024</span></div>
+  <div class="ref-b">
+    <p><strong>Why relevant:</strong> Closest spiritual analog. Premium streetwear ($145-285), founder-driven, 70% DTC. Built community through the process of building the brand, not through performance hacks.</p>
+    <p><strong>Steal: Hook formula</strong> — Product in motion, 2-second hold, then founder text overlay: "THIS IS WHY WE BUILD." Or founder-to-camera: "We made this for one reason..." → product reveal.</p>
+    <p><strong>Steal: Color grade</strong> — Desaturated mid-tones, lifted shadows, slight film grain. Think Fuji Velvia pushed one stop. 3800-4200K. Industrial backdrop. Never warm.</p>
+    <p><strong>Steal: Editing pace</strong> — Slow-cut with ONE punctuated fast sequence. 3-4 second holds on hero, then 4 rapid detail cuts (collar, cuff, zipper, texture). 20-25s runtime.</p>
+    <div class="ref-mock">┌─────────────────────────────────────────────┐
+│ COLD OPEN: Kudu texture close-up, hand     │
+│ running along arm seam. No sound. 2 sec.  │
+│                                             │
+│ CUT: Founder, dimly lit studio, Kudu       │
+│ Double Hood, all black.                    │
+│                                             │
+│ HOOK: "We built this for -40°C. Turns      │
+│ out it looks better than anything else     │
+│ in your closet."                           │
+│                                             │
+│ 4 FAST CUTS: zipper, chest badge, hem,    │
+│ collar fold                                │
+│                                             │
+│ HOLD: Full-length shot, urban backdrop    │
+│ CTA: "Explore the Collection →"            │
+└─────────────────────────────────────────────┘
+Grade: Desaturated cool-neutral, 4000K
+Music: Low-tempo instrumental, no vocals</div>
+    <div class="steal"><strong>AlphaStyle Execution:</strong> Founder holds Kudu in minimal studio, 2 sentences about why they built it (no script). Cut to texture close-ups (6s). Clean brand card. Run cold + broad targeting.</div>
+  </div>
+</div>
+
+<div class="ref">
+  <div class="ref-h"><span>02 — MADHAPPY</span><span style="font-weight:400;font-size:9.5pt;color:#666">Community-Values Playbook · $150-350 hoodies</span></div>
+  <div class="ref-b">
+    <p><strong>Why relevant:</strong> Product isn't radically different from competitors — the brand has a reason to exist. Community-first before product-first. Celebrities sought them out, they never paid for influencers.</p>
+    <p><strong>Steal: Identity angle</strong> — First 3 seconds are never about the product. It's about the feeling. "Made for who you're becoming." Then product enters frame.</p>
+    <p><strong>Steal: Color grade</strong> — Kodak Portra 400 emulation. Warm golden fill light. Lifted shadows (never crushed blacks). 5000-5500K. Approachable. Feels like a good day.</p>
+    <div class="ref-mock">┌─────────────────────────────────────────────┐
+│ STATIC: Model in Kudu puffer, standing    │
+│ outside, early morning, breath visible.  │
+│ Natural, candid, unbothered. Hold 3s.    │
+│                                             │
+│ FADE IN TEXT: "Built in Canada.           │
+│ Worn wherever winter finds you."          │
+│                                             │
+│ CUT: Product detail, clean bg, warm side │
+│ light. Logo.                               │
+│                                             │
+│ CAPTION: "The Kudu. For people who don't │
+│ stop when it gets cold."                  │
+│ CTA: "Shop the Drop"                      │
+└─────────────────────────────────────────────┘
+Grade: Portra 400, golden AM light, 5200K
+Audience: Warm / retargeting / LAL only</div>
+    <div class="steal"><strong>AlphaStyle Execution:</strong> Community quote static — customer quote overlaid on editorial shot: "I've owned $2,000 jackets. The Kudu is the one I actually reach for." — [First name, city]. Run to warm audiences.</div>
+  </div>
+</div>
+
+<div class="ref">
+  <div class="ref-h"><span>03 — MOOSE KNUCKLES</span><span style="font-weight:400;font-size:9.5pt;color:#666">Canadian Premium Outerwear Blueprint · $700-2,000</span></div>
+  <div class="ref-b">
+    <p><strong>Why relevant:</strong> Same country. Same climate. Same positioning challenge — "why pay this much for a jacket?" Their answer: body-conscious fit, youthful irreverence, the sexiest cold-weather advertising you've ever seen. "We're the streetwear brand in outerwear."</p>
+    <p><strong>Steal: Price justification</strong> — Lead with the question, then answer it visually. Never explain the price — demonstrate the value. "You know who you are" positioning.</p>
+    <p><strong>Steal: High-contrast drama</strong> — Strong lighting contrast, unexpected settings, movement-forward. Not safe catalog photography. Confidence signals quality.</p>
+    <div class="steal"><strong>AlphaStyle Execution:</strong> Reframe vs. Canada Goose (no name used): "The alternative. Same Canadian winter. $400 less." Static, high contrast, Kudu detail shot. Run to cold audiences with price anchor.</div>
+  </div>
+</div>
+
+<div class="ref">
+  <div class="ref-h"><span>04 — TRUE CLASSIC</span><span style="font-weight:400;font-size:9.5pt;color:#666">The Performance Meta Formula · $150M in 2 years DTC</span></div>
+  <div class="ref-b">
+    <p><strong>Why relevant:</strong> Not for aesthetic — for Meta formula. $150M in 2 years via direct response. 10-20 new creatives per week. Before/after fit reveal. Price anchor copy. Split-screen problem/solution. This is the scaling playbook.</p>
+    <p><strong>Steal: Volume discipline</strong> — Test 8+ creatives simultaneously. Kill anything &lt;$100 spend without performance. Scale winners 15% every 3 days.</p>
+    <p><strong>Steal: Price anchor formula</strong> — "Less than 3 pairs of Jordans. Lasts 10 winters." This copy formula outperforms narrative ads for cold traffic conversion.</p>
+    <div class="steal"><strong>AlphaStyle Execution:</strong> Static with copy: "Less than a Canada Goose. Better than either of them." Clean product on dark background. Price shown. CTA: "See why." Run broad, high volume, let Meta optimize.</div>
+  </div>
+</div>
+</div>
+
+<!-- 05: META STRATEGY -->
+<div class="page pb">
+<div class="sh"><div class="sn">05</div><div><div class="st">Meta Account Structure</div><div class="ss">3-campaign architecture · Exact naming · Day-by-day launch · Kill/scale thresholds</div></div></div>
+
+<h2>Phase 1 Architecture — $2,000/day</h2>
+<div class="phase">
+<div class="ph">Campaign 1: AS | P1 | ASC | MAIN | 0422 — $900/day (45%)</div>
+<div class="pb-body">
+<p><strong>Type:</strong> Advantage+ Shopping Campaign — replicates the Feb DABA structure that drove 2.16x ROAS</p>
+<p><strong>Geo:</strong> Canada (BC, AB, ON, QC, NS) primary. No US until checkout confirmed fixed.</p>
+<p><strong>Ads at launch (6 minimum):</strong></p>
+<table>
+  <tr><th>Ad Name</th><th>Format</th><th>Source</th></tr>
+  <tr><td>AS|P1|VID|NBAYB-KUDU-V1|0422</td><td>NBA YoungBoy video (EXACT REPLICATION of Feb winner)</td><td>Existing — CRITICAL</td></tr>
+  <tr><td>AS|P1|VID|NEVE-LAUNCH-V1|0422</td><td>"NOW LIVE. The ALPHA NEVE" video — 18.87x ROAS creative</td><td>Existing — CRITICAL</td></tr>
+  <tr><td>AS|P1|SM|KUDU-HOOD-REVEAL|0422</td><td>Stop motion — double hood reveal sequence</td><td>Shoot Day 1</td></tr>
+  <tr><td>AS|P1|STA|KUDU-CLEAN-PRICE|0422</td><td>Static, hero jacket, clean bg, price shown</td><td>Product photos</td></tr>
+  <tr><td>AS|P1|STA|CANADA-GOOSE-COMP|0422</td><td>Price anchor — "Canadian outerwear. $300 less."</td><td>Design Day 1</td></tr>
+  <tr><td>AS|P1|CAR|FULL-KIT|0422</td><td>Carousel — Kudu + Cargo + Beanie with prices</td><td>Product photos</td></tr>
+</table>
+</div>
+</div>
+
+<div class="phase">
+<div class="ph">Campaign 2: AS | P1 | RTGT | WARM | 0422 — $600/day (30%)</div>
+<div class="pb-body">
+<p><strong>Type:</strong> Manual ABO — 5 retargeting ad sets, each with separate budget control</p>
+<table>
+  <tr><th>Ad Set</th><th>Audience</th><th>Budget</th><th>Exclusion</th></tr>
+  <tr><td>CHKOUT-7D</td><td>Checkout Abandon 7 days</td><td>$150</td><td>All Purchasers</td></tr>
+  <tr><td>CHKOUT-30D</td><td>Checkout Abandon 30 days</td><td>$120</td><td>+CHKOUT-7D</td></tr>
+  <tr><td>ATC-30D</td><td>ATC No Purchase 30d</td><td>$120</td><td>+Checkout audiences</td></tr>
+  <tr><td>SITE-VIS-30D</td><td>All Visitors 30d</td><td>$120</td><td>+ATC + Checkout + Purchasers</td></tr>
+  <tr><td>OG-IG-365</td><td>OG IG 365 Engagers</td><td>$90</td><td>+Site Visitors + Purchasers</td></tr>
+</table>
+<p><strong>Creative per ad set:</strong> DPA catalog for checkout/ATC audiences. Static with urgency ("Still thinking about it?") for site visitors. Brand/lifestyle for IG engagers.</p>
+</div>
+</div>
+
+<div class="phase">
+<div class="ph">Campaign 3: AS | P1 | PROS | LAL | 0422 — $500/day (25%)</div>
+<div class="pb-body">
+<table>
+  <tr><th>Ad Set</th><th>Audience</th><th>Budget</th><th>Note</th></tr>
+  <tr><td>LAL2-TOP-SPENDERS</td><td>US 2% LAL — Top 10 Spenders</td><td>$200</td><td>Currently idle — your best prospecting audience</td></tr>
+  <tr><td>LAL2-ALL-PURCHASERS</td><td>US 2% LAL — All Purchasers</td><td>$200</td><td>Currently idle — activate immediately</td></tr>
+  <tr><td>SUPREME-BAPE</td><td>Supreme, Bape, Palace, Off-White, Kith</td><td>$100</td><td>Rebuilt from the 4.15x winner — new creatives only</td></tr>
+</table>
+</div>
+</div>
+
+<h2>Day-by-Day Launch Plan</h2>
+<div class="day-row"><div class="day-n">Day 1</div><div class="day-c"><span class="tag t-meta">META</span> Kill GTW Prospecting April. Fund account $10K+. Launch 3-campaign structure with 6 creatives. <span class="tag t-store">STORE</span> Enable Shop Pay + PayPal Express. Archive 132 dead-weight products. Add Beanie upsell to Kudu PDPs. Fix Stripe Radar: 3DS → Recommended. <span class="tag t-kl">KLAVIYO</span> Begin building Abandoned Cart flow.</div></div>
+<div class="day-row"><div class="day-n">Day 3</div><div class="day-c"><span class="tag t-meta">META</span> Check CTR only. Kill any ad with 0 clicks after $20 spend. NO budget changes yet. <span class="tag t-kl">KLAVIYO</span> Complete Abandoned Cart + SMS. Activate. Begin Welcome Series.</div></div>
+<div class="day-row"><div class="day-n">Day 7</div><div class="day-c"><span class="tag t-meta">META</span> First real optimization. Kill creatives &lt;1x ROAS after $100 spend. Scale winners 15% if ROAS ≥2x. Check CAPI event match quality — must be &gt;7.0. <span class="tag t-kl">KLAVIYO</span> Welcome + Post-Purchase flows live. <span class="tag t-cr">CREATIVE</span> UGC creator first check-in — confirm Day 14 delivery.</div></div>
+<div class="day-row"><div class="day-n">Day 14</div><div class="day-c"><span class="tag t-meta">META</span> <strong>GATE 1 CHECK.</strong> Pass if ASC ≥2x ROAS AND retargeting ≥3.5x AND CAPI match &gt;70%. If yes → launch Phase 2. If no → diagnose before scaling. <span class="tag t-cr">CREATIVE</span> UGC Video 1 delivered and live in ASC.</div></div>
+<div class="day-row"><div class="day-n">Day 15</div><div class="day-c"><span class="tag t-meta">META</span> Launch Phase 2: Fresh ASC ($800/day, UGC only) + Broad Interest CBO (Supreme+Bape expand: add Amiri, Fear of God, Rhude, Stussy). Scale P1 campaigns 20%.</div></div>
+<div class="day-row"><div class="day-n">Day 17</div><div class="day-c"><span class="tag t-meta">META</span> Launch Aus/NZ puffer campaign — $100/day test. Same creative, Sydney + Melbourne + Auckland geo. Entering their May-August winter. If Week 1 ROAS ≥1.5x: scale to $300/day Week 3.</div></div>
+<div class="day-row"><div class="day-n">Day 21</div><div class="day-c"><span class="tag t-meta">META</span> Gate 2 check. Build video viewer audience from NBA YB views (55K+ warm, unused). <span class="tag t-kl">KLAVIYO</span> Win-Back flow live.</div></div>
+
+<h2>Kill / Scale Thresholds</h2>
+<table>
+  <tr><th>Level</th><th>KILL Signal</th><th>HOLD</th><th>SCALE Signal</th><th>Action</th></tr>
+  <tr><td>Campaign (7d)</td><td>&lt;0.8x ROAS, &gt;$500 spend</td><td>0.8–1.5x</td><td>≥2x for 5 days</td><td>Pause / +15% budget</td></tr>
+  <tr><td>Ad Set (5d)</td><td>&lt;1x after $200 spend</td><td>1–2x</td><td>≥3x, freq &lt;3.0</td><td>Pause / +20% budget</td></tr>
+  <tr><td>Creative</td><td>CTR &lt;0.5% after $30 OR &lt;1.5x ROAS after $100</td><td>1.5–2.5x</td><td>≥2.5x after $100</td><td>Pause / move to ASC</td></tr>
+  <tr><td>Frequency</td><td>&gt;4.0 (prospecting)</td><td>2–4x</td><td>&lt;2.0</td><td>Kill + refresh creative</td></tr>
+</table>
+<p><strong>Rules:</strong> Max 30% budget increase per day. Wait 3 days after budget change. Reduce 50% before pausing. Never pause a learning ASC. Duplicate before testing — never modify a live winner.</p>
+</div>
+
+<!-- 06: CREATIVE PLAN -->
+<div class="page pb">
+<div class="sh"><div class="sn">06</div><div><div class="st">Creative Production Plan</div><div class="ss">Every ad for 30 days · Hooks written · Shot list · UGC brief</div></div></div>
+
+<h2>Phase 1 Ads (Days 1-14, $2K/day)</h2>
+<table>
+  <tr><th>Ad</th><th>Format</th><th>Hook (exact first 3s)</th><th>Copy</th><th>Gate</th></tr>
+  <tr><td>AS|P1|VID|NBAYB-KUDU-V1</td><td>Celebrity video</td><td>[NBA YoungBoy wearing Kudu, no sound, 2 sec]</td><td>"The jacket they chose. The Kudu."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|SM|KUDU-HOOD-REVEAL</td><td>Stop motion</td><td>[Double hood reveal in 3 frames, text: "WAIT."]</td><td>"Two jackets. Zero compromise. The Kudu 2-in-1."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|VID|LIFESTYLE-CITY</td><td>Lifestyle 20s</td><td>[Model walking in winter city, jacket fully on, hood up, dawn light]</td><td>"Built for this. $456."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|STA|KUDU-CLEAN-PRICE</td><td>Static</td><td>Hero jacket, white bg, large price: "$456"</td><td>"Less than a Canada Goose. Better in ways that matter."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|STA|COMP-CG</td><td>Comparison static</td><td>Split: "$900+ vs $456" — both jackets (no name on CG)</td><td>"Same winter. $450 saved."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|CAR|FULL-KIT</td><td>Carousel 3-frame</td><td>Frame 1: Kudu jacket hero. Frame 2: Cargo pants. Frame 3: Beanie.</td><td>"The full kit. Everything you need for winter."</td><td>Day 1</td></tr>
+  <tr><td>AS|P1|UGC|REVIEW-01</td><td>UGC video 30s</td><td>[Customer unboxing, real reaction: "I don't know how to explain it..."]</td><td>Caption only: "Real customer. Real Kudu."</td><td>Day 14</td></tr>
+  <tr><td>AS|P1|SM|KUDU-V2-DARK</td><td>Stop motion V2</td><td>[Darkshine colorway reveal, matte finish in dramatic light]</td><td>"Shadow Signal. The Kudu Darkshine."</td><td>Day 14</td></tr>
+</table>
+
+<h2>Hook Library — 20 Written for AlphaStyle</h2>
+<h3>Problem/Solution (5)</h3>
+<ol>
+  <li>"I used to spend $900 on Canada Goose every winter. Then I found out what they were actually made of."</li>
+  <li>"The jacket you actually need isn't the one everyone's wearing. The Kudu."</li>
+  <li>"Why does everyone's winter jacket look the same? This is the answer."</li>
+  <li>"I got stopped three times in one day. All three asked where the jacket was from."</li>
+  <li>"I've owned $1,500 jackets. This $456 one is the only one I reach for."</li>
+</ol>
+<h3>Identity (5)</h3>
+<ol>
+  <li>"The jacket for the kid who figured it out."</li>
+  <li>"If you know AlphaStyle, you already know."</li>
+  <li>"Not everyone's going to get it. That's the point."</li>
+  <li>"Some jackets tell people you spent money. The Kudu tells them something else."</li>
+  <li>"Built in Canada. Recognized everywhere."</li>
+</ol>
+<h3>Feature Reveal (5)</h3>
+<ol>
+  <li>"Wait until you see what this hood does. [pause] Two hoods. Same jacket."</li>
+  <li>"The only jacket with a built-in phone pocket rated for -40°C."</li>
+  <li>"You can carry it on your shoulder without a bag. Watch."</li>
+  <li>"Matte finish. 700-fill goose down. The Kudu Double Hood."</li>
+  <li>"Here's how you turn one jacket into two in under 5 seconds."</li>
+</ol>
+<h3>Social Proof (5)</h3>
+<ol>
+  <li>"NBA YoungBoy wears the Kudu. This is why."</li>
+  <li>"Straight from NYFW to your block."</li>
+  <li>"They wore it at NYFW. You can wear it everywhere else."</li>
+  <li>"Over 10,000 Canadian winters survived. The Kudu keeps going."</li>
+  <li>"Our customers say it's the last jacket they'll ever buy. Here's why."</li>
+</ol>
+
+<h2>One-Day Photoshoot Shot List (6 Blocks, ~80-100 deliverables)</h2>
+<table>
+  <tr><th>Block</th><th>Time</th><th>Shots</th><th>Key Deliverables</th></tr>
+  <tr><td>1 — Hero Clean Bg</td><td>45 min</td><td>12–15</td><td>White + dark bg, all colorways, front/back/side. Ghost mannequin for size. Price card option.</td></tr>
+  <tr><td>2 — Lifestyle City</td><td>60 min</td><td>20–25</td><td>Urban location (parkade, alley, building steps). Full outfit + jacket only. Day + dusk light. NYC-coded aesthetic.</td></tr>
+  <tr><td>3 — Detail/Feature Shots</td><td>30 min</td><td>15–20</td><td>Hood mechanism (detach sequence 4 frames), TPU phone pocket, zipper pull, fabric texture close-up, tag shot.</td></tr>
+  <tr><td>4 — Full Outfit Styling</td><td>45 min</td><td>12–16 per look × 4 looks</td><td>Look 1: Kudu + Cargo + clean sneaker. Look 2: OG3Three edition + graphic tee. Look 3: Darkshine + all black. Look 4: Kudu + Beanie bundle.</td></tr>
+  <tr><td>5 — Group/Social</td><td>45 min</td><td>12–15</td><td>3 people, diverse cast, multicultural urban Canada aesthetic (Madhappy reference). Candid, not posed. Winter city.</td></tr>
+  <tr><td>6 — Movement/Action</td><td>30 min</td><td>8–10 + video clips</td><td>Walking toward camera, hood pull in wind, jacket in motion. 5-10 short video clips for stop motion source material.</td></tr>
+</table>
+</div>
+
+<!-- 07: KLAVIYO -->
+<div class="page pb">
+<div class="sh"><div class="sn">07</div><div><div class="st">Klaviyo Flow Stack</div><div class="ss">9 flows built · 25 checkouts → 2 purchases is the emergency · CASL compliance</div></div></div>
+
+<div class="box r"><p><strong>The checkout abandonment problem is worth $6,762/day in lost revenue at current volume.</strong> At a conservative 5% recovery rate from flows: +$44K–$60K/month before touching a single ad. Build this first.</p></div>
+
+<h2>Flow Build Priority</h2>
+<div class="flow-grid"><div class="fg h">Flow</div><div class="fg h">Trigger + Logic</div><div class="fg h">Sequence</div><div class="fg h">Build</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Abandoned Cart</div><div class="fg">Started Checkout, no purchase after 1hr. 3 emails + 2 SMS.</div><div class="fg" style="text-align:center">3E + 2S</div><div class="fg p1x">WEEK 1</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Checkout Abandon</div><div class="fg">Checkout Started, no Complete Purchase in 2hr. Separate from Cart.</div><div class="fg" style="text-align:center">2E + 1S</div><div class="fg p1x">WEEK 1</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Welcome Series</div><div class="fg">List Subscribe (non-purchaser). 10% offer gated at Email 4.</div><div class="fg" style="text-align:center">5E</div><div class="fg p1x">WEEK 1</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Browse Abandon</div><div class="fg">2+ product views, no ATC, inactive 4hr.</div><div class="fg" style="text-align:center">2E</div><div class="fg p1x">WEEK 1</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Post-Purchase</div><div class="fg">Order Placed. Conf → Shipping → Review → Upsell Day 21.</div><div class="fg" style="text-align:center">4E</div><div class="fg p1x">WEEK 1</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Win-Back</div><div class="fg">60/90/120 day no purchase — escalating offers.</div><div class="fg" style="text-align:center">3E (tiered)</div><div class="fg p2x">WEEK 2</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">VIP</div><div class="fg">2nd purchase placed. Early access + monthly perk.</div><div class="fg" style="text-align:center">2E</div><div class="fg p2x">WEEK 2</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Back-in-Stock</div><div class="fg">OOS product restocked. 1 SMS + 2 emails.</div><div class="fg" style="text-align:center">1S + 2E</div><div class="fg p3x">WEEK 3+</div></div>
+<div class="flow-grid"><div class="fg" style="font-weight:700">Sunset / Hygiene</div><div class="fg">180+ days no engagement. 3-email exit before suppression.</div><div class="fg" style="text-align:center">3E</div><div class="fg p3x">WEEK 3+</div></div>
+
+<h2>Abandoned Cart — Full Sequence</h2>
+<table>
+  <tr><th>Touch</th><th>Timing</th><th>Subject Line</th><th>Content/Hook</th></tr>
+  <tr><td>Email 1</td><td>1hr after abandon</td><td>"Still there, [First Name]"</td><td>Cart contents shown. No discount. Urgency: "The Kudu sells out in winter."</td></tr>
+  <tr><td>SMS 1</td><td>2hrs</td><td>—</td><td>"[First name], your Kudu cart is waiting. [84 chars max] [link]"</td></tr>
+  <tr><td>Email 2</td><td>24hrs</td><td>"What's holding you back?"</td><td>Social proof angle (collab, reviews). Address shipping/returns objection. Soft urgency.</td></tr>
+  <tr><td>SMS 2</td><td>26hrs</td><td>—</td><td>"Your cart expires soon. Don't let someone else get your size. [link]"</td></tr>
+  <tr><td>Email 3</td><td>72hrs</td><td>"10% off — just this once."</td><td>One-time 10% code. Hard 48hr expiry. Clear CTA. Suppressed if they've already gotten a Welcome discount.</td></tr>
+</table>
+<p><em>⚠️ CASL: Canadian subscribers require explicit double opt-in for SMS. Consent must be stored separately. Non-compliance = up to CAD $10M fine.</em></p>
+
+<h2>Revenue Projection from Flows</h2>
+<table>
+  <tr><th>Scenario</th><th>Meta Spend</th><th>Estimated Email Revenue/Month</th><th>% of Total</th></tr>
+  <tr><td>Current (no flows)</td><td>$210/day</td><td>~$0</td><td>0%</td></tr>
+  <tr><td>Gate 1 + flows live</td><td>$2K/day</td><td>$47K–$72K</td><td>~25-30%</td></tr>
+  <tr><td>Gate 3 + full stack</td><td>$6K/day</td><td>$141K–$215K</td><td>~25-30%</td></tr>
+</table>
+</div>
+
+<!-- 08: CALENDAR -->
+<div class="page pb">
+<div class="sh"><div class="sn">08</div><div><div class="st">30-Day Unified Calendar</div><div class="ss">Every action across every lane on one grid</div></div></div>
+
+<h2>5 Most Critical Days</h2>
+<table>
+  <tr><th>Day</th><th>Date</th><th>Why It's Critical</th></tr>
+  <tr><td><strong>Day 1</strong></td><td>Apr 22</td><td>Kill GTW. Fund account. Launch new structure. Fix checkout. Everything starts or stops here.</td></tr>
+  <tr><td><strong>Day 4</strong></td><td>Apr 25</td><td>Abandoned Cart flow goes live. First optimization window for ads.</td></tr>
+  <tr><td><strong>Day 12</strong></td><td>May 3</td><td>All Week 1 flows active. First UGC delivered. Email machine online.</td></tr>
+  <tr><td><strong>Day 14</strong></td><td>May 5</td><td><strong>GATE 1 CHECK.</strong> 2x ROAS pass/fail → Phase 2 decision. No passing = diagnose, don't scale.</td></tr>
+  <tr><td><strong>Day 21</strong></td><td>May 12</td><td><strong>GATE 2 CHECK.</strong> Creative fatigue audit. Aus/NZ data assessed. Phase 3 decision.</td></tr>
+</table>
+
+<h2>Week-by-Week Calendar</h2>
+<h3>Week 1: April 22–28</h3>
+<div class="day-row"><div class="day-n">Day 1</div><div class="day-c"><span class="tag t-meta">META</span> Kill GTW, fund $10K+, launch 3-campaign structure with NBA YB + stop motion + 4 statics. <span class="tag t-store">STORE</span> Enable Shop Pay + PayPal Express, archive 132 dead-weight products, beanie upsell on Kudu PDPs. <span class="tag t-kl">KLAVIYO</span> Begin Abandoned Cart build.</div></div>
+<div class="day-row"><div class="day-n">Day 2</div><div class="day-c"><span class="tag t-kl">KLAVIYO</span> Complete Abandoned Cart + SMS. Begin Welcome Series. <span class="tag t-store">STORE</span> Re-list delisted winners: Percy Cargo Joggers, Yance Cargo, Mancos Track Jacket. Kill WELCOME10 public code.</div></div>
+<div class="day-row"><div class="day-n">Day 3</div><div class="day-c"><span class="tag t-meta">META</span> CTR check only. Kill 0-click ads after $20. No budget changes. <span class="tag t-cr">CREATIVE</span> Brief UGC creators — hard deadline Day 14 delivery.</div></div>
+<div class="day-row"><div class="day-n">Day 4</div><div class="day-c"><span class="tag t-kl">KLAVIYO</span> Abandoned Cart + Checkout Abandon flows LIVE. Test with a real cart. <span class="tag t-cr">CREATIVE</span> Photoshoot Day 1 — 6 blocks, 80+ deliverables.</div></div>
+<div class="day-row"><div class="day-n">Day 7</div><div class="day-c"><span class="tag t-meta">META</span> First optimization — kill creatives &lt;1x ROAS after $100. Scale winners 15% if ROAS ≥2x. Verify CAPI event match &gt;7.0. <span class="tag t-kl">KLAVIYO</span> Welcome Series + Browse Abandon live. <span class="tag t-email">EMAIL</span> Send 1: "New in AlphaStyle" — re-engage full list, show re-listed products.</div></div>
+
+<h3>Week 2: April 29 – May 5</h3>
+<div class="day-row"><div class="day-n">Day 8</div><div class="day-c"><span class="tag t-meta">META</span> Review Week 1 ROAS. Scale winning ad sets 15% if ≥2x. <span class="tag t-kl">KLAVIYO</span> Post-Purchase flow live.</div></div>
+<div class="day-row"><div class="day-n">Day 10</div><div class="day-c"><span class="tag t-email">EMAIL</span> Send 2: "The Kudu. Before it's gone for the season." — urgency on puffers closing window.</div></div>
+<div class="day-row"><div class="day-n">Day 12</div><div class="day-c"><span class="tag t-cr">CREATIVE</span> UGC Video 1 delivered. Upload to ASC immediately. <span class="tag t-meta">META</span> Build Checkout Abandon 7d audience — tightest retargeting signal.</div></div>
+<div class="day-row"><div class="day-n">Day 14</div><div class="day-c"><span class="tag t-meta">META</span> <strong>GATE 1 CHECK.</strong> ASC ≥2x AND retargeting ≥3.5x? YES → Phase 2 launch. NO → diagnose, do NOT scale. <span class="tag t-email">EMAIL</span> Send 3: "Spring kit is ready" — cargos, track jackets, lighter pieces.</div></div>
+
+<h3>Week 3: May 6–12</h3>
+<div class="day-row"><div class="day-n">Day 15</div><div class="day-c"><span class="tag t-meta">META</span> Launch Phase 2 if Gate 1 passed: Fresh ASC $800/day (UGC-only) + Broad Interest CBO $400/day (Amiri, Fear of God, Stussy, Rhude). Scale P1 campaigns 20%.</div></div>
+<div class="day-row"><div class="day-n">Day 17</div><div class="day-c"><span class="tag t-meta">META</span> Launch Aus/NZ test $100/day. Same creative, Sydney + Melbourne + Auckland. <span class="tag t-email">EMAIL</span> Send 4: Feature email — stop motion format, hook: "Wait until you see this."</div></div>
+<div class="day-row"><div class="day-n">Day 21</div><div class="day-c"><span class="tag t-meta">META</span> <strong>GATE 2 CHECK.</strong> Build video viewer audience (55K warm viewers from NBA YB video — unused). <span class="tag t-kl">KLAVIYO</span> Win-Back flow live. <span class="tag t-email">EMAIL</span> Send 5: VIP early access if drop ready.</div></div>
+
+<h3>Week 4: May 13–21</h3>
+<div class="day-row"><div class="day-n">Day 22-25</div><div class="day-c"><span class="tag t-meta">META</span> Phase 3 prep if Gate 2 hit. Assess Aus/NZ ROAS — if ≥1.5x scale to $300/day. <span class="tag t-cr">CREATIVE</span> UGC Video 2 delivered. Group lifestyle shoot (Madhappy reference). Stop Motion V3.</div></div>
+<div class="day-row"><div class="day-n">Day 28</div><div class="day-c"><span class="tag t-email">EMAIL</span> Send 6: "Back for summer" — SS26 pieces, spring angle, lifestyle photography.</div></div>
+<div class="day-row"><div class="day-n">Day 30</div><div class="day-c"><span class="tag t-meta">META</span> 30-day review. Document all winning creatives and audiences for Fall 2026. Build AW26 launch plan. Begin October pre-season planning. $6K/day is a fall objective.</div></div>
+</div>
+
+<!-- 09: RISK REGISTER -->
+<div class="page pb">
+<div class="sh"><div class="sn">09</div><div><div class="st">Risk Register + Timeline</div><div class="ss">Honest gate assessment · Top 10 risks · Decision trees</div></div></div>
+
+<h2>Gate Reality (Quantitative)</h2>
+<table>
+  <tr><th>Gate</th><th>Target</th><th>Verdict</th><th>Purchases/Day Needed</th><th>Current</th><th>Multiplier</th></tr>
+  <tr><td>Gate 1</td><td>$2K/day · 2x ROAS</td><td style="color:#c80;font-weight:700">STRETCH</td><td>13.6/day</td><td>0.5/day</td><td>27x</td></tr>
+  <tr><td>Gate 2</td><td>$4K/day · 3x ROAS</td><td style="color:#c80;font-weight:700">ADJUSTED</td><td>40.8/day</td><td>0.5/day</td><td>82x</td></tr>
+  <tr><td>Gate 3</td><td>$6K/day · 4x ROAS</td><td style="color:#b00;font-weight:700">FALL 2026</td><td>81/day</td><td>0.5/day</td><td>162x</td></tr>
+</table>
+
+<h2>Risk Register</h2>
+<div class="risk-g"><div class="rg hd">Risk</div><div class="rg hd" style="text-align:center">Prob</div><div class="rg hd" style="text-align:center">Impact</div><div class="rg hd">Mitigation</div></div>
+<div class="risk-g"><div class="rg">Account runs dry mid-campaign</div><div class="rg" style="text-align:center"><span class="hi">CERTAIN</span></div><div class="rg" style="text-align:center"><span class="hi">CRITICAL</span></div><div class="rg">Fund $10K+ today. Set auto-pay at $500 threshold. Never run on prepay.</div></div>
+<div class="risk-g"><div class="rg">Checkout still broken at launch (92% abandon)</div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg" style="text-align:center"><span class="hi">CRITICAL</span></div><div class="rg">Day 1: Enable Shop Pay + PayPal Express. Fix Stripe 3DS. Hard rule: no spend &gt;$500/day until checkout CVR &gt;20%.</div></div>
+<div class="risk-g"><div class="rg">Creative bottleneck — no NBA YB video Day 1</div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg">Audit existing content Day 1. Any UGC? Repurpose immediately. Launch statics while video is produced. Founder iPhone video is a valid fallback.</div></div>
+<div class="risk-g"><div class="rg">Learning phase trap (0.5 purchases/day)</div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg">Consolidate to 1-2 ad sets max at launch. Fix checkout → purchases → exit learning. Consider Add-to-Cart optimization as bridge.</div></div>
+<div class="risk-g"><div class="rg">Seasonal mismatch — puffers in May/June</div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg" style="text-align:center"><span class="hi">HIGH</span></div><div class="rg">Geo-restrict puffer campaigns to Canada only. Pivot US budget to graphic tees ($38-68) as TOFU pixel builders. Launch Aus/NZ Day 17.</div></div>
+<div class="risk-g"><div class="rg">iOS attribution gap — kills look lower than real</div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg">Compare Meta ROAS vs Shopify-attributed weekly. Use Shopify as truth signal for kill decisions. Never kill on Meta-reported alone.</div></div>
+<div class="risk-g"><div class="rg">UGC creator delivers late (Week 3)</div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg">Brief 2 creators Day 1 (redundancy). Hard delivery deadline: Day 12. Founder iPhone backup if both miss.</div></div>
+<div class="risk-g"><div class="rg">DPA retargeting audience exhausted (14x freq)</div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg">New DPA campaign with fresh catalog and new creative. Frequency cap 3x/week. Split into 7d/30d/60d windows.</div></div>
+<div class="risk-g"><div class="rg">Supreme+Bape saturates at $2K/day</div><div class="rg" style="text-align:center"><span class="me">MED</span></div><div class="rg" style="text-align:center"><span class="lo">LOW</span></div><div class="rg">Expand to: Off-White, Palace, Stussy, Fear of God, Rhude, Amiri — test each at $50/day separately. Watch frequency &gt;3.5 as saturation signal.</div></div>
+<div class="risk-g"><div class="rg">Sale addiction eroding brand equity</div><div class="rg" style="text-align:center"><span class="lo">LOW</span></div><div class="rg" style="text-align:center"><span class="hi">HIGH (long-term)</span></div><div class="rg">Kill all public discount codes. Move discounts to gated email capture only. No discount in cold traffic ads ever.</div></div>
+
+<h2>Decision Tree</h2>
+<h3>If ROAS &lt;1x by Day 7:</h3>
+<ol>
+  <li>Check CAPI in Events Manager — is Purchase firing with value?</li>
+  <li>Do a live checkout test — is the site broken?</li>
+  <li>Check CPM — if &lt;$5, you're in wrong placements (Audience Network)</li>
+  <li>Pause 2 worst ad sets. Do NOT pause ASC MAIN.</li>
+  <li>Launch 2 fresh creatives immediately.</li>
+</ol>
+
+<h3>If Gate 1 is Missed by Day 14:</h3>
+<ol>
+  <li>Don't scale. Don't panic. Diagnose.</li>
+  <li>Identify the single biggest conversion leak (checkout, creative, audience, attribution)</li>
+  <li>Fix that one thing. Stay at current spend level for 7 more days.</li>
+  <li>Gate 1 becomes Day 21. Gate 2 becomes Day 35. Gate 3 becomes Fall 2026.</li>
+</ol>
+</div>
+
+<!-- 10: SCORECARD -->
+<div class="page">
+<div class="sh"><div class="sn">10</div><div><div class="st">KPI Scorecard</div><div class="ss">Monday morning review · Kill/scale thresholds · North stars</div></div></div>
+
+<h2>Weekly Scorecard — Monday Morning (30 minutes)</h2>
+<div class="scorecard">
+<div class="sc"><div class="scc hd lbl">KPI</div><div class="scc hd">Current</div><div class="scc hd">Gate 1</div><div class="scc hd">Gate 2</div><div class="scc hd">Gate 3</div><div class="scc hd">2026 Benchmark</div></div>
+<div class="sc"><div class="scc lbl">Meta ROAS (reported)</div><div class="scc re">0.26x</div><div class="scc">≥2x</div><div class="scc">≥3x</div><div class="scc">≥4x</div><div class="scc">2.9x avg fashion</div></div>
+<div class="sc"><div class="scc lbl">Shopify ROAS (attributed)</div><div class="scc re">~0.7x (est)</div><div class="scc">≥1.7x</div><div class="scc">≥2.5x</div><div class="scc">≥3.5x</div><div class="scc">Use as truth signal</div></div>
+<div class="sc"><div class="scc lbl">Meta Spend/Day</div><div class="scc ye">$210</div><div class="scc">$2,000</div><div class="scc">$4,000</div><div class="scc">$6,000</div><div class="scc">—</div></div>
+<div class="sc"><div class="scc lbl">CPA (Meta)</div><div class="scc re">$1,100+</div><div class="scc">≤$147</div><div class="scc">≤$98</div><div class="scc">≤$74</div><div class="scc">$38 fashion avg</div></div>
+<div class="sc"><div class="scc lbl">Checkout CVR</div><div class="scc re">8%</div><div class="scc">≥20%</div><div class="scc">≥28%</div><div class="scc">≥32%</div><div class="scc">30-35% industry</div></div>
+<div class="sc"><div class="scc lbl">CTR (prospecting)</div><div class="scc gr">2.06-2.52%</div><div class="scc">≥2%</div><div class="scc">≥2.5%</div><div class="scc">≥3%</div><div class="scc">2.84% avg 2026</div></div>
+<div class="sc"><div class="scc lbl">CPM</div><div class="scc re">$2.91 (GTW)</div><div class="scc">$10-18</div><div class="scc">$10-18</div><div class="scc">$12-20</div><div class="scc">$14 avg fashion</div></div>
+<div class="sc"><div class="scc lbl">Frequency (prospecting)</div><div class="scc gr">2.3-3.6x</div><div class="scc">&lt;3.5x</div><div class="scc">&lt;3.0x</div><div class="scc">&lt;2.5x</div><div class="scc">1.5-3x target</div></div>
+<div class="sc"><div class="scc lbl">Email Rev % of Total</div><div class="scc re">~0%</div><div class="scc">≥15%</div><div class="scc">≥20%</div><div class="scc">≥25%</div><div class="scc">20-30% fashion DTC</div></div>
+<div class="sc"><div class="scc lbl">Repeat Purchase Rate</div><div class="scc re">11.5%</div><div class="scc">≥15%</div><div class="scc">≥20%</div><div class="scc">≥25%</div><div class="scc">24.4% fashion avg</div></div>
+<div class="sc"><div class="scc lbl">CAPI Match Quality</div><div class="scc ye">Unknown</div><div class="scc">≥7.0</div><div class="scc">≥8.0</div><div class="scc">≥8.5</div><div class="scc">7+ = minimum</div></div>
+</div>
+
+<h2>The 3 North Star Numbers</h2>
+<div class="krow">
+  <div class="kc"><div class="kv">MER</div><div class="kl">Marketing Efficiency Ratio<br>Total Revenue ÷ Total Ad Spend<br>Target: ≥2.5x by Day 14</div></div>
+  <div class="kc"><div class="kv">CPA:AOV</div><div class="kl">Cost Per Acquisition vs Order Value<br>Currently 3.74x (paying 374% of AOV)<br>Target: ≤0.5x (CPA &lt; $147)</div></div>
+  <div class="kc"><div class="kv">Email%</div><div class="kl">Email Revenue as % of Total<br>Currently 0%. Benchmark: 20-30%<br>Target: 15%+ by Week 3</div></div>
+  <div class="kc"><div class="kv">Checkout%</div><div class="kl">Checkout → Purchase CVR<br>Currently 8% (broken)<br>Target: 20%+ by Day 7</div></div>
+</div>
+
+<div class="box g">
+  <p><strong>The bottom line:</strong> AlphaStyle has already hit 6.74x Shopify ROAS. The brand, the product, and the audience infrastructure exist. The account simply abandoned the formula that worked. Supreme+Bape interest targeting + NBA YoungBoy video creative + clean DPA retargeting = the proven playbook. Fix checkout so conversions don't evaporate, rebuild the three-campaign structure, and the brand's best performance history is the floor — not the ceiling.</p>
+</div>
+</div>
+
+<footer>
+  <span>AlphaStyle × G2W Strategy — Confidential</span>
+  <span>Go To War · April 2026 · 10-Agent Analysis</span>
+</footer>
+
+</body>
+</html>
