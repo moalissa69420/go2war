@@ -77,7 +77,9 @@ async function verifyToken(token, secret) {
 }
 
 function getClientPassword(env, slug) {
-  const key = `CLIENT_PASSWORD_${String(slug || "").toUpperCase()}`;
+  // Env var names can't contain hyphens, so normalize slug: military-com -> MILITARY_COM
+  const normalized = String(slug || "").toUpperCase().replace(/-/g, "_");
+  const key = `CLIENT_PASSWORD_${normalized}`;
   return env[key] || "";
 }
 
