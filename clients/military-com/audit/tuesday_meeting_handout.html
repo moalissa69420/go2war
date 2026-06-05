@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuesday Meeting Handout — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Tuesday Meeting Handout</div>
+<div class="meta">Source: <code>tuesday_meeting_handout.md</code></div>
+<hr class="divider">
+<h1 id="tuesday-meeting-handout-june-4-2026">Tuesday Meeting Handout — June 4, 2026</h1>
+<p><strong>Print this. Walk in with it. Use it.</strong></p>
+<p>For the office meeting with Lauren + dev team + (likely) Anthony / Hassan.</p>
+<hr />
+<h2 id="90-second-opener">90-second opener</h2>
+<blockquote>
+<p>"Audit's done. Account is structurally healthy — 99/100 Opportunity Score, EMQ on the lead-gen pixel is 9.1, scaling held through May with no degradation. That's the headline.</p>
+<p>Under that headline, three things are leaving real money on the table. The biggest is the Purchase value pipe — Meta can't compute ROAS on this account because the value parameter isn't usable, which means Auto Max Val is paying a 67% CPL premium optimizing against a signal that doesn't exist. That's a $137K-a-month problem and it's the one thing I want us to decide today.</p>
+<p>The second is creative concentration — two concept families are 76% of all spend. The fatigue clock on Odometer is days, not weeks. The third is the warm/retargeting layer — under SAC, the website-Pixel-seeded retargeting is essentially nonexistent, and we have a healthy page-engagement audience sitting unused. That's a Week 1 fix.</p>
+<p>I have a printed list of every dataset, every campaign, every audience, and three decisions I need from each of you. Let's work through it."</p>
+</blockquote>
+<hr />
+<h2 id="the-three-findings-in-a-screen-friendly-format">The three findings (in a screen-friendly format)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>What</th>
+<th>Dollar size</th>
+<th>Decision needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Broken Purchase value pipe</strong> — Meta returns <code>purchase_roas: "Not available"</code> everywhere. Auto Max Val pays 67% CPL premium ($36.44 vs $21.84) against a broken signal.</td>
+<td><strong>~$137K/month premium spend → ~$1.6M/yr locked headroom</strong></td>
+<td><strong>Pause Max Val until value pipe is fixed? Cap it?</strong> Hassan + Anthony</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Two concepts = 76% of spend</strong> — Lower-Your-Auto $371K/30d + Odometer $270K/30d. Top single ad (Odometer 05/15) at frequency 3.27, ~14 days from fatigue cliff.</td>
+<td>Replacement cost vs fatigue-induced CPL inflation: easily $30-50K/mo</td>
+<td>Approve 8-10 net-new creative concepts this week. Mo + Lauren</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Retargeting layer doesn't exist</strong> — All Site Visitors (180D) and Visited Auto LP (180D) are at ~20 people each (SAC restriction). Page-engagement audiences (FB Engagers 341K, IG Engagers 93K) are healthy but UNUSED.</td>
+<td>New warm lane = 5-10% incremental quality leads at lower CPL</td>
+<td>Build a new ad set targeting FB Page Engagers + IG Account Engagers. Mo + Lauren</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-auto-max-val-decision-the-big-one">The Auto Max Val decision (the big one)</h2>
+<p><strong>Numbers (last 30d):</strong>
+- Auto Max Val spend: $341,592
+- Auto Max Val CPL: $36.44
+- Auto BAU CPL: $21.84
+- Same audience targeting. Same creative concepts. Only difference: Max Val optimizes for <code>RETURN_ON_AD_SPEND</code> against a broken value signal.
+- Premium cost: $14.60/lead × 9,375 leads = <strong>$136,912 / 30 days = ~$1.6M/yr</strong></p>
+<p><strong>Three options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What happens</th>
+<th>$ Impact (per month)</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Pause Max Val</strong></td>
+<td>Stop the $341K/30d Max Val spend. Reallocate to Auto BAU at $21.84 CPL.</td>
+<td><strong>Same volume at 32% lower cost = ~$110K/mo savings.</strong></td>
+<td>None financially. Some signal loss as Meta retrains on BAU.</td>
+</tr>
+<tr>
+<td><strong>B. Cap Max Val</strong></td>
+<td>Hold Max Val at current daily $7K cap. Don't increase until value fix lands.</td>
+<td>Limits bleed but doesn't fix it. ~$0 saved this month.</td>
+<td>Lowest risk; preserves campaign in case the value-fix unlocks performance.</td>
+</tr>
+<tr>
+<td><strong>C. Keep running, fix value pipe in parallel</strong></td>
+<td>Status quo. ~3-4 weeks of dev work to fix Purchase value.</td>
+<td>$137K/mo premium spend until fix lands = $300-500K total bleed during the fix window.</td>
+<td>Most expensive but most preserves optionality.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>My recommendation: B (cap) for Week 1, decide A vs C in Week 2 based on dev confidence in the value-fix timeline.</strong></p>
+<p>If dev says "2 weeks": cap and wait (option B → C).
+If dev says "6+ weeks": pause and reallocate (option B → A).
+If dev says "not sure": pause and reallocate; we can always relight Max Val later.</p>
+<p><strong>Ask Hassan / Anthony Tuesday: which option, and what does dev think the fix timeline actually is?</strong></p>
+<hr />
+<h2 id="diagnostic-checklist-for-tuesday-morning-before-the-meeting">Diagnostic checklist for Tuesday morning (before the meeting)</h2>
+<h3 id="step-1-open-meta-events-manager-5-min">Step 1 — Open Meta Events Manager (5 min)</h3>
+<p>Navigate to: <strong>Events Manager → Datasets → "Military Insurance" (ID <code>332555186604235</code>)</strong></p>
+<p>Then click the <strong>Diagnostics tab</strong> (top nav).</p>
+<p>Look for:
+- ☐ Any <strong>flagged errors on the Purchase event</strong> specifically the <code>value</code> parameter
+- ☐ Any <strong>flagged errors on the fbc parameter</strong> (truncation / malformed values)
+- ☐ Any other parameter-level errors</p>
+<p>If the <code>value</code> parameter is flagged → Mo's "98% malformed" finding is <strong>confirmed</strong>.
+If the <code>fbc</code> parameter is flagged → the truncation finding is <strong>confirmed</strong>.</p>
+<h3 id="step-2-open-audiences-view-3-min">Step 2 — Open Audiences view (3 min)</h3>
+<p>Navigate to: <strong>Audiences → Custom Audiences → search "Mil FB Customer Match 4.12.21"</strong></p>
+<ul>
+<li>☐ Confirm whether the named audience is archived or doesn't exist</li>
+<li>☐ If it exists archived: note refresh date</li>
+<li>☐ Compare to <code>Custom_Recruiting-Leads_08-05-2025</code> to confirm it's the replacement</li>
+</ul>
+<h3 id="step-3-check-the-60-compliance-question-3-min">Step 3 — Check the "60%" compliance question (3 min)</h3>
+<p>Navigate to: <strong>Ads Library → search by page <code>Military.com</code> → keyword "60%"</strong></p>
+<ul>
+<li>☐ Confirm no active ads run "Save up to 60%" claim (May 13 audit flagged 3 ads with this)</li>
+<li>☐ If any still active: note Ad IDs (priority sunset)</li>
+</ul>
+<h3 id="step-4-quick-screen-of-opportunity-score-recommendation-2-min">Step 4 — Quick screen of opportunity score recommendation (2 min)</h3>
+<p>Navigate to: <strong>Ads Manager → Account → Opportunity Score (top-right)</strong></p>
+<ul>
+<li>☐ Confirm 99/100</li>
+<li>☐ Read the 1-point recommendation and screenshot it for Hassan</li>
+</ul>
+<p><strong>Total time: ~15 minutes before walking into the meeting.</strong></p>
+<hr />
+<h2 id="questions-for-lauren">Questions for Lauren</h2>
+<p>Ask in order:</p>
+<ol>
+<li>
+<p><strong>What was the last refresh date of the <code>Custom_Recruiting-Leads_08-05-2025</code> audience?</strong> (Stale 10-month seed = stale 1%/3%/5% LALs. Need fresh export.)</p>
+</li>
+<li>
+<p><strong>What's the audience SOURCE size on these two ad sets?</strong>
+   - <code>120240808864440498</code> (Custom — Auto BAU)
+   - <code>120227142278180498</code> (Custom — Home BAU)
+   - Are these the "narrow ~1,000-person Custom audiences" Mo's prior audit flagged?</p>
+</li>
+<li>
+<p><strong>Can you send me an export of sold leads from the last 180 days for a fresh customer-match upload?</strong> (To rebuild the LAL ladder on current signal.)</p>
+</li>
+<li>
+<p><strong>March + April 2026 daily reports in the same format as May</strong> — for baseline vetting with Hassan mid-June.</p>
+</li>
+<li>
+<p><strong>Are the "Save up to 60%" creatives definitively sunset?</strong> Mo's May 13 audit flagged 3 ads (<code>1004559982134492</code> and 2 others). Live audit didn't see them in top spenders but want to confirm zero live.</p>
+</li>
+<li>
+<p><strong>What's the current creative production cadence?</strong> Can you commit to receiving + reviewing 8-10 net-new concepts per week starting this week?</p>
+</li>
+</ol>
+<hr />
+<h2 id="questions-for-dev-anthonys-team">Questions for Dev (Anthony's team)</h2>
+<p>Ask in order:</p>
+<ol>
+<li>
+<p><strong>Purchase event value parameter</strong> — what value is being passed today? Real per-lead payout from QW/Delty, or a flat placeholder?</p>
+</li>
+<li>
+<p><strong>What's a realistic timeline to fix it?</strong> Best case / worst case.</p>
+</li>
+<li>
+<p><strong>The Military.com content pixel (<code>587241028099131</code>)</strong> — its server has been silent since March 2023. What's the plan? Adding a Signals Gateway / CAPI here is Mo's audit estimate of +23% cost/result. <strong>Multi-week or 24-48 hour work?</strong></p>
+</li>
+<li>
+<p><strong>The MA Military Insurance dataset (<code>1536649764252698</code>)</strong> — what is it for? It's never fired server-side. Activate or archive?</p>
+</li>
+<li>
+<p><strong>Form architecture</strong> — is it a QW-hosted iframe on auto.military.com, a redirect to QW's form, or an Iron Corp own page posting to QW's API? (Determines what's possible for the form migration.)</p>
+</li>
+<li>
+<p><strong>fbc / fbclid handling</strong> — any known issue with URL parameter truncation between the ad click and the lead form? (Mo's audit flagged this; Events Manager will confirm.)</p>
+</li>
+</ol>
+<hr />
+<h2 id="questions-for-hassan-anthony-joint">Questions for Hassan / Anthony (joint)</h2>
+<ol>
+<li>
+<p><strong>The Auto Max Val decision</strong> — Options A (pause), B (cap), or C (keep + fix in parallel)? See table above.</p>
+</li>
+<li>
+<p><strong>Can dev get the value-pipe fix scoped this week?</strong> Need an honest estimate of how many weeks of dev time so the Max Val decision can be made on a real timeline.</p>
+</li>
+<li>
+<p><strong>OK to build a new ad set targeting FB Page Engagers + IG Account Engagers this week?</strong> Existing healthy audiences, currently unused. Conservative estimate: 5-10% incremental quality leads at lower CPL.</p>
+</li>
+<li>
+<p><strong>Mid-June 1:1?</strong> Want a 30-min slot to walk through the baseline vetting data (March-April-May comparison) and the success-metric reframe (RPL−CPL spread vs CPL-only).</p>
+</li>
+</ol>
+<hr />
+<h2 id="week-1-action-checklist-commit-tuesday">Week 1 action checklist (commit Tuesday)</h2>
+<table>
+<thead>
+<tr>
+<th>Owner</th>
+<th>Action</th>
+<th>By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mo</td>
+<td>Events Manager Diagnostics check on Purchase value + fbc parameters</td>
+<td>Tuesday AM</td>
+</tr>
+<tr>
+<td>Mo + Hassan</td>
+<td>Decide Auto Max Val: pause / cap / keep</td>
+<td>Tuesday</td>
+</tr>
+<tr>
+<td>Mo</td>
+<td>Delete 28 broken placeholder LALs (cleanup)</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Build new ad set: FB Page Engagers + IG Account Engagers</td>
+<td>Wed-Thu</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Get fresh 180-day sold-leads export</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo</td>
+<td>Rebuild Custom-list seed + 1%/3%/5% LALs</td>
+<td>Thu</td>
+</tr>
+<tr>
+<td>Mo + War Room</td>
+<td>Ship 8-10 net-new creative concepts (Home Inside_Icon + Drive-On + spouse-angle test)</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Reallocate Auto BAU pacing gap (~$8.5K/day) to Drive-On + Lower-Your-Auto BAU</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Scale Home spend share from 8% → 15-20%</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>Scope Purchase value-pipe fix; honest timeline</td>
+<td>By Wed</td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>Decide MA Military Insurance dataset: activate or archive</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Anthony</td>
+<td>Decide on Auto Max Val with Hassan</td>
+<td>Tuesday-Wed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-im-not-asking-for-tuesday">What I'm NOT asking for Tuesday</h2>
+<ul>
+<li>No form migration cutover (Phase 3+ work, not in measurement window)</li>
+<li>No baseline negotiation yet (mid-June, after Week 1 wins land)</li>
+<li>No new comp structure or kicker discussion (after baseline)</li>
+<li>No HELOC, Thread C, or strategic expansion conversations (post-pilot)</li>
+<li>No metric reframe conversation with Hassan yet (Week 3 after I've banked wins)</li>
+</ul>
+<hr />
+<h2 id="the-thing-i-want-to-walk-out-of-tuesday-with">The thing I want to walk out of Tuesday with</h2>
+<ol>
+<li><strong>A signed Max Val decision</strong> (pause, cap, or keep)</li>
+<li><strong>A dev timeline for the value-pipe fix</strong> (best-case + worst-case weeks)</li>
+<li><strong>Lauren's commitment</strong> on the sold-leads export + creative review cadence</li>
+<li><strong>A calendar invite</strong> for the mid-June 1:1 with Hassan</li>
+<li><strong>Confirmation</strong> that dev will pursue the content-pixel CAPI Gateway (the +23% lever)</li>
+</ol>
+<p>If I walk out with those five things, Tuesday was a win.</p>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

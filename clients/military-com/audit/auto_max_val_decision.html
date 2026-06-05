@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Max Val Decision — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Auto Max Val Decision</div>
+<div class="meta">Source: <code>auto_max_val_decision.md</code></div>
+<hr class="divider">
+<h1 id="auto-max-val-decision-deep-dive">Auto Max Val Decision — Deep Dive</h1>
+<p><strong>The single biggest decision in this audit. ~$1.6M/yr is on the table.</strong></p>
+<hr />
+<h2 id="what-auto-max-val-is">What "Auto Max Val" is</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Campaign</td>
+<td><code>QuoteWizard | MIL | SOCIAL | Insurance | Auto_Insurance | (18-65) SAC - ALC - Max Val | NEW</code></td>
+</tr>
+<tr>
+<td>Campaign ID</td>
+<td><code>120241310920250498</code></td>
+</tr>
+<tr>
+<td>Objective</td>
+<td><strong>OUTCOME_SALES</strong> (not OUTCOME_LEADS)</td>
+</tr>
+<tr>
+<td>Bid Strategy</td>
+<td><strong>Highest volume</strong></td>
+</tr>
+<tr>
+<td>Optimization Goal (ad set level)</td>
+<td><strong>RETURN_ON_AD_SPEND</strong></td>
+</tr>
+<tr>
+<td>Daily Budget</td>
+<td>$7,000</td>
+</tr>
+<tr>
+<td>Start date</td>
+<td>March 16, 2026</td>
+</tr>
+<tr>
+<td>30-day spend</td>
+<td><strong>$341,592.67</strong> (40.6% of total account spend)</td>
+</tr>
+<tr>
+<td>Leads generated</td>
+<td>9,375</td>
+</tr>
+<tr>
+<td><strong>CPL</strong></td>
+<td><strong>$36.44</strong></td>
+</tr>
+<tr>
+<td>Reach</td>
+<td>4,087,517</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td>4.80</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="why-it-exists-the-media-buyers-strategy">Why it exists (the media buyer's strategy)</h2>
+<p>The BAU / ALC / Max Val trio is intentional, not accidental:</p>
+<ul>
+<li><strong>BAU</strong> (Business As Usual) — optimizes for <code>OFFSITE_CONVERSIONS</code>, gets the lead at lowest cost. The volume engine.</li>
+<li><strong>ALC</strong> (Advantage+ Leads Campaign or similar) — Meta's automated optimization, broader reach.</li>
+<li><strong>Max Val</strong> (Maximum Value) — optimizes for <code>RETURN_ON_AD_SPEND</code> against the Purchase event. <strong>The premise: pay more per lead, but get higher-VALUE leads (better accept rate, higher payout) that more than make up for the CPL premium.</strong></li>
+</ul>
+<p>The media buyer's bet: at Max Val, the algorithm should learn to find leads that QuoteWizard will accept and pay premium for. Even at $36.44 CPL, if those leads have a 50% higher accept-rate × payout vs BAU leads at $21.84, Max Val wins.</p>
+<p><strong>That's a coherent strategy IF the value signal works.</strong></p>
+<hr />
+<h2 id="why-its-broken">Why it's broken</h2>
+<p>Meta returns <strong><code>purchase_roas: "Not available"</code></strong> at every level of the account — campaign, ad set, ad. This is because:</p>
+<ol>
+<li>The Purchase event is firing (good)</li>
+<li>The Purchase event has high EMQ (9.1 — good)</li>
+<li>But the <code>value</code> parameter on the Purchase event is either malformed or flat (Mo's audit: "98% of Purchase price data has formatting issues" — needs Events Manager confirmation)</li>
+</ol>
+<p>The result: <strong>Meta's <code>RETURN_ON_AD_SPEND</code> optimization has no signal to optimize against.</strong> It's optimizing against noise. The campaign is structurally paying for premium optimization that isn't happening.</p>
+<h3 id="visualizing-the-bleed">Visualizing the bleed</h3>
+<pre><code>Auto BAU                Auto Max Val
+$338,882 spend          $341,592 spend
+15,587 leads            9,375 leads
+$21.84 CPL              $36.44 CPL
+                        ↑ $14.60 PREMIUM per lead
+
+9,375 leads × $14.60 = $136,912 / 30 days
+                     = $1.64M / year
+
+                     PAID for an optimization
+                     that isn't happening
+</code></pre>
+<hr />
+<h2 id="the-three-options-with-math">The three options, with math</h2>
+<h3 id="option-a-pause-max-val-reallocate-budget-to-bau">Option A — Pause Max Val, reallocate budget to BAU</h3>
+<p><strong>Action:</strong> Pause Auto Max Val campaign. Move the $7,000/day budget to Auto BAU (currently underspent — $11.3K/day actual vs $19.8K/day cap).</p>
+<p><strong>Math:</strong>
+- Auto BAU pacing gap is $8.5K/day undeployed
+- Pausing Max Val saves $7K/day = $210K/30d
+- Reallocating $7K/day to BAU at $21.84 CPL = ~320 additional leads/day
+- Current Max Val produces 9,375 leads/30d = 312 leads/day at $36.44 CPL
+- <strong>Same lead volume, ~40% lower CPL.</strong></p>
+<p><strong>Pros:</strong>
+- Immediate savings: ~$110K/mo at same volume (BAU CPL × current Max Val lead count)
+- Eliminates the "paying for broken optimization" bleed
+- Frees Auto BAU pacing — actually USES the budget that's been sitting</p>
+<p><strong>Cons:</strong>
+- Loses the campaign structure — relighting Max Val later means re-warming the learning phase
+- Some optionality loss if the value-fix lands quickly and Max Val WOULD have worked</p>
+<p><strong>Best if:</strong> dev says the value-fix timeline is "6+ weeks" or "unsure"</p>
+<hr />
+<h3 id="option-b-cap-max-val-at-current-7kday-fix-value-pipe-in-parallel">Option B — Cap Max Val at current $7K/day, fix value pipe in parallel</h3>
+<p><strong>Action:</strong> Don't pause. Don't scale. Lock the daily budget. Start value-pipe dev work in parallel. Revisit in 2 weeks.</p>
+<p><strong>Math:</strong>
+- Continues $341K/30d at $36.44 CPL
+- Continues paying $137K/mo premium during the fix window
+- If fix lands in Week 2: Week 1 + half of Week 2 of premium spend ≈ $50-70K wasted
+- If fix lands in Week 3: $100K wasted
+- If fix lands in Week 4: $137K wasted</p>
+<p><strong>Pros:</strong>
+- Preserves campaign learning (no re-warm cost)
+- Maximum optionality — if value-fix lands fast, Max Val starts working
+- Lowest risk politically (no "Mo paused our biggest campaign" optics)</p>
+<p><strong>Cons:</strong>
+- Bleeds $4.5K/day of premium spend during the fix window
+- Doesn't actually solve anything — just delays the decision</p>
+<p><strong>Best if:</strong> dev says the value-fix timeline is "2 weeks" with confidence</p>
+<hr />
+<h3 id="option-c-keep-running-fix-value-pipe-in-parallel-decide-later">Option C — Keep running, fix value pipe in parallel, decide later</h3>
+<p><strong>Action:</strong> Don't change anything. Start dev work. Revisit at the value-fix landing.</p>
+<p><strong>Math:</strong>
+- Continues $341K/30d unchanged
+- Total wasted spend during typical fix window (3-4 weeks): $300-500K</p>
+<p><strong>Pros:</strong>
+- Zero operational change required
+- No risk of disrupting current performance</p>
+<p><strong>Cons:</strong>
+- Costs ~$300-500K in premium spend during the fix
+- "We knew it was bleeding and we did nothing" if Hassan asks why</p>
+<p><strong>Best if:</strong> never. This option exists only to be rejected unless there's a specific reason to preserve current state.</p>
+<hr />
+<h2 id="my-recommendation">My recommendation</h2>
+<p><strong>Cap to $7K/day for Week 1 (Option B), then re-decide Week 2 based on dev confidence:</strong></p>
+<ul>
+<li>If dev says <strong>"value-fix lands in 2 weeks with confidence"</strong> → stay capped (Option B → C)</li>
+<li>If dev says <strong>"value-fix is 6+ weeks or uncertain"</strong> → pause + reallocate (Option B → A)</li>
+<li>If dev says <strong>"3-4 weeks"</strong> → pause + reallocate. Reallocation savings in 3 weeks (~$110K) exceed the optionality value of preserving the campaign structure.</li>
+</ul>
+<p><strong>The framing for Hassan:</strong></p>
+<blockquote>
+<p>"I want to cap Auto Max Val at its current spend for Week 1 so we stop the bleed but don't lose the campaign yet. By next Tuesday, dev tells us how long the value-pipe fix takes. If it's two weeks, we hold the cap. If it's a month or more, we pause Max Val and shift that budget to BAU — same lead volume, 40% lower cost. Either way, we're not paying for broken optimization in Q3."</p>
+</blockquote>
+<p>That's an operator framing Hassan can sign off on without a 30-minute conversation.</p>
+<hr />
+<h2 id="what-to-say-if-hassan-or-anthony-push-back">What to say if Hassan or Anthony push back</h2>
+<h3 id="weve-been-running-max-val-for-months-it-must-be-working">"We've been running Max Val for months. It must be working."</h3>
+<p><strong>Response:</strong> "It's running, but Meta returns <code>purchase_roas: Not available</code> everywhere. That's the algorithm telling us the value optimization isn't happening. The CPL premium versus BAU on the same audience is structural — same audience targeting, 67% higher CPL. That's the cost of running ROAS optimization against a broken signal. The campaign isn't delivering on its premise; we just haven't measured it."</p>
+<h3 id="pausing-breaks-our-delivery">"Pausing breaks our delivery."</h3>
+<p><strong>Response:</strong> "Auto BAU has $8.5K/day of unspent budget right now. The reallocation absorbs Max Val's volume at lower CPL. We don't lose delivery — we lose CPL premium."</p>
+<h3 id="max-val-gets-us-higher-value-leads-even-if-meta-cant-see-it">"Max Val gets us higher-value leads even if Meta can't see it."</h3>
+<p><strong>Response:</strong> "Possible, but unverifiable. The downstream lead quality data (accept rate, payout per lead) isn't visible to us in the Meta-only view. If you have that data, let's look at it — if Max Val leads have a 50%+ higher accept rate that justifies the premium, we keep it. Without that data, we're paying a premium on faith."</p>
+<h3 id="whats-the-downside-of-just-leaving-it">"What's the downside of just leaving it?"</h3>
+<p><strong>Response:</strong> "$137K a month of premium spend for at least the 3-4 weeks of the value-fix dev cycle = $400-500K. That's the lower bound. If value-fix takes longer, more. Compared to a campaign pause that costs ~$0 to reverse, the do-nothing option is the most expensive option on the table."</p>
+<hr />
+<h2 id="what-this-audit-cant-tell-us-and-what-mo-should-ask">What this audit can't tell us (and what Mo should ask)</h2>
+<p>The Meta-only view doesn't see downstream lead quality. To make this call with full confidence Mo needs from QW/Delty:</p>
+<ul>
+<li>Accept rate on Max Val leads vs BAU leads (same time period)</li>
+<li>Payout per accepted lead on Max Val vs BAU</li>
+<li>Return rate on Max Val vs BAU</li>
+</ul>
+<p><strong>If Max Val accept-rate is materially higher (say 30%+ over BAU), the campaign may be working despite Meta not being able to measure ROAS.</strong> In that case Option B (cap) becomes more attractive — preserve the campaign for when the value-fix gives the algorithm what it needs.</p>
+<p><strong>If Max Val accept-rate is roughly equal to BAU</strong>, the campaign is straight-up overpaying for nothing. Option A (pause) is the clear move.</p>
+<p>This is a Tuesday ask of Anthony / Lauren: <strong>get me the accept-rate breakdown by campaign for the last 30 days.</strong></p>
+<hr />
+<h2 id="decision-tree">Decision tree</h2>
+<pre><code>Tuesday Tuesday Tuesday:
+                          │
+              [Dev value-fix timeline?]
+                          │
+              ┌───────────┼───────────┐
+              │           │           │
+        2 weeks     3-4 weeks     6+ weeks
+              │           │           │
+              ▼           ▼           ▼
+         Cap (B)    Pause (A)    Pause (A)
+         Stay B     Reallocate    Reallocate
+         until      to BAU        to BAU
+         fix lands  immediately   immediately
+              │
+              ▼
+        Fix lands?
+              │
+        ┌─────┼─────┐
+        │     │     │
+       Yes   No    Late
+        │     │     │
+        ▼     ▼     ▼
+     Scale  Pause Pause
+     Max    Max    Max
+     Val    Val    Val
+</code></pre>
+<hr />
+<h2 id="if-i-get-one-thing-from-tuesday-on-this-topic">If I get one thing from Tuesday on this topic</h2>
+<p><strong>An honest dev timeline.</strong> Best case + worst case in weeks.</p>
+<p>With that number, the Max Val decision makes itself. Without it, we're guessing.</p>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

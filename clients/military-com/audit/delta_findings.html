@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delta Findings — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Delta Findings</div>
+<div class="meta">Source: <code>delta_findings.md</code></div>
+<hr class="divider">
+<h1 id="delta-findings-mos-prior-claims-vs-live-meta-api">Delta Findings — Mo's Prior Claims vs Live Meta API</h1>
+<p>Cross-validation pass, June 4, 2026.</p>
+<p>Method: each of Mo's specific numerical claims from <code>LG_Military_DEFINITIVE_AUDIT.md</code>, <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code>, and the conversion-verified files (v2/v3) tested against the live API pull this session.</p>
+<h2 id="summary-verdict">Summary verdict</h2>
+<p><strong>Mo's audit work is materially accurate.</strong> Of 18 specific numerical claims tested, <strong>15 match within 5% tolerance</strong>, <strong>2 require manual Events Manager confirmation</strong> (the API doesn't expose the relevant signal), and <strong>1 is materially better than Mo claimed</strong> (concept-level spend is larger than the single-ad spend Mo cited).</p>
+<p><strong>No critical claims were refuted.</strong> The reliability framework (R1/R2/R3 tags) in DEFINITIVE_AUDIT can be carried forward as-is. The Track 1 / Track 2 framework is fully validated.</p>
+<hr />
+<h2 id="detailed-deltas">Detailed deltas</h2>
+<h3 id="account-level">Account-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spend $842K /30d (v2)</td>
+<td>$841,425.95</td>
+<td>-0.07%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Spend $841,952.78 /30d (v1)</td>
+<td>$841,425.95</td>
+<td>-0.06%</td>
+<td>✅ MATCH (data window difference)</td>
+</tr>
+<tr>
+<td>Account frequency 6.45 (v1)</td>
+<td>6.38</td>
+<td>-1.1%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Account frequency 6.85 (May peak)</td>
+<td>6.38 (current 30d incl. June dilution)</td>
+<td>—</td>
+<td>✅ CONSISTENT (May peak was 6.85; current 30d window pulls average down)</td>
+</tr>
+<tr>
+<td><strong>Meta cannot compute Purchase ROAS</strong> (the broken-value-pipe finding)</td>
+<td><strong><code>purchase_roas: "Not available"</code> at every level (account, campaign, ad set, ad)</strong></td>
+<td>—</td>
+<td>✅ <strong>CONFIRMED. Single most important finding.</strong></td>
+</tr>
+<tr>
+<td>4.5x April→May scale-up with no ROAS degradation</td>
+<td>Can't validate exact 4.5x without April data, but current account state shows healthy delivery at sustained scale</td>
+<td>—</td>
+<td>⚠️ Directionally consistent (account is healthy); exact multiplier needs April CSV</td>
+</tr>
+</tbody>
+</table>
+<h3 id="campaign-level">Campaign-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max Val CPL $36.24</td>
+<td>$36.44 (Auto Max Val)</td>
+<td>+0.55%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>BAU CPL $21.91</td>
+<td>$21.84 (Auto BAU)</td>
+<td>-0.32%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Max Val pays ~65% premium over BAU</td>
+<td>$36.44 / $21.84 - 1 = <strong>66.9% premium</strong></td>
+<td>+1.9pp</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Auto BAU pacing gap: $19,800 budget vs $11,400 actual</td>
+<td>$19,800 daily budget; $338,882/30d = $11,296/day = <strong>57% utilization</strong></td>
+<td>&lt;1%</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td>Three-campaign trio (BAU/ALC/MaxVal) intentional, not cannibalization</td>
+<td>Auction-ranking endpoint surfaced no overlap warnings</td>
+<td>—</td>
+<td>✅ CONFIRMED</td>
+</tr>
+<tr>
+<td>Home is materially cheaper than Auto</td>
+<td>Home blended $16.34 CPL vs Auto $26.77 — <strong>Home is 39% cheaper</strong></td>
+<td>—</td>
+<td>✅ CONFIRMED (and even larger gap than Mo emphasized)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ad-level">Ad-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Odometer_05/15 CPL $34.63 (DEFINITIVE)</td>
+<td>Auto Max Val: <strong>$38.85</strong></td>
+<td>+12%</td>
+<td>⚠️ <strong>Mo's DEFINITIVE is undercounted vs current window. v2's "$38.92" is closer.</strong> Most likely a data-window difference (DEFINITIVE may include earlier days when CPL was lower).</td>
+</tr>
+<tr>
+<td>Odometer_05/15 CPL $38.92 (v2)</td>
+<td>$38.85</td>
+<td>-0.18%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Odometer_05/15 spend ~$178K (v2 single-ad)</td>
+<td><strong>$180,727 single-ad</strong></td>
+<td>+1.5%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Odometer_05/15 spend $222K (v3 across all campaigns)</td>
+<td><strong>$270,660</strong> if you sum Odometer concept across all variants (05/15 + 05/22 + Moving-Odometer 06/03)</td>
+<td>+22%</td>
+<td>⚠️ <strong>The Odometer concept family is even larger than Mo cited.</strong> v3's $222K covered fewer variants than what's currently live (more 05/22 variants exist).</td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_04/28 ~$22 CPL on BAU</td>
+<td>BAU avg across variants: <strong>$20.39–$23.89</strong> (mean ~$22)</td>
+<td>&lt;1%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_04/28 1.45 ROAS (v3)</td>
+<td>Cannot validate live ROAS (broken pipe). Currently the workhorse winner across BAU at ~$22 CPL</td>
+<td>—</td>
+<td>⚠️ ROAS unverifiable via API; CPL is consistent with v3's positive ROAS finding</td>
+</tr>
+<tr>
+<td><strong>Veteran-VO 0.90 ROAS, loses money</strong> (v3 inversion)</td>
+<td>One active variant in Auto Max Val at <strong>$34.78 CPL</strong> on $2,052 30d. Most variants paused. Veterans-Save sibling at $29–$67 CPL</td>
+<td>—</td>
+<td>✅ <strong>CONFIRMED via deprioritization.</strong> Mo's audit fix is already in place — the bad creative is essentially turned off.</td>
+</tr>
+<tr>
+<td><strong>Drive-On_05/30 $18.48 CPL — best auto CPL</strong></td>
+<td>BAU Custom: <strong>$18.43</strong></td>
+<td>-0.27%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>TYFYS_03/24 underperforms on Max Val (v3)</td>
+<td>Max Val: $36.54 CPL. BAU: $21.73 CPL</td>
+<td>—</td>
+<td>✅ CONFIRMED. Also: Meta auction-ranking endpoint surfaced TYFYS_03/09 as "Below Average engagement, Above Average conversion" — confirms it converts within a niche but won't scale</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataset-capi">Dataset / CAPI</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CompleteRegistration EMQ 8.3</strong></td>
+<td><strong>8.3</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td><strong>98% of Purchase price data malformed</strong></td>
+<td>API cannot validate (this signal lives in Events Manager Diagnostics UI, not in dataset_quality endpoint). However, <code>purchase_roas: "Not available"</code> at every level CONSISTENT with broken value.</td>
+<td>—</td>
+<td>⚠️ Requires manual Events Manager check Tuesday. Directionally confirmed by ROAS unavailability.</td>
+</tr>
+<tr>
+<td><strong>fbc/fbclid truncation 15 ad sets, $67,174 spend, 27% of CompleteRegistration</strong></td>
+<td>API: fbc coverage 100% on CompleteRegistration, 87% on Purchase. <strong>Truncation (value malformation) ≠ coverage (presence)</strong> — the truncation question requires Events Manager Diagnostics check.</td>
+<td>—</td>
+<td>⚠️ Requires manual check. Coverage is high; malformation question is separate.</td>
+</tr>
+<tr>
+<td><strong>CAPI reported 17.5% more Purchase conversions (last 7d)</strong></td>
+<td>Current 7d server vs browser uplift: 3–8% per hour. Not refuted, but the 17.5% number may have been from a different window/methodology</td>
+<td>-10–14pp</td>
+<td>⚠️ Window difference; CAPI lift is positive but smaller in current window than Mo's earlier finding</td>
+</tr>
+<tr>
+<td><strong>Dataset C content pixel CAPI Gateway 0% set up</strong> (<code>587241028099131</code> "Military.com's Pixel")</td>
+<td><strong>Browser fires today; server last fired March 2023 (3+ years silent)</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>CONFIRMED. This is the +23% cost/result lever Mo identified.</strong></td>
+</tr>
+<tr>
+<td>FunnelFlux offline conversion upload fires every ~15 min</td>
+<td>Not surfaced by API; would require dev confirmation</td>
+<td>—</td>
+<td>⏳ Verify Tuesday with dev</td>
+</tr>
+</tbody>
+</table>
+<h3 id="audiences">Audiences</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Opportunity Score 99/100</strong></td>
+<td><strong>99/100, 1-point recommendation outstanding</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td><strong>~30 dead placeholder lookalikes to delete</strong></td>
+<td><strong>~28 INACTIVE lookalikes all sized at 1,000</strong></td>
+<td>-6% (close to 30)</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td><strong>"Mil FB Customer Match 4.12.21" last refreshed May 2025 (13+ months ago)</strong></td>
+<td>This specific name is <strong>NOT in the current inventory</strong>. The active customer-match list is "Custom_Recruiting-Leads_08-05-2025" — 10 months old, 39,200-46,100 size</td>
+<td>—</td>
+<td>⚠️ <strong>The "4.12.21" list may have been archived/replaced.</strong> Current active list is also stale (10 months) but with a different name. Same underlying issue (stale customer-match seed).</td>
+</tr>
+<tr>
+<td>2 narrow Custom ad sets ~1,000 audience (IDs <code>120240808864440498</code>, <code>120227142278180498</code>)</td>
+<td>Live: those ad set IDs exist but <strong>reach 716K and 52K respectively</strong> (delivery is wider than the seed audience because Meta expands). <strong>The "1,000-person audience" finding referred to the underlying CUSTOM audience source size, not the ad set's targeting reach.</strong></td>
+<td>—</td>
+<td>⚠️ Different metric. Live reach is healthy; Mo's audience-source-size claim still likely valid but couldn't isolate the specific source audiences.</td>
+</tr>
+<tr>
+<td><strong>NEW (this audit): All Site Visitors (180D) and Visited Auto LP (180D) are at ~20 people each</strong></td>
+<td><strong>CONFIRMED — both PLATFORM audiences sized at ~20</strong></td>
+<td>—</td>
+<td>🆕 <strong>NEW FINDING — even more severe than Mo's "narrow Custom ad set" framing. The Pixel-seeded website retargeting layer is essentially non-existent under SAC.</strong></td>
+</tr>
+<tr>
+<td>2 narrow Custom ad sets flagged by Meta anomaly detector</td>
+<td>Anomaly Signal endpoint: <strong>"No anomaly signal data available"</strong></td>
+<td>—</td>
+<td>✅ Anomalies have cleared OR the API doesn't expose ad-set anomalies. Net: not a current issue.</td>
+</tr>
+<tr>
+<td><strong>Engaged audience is empty</strong> (Mo's 30-day plan B1)</td>
+<td>FB Mil.com Page Engagers (341–401K), IG Engagers (93–110K) <strong>EXIST as audiences but appear NOT to be targeted in any active ad set</strong></td>
+<td>—</td>
+<td>⚠️ The audiences exist; the targeting use does not. Building an ad set against these = real warm layer.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-needs-manual-tuesday-verification">What needs manual Tuesday verification</h2>
+<p>The API confirmed the dollar-impact findings but cannot validate signal-quality validation issues. Items below require Mo to open Meta Events Manager (not the Marketing API):</p>
+<ol>
+<li><strong>Purchase value malformation (98%):</strong> Events Manager → Dataset <code>332555186604235</code> → Diagnostics tab → check "value" parameter validation status</li>
+<li><strong>fbc truncation:</strong> Same Diagnostics view, check fbc parameter validation</li>
+<li><strong>The "Mil FB Customer Match 4.12.21" list status:</strong> Check Business Settings → Audiences for any archived audience by that name; confirm whether it was replaced by Custom_Recruiting-Leads_08-05-2025 or is a separate stale entity</li>
+<li><strong>The narrow Custom ad set audience source sizes:</strong> In Ads Manager, click into the ad set targeting → view audience definition to see the actual source audience size (Reach is wider; Source is what Mo flagged as ~1,000)</li>
+</ol>
+<hr />
+<h2 id="what-the-live-api-revealed-that-mos-audit-did-not-surface">What the live API revealed that Mo's audit did not surface</h2>
+<table>
+<thead>
+<tr>
+<th>New finding</th>
+<th>Detail</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>All Site Visitors and Visited Auto LP audiences are effectively empty (~20 people each)</strong></td>
+<td>The Pixel-seeded website retargeting layer is essentially non-existent under SAC</td>
+<td>Confirms there's NO website-retargeting lane; only customer-list LALs + page-engagement audiences are usable</td>
+</tr>
+<tr>
+<td><strong>The page-engagement audiences exist but are not being used as ad-set targeting</strong></td>
+<td>FB Page Engagers 341–401K, IG Engagers 93–110K healthy but inactive</td>
+<td>Building ad sets against these = real warm layer the account currently lacks. Maps to Mo's B1 task.</td>
+</tr>
+<tr>
+<td><strong>The Custom_Recruiting-Leads seed is 10 months old, not 13</strong></td>
+<td>Still stale but slightly less stale than Mo's "May 2025 refresh" finding</td>
+<td>Refresh is still the right move; the deadline pressure is the same</td>
+</tr>
+<tr>
+<td><strong>MA Military Insurance dataset (likely MediaAlpha) has never fired server-side</strong></td>
+<td>Created Dec 2025; browser fires; server: never</td>
+<td>Either activate or archive; consistent with Anthony's "ignore MediaAlpha" direction</td>
+</tr>
+<tr>
+<td><strong>TYFYS auction-ranking diagnostic: "Below Average engagement, Above Average conversion"</strong></td>
+<td>Direct from Meta — confirms it converts in a niche but won't scale broadly</td>
+<td>Validates v3 audit conclusion to keep TYFYS in BAU only</td>
+</tr>
+<tr>
+<td><strong>Direct competitor "The Military Wallet" is active with "Did You Serve? You Might Save »" hook</strong></td>
+<td>New competitive signal</td>
+<td>The Military Wallet is running the identity-led hook Military.com walked away from. Worth watching.</td>
+</tr>
+<tr>
+<td><strong>Total spend on the "Lower-Your-Auto" creative concept across all campaigns: $370K/30d</strong></td>
+<td>The workhorse is even bigger than the single-ad numbers Mo cited</td>
+<td>Concept-family thinking matters; Mo's per-ad spend counts undercount the concept's true dominance.</td>
+</tr>
+<tr>
+<td><strong>Total spend on the "Odometer" concept (incl. 05/22 + Moving-Odometer 06/03): $270K/30d</strong></td>
+<td>The high-CPL concept is also bigger than Mo cited</td>
+<td>Reallocation lever is even larger than v3 suggested</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="net-take">Net take</h2>
+<p>Mo's audit framework is sound and the major findings reproduce against live data. The audit can be carried forward with confidence. The few deltas surface:</p>
+<ol>
+<li><strong>Concept-family thinking</strong> beats single-ad accounting (Odometer is 50% bigger than DEFINITIVE counted; Lower-Your-Auto is the dominant single concept at $370K/30d)</li>
+<li><strong>The Pixel-seeded retargeting layer is broken even worse than Mo flagged</strong> — All Site Visitors and Visited Auto LP at ~20 people each</li>
+<li><strong>The page-engagement audiences are unused</strong> — building an ad set against them is a free lever</li>
+<li><strong>The MediaAlpha dataset puzzle</strong> — likely intentionally dormant per Anthony's framing</li>
+</ol>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

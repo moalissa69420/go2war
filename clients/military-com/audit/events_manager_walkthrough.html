@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events Manager Walkthrough — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Events Manager Walkthrough</div>
+<div class="meta">Source: <code>events_manager_walkthrough.md</code></div>
+<hr class="divider">
+<h1 id="events-manager-diagnostics-walkthrough">Events Manager Diagnostics Walkthrough</h1>
+<p><strong>Tuesday morning, 15 minutes before the meeting. This is the doc you follow click-by-click.</strong></p>
+<p>The whole audit's biggest finding — the Purchase value pipe being broken — was validated indirectly via the Marketing API (Meta returns <code>purchase_roas: "Not available"</code> everywhere). The <strong>direct evidence</strong> lives only in Events Manager Diagnostics. This walkthrough gets you to it.</p>
+<hr />
+<h2 id="why-this-matters">Why this matters</h2>
+<p>The API confirms:
+- ✅ Purchase events fire (~755/day)
+- ✅ EMQ on Purchase is excellent (9.1)
+- ✅ fbc parameter has 87% coverage on Purchase, 100% on CompleteRegistration
+- ❌ But <code>purchase_roas: "Not available"</code> everywhere</p>
+<p>That last point means <strong>something in the value pipe is broken</strong>. The API tells us "value optimization isn't working" but not <em>why</em>. Events Manager Diagnostics tells us why — specifically, whether the <code>value</code> parameter being sent is malformed (Mo's "98% of price data" claim).</p>
+<p>If you confirm value malformation Tuesday morning:
+- The root cause is locked in
+- The Auto Max Val decision becomes data-supported, not inference-supported
+- The Tuesday dev conversation becomes "fix this specific thing" not "investigate this hypothesis"</p>
+<hr />
+<h2 id="step-by-step">Step-by-step</h2>
+<h3 id="open-events-manager">Open Events Manager</h3>
+<ol>
+<li>Go to <code>business.facebook.com</code></li>
+<li>Sign in with the Iron Corp / Military.com BM access</li>
+<li>In the left sidebar, click <strong>Events Manager</strong></li>
+</ol>
+<p>If you have multiple BMs visible, select the one containing the LG Military Ads account (<code>1034037341617540</code>). The associated business ID for the lead-gen dataset is <code>551525685236215</code> — that may be a separate BM you need to switch to.</p>
+<h3 id="navigate-to-the-lead-gen-dataset">Navigate to the lead-gen dataset</h3>
+<ol>
+<li>In Events Manager, the left sidebar shows a list of <strong>Datasets / Pixels</strong></li>
+<li>Click on <strong><code>Military Insurance</code></strong> (ID <code>332555186604235</code>)
+   - <strong>Not</strong> <code>Military.com's Pixel</code> (that's the content pixel)
+   - <strong>Not</strong> <code>MA Military Insurance</code> (that's the dormant MediaAlpha one)</li>
+</ol>
+<p>You should see the dataset overview page. Top of the page shows: event activity graph, today's volume, etc.</p>
+<h3 id="open-the-diagnostics-tab">Open the Diagnostics tab</h3>
+<p>Top navigation of the dataset page shows tabs: <strong>Overview | Test Events | Diagnostics | Settings | History</strong></p>
+<p>Click <strong>Diagnostics</strong>.</p>
+<p>This tab surfaces parameter-validation errors that the Marketing API doesn't expose.</p>
+<hr />
+<h2 id="what-to-look-for-in-priority-order">What to look for (in priority order)</h2>
+<h3 id="priority-1-purchase-event-value-parameter">Priority 1: Purchase event <code>value</code> parameter</h3>
+<p>In the Diagnostics tab, look for an entry that says one of:
+- "Purchase event has formatting issues with the <code>value</code> parameter"
+- "Purchase event value parameter is missing or invalid"
+- "Recommend updating Purchase event <code>value</code> field to match expected format"
+- Or similar — Meta phrases vary</p>
+<p>If you see one of these, click it to expand:
+- It will show <strong>how many events are affected</strong> (Mo's audit cited 98% — verify this)
+- It will show <strong>what the value parameter currently looks like</strong> (probably $0, $1, or a non-numeric string)
+- It will show <strong>what the recommended format is</strong> (numeric, typically decimal like <code>27.50</code>)</p>
+<p><strong>Screenshot this for the master record.</strong> This is the single most important screenshot from Tuesday.</p>
+<h3 id="priority-2-fbc-fbclid-parameter">Priority 2: fbc / fbclid parameter</h3>
+<p>In the same Diagnostics view, look for an entry referencing <strong><code>fbc</code> (Facebook Click ID)</strong> with words like:
+- "Truncated"
+- "Invalid format"
+- "Missing characters"</p>
+<p>If you see this, click to expand:
+- Note <strong>how many ad sets / events</strong> are affected (Mo's audit cited 15 ad sets / $67,174 / 27% of CompleteRegistration)
+- Note the <strong>example fbc value</strong> Meta shows (it'll be a string starting with <code>fb.1.</code> — should have 3+ dots; truncated = fewer)</p>
+<h3 id="priority-3-anything-else-flagged">Priority 3: Anything else flagged</h3>
+<p>Scroll the full Diagnostics view. Things to also note:
+- Any <strong>CompleteRegistration parameter warnings</strong>
+- Any <strong>dedup warnings</strong> (browser + server fire same event with mismatched dedup keys)
+- Any <strong>PII format warnings</strong> (hashed values not in lowercase, etc.)
+- Any <strong>upload frequency</strong> warnings (events arriving too late)</p>
+<p>Most of these will be clean given the EMQ scores are strong, but anything flagged is worth a screenshot for the dev conversation.</p>
+<hr />
+<h2 id="what-good-looks-like-so-you-know-if-mos-prior-claim-was-wrong">What "good" looks like (so you know if Mo's prior claim was wrong)</h2>
+<p>If the Purchase <code>value</code> parameter is <strong>NOT</strong> flagged in Diagnostics, then:
+- Mo's "98% of Purchase price data is malformed" finding has been resolved since the prior audit, OR
+- The diagnostic surfaces it differently in 2026 than it did when Mo first found it, OR
+- The issue is real but Meta's Diagnostics tab doesn't catch it (rare but possible)</p>
+<p>In that case, the next check is:
+1. Click into the <strong><code>value</code></strong> parameter detail under the Purchase event (in the Overview tab → Event Details)
+2. Look at the <strong>distribution of values</strong> Meta has received
+3. If 98%+ of values are <strong>the same number</strong> (e.g., everything is $1, $27.50, or $0), that's the flat-value problem even if Meta doesn't flag it
+4. Real lead-payout data would show a distribution: $15 here, $32 there, $47 there, etc.</p>
+<p>A flat distribution = broken value pipe regardless of whether the Diagnostics tab flags it.</p>
+<hr />
+<h2 id="what-to-do-with-what-you-find">What to do with what you find</h2>
+<h3 id="if-value-malformation-is-confirmed">If value malformation is confirmed:</h3>
+<p>Walk into the meeting with the screenshot. Say:</p>
+<blockquote>
+<p>"Confirmed this morning — Purchase events fire fine, but the value parameter is malformed in 98% of cases. Meta's flagging it in Diagnostics. This is why ROAS isn't available, this is why Max Val is paying a 67% CPL premium for nothing. Here's the screenshot. Dev — what's the fix and how long?"</p>
+</blockquote>
+<h3 id="if-fbc-truncation-is-confirmed">If fbc truncation is confirmed:</h3>
+<p>Same approach, second priority. Say:</p>
+<blockquote>
+<p>"Second thing — fbc parameter is truncated on N ad sets representing M% of CompleteRegistration events. That's the click-ID Meta needs to attribute leads back to specific ads. Less urgent than value but real. Dev — likely a URL parameter handling bug. Worth scoping with the value fix?"</p>
+</blockquote>
+<h3 id="if-both-are-confirmed-and-value-malformation-is-severe">If both are confirmed and value malformation is severe:</h3>
+<p>The whole pitch is: <strong>the Auto Max Val decision becomes urgent, not speculative</strong>. Lean toward Option A (pause) unless dev commits to a 2-week value-fix.</p>
+<h3 id="if-neither-is-flagged-mos-prior-audit-overstated">If neither is flagged (Mo's prior audit overstated):</h3>
+<p>Don't pretend. Update the master_audit.md's Section 4 to mark the finding as "claimed but not reproducible in current Diagnostics — dev should still investigate root cause of ROAS unavailability."</p>
+<hr />
+<h2 id="adjacent-thing-to-check-while-youre-in-there">Adjacent thing to check while you're in there</h2>
+<p>In the <strong>Datasets</strong> list, click on <strong><code>Military.com's Pixel</code></strong> (ID <code>587241028099131</code>) and check:</p>
+<ul>
+<li><strong>Last server fired</strong>: should show "Never" or a date in March 2023 (per Mo's audit)</li>
+<li><strong>CAPI status</strong>: should show "Not set up" or similar</li>
+</ul>
+<p>This confirms the +23% cost/result lever (adding CAPI Gateway to the content pixel). Screenshot the "no CAPI" state — it's the artifact you walk into the dev conversation with for that ask.</p>
+<hr />
+<h2 id="total-time">Total time</h2>
+<ul>
+<li>Open Events Manager: 1 min</li>
+<li>Navigate to dataset Diagnostics: 1 min</li>
+<li>Read + screenshot the Purchase value finding: 3-5 min</li>
+<li>Read + screenshot the fbc finding: 2-3 min</li>
+<li>Check Military.com's Pixel CAPI state: 2 min</li>
+<li>Buffer for slowness: 2-3 min</li>
+</ul>
+<p><strong>Realistic total: 12-15 minutes.</strong> Do this before the 9 AM meeting and you walk in with screenshots that anchor the whole conversation.</p>
+<hr />
+<h2 id="what-to-not-click-on">What to NOT click on</h2>
+<p>The Diagnostics tab has a "Resolve" / "Apply Recommendation" button for some issues. <strong>Do NOT click anything that says "Fix" or "Apply" without dev review.</strong> Meta's auto-fixes for parameter issues sometimes restructure the event schema in ways that break downstream integrations (especially with QW/Delty postbacks). Read-only Tuesday. Decisions get made in the meeting, not in the dashboard.</p>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

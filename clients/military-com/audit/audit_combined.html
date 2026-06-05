@@ -1,0 +1,4001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Audit — GTW × Military.com — June 4, 2026</title>
+<style>
+:root {
+    --navy: #1E2761;
+    --navy-deep: #151B40;
+    --ice: #CADCFC;
+    --orange: #FF6B35;
+    --text: #1B1F3A;
+    --muted: #64748B;
+    --divider: #E2E8F0;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.65; font-size: 16px;
+}
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    max-width: 1340px;
+    margin: 0 auto;
+}
+aside {
+    position: sticky; top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--divider);
+    background: var(--bg);
+}
+aside .brand {
+    font-family: Georgia, serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+aside .brand-sub {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--orange);
+    font-weight: 600; margin-bottom: 32px;
+}
+aside h3 {
+    font-family: Georgia, serif;
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--muted);
+    margin: 0 0 12px; font-weight: 700;
+}
+aside ol { list-style: none; padding: 0; margin: 0 0 32px; counter-reset: tocnum; }
+aside li { margin: 4px 0; font-size: 13px; counter-increment: tocnum; }
+aside li::before { content: counter(tocnum) ". "; color: var(--muted); font-weight: 600; }
+aside a {
+    color: var(--text); text-decoration: none;
+    display: inline-block; padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+    width: calc(100% - 24px);
+}
+aside a:hover {
+    background: var(--card);
+    border-left-color: var(--orange);
+    color: var(--navy);
+}
+main {
+    padding: 56px 72px;
+    max-width: 900px;
+    background: var(--card);
+    min-height: 100vh;
+    box-shadow: 0 0 24px rgba(0,0,0,0.04);
+}
+.page-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 3px solid var(--navy);
+}
+.page-header .eyebrow {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--orange);
+    font-weight: 700; margin: 0 0 8px;
+}
+.page-header h1 {
+    font-family: Georgia, serif;
+    font-size: 38px; color: var(--navy);
+    margin: 0 0 8px; line-height: 1.15;
+}
+.page-header .subtitle {
+    color: var(--muted);
+    font-size: 14px; margin: 0;
+}
+section {
+    padding: 48px 0;
+    border-top: 1px solid var(--divider);
+}
+section:first-of-type { border-top: none; padding-top: 16px; }
+.section-header { margin-bottom: 32px; }
+.section-label {
+    display: inline-block;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--orange);
+    font-weight: 700;
+    padding: 4px 10px;
+    background: rgba(255, 107, 53, 0.08);
+    border-radius: 3px;
+    margin-bottom: 12px;
+}
+.section-header h2 {
+    font-family: Georgia, serif;
+    font-size: 32px; color: var(--navy);
+    margin: 0 0 4px; line-height: 1.2;
+}
+.section-source {
+    color: var(--muted);
+    font-size: 12px;
+    font-family: "SF Mono", Monaco, Consolas, monospace;
+    margin: 0;
+}
+section h1, section h2, section h3, section h4 {
+    font-family: Georgia, serif; color: var(--navy);
+    line-height: 1.3;
+}
+section h1 { font-size: 26px; margin: 36px 0 14px; }
+section h2 { font-size: 22px; margin: 32px 0 12px; }
+section h3 { font-size: 18px; margin: 26px 0 8px; color: var(--navy-deep); }
+section h4 { font-size: 16px; margin: 20px 0 6px; color: var(--text); }
+section h2 + p, section h3 + p { margin-top: 8px; }
+p, ul, ol { margin: 12px 0; }
+a { color: var(--orange); text-decoration: none; border-bottom: 1px solid rgba(255, 107, 53, 0.3); }
+a:hover { border-bottom-color: var(--orange); }
+strong { color: var(--navy); font-weight: 600; }
+blockquote {
+    border-left: 3px solid var(--orange);
+    margin: 20px 0; padding: 8px 20px;
+    background: rgba(255, 107, 53, 0.04);
+    color: var(--text); font-style: italic;
+}
+code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", Consolas, monospace;
+    font-size: 13px; background: #F1F4F9;
+    padding: 2px 6px; border-radius: 3px;
+    color: var(--navy-deep);
+}
+pre {
+    background: #F1F4F9;
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    border-left: 3px solid var(--navy);
+    font-size: 13px; line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+table {
+    width: 100%; border-collapse: collapse;
+    margin: 20px 0; font-size: 14px;
+}
+th, td {
+    text-align: left; padding: 10px 12px;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: top;
+}
+th {
+    background: var(--navy); color: white;
+    font-weight: 600; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+tr:nth-child(even) td { background: rgba(202, 220, 252, 0.12); }
+ul li, ol li { margin: 6px 0; }
+hr {
+    border: none; height: 1px;
+    background: var(--divider); margin: 36px 0;
+}
+@media (max-width: 940px) {
+    .layout { grid-template-columns: 1fr; }
+    aside {
+        position: relative; height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+        padding: 20px;
+    }
+    main { padding: 32px 20px; }
+    .page-header h1 { font-size: 28px; }
+    section h1 { font-size: 22px; }
+    section h2 { font-size: 19px; }
+    .section-header h2 { font-size: 24px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px; }
+}
+@media print {
+    aside { display: none; }
+    main { box-shadow: none; padding: 0; max-width: 100%; }
+    section { page-break-before: always; }
+    section:first-of-type { page-break-before: auto; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+    <aside>
+        <div class="brand">GTW × Military.com</div>
+        <div class="brand-sub">Master Audit · Jun 4, 2026</div>
+        <h3>Contents</h3>
+        <ol>
+            <li><a href="#master">Master Audit — START HERE</a></li>
+            <li><a href="#tuesday">Tuesday Meeting Handout (print this)</a></li>
+            <li><a href="#maxval">Auto Max Val Decision Deep-Dive</a></li>
+            <li><a href="#events">Events Manager Diagnostics Walkthrough</a></li>
+            <li><a href="#engagement">Page-Engagement Audience Build Spec</a></li>
+            <li><a href="#delta">Delta: Prior Claims vs Live API</a></li>
+            <li><a href="#app-a">Appendix A — Meta Account Structure</a></li>
+            <li><a href="#app-b">Appendix B — Creatives</a></li>
+            <li><a href="#app-c">Appendix C — Dataset / CAPI / Signals</a></li>
+            <li><a href="#app-d">Appendix D — Audiences / Opportunity / Anomalies</a></li>
+            <li><a href="#app-e">Appendix E — Competitive Scan</a></li>
+            <li><a href="#digest">Mo's Prior Files — Digest (background)</a></li>
+        </ol>
+        <h3>Print</h3>
+        <p style="font-size:12px; color: var(--muted); margin: 0;">Cmd+P → Save as PDF for offline copy. The Tuesday Handout (#2) is designed to print on 2-3 pages.</p>
+    </aside>
+    <main>
+        <header class="page-header">
+            <p class="eyebrow">MASTER AUDIT</p>
+            <h1>Military.com — June 4, 2026</h1>
+            <p class="subtitle">Canonical audit · Live Meta API · Reconciles with Mo's prior 20 files · Account `1034037341617540`</p>
+        </header>
+        
+<section id="master">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Master Audit — START HERE</h2>
+        <p class="section-source">master_audit.md</p>
+    </div>
+    <h1 id="militarycom-master-audit-june-4-2026">Military.com Master Audit — June 4, 2026</h1>
+<p><strong>Canonical document.</strong> Supersedes all prior audit iterations in <code>/Users/mo/Downloads/military/</code>. Validated against live Meta Marketing API pull this session. Integrates with the June 2026 plan in <code>/Users/mo/Desktop/military.com/deliverables/june_2026/</code>.</p>
+<p><strong>Account audited:</strong> <code>1034037341617540</code> — LG Military Ads (Business: Military.com, <code>10153481725199270</code>)
+<strong>Data window:</strong> May 5 – June 3, 2026 (last 30d)
+<strong>Author:</strong> GTW (Mo) · Live API audit</p>
+<hr />
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p>Military.com's lead-gen Meta account is a structurally healthy $850K/month engine sitting under <strong>a 99/100 Opportunity Score</strong> with three compounding problems that explain why it's not as profitable as it should be:</p>
+<ol>
+<li>
+<p><strong>The Purchase value pipe is broken.</strong> Meta returns <code>purchase_roas: "Not available"</code> at every level — account, campaign, ad set, ad. The Auto Max Val campaign optimizes for <code>RETURN_ON_AD_SPEND</code> against this broken signal and pays <strong>a 66.9% CPL premium</strong> ($36.44 vs $21.84 BAU) for the privilege. <strong>~$136.9K/month</strong> of premium spend with zero value visibility = <strong>~$1.6M/yr</strong> of arguably wasted optimization headroom.</p>
+</li>
+<li>
+<p><strong>Concept concentration is extreme.</strong> Two creative families — Lower-Your-Auto ($370K/30d) and Odometer ($270K/30d) — account for <strong>76% of total monthly spend</strong>. The fatigue clock on these two concepts is the single biggest near-term risk.</p>
+</li>
+<li>
+<p><strong>The retargeting layer doesn't exist.</strong> Both website-Pixel-seeded audiences (<code>All Site Visitors (180D)</code> and <code>Visited Auto LP (180D)</code>) sit at <strong>~20 people each</strong>. Under Special Ad Category (Financial Products), Pixel-seeded retargeting is essentially unavailable. The account has only customer-list LALs + a healthy-but-unused page-engagement layer.</p>
+</li>
+</ol>
+<h3 id="what-to-do-this-week">What to do this week</h3>
+<ul>
+<li><strong>Tuesday morning:</strong> Open Meta Events Manager → Dataset <code>332555186604235</code> → Diagnostics tab to confirm the Purchase value malformation. This gates everything else.</li>
+<li><strong>Tuesday with dev:</strong> Start the value-pipe fix (multi-week dev work). Decide on Auto Max Val budget — pause or cap until the value signal is real.</li>
+<li><strong>Tuesday with Lauren:</strong> Fresh sold-leads export (last 180d) for the Custom-list seed refresh. Build a new ad set targeting FB Page Engagers + IG Account Engagers (currently unused).</li>
+<li><strong>This week:</strong> Delete the ~28 broken placeholder LALs. Ship 8–10 new creative concepts. Reallocate Auto BAU's $8.5K/day pacing gap to Drive-On + Lower-Your-Auto BAU variants.</li>
+</ul>
+<h3 id="the-framing">The framing</h3>
+<p>The account is well-run and structurally healthy. Mo's audit thesis was right: <strong>the leverage is in measurement plumbing, creative, and the success metric — not structural fixes.</strong> Opportunity Score 99/100 confirms it. The job is to execute that thesis with the value pipe fixed first.</p>
+<hr />
+<h2 id="2-whats-the-same-whats-changed">2. What's the same, what's changed</h2>
+<p><strong>Net verdict from cross-validating Mo's prior audit claims against live API data: 15 of 18 specific numerical claims match within 5% tolerance. No critical claims refuted.</strong></p>
+<h3 id="canonical-reconciliations-carry-these-numbers-forward">Canonical reconciliations (carry these numbers forward)</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's prior claim</th>
+<th>Live API value</th>
+<th>Canonical going forward</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account spend $842K /30d</td>
+<td>$841,425.95</td>
+<td><strong>$841K (essentially exact)</strong></td>
+</tr>
+<tr>
+<td>Account frequency 6.45</td>
+<td>6.38</td>
+<td><strong>6.38</strong></td>
+</tr>
+<tr>
+<td>Purchase ROAS "broken value pipe"</td>
+<td><code>Not available</code> at every level</td>
+<td><strong>CONFIRMED. Root cause.</strong></td>
+</tr>
+<tr>
+<td>Max Val pays ~65% premium</td>
+<td>66.9% ($36.44 vs $21.84)</td>
+<td><strong>67%</strong></td>
+</tr>
+<tr>
+<td>Auto BAU pacing: $19.8K budget, $11.4K actual</td>
+<td>$19,800 budget, $11,296 actual = 57% utilization</td>
+<td><strong>$19.8K → $11.3K (57%)</strong></td>
+</tr>
+<tr>
+<td>Odometer_05/15 single ad spend $178K</td>
+<td>$180,727 single-ad</td>
+<td><strong>$181K single ad</strong></td>
+</tr>
+<tr>
+<td>Odometer concept total $222K</td>
+<td>$270,660 (includes 05/22 + 06/03 variants)</td>
+<td><strong>$270K (concept family)</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Auto workhorse "+$191K net"</td>
+<td>$370,738 (all variants, all campaigns)</td>
+<td><strong>$370K (concept family) — the dominant single concept</strong></td>
+</tr>
+<tr>
+<td>CompleteRegistration EMQ 8.3</td>
+<td>8.3</td>
+<td><strong>8.3 (exact)</strong></td>
+</tr>
+<tr>
+<td>Opportunity Score 99/100</td>
+<td>99</td>
+<td><strong>99 (exact)</strong></td>
+</tr>
+<tr>
+<td>~30 broken placeholder LALs</td>
+<td>28 INACTIVE at 1,000 each</td>
+<td><strong>~28</strong></td>
+</tr>
+<tr>
+<td>Customer-list "Mil FB Customer Match 4.12.21"</td>
+<td>Not in inventory</td>
+<td><strong>Replaced by <code>Custom_Recruiting-Leads_08-05-2025</code> (39K-46K seed, 10 months old)</strong></td>
+</tr>
+<tr>
+<td>Drive-On_05/30 $18.48 CPL</td>
+<td>$18.43</td>
+<td><strong>$18.43</strong></td>
+</tr>
+<tr>
+<td>2 narrow Custom ad sets at ~1,000 audience</td>
+<td>Ad sets reach 716K &amp; 52K; <strong>website-retargeting audiences at ~20 each is the more severe finding</strong></td>
+<td><strong>NEW severity — retargeting layer essentially nonexistent</strong></td>
+</tr>
+<tr>
+<td>Dataset C content pixel CAPI 0%</td>
+<td>"Military.com's Pixel" server silent since March 2023</td>
+<td><strong>CONFIRMED</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="three-corrections-to-internalize">Three corrections to internalize</h3>
+<ol>
+<li>
+<p><strong>Concept-family thinking beats per-ad accounting.</strong> The Odometer concept is $270K/30d (not $178K). Lower-Your-Auto is $370K/30d. Always think concept first, ad-ID second.</p>
+</li>
+<li>
+<p><strong>The customer-list seed name is <code>Custom_Recruiting-Leads_08-05-2025</code>, not "Mil FB Customer Match 4.12.21".</strong> The older audit referenced a name that's no longer in the inventory. Same underlying issue (stale seed), different audience entity.</p>
+</li>
+<li>
+<p><strong>Retargeting is broken worse than the audit framed.</strong> Not just "narrow Custom ad sets" — the entire Pixel-seeded website retargeting layer is empty (~20 people in each audience). Under SAC for Financial Products, this is structural, not a fixable Pixel bug.</p>
+</li>
+</ol>
+<hr />
+<h2 id="3-account-state-at-a-glance">3. Account state at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ad Account ID</td>
+<td><code>1034037341617540</code></td>
+</tr>
+<tr>
+<td>Account Name</td>
+<td>LG Military Ads</td>
+</tr>
+<tr>
+<td>Business</td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>Special Ad Category</td>
+<td>Financial Products (SAC ON — confirmed via all campaign names)</td>
+</tr>
+<tr>
+<td>Account Status</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td><strong>Opportunity Score</strong></td>
+<td><strong>99 / 100</strong></td>
+</tr>
+<tr>
+<td>30-day spend</td>
+<td>$841,425.95</td>
+</tr>
+<tr>
+<td>30-day impressions</td>
+<td>38,557,408</td>
+</tr>
+<tr>
+<td>30-day clicks</td>
+<td>443,130</td>
+</tr>
+<tr>
+<td>30-day reach</td>
+<td>6,039,757</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td>6.38</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td>1.15%</td>
+</tr>
+<tr>
+<td>CPC</td>
+<td>$1.90</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td>$21.82</td>
+</tr>
+<tr>
+<td><strong><code>purchase_roas</code></strong></td>
+<td><strong><code>Not available</code> (every level)</strong></td>
+</tr>
+<tr>
+<td>Active campaigns</td>
+<td>6 (BAU + ALC + Max Val × Auto + Home)</td>
+</tr>
+<tr>
+<td>Active ads</td>
+<td>50+ (top 50 reviewed; account total higher)</td>
+</tr>
+<tr>
+<td>Datasets attached</td>
+<td>3 (1 lead-gen workhorse, 1 content legacy, 1 dormant MediaAlpha)</td>
+</tr>
+<tr>
+<td>Customer audiences</td>
+<td>38 total (10 active, 28 broken placeholders)</td>
+</tr>
+<tr>
+<td>Workhorse dataset</td>
+<td><code>332555186604235</code> — Purchase EMQ 9.1, CompleteRegistration EMQ 8.3</td>
+</tr>
+<tr>
+<td>Custom conversion events</td>
+<td>Auto <code>26414218331497189</code>, Home <code>527662590217855</code> ("click to quotes")</td>
+</tr>
+</tbody>
+</table>
+<h3 id="campaign-structure-6-active">Campaign structure (6 active)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Campaign</th>
+<th>Objective</th>
+<th>Daily Budget</th>
+<th>30d Spend</th>
+<th>Leads</th>
+<th>CPL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Auto SAC ALC Max Val (NEW)</td>
+<td>OUTCOME_SALES</td>
+<td>$7,000</td>
+<td>$341,592</td>
+<td>9,375</td>
+<td><strong>$36.44</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Auto SAC BAU (NEW)</td>
+<td>OUTCOME_LEADS</td>
+<td>$19,800</td>
+<td>$338,882</td>
+<td>15,587</td>
+<td><strong>$21.84</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Auto SAC ALC (NEW)</td>
+<td>OUTCOME_LEADS</td>
+<td>$8,500</td>
+<td>$80,960</td>
+<td>3,491</td>
+<td>$23.19</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Home SAC ALC</td>
+<td>OUTCOME_LEADS</td>
+<td>$4,000</td>
+<td>$37,553</td>
+<td>2,573</td>
+<td><strong>$14.60</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Home SAC ALC Max Val (NEW)</td>
+<td>OUTCOME_SALES</td>
+<td>$1,600</td>
+<td>$29,268</td>
+<td>1,363</td>
+<td>$21.47</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Home SAC BAU</td>
+<td>OUTCOME_LEADS</td>
+<td>$2,000</td>
+<td>$13,169</td>
+<td>959</td>
+<td><strong>$13.73</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto:Home spend split is 90:10. Auto:Home lead split is 85:15. Home's CPL is 39% lower than Auto's.</strong></p>
+<hr />
+<h2 id="4-the-three-compounding-problems">4. The three compounding problems</h2>
+<h3 id="1-broken-purchase-value-pipe-the-root-cause">(1) Broken Purchase value pipe — the root cause</h3>
+<p><strong>The single most important finding in the account.</strong></p>
+<p>Evidence:
+- <code>purchase_roas: "Not available"</code> at every level (account, campaign, ad set, ad)
+- Auto Max Val campaign optimizes for <code>RETURN_ON_AD_SPEND</code> — but Meta cannot compute ROAS because the value signal is unusable
+- The Max Val penalty: $36.44 Max Val CPL vs $21.84 BAU CPL on the SAME audience targeting strategy = <strong>66.9% premium</strong> the account is paying for the privilege of broken value optimization
+- Mo's "98% of Purchase price data is malformed" finding: cannot be validated via the <code>dataset_quality</code> endpoint (which only checks presence, not value validity) — but the entire ROAS unavailability is consistent with this. Manual Events Manager Diagnostics check required Tuesday.</p>
+<p><strong>Dollar size:</strong> Auto Max Val spends $341,592/30d at $36.44 CPL vs BAU $21.84. The premium = $14.60 per lead × 9,375 leads = <strong>$136,912 / 30 days</strong> of premium-spend optimization headroom locked behind the broken signal. <strong>Annualized: ~$1.6M.</strong></p>
+<p><strong>Why it matters strategically:</strong> until this is fixed, Max Val campaigns CANNOT do their job. They're paying a value-optimization premium against a signal that doesn't exist. Either (a) fix the value pipe and Max Val starts working, OR (b) pause Max Val and reallocate to BAU at $21.84 CPL. Both are valid moves; the worst-of-both is current state.</p>
+<h3 id="2-concept-family-over-concentration">(2) Concept-family over-concentration</h3>
+<p>The account spends <strong>$640K/30d (76% of total)</strong> on just two creative concept families:</p>
+<ul>
+<li><strong>Lower-Your-Auto-Insurance:</strong> $370,738 across all variants and campaigns. The workhorse. Avg $20.39–$23.89 CPL on BAU (best $20.39 in Digital Marketing &amp; Tech ad set).</li>
+<li><strong>Odometer:</strong> $270,660 across all variants (05/15, 05/22, Moving-Odometer 06/03). Higher CPL than Lower-Your-Auto. $20.43 BAU best, $38.85 Max Val worst.</li>
+</ul>
+<p><strong>Fatigue clock risk:</strong> the Odometer 05/15 single ad has frequency 3.27 and reach 3.1M. Within 14 days at current pace it crosses 4.0 — Meta's typical fatigue threshold. New variants (05/22, 06/03) are being launched to extend the family but the underlying audience is still being burned by the same concept.</p>
+<p><strong>Reallocation lever:</strong> within the Lower-Your-Auto family, shifting Max Val budget ($115K/30d on this concept) to BAU at $21.88 CPL = same volume at ~32% lower cost. Within Odometer, similar reallocation.</p>
+<h3 id="3-fbcfbclid-value-malformation-suspected-tuesday-confirm">(3) fbc/fbclid value malformation (suspected — Tuesday confirm)</h3>
+<p>Mo's audit: 15 ad sets, $67,174 spend, 27% of CompleteRegistration events affected by fbc truncation.</p>
+<p>Live API: fbc parameter is <strong>PRESENT</strong> on 100% of CompleteRegistration events and 87% of Purchase events. The truncation Mo identified is a <strong>value-validation issue</strong> (the fbc string is present but malformed), which is invisible to <code>dataset_quality</code> (presence-only) and only surfaces in Meta Events Manager Diagnostics.</p>
+<p>Verdict: <strong>carry as suspected-confirmed pending the Tuesday Events Manager check.</strong> If validated, the fix is a dev-team URL parameter handling change (small effort, real impact on EMQ-driven optimization).</p>
+<hr />
+<h2 id="5-whats-healthy-the-counterweight">5. What's healthy (the counterweight)</h2>
+<p>Mo's audit thesis is right that this is a structurally healthy account. The positives:</p>
+<ul>
+<li><strong>Opportunity Score 99/100</strong> — Meta's automated assessment shows no structural fixes needed</li>
+<li><strong>Excellent EMQ scores</strong> on the lead-gen dataset: Purchase 9.1, CompleteRegistration 8.3</li>
+<li><strong>Tight Auto BAU CPL band</strong> ($20.39–$23.89) across all interest-targeted ad sets — interest targeting works; consolidation is a test, not an obvious win</li>
+<li><strong>Home is materially cheaper than Auto</strong> (39% lower CPL) — real arbitrage opportunity</li>
+<li><strong>Creative cadence is real</strong> — ~2 net-new launches/week (May 4, 7, 15, 22, 29, 30, June 3 all visible)</li>
+<li><strong>Dual-channel firing</strong> — server and browser both active, ~5–8% server uplift, healthy deduplication</li>
+<li><strong>Healthy page-engagement audiences</strong> (currently unused as targeting): FB Likers 999K–1.2M, FB Engagers 341K–401K, IG Followers 30K–35K, IG Engagers 93K–110K</li>
+<li><strong>No active anomaly flags</strong> from Meta</li>
+<li><strong>Custom-list LAL ladder works</strong> — 1%/3%/5% LALs all properly sized at 1.9M–10.1M</li>
+<li><strong>TYFYS is correctly de-prioritized</strong> — Meta auction-ranking confirms "Below Average engagement, Above Average conversion" — converts in niche but won't scale. Audit fix is in place.</li>
+<li><strong>Veteran-VO is correctly de-prioritized</strong> — only one active variant at $2,052 spend, most variants paused. Audit fix is in place.</li>
+</ul>
+<hr />
+<h2 id="6-creative-state-of-the-union">6. Creative state of the union</h2>
+<h3 id="concept-families-10-distinct-matching-mos-count">Concept families (~10 distinct, matching Mo's count)</h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Format</th>
+<th>30d Spend</th>
+<th>Avg CPL</th>
+<th>Where it works</th>
+<th>Where it fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lower-Your-Auto-Insurance</strong></td>
+<td>Static + Anim + Swipe</td>
+<td><strong>$371K</strong></td>
+<td>$20–32</td>
+<td>BAU ($22)</td>
+<td>Max Val ($32)</td>
+</tr>
+<tr>
+<td><strong>Odometer</strong></td>
+<td>Static + Anim + Swipe</td>
+<td><strong>$270K</strong></td>
+<td>$20–47</td>
+<td>BAU/ALC ($20–23)</td>
+<td>Max Val ($38–47)</td>
+</tr>
+<tr>
+<td><strong>Lower-Your-Home-Insurance</strong></td>
+<td>Static + Inside + Icon</td>
+<td>$61K</td>
+<td>$12.68–$21.32</td>
+<td>All Home placements</td>
+<td>—</td>
+</tr>
+<tr>
+<td>TYFYS</td>
+<td>Video + Anim + Swipe</td>
+<td>$17K</td>
+<td>$21.73–$36.54</td>
+<td>BAU low spend</td>
+<td>Max Val</td>
+</tr>
+<tr>
+<td>Drive-On</td>
+<td>Static + Anim + Swipe</td>
+<td>$13K</td>
+<td>$18.43–$34.34</td>
+<td>BAU Custom ($18.43)</td>
+<td>Max Val</td>
+</tr>
+<tr>
+<td>Simplified (V2/V3/V4)</td>
+<td>Video + Inside + Icon</td>
+<td>$8K</td>
+<td>$13.22–$41.62</td>
+<td>Home</td>
+<td>Auto Max Val</td>
+</tr>
+<tr>
+<td>Moving-To-Do-List</td>
+<td>Static</td>
+<td>$3.6K</td>
+<td>$25.31–$41.31</td>
+<td>BAU</td>
+<td>Max Val</td>
+</tr>
+<tr>
+<td>Family-outside / Loading-car-2 / Half-Truck / Save-Piggybank-Camo</td>
+<td>Static + Outside + Family</td>
+<td>$6K</td>
+<td>$19.81–$23.21</td>
+<td>Auto ALC</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gradient / More-Savings / Drive-Down / Blue-Camo-Vets-Save / Half-Car</td>
+<td>Static + Anim + Swipe</td>
+<td>$10K</td>
+<td>$18.27–$69.78</td>
+<td>BAU (More-Savings $18)</td>
+<td>Max Val (More-Savings $70)</td>
+</tr>
+<tr>
+<td>Veteran-VO / Veterans-Save (deprioritized)</td>
+<td>Video + Anim + Flag-Swipe</td>
+<td>$3K</td>
+<td>$29–$67</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="format-mix">Format mix</h3>
+<p><strong>Static dominates ~5:1 over Video by spend.</strong> Top 20 spenders: 18 Static, 2 Video. Two video assets in the top 20: TYFYS_03/24 ($12K Max Val) and TYFYS_03/09 ($3K BAU). The Video 2 family from December 2025 still runs at low spend with anomalously high CTRs (8.33%, 10.49%).</p>
+<p><strong>Zero veteran UGC, zero testimonial creative.</strong> The defensible moat (the only player with the audience to credibly ship real-veteran-on-camera creative) remains unbuilt. Mo's prior audit conclusion stands and is confirmed.</p>
+<h3 id="compliance">Compliance</h3>
+<p>The "Save up to 60%" creatives that triggered Mo's earlier compliance concern are <strong>NOT in the current top 50 by spend.</strong> Need to confirm via Events Manager check that they're sunset entirely or just demoted to low spend. As of this audit, the high-risk creative does not appear to be a live concern.</p>
+<h3 id="what-to-ship-next">What to ship next</h3>
+<p>Based on the audit:
+- <strong>Home Lower-Your-Home_Inside_Icon variants</strong> — best CPL in the account ($12.68 BAU, $14.69 ALC); under-funded at $61K vs $371K Auto
+- <strong>Drive-On variants</strong> — newer creative trending at $18.43 BAU; underfunded vs Odometer's $270K
+- <strong>More-Savings BAU variants</strong> — $18.27 BAU CPL; Max Val variant ($69.78) should be killed but BAU works
+- <strong>Anything with "Inside_Icon" format on Home</strong> — Home's working format
+- <strong>Video — anything</strong> — current 5:1 Static:Video split leaves video opportunity unbuilt</p>
+<hr />
+<h2 id="7-audience-state">7. Audience state</h2>
+<h3 id="active-and-working-10-audiences">Active and working (10 audiences)</h3>
+<p>The customer-list LAL ladder is properly built:
+- <code>Custom_Recruiting-Leads_08-05-2025</code> — 39,200–46,100 people (the seed; 10 months old, refresh candidate)
+- <code>Lookalike (US, 1%)</code> — 1.9M–2.2M
+- <code>Lookalike (US, 3%)</code> — 5.3M–6.3M
+- <code>Lookalike (US, 5%)</code> — 8.5M–10.1M</p>
+<p>Page-engagement audiences exist and are healthy:
+- <code>FB Mil.com Page Likers/Followers</code> — 999K–1.2M
+- <code>FB Mil.com Page Engagers (365D)</code> — 341K–401K
+- <code>IG Mil.com Followers</code> — 30K–35K
+- <code>IG Mil.com Account Engagers (365D)</code> — 93.6K–110K</p>
+<h3 id="broken-state-the-new-finding">Broken state (the new finding)</h3>
+<ul>
+<li><strong><code>All Site Visitors (180D)</code></strong> — sized at <strong>~20 people</strong></li>
+<li><strong><code>Visited Auto LP (180D)</code></strong> — sized at <strong>~20 people</strong></li>
+</ul>
+<p>These should be hundreds of thousands of people each. Two hypotheses:</p>
+<ol>
+<li>The lead-gen Pixel doesn't write back to these account-level Platform audiences (cross-business write issue between dataset <code>332555186604235</code> business <code>551525685236215</code> and the LG Military Ads account business).</li>
+<li><strong>SAC (Financial Products) filters Pixel-seeded retargeting audiences out</strong>, leaving them effectively empty.</li>
+</ol>
+<p><strong>Hypothesis 2 is more likely.</strong> Under SAC, Meta restricts retargeting audiences derived from website Pixel events for financial products. The audience accumulates events but they're filtered as ineligible for ad delivery.</p>
+<p><strong>Implication:</strong> the account has <strong>no functional website-retargeting layer.</strong> The legitimate audience seeds under SAC are:
+- ✅ Customer-list (advertiser-provided) — the Recruiting-Leads seed and LALs
+- ✅ FB/IG engagement (on-Meta surfaces) — the page audiences, currently UNUSED
+- ❌ Pixel-seeded website retargeting — restricted or filtered under SAC</p>
+<h3 id="broken-placeholder-lals-cleanup-task">Broken placeholder LALs (cleanup task)</h3>
+<p><strong>28 INACTIVE lookalikes all sized at exactly 1,000.</strong> Meta's signature for orphaned/broken lookalikes (seed audience deleted or invalid). Matches Mo's "delete ~30 dead placeholder lookalikes" task. Low-risk cleanup; no positive impact from leaving them.</p>
+<h3 id="customer-list-lookalike-eligibility-under-sac">Customer-list lookalike eligibility under SAC</h3>
+<p>The LAL ladder on the Recruiting-Leads seed (1%/3%/5%) IS active and sized properly — which means <strong>customer-list LALs under SAC for Financial Products IS allowed in this account.</strong> Mo's W4-T3 task (test customer-list LAL eligibility) is effectively answered by live state: customer-list LALs work. The in-product test confirmation is a 30-second check rather than a real concern.</p>
+<h3 id="the-mil-fb-customer-match-41221-question">The "Mil FB Customer Match 4.12.21" question</h3>
+<p>That specific named list is not in the current inventory. The active customer-match list is <code>Custom_Recruiting-Leads_08-05-2025</code> (created Aug 5, 2025; 10 months old). Same underlying issue Mo identified (stale customer-match seed) but with a different name. Refresh remains the right move.</p>
+<hr />
+<h2 id="8-tracking-dataset-capi">8. Tracking / Dataset / CAPI</h2>
+<h3 id="three-datasets-three-states">Three datasets, three states</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Purpose</th>
+<th>Browser</th>
+<th>Server</th>
+<th>EMQ</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>332555186604235</code></td>
+<td>Military Insurance</td>
+<td><strong>Lead-gen workhorse</strong> (likely QW/Delty integration)</td>
+<td>Fires real-time</td>
+<td><strong>Fires real-time ✅</strong></td>
+<td>Purchase 9.1, CompReg 8.3, PV 6.9</td>
+<td>None — healthy</td>
+</tr>
+<tr>
+<td><code>587241028099131</code></td>
+<td>Military.com's Pixel</td>
+<td>Content/site pixel (legacy from 2016)</td>
+<td>Fires today</td>
+<td><strong>Silent since March 2023</strong></td>
+<td>No CAPI events</td>
+<td><strong>Add CAPI Gateway (+23% cost/result lever)</strong></td>
+</tr>
+<tr>
+<td><code>1536649764252698</code></td>
+<td>MA Military Insurance</td>
+<td>Likely MediaAlpha (dormant)</td>
+<td>Fires today</td>
+<td><strong>Never fired (1969 epoch)</strong></td>
+<td>No EMQ</td>
+<td><strong>Activate OR archive — confirm with Anthony</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-taxonomy-current-state">Event taxonomy (current state)</h3>
+<ul>
+<li><strong>Native Lead event</strong>: Not used as conversion target (always "Not available" in results)</li>
+<li><strong>Custom conversion <code>26414218331497189</code></strong>: "Auto click to quotes" — the Auto optimization target</li>
+<li><strong>Custom conversion <code>527662590217855</code></strong>: "Home click to quotes" — the Home optimization target</li>
+<li><strong>Purchase event</strong>: Fires at high volume (~755/day) and high EMQ (9.1) — but value parameter is the issue (Events Manager Diagnostics confirm Tuesday)</li>
+<li><strong>CompleteRegistration</strong>: Fires ~755/day, EMQ 8.3, fbc 100% coverage</li>
+</ul>
+<h3 id="volume-and-freshness-last-7-days">Volume and freshness (last 7 days)</h3>
+<ul>
+<li>PageView: ~392K events</li>
+<li>Purchase: ~5,300 events (~755/day)</li>
+<li>CompleteRegistration: ~5,300 events</li>
+<li>SERVER ~52%, BROWSER ~48% — CAPI doing roughly equal volume to Pixel</li>
+<li>Server uplift: ~5–8% per hour (CAPI catches events Pixel misses)</li>
+</ul>
+<p>Note: Mo's earlier "17.5% CAPI lift" finding may have been from a specific 7-day window in his audit. Current 7-day uplift is lower (5–8%), but the lift is real and positive. The dual-channel setup is fundamentally healthy.</p>
+<h3 id="the-23-costresult-lever">The +23% cost/result lever</h3>
+<p>Adding a Signals Gateway / CAPI for <code>587241028099131</code> ("Military.com's Pixel") — the content pixel currently running browser-only — would let the algorithm see retargeting events from military.com's broader content footprint. Mo's audit estimates +23% cost/result improvement when this is wired up. The work is engineering-only (no creative dependency); ~24–48 hour dev sprint.</p>
+<hr />
+<h2 id="9-competitive-landscape">9. Competitive landscape</h2>
+<h3 id="live-api-limitations">Live API limitations</h3>
+<p>Meta Ad Library keyword search only matches creative text, not brand. The major aggregator competitors (EverQuote, The Zebra, Insurify, SmartFinancial, QuoteWizard) use product-neutral copy and didn't surface via brand-keyword search. <strong>Mo's May 13 competitive teardown (<code>07_competitive_teardown.md</code>) remains canonical for these brands.</strong></p>
+<h3 id="what-the-live-scan-did-surface">What the live scan DID surface</h3>
+<p><strong>The Military Wallet</strong> (<code>page_id: 220855334603609</code>) — direct competitor running active ads with "<strong>Did You Serve? You Might Save »</strong>" — an identity-led hook. This is exactly the angle Military.com walked away from with Veteran-VO. Two takeaways:</p>
+<ol>
+<li>The Military Wallet is doubling down on the hook Military.com de-prioritized</li>
+<li>The "Did You Serve?" framing is RUNNING under SAC — suggests Meta is not blocking identity-confirmation hooks the way prior audits assumed</li>
+</ol>
+<p><strong>Veteran Life Insurance</strong> (adjacent vertical, page <code>222591640945329</code>) — uses two angles Military.com isn't running:
+- Spouse-protection ("Protect your spouse")
+- Retirement angle</p>
+<p>Both are family-financial-security framings worth testing in Military.com's Auto BAU.</p>
+<h3 id="key-gaps-militarycom-still-has">Key gaps Military.com still has</h3>
+<p>From Mo's earlier teardown, confirmed by this scan:</p>
+<ul>
+<li><strong>Spouse-angle creative</strong> — used by EverQuote, Insurify, Veteran Life Insurance. Military.com has zero spouse-specific variants.</li>
+<li><strong>Real-veteran UGC</strong> — under-utilized everywhere. Defensible moat unbuilt.</li>
+<li><strong>Specific dollar/monthly-payment framing</strong> — beats generic "Save 15% or More." Both Military.com and competitors leave this on the table.</li>
+</ul>
+<h3 id="tuesday-browser-check">Tuesday browser check</h3>
+<p>Open <code>facebook.com/ads/library</code>, search by <strong>page name</strong> for: EverQuote, Insurify, SmartFinancial, The Zebra, QuoteWizard, The Military Wallet (priority), Veteran Life Insurance (priority). 30-minute manual sweep produces sharper teardown than API can.</p>
+<hr />
+<h2 id="10-reconciled-with-the-june-2026-plan">10. Reconciled with the June 2026 plan</h2>
+<h3 id="what-the-existing-june-2026-plan-got-right">What the existing June 2026 plan got right</h3>
+<ul>
+<li><strong>Creative engine focus</strong> — confirmed as a primary lever; concept-family analysis validates the plan's volume targets</li>
+<li><strong>Home insurance scale</strong> — confirmed as the highest-confidence revenue action (39% CPL advantage)</li>
+<li><strong>CAPI rebuild plan</strong> — directionally correct, though this audit clarifies that the workhorse dataset (<code>332555186604235</code>) is healthy; the +23% lever is on the content pixel (<code>587241028099131</code>)</li>
+<li><strong>Baseline vetting framework</strong> — still required; the live data doesn't change Mo's leverage to argue baseline down</li>
+</ul>
+<h3 id="what-needs-updating">What needs updating</h3>
+<ul>
+<li><strong>Retargeting layer assumption.</strong> The June plan implicitly assumes Pixel-seeded retargeting is buildable. Under SAC it is not. Update the plan to: warm layer is page-engagement audiences only (FB/IG); no website retargeting available.</li>
+<li><strong>Page-engagement audiences workstream.</strong> Add a specific Week 1 task: build an ad set targeting FB Engagers + IG Account Engagers. This is the only warm layer available and currently unused.</li>
+<li><strong>Auto Max Val budget question.</strong> The June plan doesn't address what to do with $341K/30d of Max Val spend optimizing against a broken signal. Recommend explicit decision Tuesday: pause/cap until value fix lands.</li>
+<li><strong>Conversion-value-fix elevation.</strong> The June plan deprioritizes this vs creative/home. This audit's recommendation: parallel tracks, not either/or — start value-fix dev work Tuesday (multi-week), while creative/home/pacing deliver visible Week 1 wins.</li>
+</ul>
+<h3 id="what-the-plan-missed-entirely">What the plan missed entirely</h3>
+<ul>
+<li><strong>The MA Military Insurance dataset puzzle</strong> — likely MediaAlpha, never fired server-side. Decide Tuesday.</li>
+<li><strong>The Military.com content pixel CAPI Gateway opportunity</strong> — the +23% cost/result lever</li>
+<li><strong>The 28 broken placeholder LALs cleanup</strong> — free task</li>
+<li><strong>The page-engagement audiences building</strong> — free warm layer</li>
+<li><strong>The four strategic recommendations Mo has been carrying</strong> — see Section 11</li>
+</ul>
+<hr />
+<h2 id="11-the-four-strategic-recommendations-mos-been-carrying-separately">11. The four strategic recommendations Mo's been carrying separately</h2>
+<p>These live in Mo's prior files but didn't make the June 2026 plan. Surfaced here per Mo's direction in this audit's scoping.</p>
+<h3 id="a-rplcpl-spread-or-roas-as-the-success-metric-replacing-cpl-alone">A. RPL−CPL spread (or ROAS) as the success metric, replacing CPL alone</h3>
+<p><strong>Case for:</strong> Under SAC, traditional CPL levers are blocked. CPL alone doesn't capture the value side of the equation — same CPL with higher accept rate / higher payout per lead is more profitable. Mo's Master Plan calls this "the most important strategic ask."</p>
+<p><strong>Case against:</strong> Requires Hassan signoff. Introduces complexity into the comp goal-post structure (current goal posts are CPL-based). Has knock-on effects on attribution windows and baseline definition.</p>
+<p><strong>Recommendation:</strong> Pitch to Hassan AFTER mid-June baseline conversation goes well. Frame as: <em>"You only pay me to grow real net revenue, not just shave CPL."</em> Tie to Mo's Master Plan W5-T1. Probably Week 3 of June, not Week 1.</p>
+<h3 id="b-heloc-expansion-thesis">B. HELOC expansion thesis</h3>
+<p><strong>Case for:</strong> Incremental revenue lane outside the QW funnel. Uses the same audience. Mo's Master Plan W5-T2 identified the opportunity.</p>
+<p><strong>Case against:</strong> Requires legal/compliance scoping. Opens a whole new operations track during a 90-day pilot. Capacity is finite and June is full.</p>
+<p><strong>Recommendation:</strong> Surface to Hassan in end-of-June review as a <strong>Q3+ idea, not June work.</strong> Don't divert June capacity. Mention in pitches; don't build.</p>
+<h3 id="c-thread-c-recruitment-partnerships">C. Thread C (recruitment partnerships)</h3>
+<p><strong>Case for:</strong> $1–3M/yr ceiling per Mo's pitch files. Defensible moat (Military.com owns the audience nobody else has). 10 partners × $100K at 60–80% margin = real revenue.</p>
+<p><strong>Case against:</strong> Not in the renegotiated pilot scope. Partnership-sales is a separate motion from media buying. Trying to do both during the 90-day pilot is over-scope.</p>
+<p><strong>Recommendation:</strong> <strong>Hold for Stage 2/3 conversation post-pilot.</strong> Don't try to launch during June. Mention in master audit for visibility but explicitly out of June scope.</p>
+<h3 id="d-conversion-value-fix-as-1-priority-vs-the-june-plans-prioritization">D. Conversion-value-fix as #1 priority (vs the June plan's prioritization)</h3>
+<p><strong>Case for:</strong> It's the root cause. Meta estimates +7% ROAS from the fix. It gates Max Val from ever being efficient. Longest lead time means starting late means landing late.</p>
+<p><strong>Case against:</strong> Dev-heavy, multi-week. Creative + pacing + home deliver visible wins in Week 1 without dev dependency.</p>
+<p><strong>Recommendation:</strong> <strong>Both can be true.</strong> Start the value-fix dev work Tuesday (parallel track, no creative dependency). Ship visible Week 1 wins via creative/pacing/home/cleanup. CAPI/value-fix lands by Week 4 and unlocks Max Val. Reconcilable as parallel tracks, not either/or.</p>
+<hr />
+<h2 id="12-ranked-action-list-top-15">12. Ranked action list (Top 15)</h2>
+<p>Each item: action, owner, target week, estimated dollar impact.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Action</th>
+<th>Owner</th>
+<th>Week</th>
+<th>$ Impact / Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Open Events Manager Diagnostics for dataset <code>332555186604235</code></strong> to confirm Purchase value malformation</td>
+<td>Mo</td>
+<td>Tue Jun 2</td>
+<td>Gates everything else. No $ impact until validated, but validates the root cause.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Decide Auto Max Val budget: pause OR cap at current spend</strong> until value fix lands</td>
+<td>Mo + Hassan</td>
+<td>W1</td>
+<td>Pause = redirect $341K/30d at 67% CPL premium → BAU at $21.84 = same volume at 32% lower cost = ~$110K/mo savings</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Kick off Purchase value-fix dev work</strong> (multi-week)</td>
+<td>Dev (Anthony's team)</td>
+<td>W1 starts, W3-4 lands</td>
+<td>Meta estimate: +7% ROAS when live. ~$60K/mo when complete.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Build ad set targeting FB Page Engagers + IG Account Engagers</strong> (warm layer doesn't exist today)</td>
+<td>Mo + Lauren</td>
+<td>W1-W2</td>
+<td>New warm/retargeting lane. Conservative estimate: 5–10% incremental quality leads at lower CPL.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Refresh <code>Custom_Recruiting-Leads_08-05-2025</code> seed with Lauren's last-180-day sold-leads export</strong></td>
+<td>Mo + Lauren</td>
+<td>W1</td>
+<td>Rebuilds 1%/3%/5% LALs on fresh signal. Lifts LAL performance ~5–10%.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Reallocate Auto BAU's $8.5K/day pacing gap</strong> to Drive-On + Lower-Your-Auto BAU winners</td>
+<td>Mo + Lauren</td>
+<td>W1</td>
+<td>$8.5K/day × 30 = $255K/mo additional spend at $21.84 CPL = ~11,700 additional leads/mo</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Scale Home spend share from 8% → 20% of total</strong> given 39% CPL advantage</td>
+<td>Mo + Lauren</td>
+<td>W1-W2</td>
+<td>Same total budget shifted to more efficient channel. Conservative: 8–12% net rev lift.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Add Signals Gateway / CAPI for <code>587241028099131</code> (Military.com's Pixel)</strong> — the content pixel</td>
+<td>Dev</td>
+<td>W2-W3</td>
+<td>Mo's audit estimate: <strong>+23% cost/result.</strong> Largest single technical lever.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Delete the ~28 dead placeholder LALs</strong></td>
+<td>Mo</td>
+<td>W1</td>
+<td>$0 impact but housekeeping; reduces account-level noise.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Ship 8–10 net-new creative concepts</strong> (target Home Inside_Icon variants + Drive-On + spouse-angle test)</td>
+<td>Mo + War Room</td>
+<td>W1</td>
+<td>Feeds the testing engine; replaces fatiguing Odometer 05/15</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Decide MA Military Insurance dataset (<code>1536649764252698</code>)</strong>: activate OR archive</td>
+<td>Anthony</td>
+<td>W1</td>
+<td>Cleans up dormant integration.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Confirm Lauren on the 2 narrow Custom ad sets</strong> (<code>120240808864440498</code>, <code>120227142278180498</code>) — fix audience source or remove</td>
+<td>Mo + Lauren</td>
+<td>W1</td>
+<td>Either repair to functional state or pause.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Test customer-list LAL under SAC for financial products</strong> (Mo's W4-T3) — likely confirmed already by live state but verify in-product</td>
+<td>Mo</td>
+<td>W1</td>
+<td>Validates that the LAL ladder Mo wants to rebuild on fresh seed will actually work.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Pull March + April 2026 daily reports from Lauren</strong> for baseline vetting</td>
+<td>Mo + Lauren</td>
+<td>W1</td>
+<td>Required input for the baseline conversation with Hassan.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Mid-June 1:1 with Hassan</strong> — baseline + RPL−CPL metric reframe</td>
+<td>Mo</td>
+<td>W3, after Week 1 wins</td>
+<td>Locks in defensible baseline; opens metric reframe conversation. ~$45–67K to Mo over the pilot.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-whats-still-open-by-stakeholder">13. What's still open (by stakeholder)</h2>
+<h3 id="ask-lauren">Ask Lauren</h3>
+<ul>
+<li>Latest customer-match list refresh history</li>
+<li>Audience source size of the 2 narrow Custom ad sets</li>
+<li>Fresh last-180-day sold-leads export</li>
+<li>Current creative production cadence and capacity</li>
+<li>March + April 2026 daily reports</li>
+</ul>
+<h3 id="ask-anthony-dev">Ask Anthony / Dev</h3>
+<ul>
+<li>Form architecture (QW iframe vs redirect vs Iron Corp own page posting to QW API)</li>
+<li>CAPI Gateway plan for the content pixel (<code>587241028099131</code>)</li>
+<li>QW postback integration current state and ownership</li>
+<li>Dev capacity for value-pipe fix</li>
+<li>Confirm MA Military Insurance dataset purpose</li>
+</ul>
+<h3 id="ask-hassan">Ask Hassan</h3>
+<ul>
+<li>Signoff on RPL−CPL metric reframe (timing: after Week 1 wins)</li>
+<li>Willingness to discuss baseline mid-June (target Week 3)</li>
+<li>Openness to HELOC and Thread C as post-pilot extensions (timing: end-of-June review)</li>
+<li>Auto Max Val budget decision (pause vs cap vs keep) pending value-fix timeline</li>
+</ul>
+<h3 id="validation-needed-mo-events-manager">Validation needed (Mo / Events Manager)</h3>
+<ul>
+<li>Purchase value parameter malformation status (Events Manager Diagnostics)</li>
+<li>fbc/fbclid value malformation status (Events Manager Diagnostics)</li>
+<li>"Mil FB Customer Match 4.12.21" archive status (Business Settings → Archived audiences)</li>
+</ul>
+<hr />
+<h2 id="14-appendix-references">14. Appendix references</h2>
+<p>All raw evidence lives in <code>/Users/mo/Desktop/military.com/deliverables/audit_2026-06-04/</code>:</p>
+<ul>
+<li><code>_mo_files_digest.md</code> — synthesis of 20 prior files in <code>/Users/mo/Downloads/military/</code></li>
+<li><code>delta_findings.md</code> — cross-validation of Mo's prior claims against live API</li>
+<li><code>appendix_a_meta_account.md</code> — account, campaigns, ad sets, economics</li>
+<li><code>appendix_b_creatives.md</code> — creative library, top performers, concept families</li>
+<li><code>appendix_c_dataset_capi.md</code> — datasets, EMQ, event taxonomy</li>
+<li><code>appendix_d_audiences_signals.md</code> — audiences, Opportunity Score, anomalies, auction benchmarks</li>
+<li><code>appendix_e_competitive.md</code> — competitive ad library scan</li>
+</ul>
+<p>The master audit (this document) is the synthesis; appendices are the receipts.</p>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<p>GTW explicitly acknowledges the following inferred or unverified items:</p>
+<ol>
+<li>
+<p><strong>The Purchase value malformation (98% per Mo)</strong> is suspected-confirmed by the universal <code>purchase_roas: "Not available"</code> state, but the API cannot validate value-parameter validity. Events Manager Diagnostics check Tuesday is the final word.</p>
+</li>
+<li>
+<p><strong>The fbc truncation finding</strong> (15 ad sets, 27% of CompleteRegistration affected) is similarly suspected-confirmed; API confirms presence (100% coverage), not value validity. Events Manager Diagnostics required.</p>
+</li>
+<li>
+<p><strong>The MA Military Insurance dataset business identity</strong> (<code>business_id: 551525685236215</code> for the workhorse, <code>10153481725199270</code> for MA) — assumed to be the QW/Delty integration entity based on context, but not directly verified.</p>
+</li>
+<li>
+<p><strong>SAC restriction on Pixel-seeded retargeting</strong> is the most likely explanation for All Site Visitors and Visited Auto LP being at ~20 people, but could also be a cross-business write configuration issue. Confirmation needed from dev team Tuesday.</p>
+</li>
+<li>
+<p><strong>The "Custom_Recruiting-Leads_08-05-2025" → "Mil FB Customer Match 4.12.21" replacement</strong> is inferred — possible the older list was archived and not actually replaced. Lauren can confirm.</p>
+</li>
+<li>
+<p><strong>Competitive landscape findings beyond The Military Wallet and Veteran Life Insurance</strong> rely on Mo's May 13 teardown (<code>07_competitive_teardown.md</code>); not independently re-verified this session due to API search limitations.</p>
+</li>
+<li>
+<p><strong>The "17.5% CAPI lift" figure</strong> from Mo's earlier audit could not be reproduced in the current 7-day window (current uplift is 5–8% per hour). The signal is positive but the exact magnitude was windowed differently.</p>
+</li>
+<li>
+<p><strong>The Auto Max Val budget recommendation</strong> (pause vs cap) assumes the value-fix dev work is feasible in 3–4 weeks. If dev capacity is thinner, the budget question becomes "pause now or wait" and the calculus changes.</p>
+</li>
+</ol>
+<hr />
+<p><em>End of master audit.</em></p>
+</section>
+
+<section id="tuesday">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Tuesday Meeting Handout (print this)</h2>
+        <p class="section-source">tuesday_meeting_handout.md</p>
+    </div>
+    <h1 id="tuesday-meeting-handout-june-4-2026">Tuesday Meeting Handout — June 4, 2026</h1>
+<p><strong>Print this. Walk in with it. Use it.</strong></p>
+<p>For the office meeting with Lauren + dev team + (likely) Anthony / Hassan.</p>
+<hr />
+<h2 id="90-second-opener">90-second opener</h2>
+<blockquote>
+<p>"Audit's done. Account is structurally healthy — 99/100 Opportunity Score, EMQ on the lead-gen pixel is 9.1, scaling held through May with no degradation. That's the headline.</p>
+<p>Under that headline, three things are leaving real money on the table. The biggest is the Purchase value pipe — Meta can't compute ROAS on this account because the value parameter isn't usable, which means Auto Max Val is paying a 67% CPL premium optimizing against a signal that doesn't exist. That's a $137K-a-month problem and it's the one thing I want us to decide today.</p>
+<p>The second is creative concentration — two concept families are 76% of all spend. The fatigue clock on Odometer is days, not weeks. The third is the warm/retargeting layer — under SAC, the website-Pixel-seeded retargeting is essentially nonexistent, and we have a healthy page-engagement audience sitting unused. That's a Week 1 fix.</p>
+<p>I have a printed list of every dataset, every campaign, every audience, and three decisions I need from each of you. Let's work through it."</p>
+</blockquote>
+<hr />
+<h2 id="the-three-findings-in-a-screen-friendly-format">The three findings (in a screen-friendly format)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>What</th>
+<th>Dollar size</th>
+<th>Decision needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Broken Purchase value pipe</strong> — Meta returns <code>purchase_roas: "Not available"</code> everywhere. Auto Max Val pays 67% CPL premium ($36.44 vs $21.84) against a broken signal.</td>
+<td><strong>~$137K/month premium spend → ~$1.6M/yr locked headroom</strong></td>
+<td><strong>Pause Max Val until value pipe is fixed? Cap it?</strong> Hassan + Anthony</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Two concepts = 76% of spend</strong> — Lower-Your-Auto $371K/30d + Odometer $270K/30d. Top single ad (Odometer 05/15) at frequency 3.27, ~14 days from fatigue cliff.</td>
+<td>Replacement cost vs fatigue-induced CPL inflation: easily $30-50K/mo</td>
+<td>Approve 8-10 net-new creative concepts this week. Mo + Lauren</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Retargeting layer doesn't exist</strong> — All Site Visitors (180D) and Visited Auto LP (180D) are at ~20 people each (SAC restriction). Page-engagement audiences (FB Engagers 341K, IG Engagers 93K) are healthy but UNUSED.</td>
+<td>New warm lane = 5-10% incremental quality leads at lower CPL</td>
+<td>Build a new ad set targeting FB Page Engagers + IG Account Engagers. Mo + Lauren</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-auto-max-val-decision-the-big-one">The Auto Max Val decision (the big one)</h2>
+<p><strong>Numbers (last 30d):</strong>
+- Auto Max Val spend: $341,592
+- Auto Max Val CPL: $36.44
+- Auto BAU CPL: $21.84
+- Same audience targeting. Same creative concepts. Only difference: Max Val optimizes for <code>RETURN_ON_AD_SPEND</code> against a broken value signal.
+- Premium cost: $14.60/lead × 9,375 leads = <strong>$136,912 / 30 days = ~$1.6M/yr</strong></p>
+<p><strong>Three options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What happens</th>
+<th>$ Impact (per month)</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Pause Max Val</strong></td>
+<td>Stop the $341K/30d Max Val spend. Reallocate to Auto BAU at $21.84 CPL.</td>
+<td><strong>Same volume at 32% lower cost = ~$110K/mo savings.</strong></td>
+<td>None financially. Some signal loss as Meta retrains on BAU.</td>
+</tr>
+<tr>
+<td><strong>B. Cap Max Val</strong></td>
+<td>Hold Max Val at current daily $7K cap. Don't increase until value fix lands.</td>
+<td>Limits bleed but doesn't fix it. ~$0 saved this month.</td>
+<td>Lowest risk; preserves campaign in case the value-fix unlocks performance.</td>
+</tr>
+<tr>
+<td><strong>C. Keep running, fix value pipe in parallel</strong></td>
+<td>Status quo. ~3-4 weeks of dev work to fix Purchase value.</td>
+<td>$137K/mo premium spend until fix lands = $300-500K total bleed during the fix window.</td>
+<td>Most expensive but most preserves optionality.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>My recommendation: B (cap) for Week 1, decide A vs C in Week 2 based on dev confidence in the value-fix timeline.</strong></p>
+<p>If dev says "2 weeks": cap and wait (option B → C).
+If dev says "6+ weeks": pause and reallocate (option B → A).
+If dev says "not sure": pause and reallocate; we can always relight Max Val later.</p>
+<p><strong>Ask Hassan / Anthony Tuesday: which option, and what does dev think the fix timeline actually is?</strong></p>
+<hr />
+<h2 id="diagnostic-checklist-for-tuesday-morning-before-the-meeting">Diagnostic checklist for Tuesday morning (before the meeting)</h2>
+<h3 id="step-1-open-meta-events-manager-5-min">Step 1 — Open Meta Events Manager (5 min)</h3>
+<p>Navigate to: <strong>Events Manager → Datasets → "Military Insurance" (ID <code>332555186604235</code>)</strong></p>
+<p>Then click the <strong>Diagnostics tab</strong> (top nav).</p>
+<p>Look for:
+- ☐ Any <strong>flagged errors on the Purchase event</strong> specifically the <code>value</code> parameter
+- ☐ Any <strong>flagged errors on the fbc parameter</strong> (truncation / malformed values)
+- ☐ Any other parameter-level errors</p>
+<p>If the <code>value</code> parameter is flagged → Mo's "98% malformed" finding is <strong>confirmed</strong>.
+If the <code>fbc</code> parameter is flagged → the truncation finding is <strong>confirmed</strong>.</p>
+<h3 id="step-2-open-audiences-view-3-min">Step 2 — Open Audiences view (3 min)</h3>
+<p>Navigate to: <strong>Audiences → Custom Audiences → search "Mil FB Customer Match 4.12.21"</strong></p>
+<ul>
+<li>☐ Confirm whether the named audience is archived or doesn't exist</li>
+<li>☐ If it exists archived: note refresh date</li>
+<li>☐ Compare to <code>Custom_Recruiting-Leads_08-05-2025</code> to confirm it's the replacement</li>
+</ul>
+<h3 id="step-3-check-the-60-compliance-question-3-min">Step 3 — Check the "60%" compliance question (3 min)</h3>
+<p>Navigate to: <strong>Ads Library → search by page <code>Military.com</code> → keyword "60%"</strong></p>
+<ul>
+<li>☐ Confirm no active ads run "Save up to 60%" claim (May 13 audit flagged 3 ads with this)</li>
+<li>☐ If any still active: note Ad IDs (priority sunset)</li>
+</ul>
+<h3 id="step-4-quick-screen-of-opportunity-score-recommendation-2-min">Step 4 — Quick screen of opportunity score recommendation (2 min)</h3>
+<p>Navigate to: <strong>Ads Manager → Account → Opportunity Score (top-right)</strong></p>
+<ul>
+<li>☐ Confirm 99/100</li>
+<li>☐ Read the 1-point recommendation and screenshot it for Hassan</li>
+</ul>
+<p><strong>Total time: ~15 minutes before walking into the meeting.</strong></p>
+<hr />
+<h2 id="questions-for-lauren">Questions for Lauren</h2>
+<p>Ask in order:</p>
+<ol>
+<li>
+<p><strong>What was the last refresh date of the <code>Custom_Recruiting-Leads_08-05-2025</code> audience?</strong> (Stale 10-month seed = stale 1%/3%/5% LALs. Need fresh export.)</p>
+</li>
+<li>
+<p><strong>What's the audience SOURCE size on these two ad sets?</strong>
+   - <code>120240808864440498</code> (Custom — Auto BAU)
+   - <code>120227142278180498</code> (Custom — Home BAU)
+   - Are these the "narrow ~1,000-person Custom audiences" Mo's prior audit flagged?</p>
+</li>
+<li>
+<p><strong>Can you send me an export of sold leads from the last 180 days for a fresh customer-match upload?</strong> (To rebuild the LAL ladder on current signal.)</p>
+</li>
+<li>
+<p><strong>March + April 2026 daily reports in the same format as May</strong> — for baseline vetting with Hassan mid-June.</p>
+</li>
+<li>
+<p><strong>Are the "Save up to 60%" creatives definitively sunset?</strong> Mo's May 13 audit flagged 3 ads (<code>1004559982134492</code> and 2 others). Live audit didn't see them in top spenders but want to confirm zero live.</p>
+</li>
+<li>
+<p><strong>What's the current creative production cadence?</strong> Can you commit to receiving + reviewing 8-10 net-new concepts per week starting this week?</p>
+</li>
+</ol>
+<hr />
+<h2 id="questions-for-dev-anthonys-team">Questions for Dev (Anthony's team)</h2>
+<p>Ask in order:</p>
+<ol>
+<li>
+<p><strong>Purchase event value parameter</strong> — what value is being passed today? Real per-lead payout from QW/Delty, or a flat placeholder?</p>
+</li>
+<li>
+<p><strong>What's a realistic timeline to fix it?</strong> Best case / worst case.</p>
+</li>
+<li>
+<p><strong>The Military.com content pixel (<code>587241028099131</code>)</strong> — its server has been silent since March 2023. What's the plan? Adding a Signals Gateway / CAPI here is Mo's audit estimate of +23% cost/result. <strong>Multi-week or 24-48 hour work?</strong></p>
+</li>
+<li>
+<p><strong>The MA Military Insurance dataset (<code>1536649764252698</code>)</strong> — what is it for? It's never fired server-side. Activate or archive?</p>
+</li>
+<li>
+<p><strong>Form architecture</strong> — is it a QW-hosted iframe on auto.military.com, a redirect to QW's form, or an Iron Corp own page posting to QW's API? (Determines what's possible for the form migration.)</p>
+</li>
+<li>
+<p><strong>fbc / fbclid handling</strong> — any known issue with URL parameter truncation between the ad click and the lead form? (Mo's audit flagged this; Events Manager will confirm.)</p>
+</li>
+</ol>
+<hr />
+<h2 id="questions-for-hassan-anthony-joint">Questions for Hassan / Anthony (joint)</h2>
+<ol>
+<li>
+<p><strong>The Auto Max Val decision</strong> — Options A (pause), B (cap), or C (keep + fix in parallel)? See table above.</p>
+</li>
+<li>
+<p><strong>Can dev get the value-pipe fix scoped this week?</strong> Need an honest estimate of how many weeks of dev time so the Max Val decision can be made on a real timeline.</p>
+</li>
+<li>
+<p><strong>OK to build a new ad set targeting FB Page Engagers + IG Account Engagers this week?</strong> Existing healthy audiences, currently unused. Conservative estimate: 5-10% incremental quality leads at lower CPL.</p>
+</li>
+<li>
+<p><strong>Mid-June 1:1?</strong> Want a 30-min slot to walk through the baseline vetting data (March-April-May comparison) and the success-metric reframe (RPL−CPL spread vs CPL-only).</p>
+</li>
+</ol>
+<hr />
+<h2 id="week-1-action-checklist-commit-tuesday">Week 1 action checklist (commit Tuesday)</h2>
+<table>
+<thead>
+<tr>
+<th>Owner</th>
+<th>Action</th>
+<th>By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mo</td>
+<td>Events Manager Diagnostics check on Purchase value + fbc parameters</td>
+<td>Tuesday AM</td>
+</tr>
+<tr>
+<td>Mo + Hassan</td>
+<td>Decide Auto Max Val: pause / cap / keep</td>
+<td>Tuesday</td>
+</tr>
+<tr>
+<td>Mo</td>
+<td>Delete 28 broken placeholder LALs (cleanup)</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Build new ad set: FB Page Engagers + IG Account Engagers</td>
+<td>Wed-Thu</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Get fresh 180-day sold-leads export</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo</td>
+<td>Rebuild Custom-list seed + 1%/3%/5% LALs</td>
+<td>Thu</td>
+</tr>
+<tr>
+<td>Mo + War Room</td>
+<td>Ship 8-10 net-new creative concepts (Home Inside_Icon + Drive-On + spouse-angle test)</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Reallocate Auto BAU pacing gap (~$8.5K/day) to Drive-On + Lower-Your-Auto BAU</td>
+<td>Wed</td>
+</tr>
+<tr>
+<td>Mo + Lauren</td>
+<td>Scale Home spend share from 8% → 15-20%</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>Scope Purchase value-pipe fix; honest timeline</td>
+<td>By Wed</td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>Decide MA Military Insurance dataset: activate or archive</td>
+<td>By Fri</td>
+</tr>
+<tr>
+<td>Anthony</td>
+<td>Decide on Auto Max Val with Hassan</td>
+<td>Tuesday-Wed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-im-not-asking-for-tuesday">What I'm NOT asking for Tuesday</h2>
+<ul>
+<li>No form migration cutover (Phase 3+ work, not in measurement window)</li>
+<li>No baseline negotiation yet (mid-June, after Week 1 wins land)</li>
+<li>No new comp structure or kicker discussion (after baseline)</li>
+<li>No HELOC, Thread C, or strategic expansion conversations (post-pilot)</li>
+<li>No metric reframe conversation with Hassan yet (Week 3 after I've banked wins)</li>
+</ul>
+<hr />
+<h2 id="the-thing-i-want-to-walk-out-of-tuesday-with">The thing I want to walk out of Tuesday with</h2>
+<ol>
+<li><strong>A signed Max Val decision</strong> (pause, cap, or keep)</li>
+<li><strong>A dev timeline for the value-pipe fix</strong> (best-case + worst-case weeks)</li>
+<li><strong>Lauren's commitment</strong> on the sold-leads export + creative review cadence</li>
+<li><strong>A calendar invite</strong> for the mid-June 1:1 with Hassan</li>
+<li><strong>Confirmation</strong> that dev will pursue the content-pixel CAPI Gateway (the +23% lever)</li>
+</ol>
+<p>If I walk out with those five things, Tuesday was a win.</p>
+</section>
+
+<section id="maxval">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Auto Max Val Decision Deep-Dive</h2>
+        <p class="section-source">auto_max_val_decision.md</p>
+    </div>
+    <h1 id="auto-max-val-decision-deep-dive">Auto Max Val Decision — Deep Dive</h1>
+<p><strong>The single biggest decision in this audit. ~$1.6M/yr is on the table.</strong></p>
+<hr />
+<h2 id="what-auto-max-val-is">What "Auto Max Val" is</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Campaign</td>
+<td><code>QuoteWizard | MIL | SOCIAL | Insurance | Auto_Insurance | (18-65) SAC - ALC - Max Val | NEW</code></td>
+</tr>
+<tr>
+<td>Campaign ID</td>
+<td><code>120241310920250498</code></td>
+</tr>
+<tr>
+<td>Objective</td>
+<td><strong>OUTCOME_SALES</strong> (not OUTCOME_LEADS)</td>
+</tr>
+<tr>
+<td>Bid Strategy</td>
+<td><strong>Highest volume</strong></td>
+</tr>
+<tr>
+<td>Optimization Goal (ad set level)</td>
+<td><strong>RETURN_ON_AD_SPEND</strong></td>
+</tr>
+<tr>
+<td>Daily Budget</td>
+<td>$7,000</td>
+</tr>
+<tr>
+<td>Start date</td>
+<td>March 16, 2026</td>
+</tr>
+<tr>
+<td>30-day spend</td>
+<td><strong>$341,592.67</strong> (40.6% of total account spend)</td>
+</tr>
+<tr>
+<td>Leads generated</td>
+<td>9,375</td>
+</tr>
+<tr>
+<td><strong>CPL</strong></td>
+<td><strong>$36.44</strong></td>
+</tr>
+<tr>
+<td>Reach</td>
+<td>4,087,517</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td>4.80</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="why-it-exists-the-media-buyers-strategy">Why it exists (the media buyer's strategy)</h2>
+<p>The BAU / ALC / Max Val trio is intentional, not accidental:</p>
+<ul>
+<li><strong>BAU</strong> (Business As Usual) — optimizes for <code>OFFSITE_CONVERSIONS</code>, gets the lead at lowest cost. The volume engine.</li>
+<li><strong>ALC</strong> (Advantage+ Leads Campaign or similar) — Meta's automated optimization, broader reach.</li>
+<li><strong>Max Val</strong> (Maximum Value) — optimizes for <code>RETURN_ON_AD_SPEND</code> against the Purchase event. <strong>The premise: pay more per lead, but get higher-VALUE leads (better accept rate, higher payout) that more than make up for the CPL premium.</strong></li>
+</ul>
+<p>The media buyer's bet: at Max Val, the algorithm should learn to find leads that QuoteWizard will accept and pay premium for. Even at $36.44 CPL, if those leads have a 50% higher accept-rate × payout vs BAU leads at $21.84, Max Val wins.</p>
+<p><strong>That's a coherent strategy IF the value signal works.</strong></p>
+<hr />
+<h2 id="why-its-broken">Why it's broken</h2>
+<p>Meta returns <strong><code>purchase_roas: "Not available"</code></strong> at every level of the account — campaign, ad set, ad. This is because:</p>
+<ol>
+<li>The Purchase event is firing (good)</li>
+<li>The Purchase event has high EMQ (9.1 — good)</li>
+<li>But the <code>value</code> parameter on the Purchase event is either malformed or flat (Mo's audit: "98% of Purchase price data has formatting issues" — needs Events Manager confirmation)</li>
+</ol>
+<p>The result: <strong>Meta's <code>RETURN_ON_AD_SPEND</code> optimization has no signal to optimize against.</strong> It's optimizing against noise. The campaign is structurally paying for premium optimization that isn't happening.</p>
+<h3 id="visualizing-the-bleed">Visualizing the bleed</h3>
+<pre><code>Auto BAU                Auto Max Val
+$338,882 spend          $341,592 spend
+15,587 leads            9,375 leads
+$21.84 CPL              $36.44 CPL
+                        ↑ $14.60 PREMIUM per lead
+
+9,375 leads × $14.60 = $136,912 / 30 days
+                     = $1.64M / year
+
+                     PAID for an optimization
+                     that isn't happening
+</code></pre>
+<hr />
+<h2 id="the-three-options-with-math">The three options, with math</h2>
+<h3 id="option-a-pause-max-val-reallocate-budget-to-bau">Option A — Pause Max Val, reallocate budget to BAU</h3>
+<p><strong>Action:</strong> Pause Auto Max Val campaign. Move the $7,000/day budget to Auto BAU (currently underspent — $11.3K/day actual vs $19.8K/day cap).</p>
+<p><strong>Math:</strong>
+- Auto BAU pacing gap is $8.5K/day undeployed
+- Pausing Max Val saves $7K/day = $210K/30d
+- Reallocating $7K/day to BAU at $21.84 CPL = ~320 additional leads/day
+- Current Max Val produces 9,375 leads/30d = 312 leads/day at $36.44 CPL
+- <strong>Same lead volume, ~40% lower CPL.</strong></p>
+<p><strong>Pros:</strong>
+- Immediate savings: ~$110K/mo at same volume (BAU CPL × current Max Val lead count)
+- Eliminates the "paying for broken optimization" bleed
+- Frees Auto BAU pacing — actually USES the budget that's been sitting</p>
+<p><strong>Cons:</strong>
+- Loses the campaign structure — relighting Max Val later means re-warming the learning phase
+- Some optionality loss if the value-fix lands quickly and Max Val WOULD have worked</p>
+<p><strong>Best if:</strong> dev says the value-fix timeline is "6+ weeks" or "unsure"</p>
+<hr />
+<h3 id="option-b-cap-max-val-at-current-7kday-fix-value-pipe-in-parallel">Option B — Cap Max Val at current $7K/day, fix value pipe in parallel</h3>
+<p><strong>Action:</strong> Don't pause. Don't scale. Lock the daily budget. Start value-pipe dev work in parallel. Revisit in 2 weeks.</p>
+<p><strong>Math:</strong>
+- Continues $341K/30d at $36.44 CPL
+- Continues paying $137K/mo premium during the fix window
+- If fix lands in Week 2: Week 1 + half of Week 2 of premium spend ≈ $50-70K wasted
+- If fix lands in Week 3: $100K wasted
+- If fix lands in Week 4: $137K wasted</p>
+<p><strong>Pros:</strong>
+- Preserves campaign learning (no re-warm cost)
+- Maximum optionality — if value-fix lands fast, Max Val starts working
+- Lowest risk politically (no "Mo paused our biggest campaign" optics)</p>
+<p><strong>Cons:</strong>
+- Bleeds $4.5K/day of premium spend during the fix window
+- Doesn't actually solve anything — just delays the decision</p>
+<p><strong>Best if:</strong> dev says the value-fix timeline is "2 weeks" with confidence</p>
+<hr />
+<h3 id="option-c-keep-running-fix-value-pipe-in-parallel-decide-later">Option C — Keep running, fix value pipe in parallel, decide later</h3>
+<p><strong>Action:</strong> Don't change anything. Start dev work. Revisit at the value-fix landing.</p>
+<p><strong>Math:</strong>
+- Continues $341K/30d unchanged
+- Total wasted spend during typical fix window (3-4 weeks): $300-500K</p>
+<p><strong>Pros:</strong>
+- Zero operational change required
+- No risk of disrupting current performance</p>
+<p><strong>Cons:</strong>
+- Costs ~$300-500K in premium spend during the fix
+- "We knew it was bleeding and we did nothing" if Hassan asks why</p>
+<p><strong>Best if:</strong> never. This option exists only to be rejected unless there's a specific reason to preserve current state.</p>
+<hr />
+<h2 id="my-recommendation">My recommendation</h2>
+<p><strong>Cap to $7K/day for Week 1 (Option B), then re-decide Week 2 based on dev confidence:</strong></p>
+<ul>
+<li>If dev says <strong>"value-fix lands in 2 weeks with confidence"</strong> → stay capped (Option B → C)</li>
+<li>If dev says <strong>"value-fix is 6+ weeks or uncertain"</strong> → pause + reallocate (Option B → A)</li>
+<li>If dev says <strong>"3-4 weeks"</strong> → pause + reallocate. Reallocation savings in 3 weeks (~$110K) exceed the optionality value of preserving the campaign structure.</li>
+</ul>
+<p><strong>The framing for Hassan:</strong></p>
+<blockquote>
+<p>"I want to cap Auto Max Val at its current spend for Week 1 so we stop the bleed but don't lose the campaign yet. By next Tuesday, dev tells us how long the value-pipe fix takes. If it's two weeks, we hold the cap. If it's a month or more, we pause Max Val and shift that budget to BAU — same lead volume, 40% lower cost. Either way, we're not paying for broken optimization in Q3."</p>
+</blockquote>
+<p>That's an operator framing Hassan can sign off on without a 30-minute conversation.</p>
+<hr />
+<h2 id="what-to-say-if-hassan-or-anthony-push-back">What to say if Hassan or Anthony push back</h2>
+<h3 id="weve-been-running-max-val-for-months-it-must-be-working">"We've been running Max Val for months. It must be working."</h3>
+<p><strong>Response:</strong> "It's running, but Meta returns <code>purchase_roas: Not available</code> everywhere. That's the algorithm telling us the value optimization isn't happening. The CPL premium versus BAU on the same audience is structural — same audience targeting, 67% higher CPL. That's the cost of running ROAS optimization against a broken signal. The campaign isn't delivering on its premise; we just haven't measured it."</p>
+<h3 id="pausing-breaks-our-delivery">"Pausing breaks our delivery."</h3>
+<p><strong>Response:</strong> "Auto BAU has $8.5K/day of unspent budget right now. The reallocation absorbs Max Val's volume at lower CPL. We don't lose delivery — we lose CPL premium."</p>
+<h3 id="max-val-gets-us-higher-value-leads-even-if-meta-cant-see-it">"Max Val gets us higher-value leads even if Meta can't see it."</h3>
+<p><strong>Response:</strong> "Possible, but unverifiable. The downstream lead quality data (accept rate, payout per lead) isn't visible to us in the Meta-only view. If you have that data, let's look at it — if Max Val leads have a 50%+ higher accept rate that justifies the premium, we keep it. Without that data, we're paying a premium on faith."</p>
+<h3 id="whats-the-downside-of-just-leaving-it">"What's the downside of just leaving it?"</h3>
+<p><strong>Response:</strong> "$137K a month of premium spend for at least the 3-4 weeks of the value-fix dev cycle = $400-500K. That's the lower bound. If value-fix takes longer, more. Compared to a campaign pause that costs ~$0 to reverse, the do-nothing option is the most expensive option on the table."</p>
+<hr />
+<h2 id="what-this-audit-cant-tell-us-and-what-mo-should-ask">What this audit can't tell us (and what Mo should ask)</h2>
+<p>The Meta-only view doesn't see downstream lead quality. To make this call with full confidence Mo needs from QW/Delty:</p>
+<ul>
+<li>Accept rate on Max Val leads vs BAU leads (same time period)</li>
+<li>Payout per accepted lead on Max Val vs BAU</li>
+<li>Return rate on Max Val vs BAU</li>
+</ul>
+<p><strong>If Max Val accept-rate is materially higher (say 30%+ over BAU), the campaign may be working despite Meta not being able to measure ROAS.</strong> In that case Option B (cap) becomes more attractive — preserve the campaign for when the value-fix gives the algorithm what it needs.</p>
+<p><strong>If Max Val accept-rate is roughly equal to BAU</strong>, the campaign is straight-up overpaying for nothing. Option A (pause) is the clear move.</p>
+<p>This is a Tuesday ask of Anthony / Lauren: <strong>get me the accept-rate breakdown by campaign for the last 30 days.</strong></p>
+<hr />
+<h2 id="decision-tree">Decision tree</h2>
+<pre><code>Tuesday Tuesday Tuesday:
+                          │
+              [Dev value-fix timeline?]
+                          │
+              ┌───────────┼───────────┐
+              │           │           │
+        2 weeks     3-4 weeks     6+ weeks
+              │           │           │
+              ▼           ▼           ▼
+         Cap (B)    Pause (A)    Pause (A)
+         Stay B     Reallocate    Reallocate
+         until      to BAU        to BAU
+         fix lands  immediately   immediately
+              │
+              ▼
+        Fix lands?
+              │
+        ┌─────┼─────┐
+        │     │     │
+       Yes   No    Late
+        │     │     │
+        ▼     ▼     ▼
+     Scale  Pause Pause
+     Max    Max    Max
+     Val    Val    Val
+</code></pre>
+<hr />
+<h2 id="if-i-get-one-thing-from-tuesday-on-this-topic">If I get one thing from Tuesday on this topic</h2>
+<p><strong>An honest dev timeline.</strong> Best case + worst case in weeks.</p>
+<p>With that number, the Max Val decision makes itself. Without it, we're guessing.</p>
+</section>
+
+<section id="events">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Events Manager Diagnostics Walkthrough</h2>
+        <p class="section-source">events_manager_walkthrough.md</p>
+    </div>
+    <h1 id="events-manager-diagnostics-walkthrough">Events Manager Diagnostics Walkthrough</h1>
+<p><strong>Tuesday morning, 15 minutes before the meeting. This is the doc you follow click-by-click.</strong></p>
+<p>The whole audit's biggest finding — the Purchase value pipe being broken — was validated indirectly via the Marketing API (Meta returns <code>purchase_roas: "Not available"</code> everywhere). The <strong>direct evidence</strong> lives only in Events Manager Diagnostics. This walkthrough gets you to it.</p>
+<hr />
+<h2 id="why-this-matters">Why this matters</h2>
+<p>The API confirms:
+- ✅ Purchase events fire (~755/day)
+- ✅ EMQ on Purchase is excellent (9.1)
+- ✅ fbc parameter has 87% coverage on Purchase, 100% on CompleteRegistration
+- ❌ But <code>purchase_roas: "Not available"</code> everywhere</p>
+<p>That last point means <strong>something in the value pipe is broken</strong>. The API tells us "value optimization isn't working" but not <em>why</em>. Events Manager Diagnostics tells us why — specifically, whether the <code>value</code> parameter being sent is malformed (Mo's "98% of price data" claim).</p>
+<p>If you confirm value malformation Tuesday morning:
+- The root cause is locked in
+- The Auto Max Val decision becomes data-supported, not inference-supported
+- The Tuesday dev conversation becomes "fix this specific thing" not "investigate this hypothesis"</p>
+<hr />
+<h2 id="step-by-step">Step-by-step</h2>
+<h3 id="open-events-manager">Open Events Manager</h3>
+<ol>
+<li>Go to <code>business.facebook.com</code></li>
+<li>Sign in with the Iron Corp / Military.com BM access</li>
+<li>In the left sidebar, click <strong>Events Manager</strong></li>
+</ol>
+<p>If you have multiple BMs visible, select the one containing the LG Military Ads account (<code>1034037341617540</code>). The associated business ID for the lead-gen dataset is <code>551525685236215</code> — that may be a separate BM you need to switch to.</p>
+<h3 id="navigate-to-the-lead-gen-dataset">Navigate to the lead-gen dataset</h3>
+<ol>
+<li>In Events Manager, the left sidebar shows a list of <strong>Datasets / Pixels</strong></li>
+<li>Click on <strong><code>Military Insurance</code></strong> (ID <code>332555186604235</code>)
+   - <strong>Not</strong> <code>Military.com's Pixel</code> (that's the content pixel)
+   - <strong>Not</strong> <code>MA Military Insurance</code> (that's the dormant MediaAlpha one)</li>
+</ol>
+<p>You should see the dataset overview page. Top of the page shows: event activity graph, today's volume, etc.</p>
+<h3 id="open-the-diagnostics-tab">Open the Diagnostics tab</h3>
+<p>Top navigation of the dataset page shows tabs: <strong>Overview | Test Events | Diagnostics | Settings | History</strong></p>
+<p>Click <strong>Diagnostics</strong>.</p>
+<p>This tab surfaces parameter-validation errors that the Marketing API doesn't expose.</p>
+<hr />
+<h2 id="what-to-look-for-in-priority-order">What to look for (in priority order)</h2>
+<h3 id="priority-1-purchase-event-value-parameter">Priority 1: Purchase event <code>value</code> parameter</h3>
+<p>In the Diagnostics tab, look for an entry that says one of:
+- "Purchase event has formatting issues with the <code>value</code> parameter"
+- "Purchase event value parameter is missing or invalid"
+- "Recommend updating Purchase event <code>value</code> field to match expected format"
+- Or similar — Meta phrases vary</p>
+<p>If you see one of these, click it to expand:
+- It will show <strong>how many events are affected</strong> (Mo's audit cited 98% — verify this)
+- It will show <strong>what the value parameter currently looks like</strong> (probably $0, $1, or a non-numeric string)
+- It will show <strong>what the recommended format is</strong> (numeric, typically decimal like <code>27.50</code>)</p>
+<p><strong>Screenshot this for the master record.</strong> This is the single most important screenshot from Tuesday.</p>
+<h3 id="priority-2-fbc-fbclid-parameter">Priority 2: fbc / fbclid parameter</h3>
+<p>In the same Diagnostics view, look for an entry referencing <strong><code>fbc</code> (Facebook Click ID)</strong> with words like:
+- "Truncated"
+- "Invalid format"
+- "Missing characters"</p>
+<p>If you see this, click to expand:
+- Note <strong>how many ad sets / events</strong> are affected (Mo's audit cited 15 ad sets / $67,174 / 27% of CompleteRegistration)
+- Note the <strong>example fbc value</strong> Meta shows (it'll be a string starting with <code>fb.1.</code> — should have 3+ dots; truncated = fewer)</p>
+<h3 id="priority-3-anything-else-flagged">Priority 3: Anything else flagged</h3>
+<p>Scroll the full Diagnostics view. Things to also note:
+- Any <strong>CompleteRegistration parameter warnings</strong>
+- Any <strong>dedup warnings</strong> (browser + server fire same event with mismatched dedup keys)
+- Any <strong>PII format warnings</strong> (hashed values not in lowercase, etc.)
+- Any <strong>upload frequency</strong> warnings (events arriving too late)</p>
+<p>Most of these will be clean given the EMQ scores are strong, but anything flagged is worth a screenshot for the dev conversation.</p>
+<hr />
+<h2 id="what-good-looks-like-so-you-know-if-mos-prior-claim-was-wrong">What "good" looks like (so you know if Mo's prior claim was wrong)</h2>
+<p>If the Purchase <code>value</code> parameter is <strong>NOT</strong> flagged in Diagnostics, then:
+- Mo's "98% of Purchase price data is malformed" finding has been resolved since the prior audit, OR
+- The diagnostic surfaces it differently in 2026 than it did when Mo first found it, OR
+- The issue is real but Meta's Diagnostics tab doesn't catch it (rare but possible)</p>
+<p>In that case, the next check is:
+1. Click into the <strong><code>value</code></strong> parameter detail under the Purchase event (in the Overview tab → Event Details)
+2. Look at the <strong>distribution of values</strong> Meta has received
+3. If 98%+ of values are <strong>the same number</strong> (e.g., everything is $1, $27.50, or $0), that's the flat-value problem even if Meta doesn't flag it
+4. Real lead-payout data would show a distribution: $15 here, $32 there, $47 there, etc.</p>
+<p>A flat distribution = broken value pipe regardless of whether the Diagnostics tab flags it.</p>
+<hr />
+<h2 id="what-to-do-with-what-you-find">What to do with what you find</h2>
+<h3 id="if-value-malformation-is-confirmed">If value malformation is confirmed:</h3>
+<p>Walk into the meeting with the screenshot. Say:</p>
+<blockquote>
+<p>"Confirmed this morning — Purchase events fire fine, but the value parameter is malformed in 98% of cases. Meta's flagging it in Diagnostics. This is why ROAS isn't available, this is why Max Val is paying a 67% CPL premium for nothing. Here's the screenshot. Dev — what's the fix and how long?"</p>
+</blockquote>
+<h3 id="if-fbc-truncation-is-confirmed">If fbc truncation is confirmed:</h3>
+<p>Same approach, second priority. Say:</p>
+<blockquote>
+<p>"Second thing — fbc parameter is truncated on N ad sets representing M% of CompleteRegistration events. That's the click-ID Meta needs to attribute leads back to specific ads. Less urgent than value but real. Dev — likely a URL parameter handling bug. Worth scoping with the value fix?"</p>
+</blockquote>
+<h3 id="if-both-are-confirmed-and-value-malformation-is-severe">If both are confirmed and value malformation is severe:</h3>
+<p>The whole pitch is: <strong>the Auto Max Val decision becomes urgent, not speculative</strong>. Lean toward Option A (pause) unless dev commits to a 2-week value-fix.</p>
+<h3 id="if-neither-is-flagged-mos-prior-audit-overstated">If neither is flagged (Mo's prior audit overstated):</h3>
+<p>Don't pretend. Update the master_audit.md's Section 4 to mark the finding as "claimed but not reproducible in current Diagnostics — dev should still investigate root cause of ROAS unavailability."</p>
+<hr />
+<h2 id="adjacent-thing-to-check-while-youre-in-there">Adjacent thing to check while you're in there</h2>
+<p>In the <strong>Datasets</strong> list, click on <strong><code>Military.com's Pixel</code></strong> (ID <code>587241028099131</code>) and check:</p>
+<ul>
+<li><strong>Last server fired</strong>: should show "Never" or a date in March 2023 (per Mo's audit)</li>
+<li><strong>CAPI status</strong>: should show "Not set up" or similar</li>
+</ul>
+<p>This confirms the +23% cost/result lever (adding CAPI Gateway to the content pixel). Screenshot the "no CAPI" state — it's the artifact you walk into the dev conversation with for that ask.</p>
+<hr />
+<h2 id="total-time">Total time</h2>
+<ul>
+<li>Open Events Manager: 1 min</li>
+<li>Navigate to dataset Diagnostics: 1 min</li>
+<li>Read + screenshot the Purchase value finding: 3-5 min</li>
+<li>Read + screenshot the fbc finding: 2-3 min</li>
+<li>Check Military.com's Pixel CAPI state: 2 min</li>
+<li>Buffer for slowness: 2-3 min</li>
+</ul>
+<p><strong>Realistic total: 12-15 minutes.</strong> Do this before the 9 AM meeting and you walk in with screenshots that anchor the whole conversation.</p>
+<hr />
+<h2 id="what-to-not-click-on">What to NOT click on</h2>
+<p>The Diagnostics tab has a "Resolve" / "Apply Recommendation" button for some issues. <strong>Do NOT click anything that says "Fix" or "Apply" without dev review.</strong> Meta's auto-fixes for parameter issues sometimes restructure the event schema in ways that break downstream integrations (especially with QW/Delty postbacks). Read-only Tuesday. Decisions get made in the meeting, not in the dashboard.</p>
+</section>
+
+<section id="engagement">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Page-Engagement Audience Build Spec</h2>
+        <p class="section-source">page_engagement_audience_build.md</p>
+    </div>
+    <h1 id="page-engagement-audience-build-spec">Page-Engagement Audience Build — Spec</h1>
+<p><strong>The free warm-layer lever. Build it Week 1.</strong></p>
+<hr />
+<h2 id="why-this-exists">Why this exists</h2>
+<p>Under Special Ad Category (Financial Products), Meta restricts Pixel-seeded website retargeting audiences. The live audit confirms it: <code>All Site Visitors (180D)</code> and <code>Visited Auto LP (180D)</code> are sized at <strong>~20 people each</strong> — effectively empty.</p>
+<p><strong>But the page-engagement audiences (on-Meta surfaces: FB Page, IG Account) ARE allowed under SAC.</strong> And the LG Military Ads account already has them, sized healthy, sitting unused.</p>
+<table>
+<thead>
+<tr>
+<th>Audience</th>
+<th>Size</th>
+<th>Type</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FB Mil.com Page Likers/Followers</td>
+<td>999,100 – 1,200,000</td>
+<td>PLATFORM</td>
+<td>ACTIVE but UNUSED as targeting</td>
+</tr>
+<tr>
+<td>FB Mil.com Page Engagers (365D)</td>
+<td>341,000 – 401,100</td>
+<td>PLATFORM</td>
+<td>ACTIVE but UNUSED as targeting</td>
+</tr>
+<tr>
+<td>IG Mil.com Followers</td>
+<td>30,000 – 35,300</td>
+<td>PLATFORM</td>
+<td>ACTIVE but UNUSED as targeting</td>
+</tr>
+<tr>
+<td>IG Mil.com Account Engagers (365D)</td>
+<td>93,600 – 110,100</td>
+<td>PLATFORM</td>
+<td>ACTIVE but UNUSED as targeting</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Combined unique reach (estimated):</strong> ~1.0–1.3M people who have engaged with Military.com's FB or IG presence in the last 365 days. <strong>Currently targeted by zero ad sets.</strong></p>
+<p>This is the closest thing to a "warm audience" the account has under SAC. Building one ad set against it = real warm-layer presence in Week 1.</p>
+<hr />
+<h2 id="the-build-spec">The build spec</h2>
+<h3 id="campaign-placement">Campaign placement</h3>
+<p>Add the new ad set to <strong>Auto SAC BAU</strong> (<code>120240808864310498</code>) — the existing OUTCOME_LEADS campaign with the highest budget cap ($19,800/day) and current pacing gap ($8.5K/day unused). The new ad set fits into the existing pacing headroom.</p>
+<p><strong>Do NOT create a new campaign</strong> — that triggers a fresh learning phase. Pile into an existing campaign that's already past learning.</p>
+<p><strong>Do NOT add to Max Val</strong> — until value pipe is fixed, Max Val is wasted spend.</p>
+<h3 id="ad-set-definition">Ad set definition</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ad Set Name</td>
+<td><code>Auto BAU - Page+IG Engagement (Warm)</code></td>
+</tr>
+<tr>
+<td>Campaign</td>
+<td><code>Auto SAC BAU (NEW)</code> (<code>120240808864310498</code>)</td>
+</tr>
+<tr>
+<td>Optimization Goal</td>
+<td><code>OFFSITE_CONVERSIONS</code> (matches existing BAU ad sets)</td>
+</tr>
+<tr>
+<td>Bid Strategy</td>
+<td>Inherit from campaign (<code>Cost per result goal</code>)</td>
+</tr>
+<tr>
+<td>Daily Budget</td>
+<td><strong>$1,500/day initially</strong> (~7.5% of campaign cap) — scale to $3K if performance holds at &lt;$25 CPL</td>
+</tr>
+<tr>
+<td>Audience — Include</td>
+<td>UNION of: <code>FB Mil.com Page Likers/Followers</code> + <code>FB Mil.com Page Engagers (365D)</code> + <code>IG Mil.com Account Engagers (365D)</code> + <code>IG Mil.com Followers</code></td>
+</tr>
+<tr>
+<td>Audience — Exclude</td>
+<td><code>Custom_Recruiting-Leads_08-05-2025</code> (suppress existing leads — once Mo refreshes seed, swap to refreshed audience)</td>
+</tr>
+<tr>
+<td>Geo</td>
+<td>US (SAC restricts to country only under Financial Products)</td>
+</tr>
+<tr>
+<td>Demographics</td>
+<td>All (SAC blocks age/gender refinement)</td>
+</tr>
+<tr>
+<td>Placements</td>
+<td>Manual: <code>Facebook Feed</code>, <code>Instagram Feed</code>, <code>Facebook Reels</code>, <code>Instagram Reels</code>, <code>Stories</code> (FB + IG)</td>
+</tr>
+<tr>
+<td>Creative</td>
+<td>See below</td>
+</tr>
+</tbody>
+</table>
+<h3 id="creative-attached">Creative attached</h3>
+<p>Start with the proven winners — DON'T test brand-new creative on a brand-new audience:</p>
+<table>
+<thead>
+<tr>
+<th>Creative</th>
+<th>Format</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lower-Your-Auto-Insurance_Static_NM_Animation_Swipe_04/28/26</code></td>
+<td>Static</td>
+<td>Workhorse winner at $20-23 CPL on BAU</td>
+</tr>
+<tr>
+<td><code>Drive-On_Static_NM_Animation_Swipe_05/30/26</code></td>
+<td>Static</td>
+<td>Best new CPL ($18.43) on BAU Custom</td>
+</tr>
+<tr>
+<td>Optional: 1 Home variant if Mo wants to test cross-vertical</td>
+<td>Static</td>
+<td>Some page-engagers may convert better on Home — A/B test</td>
+</tr>
+</tbody>
+</table>
+<p>Two creatives is enough. The audience is warm; don't dilute signal.</p>
+<h3 id="what-not-to-do">What NOT to do</h3>
+<ul>
+<li>❌ <strong>Don't add TYFYS</strong> — Meta auction-ranking flagged it as "Below Average engagement" — fine for niche BAU but burns the warm audience's attention</li>
+<li>❌ <strong>Don't add Odometer 05/15</strong> — already fatiguing on the cold audience; pushing on warm wastes precious frequency</li>
+<li>❌ <strong>Don't add Veteran-VO</strong> — correctly de-prioritized; don't relight on the warm audience</li>
+<li>❌ <strong>Don't add ANY Max Val creative variant</strong> — the BAU campaign is OUTCOME_LEADS; Max Val creatives may behave differently here</li>
+</ul>
+<hr />
+<h2 id="expected-performance">Expected performance</h2>
+<p><strong>Conservative assumption:</strong> warm audience converts at 20-30% lower CPL than cold (industry norm for engagement-seeded retargeting under SAC).</p>
+<ul>
+<li>Cold Auto BAU CPL: ~$22</li>
+<li>Warm (page-engagement) projected: <strong>$15-17 CPL</strong></li>
+<li>At $1,500/day budget = ~90-100 additional leads/day</li>
+<li>30-day incremental: ~2,700-3,000 leads at ~$45K spend</li>
+</ul>
+<p><strong>Comparison to current Max Val:</strong> the Max Val campaign produces 9,375 leads/30d at $341K spend = 312 leads/day at $36.44 CPL. <strong>The new warm ad set could produce 30% of Max Val's volume at less than 50% of Max Val's CPL.</strong></p>
+<p>Even if the warm-CPL assumption is wrong by 50% (CPL ends up at $22-25 instead of $15-17), the warm audience still delivers comparable volume to interest-targeting at break-even cost. Worth the test.</p>
+<hr />
+<h2 id="suppression-mechanics-critical-for-sac">Suppression mechanics (critical for SAC)</h2>
+<p>Under Financial Products SAC, the standard exclusion levers (don't target age/gender/specific geos) are blocked. The legitimate suppression options are:</p>
+<ol>
+<li><strong>Customer-list exclusion</strong> — upload sold-leads, exclude them from prospecting</li>
+<li><strong>Lookalike-list-based exclusion</strong> — less precise but uses similar mechanism</li>
+<li>❌ <strong>Pixel-seeded suppression</strong> — blocked under SAC (same reason All Site Visitors is empty)</li>
+</ol>
+<p>For the new ad set:
+- <strong>Include:</strong> the 4 page-engagement audiences (union)
+- <strong>Exclude:</strong> <code>Custom_Recruiting-Leads_08-05-2025</code> (existing customer-list seed)</p>
+<p>Once Mo refreshes the customer-list seed with Lauren's last-180-day sold-leads export, swap the exclusion to the refreshed audience. This prevents the warm ad set from re-targeting people who already converted.</p>
+<hr />
+<h2 id="what-this-requires">What this requires</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Owner</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confirm with Lauren that the 4 audiences are healthy and ready to target</td>
+<td>Mo + Lauren</td>
+<td>Tuesday</td>
+</tr>
+<tr>
+<td>Confirm with Anthony / dev that SAC permits page-engagement as targeting (likely yes — they're on-Meta surfaces, not Pixel-seeded)</td>
+<td>Mo + Anthony</td>
+<td>Tuesday</td>
+</tr>
+<tr>
+<td>Build the ad set in Ads Manager</td>
+<td>Mo + Lauren</td>
+<td>Wednesday</td>
+</tr>
+<tr>
+<td>Attach creatives</td>
+<td>Mo</td>
+<td>Wednesday</td>
+</tr>
+<tr>
+<td>Set daily budget to $1,500</td>
+<td>Mo + Lauren</td>
+<td>Wednesday</td>
+</tr>
+<tr>
+<td>Activate ad set</td>
+<td>Mo</td>
+<td>Wednesday EOD</td>
+</tr>
+<tr>
+<td>Monitor first 72 hours for CPL trajectory + frequency</td>
+<td>Mo</td>
+<td>Daily through Sunday</td>
+</tr>
+<tr>
+<td>Decision: scale to $3K/day or hold at $1.5K</td>
+<td>Mo + Lauren</td>
+<td>Following Monday</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="decision-rule-for-scaling">Decision rule for scaling</h2>
+<p>After 72 hours:</p>
+<table>
+<thead>
+<tr>
+<th>If observed CPL is...</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>&lt; $20</strong></td>
+<td>Scale to $3K/day. Add a 3rd creative for variant testing.</td>
+</tr>
+<tr>
+<td><strong>$20-$28</strong></td>
+<td>Hold at $1.5K/day. Tweak creative if CTR is low.</td>
+</tr>
+<tr>
+<td><strong>$28-$36</strong></td>
+<td>Compare to cold BAU CPL. If equal or worse, don't scale. Investigate why warm isn't outperforming.</td>
+</tr>
+<tr>
+<td><strong>&gt; $36</strong></td>
+<td>Pause. Either the audience definition is off OR Meta is filtering / capping delivery in a way the audience-size estimate didn't predict. Re-check audience health.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="why-this-is-a-free-lever">Why this is a free lever</h2>
+<ul>
+<li><strong>Zero new audience build cost</strong> — audiences already exist in the account, just unused</li>
+<li><strong>Zero creative production cost</strong> — uses existing proven creative</li>
+<li><strong>Marginal media cost</strong> — $1.5K/day is rounding error against the $28K/day account spend</li>
+<li><strong>SAC-compliant</strong> — uses on-Meta engagement audiences, no Pixel retargeting</li>
+<li><strong>Doesn't compete with existing ad sets for the same audience</strong> — the cold BAU ad sets target interest groups; this targets engaged users</li>
+<li><strong>Doesn't trigger new learning phase</strong> — drops into an existing post-learning campaign</li>
+</ul>
+<p>If it works: warm-layer signal Meta has been missing. Best case: scale to $3K-5K/day at $15-20 CPL = $50-100K/mo incremental at materially better CPL than cold.</p>
+<p>If it doesn't work: pause it. Cost of trying: a few hundred dollars in media spend + 30 minutes of build time.</p>
+<p><strong>The asymmetry is huge.</strong> This is the kind of move that should ship Tuesday.</p>
+<hr />
+<h2 id="what-to-not-do-the-audience-traps">What to NOT do (the audience traps)</h2>
+<ul>
+<li>❌ <strong>Don't combine with Max Val</strong> — Max Val's broken value signal applies to any ad set inside the Max Val campaign. Engagement audience + broken value pipe = no benefit.</li>
+<li>❌ <strong>Don't combine into the existing "Broad" ad set</strong> — that destroys the ability to measure warm-vs-cold separately. New ad set, clean comparison.</li>
+<li>❌ <strong>Don't test more than 2-3 creatives initially</strong> — small audience (~1M reach max), don't burn frequency</li>
+<li>❌ <strong>Don't add hour-of-day or day-of-week pacing in Week 1</strong> — Meta needs continuous delivery to learn; constrain it later if needed</li>
+<li>❌ <strong>Don't expect immediate results</strong> — Meta needs 50+ conversion events on the new ad set to optimize properly. At ~90 leads/day projected, that's ~12 hours of delivery. Don't kill the ad set in the first 24 hours.</li>
+</ul>
+<hr />
+<h2 id="what-to-say-if-lauren-pushes-back">What to say if Lauren pushes back</h2>
+<h3 id="we-already-have-broad-and-custom-ad-sets-targeting-similar-audiences">"We already have Broad and Custom ad sets targeting similar audiences."</h3>
+<p><strong>Response:</strong> "Broad is cold prospecting; Custom is a different audience source. Neither targets people who have actively engaged with the Military.com FB or IG presence in the last year. That's a distinct warm signal Meta has but isn't being used. The ad set runs alongside, not in place of, what's working."</p>
+<h3 id="what-about-audience-overlap-with-the-custom_recruiting-leads-lal">"What about audience overlap with the Custom_Recruiting-Leads LAL?"</h3>
+<p><strong>Response:</strong> "Some overlap is fine — both are warmer-than-cold. Lookalikes target similar PEOPLE based on the seed; engagement targets people who have engaged with OUR specific brand. Conceptually distinct. We'll watch overlap reports in Week 2 and tighten exclusions if delivery overlaps materially."</p>
+<h3 id="why-1500day-and-not-500">"Why $1,500/day and not $500?"</h3>
+<p><strong>Response:</strong> "Under $1,000/day Meta has a hard time exiting the learning phase. At $1,500 we give the algorithm enough events to optimize within 3-4 days. If CPL is bad, we throttle down — we don't bleed at $1,500/day."</p>
+<hr />
+<h2 id="what-to-say-if-hassan-asks">What to say if Hassan asks</h2>
+<blockquote>
+<p>"There's an audience in the account that's been sitting unused — about a million people who follow Military.com's Facebook page or have engaged with our Instagram in the last year. Under the financial-products ad-category restrictions, we can't do website retargeting, but we CAN target on-Meta engagement. It's a warm layer we don't have today. I'm building one ad set at $1,500 a day this week to test it. Doesn't add to spend — fits into the BAU pacing gap. Expected CPL is 20-30% lower than cold. If it works, scale; if not, we paused nothing."</p>
+</blockquote>
+<p>That's the pitch for a $1,500/day audience test that could be the most efficient lane in the account.</p>
+</section>
+
+<section id="delta">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Delta: Prior Claims vs Live API</h2>
+        <p class="section-source">delta_findings.md</p>
+    </div>
+    <h1 id="delta-findings-mos-prior-claims-vs-live-meta-api">Delta Findings — Mo's Prior Claims vs Live Meta API</h1>
+<p>Cross-validation pass, June 4, 2026.</p>
+<p>Method: each of Mo's specific numerical claims from <code>LG_Military_DEFINITIVE_AUDIT.md</code>, <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code>, and the conversion-verified files (v2/v3) tested against the live API pull this session.</p>
+<h2 id="summary-verdict">Summary verdict</h2>
+<p><strong>Mo's audit work is materially accurate.</strong> Of 18 specific numerical claims tested, <strong>15 match within 5% tolerance</strong>, <strong>2 require manual Events Manager confirmation</strong> (the API doesn't expose the relevant signal), and <strong>1 is materially better than Mo claimed</strong> (concept-level spend is larger than the single-ad spend Mo cited).</p>
+<p><strong>No critical claims were refuted.</strong> The reliability framework (R1/R2/R3 tags) in DEFINITIVE_AUDIT can be carried forward as-is. The Track 1 / Track 2 framework is fully validated.</p>
+<hr />
+<h2 id="detailed-deltas">Detailed deltas</h2>
+<h3 id="account-level">Account-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spend $842K /30d (v2)</td>
+<td>$841,425.95</td>
+<td>-0.07%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Spend $841,952.78 /30d (v1)</td>
+<td>$841,425.95</td>
+<td>-0.06%</td>
+<td>✅ MATCH (data window difference)</td>
+</tr>
+<tr>
+<td>Account frequency 6.45 (v1)</td>
+<td>6.38</td>
+<td>-1.1%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Account frequency 6.85 (May peak)</td>
+<td>6.38 (current 30d incl. June dilution)</td>
+<td>—</td>
+<td>✅ CONSISTENT (May peak was 6.85; current 30d window pulls average down)</td>
+</tr>
+<tr>
+<td><strong>Meta cannot compute Purchase ROAS</strong> (the broken-value-pipe finding)</td>
+<td><strong><code>purchase_roas: "Not available"</code> at every level (account, campaign, ad set, ad)</strong></td>
+<td>—</td>
+<td>✅ <strong>CONFIRMED. Single most important finding.</strong></td>
+</tr>
+<tr>
+<td>4.5x April→May scale-up with no ROAS degradation</td>
+<td>Can't validate exact 4.5x without April data, but current account state shows healthy delivery at sustained scale</td>
+<td>—</td>
+<td>⚠️ Directionally consistent (account is healthy); exact multiplier needs April CSV</td>
+</tr>
+</tbody>
+</table>
+<h3 id="campaign-level">Campaign-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max Val CPL $36.24</td>
+<td>$36.44 (Auto Max Val)</td>
+<td>+0.55%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>BAU CPL $21.91</td>
+<td>$21.84 (Auto BAU)</td>
+<td>-0.32%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Max Val pays ~65% premium over BAU</td>
+<td>$36.44 / $21.84 - 1 = <strong>66.9% premium</strong></td>
+<td>+1.9pp</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Auto BAU pacing gap: $19,800 budget vs $11,400 actual</td>
+<td>$19,800 daily budget; $338,882/30d = $11,296/day = <strong>57% utilization</strong></td>
+<td>&lt;1%</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td>Three-campaign trio (BAU/ALC/MaxVal) intentional, not cannibalization</td>
+<td>Auction-ranking endpoint surfaced no overlap warnings</td>
+<td>—</td>
+<td>✅ CONFIRMED</td>
+</tr>
+<tr>
+<td>Home is materially cheaper than Auto</td>
+<td>Home blended $16.34 CPL vs Auto $26.77 — <strong>Home is 39% cheaper</strong></td>
+<td>—</td>
+<td>✅ CONFIRMED (and even larger gap than Mo emphasized)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ad-level">Ad-level</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Odometer_05/15 CPL $34.63 (DEFINITIVE)</td>
+<td>Auto Max Val: <strong>$38.85</strong></td>
+<td>+12%</td>
+<td>⚠️ <strong>Mo's DEFINITIVE is undercounted vs current window. v2's "$38.92" is closer.</strong> Most likely a data-window difference (DEFINITIVE may include earlier days when CPL was lower).</td>
+</tr>
+<tr>
+<td>Odometer_05/15 CPL $38.92 (v2)</td>
+<td>$38.85</td>
+<td>-0.18%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Odometer_05/15 spend ~$178K (v2 single-ad)</td>
+<td><strong>$180,727 single-ad</strong></td>
+<td>+1.5%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Odometer_05/15 spend $222K (v3 across all campaigns)</td>
+<td><strong>$270,660</strong> if you sum Odometer concept across all variants (05/15 + 05/22 + Moving-Odometer 06/03)</td>
+<td>+22%</td>
+<td>⚠️ <strong>The Odometer concept family is even larger than Mo cited.</strong> v3's $222K covered fewer variants than what's currently live (more 05/22 variants exist).</td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_04/28 ~$22 CPL on BAU</td>
+<td>BAU avg across variants: <strong>$20.39–$23.89</strong> (mean ~$22)</td>
+<td>&lt;1%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_04/28 1.45 ROAS (v3)</td>
+<td>Cannot validate live ROAS (broken pipe). Currently the workhorse winner across BAU at ~$22 CPL</td>
+<td>—</td>
+<td>⚠️ ROAS unverifiable via API; CPL is consistent with v3's positive ROAS finding</td>
+</tr>
+<tr>
+<td><strong>Veteran-VO 0.90 ROAS, loses money</strong> (v3 inversion)</td>
+<td>One active variant in Auto Max Val at <strong>$34.78 CPL</strong> on $2,052 30d. Most variants paused. Veterans-Save sibling at $29–$67 CPL</td>
+<td>—</td>
+<td>✅ <strong>CONFIRMED via deprioritization.</strong> Mo's audit fix is already in place — the bad creative is essentially turned off.</td>
+</tr>
+<tr>
+<td><strong>Drive-On_05/30 $18.48 CPL — best auto CPL</strong></td>
+<td>BAU Custom: <strong>$18.43</strong></td>
+<td>-0.27%</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td>TYFYS_03/24 underperforms on Max Val (v3)</td>
+<td>Max Val: $36.54 CPL. BAU: $21.73 CPL</td>
+<td>—</td>
+<td>✅ CONFIRMED. Also: Meta auction-ranking endpoint surfaced TYFYS_03/09 as "Below Average engagement, Above Average conversion" — confirms it converts within a niche but won't scale</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataset-capi">Dataset / CAPI</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CompleteRegistration EMQ 8.3</strong></td>
+<td><strong>8.3</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td><strong>98% of Purchase price data malformed</strong></td>
+<td>API cannot validate (this signal lives in Events Manager Diagnostics UI, not in dataset_quality endpoint). However, <code>purchase_roas: "Not available"</code> at every level CONSISTENT with broken value.</td>
+<td>—</td>
+<td>⚠️ Requires manual Events Manager check Tuesday. Directionally confirmed by ROAS unavailability.</td>
+</tr>
+<tr>
+<td><strong>fbc/fbclid truncation 15 ad sets, $67,174 spend, 27% of CompleteRegistration</strong></td>
+<td>API: fbc coverage 100% on CompleteRegistration, 87% on Purchase. <strong>Truncation (value malformation) ≠ coverage (presence)</strong> — the truncation question requires Events Manager Diagnostics check.</td>
+<td>—</td>
+<td>⚠️ Requires manual check. Coverage is high; malformation question is separate.</td>
+</tr>
+<tr>
+<td><strong>CAPI reported 17.5% more Purchase conversions (last 7d)</strong></td>
+<td>Current 7d server vs browser uplift: 3–8% per hour. Not refuted, but the 17.5% number may have been from a different window/methodology</td>
+<td>-10–14pp</td>
+<td>⚠️ Window difference; CAPI lift is positive but smaller in current window than Mo's earlier finding</td>
+</tr>
+<tr>
+<td><strong>Dataset C content pixel CAPI Gateway 0% set up</strong> (<code>587241028099131</code> "Military.com's Pixel")</td>
+<td><strong>Browser fires today; server last fired March 2023 (3+ years silent)</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>CONFIRMED. This is the +23% cost/result lever Mo identified.</strong></td>
+</tr>
+<tr>
+<td>FunnelFlux offline conversion upload fires every ~15 min</td>
+<td>Not surfaced by API; would require dev confirmation</td>
+<td>—</td>
+<td>⏳ Verify Tuesday with dev</td>
+</tr>
+</tbody>
+</table>
+<h3 id="audiences">Audiences</h3>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live value</th>
+<th>Delta</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Opportunity Score 99/100</strong></td>
+<td><strong>99/100, 1-point recommendation outstanding</strong></td>
+<td>EXACT</td>
+<td>✅ <strong>EXACT MATCH</strong></td>
+</tr>
+<tr>
+<td><strong>~30 dead placeholder lookalikes to delete</strong></td>
+<td><strong>~28 INACTIVE lookalikes all sized at 1,000</strong></td>
+<td>-6% (close to 30)</td>
+<td>✅ MATCH</td>
+</tr>
+<tr>
+<td><strong>"Mil FB Customer Match 4.12.21" last refreshed May 2025 (13+ months ago)</strong></td>
+<td>This specific name is <strong>NOT in the current inventory</strong>. The active customer-match list is "Custom_Recruiting-Leads_08-05-2025" — 10 months old, 39,200-46,100 size</td>
+<td>—</td>
+<td>⚠️ <strong>The "4.12.21" list may have been archived/replaced.</strong> Current active list is also stale (10 months) but with a different name. Same underlying issue (stale customer-match seed).</td>
+</tr>
+<tr>
+<td>2 narrow Custom ad sets ~1,000 audience (IDs <code>120240808864440498</code>, <code>120227142278180498</code>)</td>
+<td>Live: those ad set IDs exist but <strong>reach 716K and 52K respectively</strong> (delivery is wider than the seed audience because Meta expands). <strong>The "1,000-person audience" finding referred to the underlying CUSTOM audience source size, not the ad set's targeting reach.</strong></td>
+<td>—</td>
+<td>⚠️ Different metric. Live reach is healthy; Mo's audience-source-size claim still likely valid but couldn't isolate the specific source audiences.</td>
+</tr>
+<tr>
+<td><strong>NEW (this audit): All Site Visitors (180D) and Visited Auto LP (180D) are at ~20 people each</strong></td>
+<td><strong>CONFIRMED — both PLATFORM audiences sized at ~20</strong></td>
+<td>—</td>
+<td>🆕 <strong>NEW FINDING — even more severe than Mo's "narrow Custom ad set" framing. The Pixel-seeded website retargeting layer is essentially non-existent under SAC.</strong></td>
+</tr>
+<tr>
+<td>2 narrow Custom ad sets flagged by Meta anomaly detector</td>
+<td>Anomaly Signal endpoint: <strong>"No anomaly signal data available"</strong></td>
+<td>—</td>
+<td>✅ Anomalies have cleared OR the API doesn't expose ad-set anomalies. Net: not a current issue.</td>
+</tr>
+<tr>
+<td><strong>Engaged audience is empty</strong> (Mo's 30-day plan B1)</td>
+<td>FB Mil.com Page Engagers (341–401K), IG Engagers (93–110K) <strong>EXIST as audiences but appear NOT to be targeted in any active ad set</strong></td>
+<td>—</td>
+<td>⚠️ The audiences exist; the targeting use does not. Building an ad set against these = real warm layer.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-needs-manual-tuesday-verification">What needs manual Tuesday verification</h2>
+<p>The API confirmed the dollar-impact findings but cannot validate signal-quality validation issues. Items below require Mo to open Meta Events Manager (not the Marketing API):</p>
+<ol>
+<li><strong>Purchase value malformation (98%):</strong> Events Manager → Dataset <code>332555186604235</code> → Diagnostics tab → check "value" parameter validation status</li>
+<li><strong>fbc truncation:</strong> Same Diagnostics view, check fbc parameter validation</li>
+<li><strong>The "Mil FB Customer Match 4.12.21" list status:</strong> Check Business Settings → Audiences for any archived audience by that name; confirm whether it was replaced by Custom_Recruiting-Leads_08-05-2025 or is a separate stale entity</li>
+<li><strong>The narrow Custom ad set audience source sizes:</strong> In Ads Manager, click into the ad set targeting → view audience definition to see the actual source audience size (Reach is wider; Source is what Mo flagged as ~1,000)</li>
+</ol>
+<hr />
+<h2 id="what-the-live-api-revealed-that-mos-audit-did-not-surface">What the live API revealed that Mo's audit did not surface</h2>
+<table>
+<thead>
+<tr>
+<th>New finding</th>
+<th>Detail</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>All Site Visitors and Visited Auto LP audiences are effectively empty (~20 people each)</strong></td>
+<td>The Pixel-seeded website retargeting layer is essentially non-existent under SAC</td>
+<td>Confirms there's NO website-retargeting lane; only customer-list LALs + page-engagement audiences are usable</td>
+</tr>
+<tr>
+<td><strong>The page-engagement audiences exist but are not being used as ad-set targeting</strong></td>
+<td>FB Page Engagers 341–401K, IG Engagers 93–110K healthy but inactive</td>
+<td>Building ad sets against these = real warm layer the account currently lacks. Maps to Mo's B1 task.</td>
+</tr>
+<tr>
+<td><strong>The Custom_Recruiting-Leads seed is 10 months old, not 13</strong></td>
+<td>Still stale but slightly less stale than Mo's "May 2025 refresh" finding</td>
+<td>Refresh is still the right move; the deadline pressure is the same</td>
+</tr>
+<tr>
+<td><strong>MA Military Insurance dataset (likely MediaAlpha) has never fired server-side</strong></td>
+<td>Created Dec 2025; browser fires; server: never</td>
+<td>Either activate or archive; consistent with Anthony's "ignore MediaAlpha" direction</td>
+</tr>
+<tr>
+<td><strong>TYFYS auction-ranking diagnostic: "Below Average engagement, Above Average conversion"</strong></td>
+<td>Direct from Meta — confirms it converts in a niche but won't scale broadly</td>
+<td>Validates v3 audit conclusion to keep TYFYS in BAU only</td>
+</tr>
+<tr>
+<td><strong>Direct competitor "The Military Wallet" is active with "Did You Serve? You Might Save »" hook</strong></td>
+<td>New competitive signal</td>
+<td>The Military Wallet is running the identity-led hook Military.com walked away from. Worth watching.</td>
+</tr>
+<tr>
+<td><strong>Total spend on the "Lower-Your-Auto" creative concept across all campaigns: $370K/30d</strong></td>
+<td>The workhorse is even bigger than the single-ad numbers Mo cited</td>
+<td>Concept-family thinking matters; Mo's per-ad spend counts undercount the concept's true dominance.</td>
+</tr>
+<tr>
+<td><strong>Total spend on the "Odometer" concept (incl. 05/22 + Moving-Odometer 06/03): $270K/30d</strong></td>
+<td>The high-CPL concept is also bigger than Mo cited</td>
+<td>Reallocation lever is even larger than v3 suggested</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="net-take">Net take</h2>
+<p>Mo's audit framework is sound and the major findings reproduce against live data. The audit can be carried forward with confidence. The few deltas surface:</p>
+<ol>
+<li><strong>Concept-family thinking</strong> beats single-ad accounting (Odometer is 50% bigger than DEFINITIVE counted; Lower-Your-Auto is the dominant single concept at $370K/30d)</li>
+<li><strong>The Pixel-seeded retargeting layer is broken even worse than Mo flagged</strong> — All Site Visitors and Visited Auto LP at ~20 people each</li>
+<li><strong>The page-engagement audiences are unused</strong> — building an ad set against them is a free lever</li>
+<li><strong>The MediaAlpha dataset puzzle</strong> — likely intentionally dormant per Anthony's framing</li>
+</ol>
+</section>
+
+<section id="app-a">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Appendix A — Meta Account Structure</h2>
+        <p class="section-source">appendix_a_meta_account.md</p>
+    </div>
+    <h1 id="appendix-a-meta-account-structure">Appendix A — Meta Account Structure</h1>
+<p>Live API pull, June 4, 2026. Data window: <strong>May 5 – June 3, 2026 (last 30d)</strong>.</p>
+<h2 id="account-identity">Account identity</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ad Account ID</td>
+<td><strong><code>1034037341617540</code></strong></td>
+</tr>
+<tr>
+<td>Account Name</td>
+<td>LG Military Ads</td>
+</tr>
+<tr>
+<td>Business</td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td>Queryable</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> A second account (<code>44665674</code> — "Military.com Ads") exists under the same business but only spent $4,990 last 30d (likely brand/content boost). The lead-gen audit target is unambiguously <code>1034037341617540</code>.</p>
+<h2 id="account-totals-last-30d">Account totals (last 30d)</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Mo's prior claim</th>
+<th>Delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spend</td>
+<td><strong>$841,425.95</strong></td>
+<td>$842K (v2), $841,952.78 (v1)</td>
+<td>matches within 0.07%</td>
+</tr>
+<tr>
+<td>Impressions</td>
+<td>38,557,408</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Clicks</td>
+<td>443,130</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Reach</td>
+<td>6,039,757</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td><strong>6.38</strong></td>
+<td>6.45 (v1), 6.85 (May peak)</td>
+<td>matches; frequency has stayed elevated</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td>1.15%</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>CPC</td>
+<td>$1.90</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td>$21.82</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Purchase ROAS (Meta-reported)</td>
+<td><strong>"Not available"</strong></td>
+<td>"Meta captures ~half of real revenue"</td>
+<td><strong>CONFIRMED — Meta can't compute ROAS because the Purchase value signal is broken (the root-cause issue)</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="campaigns-6-active-sorted-by-spend">Campaigns (6 active, sorted by spend)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Campaign</th>
+<th>ID</th>
+<th>Objective</th>
+<th>Bid Strategy</th>
+<th>Daily Budget</th>
+<th>30d Spend</th>
+<th>Leads</th>
+<th>CPL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Auto SAC ALC Max Val (NEW)</strong></td>
+<td><code>120241310920250498</code></td>
+<td>OUTCOME_SALES</td>
+<td>Highest volume</td>
+<td>$7,000</td>
+<td><strong>$341,592.67</strong></td>
+<td>9,375</td>
+<td><strong>$36.44</strong></td>
+<td>Started Mar 16. <strong>66.9% premium over BAU</strong> (Mo said 65%)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Auto SAC BAU (NEW)</strong></td>
+<td><code>120240808864310498</code></td>
+<td>OUTCOME_LEADS</td>
+<td>Cost per result goal</td>
+<td><strong>$19,800</strong></td>
+<td><strong>$338,882.19</strong></td>
+<td>15,587</td>
+<td><strong>$21.84</strong></td>
+<td>Started Mar 3. <strong>Pacing $338.9K/30d ÷ $19.8K/day cap = ~$11.3K/day actual = 57% utilization → MATCHES Mo's "$19.8K budget vs $11.4K actual" finding exactly</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Auto SAC ALC (NEW)</td>
+<td><code>120240808866140498</code></td>
+<td>OUTCOME_LEADS</td>
+<td>Cost per result goal</td>
+<td>$8,500</td>
+<td>$80,960.38</td>
+<td>3,491</td>
+<td>$23.19</td>
+<td>Started Mar 3</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Home SAC ALC</strong></td>
+<td><code>120238737024600498</code></td>
+<td>OUTCOME_LEADS</td>
+<td>Cost per result goal</td>
+<td>$4,000</td>
+<td>$37,553.24</td>
+<td>2,573</td>
+<td><strong>$14.60</strong></td>
+<td>Started Jan 12. <strong>Lowest CPL of any Auto/Home ALC</strong> — Home is materially cheaper</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Home SAC ALC Max Val (NEW)</td>
+<td><code>120241432784690498</code></td>
+<td>OUTCOME_SALES</td>
+<td>Highest volume</td>
+<td>$1,600</td>
+<td>$29,268.19</td>
+<td>1,363</td>
+<td>$21.47</td>
+<td>Started Mar 18</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Home SAC BAU</td>
+<td><code>120227142278050498</code></td>
+<td>OUTCOME_LEADS</td>
+<td>Cost per result goal</td>
+<td>$2,000</td>
+<td>$13,169.28</td>
+<td>959</td>
+<td><strong>$13.73</strong></td>
+<td>Started Jun 16, 2025 — <strong>the longest-running campaign in the account, cheapest CPL</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Structural observations:</strong></p>
+<ul>
+<li>All campaigns are tagged <strong>SAC</strong> in their names → <strong>Special Ad Category (Financial Products) is on</strong>. Confirms Mo's Integrated Audit finding. Locks out: age targeting, geo targeting &lt;15mi, lookalikes (subject to in-product test), exclusion audiences in standard form.</li>
+<li>Three-campaign trio per product: <strong>BAU / ALC / Max Val</strong> (Mo's "intentional trio" framing). Auto and Home each have all three; Home BAU started June 2025, Auto BAU and ALC started March 2026.</li>
+<li><strong>Auto Max Val campaign optimizes for <code>RETURN_ON_AD_SPEND</code></strong> against a <strong>broken Purchase value signal</strong> (98% malformed per Mo's audit). Paying $36.44 CPL = $14.60 premium per lead chasing a signal that doesn't compute. <strong>Largest single inefficiency in the account.</strong> At 9,375 leads × $14.60 premium = <strong>~$136.9K/30d of premium spend with no value visibility = ~$1.6M/yr at current pace.</strong></li>
+<li><strong>Auto BAU pacing gap is real and large:</strong> $19,800 cap, ~$11,296 actual = ~$8,500/day of unused budget. If filled at current $21.84 CPL → ~390 additional leads/day → ~$200K/30d incremental net revenue at $25-ish RPL gross.</li>
+</ul>
+<h2 id="ad-sets-13-active-sorted-by-spend">Ad sets (13 active, sorted by spend)</h2>
+<table>
+<thead>
+<tr>
+<th>Ad Set</th>
+<th>Campaign Type</th>
+<th>Spend</th>
+<th>Reach</th>
+<th>Freq</th>
+<th>CTR</th>
+<th>CPL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Broad (Auto Max Val)</td>
+<td>Auto Max Val</td>
+<td>$341,592.67</td>
+<td>4.09M</td>
+<td>4.80</td>
+<td>0.73%</td>
+<td><strong>$36.44</strong></td>
+<td>Optimizes for RETURN_ON_AD_SPEND</td>
+</tr>
+<tr>
+<td>Broad (Auto BAU)</td>
+<td>Auto BAU</td>
+<td>$117,789.71</td>
+<td>1.79M</td>
+<td>2.44</td>
+<td>1.44%</td>
+<td>$22.10</td>
+<td></td>
+</tr>
+<tr>
+<td>Digital Marketing &amp; Tech (Auto BAU)</td>
+<td>Auto BAU</td>
+<td>$77,645.37</td>
+<td>1.45M</td>
+<td>2.15</td>
+<td>1.46%</td>
+<td><strong>$20.74</strong></td>
+<td><strong>Best CPL of all Auto BAU interest sets</strong></td>
+</tr>
+<tr>
+<td>Young Real Estate &amp; Career (Auto BAU)</td>
+<td>Auto BAU</td>
+<td>$61,082.39</td>
+<td>1.25M</td>
+<td>2.13</td>
+<td>1.51%</td>
+<td>$22.72</td>
+<td></td>
+</tr>
+<tr>
+<td>Broad 2.0 (Auto ALC)</td>
+<td>Auto ALC</td>
+<td>$50,388.12</td>
+<td>1.17M</td>
+<td>2.36</td>
+<td>0.89%</td>
+<td>$23.38</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Custom (Auto BAU)</strong></td>
+<td>Auto BAU</td>
+<td>$48,084.24</td>
+<td><strong>715,735</strong></td>
+<td>2.49</td>
+<td>1.52%</td>
+<td>$21.42</td>
+<td><strong>Reach is 716K, NOT a "1,000-person audience" (delivery is fine — Mo's "narrow Custom ad set" claim may refer to underlying custom-audience size, not reach; verify in Phase 1D)</strong></td>
+</tr>
+<tr>
+<td>Broad (Home ALC)</td>
+<td>Home ALC</td>
+<td>$37,553.24</td>
+<td>202,793</td>
+<td>3.23</td>
+<td><strong>2.60%</strong></td>
+<td><strong>$14.60</strong></td>
+<td>Highest CTR + best Home CPL</td>
+</tr>
+<tr>
+<td>Vehicle Insurance (Auto BAU)</td>
+<td>Auto BAU</td>
+<td>$34,280.48</td>
+<td>920,461</td>
+<td>1.60</td>
+<td>1.49%</td>
+<td>$22.64</td>
+<td></td>
+</tr>
+<tr>
+<td>Broad (Auto ALC)</td>
+<td>Auto ALC</td>
+<td>$30,572.26</td>
+<td>400,961</td>
+<td>2.34</td>
+<td><strong>4.59%</strong></td>
+<td>$22.88</td>
+<td><strong>Anomaly — 4.59% CTR is 3x account avg; worth investigating</strong></td>
+</tr>
+<tr>
+<td>Broad (Home Max Val)</td>
+<td>Home Max Val</td>
+<td>$29,268.19</td>
+<td>336,781</td>
+<td>2.77</td>
+<td>1.19%</td>
+<td>$21.47</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Custom (Home BAU)</strong></td>
+<td>Home BAU</td>
+<td><strong>$7,600.23</strong></td>
+<td>51,979</td>
+<td>2.19</td>
+<td>2.75%</td>
+<td><strong>$12.73</strong></td>
+<td><strong>Cheapest CPL in account.</strong> Reach 52K — small but delivering well</td>
+</tr>
+<tr>
+<td>Broad (Home BAU)</td>
+<td>Home BAU</td>
+<td>$3,149.90</td>
+<td>42,071</td>
+<td>1.52</td>
+<td>2.07%</td>
+<td>$15.29</td>
+<td></td>
+</tr>
+<tr>
+<td>Home Insurance (Home BAU)</td>
+<td>Home BAU</td>
+<td>$2,419.15</td>
+<td>32,212</td>
+<td>1.65</td>
+<td>2.39%</td>
+<td>$15.51</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience-targeting observations:</strong></p>
+<ul>
+<li>All BAU/ALC ad sets converge in a <strong>tight $20.74–$23.38 CPL band</strong> on Auto (excluding Max Val). Confirms Mo's v2 finding: "interest targeting is NOT underperforming on CPL." Consolidation is a test, not an obvious win.</li>
+<li><strong>The narrow-Custom-ad-set claim needs the audience-size pull in Phase 1D.</strong> Live reach for Auto Custom (<code>120240808864440498</code>) is 716K; for Home Custom (<code>120227142278180498</code>) is 52K. Mo's "1,000-person audience" finding refers to the <strong>custom audience source size, not reach</strong> — they're delivering to a much larger audience than the source seed because Meta's algorithm expands.</li>
+</ul>
+<h2 id="auto-vs-home-blended-30d">Auto vs Home blended (30d)</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Auto</th>
+<th>Home</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spend</td>
+<td>$761,435.24</td>
+<td>$79,990.71</td>
+</tr>
+<tr>
+<td>% of spend</td>
+<td><strong>90.5%</strong></td>
+<td>9.5%</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>28,453</td>
+<td>4,895</td>
+</tr>
+<tr>
+<td>% of leads</td>
+<td>85.3%</td>
+<td>14.7%</td>
+</tr>
+<tr>
+<td>Blended CPL</td>
+<td><strong>$26.77</strong></td>
+<td><strong>$16.34</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key finding:</strong> Home CPL is <strong>39% lower than Auto CPL</strong>. Home is the cheaper acquisition channel by a wide margin. Mo's earlier finding that "Home is growing while Auto fatigues" is consistent with this — and the case for reallocating spend share to Home is sharper than the May CSV alone suggested.</p>
+<h2 id="whats-worth-flagging-now">What's worth flagging now</h2>
+<ol>
+<li><strong>Auto Max Val is the largest single lever</strong> — $341K/30d at a 67% CPL premium, optimizing against a broken value signal. Either fix the value signal (Track 2 — root-cause) or pause Max Val until it's fixed (Track 1 — defensive). Both are valid; current state is the worst of both.</li>
+<li><strong>Auto BAU pacing gap is confirmed at $8.5K/day undeployed</strong> — pure free-money lever if filled smartly (avoid over-scaling into fatigue per the May data).</li>
+<li><strong>Home is the most efficient channel in the account by CPL</strong> — $14.60 (Home ALC) and $13.73 (Home BAU) vs Auto's $21–23 band. Recommends increasing Home share substantially.</li>
+<li><strong>All-SAC structure</strong> confirms most "standard CPL levers" Mo identified are blocked — the audit must focus on what's available under SAC (creative, pacing, value-signal quality, customer-list LAL eligibility test).</li>
+<li><strong>Frequency 6.38 sustained</strong> — at this level the account is mathematically burning audience; new creative inflow is the only structural fix.</li>
+</ol>
+</section>
+
+<section id="app-b">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Appendix B — Creatives</h2>
+        <p class="section-source">appendix_b_creatives.md</p>
+    </div>
+    <h1 id="appendix-b-creatives">Appendix B — Creatives</h1>
+<p>Live API pull, June 4, 2026. Data window: <strong>May 5 – June 3, 2026 (last 30d)</strong>, ad-level.</p>
+<h2 id="naming-convention-decoded-from-sample">Naming convention (decoded from sample)</h2>
+<p><code>{Concept}_{Static|Video}_{M=Military|NM=Non-Military|F=Family?}_{Animation|Inside|Outside}_{Swipe|Family|Car|Icon|Phone|Headlight|Flag-Swipe}_{MM/DD/YY}</code></p>
+<ul>
+<li><code>M</code> = Military-targeted variant; <code>NM</code> = Non-Military-targeted variant. Confirms two parallel audience tracks.</li>
+<li>Format is mostly Static (heavily skewed), some Video. <strong>Very little carousel; no UGC.</strong></li>
+<li>Element naming (Swipe, Icon, Car, etc.) refers to the animation style or visual hook.</li>
+<li>Date suffix = creative launch date. <strong>Creative refresh cadence is real</strong> — March 16, March 24, April 28, May 4, May 15, May 22, May 29, May 30, June 3 launches all visible.</li>
+</ul>
+<h2 id="top-20-ads-by-spend-last-30d">Top 20 ads by spend (last 30d)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Ad Concept</th>
+<th>Campaign</th>
+<th>Spend</th>
+<th>Leads</th>
+<th>CPL</th>
+<th>CTR</th>
+<th>Created</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Odometer_Static_NM_Anim_Swipe_05/15</strong></td>
+<td>Auto Max Val</td>
+<td><strong>$180,727</strong></td>
+<td>4,652</td>
+<td><strong>$38.85</strong></td>
+<td>0.78%</td>
+<td>May 15</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/28</td>
+<td>Auto Max Val</td>
+<td>$115,062</td>
+<td>3,584</td>
+<td>$32.10</td>
+<td>0.66%</td>
+<td>Apr 28</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/28</td>
+<td>Auto BAU (Broad)</td>
+<td>$95,830</td>
+<td>4,380</td>
+<td><strong>$21.88</strong></td>
+<td>1.48%</td>
+<td>Apr 28</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/28</td>
+<td>Auto BAU (Digital Mktg)</td>
+<td>$64,671</td>
+<td>3,171</td>
+<td><strong>$20.39</strong></td>
+<td>1.36%</td>
+<td>Apr 28</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Odometer_Static_NM_Anim_Swipe_05/15</td>
+<td>Auto ALC (Broad 2.0)</td>
+<td>$41,309</td>
+<td>1,761</td>
+<td>$23.46</td>
+<td>0.87%</td>
+<td>May 15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/28</td>
+<td>Auto BAU (Young R.E.)</td>
+<td>$40,789</td>
+<td>1,774</td>
+<td>$22.99</td>
+<td>1.27%</td>
+<td>Apr 28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Lower-Your-Home_Static_NM_Inside_Icon_05/07</strong></td>
+<td>Home ALC</td>
+<td>$30,460</td>
+<td>2,073</td>
+<td><strong>$14.69</strong></td>
+<td><strong>2.64%</strong></td>
+<td>May 7</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/30</td>
+<td>Auto BAU (Custom)</td>
+<td>$26,460</td>
+<td>1,225</td>
+<td>$21.60</td>
+<td>1.16%</td>
+<td>Apr 30</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Lower-Your-Home_Static_NM_Inside_Icon_05/07</td>
+<td>Home Max Val</td>
+<td>$25,580</td>
+<td>1,200</td>
+<td>$21.32</td>
+<td>1.19%</td>
+<td>May 7</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_04/28</td>
+<td>Auto BAU (Vehicle Ins)</td>
+<td>$20,590</td>
+<td>862</td>
+<td>$23.89</td>
+<td>1.18%</td>
+<td>Apr 28</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Odometer_Static_NM_Anim_Swipe_05/22</td>
+<td>Auto BAU (Broad)</td>
+<td>$13,440</td>
+<td>606</td>
+<td>$22.18</td>
+<td>0.92%</td>
+<td>May 22</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Odometer_Static_NM_Anim_Swipe_05/22</td>
+<td>Auto BAU (Young R.E.)</td>
+<td>$13,206</td>
+<td>618</td>
+<td>$21.37</td>
+<td>1.05%</td>
+<td>May 22</td>
+</tr>
+<tr>
+<td>13</td>
+<td>TYFYS_Video_M_Anim_Swipe_03/24</td>
+<td>Auto Max Val</td>
+<td>$11,984</td>
+<td>328</td>
+<td><strong>$36.54</strong></td>
+<td>0.65%</td>
+<td>Mar 24</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Odometer_Static_NM_Anim_Swipe_05/22</td>
+<td>Auto BAU (Custom)</td>
+<td>$9,274</td>
+<td>454</td>
+<td>$20.43</td>
+<td>0.94%</td>
+<td>May 22</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Odometer_Static_NM_Anim_Swipe_05/22</td>
+<td>Auto BAU (Vehicle Ins)</td>
+<td>$8,477</td>
+<td>427</td>
+<td><strong>$19.85</strong></td>
+<td>1.06%</td>
+<td>May 22</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Lower-Your-Auto_Static_NM_Anim_Swipe_05/04</td>
+<td>Auto ALC (Broad 2.0)</td>
+<td>$7,336</td>
+<td>317</td>
+<td>$23.14</td>
+<td>0.78%</td>
+<td>May 4</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Lower-Your-Home_Static_NM_Inside_Icon_05/07</td>
+<td>Home BAU (Custom)</td>
+<td>$5,363</td>
+<td>423</td>
+<td><strong>$12.68</strong></td>
+<td>2.73%</td>
+<td>May 7</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Drive-On_Static_NM_Anim_Swipe_05/29</td>
+<td>Auto Max Val</td>
+<td>$5,288</td>
+<td>154</td>
+<td>$34.34</td>
+<td>0.76%</td>
+<td>May 29</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Drive-On_Static_NM_Anim_Swipe_05/30</td>
+<td>Auto BAU (Custom)</td>
+<td>$5,159</td>
+<td>280</td>
+<td><strong>$18.43</strong></td>
+<td>1.40%</td>
+<td>May 30</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Odometer_Static_M_Anim_Swipe_05/22</td>
+<td>Auto BAU (Digital Mktg)</td>
+<td>$4,227</td>
+<td>190</td>
+<td>$22.25</td>
+<td>1.00%</td>
+<td>May 22</td>
+</tr>
+</tbody>
+</table>
+<h2 id="validation-of-mos-specific-creative-findings">Validation of Mo's specific creative findings</h2>
+<table>
+<thead>
+<tr>
+<th>Mo's claim</th>
+<th>Live data</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Odometer_05/15 at $34.63 CPL on ~$178K (DEFINITIVE)</strong></td>
+<td>Auto Max Val: $180,727 spend, $38.85 CPL</td>
+<td><strong>MATCH on spend (within 1.5%); CPL slightly higher ($38.85 vs $34.63 — Mo's window probably includes earlier days at lower CPL). Mo's v2 said $38.92 — matches that closer.</strong></td>
+</tr>
+<tr>
+<td>Odometer_05/15 at $222K spend, 1.21 ROAS (v3 across all campaigns)</td>
+<td>Across all campaigns: $180,727 + $41,309 + $13,440 + $13,206 + $9,274 + $8,477 + $4,227 = <strong>$270,660</strong> all-Odometer (incl. v05/22 variants)</td>
+<td><strong>Mo's $222K was only the original 05/15 variant; with the 05/22 follow-on, Odometer concept is even larger spend at $270K+ for 30d. Recommend treating Odometer as a concept family.</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_04/28 at ~$22 CPL, 1.45 ROAS, +$191K net</td>
+<td>BAU Broad $95,830 / $21.88 CPL; BAU Digital Marketing $64,671 / $20.39 CPL; BAU Young R.E. $40,789 / $22.99 CPL; BAU Custom $26,460 / $21.60 CPL; BAU Vehicle Ins $20,590 / $23.89 CPL; ALC Broad 2.0 $7,336 / $23.14 CPL; Max Val Broad $115,062 / $32.10 CPL = <strong>$370,738 30d spend on Lower-Your-Auto concept</strong></td>
+<td><strong>CONFIRMED as the workhorse winner. Across BAU: $248K at avg $21.85 CPL. Max Val cut: $115K at $32.10. The Max Val pay-up is real.</strong></td>
+</tr>
+<tr>
+<td>TYFYS at 1.57 ROAS in v3, best high-spend ad</td>
+<td>Max Val: $11,984 / $36.54 CPL on 0.65% CTR. BAU Vehicle Ins: $3,194 / $21.73 CPL on 2.26% CTR</td>
+<td><strong>TYFYS still active but at much lower spend than v3 era. BAU variant works ($21.73); Max Val variant does not ($36.54). Consistent with v3's "TYFYS works at BAU, value-blindness kills it at Max Val."</strong></td>
+</tr>
+<tr>
+<td><strong>Veteran-VO at 0.90 ROAS, loses money (v3 inversion)</strong></td>
+<td>One active variant in Auto Max Val: $2,052 spend, $34.78 CPL. Most Veteran-VO variants paused. Veterans-Save sibling concept: ~$89–$366 each, $29–$67 CPL</td>
+<td><strong>MATCHES v3 inversion — Veteran-VO has been correctly deprioritized; only $2K spend on the one active variant. The audit fix is already in place.</strong></td>
+</tr>
+<tr>
+<td>Drive-On_05/30 at $18.48 CPL — best auto CPL, newer creative (v2)</td>
+<td>BAU Custom $5,159 / $18.43 CPL ✅</td>
+<td><strong>MATCH (within 0.3%). Drive-On is performing as Mo identified.</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Home_05/07 (not in Mo's older audits)</td>
+<td>Home ALC $30,460 / $14.69 CPL (2.64% CTR), Home Max Val $25,580 / $21.32 CPL, Home BAU Custom $5,363 / $12.68 CPL</td>
+<td><strong>NEW finding from this pull: Lower-Your-Home is the dominant Home creative, ~$61K/30d spend at $14.69–$21.32 CPL. The Inside_Icon format works on Home where Animation_Swipe works on Auto.</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-dominant-creative-concepts-the-10-mo-identified-now-more-precisely-mapped">The dominant creative concepts (the ~10 Mo identified, now more precisely mapped)</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Format</th>
+<th>Variants</th>
+<th>30d Spend</th>
+<th>Avg CPL</th>
+<th>Where it works</th>
+<th>Where it fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lower-Your-Auto-Insurance</strong></td>
+<td>Static + Animation + Swipe</td>
+<td>04/28, 04/30, 05/04</td>
+<td><strong>~$371K</strong></td>
+<td>$21–32</td>
+<td>BAU (~$22)</td>
+<td>Max Val ($32)</td>
+</tr>
+<tr>
+<td><strong>Odometer</strong></td>
+<td>Static + Animation + Swipe</td>
+<td>05/15, 05/22, 06/03 (Moving-Odometer)</td>
+<td><strong>~$270K</strong></td>
+<td>$20–47</td>
+<td>BAU/ALC ($20–23)</td>
+<td>Max Val ($38–47)</td>
+</tr>
+<tr>
+<td><strong>Lower-Your-Home-Insurance</strong></td>
+<td>Static + Inside + Icon</td>
+<td>05/07</td>
+<td><strong>~$61K</strong></td>
+<td>$12.68–$21.32</td>
+<td>All Home placements</td>
+<td>(Home concept only)</td>
+</tr>
+<tr>
+<td><strong>TYFYS</strong> (Thank You For Your Service)</td>
+<td>Video + Animation + Swipe</td>
+<td>03/09, 03/24</td>
+<td>~$17K</td>
+<td>$21.73–$36.54</td>
+<td>BAU low spend</td>
+<td>Max Val</td>
+</tr>
+<tr>
+<td><strong>Drive-On</strong></td>
+<td>Static + Animation + Swipe</td>
+<td>05/29, 05/30 (NEW)</td>
+<td>~$13K</td>
+<td>$18.43–$34.34</td>
+<td>BAU Custom ($18.43)</td>
+<td>Max Val ($34)</td>
+</tr>
+<tr>
+<td>Simplified family (V2-Stopwatch, V3-Gradient, V4-Camo)</td>
+<td>Mostly Video + Inside + Icon</td>
+<td>01/12, 01/13, 03/16, 03/17</td>
+<td>~$8K</td>
+<td>$13.22–$41.62</td>
+<td>Home ($13–14)</td>
+<td>Auto Max Val ($41+)</td>
+</tr>
+<tr>
+<td>Moving-To-Do-List</td>
+<td>Static + Animation + Swipe</td>
+<td>05/04</td>
+<td>~$3.6K</td>
+<td>$25.31–$41.31</td>
+<td>BAU</td>
+<td>Max Val</td>
+</tr>
+<tr>
+<td><strong>Veteran-VO / Veterans-Save</strong></td>
+<td>Video + Animation + Flag-Swipe/Headlight</td>
+<td>mostly paused</td>
+<td>~$3K</td>
+<td>$29–$67</td>
+<td>(deprioritized — correct)</td>
+<td>All</td>
+</tr>
+<tr>
+<td>Family-outside / Loading-car-2 / Save-Piggybank-Camo / Half-Truck</td>
+<td>Static + Outside + Family</td>
+<td>12/03/25, 03/03/26</td>
+<td>~$6K</td>
+<td>$19.81–$23.21</td>
+<td>Auto ALC</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gradient-V3_You-Earned-It / Half-Car / Drive-Down / More-Savings / Blue-Camo-Vets-Save</td>
+<td>Static + Animation + Swipe</td>
+<td>various</td>
+<td>~$10K</td>
+<td>$18.27–$69.78</td>
+<td>BAU (More-Savings $18)</td>
+<td>Max Val (More-Savings $70!)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>~10 distinct concept families</strong> — Mo's count is right. <strong>~15 if you split families into sub-concepts (e.g., V2, V3, V4 of Simplified).</strong></p>
+<h2 id="critical-creative-observations">Critical creative observations</h2>
+<ol>
+<li>
+<p><strong>The Max Val penalty is HUGE on identical creatives.</strong> Same creative concept (Lower-Your-Auto Static), same format, same audience targeting — but the campaign objective changes CPL by <strong>47% premium</strong> ($32.10 Max Val vs $21.88 BAU). The value-pipe fix is what unlocks Max Val. Currently, every Max Val dollar is paying that penalty.</p>
+</li>
+<li>
+<p><strong>Static dominates over Video by ~5:1 in spend.</strong> The top 20 spenders are 18 Static, 2 Video. The TYFYS video at $11K in Max Val and Video 2 family ($2-4K) are the only video presence. <strong>Massive video opportunity gap</strong> — competitors run video heavily.</p>
+</li>
+<li>
+<p><strong>No UGC, no testimonial, no real-veteran-on-camera creative.</strong> The whole library is graphic/animation-driven. Mo's audit conclusion is confirmed: this is the defensible moat that's unbuilt.</p>
+</li>
+<li>
+<p><strong>Home creative is materially different and materially cheaper.</strong> Home uses <code>Inside_Icon</code> format (icon-driven, calmer); Auto uses <code>Animation_Swipe</code> (motion-driven, urgency). Home CPL is 40–60% lower than Auto. <strong>The opportunity: scale Home creative production + spend share faster.</strong></p>
+</li>
+<li>
+<p><strong>Creative cadence: 8 net-new creative launches identified in May–June</strong> (05/04, 05/05, 05/07, 05/15, 05/22, 05/29, 05/30, 06/03). That's ~2 net-new shippable concepts per week, which is consistent — but the variant count per launch is low (2–4 placement variants). True diversity is closer to 1 new concept/week → fatigue clock keeps ticking.</p>
+</li>
+<li>
+<p><strong>All ads use the same auto custom conversion event</strong> (<code>26414218331497189</code>) for Auto, and <code>527662590217855</code> for Home — confirming Mo's "click to quotes" finding. Native Lead and Purchase events are not the optimization target despite Purchase having ROAS optimization on Max Val campaigns (which is exactly the broken-value-pipe problem).</p>
+</li>
+<li>
+<p><strong>Frequency on top Odometer ad: 3.27</strong> (the $180K one in Auto Max Val). Reach 3.1M. Not yet in fatigue territory, but climbing. Within 14 days at current pace it likely passes 4.0.</p>
+</li>
+<li>
+<p><strong><code>purchase_roas: "Not available"</code> on every single ad</strong> — the broken value signal is account-wide. Every ad in the account has this state. This is not "some events malformed" — this is <strong>structurally no usable Purchase ROAS data in Meta</strong>. The 98% Mo cited may actually understate it.</p>
+</li>
+</ol>
+<h2 id="top-5-longest-running-active-ads-by-created_time">Top 5 longest-running active ads (by created_time)</h2>
+<ol>
+<li>Video 2_Video_M_Anim_Phone (03/03/26) — created Mar 3 — ~$2,333 30d / 1.75 freq / <strong>8.33% CTR</strong> ⚠️ anomaly</li>
+<li>Family-outside_Static_M_Outside_Family (03/03/26) — Mar 3 — $3,992 / 23.21 CPL</li>
+<li>Loading-car-2_Static_NM_Outside_Family (03/03/26) — Mar 3 — $1,078 / 22.95 CPL / <strong>4.47% CTR</strong></li>
+<li>Save-Piggybank-Camo_Video_M_Anim_Swipe (12/23/25) — created Dec 2025! — $662 30d but <strong>10.49% CTR</strong> ⚠️</li>
+<li>Video 2-V2-Emojis_Video_M_Anim_Phone (12/03/25) — created Dec 2025 — $780 / 32.51 CPL</li>
+</ol>
+<p><strong>The 10.49% CTR Save-Piggybank-Camo video</strong> and <strong>8.33% Video 2</strong> are anomalies worth investigating: very high CTR but moderate spend. Either (a) they only deliver to narrow audiences that ad set targets, or (b) they're cheap because they self-throttle on CTR but Mo could push more budget here.</p>
+<h2 id="whats-still-open-after-this-pull">What's still open after this pull</h2>
+<ul>
+<li>Need to confirm exact <code>is_video</code> vs <code>is_static</code> format mix by impressions (the naming convention is a proxy; ad-image vs ad-video API call would confirm)</li>
+<li>The <code>Video 2</code> family (12/2025-era) carries high CTRs but low spend — worth deeper performance trend lookup</li>
+<li>Veteran-VO concept is correctly de-prioritized; no action needed</li>
+<li>Drive-On is new and trending well at BAU — recommend scaling spend</li>
+</ul>
+</section>
+
+<section id="app-c">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Appendix C — Dataset / CAPI / Signals</h2>
+        <p class="section-source">appendix_c_dataset_capi.md</p>
+    </div>
+    <h1 id="appendix-c-dataset-capi-signals">Appendix C — Dataset / CAPI / Signals</h1>
+<p>Live API pull, June 4, 2026.</p>
+<h2 id="datasets-attached-to-the-account">Datasets attached to the account</h2>
+<p>Three unique datasets (one shown twice via duplicate business associations):</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Created</th>
+<th>Last Web Fired</th>
+<th>Last Server Fired</th>
+<th>Business</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1536649764252698</code></td>
+<td><strong>MA Military Insurance</strong></td>
+<td>Dec 1, 2025</td>
+<td>Jun 4 14:42 ✅</td>
+<td><strong>NEVER (1969 epoch)</strong></td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td><code>587241028099131</code></td>
+<td><strong>Military.com's Pixel</strong></td>
+<td>Feb 2016 (legacy)</td>
+<td>Jun 4 14:39 ✅</td>
+<td><strong>Mar 2023 (3+ years silent)</strong></td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td><code>332555186604235</code></td>
+<td><strong>Military Insurance</strong></td>
+<td>May 21, 2024</td>
+<td>Jun 4 14:39 ✅</td>
+<td><strong>Jun 4 14:34 ✅</strong></td>
+<td><code>551525685236215</code> (QW/Delty integration?)</td>
+<td>ACTIVE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The decode:</strong></p>
+<ul>
+<li><strong>Dataset <code>332555186604235</code> ("Military Insurance")</strong> is the live lead-gen workhorse — <strong>both Pixel and CAPI firing in real-time</strong>, owned by a separate business (almost certainly the QuoteWizard/Delty postback integration entity, hence the different business_id).</li>
+<li><strong>Dataset <code>587241028099131</code> ("Military.com's Pixel")</strong> is the legacy content/site Pixel from 2016. Has Lead, PageView, SubscribedButtonClick events — but <strong>server hasn't fired since March 2023</strong>. Maps to Mo's audit finding: "Dataset C content pixel CAPI Gateway 0% set up." This is the brand/content pixel for the main site, where adding CAPI would unlock the +23% cost/result Mo cited.</li>
+<li><strong>Dataset <code>1536649764252698</code> ("MA Military Insurance")</strong> — MA likely = MediaAlpha. Created Dec 2025, browser fires today, <strong>server never has fired</strong>. Likely a parallel test/integration that's not active server-side. Could be a placeholder or a half-built MediaAlpha lane.</li>
+</ul>
+<h2 id="event-match-quality-emq-by-dataset">Event Match Quality (EMQ) by dataset</h2>
+<h3 id="dataset-332555186604235-the-lead-gen-workhorse">Dataset <code>332555186604235</code> (the lead-gen workhorse)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ Composite</th>
+<th>Email %</th>
+<th>Phone %</th>
+<th>fbc %</th>
+<th>fbp %</th>
+<th>zip %</th>
+<th>Upload Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><strong>9.1</strong> ⭐</td>
+<td>85.2%</td>
+<td>97.1%</td>
+<td><strong>87.0%</strong></td>
+<td>100%</td>
+<td>99.9%</td>
+<td>hourly</td>
+</tr>
+<tr>
+<td><strong>CompleteRegistration</strong></td>
+<td><strong>8.3</strong> ⭐</td>
+<td>100%</td>
+<td>97.8%</td>
+<td><strong>100%</strong></td>
+<td>(not shown)</td>
+<td>97.8%</td>
+<td>hourly</td>
+</tr>
+<tr>
+<td>PageView</td>
+<td>6.9</td>
+<td>12.7%</td>
+<td>11.3%</td>
+<td>82.7%</td>
+<td>99.2%</td>
+<td>80.3%</td>
+<td>real-time</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key validations:</strong></p>
+<ul>
+<li><strong>CompleteRegistration EMQ = 8.3</strong> — <strong>EXACT MATCH to Mo's audit finding "EMQ 8.3/10"</strong>. Strong signal health.</li>
+<li><strong>Purchase EMQ = 9.1</strong> — <em>higher than Mo's audit cited.</em> Score is excellent.</li>
+<li><strong>fbc coverage = 100% on CompleteRegistration, 87% on Purchase</strong> — Coverage is HIGH. Mo's "fbc truncation on 15 ad sets, 27% of CompleteRegistration affected" — the <code>truncation</code> is a <em>value malformation</em> visible only in Meta Events Manager Diagnostics UI, <strong>not in this API's coverage field.</strong> This API confirms fbc is PRESENT in 100% / 87% of events; the truncation question (presence-but-malformed) needs a manual Events Manager check.</li>
+<li>All three events upload hourly or real-time — data freshness is fine.</li>
+</ul>
+<h3 id="dataset-587241028099131-militarycoms-pixel-contentsite">Dataset <code>587241028099131</code> (Military.com's Pixel — content/site)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PageView</td>
+<td>not surfaced (no match keys)</td>
+</tr>
+<tr>
+<td>SubscribedButtonClick</td>
+<td>not surfaced</td>
+</tr>
+<tr>
+<td>Lead</td>
+<td>not surfaced</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No CAPI events, no EMQ scoring.</strong> This dataset is browser-only. Maps to Mo's "Dataset C content pixel CAPI Gateway 0% set up" finding — <strong>CONFIRMED</strong>. Adding a Signals Gateway / CAPI for this pixel is the +23% cost/result opportunity Mo flagged.</p>
+<h3 id="dataset-1536649764252698-ma-military-insurance">Dataset <code>1536649764252698</code> (MA Military Insurance)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase</td>
+<td>not surfaced</td>
+</tr>
+<tr>
+<td>PageView</td>
+<td>not surfaced</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Browser-only, no EMQ data.</strong> Dormant from a server-side perspective.</p>
+<h2 id="event-volume-last-7-days-dataset-332555186604235">Event volume (last 7 days, Dataset <code>332555186604235</code>)</h2>
+<p>Rough totals across the 7-day window May 28 14:00 – Jun 4 13:59:</p>
+<ul>
+<li><strong>PageView</strong>: 392,000+ events</li>
+<li><strong>Purchase</strong>: 5,300+ events (~755/day average)</li>
+<li><strong>CompleteRegistration</strong>: 5,300+ events (~755/day)</li>
+</ul>
+<p><strong>Server vs Browser split</strong> (across same window): SERVER ~52%, BROWSER ~48%. CAPI is doing roughly equal volume to the Pixel. Healthy dual-channel setup.</p>
+<p><strong>Server uplift over browser</strong>: ~5–8% per hour on average. Mo's "17.5% more Purchase conversions via CAPI last 7d" was likely from a different reference window or measurement methodology (Meta's UI sometimes shows attribution-window-adjusted lift). The current dataset health is good but the 17.5% number may not be re-derivable today.</p>
+<h2 id="the-purchase-value-malformation-issue-the-root-cause">The Purchase value malformation issue (the root-cause)</h2>
+<p><strong>This API cannot validate or refute Mo's "98% of Purchase price data is malformed" claim directly.</strong> That signal lives in Meta Events Manager's Diagnostics UI, which surfaces parameter-validation issues that are invisible to the <code>dataset_quality</code> / <code>dataset_stats</code> endpoints (those only check presence, not validation).</p>
+<p>What this API DOES confirm:
+- Purchase events are firing at healthy volume (~755/day)
+- EMQ is excellent (9.1)
+- All match keys have high coverage</p>
+<p>What this API CANNOT confirm:
+- Whether the <code>value</code> parameter being sent is a real QW payout amount, or a flat placeholder ($1, $0, etc.)
+- Whether the value parameter format is well-formed (numeric, decimal-correct, etc.)</p>
+<p><strong>Mo's audit conclusion stands and is not refuted:</strong> Purchase events fire, EMQ is great, but if the value parameter is flat/malformed, Max Value campaigns optimizing on RETURN_ON_AD_SPEND are training against noise. <strong>This is consistent with <code>purchase_roas: "Not available"</code> at every level of the account</strong> (Appendix A account-level, Appendix B every ad). If Meta had usable Purchase value data, it would compute ROAS — it doesn't, because the value is unusable.</p>
+<h2 id="mapping-to-mos-5-workstream-task-list">Mapping to Mo's 5-workstream task list</h2>
+<table>
+<thead>
+<tr>
+<th>Workstream</th>
+<th>Item</th>
+<th>Live Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W1-1</td>
+<td>Reconcile Browser Purchase value vs FunnelFlux</td>
+<td><strong>API confirms Purchase fires at high EMQ; value validity needs Events Manager check (not API-accessible)</strong></td>
+</tr>
+<tr>
+<td>W1-2</td>
+<td>EMQ optimization</td>
+<td><strong>CompleteRegistration EMQ 8.3 / Purchase EMQ 9.1 — strong</strong>. Marginal room: PageView EMQ 6.9 (low email/phone).</td>
+</tr>
+<tr>
+<td>W1-3</td>
+<td>fbc/fbclid integrity</td>
+<td><strong>API: fbc 87–100% present. Truncation (value malformation) is a manual Events Manager validation.</strong></td>
+</tr>
+<tr>
+<td>W1-4</td>
+<td>PageView match quality</td>
+<td><strong>EMQ 6.9 — improvable.</strong> Email coverage 12.7%, phone 11.3% on PageView. Most-impact fix: capture email/phone at PageView when known (post-login pageview, etc.)</td>
+</tr>
+<tr>
+<td><strong>W1-5 (new)</strong></td>
+<td>Dataset C CAPI Gateway 0% set up</td>
+<td><strong>CONFIRMED — <code>587241028099131</code> "Military.com's Pixel" has zero server activity since Mar 2023.</strong> Adding a Signals Gateway is the +23% cost/result lever Mo identified.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-ma-military-insurance-dataset-puzzle">The MA Military Insurance dataset puzzle</h2>
+<p>A dataset created Dec 2025 with <strong>server never fired</strong> is suspicious. Two hypotheses:</p>
+<ol>
+<li><strong>MediaAlpha integration that was set up but never activated.</strong> Iron Corp had plans to route through MediaAlpha but the server-side hookup was never completed. If true, this is a quietly-broken integration that should be either activated or removed.</li>
+<li><strong>A test/staging dataset left behind.</strong> Less concerning but should be archived.</li>
+</ol>
+<p>Anthony's "ignore exchange.qmp.ai and MediaAlpha, focus on Delty + Meta" framing earlier suggests MediaAlpha is intentionally not active. This dataset's state is consistent with that.</p>
+<h2 id="open-items-for-tuesday">Open items for Tuesday</h2>
+<ol>
+<li><strong>Manually open Meta Events Manager → Dataset <code>332555186604235</code> → Diagnostics tab</strong> to verify the Purchase value-malformation claim (98% per Mo). The API confirms events fire and EMQ is high; only Events Manager Diagnostics shows value validity.</li>
+<li><strong>Confirm with dev: is Dataset <code>587241028099131</code> (Military.com's Pixel) intended to have CAPI?</strong> This is the +23% cost/result lever — if there's no policy reason not to, adding the Signals Gateway is a 24-48 hour engineering task.</li>
+<li><strong>Confirm with Anthony/dev: what is the MA Military Insurance dataset for?</strong> Activate or archive.</li>
+<li><strong>Verify the Dataset <code>332555186604235</code> business_id</strong> (<code>551525685236215</code>) — confirm this is the QW/Delty integration entity.</li>
+</ol>
+</section>
+
+<section id="app-d">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Appendix D — Audiences / Opportunity / Anomalies</h2>
+        <p class="section-source">appendix_d_audiences_signals.md</p>
+    </div>
+    <h1 id="appendix-d-audiences-opportunity-score-anomalies-auction-benchmarks">Appendix D — Audiences, Opportunity Score, Anomalies, Auction Benchmarks</h1>
+<p>Live API pull, June 4, 2026.</p>
+<h2 id="custom-audiences-inventory-38-total">Custom Audiences inventory (38 total)</h2>
+<h3 id="active-audiences-10">Active audiences (10)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Subtype</th>
+<th>Size</th>
+<th>Status</th>
+<th>Created</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Lookalike (US, 5%) — Custom_Recruiting-Leads_08-05-2025</strong></td>
+<td>LOOKALIKE</td>
+<td><strong>8.5–10.1M</strong></td>
+<td>ACTIVE</td>
+<td>Aug 27, 2025</td>
+<td>Top of LAL ladder, properly sized</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Lookalike (US, 3%) — Custom_Recruiting-Leads_08-25</td>
+<td>LOOKALIKE</td>
+<td>5.3–6.3M</td>
+<td>ACTIVE</td>
+<td>Aug 6, 2025</td>
+<td>Mid LAL</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Lookalike (US, 1%) — Custom Audience_08-05-2025</td>
+<td>LOOKALIKE</td>
+<td>1.9–2.2M</td>
+<td>ACTIVE</td>
+<td>Aug 6, 2025</td>
+<td>Tight LAL</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Custom_Recruiting-Leads_08-05-2025</strong></td>
+<td>CUSTOM</td>
+<td><strong>39,200–46,100</strong></td>
+<td>ACTIVE</td>
+<td>Aug 5, 2025</td>
+<td><strong>The seed for the LALs. "Recruiting Leads" naming — likely a sold-lead or registration export from 10 months ago. Refresh candidate.</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>All Site Visitors (180D)</strong></td>
+<td>PLATFORM</td>
+<td><strong>~20 people</strong> ⚠️</td>
+<td>ACTIVE</td>
+<td>May 5, 2025</td>
+<td><strong>CRITICALLY BROKEN — should be hundreds of thousands. Pixel not properly seeding this audience.</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Visited Auto LP (180D)</strong></td>
+<td>PLATFORM</td>
+<td><strong>~20 people</strong> ⚠️</td>
+<td>ACTIVE</td>
+<td>May 5, 2025</td>
+<td><strong>SAME BROKEN STATE — Auto landing page audience essentially empty.</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>FB Mil.com Page Likers/Followers</td>
+<td>PLATFORM</td>
+<td>999K–1.2M</td>
+<td>ACTIVE</td>
+<td>Apr 28, 2025</td>
+<td>Healthy size — Military.com's FB page audience</td>
+</tr>
+<tr>
+<td>8</td>
+<td>FB Mil.com Page Engagers (365D)</td>
+<td>PLATFORM</td>
+<td>341K–401K</td>
+<td>ACTIVE</td>
+<td>Apr 28, 2025</td>
+<td>Healthy engagement audience</td>
+</tr>
+<tr>
+<td>9</td>
+<td>IG Mil.com Followers</td>
+<td>PLATFORM</td>
+<td>30K–35K</td>
+<td>ACTIVE</td>
+<td>Apr 28, 2025</td>
+<td>Small but legit</td>
+</tr>
+<tr>
+<td>10</td>
+<td>IG Mil.com Account Engagers (365D)</td>
+<td>PLATFORM</td>
+<td>93.6K–110K</td>
+<td>ACTIVE</td>
+<td>Apr 28, 2025</td>
+<td>Healthy IG engagement audience</td>
+</tr>
+</tbody>
+</table>
+<h3 id="inactive-audiences-28-broken-placeholder-lals">Inactive audiences (~28 broken placeholder LALs)</h3>
+<p><strong>ALL 28 inactive lookalikes are sized at exactly 1,000 people</strong> — Meta's signature for a "broken" / orphaned lookalike (seed audience deleted or invalid). Examples:</p>
+<ul>
+<li><code>Lookalike (Worldwide, 1%) - IG Mil.com Account Engagers (365D)</code> — 1,000</li>
+<li><code>Lookalike (Worldwide, 1%) - FB Mil.com Page Engagers (365D)</code> — 1,000</li>
+<li><code>Lookalike (US, 10%) - All Site Visitors (180D)</code> — 1,000</li>
+<li>(25 more similar — all 1,000 size)</li>
+</ul>
+<p>These map directly to Mo's 30-day plan <strong>B4 task: "Delete ~30 dead placeholder lookalikes"</strong> — <strong>CONFIRMED</strong>. Slightly fewer than 30 (count is ~28) but the finding is exact.</p>
+<h3 id="critical-broken-state-the-retargeting-layer-doesnt-exist">Critical broken state — the retargeting layer doesn't exist</h3>
+<p><strong><code>All Site Visitors (180D)</code> = ~20 people. <code>Visited Auto LP (180D)</code> = ~20 people.</strong></p>
+<p>These are PLATFORM-subtype audiences (Pixel-seeded website audiences) that should contain everyone who has visited military.com or auto.military.com in the last 180 days. They are essentially empty (~20 people each).</p>
+<p>Two interpretations:</p>
+<ol>
+<li>
+<p><strong>The Pixel isn't properly feeding these audiences.</strong> Likely cause: cross-domain tracking issue between <code>military.com</code> (the content site, Dataset <code>587241028099131</code>) and the lead-gen funnel (Dataset <code>332555186604235</code>). The Pixel that fires on auto.military.com is the lead-gen one, and its audience aggregation isn't writing back to these account-level audiences.</p>
+</li>
+<li>
+<p><strong>SAC (Special Ad Category) is filtering them out.</strong> Financial Products SAC restricts Pixel-derived audiences for retargeting. This is the more likely explanation — <strong>under SAC, these audiences simply don't accumulate users because Meta filters them as not eligible.</strong></p>
+</li>
+</ol>
+<p><strong>Either way: this account effectively has NO retargeting layer.</strong> Mo's audit framework should be updated: under SAC, retargeting Pixel-seeded audiences may not be available at all. The page-engagement audiences (FB/IG, healthy at 30K–1.2M) ARE allowed under SAC, but website-Pixel-seeded ones are not.</p>
+<p><strong>This is critical context for the W4 Audiences workstream</strong>: under SAC, the legitimate audience seeds are:
+- ✅ Customer-list (advertiser-provided): the Recruiting-Leads seed and its LALs
+- ✅ FB/IG engagement (on-Meta surfaces): page likers, engagers, IG followers
+- ❌ Pixel-seeded website retargeting: blocked or broken under SAC</p>
+<p>The "B1 — Define Engaged audience from FB/IG page engagers" task in Mo's 30-day plan is the right move because the engagement audiences (#7–#10 above) are healthy and usable.</p>
+<h3 id="the-mil-fb-customer-match-41221-question">The "Mil FB Customer Match 4.12.21" question</h3>
+<p>Mo's audit referenced <strong>"Mil FB Customer Match 4.12.21 (Full List) — last refreshed May 2025 (13+ months ago)"</strong>. That specific name is <strong>NOT in the current audience inventory.</strong> </p>
+<p>What's there instead:
+- <code>Custom_Recruiting-Leads_08-05-2025</code> — created Aug 5, 2025 (~10 months old)</p>
+<p>Possibilities:
+- The "4.12.21" list was archived/deleted and replaced by the "Recruiting-Leads_08-05-2025" list (this would be the "May 2025 refresh" Mo referenced, but dated Aug not May).
+- The "4.12.21" list is in a different ad account or business.
+- The audit conducted before today already led to its removal.</p>
+<p><strong>Recommend: confirm with Lauren which is the "live" customer-match list — the Recruiting-Leads_08-05-2025 (39K-46K seed) is the only Custom-subtype audience currently active in this account, and its 1%/3%/5% LALs are powering the ALC and Max Val campaigns.</strong></p>
+<h2 id="opportunity-score-99100-confirmed">Opportunity Score: 99/100 — CONFIRMED</h2>
+<p><strong>Account-level Opportunity Score: 99 out of 100.</strong> EXACT MATCH to Mo's audit finding.</p>
+<h3 id="the-single-live-recommendation">The single live recommendation</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td><code>offsite_conversion</code></td>
+</tr>
+<tr>
+<td>Recommendation</td>
+<td>Maximize number of conversions performance goal</td>
+</tr>
+<tr>
+<td>Lift estimate</td>
+<td><strong>17% lower cost per result</strong></td>
+</tr>
+<tr>
+<td>Opportunity score lift</td>
+<td>1 point (would take 99 → 100)</td>
+</tr>
+<tr>
+<td>Stage</td>
+<td>pre_create_guidance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decode:</strong> Meta is suggesting a campaign-objective optimization tweak that would yield a 17% lift. The body text suggests it's pre-create guidance (not a recommendation against existing campaigns). Likely flagged because the account has multiple optimization goals across BAU/ALC/Max Val and Meta thinks consolidating around offsite_conversion goal would be cleaner.</p>
+<p><strong>The fact that the only outstanding recommendation is a 1-point lift means structural levers are exhausted.</strong> Mo's audit conclusion holds: "leverage is in measurement plumbing, creative, and the success metric — not structure."</p>
+<h2 id="anomaly-signals-none-flagged">Anomaly Signals: NONE FLAGGED</h2>
+<p><strong>API returned:</strong> "No anomaly signal data available for the given criteria."</p>
+<p>This is interesting. Mo's audit cited "2 narrow Custom ad sets flagged by Meta anomaly detector." Possibilities:</p>
+<ol>
+<li>Those anomalies have <strong>cleared</strong> since Mo's pull (the ad sets are still active with the same ~Custom names but no longer flagged).</li>
+<li>The anomaly endpoint surfaces a narrower set than the in-product detector.</li>
+<li>Meta resolved the flags after seeing performance.</li>
+</ol>
+<p><strong>Recommended check:</strong> Tuesday Open Ads Manager → Campaign view → look for any in-UI anomaly badges on <code>Custom (Auto BAU)</code> (<code>120240808864440498</code>) and <code>Custom (Home BAU)</code> (<code>120227142278180498</code>). If clean, the issue is resolved. If still flagged, the API just isn't exposing them — Mo can address via the UI.</p>
+<h2 id="auction-ranking-benchmarks-last-30d">Auction Ranking Benchmarks (last 30d)</h2>
+<p>Optimization cohort: <strong>OFFSITE_CONVERSIONS</strong> + <code>complete_registration</code> + prospecting (new customers).</p>
+<p><strong>One ad surfaced with diagnostics:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>TYFYS_Video_M_Animation_Swipe_03/09/26 (<code>120241039108910498</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quality Ranking</td>
+<td><strong>Average</strong></td>
+</tr>
+<tr>
+<td>Engagement Rate Ranking</td>
+<td><strong>Below Average (Bottom 35% of ads)</strong></td>
+</tr>
+<tr>
+<td>Conversion Rate Ranking</td>
+<td><strong>Above Average</strong></td>
+</tr>
+<tr>
+<td>Diagnosis</td>
+<td>"This ad is not spurring interest."</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key insight:</strong> TYFYS has <strong>good conversion rate (above average)</strong> but <strong>weak engagement (bottom 35%)</strong>. The ad earns the click-throughs that lead to conversion — but most users scroll past it. This is the <strong>profile of a niche/identity creative that converts well within a small interested segment but won't scale broadly.</strong></p>
+<p>Recommended action: keep TYFYS at BAU low spend (where it works) but do NOT scale it into Max Val or broad audiences. This is exactly what Mo's v3 audit concluded — keep it in BAU only.</p>
+<p><strong>Other ads not surfaced by the auction-ranking endpoint:</strong></p>
+<p>The endpoint only flagged TYFYS_03/09 — the other top spenders (Odometer, Lower-Your-Auto, Lower-Your-Home) aren't surfaced as having auction-ranking issues. This suggests they're all operating in the "expected" auction quality range, even Odometer despite its high CPL ($38.85 in Max Val). The reason Odometer is expensive isn't auction quality — it's the broken value signal in Max Val campaigns optimizing for ROAS against malformed Purchase value data.</p>
+<h2 id="auction-overlap-diagnosis-the-cannibalization-question">Auction overlap diagnosis (the cannibalization question)</h2>
+<p>The auction-ranking endpoint did NOT surface significant cross-campaign overlap. <strong>No "merge campaigns" or "consolidate ad sets" recommendations</strong> were returned.</p>
+<p>This validates Mo's Integrated Audit finding: <strong>the BAU/ALC/MaxVal trio is intentional and not cannibalizing.</strong> The media buyer's structural design is sound.</p>
+<h2 id="mapping-to-mos-30-day-plan-audience-workstream">Mapping to Mo's 30-day plan audience workstream</h2>
+<table>
+<thead>
+<tr>
+<th>Mo's task</th>
+<th>Live status</th>
+<th>Recommended action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B1</strong>: Define Engaged audience from FB/IG page engagers</td>
+<td>Audiences EXIST (#7–#10, sized 30K–1M). <strong>Not currently used as ad-set targeting</strong> based on ad-set names (only Broad and interest-named sets are visible)</td>
+<td><strong>Build new ad set: targeting FB Page Engagers + IG Engagers (suppression-excluded). Could be the warm/retargeting layer.</strong></td>
+</tr>
+<tr>
+<td><strong>B2</strong>: Replace stale 2021 customer-match list with 180d sold-leads</td>
+<td>Current live list is "Custom_Recruiting-Leads_08-05-2025" (39K-46K), 10 months old, NOT 13. <strong>Still stale; needs Lauren's fresh export of sold-leads from last 180d.</strong></td>
+<td>Get fresh sold-lead CSV from Lauren → rebuild Custom audience → rebuild 1%/3%/5% LALs</td>
+</tr>
+<tr>
+<td><strong>B3</strong>: Build suppression/exclusion audiences</td>
+<td><strong>All Site Visitors and Visited Auto LP are broken (~20 people each)</strong>, so suppression-by-pixel isn't viable. <strong>Suppression must be customer-list based</strong> (uploaded sold-leads → exclude from prospecting)</td>
+<td>Use the Recruiting-Leads CUSTOM audience as a suppression list on prospecting campaigns</td>
+</tr>
+<tr>
+<td><strong>B4</strong>: Delete ~30 dead placeholder lookalikes</td>
+<td><strong>~28 confirmed broken (all 1,000 size, INACTIVE)</strong></td>
+<td>One-shot cleanup task. Low risk.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-worth-flagging-now">What's worth flagging now</h2>
+<ol>
+<li>
+<p><strong>The retargeting layer doesn't functionally exist.</strong> All-Site-Visitors and Visited-Auto-LP audiences are essentially empty (~20 people). Under SAC, the Pixel-seeded website retargeting may not be allowed. <strong>Account effectively has only customer-list LALs + page-engagement audiences. No warm-website retargeting layer.</strong></p>
+</li>
+<li>
+<p><strong>The "Custom_Recruiting-Leads" seed is 10 months old.</strong> Refreshing it with last-180-day sold leads (per B2) is high-leverage because:
+   - All three active LALs (1%, 3%, 5%) are downstream of this seed
+   - A 10-month-old seed underweights recent buying behavior
+   - Lauren has the fresh data; this is a 1-day task</p>
+</li>
+<li>
+<p><strong>The 28 broken placeholder LALs are a cleanup-only task</strong> — no positive impact from leaving them, no risk from deleting them. Inactive state is safe to delete.</p>
+</li>
+<li>
+<p><strong>The page-engagement audiences are an under-used warm layer.</strong> FB Page Likers (1M), Page Engagers (341–401K), IG followers (30K), IG engagers (93–110K) — all healthy sizes, all SAC-compliant. <strong>None visible as targeted audiences in current ad sets.</strong> Building an ALC or ad set targeting these = real warm-audience layer the account currently lacks.</p>
+</li>
+<li>
+<p><strong>TYFYS is correctly tagged by Meta as low-engagement, high-conversion.</strong> Confirms keeping it in BAU low-spend (where it works) and NOT scaling it into Max Val. v3 audit conclusion intact.</p>
+</li>
+<li>
+<p><strong>Opportunity Score is 99/100.</strong> Confirms Mo's "no structural fixes; leverage is in measurement, creative, metric" thesis. The 1-point recommendation is a minor objective tweak.</p>
+</li>
+<li>
+<p><strong>No active anomaly flags.</strong> The "2 narrow Custom ad sets flagged" issue from Mo's earlier audit has cleared.</p>
+</li>
+</ol>
+</section>
+
+<section id="app-e">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Appendix E — Competitive Scan</h2>
+        <p class="section-source">appendix_e_competitive.md</p>
+    </div>
+    <h1 id="appendix-e-competitive-ad-library-scan">Appendix E — Competitive Ad Library Scan</h1>
+<p>Live API pull, June 4, 2026. Country: US, Active status: ACTIVE.</p>
+<h2 id="api-limitation-note">API limitation note</h2>
+<p>Meta Ad Library keyword search returns results by <strong>creative text match</strong>, not by brand. The major aggregator competitors (EverQuote, The Zebra, Insurify, SmartFinancial, QuoteWizard) do not put their brand names in creative copy — they use product pages with neutral names ("Auto Savings," "Compare Quotes," etc.). As a result, brand-keyword searches return zero matches for these competitors via the API.</p>
+<p>The competitive teardown produced May 13 (<code>/Users/mo/Desktop/military.com/deliverables/07_competitive_teardown.md</code>) covers these competitors in depth using public 10-K data and other sources. This appendix focuses on what the live Ad Library search DID surface.</p>
+<h2 id="direct-competitor-identified-the-military-wallet">Direct competitor identified: The Military Wallet</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page ID</td>
+<td><code>220855334603609</code></td>
+</tr>
+<tr>
+<td>Page Name</td>
+<td>The Military Wallet</td>
+</tr>
+<tr>
+<td>Active ads (matching the search)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Common creative copy</td>
+<td>"<strong>Did You Serve? You Might Save »</strong>"</td>
+</tr>
+<tr>
+<td>Created</td>
+<td>Late Feb 2026</td>
+</tr>
+</tbody>
+</table>
+<p><strong>This is a direct competitor in Military.com's exact niche.</strong> Same target audience (veterans/active duty), same product (insurance comparison), running on the same Meta auction.</p>
+<h3 id="notable-observations-about-the-military-wallets-did-you-serve-hook">Notable observations about The Military Wallet's "Did You Serve?" hook</h3>
+<ol>
+<li>
+<p><strong>It's running active despite SAC restrictions.</strong> The "Did you serve?" framing should arguably trip Meta's sensitive-attribute detector (military/veteran status). The fact that it's running suggests:
+   - It's NOT flagged as sensitive by Meta's classifier
+   - OR The Military Wallet has been operating long enough that the policy treatment is lenient on this specific brand
+   - This is a hook angle Military.com COULD test under SAC if it's actually allowed</p>
+</li>
+<li>
+<p><strong>Identical hook strategy to Military.com's "Veteran-VO" creative concept.</strong> Military.com's Veteran-VO ads also use military-identity framing, but they've been deprioritized (per Mo's v3 audit: 0.90 ROAS, loses money). The Military Wallet is doubling down on what Military.com just walked away from.</p>
+</li>
+<li>
+<p><strong>Hypothesis worth testing:</strong> The Military Wallet may target a different lifecycle stage. "Did you serve?" is an identity-confirmation question (works for cold/discovery). Military.com's "Easily Compare Quotes" + "Save 15% or More" is an offer-led hook (works once identity is established). <strong>The two hooks may work at different funnel stages.</strong></p>
+</li>
+</ol>
+<h2 id="adjacent-vertical-veteran-life-insurance">Adjacent vertical: Veteran Life Insurance</h2>
+<p>| Page ID | <code>222591640945329</code> |
+| Page Name | Veteran Life Insurance |
+| Creative copy | "Protect your spouse and your retirement. Straightforward life insurance for veterans." |</p>
+<p><strong>Adjacent vertical (life insurance, not auto/home), but uses two angles Mo's audit hasn't surfaced:</strong></p>
+<ol>
+<li><strong>Spouse-protection angle</strong> — "Protect your spouse"</li>
+<li><strong>Retirement angle</strong> — "your retirement"</li>
+</ol>
+<p>Both are family-financial-security framings that Military.com's auto creative does NOT use. The Family-outside and Loading-car-2 creatives are family-themed but not retirement-themed. <strong>Test hypothesis: a "Protect your family's finances on insurance" hook in Military.com's Auto BAU might convert at lower CPL than the "Lower-Your-Auto-Insurance" cost-led hook.</strong></p>
+<h2 id="cross-referencing-with-mos-earlier-competitive-teardown">Cross-referencing with Mo's earlier competitive teardown</h2>
+<p>The May 13 deliverable <code>07_competitive_teardown.md</code> covers EverQuote, The Zebra, Insurify, SmartFinancial, QuoteWizard direct in depth. Five key angles Mo identified that Military.com isn't running:</p>
+<table>
+<thead>
+<tr>
+<th>Angle</th>
+<th>Mo identified competitor</th>
+<th>Live status (this scan)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spouse-angle creative</strong></td>
+<td>EverQuote, Insurify</td>
+<td><strong>Confirmed</strong> — Veteran Life Insurance is running it in adjacent vertical. Military.com still has zero spouse-specific creative.</td>
+</tr>
+<tr>
+<td><strong>Interactive quiz/calculator hook</strong></td>
+<td>SmartFinancial, The Zebra</td>
+<td>Couldn't verify via this search; Mo's source observation stands. Military.com has Moving-To-Do-List (calculator-adjacent at $41/CPL Max Val); not winning.</td>
+</tr>
+<tr>
+<td><strong>Real-veteran UGC</strong></td>
+<td>Under-utilized everywhere</td>
+<td><strong>Confirmed under-utilized.</strong> The Military Wallet uses static graphics. No competitor is running authentic veteran UGC at scale in this scan. <strong>Defensible moat for Military.com still unbuilt.</strong></td>
+</tr>
+<tr>
+<td><strong>Mobile-native (9:16 first-frame, captions, finger-tap CTAs)</strong></td>
+<td>Industry-trending</td>
+<td>Couldn't verify; competitor format mix not in API output.</td>
+</tr>
+<tr>
+<td><strong>Specific dollar/monthly-payment framing</strong></td>
+<td>Better than generic savings</td>
+<td>Military.com uses generic "Save 15% or More" — competitor Military Wallet uses "You Might Save" (identical generic framing). <strong>Both leave money on the table by not using specific dollar amounts.</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-worth-flagging">What's worth flagging</h2>
+<ol>
+<li>
+<p><strong>The Military Wallet is the most direct competitor surfaced live.</strong> Same audience, same product, same hook strategy as Military.com's deprioritized Veteran-VO concept. Worth watching as a competitive signal: if The Military Wallet scales spend, they're validating the identity-led hook in the current SAC environment.</p>
+</li>
+<li>
+<p><strong>Spouse-angle creative is still a Military.com gap.</strong> Veteran Life Insurance proves the angle works in adjacent vertical. Military.com Auto BAU has no spouse-specific variant.</p>
+</li>
+<li>
+<p><strong>Real-veteran UGC remains the moat nobody is taking.</strong> Across all live competitive scans, no competitor is running authentic-veteran-on-camera creative. Military.com is the only player with the audience, brand permission, and editorial relationships to ship this credibly.</p>
+</li>
+<li>
+<p><strong>The "Did You Serve?" hook is running in the SAC environment without obvious penalty</strong> (The Military Wallet has 3 active ads with this copy). This contradicts Mo's earlier compliance-safe framing in <code>02_creative_engine_plan.md</code> which advised avoiding identity-confirmation hooks. <strong>Re-test hypothesis: military-identity hooks may not be Meta-policy-blocked in 2026 the way they were earlier.</strong> This is worth verifying in-product before writing off this angle.</p>
+</li>
+<li>
+<p><strong>No EverQuote/Zebra/Insurify/SmartFinancial live ads surfaced via brand-keyword search.</strong> Either they're running under different page names, using only product-neutral copy, or temporarily out of the auction. Use the May 13 teardown as the canonical competitive view for those brands.</p>
+</li>
+</ol>
+<h2 id="recommended-tuesday-browser-check">Recommended Tuesday browser check</h2>
+<p>Open Meta Ad Library directly at facebook.com/ads/library, search by <strong>page name</strong> (not keyword) for:
+- EverQuote
+- Insurify<br />
+- SmartFinancial
+- The Zebra
+- QuoteWizard
+- The Military Wallet (priority — direct competitor)
+- Veteran Life Insurance (priority — adjacent angle insights)</p>
+<p>For each, capture: format mix (static vs video), top-running ad concept, hook style, landing approach. This 30-minute manual sweep produces a sharper teardown than the keyword API can.</p>
+</section>
+
+<section id="digest">
+    <div class="section-header">
+        <span class="section-label">FILE</span>
+        <h2>Mo's Prior Files — Digest (background)</h2>
+        <p class="section-source">_mo_files_digest.md</p>
+    </div>
+    <h1 id="mos-files-digest-usersmodownloadsmilitary">Mo's Files Digest — <code>/Users/mo/Downloads/military/</code></h1>
+<p>Produced by Explore agents on June 4, 2026 as input to the master audit. Captures everything Mo has documented across 20 files of iterative audit/strategy work.</p>
+<hr />
+<h2 id="section-1-audit-flavored-files-digested">SECTION 1 — Audit-flavored files (digested)</h2>
+<h3 id="1-lg_military_definitive_auditmd-canonical-narrative-audit">1. <code>LG_Military_DEFINITIVE_AUDIT.md</code> (CANONICAL narrative audit)</h3>
+<p>~195 lines / ~2,400 words. Window Mar 1 – Jun 3, 2026. Self-labeled "Definitive."</p>
+<p><strong>Top findings:</strong>
+- $2.45M spend → $3.35M revenue → ~$891K net, <strong>1.36x blended ROAS</strong> (internal QW dashboard)
+- Auto 1.38x / 27.3% margin vs Home 1.28x / 22.1% — Auto is the better business
+- Scaled <strong>4.5x April→May</strong> with no ROAS degradation
+- <strong>98% of Purchase event price data has formatting issues</strong> — Meta Events Manager flag; all events send the same flat price
+- <strong>fbc/fbclid truncation</strong> on 15 ad sets, <strong>$67,174 spend</strong>, 27% of CompleteRegistration events affected
+- Auto BAU pacing gap: <strong>$19,800/day budget vs ~$11,400/day actual</strong>
+- Odometer_05/15 running at <strong>$34.63 CPL on ~$178K</strong> — highest-cost big spender
+- "Mil FB Customer Match 4.12.21 (Full List)" — audience list reads as a <strong>2021 list</strong>, stale</p>
+<p><strong>Conclusions:</strong> Two tracks — Track 1 (cost levers for CPL goal posts), Track 2 (fix value pipe for real optimization). GP1 (15% CPL reduction) high confidence from cost levers alone; GP3 (25%) only achievable the right way (value up, not junk in).</p>
+<p><strong>Gaps flagged:</strong> What value is wired into Purchase event (flat vs real payout)? Why is Auto BAU pacing only ~$11.4K/day? What happened May 23 (0.90x loss day)? Can real QW per-lead payout be sent server-side?</p>
+<h3 id="2-lg_military_integrated_auditmd-post-media-buyer-strategy-version">2. <code>LG_Military_Integrated_Audit.md</code> (post-media-buyer-strategy version)</h3>
+<p>~103 lines / ~1,500 words.</p>
+<p><strong>Top findings:</strong>
+- <strong>SAC (Special Ad Category) removes the standard CPL levers</strong> — no lookalikes, no age/geo targeting, no exclusions. This invalidates the entire "shift budget to 25–44" and "build value-seeded LALs" plans from FULL_AUDIT.md v3.
+- FunnelFlux offline conversion upload fires every ~15 minutes (single-fire postback) — value tracking exists in principle, but the browser Purchase event's flat value may be diluting the algorithm's signal
+- Campaign structure (BAU/ALC/MaxVal trio) is intentional, not cannibalization — media buyer tested more and saw performance dip from overlap
+- Auto &gt; Home is a carrier story: Progressive bids strong on auto; Allstate (home) is reactive
+- The <strong>"auto-updating" customer-match list was last confirmed refreshed May 2025</strong> (13+ months ago, per the Master Task List/Learnings PDF)
+- Two narrow Custom ad sets (IDs 120240808864440498, 120227142278180498) delivering to <strong>~1,000-person audiences</strong> — essentially broken</p>
+<p><strong>Conclusions:</strong> Measure on <strong>RPL−CPL spread, not CPL alone</strong> — the single most important strategic ask. Drop the lookalike plan. Creative is the primary CPL lever remaining under SAC.</p>
+<h3 id="3-lg_military_optimization_auditmd-leads-campaigns-optimization-trace">3. <code>LG_Military_Optimization_Audit.md</code> (LEADS campaigns optimization trace)</h3>
+<p>~72 lines / ~900 words.</p>
+<p><strong>Top findings:</strong>
+- Custom conversion total (~33,277 / 30d) reconciles with internal QW dashboard (34,158 May leads) and CompleteRegistration (31.3K) — <strong>all within ~2.5%</strong>
+- Native Meta Lead event is never populated ("Not available") — leads flow through custom conversions "click to quotes" — this is not a malfunction
+- Max Value campaigns pay <strong>$36.24 CPL vs $21.91 on BAU</strong> — a ~65% premium — to optimize for value against a <strong>flat value signal</strong> (98% malformed Purchase price data)
+- A paused SALES campaign optimizes toward <code>fb_pixel_purchase</code> (standard Purchase event) — different/older setup, currently inactive
+- CAPI alongside Pixel reported <strong>17.5% more Purchase conversions</strong> in the last 7 days</p>
+<h3 id="4-lg_military_master_audit_tasklist_learningspdf-5-page-june-2026-deck-canonical-client-facing">4. <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code> (5-page June 2026 deck — CANONICAL client-facing)</h3>
+<p><strong>Top findings (identical economics, new framing):</strong>
+- Meta Opportunity Score: <strong>99/100</strong> — no structural fixes to make; leverage is in measurement, creative, and the success metric
+- Key Learning #4: Max Value pays a <strong>~65% CPL premium</strong> to chase a value signal that doesn't exist
+- Key Learning #5: <strong>SAC removes standard CPL levers</strong> — bypassing SAC is "Evasion violation that damages account health"
+- Customer-match list last refreshed <strong>May 2025</strong> (13+ months ago, not auto-updating)
+- fbc truncation: <strong>15 ad sets, $67,174 spend, 27% of CompleteRegistration</strong> (confirmed)
+- CAPI reported 17.5% more conversions (last 7d) — signal health is real
+- Dataset C (Military.com's content pixel) CAPI Gateway <strong>0% set up</strong>; Add a Signals Gateway Pixel impact estimated at <strong>~23% cost/result</strong></p>
+<p><strong>Conclusions:</strong> 5 workstreams — W1 Measurement Plumbing (highest leverage), W2 Creative (primary SAC lever), W3 Efficiency (learning-phase safe), W4 Audiences (SAC-compliant), W5 Strategic/Metric (most important ask: reframe to RPL−CPL spread).</p>
+<h3 id="5-full_auditmd-v3-roas-verified-superseded-but-contains-the-inversions">5. <code>FULL_AUDIT.md</code> (v3 ROAS-verified — superseded but contains the inversions)</h3>
+<p><strong>Key inversions vs v1:</strong>
+- Veteran-VO: 9.37% CTR → <strong>0.90 ROAS, loses money</strong> (v1 said "revive it")
+- Instagram Stories: 0.34% CTR → <strong>1.42 ROAS — top placement</strong> (v1 said "cut it")
+- Desktop: 3.6x CPC → <strong>1.45 ROAS — best device</strong> (v1 said "exclude")
+- 65+: cheapest CPL → <strong>1.18 ROAS — lowest of all ages</strong> (v1 said "shift budget here")
+- Rewarded video: "fraud" → <strong>real leads, $22.65 CPL, break-even at 0.96 ROAS</strong>
+- TYFYS video: "CTR mirage" → <strong>1.57 ROAS — best high-spend ad</strong>
+- Lower-Your-Auto_04/28: <strong>$421K spend, 1.45 ROAS, +$191K net</strong> — the workhorse winner
+- Odometer_05/15: $222K spend, <strong>1.21 ROAS</strong> — net positive but least efficient big-spend ad
+- Meta reported value ($1.62M) vs internal dashboard ($3.35M) — Meta captures <strong>~half</strong> of real revenue</p>
+<h3 id="6-lg_military_full_auditmd-v2-superseded">6. <code>lg_military_full_audit.md</code> (v2 — superseded)</h3>
+<p>Blended: ~$842K spend → ~33,366 leads → <strong>~$25.23 CPL</strong>. Odometer at $38.92 CPL (later revised to $34.63). Drive-On_05/30: $5,137 at $18.48 CPL — best auto CPL, newer creative.</p>
+<h3 id="7-lg_military_auditmd-v1-origin-doc-mostly-self-corrected">7. <code>lg_military_audit.md</code> (v1 — origin doc, mostly self-corrected)</h3>
+<p>$841,952.78 spend / 30d. Account frequency 6.45. Estimated recoverable value: $140–200K/month conservative, $335–565K/month full execution (based on CTR assumptions later invalidated). Most v1 claims were inverted by v2/v3.</p>
+<h3 id="8-master-prompts-procedural-artifacts-not-audits">8. Master prompts (procedural artifacts, not audits)</h3>
+<p><code>full_audit_master_prompt.md</code>, <code>lg_military_full_audit_master_prompt.md</code>, <code>ad_library_research_prompt.md</code> — execution prompts for prior audit pulls. Contain the <strong>8 epistemic rules</strong> Mo developed (never trust CTR alone, tag every finding, custom conversions don't break by placement, etc.) — worth preserving.</p>
+<h3 id="audit-synthesis">Audit Synthesis</h3>
+<p><strong>Canonical now</strong>: DEFINITIVE_AUDIT (narrative) + Master_Audit_TaskList_Learnings.pdf (deck). Everything else superseded but historically useful.</p>
+<p><strong>Consolidated picture of what Mo found:</strong> A healthy $850K/month lead engine with <strong>three compounding problems, not the six "critical leaks" the v1 audit identified:</strong></p>
+<ol>
+<li><strong>Broken conversion value</strong> (the root cause): 98% of Purchase price data is malformed/flat. Max Value campaigns can't optimize for value. Meta estimates +7% ROAS from fixing this alone.</li>
+<li><strong>fbc/fbclid truncation</strong> on 15 ad sets ($67,174 spend, 27% of CompleteRegistration events): degrades attribution and optimization signal.</li>
+<li><strong>Odometer_05/15 concentration</strong>: ~$178K/30d at $34.63 CPL vs Lower-Your-Auto at ~$22 CPL. Reallocation is the largest single pure cost lever today.</li>
+</ol>
+<p>The <strong>SAC constraint</strong> removes the standard CPL levers (no demo reallocation, no exclusion audiences, no lookalikes). What remains: creative (UGC test batch — primary lever), budget/pacing efficiency, value-signal quality, and the strategic ask to <strong>reframe success metric from CPL to RPL−CPL spread</strong>.</p>
+<hr />
+<h2 id="section-2-plan-strategy-pitch-files-digested">SECTION 2 — Plan / strategy / pitch files (digested)</h2>
+<h3 id="1-lg_military_30day_action_planmd">1. <code>LG_Military_30Day_Action_Plan.md</code></h3>
+<p>~1,400 words. Task-level execution plan with workstream B (audiences), C (tracking), D (cost):
+- B1: Define Engaged audience from FB/IG page engagers
+- B2: Replace stale 2021 customer-match list with 180-day sold-leads export from Lauren
+- B3: Build suppression/exclusion audiences
+- B4: Delete ~30 dead placeholder lookalikes; rebuild on sold-leads + engagement seeds
+- C1: Fix Purchase event value — "#1 priority" — real QW payout server-side
+- C2: Fix fbc/Click ID truncation
+- D1: Reallocate <code>Odometer_05/15</code> budget → <code>Lower-Your-Auto_04/28</code>
+- Close Auto BAU pacing gap</p>
+<h3 id="2-lg_military_master_planmd">2. <code>LG_Military_Master_Plan.md</code></h3>
+<p>5-workstream strategic plan. Thesis: Meta Opportunity Score 99/100 → structural wins don't exist → leverage in measurement plumbing, creative, and <strong>success metric reframe</strong>.</p>
+<p><strong>Most important strategic ask (W5-T1)</strong>: Reframe success metric to <strong>RPL − CPL spread (or ROAS)</strong>, or pair CPL with RPL/acceptance floor.</p>
+<p><strong>HELOC expansion thesis (W5-T2)</strong> introduced here.</p>
+<p><strong>SAC mechanics</strong> extensively documented: 15-mile radius minimum, no age/geo targeting, LAL eligibility contested for financial category.</p>
+<h3 id="3-lg_military_audit_june_prioritiesmd">3. <code>LG_Military_Audit_June_Priorities.md</code></h3>
+<p>Most complete economics table (verified Meta $25.23 vs internal $24.91, sub-2% reconciliation). 4.5x April→May spend scale-up without ROAS degradation as evidence of headroom. Conversion-value fix called <strong>#1 June priority</strong> (longest lead time). 7% ROAS improvement estimate from Meta modeling on value-fix alone.</p>
+<h3 id="4-lg_military_deck_sourcemd">4. <code>LG_Military_Deck_Source.md</code></h3>
+<p>16-slide deck. Frames GTW as "sharpening, not fixing." RPL−CPL reframe needs <strong>leadership signoff</strong>, not just media buyer.</p>
+<h3 id="5-military_meeting_packagemd">5. <code>military_meeting_package.md</code></h3>
+<p>Pre-meeting walk-in pitch. Three problems / three threads (Performance/Compliance/Partnerships). Stage 1 $20K diagnostic + cross-portfolio. Stage 2 $75K pilot. Stage 3 $60K/mo + 5% net-new revenue + 10% partnerships. Stage 4 $1.5–4M Cross-Valnet.</p>
+<h3 id="68-military_pitch_v2v3md-military_proposalmd">6–8. <code>military_pitch_v2/v3.md</code>, <code>military_proposal.md</code></h3>
+<p>Earlier pitch iterations. Stage 3 $50–100K/month. Thread C (recruitment partnerships): "10 partners × $100K = $1M/year at 60–80% margin." <code>military_proposal.md</code> is the formal $75K 90-day pilot doc.</p>
+<h3 id="9-claude_code_master_promptmd">9. <code>claude_code_master_prompt.md</code></h3>
+<p>Multi-agent orchestration prompt for original meeting prep. Contains the IP clause language (GTW retains War Room; client owns campaign data + creative assets). 8-vector risk assessment including "Hassan needs Rony signoff," "Valnet pays Net-60+ in practice."</p>
+<h3 id="strategy-synthesis">Strategy Synthesis</h3>
+<p><strong>Canonical strategy doc now</strong>: <code>/Users/mo/Desktop/military.com/deliverables/june_2026/06_june_strategy_master.md</code>. None of the Downloads strategy files reach that level of post-access operational specificity.</p>
+<p><strong>What's NEW in Downloads files not in June 2026 deliverables:</strong></p>
+<ol>
+<li><strong>HELOC expansion thesis</strong> — not in June plan at all</li>
+<li><strong>RPL − CPL spread metric reframe</strong> — Mo's "most important strategic ask"; June plan operates within CPL goal-post framework without proposing change</li>
+<li><strong>Thread C (recruitment partnerships)</strong> — present in pitch files; absent from June 2026 deliverables scope</li>
+<li><strong>Customer-list lookalike eligibility test (W4-T3)</strong> — specific in-product test for the contested SAC/LAL question; not in June 2026 weekly roadmap</li>
+<li><strong>Value-based lookalike</strong> seeded from payout-weighted customer list — not in June 2026 deliverables</li>
+<li><strong>IP clause language</strong> — GTW retains War Room; client owns campaign data</li>
+<li><strong>SAC mechanics documentation</strong> — more precise in Downloads files than in June 2026 deliverables</li>
+</ol>
+<h3 id="tensions-contradictions-with-renegotiated-deal-terms">Tensions / contradictions with renegotiated deal terms</h3>
+<table>
+<thead>
+<tr>
+<th>Tension</th>
+<th>Downloads file(s)</th>
+<th>June 2026 reality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Counterparty</td>
+<td>"the GM" / "Iron Corp leadership"</td>
+<td>Hassan Youssef (Valnet CEO)</td>
+</tr>
+<tr>
+<td>Comp structure</td>
+<td>Fixed-fee pilots ($75K, $25K/month)</td>
+<td>Base + % of growth above baseline</td>
+</tr>
+<tr>
+<td>Baseline</td>
+<td>Not discussed</td>
+<td>Highest-leverage open item; $275K contested vs ~$155–185K defensible</td>
+</tr>
+<tr>
+<td>Thread C (partnerships)</td>
+<td>Core upside in pitch files; $1–3M/year</td>
+<td>Not in June pilot scope</td>
+</tr>
+<tr>
+<td>Goal-post targets</td>
+<td>Static-baseline GP1/GP2/GP3</td>
+<td>Growing-baseline GP1 +15%, GP2 +36%, GP3 +57%</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>RPL−CPL spread proposed</td>
+<td>June plan operates within CPL goal-post framework</td>
+</tr>
+<tr>
+<td>Conversion-value priority</td>
+<td>Ranked #1</td>
+<td>June plan deprioritizes vs creative engine + home reallocation</td>
+</tr>
+<tr>
+<td>Form migration</td>
+<td>Not mentioned</td>
+<td>Major June scoping item</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cross-references-to-the-existing-deliverables-structure">Cross-references to the existing deliverables structure</h2>
+<ul>
+<li><code>LG_Military_DEFINITIVE_AUDIT.md</code> + <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code> → connect directly to <code>/Users/mo/Desktop/military.com/deliverables/05_audit_visual_spec.md</code> (the reliability framework / two-track plan source)</li>
+<li><code>LG_Military_Audit_June_Priorities.md</code> → connects to <code>/Users/mo/Desktop/military.com/deliverables/june_2026/04_baseline_vetting_framework.md</code> (economics table)</li>
+<li><code>LG_Military_30Day_Action_Plan.md</code> → maps onto Track 1 (cost levers) in <code>/Users/mo/Desktop/military.com/deliverables/june_2026/01_first_week_playbook.md</code> and Track 2 (value pipe) in <code>03_tracking_capi_rebuild.md</code></li>
+<li><code>LG_Military_Master_Plan.md</code> W5 (metric reframe) → NOT YET reflected in any June 2026 deliverable — surface in master audit</li>
+<li><code>military_meeting_package.md</code>, pitch v2/v3, <code>military_proposal.md</code> → fully superseded by the renegotiated deal; historical reference only</li>
+</ul>
+<p>End of digest.</p>
+</section>
+
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTW × MIL.COM | TASK TERMINAL</title>
+<style>
+:root {
+    --bg: #000000;
+    --bg-alt: #0A0A0A;
+    --panel: #111111;
+    --panel-2: #161616;
+    --border: #222222;
+    --border-bright: #333333;
+    --text: #E8E8E8;
+    --text-dim: #888888;
+    --text-mute: #555555;
+    --amber: #FF9900;
+    --amber-dim: #B36B00;
+    --white: #FFFFFF;
+    --red: #FF3B3B;
+    --green: #33D17A;
+    --cyan: #29D9E6;
+    --magenta: #E64FE6;
+    --yellow: #FFD600;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    font-feature-settings: 'liga' 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border-bright);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+header .left { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+header .brand { color: var(--amber); font-weight: 700; letter-spacing: 1px; font-size: 13px; }
+header .crumbs { color: var(--text-dim); font-size: 11px; }
+header .ticker { color: var(--green); font-size: 11px; }
+header .ticker .pulse { display: inline-block; width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; vertical-align: middle; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+header .right { display: flex; gap: 16px; color: var(--text-dim); font-size: 11px; flex-wrap: wrap; }
+header .right span strong { color: var(--white); }
+header .right a { color: var(--text-dim); }
+header .right a:hover { color: var(--amber); }
+
+.strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border-bright);
+}
+.strip .cell { background: var(--panel); padding: 8px 12px; }
+.strip .cell .lbl { color: var(--text-mute); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.strip .cell .val { color: var(--amber); font-size: 18px; font-weight: 700; margin-top: 2px; }
+.strip .cell .sub { color: var(--text-dim); font-size: 10px; margin-top: 2px; }
+.strip .cell.alert .val { color: var(--red); }
+.strip .cell.ok .val { color: var(--green); }
+
+.filterbar {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border-bright);
+    padding: 8px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    font-size: 11px;
+}
+.filterbar .group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.filterbar .lbl { color: var(--text-mute); text-transform: uppercase; letter-spacing: 1px; }
+.filterbar .btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border-bright);
+    padding: 3px 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.filterbar .btn:hover { color: var(--amber); border-color: var(--amber); }
+.filterbar .btn.active { color: var(--bg); background: var(--amber); border-color: var(--amber); }
+.filterbar .search {
+    background: var(--panel);
+    border: 1px solid var(--border-bright);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 11px;
+    padding: 4px 8px;
+    width: 220px;
+}
+.filterbar .search:focus { outline: none; border-color: var(--amber); }
+.filterbar .actions { margin-left: auto; display: flex; gap: 6px; }
+
+main { padding: 0; }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+.tbl thead th {
+    background: var(--bg-alt);
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-bright);
+    position: sticky;
+    top: 88px;
+    z-index: 10;
+    white-space: nowrap;
+}
+.tbl tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+}
+.tbl tbody tr.task { cursor: pointer; transition: background 0.1s; }
+.tbl tbody tr.task:hover td { background: var(--bg-alt); }
+.tbl tbody tr.task.open td { background: var(--panel); }
+.tbl tbody tr.task.open .chevron::before { content: "▾"; }
+.tbl tbody tr.task .chevron { color: var(--text-mute); margin-right: 6px; display: inline-block; width: 10px; }
+.tbl tbody tr.task .chevron::before { content: "▸"; }
+.tbl tbody tr.task.open .chevron { color: var(--amber); }
+
+.tbl tbody tr.section-hdr td {
+    background: var(--panel);
+    color: var(--amber);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    padding: 10px;
+    border-top: 2px solid var(--border-bright);
+}
+
+.tbl tbody tr.detail { display: none; }
+.tbl tbody tr.detail.open { display: table-row; }
+.tbl tbody tr.detail td {
+    background: var(--panel-2);
+    padding: 16px 24px 20px 36px;
+    border-bottom: 1px solid var(--border-bright);
+    border-left: 3px solid var(--amber);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 28px;
+}
+.detail-section { display: flex; flex-direction: column; gap: 6px; }
+.detail-section.span2 { grid-column: 1 / -1; }
+.detail-label {
+    color: var(--amber);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+.detail-body {
+    color: var(--text);
+    font-size: 11.5px;
+    line-height: 1.55;
+}
+.detail-body ol, .detail-body ul { padding-left: 18px; margin: 4px 0; }
+.detail-body li { margin: 3px 0; }
+.detail-body code {
+    background: var(--bg);
+    color: var(--cyan);
+    padding: 1px 5px;
+    font-size: 11px;
+    border: 1px solid var(--border-bright);
+}
+.detail-body strong { color: var(--white); }
+.detail-body em { color: var(--amber); font-style: normal; }
+.detail-body a { color: var(--cyan); border-bottom: 1px dotted var(--cyan); }
+.detail-body a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+.status { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.status.pend { background: rgba(255, 214, 0, 0.15); color: var(--yellow); border: 1px solid rgba(255, 214, 0, 0.4); }
+.status.wip { background: rgba(41, 217, 230, 0.15); color: var(--cyan); border: 1px solid rgba(41, 217, 230, 0.4); }
+.status.done { background: rgba(51, 209, 122, 0.15); color: var(--green); border: 1px solid rgba(51, 209, 122, 0.4); }
+.status.blkd { background: rgba(255, 59, 59, 0.15); color: var(--red); border: 1px solid rgba(255, 59, 59, 0.4); }
+.status.hold { background: rgba(136, 136, 136, 0.15); color: var(--text-dim); border: 1px solid rgba(136, 136, 136, 0.4); }
+
+.pri { font-weight: 700; }
+.pri.p0 { color: var(--red); }
+.pri.p1 { color: var(--amber); }
+.pri.p2 { color: var(--yellow); }
+.pri.p3 { color: var(--text-dim); }
+
+.owner { color: var(--cyan); font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
+.dollar { color: var(--green); font-weight: 700; text-align: right; }
+.dollar.neg { color: var(--red); }
+.dollar.neutral { color: var(--text-dim); }
+.wk { display: inline-block; padding: 1px 6px; background: var(--panel); border: 1px solid var(--border-bright); color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
+
+.task-desc { color: var(--text); }
+.task-desc .id { color: var(--text-mute); font-weight: 600; margin-right: 8px; font-size: 10px; }
+.task-desc .ref { color: var(--text-mute); font-size: 10px; margin-top: 2px; font-style: italic; }
+
+.chip { display: inline-block; padding: 0 5px; border: 1px solid var(--border-bright); color: var(--text-dim); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+.chip.alert { color: var(--red); border-color: var(--red); }
+.chip.lever { color: var(--green); border-color: var(--green); }
+
+footer {
+    padding: 12px 16px;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border-bright);
+    color: var(--text-mute);
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+footer .right { color: var(--amber); }
+footer a { color: var(--text-dim); }
+footer a:hover { color: var(--amber); }
+
+tr.hidden { display: none !important; }
+
+@media print {
+    html, body { background: white; color: black; font-size: 9px; }
+    header, .filterbar, footer { display: none; }
+    .tbl thead th { background: white; color: black; border-bottom: 2px solid black; position: static; }
+    .tbl tbody td { border-bottom: 1px solid #DDD; color: black; }
+    .tbl tbody tr.section-hdr td { background: #EEE; color: black; border-top: 2px solid black; }
+    .tbl tbody tr.detail.open td { background: #FAFAFA; border-left: 3px solid #999; color: black; }
+    .detail-label { color: black; }
+    .strip { background: white; border-bottom: 2px solid black; page-break-after: avoid; }
+    .strip .cell { background: white; border-right: 1px solid #DDD; }
+    .strip .cell .lbl, .strip .cell .sub { color: #666; }
+    .strip .cell .val { color: black; }
+    .status { background: white !important; }
+    .owner, .dollar, .wk, .pri, .chip { color: black !important; }
+}
+
+@media (max-width: 768px) {
+    .strip { grid-template-columns: repeat(2, 1fr); }
+    .detail-grid { grid-template-columns: 1fr; }
+    header .right { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="left">
+        <span class="brand">GTW &lt;TASK&gt;</span>
+        <span class="crumbs"><a href="./" style="color:inherit;text-decoration:none">MIL.COM</a> / LG_MILITARY_ADS / 1034037341617540</span>
+        <span class="ticker"><span class="pulse"></span>LIVE</span>
+    </div>
+    <div class="right">
+        <span>UPD <strong>2026-06-05</strong></span>
+        <span>SRC <strong>MASTER_AUDIT</strong></span>
+        <span><a href="./">PORTAL</a></span>
+    </div>
+</header>
+
+<div class="strip">
+    <div class="cell"><div class="lbl">SPEND 30D</div><div class="val">$841K</div><div class="sub">matches prior audit</div></div>
+    <div class="cell ok"><div class="lbl">OPP SCORE</div><div class="val">99/100</div><div class="sub">structural OK</div></div>
+    <div class="cell alert"><div class="lbl">ROAS</div><div class="val">N/A</div><div class="sub">value pipe broken</div></div>
+    <div class="cell alert"><div class="lbl">MAX VAL PREMIUM</div><div class="val">+67%</div><div class="sub">$137K/mo bleed</div></div>
+    <div class="cell"><div class="lbl">FREQ</div><div class="val">6.38</div><div class="sub">burn risk</div></div>
+    <div class="cell"><div class="lbl">CONCEPT CONC</div><div class="val">76%</div><div class="sub">2 families · $640K</div></div>
+    <div class="cell"><div class="lbl">RETARGETING</div><div class="val">~20</div><div class="sub">people · SAC blocked</div></div>
+    <div class="cell ok"><div class="lbl">EMQ PURCHASE</div><div class="val">9.1</div><div class="sub">CompReg 8.3</div></div>
+</div>
+
+<div class="filterbar">
+    <div class="group">
+        <span class="lbl">PRI</span>
+        <button class="btn active" data-filter="pri" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="pri" data-val="P0">P0</button>
+        <button class="btn" data-filter="pri" data-val="P1">P1</button>
+        <button class="btn" data-filter="pri" data-val="P2">P2</button>
+        <button class="btn" data-filter="pri" data-val="P3">P3</button>
+    </div>
+    <div class="group">
+        <span class="lbl">OWNER</span>
+        <button class="btn active" data-filter="owner" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="owner" data-val="MO">MO</button>
+        <button class="btn" data-filter="owner" data-val="LAUREN">LAUREN</button>
+        <button class="btn" data-filter="owner" data-val="DEV">DEV</button>
+        <button class="btn" data-filter="owner" data-val="HASSAN">HASSAN</button>
+        <button class="btn" data-filter="owner" data-val="ANTHONY">ANTHONY</button>
+    </div>
+    <div class="group">
+        <span class="lbl">WEEK</span>
+        <button class="btn active" data-filter="wk" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="wk" data-val="THIS">THIS WK</button>
+        <button class="btn" data-filter="wk" data-val="W2">WK 2</button>
+        <button class="btn" data-filter="wk" data-val="W3">WK 3</button>
+        <button class="btn" data-filter="wk" data-val="W4+">WK 4+</button>
+    </div>
+    <div class="group">
+        <span class="lbl">STATUS</span>
+        <button class="btn active" data-filter="stat" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="stat" data-val="PEND">PEND</button>
+        <button class="btn" data-filter="stat" data-val="WIP">WIP</button>
+        <button class="btn" data-filter="stat" data-val="BLKD">BLKD</button>
+        <button class="btn" data-filter="stat" data-val="HIDE_DONE">HIDE DONE</button>
+    </div>
+    <div class="group">
+        <span class="lbl">FIND</span>
+        <input type="text" class="search" id="searchInput" placeholder="Search task or ID..." />
+    </div>
+    <div class="actions">
+        <button class="btn" id="expandAll">EXPAND ALL</button>
+        <button class="btn" id="collapseAll">COLLAPSE</button>
+    </div>
+</div>
+
+<main>
+<table class="tbl">
+    <thead>
+        <tr>
+            <th style="width:60px">PRI</th>
+            <th style="width:70px">STATUS</th>
+            <th>TASK</th>
+            <th style="width:90px">OWNER</th>
+            <th style="width:60px">WK</th>
+            <th style="width:80px">DUE</th>
+            <th style="width:110px; text-align:right">$ IMPACT</th>
+            <th style="width:120px">DEPS</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+
+<!-- ============ TODAY ============ -->
+<tr class="section-hdr"><td colspan="8">▎ TODAY · FRI JUN 5 · ZERO-COST CLEANUP + VERIFICATION (DO BEFORE WEEKEND)</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="A01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A01</span>EVENTS MGR DIAGNOSTICS · DATASET 332555186604235 · PURCHASE VALUE PARAM CHECK<div class="ref">→ events_manager_walkthrough.md · screenshot the malformation flag</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">GATES $1.6M/YR</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Root-cause finding from the audit. Meta returns <code>purchase_roas: "Not available"</code> at every level — account, campaign, ad set, ad. This means Auto Max Val (which optimizes for <code>RETURN_ON_AD_SPEND</code>) is paying a <strong>67% CPL premium</strong> ($36.44 vs $21.84 BAU) against a signal that doesn't compute. <em>Confirming this in Events Manager is the gate for everything else.</em> Without screenshot evidence, every downstream decision (especially the Max Val pause call) is on inference, not evidence.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Go to <code>business.facebook.com</code> → Events Manager</li>
+            <li>Select the Iron Corp / Military.com BM (containing LG Military Ads <code>1034037341617540</code>)</li>
+            <li>Datasets sidebar → click <strong>"Military Insurance"</strong> (ID <code>332555186604235</code>) — NOT "Military.com's Pixel" or "MA Military Insurance"</li>
+            <li>Click the <strong>Diagnostics</strong> tab (top nav)</li>
+            <li>Look for a flag on the <strong>Purchase event value parameter</strong>: "formatting issues", "invalid format", or "recommend updating value field"</li>
+            <li>If found: expand it, screenshot the affected event count + recommended format</li>
+            <li>If NOT in Diagnostics: Overview → Event Details → Purchase event → check value distribution. 98%+ same number = broken pipe even if Meta doesn't flag</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">A screenshot proving (or disproving) the value malformation claim. This becomes the artifact you walk into the dev conversation with. If confirmed: <strong>Auto Max Val decision becomes data-supported, not inference-supported.</strong></div></div>
+        <div class="detail-section"><div class="detail-label">DO NOT CLICK</div><div class="detail-body">The Diagnostics tab sometimes shows "Apply Recommendation" / "Fix" buttons. <strong>Don't click these</strong> without dev review — Meta's auto-fixes sometimes restructure the event schema and break downstream QW/Delty postbacks.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>5 minutes.</strong> Do this before the weekend so Mon Jun 8 starts with the evidence in hand.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="A02">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A02</span>EVENTS MGR DIAGNOSTICS · FBC/FBCLID PARAM TRUNCATION CHECK<div class="ref">→ note affected ad set count</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">VALIDATES $67K BLEED</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Prior audit flagged <strong>15 ad sets, $67,174 spend, 27% of CompleteRegistration events</strong> affected by fbc truncation. API confirms fbc is PRESENT (87% coverage on Purchase, 100% on CompleteRegistration) but cannot validate value integrity. Truncation degrades attribution and trains Meta's algorithm on partial signal.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Same dataset (<code>332555186604235</code>), same Diagnostics tab as A01</li>
+            <li>Look for warnings on <strong>fbc</strong>: "truncated", "invalid format", "missing characters"</li>
+            <li>Expand if found — note ad set count, affected event count, example fbc value</li>
+            <li>Healthy fbc starts with <code>fb.1.</code> with 3+ dots. Truncated = fewer dots.</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Screenshot of fbc truncation flag OR confirmation it's resolved. If confirmed: hand to dev as a URL-parameter-handling fix (typically a 1-2 day engineering task).</div></div>
+        <div class="detail-section"><div class="detail-label">DEPS</div><div class="detail-body">Doing A01 first means you're already in the right dataset — saves clicks.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>3 minutes</strong> while you're already in Diagnostics.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="A03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A03</span>ADS LIBRARY · CONFIRM "SAVE UP TO 60%" CREATIVES ZERO LIVE<div class="ref">→ search page 6179724269 for "60%"</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">COMPLIANCE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">May 13 audit flagged 3 active ads running "Save up to 60%" claim (4× the published carrier band, no qualifier, no disclosure). Jun 4 audit didn't see them in top 50 spenders. Sweep the full library to confirm zero live before the meeting — Hassan will ask.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Open <a href="https://facebook.com/ads/library" target="_blank">facebook.com/ads/library</a></li>
+            <li>Filters: <strong>Country = US</strong>, <strong>Active status = Active</strong>, <strong>Ad category = All ads</strong></li>
+            <li>Page search: <strong>Military.com</strong> (page ID <code>6179724269</code>)</li>
+            <li>In the keyword filter: <strong>"60%"</strong></li>
+            <li>Note any active ads — record Ad IDs</li>
+            <li>If any are live: pause via Ads Manager <strong>before EOD</strong></li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Zero active ads with "60%" claim language. Or list of any active with pause action queued for Monday.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>5 minutes.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="A04">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A04</span>BUSINESS SETTINGS · ARCHIVE STATUS "MIL FB CUSTOMER MATCH 4.12.21"<div class="ref">→ confirm replacement by Custom_Recruiting-Leads_08-05-2025</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">—</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Prior audit referenced this audience by name; Jun 4 audit didn't find it in active inventory. Confirming archive status closes the loop on the customer-match list question and prevents Lauren saying "that's the one we use" later.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Business Settings → Data Sources → <strong>Audiences</strong></li>
+            <li>Search "<em>Mil FB Customer Match 4.12.21</em>"</li>
+            <li>Check archived audiences tab if not in active list</li>
+            <li>Note last refresh date if found</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Confirmed status: archived / deleted / replaced. If found archived with recent date, confirm with Lauren which is the canonical live customer-match list.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>2 minutes.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="A05">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A05</span>DELETE 28 DEAD PLACEHOLDER LOOKALIKES <span class="chip lever">FREE CLEANUP</span><div class="ref">→ all sized 1,000 · INACTIVE · zero risk</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">28 lookalikes all sized at <strong>exactly 1,000 people</strong> — Meta's signature for orphaned/broken lookalikes (seed audience deleted). Zero value as targeting, zero risk to delete. Reduces account audience list from 38 → 10 active. Mo's 30-day plan task B4.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Ads Manager → <strong>Audiences</strong></li>
+            <li>Filter: <strong>Status = Inactive</strong>, <strong>Type = Lookalike</strong></li>
+            <li>Select all entries sized at <strong>1,000</strong> with patterns like:
+                <ul><li>"Lookalike (Worldwide, 1%) - ..."</li><li>"Lookalike (US, 1%) - ..." dated 2025-07-09 or 2025-07-22</li><li>"Lookalike (US, 3% / 10%) - ..." same dates</li></ul>
+            </li>
+            <li>Bulk delete via the action menu</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">28 placeholders gone. Active audience inventory reduces to ~10 entries.</div></div>
+        <div class="detail-section"><div class="detail-label">DO NOT DELETE</div><div class="detail-body">The <strong>active LAL ladder</strong> on Custom_Recruiting-Leads (1%/3%/5%) — those are properly sized (1.9M–10.1M) and powering the ALC + Max Val campaigns. Only delete the 1,000-size INACTIVE ones.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>10 minutes.</strong></div></div>
+    </div></td>
+</tr>
+
+<!-- ============ MON JUN 8 ============ -->
+<tr class="section-hdr"><td colspan="8">▎ MON JUN 8 · WEEK 1 KICKOFF · UNBLOCK MAX VAL DECISION + REQUEST INPUTS</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="DEV" data-wk="THIS" data-stat="BLKD" data-id="B01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status blkd">BLKD</span></td>
+    <td class="task-desc"><span class="id">B01</span>DEV TIMELINE FOR PURCHASE VALUE-PIPE FIX · BEST + WORST CASE WEEKS<div class="ref">→ unblocks B02 (Max Val decision)</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar neutral">GATES $137K/MO</td>
+    <td>A01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">This number gates the Auto Max Val decision (B02). Without an honest timeline (best + worst case weeks), the Max Val call is a guess. <strong>2 weeks = cap. 6+ weeks = pause + reallocate.</strong></div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Send Anthony (or his dev lead) a Slack / email</li>
+            <li>Attach the screenshot from A01</li>
+            <li>Scope the question precisely: <em>"Who passes the QW per-lead payout to the Purchase event? Where does that integration sit? What server-side changes are needed?"</em></li>
+            <li>Ask explicitly: <strong>"Best case weeks / worst case weeks / what's the work?"</strong></li>
+            <li>Push back if you get vague answers — get a number, even with a wide range</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Written timeline estimate (e.g., "2-4 weeks depending on QW API access"). With this you can make the Max Val call Tuesday.</div></div>
+        <div class="detail-section"><div class="detail-label">DEPS</div><div class="detail-body">A01 — need the diagnostic screenshot to scope the fix concretely.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> to send and follow up. Their response may take 1-2 business days.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P0" data-owner="HASSAN" data-wk="THIS" data-stat="BLKD" data-id="B02">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status blkd">BLKD</span></td>
+    <td class="task-desc"><span class="id">B02</span>DECIDE AUTO MAX VAL · PAUSE / CAP / KEEP <span class="chip alert">BIGGEST DECISION</span><div class="ref">→ auto_max_val_decision.md</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+$110K/MO</td>
+    <td>B01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body"><strong>$341K/30d optimizing against a broken signal.</strong> 67% CPL premium = $137K/mo bleed. Largest single $$$ decision in the engagement. <em>The deeper-dive doc walks through the three options with math.</em></div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Three options:<ul>
+            <li><strong>A — Pause + reallocate to BAU:</strong> saves ~$110K/mo at same volume (BAU CPL $21.84 vs Max Val $36.44)</li>
+            <li><strong>B — Cap at current spend:</strong> holds line, decides later. Lowest risk, lowest reward.</li>
+            <li><strong>C — Keep running:</strong> bleeds $137K/mo during fix window. Worst-of-both.</li>
+        </ul>Decision rule based on B01 dev timeline:<ul>
+            <li>2 weeks → <strong>Option B</strong> (cap, hold)</li>
+            <li>3-4 weeks → <strong>Option A</strong> (pause + reallocate)</li>
+            <li>6+ weeks → <strong>Option A</strong> (pause + reallocate)</li>
+        </ul>Bring the framing from <a href="audit/auto_max_val_decision.html">auto_max_val_decision.md</a> verbatim — Hassan-tested language.</div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Hassan-signed decision in writing (text / email / Slack). Action queued for Wed.</div></div>
+        <div class="detail-section"><div class="detail-label">DEPS</div><div class="detail-body">B01 — without a dev timeline you're guessing.</div></div>
+        <div class="detail-section"><div class="detail-label">PUSHBACK PREP</div><div class="detail-body">If Hassan says "Max Val has been running for months, must be working" → response is in the deep-dive doc. Short version: Meta returning <code>purchase_roas: "Not available"</code> at every level IS the algorithm telling us optimization isn't happening.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> Hassan conversation Tuesday or Wednesday.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="LAUREN" data-wk="THIS" data-stat="PEND" data-id="B03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B03</span>REQUEST FRESH 180-DAY SOLD-LEADS EXPORT FROM QW/DELTY<div class="ref">→ rebuild customer-list seed (current is 10mo stale)</div></td>
+    <td><span class="owner">LAUREN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+5-10% LAL LIFT</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Current customer-list seed (<code>Custom_Recruiting-Leads_08-05-2025</code>) is 10 months old. All three active LALs (1%/3%/5%) — which power ALC + Max Val campaigns — are downstream of this stale seed. A 10-month-old seed underweights recent buying behavior; refreshing yields ~5–10% LAL performance lift across the LAL-driven campaigns.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Slack / email Lauren</li>
+            <li>Ask: <em>"Can you pull a CSV export of sold leads from the last 180 days for a fresh customer-match upload? I want to rebuild the LAL ladder on current signal."</em></li>
+            <li>Required fields: hashed or plain email (Meta will hash on upload), phone if available, name, ZIP, country</li>
+            <li>Confirm format: CSV with column headers — Meta accepts most formats</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">CSV file from Lauren in your inbox by Wed. Triggers C02 (rebuild seed).</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>5 min</strong> ask. Lauren's response may take 1-2 days.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="LAUREN" data-wk="THIS" data-stat="PEND" data-id="B04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B04</span>PULL MAR + APR 2026 DAILY REPORTS · SAME FORMAT AS MAY<div class="ref">→ baseline vetting input · required before mid-June Hassan 1:1</div></td>
+    <td><span class="owner">LAUREN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-09</td>
+    <td class="dollar">$45-67K NEGO</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Hassan proposed $275K (May) as the baseline. May data shows the month ended at a $87K-exit-run-rate after Memorial Day collapse — meaning $275K is misleading. To argue baseline DOWN (worth $45-67K to Mo over the pilot), you need March + April for YoY-comparable context.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Slack Lauren</li>
+            <li>Ask: <em>"Can you send daily reports in the same format as the May file from July 2025 through May 2026? Full post-acquisition history."</em></li>
+            <li>Frame as <strong>execution prep, not baseline negotiation</strong>: <em>"Each category we're running has its own seasonal rhythm. Want to use last year's numbers as the hypothesis for budget + creative allocation in the back half."</em></li>
+            <li>Don't telegraph the baseline fight</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">CSV files for at minimum Mar + Apr 2026 in your inbox by Wed. Triggers D06 (YoY analysis).</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>5 min</strong> ask. Should be fast if pulled from internal tool.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="ANTHONY" data-wk="THIS" data-stat="PEND" data-id="B05">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B05</span>QW CONTRACT TERMS · EXCLUSIVITY · PING-POST PERMISSIONS<div class="ref">→ gates form migration Tier 2 viability</div></td>
+    <td><span class="owner">ANTHONY</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">GATES $1-3M</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The form-migration play's big money is in <strong>multi-buyer ping-post</strong> (Tier 2) — posting each lead to QW + EverQuote + MediaAlpha simultaneously and taking the best bid. Potential 20-30% RPL lift. <strong>But if QW contract has exclusivity, ping-post is blocked and the migration value drops by half.</strong> Cannot scope the migration without reading the contract.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Ask Anthony for a copy of the current QW/Delty/LendingTree contract</li>
+            <li>Look for: <strong>exclusivity clause</strong>, <strong>volume commitment</strong>, <strong>termination notice</strong>, <strong>ping-post permissions</strong>, <strong>revenue share / accept-rate structure</strong></li>
+            <li>If exclusivity present: scope the wind-down before any migration work</li>
+            <li>If ping-post explicitly permitted: this is the big unlock</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Contract reviewed, key terms documented in a one-page memo for the form-migration scoping conversation.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> reading + ~1 hour summary memo.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="ANTHONY" data-wk="THIS" data-stat="PEND" data-id="B06">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B06</span>DECIDE MA MILITARY INSURANCE DATASET · 1536649764252698<div class="ref">→ never fired server-side · activate or archive</div></td>
+    <td><span class="owner">ANTHONY</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">"MA" likely = MediaAlpha. Dataset created Dec 1, 2025. Browser fires today; <strong>server has never fired</strong>. Either an unactivated MediaAlpha integration or a stale test dataset. Anthony's earlier framing was "ignore MediaAlpha, focus on Delty" — consistent with this dataset being intentionally dormant. Just confirm and decide.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Slack Anthony</li>
+            <li>Ask: <em>"The MA Military Insurance dataset (<code>1536649764252698</code>) has never fired server-side. What is it for? Activate or archive?"</em></li>
+            <li>Apply his decision: activate (engineering work) or archive (Business Settings → Datasets → Archive)</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Anthony-confirmed status. Either activated (with dev plan) or archived.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>5 min</strong> ask + ~10 min to archive if that's the decision.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="DEV" data-wk="THIS" data-stat="PEND" data-id="B07">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B07</span>SCOPE SIGNALS GATEWAY / CAPI FOR DATASET 587241028099131<div class="ref">→ content pixel · server silent since Mar 2023 · +23% lever</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">+23% COST/RESULT</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">"Military.com's Pixel" — the content pixel from 2016 — runs browser-only. Server hasn't fired since <strong>March 2023</strong>. Adding a Signals Gateway / CAPI here lets Meta see retargeting events from military.com's broader content footprint. Estimated impact: <strong>+23% cost/result</strong>. Engineering-only (no creative dependency).</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Ask dev to scope adding <strong>Conversions API Gateway</strong> for dataset <code>587241028099131</code></li>
+            <li>This is typically a <strong>24–48 hour dev sprint</strong> (deploy Stape or Meta's CAPI Gateway, configure event mapping)</li>
+            <li>Confirm event taxonomy to mirror: at minimum PageView + SubscribedButtonClick + Lead (currently browser-only)</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Dev commits to a build window. Target landing: Week 2 (Jun 15-19).</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>15 min scoping conversation.</strong> Build is dev-team estimated 24-48 hours of engineering.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ WEEK 1 EXECUTION ============ -->
+<tr class="section-hdr"><td colspan="8">▎ WEEK 1 EXECUTION · MON-FRI JUN 8-12 · SHIPPABLE</td></tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C01">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C01</span>BUILD NEW AD SET · FB+IG ENGAGEMENT WARM LAYER <span class="chip lever">FREE LEVER</span><div class="ref">→ page_engagement_audience_build.md · $1.5K/day · 2 creatives</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+5-10% QUAL LEADS</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Under SAC, website-Pixel retargeting is essentially nonexistent (All Site Visitors / Visited Auto LP are at ~20 people each). BUT the page-engagement audiences (FB Page Likers 1M, FB Engagers 341K, IG Followers 30K, IG Engagers 93K) are healthy and SAC-compliant — and <strong>completely unused as ad-set targeting</strong>. Building one ad set against them = the only warm layer the account has access to. Free lever.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Full spec in <a href="audit/page_engagement_audience_build.html">page_engagement_audience_build.html</a>. Quick version:<ol>
+            <li>Add ad set to <strong>Auto SAC BAU</strong> campaign (<code>120240808864310498</code>) — pile into existing post-learning campaign</li>
+            <li>Name: <code>Auto BAU - Page+IG Engagement (Warm)</code></li>
+            <li>Optimization: <code>OFFSITE_CONVERSIONS</code> (matches sibling ad sets)</li>
+            <li><strong>Daily budget: $1,500</strong></li>
+            <li><strong>Include:</strong> union of FB Page Likers + FB Engagers + IG Followers + IG Engagers</li>
+            <li><strong>Exclude:</strong> Custom_Recruiting-Leads_08-05-2025 (suppress existing customers)</li>
+            <li>Creatives: <strong>Lower-Your-Auto_04/28</strong> + <strong>Drive-On_05/30</strong> (two proven winners). NOT TYFYS, NOT Veteran-VO.</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Ad set live by Wed EOD. Monitor first 72 hours for CPL trajectory. Expected CPL: $15–17 (20-30% below cold).</div></div>
+        <div class="detail-section"><div class="detail-label">DECISION RULE AFTER 72H</div><div class="detail-body">CPL &lt; $20 → scale to $3K/day. $20-28 → hold. $28-36 → investigate. &gt; $36 → pause.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> to build in Ads Manager. Set-and-monitor after.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C02">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C02</span>REBUILD CUSTOM-LIST SEED FROM FRESH 180D SOLD-LEADS EXPORT<div class="ref">→ then rebuild 1%/3%/5% LALs</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-11</td>
+    <td class="dollar">+5-10% LAL LIFT</td>
+    <td>B03</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Once you have Lauren's fresh 180-day sold-leads CSV (B03), the rebuild is mechanical. Fresh seed → fresh LALs → 5-10% LAL performance lift on the campaigns currently using them.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Ads Manager → Audiences → Create → <strong>Custom Audience</strong> → <strong>Customer List</strong></li>
+            <li>Upload Lauren's CSV. Meta will hash and match. Match rate of 50%+ is healthy.</li>
+            <li>Name: <code>Custom_Sold-Leads_2026-06</code> (or similar — keep naming convention consistent)</li>
+            <li>Once the audience is ready (1-24h), create <strong>Lookalike</strong> audiences: 1%, 3%, 5% all US-targeted</li>
+            <li>Swap the LAL audiences in active ad sets from the old (Aug 2025) to the new June 2026 LALs</li>
+            <li>Keep old LALs for 1 week as fallback; archive after performance validates</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">New LAL ladder live; old LALs swapped out of ad sets; performance comparison ready for Friday readout.</div></div>
+        <div class="detail-section"><div class="detail-label">DEPS</div><div class="detail-body">B03 — Lauren's CSV.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>1 hour</strong> total (15 min upload, wait for processing, 15 min create LALs, 30 min swap into ad sets).</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C03</span>SHIP 8-10 NET-NEW CREATIVE CONCEPTS<div class="ref">→ Home Inside_Icon + Drive-On + spouse-angle</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">FATIGUE OFFSET</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Concept concentration is 76% of spend on 2 families. Odometer 05/15 single ad at frequency 3.27 — <strong>~14 days from fatigue cliff</strong>. New creative isn't optional; it's the only way to slow the fatigue clock.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Priority concept directions (from audit):<ul>
+            <li><strong>Home Inside_Icon variants</strong> (3-4 new) — Home format is best-CPL in the account at $12.68. Under-funded at $61K vs $371K Auto.</li>
+            <li><strong>Drive-On variants</strong> (2-3 new) — newest creative trending at $18.43 BAU. Scale on its proven format.</li>
+            <li><strong>Spouse-angle test</strong> (1-2 new) — competitor Veteran Life Insurance proves angle works. Military.com has zero spouse-specific creative.</li>
+            <li><strong>Video — anything</strong> (1-2 new) — current 5:1 static:video split is a gap. Even one new video tests the format.</li>
+        </ul>Use War Room AI variant generation pipeline. Mo+Lauren approval batch (not per-ad). Ship Mon + Thu.</div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">8-10 new concept ads live by Friday. Frequency on Odometer 05/15 starts declining as new variants absorb impressions.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>~3-4 hours</strong> across the week (concept briefs, generation, QA, upload).</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C04</span>REALLOCATE AUTO BAU PACING GAP · $8.5K/DAY UNDEPLOYED<div class="ref">→ shift to Drive-On + Lower-Your-Auto BAU winners</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+$255K/MO SPEND</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Auto BAU campaign cap is $19,800/day. Actual spend is $11,296/day (57% utilization). <strong>$8,500/day of approved budget is sitting unused.</strong> At BAU's $21.84 CPL that's ~390 additional leads/day if filled smartly.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Ads Manager → Auto BAU campaign (<code>120240808864310498</code>)</li>
+            <li>Identify the ad sets currently throttling: usually the algorithmic CBO/CPR bid strategy is limiting spend</li>
+            <li>Options to fill the gap:
+                <ul>
+                    <li>Raise bids on Drive-On + Lower-Your-Auto BAU ad sets gradually (10-20% increments)</li>
+                    <li>Loosen the CPR target slightly (e.g., $22 → $25) on the best-performing ad sets</li>
+                    <li>Add the new warm-layer ad set (C01) — that absorbs $1.5K/day immediately</li>
+                </ul>
+            </li>
+            <li>Don't over-fill in one move — Meta's algorithm punishes sudden 50%+ daily spend increases</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Spend pacing closer to $16-18K/day by Friday without CPL inflation > 10%.</div></div>
+        <div class="detail-section"><div class="detail-label">WATCH FOR</div><div class="detail-body">If CPL climbs above $25 while filling, throttle back. The gap exists for a reason; don't force.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> + daily monitor.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C05">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C05</span>SCALE HOME SPEND SHARE 8% → 15% (WK1) → 20% (WK2)<div class="ref">→ Home CPL 39% lower than Auto</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">+8-12% NET REV</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Home blended CPL is <strong>$16.34</strong> vs Auto $26.77 — Home is 39% cheaper. Currently Home is 9.5% of spend, Auto is 90.5%. Both have similar ROAS (1.36 vs 1.33). Pure arbitrage: shifting spend from Auto to Home at constant total budget improves blended CPL.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Raise daily budget on <strong>Home SAC ALC</strong> ($4K → $6K) and <strong>Home SAC BAU</strong> ($2K → $3K) gradually</li>
+            <li>Add 1-2 net-new Home creatives (covered in C03 — Home Inside_Icon variants)</li>
+            <li>Trim Auto Max Val if Hassan signs Option A on B02 (otherwise leave Auto alone for now)</li>
+            <li>Week 1 target: Home share at 15% of total spend</li>
+            <li>Week 2 target: Home share at 20%</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Home daily spend ~$5K (was $2.7K) by Friday. Watch CPL — if it stays under $18 the scale is healthy.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>20 min</strong> budget adjustments + daily monitor.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C06">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C06</span>NARROW CUSTOM AD SETS · CONFIRM SOURCE SIZE OR REMOVE<div class="ref">→ IDs 120240808864440498 / 120227142278180498</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Prior audit flagged 2 Custom ad sets as targeting ~1,000-person audiences. Live data shows reach of 716K and 52K respectively (delivery is fine) — but the underlying source audience may still be the narrow ~1K. Confirm and either fix the source or remove.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Open each ad set in Ads Manager:
+                <ul><li><code>120240808864440498</code> — "Custom" in Auto BAU</li><li><code>120227142278180498</code> — "Custom" in Home BAU</li></ul>
+            </li>
+            <li>Click into Audience definition</li>
+            <li>Note the source CUSTOM audience name and size</li>
+            <li>If size is ~1,000 (broken state): replace with the refreshed Custom_Sold-Leads_2026-06 from C02</li>
+            <li>If size is healthy (>10K): leave as-is, no action</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Both ad sets either confirmed healthy or repaired with fresh audience.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>15 min.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P3" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C07">
+    <td><span class="chevron"></span><span class="pri p3">P3</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C07</span>VERIFY CUSTOMER-LIST LAL ELIGIBILITY UNDER SAC IN-PRODUCT<div class="ref">→ 30-sec sanity check (likely confirmed by live state)</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">VALIDATE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Mo's W4-T3 task. Customer-list LALs under SAC for Financial Products are technically allowed but vary by account history. Live state shows the LAL ladder IS active and properly sized — likely confirmed already, but verify in-product.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Try creating a test Lookalike from a customer list in this account</li>
+            <li>If Meta allows it without error: confirmed eligible</li>
+            <li>If Meta blocks with SAC warning: document the message, surface to Anthony</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>2 min.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND" data-id="C08">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C08</span>FRIDAY READOUT TO HASSAN · $-IMPACT FORMAT<div class="ref">→ first weekly readout · sets cadence</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">First Friday readout sets the cadence Hassan trusts. Format matters: lead with $-impact, end with what's coming. Avoid agency-speak.</div></div>
+        <div class="detail-section span2"><div class="detail-label">HOW TO FIX — STRUCTURE</div><div class="detail-body">Three bullets:<ol>
+            <li><strong>What we did this week:</strong> X cleanup tasks completed (28 LALs deleted, Y warm ad set live, etc.) + the Max Val decision status</li>
+            <li><strong>What we moved:</strong> early week 1 numbers vs trailing 4-week baseline — even directional</li>
+            <li><strong>What's coming:</strong> Week 2 priorities (CAPI build start, scale warm layer, ship more creative)</li>
+        </ol>Length: 5 sentences max. Send by 4pm Friday.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>20 min</strong> Friday afternoon.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ WEEK 2 ============ -->
+<tr class="section-hdr"><td colspan="8">▎ WEEK 2 · MON-FRI JUN 15-19 · CAPI BUILD + AUDIENCE OPTIMIZE</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="DEV" data-wk="W2" data-stat="HOLD" data-id="D01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D01</span>PURCHASE VALUE-PIPE FIX · SERVER-SIDE BUILD START<div class="ref">→ enables Max Val re-light</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">+7% ROAS</td>
+    <td>B01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The root-cause fix. Pass real QW per-lead payout into the Purchase event's <code>value</code> field. Meta estimates <strong>+7% ROAS account-wide</strong> from fixing this alone. Multi-week dev work — must start W2 to land by W4 measurement window.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX (DEV)</div><div class="detail-body"><ol>
+            <li>Identify where the QW postback lands (likely an Iron Corp server or webhook)</li>
+            <li>Map postback payload to Meta CAPI Purchase event with proper <code>value</code> field (real per-lead payout in USD, decimal)</li>
+            <li>Ensure dedup with browser-side Purchase via <code>event_id</code></li>
+            <li>Backfill last 7-14 days via offline event upload to seed Meta's optimizer</li>
+            <li>Verify in Events Manager → value distribution shows real numeric range</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Purchase event value parameter shows real payout amounts. <code>purchase_roas</code> starts populating in Ads Manager. Diagnostics tab clears the malformation flag.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body">Dev-estimated <strong>2-4 weeks</strong> (depends on QW API access). Started W2, lands by W4.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="DEV" data-wk="W2" data-stat="HOLD" data-id="D02">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D02</span>CAPI GATEWAY · CONTENT PIXEL 587241028099131 BUILD<div class="ref">→ +23% cost/result · 24-48hr sprint</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-17</td>
+    <td class="dollar">+23% CPR</td>
+    <td>B07</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The content pixel for military.com root has no CAPI since March 2023. Adding it = +23% cost/result lever. Faster build than the value-pipe fix; can land in W2.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX (DEV)</div><div class="detail-body"><ol>
+            <li>Deploy Meta Conversions API Gateway (or Stape.io self-hosted) for dataset <code>587241028099131</code></li>
+            <li>Configure server-side firing of PageView + SubscribedButtonClick + Lead</li>
+            <li>Wire match-key passing (hashed email, phone where available)</li>
+            <li>Validate in Events Manager: server events firing within hours</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body">Dataset shows server events firing within 24h of go-live. EMQ improves.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>24-48 hours</strong> of dev time. Scope set W1 (B07), build W2.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD" data-id="D03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D03</span>SCALE WARM AD SET · $1.5K → $3K/DAY IF CPL &lt; $20<div class="ref">→ decision after 72hr observation</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-15</td>
+    <td class="dollar">+$50-100K/MO</td>
+    <td>C01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">If the warm-layer ad set hits target CPL (&lt;$20), scaling 2× extracts more from the unique unused audience.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Decision rule by Monday Jun 15:<ul>
+            <li>If CPL &lt; $20 → raise budget to $3K/day, add a 3rd creative variant</li>
+            <li>If $20-28 → hold at $1.5K, tweak creative</li>
+            <li>If &gt;$28 → investigate / pause</li>
+        </ul></div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>10 min.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD" data-id="D04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D04</span>SHIP 10-12 NET-NEW CREATIVE · WK2<div class="ref">→ variants of W1 winners + new tests</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">FATIGUE OFFSET</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Iterate on Week 1 winners. Generate 3-4 variants of best-performing concept. Add 2-3 new tests in directions Week 1 data suggests.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD" data-id="D05">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D05</span>FORM MIGRATION PHASE 0 · QW CONTRACT REVIEW + DEV SCOPE<div class="ref">→ no code touching live · discovery only</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">SCOPE $200K/MO</td>
+    <td>B05</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Phase 0 = paper review + dev capacity scoping. No live code touched. Sets up Phase 1 (staging build) for W3-W4 if Phase 2 (live A/B) is going to land cleanly in Q3.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Use the QW contract review from B05. Map current form architecture (iframe / redirect / Iron Corp own page posting to QW API). Document the migration plan: Phase 1 build in staging W3-W4-Jul, Phase 2 A/B test 10-20% traffic late Jul, Phase 3 full cutover post-Aug measurement window.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="W2" data-stat="HOLD" data-id="D06">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D06</span>RUN YOY ANALYSIS · PREP BASELINE CASE FOR HASSAN<div class="ref">→ uses March + April data from B04</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">$45-67K NEGO</td>
+    <td>B04</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The data-backed argument for arguing the baseline DOWN from Hassan's $275K. Use the four candidate baseline methods (exit run rate / trailing avg / April / YoY-adjusted) and pressure-test his +64% Jun→Dec growth assumption.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Framework already in <a href="audit/_audit_combined.html">audit doc</a> and <a href="june-plan/_june_strategy_combined.html">June plan</a> baseline section. Drop the new Mar+Apr data in, compute the four candidate baselines, write the one-page case file for the Hassan 1:1 (E01).</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="W2" data-stat="HOLD" data-id="D07">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D07</span>VETERAN UGC SOURCING · MICRO-CREATOR OUTREACH<div class="ref">→ first 3-5 pieces target end of June</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-22</td>
+    <td class="dollar">MOAT</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Zero veteran UGC in the account. Zero across the entire competitor scan. Defensible creative moat unbuilt — and Military.com is uniquely positioned to ship it credibly.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Outreach plan in <a href="audit/_audit_combined.html#creative">creative engine plan</a>. Target micro-creators ($300-600/piece). Casting brief: real veterans in current civilian roles, not actors. Aim for 3-5 pieces in market by Jun 22.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ WEEK 3 ============ -->
+<tr class="section-hdr"><td colspan="8">▎ WEEK 3 · MON-FRI JUN 22-26 · BASELINE LOCK + STRATEGIC CONVERSATIONS</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="HASSAN" data-wk="W3" data-stat="HOLD" data-id="E01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E01</span>MID-JUNE 1:1 WITH HASSAN · BASELINE LOCK<div class="ref">→ 30-min slot · use case file from D06</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-22</td>
+    <td class="dollar">$45-67K</td>
+    <td>D06</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Single highest-leverage admin task in June for Mo's comp. Arguing baseline from $275K to ~$155-185K is worth $45-67K to Mo over the pilot. Wait until <strong>Week 3</strong> — after Week 1 wins are banked, Mo negotiates from strength.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body"><ol>
+            <li>Walk in with the one-page case file from D06</li>
+            <li>Open: <em>"Looking at March-April-May together, the trajectory tells a different story than the May headline. Want to walk you through what a fair baseline looks like."</em></li>
+            <li>Present the four candidate baselines with the math</li>
+            <li>Land on a specific number; get it in writing (text/email confirmation Tuesday)</li>
+        </ol></div></div>
+        <div class="detail-section"><div class="detail-label">DEPS</div><div class="detail-body">D06 — the case file.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>30 min</strong> conversation + 30 min prep.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="HASSAN" data-wk="W3" data-stat="HOLD" data-id="E02">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E02</span>RPL−CPL METRIC REFRAME PITCH · POST-BASELINE-WIN<div class="ref">→ "you only pay me to grow real net rev"</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-25</td>
+    <td class="dollar">METRIC ALIGN</td>
+    <td>E01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Mo's "most important strategic ask" per Master Plan W5-T1. Under SAC the standard CPL levers are blocked; CPL alone is a misleading metric. RPL−CPL spread captures both sides of the equation. Operator framing Hassan respects.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Pitch only AFTER baseline conversation (E01) goes well. Open: <em>"Now that we have a fair baseline, want to propose one more refinement to how we measure this. Right now we're optimizing for CPL only — but under SAC that misses half the equation. Switching to RPL−CPL spread or net rev per lead means you only pay me more when you actually make more."</em></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="DEV" data-wk="W3" data-stat="HOLD" data-id="E03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E03</span>CAPI · ACCEPTEDLEAD EVENT BACKFILLED FROM QW HISTORICALS<div class="ref">→ enables Meta optimization switch from form-fill to accepted-lead</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">+15% CPQL</td>
+    <td>D01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Once D01 (value-pipe fix) lands, the AcceptedLead event can be backfilled with real per-lead acceptance + payout data. Meta then trains on revenue-quality leads, not form-fills. Meta's published benchmark: 15% lower CPQL.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Dev work continues from D01. Add AcceptedLead as named event in CAPI taxonomy. Upload 7-14 days of historical QW accepted-lead data as offline events. Verify in Events Manager that AcceptedLead is firing at expected volume.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W3" data-stat="HOLD" data-id="E04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E04</span>SHIP 12-15 NET-NEW CREATIVE · CONCENTRATE WINNERS<div class="ref">→ deeper variants on validated winners · kill losers</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">SCALE PREP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">By W3 you have W1 + W2 performance data. Triple down on validated winners with 4-5 variants each. Kill bottom-decile losers. Net add 12-15 new ads while removing under-performers — keeps ad count healthy.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="DEV" data-wk="W3" data-stat="HOLD" data-id="E05">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E05</span>FORM MIGRATION PHASE 1 · BUILD IN STAGING (NO LIVE)<div class="ref">→ wire consent + certs · server-side CAPI · demo-ready</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">SCOPE Q3</td>
+    <td>D05</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX (DEV)</div><div class="detail-body">Build the own-form in staging. Wire Jornaya + TrustedForm certs properly. Set up seller-specific consent. Stand up server-side CAPI on the new form path. <strong>Do not touch live traffic.</strong> Get to "demo-ready" by end of W3 so A/B test can launch in July.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="W3" data-stat="HOLD" data-id="E06">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E06</span>VETERAN UGC · 3-5 PIECES IN MARKET<div class="ref">→ defensible moat</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">MOAT</td>
+    <td>D07</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Sourcing started W2 (D07). By W3 first batch lands. Upload to Ads Manager, attach to BAU campaigns as test ad sets, monitor performance vs static creative baseline.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ WEEK 4 ============ -->
+<tr class="section-hdr"><td colspan="8">▎ WEEK 4 · MON-FRI JUN 29 - JUL 3 · CONSOLIDATE + END-OF-MONTH REVIEW</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="DEV" data-wk="W4+" data-stat="HOLD" data-id="F01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F01</span>VALUE-PIPE FIX · GO LIVE<div class="ref">→ unlocks Max Val re-light · +7% ROAS account-wide</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">+$60K/MO</td>
+    <td>D01·E03</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The audit's #1 fix lands. Meta starts computing real Purchase ROAS. Auto Max Val (if it was paused) can be re-lit. Account-wide +7% ROAS lift per Meta's benchmark.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Verify in Events Manager → Purchase event → value distribution shows real numeric range. <code>purchase_roas</code> starts populating in Ads Manager within 24-48h. Diagnostics flag clears.</div></div>
+        <div class="detail-section"><div class="detail-label">SUCCESS CRITERIA</div><div class="detail-body"><code>purchase_roas</code> available at ad set level in Ads Manager. EMQ on Purchase holds or improves.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P0" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="F02">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F02</span>SWITCH META OPTIMIZATION TO ACCEPTEDLEAD · POST VALUE-FIX<div class="ref">→ algorithm trains on revenue · not form-fills</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">SCALE PREP</td>
+    <td>F01</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">After F01 ships and AcceptedLead has 50+ events/week, test switching one ad set's optimization from custom-conversion (current "click to quotes") to AcceptedLead. Run a holdout for 7 days. If CPQL improves: roll to all ad sets.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="HASSAN" data-wk="W4+" data-stat="HOLD" data-id="F03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F03</span>END-OF-JUNE REVIEW WITH HASSAN · MONTH 1 SUMMARY + JUL/AUG FCST<div class="ref">→ formal monthly cadence</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-06-30</td>
+    <td class="dollar">RELATIONSHIP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">30-min slot end of June. Present: what shipped (creative count, audience builds, CAPI lands), what moved ($-impact vs locked baseline), goal-post forecast for Jul/Aug. Surface HELOC (F05) as a "later" item. Ask for end-of-July checkpoint slot.</div></div>
+        <div class="detail-section"><div class="detail-label">EFFORT</div><div class="detail-body"><strong>1 hour prep + 30 min meeting.</strong></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="F04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F04</span>SHIP 10-12 NET-NEW CREATIVE · CONCENTRATION PHASE<div class="ref">→ prep Jul-Aug measurement window</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">MEAS WINDOW</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">By end of June you have ~30-40 net-new ads in market. W4 is consolidation — concentrate spend on validated winners; ship 10-12 more variants on those winners for the measurement window.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="HASSAN" data-wk="W4+" data-stat="HOLD" data-id="F05">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F05</span>HELOC EXPANSION THESIS · SURFACE TO HASSAN (Q3+)<div class="ref">→ mention in EOM review</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-06-30</td>
+    <td class="dollar">FUTURE</td>
+    <td>F03</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">In the EOM review, mention HELOC as Q3+ idea: <em>"Adjacent revenue lane outside QW. Same audience. Worth scoping but not June work."</em> Don't divert capacity. Just plant the flag.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="F06">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F06</span>PHASE 2 RETAINER SCOPING · THREE-THREAD POST-PILOT<div class="ref">→ media + comp + recruitment partnerships</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">$50-100K/MO</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Internal Mo prep doc. Outline Phase 2 (Stage 3 from original pitch): full media ownership + cross-portfolio expansion + recruitment partnership program. Targeted at end-of-pilot Hassan conversation.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ JUL/AUG MEASUREMENT ============ -->
+<tr class="section-hdr"><td colspan="8">▎ JUL · AUG · MEASUREMENT WINDOW · 60-DAY RUN RATE TEST</td></tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="G01">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G01</span>FORM MIGRATION PHASE 2 · 10-20% TRAFFIC A/B TEST<div class="ref">→ ONLY after measurement window closes</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-09-01</td>
+    <td class="dollar">+$200K/MO</td>
+    <td>E05</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section span2"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">The first live traffic test of the own-form. Phased to land AFTER the Aug 31 measurement window so cutover wobble doesn't cost Mo the goal-post bonus.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Route 10-20% of traffic to the own-form via load balancer rule. Monitor accept rate hourly for 72h. If accept rate holds or improves: expand to 50% next week. If accept rate drops: investigate, fix, retry.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="G02">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G02</span>GOAL POST CHECK · JUL/AUG 60-DAY RUN RATE AVG<div class="ref">→ comp incentive paid Aug</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-08-31</td>
+    <td class="dollar">10-45K CAD</td>
+    <td>F02</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">WHY THIS MATTERS</div><div class="detail-body">Mo's comp incentive (10K / 25K / 45K CAD goal-post tiers) measured on July + August 60-day net revenue avg vs locked baseline.</div></div>
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Track weekly net revenue against baseline. End-of-Aug compute average vs each goal-post threshold. Document for invoice.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="W4+" data-stat="HOLD" data-id="G03">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G03</span>THREAD C · RECRUITMENT PARTNERSHIPS · POST-PILOT OUTREACH<div class="ref">→ Stage 2/3 conversation · NOT in June scope</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-09-01</td>
+    <td class="dollar">$1-3M/YR</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Post-pilot conversation. Buyer table already built in <a href="pitch/03_recruitment_buyer_table.html">recruitment_buyer_table.md</a>. Outreach plan in pitch docs. 10 partners × $100K target. Hold until post-Aug.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ RECURRING ============ -->
+<tr class="section-hdr"><td colspan="8">▎ RECURRING · ONGOING CADENCE</td></tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP" data-id="R01">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R01</span>DAILY EXEC BRIEF · $-MOVED-THIS-WEEK FORMAT<div class="ref">→ 15-min morning</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DAILY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Auto-generated daily brief format: <em>"This week net rev: $X. WoW: ±Y%. Today's action: Z. Open question for you: W."</em> 4 lines max. Sent to Hassan + Lauren via Slack.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP" data-id="R02">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R02</span>WEEKLY FRIDAY READOUT · 3-BULLET STRUCTURE<div class="ref">→ what shipped · what's coming · flags</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>—</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">See C08 for first Friday template. Three bullets: what we did + what we moved + what's coming. Send by 4pm Friday weekly.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP" data-id="R03">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R03</span>WEEKLY COMPETITIVE AD LIBRARY SCAN<div class="ref">→ EverQuote · Zebra · Insurify · SmartFinancial · Mil Wallet</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">WEEKLY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">INTEL</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Open facebook.com/ads/library. Search by page name for the 6 competitors. Note: format mix, top-running concept, hook style, anything new. 15 min weekly. Surface anything notable in Friday readout.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP" data-id="R04">
+    <td><span class="chevron"></span><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R04</span>FREQUENCY MONITORING · ODOMETER 05/15 · CAP TRIGGER 4.0<div class="ref">→ currently 3.27 · ~14 days from fatigue</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DAILY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">RISK MONITOR</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">Daily check in Ads Manager → Auto Max Val → Frequency. When Odometer 05/15 frequency hits 4.0: pause and let new variants absorb impressions. Track trigger threshold and act.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P3" data-owner="MO" data-wk="THIS" data-stat="WIP" data-id="R05">
+    <td><span class="chevron"></span><span class="pri p3">P3</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R05</span>EVENTS MANAGER DIAGNOSTICS WEEKLY CHECK<div class="ref">→ catch new parameter issues early</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">WEEKLY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">HOW TO FIX</div><div class="detail-body">5-min weekly check of Events Manager → Diagnostics tab. Note any new flags. Surface in Friday readout if material.</div></div>
+    </div></td>
+</tr>
+
+<!-- ============ DONE ============ -->
+<tr class="section-hdr"><td colspan="8">▎ COMPLETED · DONE THIS SESSION</td></tr>
+
+<tr class="task" data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X01">
+    <td><span class="chevron"></span><span class="pri p0">P0</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X01</span>FULL META API AUDIT · ACCOUNT 1034037341617540<div class="ref">→ master_audit.md + 5 appendices + delta</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">FOUNDATIONAL</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/_audit_combined.html">audit/_audit_combined.html</a> — 12 markdown files synthesized. Live API data validated against Mo's prior 20 audit iterations.</div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X02">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X02</span>CROSS-VALIDATION · 15/18 PRIOR CLAIMS MATCH WITHIN 5%<div class="ref">→ 3 corrections + 8 new findings</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">VALIDATION</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/delta_findings.html">audit/delta_findings.html</a></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X03">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X03</span>TUESDAY MEETING HANDOUT · PRINTABLE 2-PAGE BRIEF<div class="ref">→ tuesday_meeting_handout.md</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/tuesday_meeting_handout.html">audit/tuesday_meeting_handout.html</a></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X04">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X04</span>AUTO MAX VAL DECISION DEEP-DIVE<div class="ref">→ 3 options + math + framing</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/auto_max_val_decision.html">audit/auto_max_val_decision.html</a></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X05">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X05</span>EVENTS MANAGER WALKTHROUGH · STEP-BY-STEP<div class="ref">→ 15-min Tuesday AM</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/events_manager_walkthrough.html">audit/events_manager_walkthrough.html</a></div></div>
+    </div></td>
+</tr>
+
+<tr class="task" data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE" data-id="X06">
+    <td><span class="chevron"></span><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X06</span>PAGE ENGAGEMENT AUDIENCE BUILD SPEC<div class="ref">→ copy-paste into Ads Mgr</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+<tr class="detail">
+    <td colspan="8"><div class="detail-grid">
+        <div class="detail-section"><div class="detail-label">OUTPUT</div><div class="detail-body"><a href="audit/page_engagement_audience_build.html">audit/page_engagement_audience_build.html</a></div></div>
+    </div></td>
+</tr>
+
+    </tbody>
+</table>
+</main>
+
+<footer>
+    <div>GTW × MIL.COM · TASK TERMINAL · 2026-06-05 · Click any row to expand · Cmd+P → PDF</div>
+    <div class="right"><a href="./">← BACK TO PORTAL</a></div>
+</footer>
+
+<script>
+const filters = { pri: 'ALL', owner: 'ALL', wk: 'ALL', stat: 'ALL' };
+let hideDone = false;
+let searchTerm = '';
+
+// Filter buttons
+document.querySelectorAll('.filterbar .btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        const v = btn.dataset.val;
+        if (v === 'HIDE_DONE') {
+            hideDone = !hideDone;
+            btn.classList.toggle('active');
+            applyFilters();
+            return;
+        }
+        document.querySelectorAll(`.filterbar .btn[data-filter="${f}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filters[f] = v;
+        applyFilters();
+    });
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    applyFilters();
+});
+
+// Expand All / Collapse All
+document.getElementById('expandAll').addEventListener('click', () => {
+    document.querySelectorAll('#tbody tr.task').forEach(t => {
+        t.classList.add('open');
+        const next = t.nextElementSibling;
+        if (next && next.classList.contains('detail')) next.classList.add('open');
+    });
+});
+document.getElementById('collapseAll').addEventListener('click', () => {
+    document.querySelectorAll('#tbody tr.task').forEach(t => {
+        t.classList.remove('open');
+        const next = t.nextElementSibling;
+        if (next && next.classList.contains('detail')) next.classList.remove('open');
+    });
+});
+
+// Click row to toggle detail
+document.querySelectorAll('#tbody tr.task').forEach(row => {
+    row.addEventListener('click', (e) => {
+        // ignore clicks on links inside the row
+        if (e.target.tagName === 'A') return;
+        row.classList.toggle('open');
+        const next = row.nextElementSibling;
+        if (next && next.classList.contains('detail')) next.classList.toggle('open');
+    });
+});
+
+function applyFilters() {
+    document.querySelectorAll('#tbody tr.task').forEach(tr => {
+        let show = true;
+        if (filters.pri !== 'ALL' && tr.dataset.pri !== filters.pri) show = false;
+        if (filters.owner !== 'ALL' && tr.dataset.owner !== filters.owner) show = false;
+        if (filters.wk !== 'ALL' && tr.dataset.wk !== filters.wk) show = false;
+        if (filters.stat !== 'ALL' && tr.dataset.stat !== filters.stat) show = false;
+        if (hideDone && tr.dataset.stat === 'DONE') show = false;
+        if (searchTerm && !tr.textContent.toLowerCase().includes(searchTerm) && !tr.dataset.id.toLowerCase().includes(searchTerm)) show = false;
+        tr.classList.toggle('hidden', !show);
+        // Toggle the detail row to match
+        const detail = tr.nextElementSibling;
+        if (detail && detail.classList.contains('detail')) {
+            detail.classList.toggle('hidden', !show);
+        }
+    });
+    // Hide section headers with no visible rows below
+    document.querySelectorAll('#tbody tr.section-hdr').forEach(hdr => {
+        let next = hdr.nextElementSibling;
+        let anyVisible = false;
+        while (next && !next.classList.contains('section-hdr')) {
+            if (next.classList.contains('task') && !next.classList.contains('hidden')) {
+                anyVisible = true; break;
+            }
+            next = next.nextElementSibling;
+        }
+        hdr.classList.toggle('hidden', !anyVisible);
+    });
+}
+</script>
+
+</body>
+</html>

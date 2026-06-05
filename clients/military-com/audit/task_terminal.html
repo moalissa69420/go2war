@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTW × MIL.COM | TASK TERMINAL</title>
+<style>
+:root {
+    --bg: #000000;
+    --bg-alt: #0A0A0A;
+    --panel: #111111;
+    --border: #222222;
+    --border-bright: #333333;
+    --text: #E8E8E8;
+    --text-dim: #888888;
+    --text-mute: #555555;
+    --amber: #FF9900;
+    --amber-dim: #B36B00;
+    --white: #FFFFFF;
+    --red: #FF3B3B;
+    --green: #33D17A;
+    --cyan: #29D9E6;
+    --magenta: #E64FE6;
+    --yellow: #FFD600;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    font-feature-settings: 'liga' 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header bar */
+header {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border-bright);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+header .left { display: flex; gap: 24px; align-items: center; }
+header .brand {
+    color: var(--amber);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+header .crumbs {
+    color: var(--text-dim);
+    font-size: 11px;
+}
+header .ticker {
+    color: var(--green);
+    font-size: 11px;
+}
+header .ticker .pulse { display: inline-block; width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; vertical-align: middle; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+header .right { display: flex; gap: 16px; color: var(--text-dim); font-size: 11px; }
+header .right span strong { color: var(--white); }
+
+/* Top stats strip */
+.strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border-bright);
+}
+.strip .cell {
+    background: var(--panel);
+    padding: 8px 12px;
+}
+.strip .cell .lbl {
+    color: var(--text-mute);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.strip .cell .val {
+    color: var(--amber);
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 2px;
+}
+.strip .cell .sub {
+    color: var(--text-dim);
+    font-size: 10px;
+    margin-top: 2px;
+}
+.strip .cell.alert .val { color: var(--red); }
+.strip .cell.ok .val { color: var(--green); }
+
+/* Filter bar */
+.filterbar {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border-bright);
+    padding: 8px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    font-size: 11px;
+}
+.filterbar .group { display: flex; align-items: center; gap: 6px; }
+.filterbar .lbl {
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.filterbar .btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border-bright);
+    padding: 3px 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.filterbar .btn:hover { color: var(--amber); border-color: var(--amber); }
+.filterbar .btn.active { color: var(--bg); background: var(--amber); border-color: var(--amber); }
+
+/* Main grid */
+main { padding: 0; }
+
+/* Task table */
+.tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+.tbl thead th {
+    background: var(--bg-alt);
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-bright);
+    position: sticky;
+    top: 90px;
+    z-index: 10;
+    white-space: nowrap;
+}
+.tbl tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+}
+.tbl tbody tr:hover td { background: var(--bg-alt); }
+.tbl tbody tr.section-hdr td {
+    background: var(--panel);
+    color: var(--amber);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    padding: 10px;
+    border-top: 2px solid var(--border-bright);
+}
+
+/* Status indicators */
+.status {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.status.pend { background: rgba(255, 214, 0, 0.15); color: var(--yellow); border: 1px solid rgba(255, 214, 0, 0.4); }
+.status.wip { background: rgba(41, 217, 230, 0.15); color: var(--cyan); border: 1px solid rgba(41, 217, 230, 0.4); }
+.status.done { background: rgba(51, 209, 122, 0.15); color: var(--green); border: 1px solid rgba(51, 209, 122, 0.4); }
+.status.blkd { background: rgba(255, 59, 59, 0.15); color: var(--red); border: 1px solid rgba(255, 59, 59, 0.4); }
+.status.hold { background: rgba(136, 136, 136, 0.15); color: var(--text-dim); border: 1px solid rgba(136, 136, 136, 0.4); }
+
+/* Priority */
+.pri { font-weight: 700; }
+.pri.p0 { color: var(--red); }
+.pri.p1 { color: var(--amber); }
+.pri.p2 { color: var(--yellow); }
+.pri.p3 { color: var(--text-dim); }
+
+/* Owner badges */
+.owner {
+    color: var(--cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Dollar impact */
+.dollar { color: var(--green); font-weight: 700; text-align: right; }
+.dollar.neg { color: var(--red); }
+.dollar.neutral { color: var(--text-dim); }
+
+/* Week tags */
+.wk {
+    display: inline-block;
+    padding: 1px 6px;
+    background: var(--panel);
+    border: 1px solid var(--border-bright);
+    color: var(--amber);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Task description */
+.task-desc { color: var(--text); }
+.task-desc .id {
+    color: var(--text-mute);
+    font-weight: 600;
+    margin-right: 8px;
+    font-size: 10px;
+}
+.task-desc .ref {
+    color: var(--text-mute);
+    font-size: 10px;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+/* Tags / chips inline */
+.chip {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid var(--border-bright);
+    color: var(--text-dim);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+}
+.chip.alert { color: var(--red); border-color: var(--red); }
+.chip.lever { color: var(--green); border-color: var(--green); }
+
+/* Footer */
+footer {
+    padding: 12px 16px;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border-bright);
+    color: var(--text-mute);
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+footer .right { color: var(--amber); }
+
+/* Hidden state for filter */
+tr.hidden { display: none; }
+
+@media print {
+    html, body { background: white; color: black; font-size: 9px; }
+    header, .filterbar, footer { display: none; }
+    .tbl thead th { background: white; color: black; border-bottom: 2px solid black; position: static; }
+    .tbl tbody td { border-bottom: 1px solid #DDD; color: black; }
+    .tbl tbody tr.section-hdr td { background: #EEE; color: black; border-top: 2px solid black; }
+    .strip { background: white; border-bottom: 2px solid black; page-break-after: avoid; }
+    .strip .cell { background: white; border-right: 1px solid #DDD; }
+    .strip .cell .lbl, .strip .cell .sub { color: #666; }
+    .strip .cell .val { color: black; }
+    .status { background: white !important; }
+    .owner, .dollar, .wk, .pri, .chip { color: black !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="left">
+        <span class="brand">GTW &lt;TASK&gt;</span>
+        <span class="crumbs">MIL.COM / LG_MILITARY_ADS / 1034037341617540</span>
+        <span class="ticker"><span class="pulse"></span>LIVE</span>
+    </div>
+    <div class="right">
+        <span>UPD <strong>2026-06-05 09:00</strong></span>
+        <span>SRC <strong>MASTER_AUDIT</strong></span>
+        <span>OPS <strong>MO</strong></span>
+    </div>
+</header>
+
+<!-- Top stats strip -->
+<div class="strip">
+    <div class="cell">
+        <div class="lbl">SPEND 30D</div>
+        <div class="val">$841K</div>
+        <div class="sub">+0.07% vs prior audit</div>
+    </div>
+    <div class="cell ok">
+        <div class="lbl">OPP SCORE</div>
+        <div class="val">99/100</div>
+        <div class="sub">structural OK</div>
+    </div>
+    <div class="cell alert">
+        <div class="lbl">ROAS</div>
+        <div class="val">N/A</div>
+        <div class="sub">value pipe broken</div>
+    </div>
+    <div class="cell alert">
+        <div class="lbl">MAX VAL PREMIUM</div>
+        <div class="val">+67%</div>
+        <div class="sub">$137K/mo bleed</div>
+    </div>
+    <div class="cell">
+        <div class="lbl">FREQ</div>
+        <div class="val">6.38</div>
+        <div class="sub">audience burn risk</div>
+    </div>
+    <div class="cell">
+        <div class="lbl">CONCEPT CONC</div>
+        <div class="val">76%</div>
+        <div class="sub">2 families · $640K</div>
+    </div>
+    <div class="cell">
+        <div class="lbl">RETARGETING</div>
+        <div class="val">~20</div>
+        <div class="sub">people · SAC blocked</div>
+    </div>
+    <div class="cell ok">
+        <div class="lbl">EMQ PURCHASE</div>
+        <div class="val">9.1</div>
+        <div class="sub">CompReg 8.3 · OK</div>
+    </div>
+</div>
+
+<!-- Filter bar -->
+<div class="filterbar">
+    <div class="group">
+        <span class="lbl">PRI</span>
+        <button class="btn active" data-filter="pri" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="pri" data-val="P0">P0</button>
+        <button class="btn" data-filter="pri" data-val="P1">P1</button>
+        <button class="btn" data-filter="pri" data-val="P2">P2</button>
+        <button class="btn" data-filter="pri" data-val="P3">P3</button>
+    </div>
+    <div class="group">
+        <span class="lbl">OWNER</span>
+        <button class="btn active" data-filter="owner" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="owner" data-val="MO">MO</button>
+        <button class="btn" data-filter="owner" data-val="LAUREN">LAUREN</button>
+        <button class="btn" data-filter="owner" data-val="DEV">DEV</button>
+        <button class="btn" data-filter="owner" data-val="HASSAN">HASSAN</button>
+        <button class="btn" data-filter="owner" data-val="ANTHONY">ANTHONY</button>
+    </div>
+    <div class="group">
+        <span class="lbl">WEEK</span>
+        <button class="btn active" data-filter="wk" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="wk" data-val="THIS">THIS WK</button>
+        <button class="btn" data-filter="wk" data-val="W2">WK 2</button>
+        <button class="btn" data-filter="wk" data-val="W3">WK 3</button>
+        <button class="btn" data-filter="wk" data-val="W4+">WK 4+</button>
+    </div>
+    <div class="group">
+        <span class="lbl">STATUS</span>
+        <button class="btn active" data-filter="stat" data-val="ALL">ALL</button>
+        <button class="btn" data-filter="stat" data-val="PEND">PEND</button>
+        <button class="btn" data-filter="stat" data-val="WIP">WIP</button>
+        <button class="btn" data-filter="stat" data-val="BLKD">BLKD</button>
+        <button class="btn" data-filter="stat" data-val="HIDE_DONE">HIDE DONE</button>
+    </div>
+</div>
+
+<main>
+<table class="tbl">
+    <thead>
+        <tr>
+            <th style="width:60px">PRI</th>
+            <th style="width:70px">STATUS</th>
+            <th>TASK</th>
+            <th style="width:90px">OWNER</th>
+            <th style="width:60px">WK</th>
+            <th style="width:80px">DUE</th>
+            <th style="width:110px; text-align:right">$ IMPACT</th>
+            <th style="width:120px">DEPS</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+
+<!-- ============ SECTION: TODAY / FRI JUN 5 ============ -->
+<tr class="section-hdr" data-section="TODAY"><td colspan="8">▎ TODAY · FRI JUN 5 · ZERO-COST CLEANUP + VERIFICATION (DO BEFORE WEEKEND)</td></tr>
+
+<tr data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A01</span>EVENTS MANAGER DIAGNOSTICS · DATASET 332555186604235 · PURCHASE VALUE PARAM CHECK<div class="ref">→ events_manager_walkthrough.md · screenshot the malformation flag</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">GATES $1.6M/YR</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A02</span>EVENTS MANAGER DIAGNOSTICS · FBC/FBCLID PARAM TRUNCATION CHECK<div class="ref">→ events_manager_walkthrough.md · note affected ad sets count</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">VALIDATES $67K BLEED</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A03</span>ADS LIBRARY · CONFIRM "SAVE UP TO 60%" CREATIVES ZERO LIVE<div class="ref">→ search military.com page ID 6179724269 for "60%" — flag any active</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">COMPLIANCE</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A04</span>BUSINESS SETTINGS · CHECK ARCHIVE STATUS "MIL FB CUSTOMER MATCH 4.12.21"<div class="ref">→ confirm replaced by Custom_Recruiting-Leads_08-05-2025</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">—</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">A05</span>DELETE 28 DEAD PLACEHOLDER LOOKALIKES <span class="chip lever">FREE CLEANUP</span><div class="ref">→ all sized at 1,000 · INACTIVE state · no risk</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>2026-06-05</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: MON JUN 8 — KICK OFF WEEK 1 ============ -->
+<tr class="section-hdr" data-section="MON_W1"><td colspan="8">▎ MON JUN 8 · WEEK 1 KICKOFF · UNBLOCK MAX VAL DECISION + REQUEST INPUTS</td></tr>
+
+<tr data-pri="P0" data-owner="DEV" data-wk="THIS" data-stat="BLKD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status blkd">BLKD</span></td>
+    <td class="task-desc"><span class="id">B01</span>DEV TIMELINE FOR PURCHASE VALUE-PIPE FIX · BEST + WORST CASE WEEKS<div class="ref">→ unblocks MAX VAL decision (B02) · ask Anthony to scope</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar neutral">GATES $137K/MO</td>
+    <td>A01</td>
+</tr>
+
+<tr data-pri="P0" data-owner="HASSAN" data-wk="THIS" data-stat="BLKD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status blkd">BLKD</span></td>
+    <td class="task-desc"><span class="id">B02</span>DECIDE AUTO MAX VAL · PAUSE / CAP / KEEP <span class="chip alert">BIGGEST DECISION</span><div class="ref">→ auto_max_val_decision.md · framing ready for Hassan</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+$110K/MO</td>
+    <td>B01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="LAUREN" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B03</span>REQUEST FRESH 180-DAY SOLD-LEADS EXPORT FROM QW/DELTY<div class="ref">→ rebuild customer-list seed (current is 10mo stale)</div></td>
+    <td><span class="owner">LAUREN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+5-10% LAL LIFT</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="LAUREN" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B04</span>PULL MAR + APR 2026 DAILY REPORTS · SAME FORMAT AS MAY<div class="ref">→ baseline vetting input · required before mid-June 1:1 w/ Hassan</div></td>
+    <td><span class="owner">LAUREN</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-09</td>
+    <td class="dollar">$45-67K NEGO</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="ANTHONY" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B05</span>QW CONTRACT TERMS · EXCLUSIVITY · PING-POST PERMISSIONS<div class="ref">→ gates form migration Tier 2 viability</div></td>
+    <td><span class="owner">ANTHONY</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">GATES $1-3M</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="ANTHONY" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B06</span>DECIDE MA MILITARY INSURANCE DATASET · 1536649764252698<div class="ref">→ never fired server-side · activate or archive</div></td>
+    <td><span class="owner">ANTHONY</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="DEV" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">B07</span>SCOPE SIGNALS GATEWAY / CAPI FOR DATASET 587241028099131<div class="ref">→ content pixel · server silent since Mar 2023 · +23% lever</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">+23% COST/RESULT</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: WEEK 1 EXECUTION ============ -->
+<tr class="section-hdr" data-section="W1_EXEC"><td colspan="8">▎ WEEK 1 EXECUTION · MON-FRI JUN 8-12 · SHIPPABLE</td></tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C01</span>BUILD NEW AD SET · FB+IG ENGAGEMENT WARM LAYER <span class="chip lever">FREE LEVER</span><div class="ref">→ page_engagement_audience_build.md · $1.5K/day · 2 creatives</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+5-10% QUAL LEADS</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C02</span>REBUILD CUSTOM-LIST SEED FROM FRESH 180D SOLD-LEADS EXPORT<div class="ref">→ then rebuild 1%/3%/5% LALs on fresh seed</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-11</td>
+    <td class="dollar">+5-10% LAL LIFT</td>
+    <td>B03</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C03</span>SHIP 8-10 NET-NEW CREATIVE CONCEPTS<div class="ref">→ Home Inside_Icon variants + Drive-On + spouse-angle test</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">FATIGUE OFFSET</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C04</span>REALLOCATE AUTO BAU PACING GAP · $8.5K/DAY UNDEPLOYED<div class="ref">→ shift to Drive-On + Lower-Your-Auto BAU winners</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-10</td>
+    <td class="dollar">+$255K/MO SPEND</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C05</span>SCALE HOME SPEND SHARE 8% → 15% (WK1) → 20% (WK2)<div class="ref">→ Home CPL is 39% lower than Auto · arbitrage</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar">+8-12% NET REV</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C06</span>NARROW CUSTOM AD SETS · CONFIRM SOURCE SIZE OR REMOVE<div class="ref">→ IDs 120240808864440498 / 120227142278180498</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P3" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p3">P3</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C07</span>VERIFY CUSTOMER-LIST LAL ELIGIBILITY UNDER SAC IN-PRODUCT<div class="ref">→ likely confirmed by live state · 30-sec sanity check</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">VALIDATE</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="PEND">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status pend">PEND</span></td>
+    <td class="task-desc"><span class="id">C08</span>FRIDAY READOUT TO HASSAN · $-IMPACT FORMAT<div class="ref">→ first weekly readout · sets cadence</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W1</span></td>
+    <td>2026-06-12</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: WEEK 2 — JUN 15-19 ============ -->
+<tr class="section-hdr" data-section="W2"><td colspan="8">▎ WEEK 2 · MON-FRI JUN 15-19 · CAPI BUILD + AUDIENCE OPTIMIZE</td></tr>
+
+<tr data-pri="P0" data-owner="DEV" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D01</span>PURCHASE VALUE-PIPE FIX · SERVER-SIDE BUILD START<div class="ref">→ multi-week · enables Max Val re-light if paused</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">+7% ROAS</td>
+    <td>B01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="DEV" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D02</span>CAPI GATEWAY · CONTENT PIXEL 587241028099131 BUILD<div class="ref">→ +23% cost/result · 24-48hr dev sprint</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-17</td>
+    <td class="dollar">+23% CPR</td>
+    <td>B07</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D03</span>SCALE WARM AD SET · $1.5K → $3K/DAY IF CPL < $20<div class="ref">→ decision after 72hr observation</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-15</td>
+    <td class="dollar">+$50-100K/MO</td>
+    <td>C01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D04</span>SHIP 10-12 NET-NEW CREATIVE CONCEPTS · WK2<div class="ref">→ variants of W1 winners + new tests</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">FATIGUE OFFSET</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D05</span>FORM MIGRATION PHASE 0 · QW CONTRACT REVIEW + DEV SCOPE<div class="ref">→ no code touching live · discovery only</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">SCOPE $200K/MO</td>
+    <td>B05</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D06</span>RUN YOY ANALYSIS ON HISTORICAL DATA · PREP BASELINE CASE<div class="ref">→ Mo prep doc for Hassan 1:1</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-19</td>
+    <td class="dollar">$45-67K NEGO</td>
+    <td>B04</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W2" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">D07</span>VETERAN UGC SOURCING · OUTREACH TO MICRO-CREATORS<div class="ref">→ first 3-5 pieces target end of June</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W2</span></td>
+    <td>2026-06-22</td>
+    <td class="dollar">MOAT</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: WEEK 3 — JUN 22-26 ============ -->
+<tr class="section-hdr" data-section="W3"><td colspan="8">▎ WEEK 3 · MON-FRI JUN 22-26 · BASELINE LOCK + STRATEGIC CONVERSATIONS</td></tr>
+
+<tr data-pri="P0" data-owner="HASSAN" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E01</span>MID-JUNE 1:1 WITH HASSAN · BASELINE LOCK CONVERSATION<div class="ref">→ June 2026/04_baseline_vetting_framework.md · 30-min slot</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-22</td>
+    <td class="dollar">$45-67K MO</td>
+    <td>D06</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E02</span>RPL−CPL METRIC REFRAME PITCH · POST-BASELINE-WIN<div class="ref">→ "you only pay me to grow real net rev" · operator framing</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-25</td>
+    <td class="dollar">METRIC ALIGN</td>
+    <td>E01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E03</span>CAPI · ACCEPTEDLEAD EVENT BACKFILLED FROM QW HISTORICALS<div class="ref">→ enables Meta optimization switch from form-fill to accepted-lead</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">+15% CPQL</td>
+    <td>D01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E04</span>SHIP 12-15 NET-NEW CREATIVE · CONCENTRATE WINNERS<div class="ref">→ deeper variants on validated winners · kill losers</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">SCALE PREP</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E05</span>FORM MIGRATION PHASE 1 · BUILD IN STAGING (NO LIVE)<div class="ref">→ wire consent + certs · server-side CAPI · demo-ready</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">SCOPE Q3</td>
+    <td>D05</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W3" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">E06</span>VETERAN UGC · 3-5 PIECES IN MARKET<div class="ref">→ defensible moat · competitive scan confirmed unbuilt</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W3</span></td>
+    <td>2026-06-26</td>
+    <td class="dollar">MOAT</td>
+    <td>D07</td>
+</tr>
+
+<!-- ============ SECTION: WEEK 4 — JUN 29 - JUL 3 ============ -->
+<tr class="section-hdr" data-section="W4"><td colspan="8">▎ WEEK 4 · MON-FRI JUN 29 - JUL 3 · CONSOLIDATE + END-OF-MONTH REVIEW</td></tr>
+
+<tr data-pri="P0" data-owner="DEV" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F01</span>VALUE-PIPE FIX · GO LIVE<div class="ref">→ unlocks Max Val re-light decision · +7% ROAS account-wide</div></td>
+    <td><span class="owner">DEV</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">+$60K/MO</td>
+    <td>D01·E03</td>
+</tr>
+
+<tr data-pri="P0" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F02</span>SWITCH META OPTIMIZATION TO ACCEPTEDLEAD · POST VALUE-FIX<div class="ref">→ algorithm trains on revenue · not form-fills</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">SCALE PREP</td>
+    <td>F01</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F03</span>END-OF-JUNE REVIEW WITH HASSAN · MONTH 1 SUMMARY + JUL/AUG FCST<div class="ref">→ formal monthly cadence · scope adjustments</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-06-30</td>
+    <td class="dollar">RELATIONSHIP</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F04</span>SHIP 10-12 NET-NEW CREATIVE · CONCENTRATION PHASE<div class="ref">→ scale validated winners · prep Jul-Aug measurement window</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">MEAS WINDOW</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F05</span>HELOC EXPANSION THESIS · SURFACE TO HASSAN (Q3+)<div class="ref">→ mention in EOM review · do not divert June capacity</div></td>
+    <td><span class="owner">HASSAN</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-06-30</td>
+    <td class="dollar">FUTURE</td>
+    <td>F03</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">F06</span>PHASE 2 RETAINER SCOPING · DOCUMENT THE THREE-THREAD POST-PILOT<div class="ref">→ media + comp + recruitment partnership program</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-07-03</td>
+    <td class="dollar">$50-100K/MO</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: JULY+ MEASUREMENT WINDOW ============ -->
+<tr class="section-hdr" data-section="JUL_AUG"><td colspan="8">▎ JUL · AUG · MEASUREMENT WINDOW · 60-DAY RUN RATE TEST</td></tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G01</span>FORM MIGRATION PHASE 2 · 10-20% TRAFFIC A/B TEST<div class="ref">→ ONLY after measurement window closes · accept-rate watch</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-09-01</td>
+    <td class="dollar">+$200K/MO</td>
+    <td>E05</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G02</span>GOAL POST CHECK · JUL/AUG 60-DAY RUN RATE AVG<div class="ref">→ comp incentive paid Aug · GP1/GP2/GP3 tier check</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-08-31</td>
+    <td class="dollar">10K-45K CAD</td>
+    <td>F02</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="W4+" data-stat="HOLD">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status hold">HOLD</span></td>
+    <td class="task-desc"><span class="id">G03</span>THREAD C · RECRUITMENT PARTNERSHIPS · POST-PILOT OUTREACH<div class="ref">→ Stage 2/3 conversation · NOT in June scope</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">W4+</span></td>
+    <td>2026-09-01</td>
+    <td class="dollar">$1-3M/YR</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: ONGOING / RECURRING ============ -->
+<tr class="section-hdr" data-section="RECURRING"><td colspan="8">▎ RECURRING · ONGOING CADENCE</td></tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R01</span>DAILY EXEC BRIEF · $-MOVED-THIS-WEEK FORMAT TO HASSAN<div class="ref">→ June 2026 daily routine · 15-min morning</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DAILY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R02</span>WEEKLY FRIDAY READOUT · 3-BULLET STRUCTURE<div class="ref">→ what shipped · what's coming · any flags</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">FRI</span></td>
+    <td>—</td>
+    <td class="dollar neutral">REPORTING</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R03</span>WEEKLY COMPETITIVE AD LIBRARY SCAN<div class="ref">→ EverQuote · Zebra · Insurify · SmartFinancial · Mil Wallet</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">WEEKLY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">INTEL</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P2" data-owner="MO" data-wk="THIS" data-stat="WIP">
+    <td><span class="pri p2">P2</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R04</span>FREQUENCY MONITORING · ODOMETER 05/15 · CAP TRIGGER 4.0<div class="ref">→ currently 3.27 · ~14 days from fatigue</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DAILY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">RISK MONITOR</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P3" data-owner="MO" data-wk="THIS" data-stat="WIP">
+    <td><span class="pri p3">P3</span></td>
+    <td><span class="status wip">WIP</span></td>
+    <td class="task-desc"><span class="id">R05</span>EVENTS MANAGER DIAGNOSTICS WEEKLY CHECK<div class="ref">→ catch new parameter issues early</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">WEEKLY</span></td>
+    <td>—</td>
+    <td class="dollar neutral">HYGIENE</td>
+    <td>—</td>
+</tr>
+
+<!-- ============ SECTION: COMPLETED ============ -->
+<tr class="section-hdr" data-section="DONE"><td colspan="8">▎ COMPLETED · DONE THIS SESSION</td></tr>
+
+<tr data-pri="P0" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p0">P0</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X01</span>FULL META API AUDIT · ACCOUNT 1034037341617540<div class="ref">→ master_audit.md + 5 appendices + delta</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">FOUNDATIONAL</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X02</span>CROSS-VALIDATION · 15/18 PRIOR CLAIMS MATCH WITHIN 5%<div class="ref">→ delta_findings.md · 3 corrections + 8 new findings</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">VALIDATION</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X03</span>TUESDAY MEETING HANDOUT · PRINTABLE 2-PAGE BRIEF<div class="ref">→ tuesday_meeting_handout.md</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X04</span>AUTO MAX VAL DECISION DEEP-DIVE<div class="ref">→ auto_max_val_decision.md · 3 options + math + framing</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X05</span>EVENTS MANAGER WALKTHROUGH · STEP-BY-STEP<div class="ref">→ events_manager_walkthrough.md · 15-min Tuesday AM</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+
+<tr data-pri="P1" data-owner="MO" data-wk="THIS" data-stat="DONE">
+    <td><span class="pri p1">P1</span></td>
+    <td><span class="status done">DONE</span></td>
+    <td class="task-desc"><span class="id">X06</span>PAGE ENGAGEMENT AUDIENCE BUILD SPEC<div class="ref">→ page_engagement_audience_build.md · copy-paste into Ads Mgr</div></td>
+    <td><span class="owner">MO</span></td>
+    <td><span class="wk">DONE</span></td>
+    <td>2026-06-04</td>
+    <td class="dollar">PREP</td>
+    <td>—</td>
+</tr>
+
+    </tbody>
+</table>
+</main>
+
+<footer>
+    <div>GTW × MIL.COM · TASK TERMINAL · GENERATED 2026-06-05 · SOURCE: master_audit.md + june_2026/06_june_strategy_master.md</div>
+    <div class="right">Cmd+P → PDF · ALL FILTERS PRESERVE ON PRINT</div>
+</footer>
+
+<script>
+const filters = { pri: 'ALL', owner: 'ALL', wk: 'ALL', stat: 'ALL' };
+let hideDone = false;
+
+document.querySelectorAll('.filterbar .btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        const v = btn.dataset.val;
+        if (v === 'HIDE_DONE') {
+            hideDone = !hideDone;
+            btn.classList.toggle('active');
+            applyFilters();
+            return;
+        }
+        // unset siblings of same filter
+        document.querySelectorAll(`.filterbar .btn[data-filter="${f}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filters[f] = v;
+        applyFilters();
+    });
+});
+
+function applyFilters() {
+    document.querySelectorAll('#tbody tr[data-pri]').forEach(tr => {
+        let show = true;
+        if (filters.pri !== 'ALL' && tr.dataset.pri !== filters.pri) show = false;
+        if (filters.owner !== 'ALL' && tr.dataset.owner !== filters.owner) show = false;
+        if (filters.wk !== 'ALL' && tr.dataset.wk !== filters.wk) show = false;
+        if (filters.stat !== 'ALL' && tr.dataset.stat !== filters.stat) show = false;
+        if (hideDone && tr.dataset.stat === 'DONE') show = false;
+        tr.classList.toggle('hidden', !show);
+    });
+    // hide section headers with no visible rows below them
+    document.querySelectorAll('#tbody tr.section-hdr').forEach(hdr => {
+        let next = hdr.nextElementSibling;
+        let anyVisible = false;
+        while (next && !next.classList.contains('section-hdr')) {
+            if (!next.classList.contains('hidden')) { anyVisible = true; break; }
+            next = next.nextElementSibling;
+        }
+        hdr.classList.toggle('hidden', !anyVisible);
+    });
+}
+</script>
+
+</body>
+</html>

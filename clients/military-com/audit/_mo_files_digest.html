@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Mo Files Digest — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com —  Mo Files Digest</div>
+<div class="meta">Source: <code>_mo_files_digest.md</code></div>
+<hr class="divider">
+<h1 id="mos-files-digest-usersmodownloadsmilitary">Mo's Files Digest — <code>/Users/mo/Downloads/military/</code></h1>
+<p>Produced by Explore agents on June 4, 2026 as input to the master audit. Captures everything Mo has documented across 20 files of iterative audit/strategy work.</p>
+<hr />
+<h2 id="section-1-audit-flavored-files-digested">SECTION 1 — Audit-flavored files (digested)</h2>
+<h3 id="1-lg_military_definitive_auditmd-canonical-narrative-audit">1. <code>LG_Military_DEFINITIVE_AUDIT.md</code> (CANONICAL narrative audit)</h3>
+<p>~195 lines / ~2,400 words. Window Mar 1 – Jun 3, 2026. Self-labeled "Definitive."</p>
+<p><strong>Top findings:</strong>
+- $2.45M spend → $3.35M revenue → ~$891K net, <strong>1.36x blended ROAS</strong> (internal QW dashboard)
+- Auto 1.38x / 27.3% margin vs Home 1.28x / 22.1% — Auto is the better business
+- Scaled <strong>4.5x April→May</strong> with no ROAS degradation
+- <strong>98% of Purchase event price data has formatting issues</strong> — Meta Events Manager flag; all events send the same flat price
+- <strong>fbc/fbclid truncation</strong> on 15 ad sets, <strong>$67,174 spend</strong>, 27% of CompleteRegistration events affected
+- Auto BAU pacing gap: <strong>$19,800/day budget vs ~$11,400/day actual</strong>
+- Odometer_05/15 running at <strong>$34.63 CPL on ~$178K</strong> — highest-cost big spender
+- "Mil FB Customer Match 4.12.21 (Full List)" — audience list reads as a <strong>2021 list</strong>, stale</p>
+<p><strong>Conclusions:</strong> Two tracks — Track 1 (cost levers for CPL goal posts), Track 2 (fix value pipe for real optimization). GP1 (15% CPL reduction) high confidence from cost levers alone; GP3 (25%) only achievable the right way (value up, not junk in).</p>
+<p><strong>Gaps flagged:</strong> What value is wired into Purchase event (flat vs real payout)? Why is Auto BAU pacing only ~$11.4K/day? What happened May 23 (0.90x loss day)? Can real QW per-lead payout be sent server-side?</p>
+<h3 id="2-lg_military_integrated_auditmd-post-media-buyer-strategy-version">2. <code>LG_Military_Integrated_Audit.md</code> (post-media-buyer-strategy version)</h3>
+<p>~103 lines / ~1,500 words.</p>
+<p><strong>Top findings:</strong>
+- <strong>SAC (Special Ad Category) removes the standard CPL levers</strong> — no lookalikes, no age/geo targeting, no exclusions. This invalidates the entire "shift budget to 25–44" and "build value-seeded LALs" plans from FULL_AUDIT.md v3.
+- FunnelFlux offline conversion upload fires every ~15 minutes (single-fire postback) — value tracking exists in principle, but the browser Purchase event's flat value may be diluting the algorithm's signal
+- Campaign structure (BAU/ALC/MaxVal trio) is intentional, not cannibalization — media buyer tested more and saw performance dip from overlap
+- Auto &gt; Home is a carrier story: Progressive bids strong on auto; Allstate (home) is reactive
+- The <strong>"auto-updating" customer-match list was last confirmed refreshed May 2025</strong> (13+ months ago, per the Master Task List/Learnings PDF)
+- Two narrow Custom ad sets (IDs 120240808864440498, 120227142278180498) delivering to <strong>~1,000-person audiences</strong> — essentially broken</p>
+<p><strong>Conclusions:</strong> Measure on <strong>RPL−CPL spread, not CPL alone</strong> — the single most important strategic ask. Drop the lookalike plan. Creative is the primary CPL lever remaining under SAC.</p>
+<h3 id="3-lg_military_optimization_auditmd-leads-campaigns-optimization-trace">3. <code>LG_Military_Optimization_Audit.md</code> (LEADS campaigns optimization trace)</h3>
+<p>~72 lines / ~900 words.</p>
+<p><strong>Top findings:</strong>
+- Custom conversion total (~33,277 / 30d) reconciles with internal QW dashboard (34,158 May leads) and CompleteRegistration (31.3K) — <strong>all within ~2.5%</strong>
+- Native Meta Lead event is never populated ("Not available") — leads flow through custom conversions "click to quotes" — this is not a malfunction
+- Max Value campaigns pay <strong>$36.24 CPL vs $21.91 on BAU</strong> — a ~65% premium — to optimize for value against a <strong>flat value signal</strong> (98% malformed Purchase price data)
+- A paused SALES campaign optimizes toward <code>fb_pixel_purchase</code> (standard Purchase event) — different/older setup, currently inactive
+- CAPI alongside Pixel reported <strong>17.5% more Purchase conversions</strong> in the last 7 days</p>
+<h3 id="4-lg_military_master_audit_tasklist_learningspdf-5-page-june-2026-deck-canonical-client-facing">4. <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code> (5-page June 2026 deck — CANONICAL client-facing)</h3>
+<p><strong>Top findings (identical economics, new framing):</strong>
+- Meta Opportunity Score: <strong>99/100</strong> — no structural fixes to make; leverage is in measurement, creative, and the success metric
+- Key Learning #4: Max Value pays a <strong>~65% CPL premium</strong> to chase a value signal that doesn't exist
+- Key Learning #5: <strong>SAC removes standard CPL levers</strong> — bypassing SAC is "Evasion violation that damages account health"
+- Customer-match list last refreshed <strong>May 2025</strong> (13+ months ago, not auto-updating)
+- fbc truncation: <strong>15 ad sets, $67,174 spend, 27% of CompleteRegistration</strong> (confirmed)
+- CAPI reported 17.5% more conversions (last 7d) — signal health is real
+- Dataset C (Military.com's content pixel) CAPI Gateway <strong>0% set up</strong>; Add a Signals Gateway Pixel impact estimated at <strong>~23% cost/result</strong></p>
+<p><strong>Conclusions:</strong> 5 workstreams — W1 Measurement Plumbing (highest leverage), W2 Creative (primary SAC lever), W3 Efficiency (learning-phase safe), W4 Audiences (SAC-compliant), W5 Strategic/Metric (most important ask: reframe to RPL−CPL spread).</p>
+<h3 id="5-full_auditmd-v3-roas-verified-superseded-but-contains-the-inversions">5. <code>FULL_AUDIT.md</code> (v3 ROAS-verified — superseded but contains the inversions)</h3>
+<p><strong>Key inversions vs v1:</strong>
+- Veteran-VO: 9.37% CTR → <strong>0.90 ROAS, loses money</strong> (v1 said "revive it")
+- Instagram Stories: 0.34% CTR → <strong>1.42 ROAS — top placement</strong> (v1 said "cut it")
+- Desktop: 3.6x CPC → <strong>1.45 ROAS — best device</strong> (v1 said "exclude")
+- 65+: cheapest CPL → <strong>1.18 ROAS — lowest of all ages</strong> (v1 said "shift budget here")
+- Rewarded video: "fraud" → <strong>real leads, $22.65 CPL, break-even at 0.96 ROAS</strong>
+- TYFYS video: "CTR mirage" → <strong>1.57 ROAS — best high-spend ad</strong>
+- Lower-Your-Auto_04/28: <strong>$421K spend, 1.45 ROAS, +$191K net</strong> — the workhorse winner
+- Odometer_05/15: $222K spend, <strong>1.21 ROAS</strong> — net positive but least efficient big-spend ad
+- Meta reported value ($1.62M) vs internal dashboard ($3.35M) — Meta captures <strong>~half</strong> of real revenue</p>
+<h3 id="6-lg_military_full_auditmd-v2-superseded">6. <code>lg_military_full_audit.md</code> (v2 — superseded)</h3>
+<p>Blended: ~$842K spend → ~33,366 leads → <strong>~$25.23 CPL</strong>. Odometer at $38.92 CPL (later revised to $34.63). Drive-On_05/30: $5,137 at $18.48 CPL — best auto CPL, newer creative.</p>
+<h3 id="7-lg_military_auditmd-v1-origin-doc-mostly-self-corrected">7. <code>lg_military_audit.md</code> (v1 — origin doc, mostly self-corrected)</h3>
+<p>$841,952.78 spend / 30d. Account frequency 6.45. Estimated recoverable value: $140–200K/month conservative, $335–565K/month full execution (based on CTR assumptions later invalidated). Most v1 claims were inverted by v2/v3.</p>
+<h3 id="8-master-prompts-procedural-artifacts-not-audits">8. Master prompts (procedural artifacts, not audits)</h3>
+<p><code>full_audit_master_prompt.md</code>, <code>lg_military_full_audit_master_prompt.md</code>, <code>ad_library_research_prompt.md</code> — execution prompts for prior audit pulls. Contain the <strong>8 epistemic rules</strong> Mo developed (never trust CTR alone, tag every finding, custom conversions don't break by placement, etc.) — worth preserving.</p>
+<h3 id="audit-synthesis">Audit Synthesis</h3>
+<p><strong>Canonical now</strong>: DEFINITIVE_AUDIT (narrative) + Master_Audit_TaskList_Learnings.pdf (deck). Everything else superseded but historically useful.</p>
+<p><strong>Consolidated picture of what Mo found:</strong> A healthy $850K/month lead engine with <strong>three compounding problems, not the six "critical leaks" the v1 audit identified:</strong></p>
+<ol>
+<li><strong>Broken conversion value</strong> (the root cause): 98% of Purchase price data is malformed/flat. Max Value campaigns can't optimize for value. Meta estimates +7% ROAS from fixing this alone.</li>
+<li><strong>fbc/fbclid truncation</strong> on 15 ad sets ($67,174 spend, 27% of CompleteRegistration events): degrades attribution and optimization signal.</li>
+<li><strong>Odometer_05/15 concentration</strong>: ~$178K/30d at $34.63 CPL vs Lower-Your-Auto at ~$22 CPL. Reallocation is the largest single pure cost lever today.</li>
+</ol>
+<p>The <strong>SAC constraint</strong> removes the standard CPL levers (no demo reallocation, no exclusion audiences, no lookalikes). What remains: creative (UGC test batch — primary lever), budget/pacing efficiency, value-signal quality, and the strategic ask to <strong>reframe success metric from CPL to RPL−CPL spread</strong>.</p>
+<hr />
+<h2 id="section-2-plan-strategy-pitch-files-digested">SECTION 2 — Plan / strategy / pitch files (digested)</h2>
+<h3 id="1-lg_military_30day_action_planmd">1. <code>LG_Military_30Day_Action_Plan.md</code></h3>
+<p>~1,400 words. Task-level execution plan with workstream B (audiences), C (tracking), D (cost):
+- B1: Define Engaged audience from FB/IG page engagers
+- B2: Replace stale 2021 customer-match list with 180-day sold-leads export from Lauren
+- B3: Build suppression/exclusion audiences
+- B4: Delete ~30 dead placeholder lookalikes; rebuild on sold-leads + engagement seeds
+- C1: Fix Purchase event value — "#1 priority" — real QW payout server-side
+- C2: Fix fbc/Click ID truncation
+- D1: Reallocate <code>Odometer_05/15</code> budget → <code>Lower-Your-Auto_04/28</code>
+- Close Auto BAU pacing gap</p>
+<h3 id="2-lg_military_master_planmd">2. <code>LG_Military_Master_Plan.md</code></h3>
+<p>5-workstream strategic plan. Thesis: Meta Opportunity Score 99/100 → structural wins don't exist → leverage in measurement plumbing, creative, and <strong>success metric reframe</strong>.</p>
+<p><strong>Most important strategic ask (W5-T1)</strong>: Reframe success metric to <strong>RPL − CPL spread (or ROAS)</strong>, or pair CPL with RPL/acceptance floor.</p>
+<p><strong>HELOC expansion thesis (W5-T2)</strong> introduced here.</p>
+<p><strong>SAC mechanics</strong> extensively documented: 15-mile radius minimum, no age/geo targeting, LAL eligibility contested for financial category.</p>
+<h3 id="3-lg_military_audit_june_prioritiesmd">3. <code>LG_Military_Audit_June_Priorities.md</code></h3>
+<p>Most complete economics table (verified Meta $25.23 vs internal $24.91, sub-2% reconciliation). 4.5x April→May spend scale-up without ROAS degradation as evidence of headroom. Conversion-value fix called <strong>#1 June priority</strong> (longest lead time). 7% ROAS improvement estimate from Meta modeling on value-fix alone.</p>
+<h3 id="4-lg_military_deck_sourcemd">4. <code>LG_Military_Deck_Source.md</code></h3>
+<p>16-slide deck. Frames GTW as "sharpening, not fixing." RPL−CPL reframe needs <strong>leadership signoff</strong>, not just media buyer.</p>
+<h3 id="5-military_meeting_packagemd">5. <code>military_meeting_package.md</code></h3>
+<p>Pre-meeting walk-in pitch. Three problems / three threads (Performance/Compliance/Partnerships). Stage 1 $20K diagnostic + cross-portfolio. Stage 2 $75K pilot. Stage 3 $60K/mo + 5% net-new revenue + 10% partnerships. Stage 4 $1.5–4M Cross-Valnet.</p>
+<h3 id="68-military_pitch_v2v3md-military_proposalmd">6–8. <code>military_pitch_v2/v3.md</code>, <code>military_proposal.md</code></h3>
+<p>Earlier pitch iterations. Stage 3 $50–100K/month. Thread C (recruitment partnerships): "10 partners × $100K = $1M/year at 60–80% margin." <code>military_proposal.md</code> is the formal $75K 90-day pilot doc.</p>
+<h3 id="9-claude_code_master_promptmd">9. <code>claude_code_master_prompt.md</code></h3>
+<p>Multi-agent orchestration prompt for original meeting prep. Contains the IP clause language (GTW retains War Room; client owns campaign data + creative assets). 8-vector risk assessment including "Hassan needs Rony signoff," "Valnet pays Net-60+ in practice."</p>
+<h3 id="strategy-synthesis">Strategy Synthesis</h3>
+<p><strong>Canonical strategy doc now</strong>: <code>/Users/mo/Desktop/military.com/deliverables/june_2026/06_june_strategy_master.md</code>. None of the Downloads strategy files reach that level of post-access operational specificity.</p>
+<p><strong>What's NEW in Downloads files not in June 2026 deliverables:</strong></p>
+<ol>
+<li><strong>HELOC expansion thesis</strong> — not in June plan at all</li>
+<li><strong>RPL − CPL spread metric reframe</strong> — Mo's "most important strategic ask"; June plan operates within CPL goal-post framework without proposing change</li>
+<li><strong>Thread C (recruitment partnerships)</strong> — present in pitch files; absent from June 2026 deliverables scope</li>
+<li><strong>Customer-list lookalike eligibility test (W4-T3)</strong> — specific in-product test for the contested SAC/LAL question; not in June 2026 weekly roadmap</li>
+<li><strong>Value-based lookalike</strong> seeded from payout-weighted customer list — not in June 2026 deliverables</li>
+<li><strong>IP clause language</strong> — GTW retains War Room; client owns campaign data</li>
+<li><strong>SAC mechanics documentation</strong> — more precise in Downloads files than in June 2026 deliverables</li>
+</ol>
+<h3 id="tensions-contradictions-with-renegotiated-deal-terms">Tensions / contradictions with renegotiated deal terms</h3>
+<table>
+<thead>
+<tr>
+<th>Tension</th>
+<th>Downloads file(s)</th>
+<th>June 2026 reality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Counterparty</td>
+<td>"the GM" / "Iron Corp leadership"</td>
+<td>Hassan Youssef (Valnet CEO)</td>
+</tr>
+<tr>
+<td>Comp structure</td>
+<td>Fixed-fee pilots ($75K, $25K/month)</td>
+<td>Base + % of growth above baseline</td>
+</tr>
+<tr>
+<td>Baseline</td>
+<td>Not discussed</td>
+<td>Highest-leverage open item; $275K contested vs ~$155–185K defensible</td>
+</tr>
+<tr>
+<td>Thread C (partnerships)</td>
+<td>Core upside in pitch files; $1–3M/year</td>
+<td>Not in June pilot scope</td>
+</tr>
+<tr>
+<td>Goal-post targets</td>
+<td>Static-baseline GP1/GP2/GP3</td>
+<td>Growing-baseline GP1 +15%, GP2 +36%, GP3 +57%</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>RPL−CPL spread proposed</td>
+<td>June plan operates within CPL goal-post framework</td>
+</tr>
+<tr>
+<td>Conversion-value priority</td>
+<td>Ranked #1</td>
+<td>June plan deprioritizes vs creative engine + home reallocation</td>
+</tr>
+<tr>
+<td>Form migration</td>
+<td>Not mentioned</td>
+<td>Major June scoping item</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cross-references-to-the-existing-deliverables-structure">Cross-references to the existing deliverables structure</h2>
+<ul>
+<li><code>LG_Military_DEFINITIVE_AUDIT.md</code> + <code>LG_Military_Master_Audit_TaskList_Learnings.pdf</code> → connect directly to <code>/Users/mo/Desktop/military.com/deliverables/05_audit_visual_spec.md</code> (the reliability framework / two-track plan source)</li>
+<li><code>LG_Military_Audit_June_Priorities.md</code> → connects to <code>/Users/mo/Desktop/military.com/deliverables/june_2026/04_baseline_vetting_framework.md</code> (economics table)</li>
+<li><code>LG_Military_30Day_Action_Plan.md</code> → maps onto Track 1 (cost levers) in <code>/Users/mo/Desktop/military.com/deliverables/june_2026/01_first_week_playbook.md</code> and Track 2 (value pipe) in <code>03_tracking_capi_rebuild.md</code></li>
+<li><code>LG_Military_Master_Plan.md</code> W5 (metric reframe) → NOT YET reflected in any June 2026 deliverable — surface in master audit</li>
+<li><code>military_meeting_package.md</code>, pitch v2/v3, <code>military_proposal.md</code> → fully superseded by the renegotiated deal; historical reference only</li>
+</ul>
+<p>End of digest.</p>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 Baseline Vetting Framework — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — 04 Baseline Vetting Framework</div>
+<div class="meta">Source: <code>04_baseline_vetting_framework.md</code></div>
+<hr class="divider">
+<h1 id="baseline-vetting-framework-negotiation-prep">Baseline Vetting Framework + Negotiation Prep</h1>
+<p><strong>Go To War Strategy — Military.com / Valnet pilot</strong>
+<strong>Prepared:</strong> May 31, 2026 | <strong>Stakes:</strong> ~$45–75K USD over 90-day measurement window</p>
+<hr />
+<blockquote>
+<p><strong>One-sentence brief.</strong> The baseline Hassan locked into his model ($275K/mo starting June) is May's headline gross net revenue — a number inflated by an early-month spend surge that had already collapsed to a $103K/month exit pace by the final 7 days. Every $10K lower that baseline moves, Mo earns ~$4–6K more over the July–August measurement window (at a 20–30% take rate on lift). The $125K gap between Hassan's number and a defensible trailing-average baseline is worth $50–75K to Mo. This document is the analytical system Mo uses to vet that number when the historical data arrives.</p>
+</blockquote>
+<hr />
+<h2 id="part-1-three-candidate-baseline-methods-yoy-seasonality-method">PART 1 — Three Candidate Baseline Methods (+ YoY Seasonality Method)</h2>
+<h3 id="stakes-table-compute-after-real-data-arrives">Stakes table (compute after real data arrives)</h3>
+<table>
+<thead>
+<tr>
+<th>Baseline method</th>
+<th>Probable $ figure</th>
+<th>Favors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method 1: Flat May 2026 headline</td>
+<td>$275K/mo</td>
+<td>Hassan</td>
+</tr>
+<tr>
+<td>Method 2: 90-day trailing average</td>
+<td>$140K–$190K/mo</td>
+<td>Mo (moderate)</td>
+</tr>
+<tr>
+<td>Method 3: 14-day exit run rate</td>
+<td>$103K–$154K/mo</td>
+<td>Mo (aggressive)</td>
+</tr>
+<tr>
+<td>Method 4: YoY seasonally adjusted</td>
+<td>TBD once Jun–Aug 2025 data pulled</td>
+<td>Neutral / most rigorous</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="method-1-flat-may-2026-headline-275k">Method 1 — Flat May 2026 Headline ($275K)</h3>
+<p><strong>Formula / computation:</strong></p>
+<pre><code>Baseline = May 2026 total net revenue ÷ 1
+         = $281,622 ÷ 1
+         = ~$275K (Hassan's rounded figure)
+</code></pre>
+<p><strong>Why Hassan argues this:</strong>
+He's using a single-month snapshot at the calendar month level. Simple, defensible at the board level, and conveniently uses the highest month on record (inflated by early-May spend surge).</p>
+<p><strong>Why it's wrong:</strong>
+May's $281,622 is not a stable run rate — it's the aggregate of four structurally different operating environments inside one calendar month:</p>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Daily net</th>
+<th>Monthly equiv</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W1 May 1–7</td>
+<td>$14,276/day</td>
+<td>$433,977/mo</td>
+</tr>
+<tr>
+<td>W2 May 8–14</td>
+<td>$13,176/day</td>
+<td>$400,555/mo</td>
+</tr>
+<tr>
+<td>W3 May 15–21</td>
+<td>$9,607/day</td>
+<td>$292,044/mo</td>
+</tr>
+<tr>
+<td>W4 May 22–28</td>
+<td>$2,929/day</td>
+<td>$89,050/mo</td>
+</tr>
+<tr>
+<td>Last 2d May 29–30</td>
+<td>$854/day</td>
+<td>$25,962/mo</td>
+</tr>
+</tbody>
+</table>
+<p>The business that generated $275K in May does not exist anymore. The business that Mo is actually inheriting is producing ~$103K/month at exit. Hassan is asking Mo to prove he beat a number the prior operator never reliably achieved either.</p>
+<p><strong>Probable dollar figure:</strong> $275K (exactly as Hassan states)</p>
+<p><strong>Favors:</strong> Hassan, strongly.</p>
+<p><strong>Worked example with placeholder data:</strong></p>
+<pre><code>When Mar/Apr data arrives:
+  Method 1 result = $281,622  [May actual — already confirmed]
+  No computation needed. This is Hassan's opening ask.
+</code></pre>
+<hr />
+<h3 id="method-2-trailing-90-day-rolling-average-ending-may-30">Method 2 — Trailing 90-Day Rolling Average (ending May 30)</h3>
+<p><strong>Formula / computation:</strong></p>
+<pre><code>Baseline = (March 2026 net revenue + April 2026 net revenue + May 2026 net revenue) ÷ 3
+</code></pre>
+<p><strong>Why this is defensible:</strong>
+It smooths single-month anomalies. It's standard in performance marketing contracts where one month can be distorted by spend ramps, seasonality, or one-time events. Hassan cannot credibly object to averaging — it's more conservative than cherry-picking peak months.</p>
+<p><strong>Why it favors Mo:</strong>
+May was artificially high vs. what the business was doing in March and April. Per Hassan's own statement, April was ~$125K. If March was similar, the average is ~$177K — not $275K.</p>
+<p><strong>Probable dollar figure:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Mar</th>
+<th>Apr</th>
+<th>May</th>
+<th>90-day avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hassan's claim (Mar≈Apr≈$125K)</td>
+<td>$125K</td>
+<td>$125K</td>
+<td>$281.6K</td>
+<td><strong>$177K</strong></td>
+</tr>
+<tr>
+<td>Slightly higher (Mar≈Apr≈$140K)</td>
+<td>$140K</td>
+<td>$140K</td>
+<td>$281.6K</td>
+<td><strong>$187K</strong></td>
+</tr>
+<tr>
+<td>Mar higher (Mar=$180K, Apr=$125K)</td>
+<td>$180K</td>
+<td>$125K</td>
+<td>$281.6K</td>
+<td><strong>$196K</strong></td>
+</tr>
+<tr>
+<td>Both months $200K+</td>
+<td>$200K</td>
+<td>$200K</td>
+<td>$281.6K</td>
+<td><strong>$227K</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Favors:</strong> Mo (moderate). A $177K–$187K baseline is fair and hard to argue against.</p>
+<p><strong>Worked example with placeholder data:</strong></p>
+<pre><code>When data arrives, plug in:
+  March 2026 net revenue:  $ [PULL FROM HASSAN / INTERNAL TOOL]
+  April 2026 net revenue:  $ [PULL FROM HASSAN / INTERNAL TOOL]
+  May 2026 net revenue:    $281,622  [confirmed]
+
+  90-day average = (March + April + $281,622) ÷ 3
+
+  Example: ($125,000 + $125,000 + $281,622) ÷ 3 = $177,207
+
+  If Hassan says April was $125K and March was $125K →
+  BASELINE = $177,207  →  round to $178K or negotiate to $175K.
+</code></pre>
+<hr />
+<h3 id="method-3-exit-run-rate-last-14-days-of-may-annualized">Method 3 — Exit Run Rate (last 14 days of May annualized)</h3>
+<p><strong>Formula / computation:</strong></p>
+<pre><code>Exit run rate = (sum of net revenue May 17–30) ÷ 14 days × 30.4 days
+             = $70,724 ÷ 14 × 30.4
+             = $153,581/month
+
+Excluding Memorial Day (May 23–25, net=$1,613 on $78K spend):
+Exit run rate ex-MDW = ($70,724 − $1,613) ÷ 11 days × 30.4
+                     = $190,998/month
+</code></pre>
+<p><strong>Why this is defensible:</strong>
+The 14-day exit run rate is the most accurate picture of what the business is actually doing in the absence of unsustainable over-scaling. Weeks 1–2 of May benefited from a fresh creative set that fatigued rapidly and was over-scaled through Week 3, causing the collapse. The exit pace is the true operating floor. The ex-MDW version additionally removes a structurally anomalous holiday weekend where $78K was spent for ~$1.6K net return.</p>
+<p><strong>Why it's the strongest argument Mo has:</strong>
+The entire May spike was caused by overspending on fatiguing creative, not by genuine audience demand growth. Mo is being handed a business at $103K/month and asked to prove he beat $275K/month. That's a 2.7x target built on a month that doesn't represent steady-state.</p>
+<p><strong>Probable dollar figure:</strong>
+- Raw last 14 days: <strong>$153,581/mo</strong>
+- Ex-Memorial Day: <strong>$190,998/mo</strong>
+- Raw last 7 days: <strong>$103,178/mo</strong></p>
+<p><strong>Favors:</strong> Mo (aggressive). Hassan will reject the last-7-days version. The last-14-days ex-MDW number at ~$191K is more defensible in a negotiation.</p>
+<p><strong>Worked example with placeholder data:</strong></p>
+<pre><code>Last 14 days (May 17–30):
+  Net revenues by day (from CSV):
+    May 17: $4,991 | May 18: $13,826 | May 19: $14,027 | May 20: $9,874
+    May 21: $5,793 | May 22: $1,405  | May 23: -$2,953 | May 24: $70
+    May 25: $4,496 | May 26: $4,859  | May 27: $5,484  | May 28: $7,144
+    May 29: -$77   | May 30: $1,785
+
+  Total 14-day net: $70,724
+  Daily avg: $70,724 ÷ 14 = $5,052/day
+  Monthly equivalent: $5,052 × 30.4 = $153,581
+
+  Excluding May 23–25 (Memorial Day, $1,613 net on $78,321 spend):
+  Adjusted total: $70,724 − $1,613 = $69,111 over 11 days
+  Daily avg: $69,111 ÷ 11 = $6,283/day
+  Monthly equivalent: $6,283 × 30.4 = $190,998
+</code></pre>
+<hr />
+<h3 id="method-4-yoy-seasonally-adjusted-baseline">Method 4 — YoY Seasonally Adjusted Baseline</h3>
+<p><strong>Formula / computation:</strong></p>
+<pre><code>Step 1: Pull net revenue for June 2025, July 2025, August 2025
+        (from Meta Ads Manager + QuoteWizard — Mo pulls this starting June 2)
+
+Step 2: Compute YoY growth rate, month-by-month:
+        YoY_June  = (June 2026 projected / June 2025 actual) − 1
+        YoY_July  = (July 2025 actual / June 2025 actual) − 1  [i.e., natural growth rate]
+
+Step 3: Apply that natural growth rate to the Mar/Apr/May trailing average:
+        Seasonally adjusted baseline =
+            Trailing_90day_avg × (1 + natural_seasonal_lift_for_June)
+
+Step 4: This is Mo's &quot;honest baseline&quot; — what the business would have done in 
+        June 2026 with no Mo, based on what it actually did in June 2025.
+</code></pre>
+<p><strong>Why this is the most rigorous:</strong>
+It's the only method that answers the direct question: "What would June look like if Mo had never been hired?" It removes both the May spike AND any argument about seasonal trends. If Hassan claims the business naturally grows in summer, the YoY data either confirms or denies that.</p>
+<p><strong>Why it requires the data pull:</strong>
+Cannot be computed without June–August 2025 actual numbers. Mo pulls this from Meta + QuoteWizard starting Monday June 2.</p>
+<p><strong>Probable dollar figure:</strong>
+- If Jun 2025 was ~$130–170K (likely for a newly acquired asset), the seasonally adjusted baseline lands in the same range as Method 2 ($140K–$185K).
+- If Jun 2025 was already $200K+, Hassan's growth narrative has more support, and Mo needs to rely on exit run rate.</p>
+<p><strong>Favors:</strong> Neutral. This is the "truth" method. Use it to validate whichever of Methods 2/3 the data supports.</p>
+<p><strong>Worked example with placeholder data:</strong></p>
+<pre><code>When you pull from Meta + QuoteWizard:
+
+  June 2025 actual net revenue:     $ [PULL]
+  July 2025 actual net revenue:     $ [PULL]
+  August 2025 actual net revenue:   $ [PULL]
+
+  Natural Jun→Jul seasonal change: (Jul_2025 − Jun_2025) / Jun_2025 = [X%]
+  Natural Jul→Aug seasonal change: (Aug_2025 − Jul_2025) / Jul_2025 = [Y%]
+
+  If Jun 2025 = $150,000:
+    And business was flat/declining (common post-acquisition):
+    Jun 2026 organic expectation = $150,000 × (1 + modest inflation ~ 5%)
+                                 = $157,500
+
+  If Jun 2025 = $150,000 and Hassan claims +64% organic growth:
+    Jun 2026 organic claim = $150,000 × 1.64 = $246,000
+    But that +64% must be visible in 2025 data SOMEWHERE to be credible.
+    Ask: &quot;What drove 64% organic growth? Where does it show up in the 2025 data?&quot;
+</code></pre>
+<hr />
+<h2 id="part-2-decision-tree-what-baseline-to-argue-for">PART 2 — Decision Tree: What Baseline to Argue For</h2>
+<p><strong>Gate condition: Have the historical data in hand before this conversation.</strong>
+Do not enter the baseline negotiation without March, April, and July–August 2025 numbers confirmed.</p>
+<hr />
+<pre><code>START
+  │
+  ├─ PULL Mar/Apr 2026 from Hassan/internal tool
+  │    AND pull Jul–Aug 2025 from Meta + QuoteWizard
+  │
+  ▼
+[A] What did Mar/Apr 2026 show?
+  │
+  ├─ A1: Mar/Apr each ~$125K (consistent with Hassan's claim)
+  │       AND YoY (Jun/Jul/Aug 2025) also ~$120–150K
+  │         → DATA CONFIRMS: Business was running ~$125–140K/mo
+  │           Trailing 90-day avg = ~$177K (inflated by May spike)
+  │           ARGUMENT: &quot;The trailing average including May's anomaly is $177K.
+  │                       The cleaner picture is $140–155K. I'll accept $155K.&quot;
+  │           BASELINE TARGET: $150K–$160K
+  │
+  ├─ A2: Mar/Apr much higher (~$200K+)
+  │         → DATA SHOWS: May was a continuation of a strong spring, not an anomaly
+  │           Hassan's $275K headline has more context supporting it
+  │           ARGUMENT: Shift to exit run rate + Memorial Day exclusion
+  │           &quot;May was strong but the last 14 days ex-MDW ran at $191K.
+  │            June is the reset month. $191K is honest.&quot;
+  │           BASELINE TARGET: $185K–$200K
+  │
+  └─ A3: Mar/Apr were BELOW $125K (e.g., $80–100K)
+            → DATA SHOWS: May was an EVEN BIGGER anomaly
+              Hassan was running at $80–100K, spend-scaled unsustainably in May
+              ARGUMENT: Trailing average is misleading TOWARD Hassan, not Mo
+              &quot;The trailing average ($147K–$160K) actually overstates the run rate.
+               The true operating baseline is exit run rate at $153K.&quot;
+              BASELINE TARGET: $140K–$155K (trailing avg, period.)
+
+
+[B] What does YoY (Jun–Aug 2025) show?
+  │
+  ├─ B1: Jun–Aug 2025 was significantly LOWER than Hassan's $275K–$331K projection
+  │         (e.g., Jun 2025 was $120–160K)
+  │         → Hassan's &quot;+64% organic ramp&quot; is a model assumption, not historical fact
+  │           He has no data showing this business has ever grown 64% in 6 months
+  │           ARGUMENT: &quot;Your model assumes organic growth no prior period demonstrates.
+  │                       The honest starting point is what the business actually did,
+  │                       which is ~$140–160K/month.&quot;
+  │           BASELINE TARGET: $150K–$165K (aggressive)
+  │
+  ├─ B2: Jun–Aug 2025 shows STEADY GROWTH toward $200K+ by Aug 2025
+  │         → Hassan's growth model has SOME historical support
+  │           But even so, May 2026 over-scaled and collapsed; use Method 3
+  │           ARGUMENT: &quot;The business was growing — I agree. But May's headline
+  │                       includes $78K spent over Memorial Day for $1,600 net.
+  │                       Clean May ex-MDW = $311K. 14-day exit = $191K.
+  │                       The right June baseline is $200K, not $275K.&quot;
+  │           BASELINE TARGET: $185K–$205K
+  │
+  └─ B3: Jun–Aug 2025 was ALREADY at or above Hassan's $275K–$331K projection
+            → Hassan's model is historically supported
+              Mo's best move: don't fight the baseline, negotiate the fee structure instead
+              (higher base, lower % threshold, shorter measurement window)
+              BASELINE TARGET: Accept $275K, but negotiate contract protections
+              (audit rights, adjustment clause for spend policy changes, shorter window)
+
+
+[C] Wildcard conditions
+
+  WC1: Apr→May jump (+120%+ MoM) was driven by a one-time buyer-side payout increase
+         (e.g., QuoteWizard temporarily raised CPLs in April/May, reset in June)
+         → May's RPL was artificially elevated. Check the RPL column:
+           May W1 avg RPL: $34.49 vs May W4 avg RPL: $31.11 — already declining.
+           If June's RPL opens at $27–29, May was a temporary payout spike.
+         ARGUMENT: &quot;RPL fell $3.38 in May alone. If buyer payouts normalized,
+                     May $275K is mathematically unrepeatable. Baseline = 90-day avg.&quot;
+
+  WC2: Pre-July 2025 data shows Monster-era ($200M+ company) performance
+         was structurally different from the Iron Corp/Valnet era
+         → Revenue levels from 2024 and earlier are not comparable
+           The business was rebuilt post-acquisition with different buyers, tracking, ops
+         ARGUMENT: &quot;Any data before [acquisition close date] reflects a different
+                     business. The relevant baseline window is the post-acquisition
+                     operating history. Use [last N months of post-acquisition data].&quot;
+         ACTION: Find out when Valnet/Iron Corp acquired Military.com and use only
+                 post-acquisition months.
+
+  WC3: May spike was driven by a new ad account or campaign type Mo cannot replicate
+         (e.g., a burst of remarketing from email list, a one-time promo, publisher deal)
+         → Baseline built on that spike is unreachable even with Mo's best work
+         ARGUMENT: &quot;Walk me through what drove weeks 1–2 of May specifically.
+                     If that driver is gone, the baseline should reflect what's
+                     repeatable, not what was a one-time lift.&quot;
+</code></pre>
+<hr />
+<h2 id="part-3-pressure-test-hassans-growth-model">PART 3 — Pressure-Test Hassan's Growth Model</h2>
+<p><strong>Hassan's model:</strong> $275K (June) → $451K (December) = +64% organic growth, without GTW.</p>
+<h3 id="implied-growth-rates">Implied growth rates</h3>
+<pre><code>Compound monthly growth rate (CMGR) Jun→Dec:
+  ($451K / $275K)^(1/6) − 1 = 8.59%/month
+
+Month-by-month implied targets:
+  June 2026:     $275,000   ← proposed baseline
+  July 2026:     $298,635   (+8.6%)
+  August 2026:   $324,300   (+8.6%)
+  September 2026:$352,172   (+8.6%)
+  October 2026:  $382,439   (+8.6%)
+  November 2026: $415,307   (+8.6%)
+  December 2026: $451,000   (+8.6%)
+</code></pre>
+<p><strong>8.59% compounding monthly growth is very aggressive.</strong> For context:
+- A business growing 8.6% per month is growing ~150% per year
+- The S&amp;P 500 grows ~10% per year
+- Even top-quartile performance marketing accounts grow 10–30% per year, not 150%</p>
+<h3 id="the-acid-test">The acid test</h3>
+<p><strong>Question:</strong> Did Iron Corp / Valnet grow Military.com by 64% from June 2025 → December 2025?</p>
+<p><strong>Likely answer: No.</strong> Here's why the data will almost certainly show this:</p>
+<ol>
+<li>
+<p><strong>Acquisition effect.</strong> Most acquisitions decline or flatline in months 1–6 as the new operator learns the asset. The outgoing operator (Monster/Randstad) has no incentive to set Mo up for success. Systems change, ad accounts reset, buyer relationships reset.</p>
+</li>
+<li>
+<p><strong>May 2026 tells the story.</strong> If the business were organically growing 8.6% monthly, May should have been ~$340–380K given a June 2025 starting point of $275K. It wasn't. It was $281K — roughly flat YoY if Hassan's model is self-consistent.</p>
+</li>
+<li>
+<p><strong>The RPL decline.</strong> Revenue per lead fell from $34.49 to $26.56 in a single month. That's a structural compression, not a growth business.</p>
+</li>
+</ol>
+<h3 id="month-flag-analysis-where-hassans-model-looks-most-aggressive">Month-flag analysis (where Hassan's model looks most aggressive)</h3>
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>Hassan's target</th>
+<th>Implied YoY required</th>
+<th>Red flag?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>June 2026</td>
+<td>$275,000</td>
+<td>+X% vs Jun 2025</td>
+<td>Need Jun 2025 actual to compute</td>
+</tr>
+<tr>
+<td>July 2026</td>
+<td>$298,635</td>
+<td>Need Jul 2025 actual</td>
+<td>Flag if Jul 2025 &lt; $200K</td>
+</tr>
+<tr>
+<td>August 2026</td>
+<td>$324,300</td>
+<td>Need Aug 2025 actual</td>
+<td>Flag if Aug 2025 &lt; $200K</td>
+</tr>
+<tr>
+<td>Sep–Dec 2026</td>
+<td>$352K–$451K</td>
+<td>Compounding 8.6%/mo</td>
+<td>Almost certainly fantasy without a structural shift</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The stress test in one sentence:</strong>
+If the Jul–Aug 2025 actuals you pull from Meta are below $200K/month, Hassan's December $451K target requires the business to more than double in 18 months with no explanation for what changes — and Mo's "organic" hurdle is a fiction.</p>
+<p><strong>What to do with this finding:</strong>
+Do not wave this as a gotcha at Hassan. Use it privately to confirm Mo's baseline argument, and use it in the negotiation as: "Your growth model is ambitious and I believe in it — but it means the June baseline needs to reflect where we're actually starting, not where May happened to peak."</p>
+<hr />
+<h2 id="part-4-the-case-file-1-page-template">PART 4 — The Case File (1-Page Template)</h2>
+<p><em>Mo fills in bracketed values when historical data arrives. Print this and walk in with it.</em></p>
+<hr />
+<h3 id="militarycom-performance-baseline-mos-position">MILITARY.COM PERFORMANCE BASELINE — Mo's Position</h3>
+<p><strong>Date of conversation:</strong> [mid-June 2026]
+<strong>Prepared by:</strong> Go To War Strategy</p>
+<hr />
+<p><strong>SECTION A — May 2026: Headline vs. Reality</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hassan's number</th>
+<th>What the data shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>May total net revenue</td>
+<td>$275K</td>
+<td>$281,622 (confirmed)</td>
+</tr>
+<tr>
+<td>May W1 daily net</td>
+<td>—</td>
+<td>$14,276/day ($434K/mo equiv)</td>
+</tr>
+<tr>
+<td>May exit daily net (last 7d)</td>
+<td>—</td>
+<td>$3,394/day ($103K/mo equiv)</td>
+</tr>
+<tr>
+<td>Net per lead, May 1–7</td>
+<td>—</td>
+<td>$12.90</td>
+</tr>
+<tr>
+<td>Net per lead, May 22–28</td>
+<td>—</td>
+<td>$3.00</td>
+</tr>
+<tr>
+<td>Net per lead decline</td>
+<td>—</td>
+<td>−77% in 28 days</td>
+</tr>
+<tr>
+<td>Memorial Day (May 23–25)</td>
+<td>—</td>
+<td>$78,321 spent, $1,613 net</td>
+</tr>
+<tr>
+<td>Exit run rate entering June</td>
+<td>—</td>
+<td>$103K–$154K/mo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The single most important sentence:</strong> May's $275K is the sum of four different businesses running inside the same calendar month — Week 1 ran at $434K/mo pace, and the last week ran at $89K/mo pace. The baseline for the pilot is not which week came first, it's what the steady-state operating capacity is.</p>
+<hr />
+<p><strong>SECTION B — YoY Seasonally Adjusted Baseline</strong></p>
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>2025 Actual</th>
+<th>Hassan's 2026 projection</th>
+<th>Implied YoY growth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>June</td>
+<td>$ [PULL]</td>
+<td>$275,000</td>
+<td>[COMPUTE]</td>
+</tr>
+<tr>
+<td>July</td>
+<td>$ [PULL]</td>
+<td>$298,635</td>
+<td>[COMPUTE]</td>
+</tr>
+<tr>
+<td>August</td>
+<td>$ [PULL]</td>
+<td>$324,300</td>
+<td>[COMPUTE]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key finding (fill in):</strong> "June 2025 actual was $[X]. Hassan's June 2026 baseline represents a [Y%] YoY lift. The historical data [supports / does not support] that assumption because [evidence]."</p>
+<p><strong>If YoY growth was flat-to-negative:</strong> "Iron Corp's Military.com has not demonstrated the organic growth trajectory Hassan's model assumes. The honest June 2026 baseline — what the business would do with no GTW involvement — is closer to [Jun 2025 × modest inflation] = $[Z]."</p>
+<hr />
+<p><strong>SECTION C — Mo's Proposed Baseline</strong></p>
+<p><strong>Proposed baseline: $[TARGET NUMBER]</strong></p>
+<p>Methodology: [choose one of below based on what data shows]</p>
+<p>Option A (if Mar/Apr ~$125K): 90-day trailing average</p>
+<pre><code>March 2026: $[ACTUAL]
+April 2026: $[ACTUAL]
+May 2026:   $281,622
+Average:    $[CALC] → round to $[TARGET]
+</code></pre>
+<p>Option B (if Mar/Apr ~$125K + exit run rate argument):</p>
+<pre><code>14-day exit run rate (May 17–30, ex-Memorial Day):
+  Net over 11 non-MDW days: $69,111
+  Daily: $6,283
+  Monthly equivalent: $190,998
+  → Baseline: $190,000 or negotiated to $185,000
+</code></pre>
+<p>Option C (hybrid): Average of trailing-90d and exit run rate</p>
+<pre><code>Method 2 result: $177,207
+Method 3 result (ex-MDW): $190,998
+Average: $184,103 → proposed baseline: $185,000
+</code></pre>
+<hr />
+<p><strong>SECTION D — Why This Is Fair to Hassan</strong></p>
+<p>"Hassan, the performance fee structure works when the baseline reflects what the business does WITHOUT me. If we set the baseline at a peak that already collapsed before I touched a single campaign, I'm paying back value the account never actually held. You'd be paying me to recover ground that was lost before we signed — not to create new ground.</p>
+<p>The right question isn't 'what did May total?' It's 'what would June do if Mo was never hired?' The answer to that question is $[TARGET], not $275K. I'm confident in my ability to beat $[TARGET] significantly. I'm less confident about beating a number the prior operator couldn't sustain for three consecutive weeks.</p>
+<p>You don't pay GTW to deliver growth you'd get anyway. You pay for the lift above what the business naturally produces. Let's set the baseline at the natural level so both of us know exactly what we're measuring."</p>
+<hr />
+<p><strong>SECTION E — Clause Language (see Part 6 for full contract language)</strong></p>
+<p>Key points to put in writing within 48 hours of conversation:</p>
+<ol>
+<li>Baseline = $[AGREED NUMBER] per calendar month, computed as [METHOD] over [WINDOW]</li>
+<li>Measurement period = July 1, 2026 – August 31, 2026 (60-day run rate)</li>
+<li>Goal posts apply to NET revenue above baseline (not gross)</li>
+<li>Mo has right to audit underlying source data on 5-business-day notice</li>
+<li>Baseline resets if QuoteWizard payout rates change by &gt;15%, or Meta implements a policy change materially affecting lead qualification</li>
+</ol>
+<hr />
+<h2 id="part-5-negotiation-script">PART 5 — Negotiation Script</h2>
+<h3 id="timing">Timing</h3>
+<p><strong>Do NOT bring this up before June 15, 2026.</strong></p>
+<p>The sequence must be:
+1. June 1–7: Get access, audit account, build trust with Lauren and dev.
+2. June 7–14: Ship at least 2 visible quick wins (creative refresh, pacing fix, home scale). These become your credibility tokens.
+3. June 14–21: Pull and verify the historical data. Build the case file.
+4. June 15–21: Request a 1:1 with Hassan (not the team call, not the group session). "Hassan, I want to walk you through what the data shows on the baseline before we finalize the contract. 30 minutes this week?"</p>
+<p><strong>Do NOT negotiate baseline in a group setting.</strong> Lauren and the dev team do not need to hear this conversation. It changes the dynamic, puts Hassan on defense in front of his team, and risks making Mo look adversarial before trust is built.</p>
+<hr />
+<h3 id="the-opening-23-sentences">The Opening (2–3 sentences)</h3>
+<p>"Hassan, I've been doing the data work before we finalize the contract — that's the due diligence I owe you and me both. I want to walk you through what May actually showed when you look at the daily curve, and share the baseline methodology I think is fairest for the pilot. I'm not trying to game the number — I'm trying to make sure we're measuring what I actually contribute, not what the account happened to do in week one."</p>
+<hr />
+<h3 id="likely-objections-responses">Likely Objections + Responses</h3>
+<hr />
+<p><strong>Objection 1: "We did $275K in May, that's the baseline."</strong></p>
+<p>Response: "We did — and I want to show you exactly how we got there. [open the day-by-day chart]. Week 1 ran at $434K/month pace. Week 4 ran at $89K/month pace. The $275K is the average of those two very different businesses inside the same month. The business I'm taking over is the one that existed on May 30, not May 5. If we baseline at $275K, I spend the first six weeks recovering ground the account lost on its own — and you're paying performance fee for a recovery I shouldn't be charged with causing."</p>
+<hr />
+<p><strong>Objection 2: "I built the model already, let's just go with it."</strong></p>
+<p>Response: "I've seen the model and I think the growth targets are achievable — that's not my issue. My issue is the starting line, not the finish line. The model works at any baseline; it's just a question of what percentage growth we're measuring from. If we agree on $175K instead of $275K, your upside calculation doesn't change — the account still needs to get to $375K to hit GP2. The only thing that changes is whether I get credit for getting it there, or whether some of that growth was already built into the prior operator's May spike."</p>
+<hr />
+<p><strong>Objection 3: "If we cherry-pick the bad weeks, of course you look good."</strong></p>
+<p>Response: "I'm not cherry-picking — I'm asking you to use the same standard for bad weeks that you're using for good ones. You're proposing to include Week 1 in the baseline. I'm proposing to include Weeks 1 through 4, which is the trailing average. The trailing average IS the standard methodology for this exact reason — so neither side can cherry-pick. And even the trailing average comes in around $177K using your own April number. I'm actually willing to round up to $185K as a gesture of good faith."</p>
+<hr />
+<p><strong>Objection 4: "We're already growing fast, you'd be getting paid for that anyway."</strong></p>
+<p>Response: "Then show me the historical data. If June, July, August 2025 showed 8.6% monthly organic growth, I'll accept a higher baseline — your growth assumption would be empirically supported. But if last year's same months came in at $130–160K, then the 64% growth in your model is a projection, not a fact. I'm not arguing about the future — I'm asking that the baseline reflect the past. Pull the 2025 summer data and let's look at it together."</p>
+<hr />
+<h3 id="the-close">The Close</h3>
+<p>"Here's what I'd like to do: let's agree on the methodology today — trailing 90-day average, excluding one-time events — and you send me the March and April numbers by [date]. I'll do the math and send you a one-line proposed baseline by [date + 2 days]. If we're aligned, it goes into the contract that week.</p>
+<p>I want this resolved before July 1 so neither of us is guessing when measurement starts. Can we do that?"</p>
+<p><strong>Then stop talking. Wait for Hassan to respond.</strong></p>
+<p><strong>Follow-up within 48 hours:</strong> Send an email with: "Per our conversation — proposed baseline: $[NUMBER], computed as [METHOD] using March/April/May actuals you provided. Please confirm by reply so legal can incorporate." Get it in writing before July 1 or the measurement window is already running with no locked number.</p>
+<hr />
+<h2 id="part-6-contract-clause-language">PART 6 — Contract Clause Language</h2>
+<p><em>The exact language Mo wants in the Valnet/Iron Corp services agreement.</em></p>
+<hr />
+<h3 id="61-baseline-definition">6.1 — Baseline Definition</h3>
+<blockquote>
+<p><strong>"Baseline Net Revenue"</strong> means the monthly net revenue figure against which Go To War Strategy's performance fee is calculated, defined as follows:</p>
+<p><em>Computation:</em> The arithmetic mean of net revenue for the three calendar months immediately preceding the Measurement Period (March 2026, April 2026, and May 2026), where net revenue for each month is defined as total gross lead-buyer revenue received from all buyers, less total paid media spend on Meta Ads and any other paid channel, for the Military.com property operated by Iron Corp US Inc. / Valnet Inc.</p>
+<p><em>Dollar amount:</em> Baseline Net Revenue = <strong>$[AGREED NUMBER]</strong> per calendar month.</p>
+<p><em>Measurement window:</em> The Baseline Net Revenue figure shall be the reference point for all Goal Post calculations during the Pilot Measurement Period (July 1, 2026 – August 31, 2026).</p>
+<p><em>Source data:</em> Baseline shall be computed from data provided by Iron Corp's internal performance reporting tool AND cross-referenced against Meta Ads Manager and QuoteWizard reporting for the same periods. In the event of discrepancy between sources, the parties shall resolve the discrepancy in writing prior to execution of this agreement.</p>
+</blockquote>
+<hr />
+<h3 id="62-goal-post-calculations">6.2 — Goal Post Calculations</h3>
+<blockquote>
+<p><strong>Goal Post 1 (GP1):</strong> Monthly net revenue ≥ Baseline Net Revenue × 1.15 (i.e., ≥ $[BASELINE × 1.15]) during the Measurement Period.</p>
+<p><strong>Goal Post 2 (GP2):</strong> Monthly net revenue ≥ Baseline Net Revenue × 1.36 (i.e., ≥ $[BASELINE × 1.36]) during the Measurement Period.</p>
+<p><strong>Goal Post 3 (GP3):</strong> Monthly net revenue ≥ Baseline Net Revenue × 1.57 (i.e., ≥ $[BASELINE × 1.57]) during the Measurement Period.</p>
+<p>For purposes of Goal Post calculation, monthly net revenue during the Measurement Period shall be computed using the same methodology (same revenue sources, same spend inputs, same attribution window) as used to compute Baseline Net Revenue. Any change in methodology that affects net revenue by more than 5% in either direction shall trigger a re-baselining per Section 6.3.</p>
+</blockquote>
+<hr />
+<h3 id="63-baseline-adjustment-triggers">6.3 — Baseline Adjustment Triggers</h3>
+<blockquote>
+<p>The Baseline Net Revenue figure shall be subject to renegotiation in good faith within 15 business days if any of the following occur:</p>
+<p>(a) <strong>Buyer payout change:</strong> QuoteWizard or any lead buyer accounting for &gt;20% of gross revenue changes its per-lead payout rate by more than 15% (up or down) relative to the rate in effect during the Baseline Period. Adjustment shall be proportional to the revenue impact of the payout rate change.</p>
+<p>(b) <strong>Meta platform policy change:</strong> Meta Ads implements a policy change that materially restricts audience targeting, creative formats, or lead generation objectives available to the account, resulting in a documented reduction of qualified leads per dollar spent of more than 15%.</p>
+<p>(c) <strong>Acquisition or divestiture:</strong> Iron Corp / Valnet acquires or disposes of a material asset (generating or consuming &gt;$25,000/month net revenue) integrated with the Military.com paid media account during the Measurement Period.</p>
+<p>(d) <strong>Budget reduction by client:</strong> Client unilaterally reduces monthly paid media budget below $400,000 (the approximate May 2026 monthly budget) without GTW's agreement. GTW cannot be held to Goal Post targets if the budget ceiling prevents reaching them.</p>
+<p>(e) <strong>Organic revenue reclassification:</strong> Any change in how "organic" versus "paid" revenue is attributed that materially affects the net revenue figures used for Goal Post calculation.</p>
+</blockquote>
+<hr />
+<h3 id="64-audit-rights">6.4 — Audit Rights</h3>
+<blockquote>
+<p>Go To War Strategy shall have the right, on no less than 5 business days' written notice, to request source-level data supporting the monthly net revenue figures used for Baseline and Measurement Period calculations. This includes:</p>
+<ul>
+<li>Meta Ads Manager spend and revenue export for the relevant period (account-level and campaign-level)</li>
+<li>QuoteWizard lead acceptance report and payout report for the relevant period</li>
+<li>Iron Corp internal performance report (the same report used to produce the data in this agreement)</li>
+</ul>
+<p>Client shall provide the requested data within 5 business days of request. Audit rights may be exercised no more than once per quarter during the term of this agreement and any renewals.</p>
+<p>In the event that data provided under audit materially differs from data previously provided for computation of Baseline or Measurement Period net revenue, the parties shall resolve the discrepancy within 15 business days. If unresolved, the discrepancy shall be resolved by reference to the Meta Ads Manager and QuoteWizard reports, which shall govern.</p>
+</blockquote>
+<hr />
+<h3 id="65-dispute-resolution-on-delivered-numbers">6.5 — Dispute Resolution on Delivered Numbers</h3>
+<blockquote>
+<p>If the parties disagree on whether a Goal Post was achieved in a given month:</p>
+<p>(a) Either party may invoke this clause by written notice within 10 business days of the end of the relevant calendar month.</p>
+<p>(b) Within 5 business days of such notice, each party shall submit its net revenue calculation with supporting data to a mutually agreed accountant or, failing agreement, to a certified public accountant selected by the American Arbitration Association.</p>
+<p>(c) The accountant's determination shall be binding and shall be rendered within 15 business days of receiving both submissions.</p>
+<p>(d) The cost of the accountant shall be borne by the party whose submitted number was further from the accountant's determination. If the accountant's determination falls equidistant, costs shall be split equally.</p>
+<p>(e) Nothing in this clause prevents the parties from reaching a negotiated resolution before invoking the accountant process.</p>
+</blockquote>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<p><strong>Assumptions baked into this framework:</strong></p>
+<ol>
+<li>
+<p>Hassan's statement that "April was $125K" is taken at face value as the best available prior-month estimate until the internal tool data arrives. If April was substantially different, the trailing-average calculations change materially — rerun the spreadsheet.</p>
+</li>
+<li>
+<p>May 2026 net revenue of $281,622 is confirmed from the CSV file. This is the ground truth for May. Do not let Hassan propose a different May number without reconciling it against this file.</p>
+</li>
+<li>
+<p>The 90-day pilot measurement window is July 1 – August 31, 2026 (60 days, not 90 calendar days). The 90 days includes June as the ramp month. If Hassan's contract language defines "measurement period" differently, the goal post math changes.</p>
+</li>
+<li>
+<p>Mo's performance fee percentage (the take rate on lift) is assumed to be in the 20–30% range for the dollar-impact calculations. The actual rate is TBD in the contract. The framework holds at any take rate — the baseline negotiation is the highest-leverage single variable regardless.</p>
+</li>
+<li>
+<p>This framework assumes the revenue metric is "net revenue" (gross lead-buyer revenue minus paid media spend) — the same metric in the CSV. If Valnet/Iron Corp wants to use "gross revenue" or "ROAS" as the metric, the entire baseline conversation shifts. Nail down the exact metric in the contract before anything else.</p>
+</li>
+<li>
+<p>The exit run rate calculations treat the last 7 or 14 calendar days of May as the most predictive window for June's starting point. This is a defensible assumption but Hassan will contest it. The 90-day trailing average is the easier baseline to defend in a conversation.</p>
+</li>
+</ol>
+<p><strong>Open questions Mo must answer before the baseline negotiation:</strong></p>
+<ul>
+<li>[ ] What is the exact acquisition date when Valnet/Iron Corp took over Military.com? Pre-acquisition data is structurally incomparable and should not be used.</li>
+<li>[ ] What was March 2026 net revenue? (Hassan said April ~$125K; need March confirmed.)</li>
+<li>[ ] What were June, July, August 2025 net revenues? (Pull from Meta + QuoteWizard, starting June 2.)</li>
+<li>[ ] What is the exact RPL (revenue per lead) that QuoteWizard is paying in June 2026 versus May? An RPL drop of $2–3 on the same volume means the $275K number is not even theoretically repeatable.</li>
+<li>[ ] What is the exact percentage fee Hassan is proposing for lift above baseline? The answer determines exactly how much each $10K of baseline shift is worth in Mo's pocket.</li>
+<li>[ ] Does the contract count organic/direct traffic revenue separately from paid? If organic is bundled into the baseline metric, Mo gets credit (or blame) for things he doesn't control.</li>
+<li>[ ] Is the baseline measurement period exactly June 1 – August 31 (with measurement on July–August), or does the contract define it differently? Lock this before July 1.</li>
+<li>[ ] What triggered the April → May revenue jump? Was it a QuoteWizard payout increase, new buyer onboarding, increased budget, or improved creative? If it was a temporary payout increase that already reversed, May is even less repeatable.</li>
+</ul>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appendix C Dataset Capi — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Appendix C Dataset Capi</div>
+<div class="meta">Source: <code>appendix_c_dataset_capi.md</code></div>
+<hr class="divider">
+<h1 id="appendix-c-dataset-capi-signals">Appendix C — Dataset / CAPI / Signals</h1>
+<p>Live API pull, June 4, 2026.</p>
+<h2 id="datasets-attached-to-the-account">Datasets attached to the account</h2>
+<p>Three unique datasets (one shown twice via duplicate business associations):</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Created</th>
+<th>Last Web Fired</th>
+<th>Last Server Fired</th>
+<th>Business</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1536649764252698</code></td>
+<td><strong>MA Military Insurance</strong></td>
+<td>Dec 1, 2025</td>
+<td>Jun 4 14:42 ✅</td>
+<td><strong>NEVER (1969 epoch)</strong></td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td><code>587241028099131</code></td>
+<td><strong>Military.com's Pixel</strong></td>
+<td>Feb 2016 (legacy)</td>
+<td>Jun 4 14:39 ✅</td>
+<td><strong>Mar 2023 (3+ years silent)</strong></td>
+<td>Military.com (<code>10153481725199270</code>)</td>
+<td>ACTIVE</td>
+</tr>
+<tr>
+<td><code>332555186604235</code></td>
+<td><strong>Military Insurance</strong></td>
+<td>May 21, 2024</td>
+<td>Jun 4 14:39 ✅</td>
+<td><strong>Jun 4 14:34 ✅</strong></td>
+<td><code>551525685236215</code> (QW/Delty integration?)</td>
+<td>ACTIVE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The decode:</strong></p>
+<ul>
+<li><strong>Dataset <code>332555186604235</code> ("Military Insurance")</strong> is the live lead-gen workhorse — <strong>both Pixel and CAPI firing in real-time</strong>, owned by a separate business (almost certainly the QuoteWizard/Delty postback integration entity, hence the different business_id).</li>
+<li><strong>Dataset <code>587241028099131</code> ("Military.com's Pixel")</strong> is the legacy content/site Pixel from 2016. Has Lead, PageView, SubscribedButtonClick events — but <strong>server hasn't fired since March 2023</strong>. Maps to Mo's audit finding: "Dataset C content pixel CAPI Gateway 0% set up." This is the brand/content pixel for the main site, where adding CAPI would unlock the +23% cost/result Mo cited.</li>
+<li><strong>Dataset <code>1536649764252698</code> ("MA Military Insurance")</strong> — MA likely = MediaAlpha. Created Dec 2025, browser fires today, <strong>server never has fired</strong>. Likely a parallel test/integration that's not active server-side. Could be a placeholder or a half-built MediaAlpha lane.</li>
+</ul>
+<h2 id="event-match-quality-emq-by-dataset">Event Match Quality (EMQ) by dataset</h2>
+<h3 id="dataset-332555186604235-the-lead-gen-workhorse">Dataset <code>332555186604235</code> (the lead-gen workhorse)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ Composite</th>
+<th>Email %</th>
+<th>Phone %</th>
+<th>fbc %</th>
+<th>fbp %</th>
+<th>zip %</th>
+<th>Upload Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><strong>9.1</strong> ⭐</td>
+<td>85.2%</td>
+<td>97.1%</td>
+<td><strong>87.0%</strong></td>
+<td>100%</td>
+<td>99.9%</td>
+<td>hourly</td>
+</tr>
+<tr>
+<td><strong>CompleteRegistration</strong></td>
+<td><strong>8.3</strong> ⭐</td>
+<td>100%</td>
+<td>97.8%</td>
+<td><strong>100%</strong></td>
+<td>(not shown)</td>
+<td>97.8%</td>
+<td>hourly</td>
+</tr>
+<tr>
+<td>PageView</td>
+<td>6.9</td>
+<td>12.7%</td>
+<td>11.3%</td>
+<td>82.7%</td>
+<td>99.2%</td>
+<td>80.3%</td>
+<td>real-time</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key validations:</strong></p>
+<ul>
+<li><strong>CompleteRegistration EMQ = 8.3</strong> — <strong>EXACT MATCH to Mo's audit finding "EMQ 8.3/10"</strong>. Strong signal health.</li>
+<li><strong>Purchase EMQ = 9.1</strong> — <em>higher than Mo's audit cited.</em> Score is excellent.</li>
+<li><strong>fbc coverage = 100% on CompleteRegistration, 87% on Purchase</strong> — Coverage is HIGH. Mo's "fbc truncation on 15 ad sets, 27% of CompleteRegistration affected" — the <code>truncation</code> is a <em>value malformation</em> visible only in Meta Events Manager Diagnostics UI, <strong>not in this API's coverage field.</strong> This API confirms fbc is PRESENT in 100% / 87% of events; the truncation question (presence-but-malformed) needs a manual Events Manager check.</li>
+<li>All three events upload hourly or real-time — data freshness is fine.</li>
+</ul>
+<h3 id="dataset-587241028099131-militarycoms-pixel-contentsite">Dataset <code>587241028099131</code> (Military.com's Pixel — content/site)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PageView</td>
+<td>not surfaced (no match keys)</td>
+</tr>
+<tr>
+<td>SubscribedButtonClick</td>
+<td>not surfaced</td>
+</tr>
+<tr>
+<td>Lead</td>
+<td>not surfaced</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No CAPI events, no EMQ scoring.</strong> This dataset is browser-only. Maps to Mo's "Dataset C content pixel CAPI Gateway 0% set up" finding — <strong>CONFIRMED</strong>. Adding a Signals Gateway / CAPI for this pixel is the +23% cost/result opportunity Mo flagged.</p>
+<h3 id="dataset-1536649764252698-ma-military-insurance">Dataset <code>1536649764252698</code> (MA Military Insurance)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>EMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase</td>
+<td>not surfaced</td>
+</tr>
+<tr>
+<td>PageView</td>
+<td>not surfaced</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Browser-only, no EMQ data.</strong> Dormant from a server-side perspective.</p>
+<h2 id="event-volume-last-7-days-dataset-332555186604235">Event volume (last 7 days, Dataset <code>332555186604235</code>)</h2>
+<p>Rough totals across the 7-day window May 28 14:00 – Jun 4 13:59:</p>
+<ul>
+<li><strong>PageView</strong>: 392,000+ events</li>
+<li><strong>Purchase</strong>: 5,300+ events (~755/day average)</li>
+<li><strong>CompleteRegistration</strong>: 5,300+ events (~755/day)</li>
+</ul>
+<p><strong>Server vs Browser split</strong> (across same window): SERVER ~52%, BROWSER ~48%. CAPI is doing roughly equal volume to the Pixel. Healthy dual-channel setup.</p>
+<p><strong>Server uplift over browser</strong>: ~5–8% per hour on average. Mo's "17.5% more Purchase conversions via CAPI last 7d" was likely from a different reference window or measurement methodology (Meta's UI sometimes shows attribution-window-adjusted lift). The current dataset health is good but the 17.5% number may not be re-derivable today.</p>
+<h2 id="the-purchase-value-malformation-issue-the-root-cause">The Purchase value malformation issue (the root-cause)</h2>
+<p><strong>This API cannot validate or refute Mo's "98% of Purchase price data is malformed" claim directly.</strong> That signal lives in Meta Events Manager's Diagnostics UI, which surfaces parameter-validation issues that are invisible to the <code>dataset_quality</code> / <code>dataset_stats</code> endpoints (those only check presence, not validation).</p>
+<p>What this API DOES confirm:
+- Purchase events are firing at healthy volume (~755/day)
+- EMQ is excellent (9.1)
+- All match keys have high coverage</p>
+<p>What this API CANNOT confirm:
+- Whether the <code>value</code> parameter being sent is a real QW payout amount, or a flat placeholder ($1, $0, etc.)
+- Whether the value parameter format is well-formed (numeric, decimal-correct, etc.)</p>
+<p><strong>Mo's audit conclusion stands and is not refuted:</strong> Purchase events fire, EMQ is great, but if the value parameter is flat/malformed, Max Value campaigns optimizing on RETURN_ON_AD_SPEND are training against noise. <strong>This is consistent with <code>purchase_roas: "Not available"</code> at every level of the account</strong> (Appendix A account-level, Appendix B every ad). If Meta had usable Purchase value data, it would compute ROAS — it doesn't, because the value is unusable.</p>
+<h2 id="mapping-to-mos-5-workstream-task-list">Mapping to Mo's 5-workstream task list</h2>
+<table>
+<thead>
+<tr>
+<th>Workstream</th>
+<th>Item</th>
+<th>Live Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W1-1</td>
+<td>Reconcile Browser Purchase value vs FunnelFlux</td>
+<td><strong>API confirms Purchase fires at high EMQ; value validity needs Events Manager check (not API-accessible)</strong></td>
+</tr>
+<tr>
+<td>W1-2</td>
+<td>EMQ optimization</td>
+<td><strong>CompleteRegistration EMQ 8.3 / Purchase EMQ 9.1 — strong</strong>. Marginal room: PageView EMQ 6.9 (low email/phone).</td>
+</tr>
+<tr>
+<td>W1-3</td>
+<td>fbc/fbclid integrity</td>
+<td><strong>API: fbc 87–100% present. Truncation (value malformation) is a manual Events Manager validation.</strong></td>
+</tr>
+<tr>
+<td>W1-4</td>
+<td>PageView match quality</td>
+<td><strong>EMQ 6.9 — improvable.</strong> Email coverage 12.7%, phone 11.3% on PageView. Most-impact fix: capture email/phone at PageView when known (post-login pageview, etc.)</td>
+</tr>
+<tr>
+<td><strong>W1-5 (new)</strong></td>
+<td>Dataset C CAPI Gateway 0% set up</td>
+<td><strong>CONFIRMED — <code>587241028099131</code> "Military.com's Pixel" has zero server activity since Mar 2023.</strong> Adding a Signals Gateway is the +23% cost/result lever Mo identified.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-ma-military-insurance-dataset-puzzle">The MA Military Insurance dataset puzzle</h2>
+<p>A dataset created Dec 2025 with <strong>server never fired</strong> is suspicious. Two hypotheses:</p>
+<ol>
+<li><strong>MediaAlpha integration that was set up but never activated.</strong> Iron Corp had plans to route through MediaAlpha but the server-side hookup was never completed. If true, this is a quietly-broken integration that should be either activated or removed.</li>
+<li><strong>A test/staging dataset left behind.</strong> Less concerning but should be archived.</li>
+</ol>
+<p>Anthony's "ignore exchange.qmp.ai and MediaAlpha, focus on Delty + Meta" framing earlier suggests MediaAlpha is intentionally not active. This dataset's state is consistent with that.</p>
+<h2 id="open-items-for-tuesday">Open items for Tuesday</h2>
+<ol>
+<li><strong>Manually open Meta Events Manager → Dataset <code>332555186604235</code> → Diagnostics tab</strong> to verify the Purchase value-malformation claim (98% per Mo). The API confirms events fire and EMQ is high; only Events Manager Diagnostics shows value validity.</li>
+<li><strong>Confirm with dev: is Dataset <code>587241028099131</code> (Military.com's Pixel) intended to have CAPI?</strong> This is the +23% cost/result lever — if there's no policy reason not to, adding the Signals Gateway is a 24-48 hour engineering task.</li>
+<li><strong>Confirm with Anthony/dev: what is the MA Military Insurance dataset for?</strong> Activate or archive.</li>
+<li><strong>Verify the Dataset <code>332555186604235</code> business_id</strong> (<code>551525685236215</code>) — confirm this is the QW/Delty integration entity.</li>
+</ol>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

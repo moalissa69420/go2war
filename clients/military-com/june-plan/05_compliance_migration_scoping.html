@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 Compliance Migration Scoping — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — 05 Compliance Migration Scoping</div>
+<div class="meta">Source: <code>05_compliance_migration_scoping.md</code></div>
+<hr class="divider">
+<h1 id="thread-b-compliance-fixes-quotewizard-form-migration-scoping-plan">Thread B Compliance Fixes + QuoteWizard Form Migration Scoping Plan</h1>
+<p><strong>Iron Corp / Military.com — Go To War Strategy</strong>
+<strong>Produced: May 31, 2026 | For: Tuesday June 2 office visit with Hassan</strong></p>
+<hr />
+<h2 id="part-1-thread-b-compliance-punchlist-june-week-1-day-1day-7">PART 1 — Thread B Compliance Punchlist (June Week 1, Day 1–Day 7)</h2>
+<p>These are not aspirational items. Each one is an identifiable exposure that compounds the longer it stays live. The creative compliance issue was verified May 13 against the live Meta Ad Library. Execute in order.</p>
+<hr />
+<h3 id="action-1-pause-the-three-60-creatives-day-1-hour-1">Action 1: Pause the Three "60%" Creatives — Day 1, Hour 1</h3>
+<p><strong>What:</strong> Three live ads making the claim "save 60% on car insurance" or equivalent superlative-savings language. Verified Ad IDs as of May 13, 2026:
+- <strong><code>1004559982134492</code></strong> (confirmed "60%" variant)
+- Two additional "60%" creative variants identified in the same May 13 ad library pull (Ad IDs to be confirmed on Monday when account access is granted — pull from the active ad library immediately on login)</p>
+<p><strong>Why it's urgent:</strong> FTC's "reasonable basis" standard requires substantiated savings claims at the time of publication. A 60% savings claim for auto insurance requires documented actuarial or carrier data showing that specific segment of buyers actually achieves 60% savings. That documentation does not exist. The ads were 7 days old at verification — the Meta algorithm has minimal invested learning in these specific creatives. Pausing them costs almost nothing in performance terms.</p>
+<p><strong>Action:</strong> In Business Manager, pause all three ad IDs. Do not archive — preserve for audit trail. Screenshot confirmation.</p>
+<p><strong>Owner:</strong> Lauren (Mo confirms the specific IDs, Lauren executes pause)</p>
+<p><strong>Timing:</strong> Day 1, Hour 1 — before any other account work begins</p>
+<p><strong>Dollar/risk impact:</strong> State DOI inquiry or class action exposure. TCPA class actions in the insurance vertical are routinely $500K–$5M+ in settlement value. This is not a hypothetical — SmartFinancial, EverQuote, and Integrity Marketing have all faced consent/claims-based regulatory action in the 2022–2025 period. The cost of pausing three creatives is zero. The cost of not pausing is unbounded.</p>
+<p><strong>Deliverable artifact:</strong> Screenshot of paused status + internal 1-line log entry: "Paused on [date] per compliance review — unsubstantiated savings claim, pending substantiation or retirement."</p>
+<hr />
+<h3 id="action-2-full-live-ad-library-audit-for-high-claim-variants-day-12">Action 2: Full Live Ad Library Audit for High-Claim Variants — Day 1–2</h3>
+<p><strong>What:</strong> Systematically review every currently-active ad in the Meta account for savings claims exceeding 20% (auto) or 30% (home). Flag any claim that asserts a specific percentage without documented carrier substantiation.</p>
+<p><strong>The standard:</strong> Compliant claim language in the insurance vertical uses ranges with attribution ("drivers who switch save an average of $X, per [carrier] data") or relative comparisons ("compare rates from top carriers"), not unqualified superlatives. Any ad claiming "&gt;X% savings" needs a carrier-signed rate study or it gets sunset.</p>
+<p><strong>Action:</strong> Lauren pulls the full active creative inventory. Mo reviews copy against the compliance language standard. Any claim above the threshold with no substantiation on file: pause immediately. Any claim above the threshold WITH a carrier data source on file: document the source and preserve.</p>
+<p><strong>Owner:</strong> Mo (audit logic) + Lauren (pulls inventory, executes pauses)</p>
+<p><strong>Timing:</strong> Day 1–2</p>
+<p><strong>Dollar/risk impact:</strong> The audit itself costs 2–4 hours. Missing a second exposure that surfaces in a DOI inquiry after the form migration (when Iron Corp owns full liability) would be significantly more expensive.</p>
+<p><strong>Deliverable artifact:</strong> One-page "Ad Library Compliance Audit — June 2026" spreadsheet: Ad ID, headline copy, claim made, substantiation status (documented / not documented), action taken (paused / approved / pending review).</p>
+<hr />
+<h3 id="action-3-jornaya-leadid-trustedform-certificate-hygiene-audit-day-23-2448-hour-dev-sprint">Action 3: Jornaya LeadiD + TrustedForm Certificate Hygiene Audit — Day 2–3 (24–48 Hour Dev Sprint)</h3>
+<p><strong>What:</strong> Sample 100 leads from May 2026. For each, verify: (a) is a LeadiD or TrustedForm certificate present in the lead record? (b) is the certificate valid (not expired, not a test cert, not null)? (c) does the cert timestamp precede the lead submission timestamp (mandatory for TCPA safe harbor)?</p>
+<p><strong>Why this matters now:</strong> Industry benchmark data shows approximately 18% of leads that are reported as "certified" carry invalid, missing, or malformed certificates upon audit. If Iron Corp's current cert yield is at or below that benchmark, two things are true: (1) existing leads have TCPA exposure today, and (2) the QuoteWizard relationship may already have a compliance friction point QW hasn't surfaced yet.</p>
+<p><strong>Action:</strong> Dev pulls lead sample from the May CSV or internal CRM. Write a quick script to check cert presence and validity against the Jornaya and TrustedForm APIs. Report back cert yield %.</p>
+<p><strong>Owner:</strong> Dev team lead (Mo provides the audit spec, dev executes)</p>
+<p><strong>Timing:</strong> Day 2–3. Results needed before the Tuesday Tuesday QW-contract conversation if possible; at minimum before Phase 1 of the form migration begins.</p>
+<p><strong>Dollar/risk impact:</strong> A 10% invalid-cert rate across ~33K May leads = ~3,300 leads with TCPA exposure. At $500 per lead in a class action (conservative), that's $1.65M in potential exposure. This audit costs one dev-day. It also establishes the baseline that the new form path must beat.</p>
+<p><strong>Deliverable artifact:</strong> "Cert Hygiene Audit — May 2026" memo: sample size, cert present %, cert valid %, timestamp-order pass rate %, identified failure modes. 1 page.</p>
+<hr />
+<h3 id="action-4-tcpa-consent-language-review-day-34-recommend-do-not-yet-execute">Action 4: TCPA Consent Language Review — Day 3–4 (Recommend, Do Not Yet Execute)</h3>
+<p><strong>What:</strong> Review the current consent disclosure language on the QuoteWizard-hosted form. Document: (a) is consent bundled (one checkbox covering multiple buyers/partners) or seller-specific (separate disclosure per recipient)? (b) does the disclosure name Iron Corp / Military.com specifically as the data seller? (c) is the disclosure "clear and conspicuous" per FCC's One-to-One Consent rule (effective January 2025)?</p>
+<p><strong>The FCC One-to-One rule is live.</strong> As of January 27, 2025, the FCC's amended TCPA rules require that consent be obtained on a one-to-one basis — each seller must be individually named, and the consent must be logically and topically related to the website where it's obtained. Bundled multi-partner consent checkboxes are now legally insufficient for calls and texts.</p>
+<p><strong>Action at this stage:</strong> Document the current state. Do NOT change the QW-hosted form unilaterally — Iron Corp does not control that form today and modifying it requires QW coordination. The recommendation to shift to seller-specific consent is a Phase 2 action tied to the form migration. The purpose of this review is to quantify the current exposure and make the case for migration internally.</p>
+<p><strong>Owner:</strong> Mo (consent language analysis) + Lauren (screenshot/export current form)</p>
+<p><strong>Timing:</strong> Day 3–4</p>
+<p><strong>Dollar/risk impact:</strong> The FCC's January 2025 rule change is the single biggest compliance catalyst in the lead gen industry this cycle. Every lead gen operator still running bundled consent is operating with increasing legal exposure. This is also the reason the form migration has a compliance dimension that goes beyond margin — it is a liability remediation play, not just a revenue play.</p>
+<p><strong>Deliverable artifact:</strong> 1-page "TCPA Consent Audit — Current State" memo: current language verbatim, FCC One-to-One rule assessment (compliant / non-compliant / ambiguous), recommended language for the new form path. This memo feeds directly into the Phase 1 form build.</p>
+<hr />
+<h3 id="action-5-compliance-documentation-package-for-quotewizard-affiliate-team-day-45">Action 5: Compliance Documentation Package for QuoteWizard Affiliate Team — Day 4–5</h3>
+<p><strong>What:</strong> Produce a clean, professional 1-page document addressed to QW's affiliate compliance team summarizing: (a) the high-claim creatives identified and paused, (b) the cert hygiene audit being conducted, (c) Iron Corp's commitment to maintaining compliant lead quality going forward.</p>
+<p><strong>Why this is strategic, not just housekeeping:</strong> QW's affiliate compliance team audits partners periodically. An unsolicited compliance update that arrives proactively — before any audit trigger — signals that Iron Corp is a sophisticated, self-governing partner. It pre-empts any QW-initiated inquiry. It also opens a line of communication with the QW affiliate contact (whose name Mo needs — see Part 3) that will be essential when the form migration conversation begins.</p>
+<p><strong>Owner:</strong> Mo drafts, Hassan reviews and signs off before sending</p>
+<p><strong>Timing:</strong> Day 4–5</p>
+<p><strong>Dollar/risk impact:</strong> A QW-initiated compliance hold on the affiliate account would pause the lead flow entirely. At the current run rate (~$2,900–$14,300 net revenue per day), a 7-day hold is a $20K–$100K event. Proactive communication costs nothing and insures against that.</p>
+<p><strong>Deliverable artifact:</strong> "Iron Corp / Military.com — Affiliate Compliance Update, June 2026" (1 page, PDF). Sent to named QW affiliate contact.</p>
+<hr />
+<h3 id="action-6-state-doi-exposure-scan-day-57">Action 6: State DOI Exposure Scan — Day 5–7</h3>
+<p><strong>What:</strong> Review all currently-active and recently-paused ad copy for specific dollar-amount savings claims or percentage savings claims tied to specific states. Flag any state-specific claim. Confirm no ad is making a specific savings representation that would require that state's DOI to have been notified.</p>
+<p><strong>What this is NOT:</strong> This is not a legal opinion. Do not spend money on outside counsel at this stage. This is a common-sense sweep: if an ad says "Ohio drivers save 60%," that is a different exposure than "compare rates and save." The former requires actuarial documentation specific to Ohio. The latter is comparative advertising.</p>
+<p><strong>Reference standard:</strong> The compliance mini-binder contains the compliant claim language templates. Any active claim that does not conform to those templates and cannot be immediately substantiated gets paused.</p>
+<p><strong>Owner:</strong> Mo (sweep) + Lauren (ad copy export)</p>
+<p><strong>Timing:</strong> Day 5–7. Can run in parallel with Actions 3–5.</p>
+<p><strong>Dollar/risk impact:</strong> State DOI inquiries move slowly but generate public records. A DOI inquiry on a $275K/month operation is a material business risk. Scan costs 2–4 hours.</p>
+<p><strong>Deliverable artifact:</strong> "State Exposure Scan — June 2026" checklist (1 page): states mentioned in active ads, claim language used per state, substantiation status, action taken.</p>
+<hr />
+<h3 id="thread-b-summary-table">Thread B Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Action</th>
+<th>Owner</th>
+<th>Timing</th>
+<th>Key Risk Mitigated</th>
+<th>Deliverable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Pause 3 "60%" ad IDs</td>
+<td>Lauren (Mo confirms IDs)</td>
+<td>Day 1, Hour 1</td>
+<td>DOI / FTC claims liability</td>
+<td>Screenshot + log entry</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Full ad library high-claim audit</td>
+<td>Mo + Lauren</td>
+<td>Day 1–2</td>
+<td>Secondary exposure sweep</td>
+<td>Compliance audit spreadsheet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LeadiD / TrustedForm cert hygiene audit</td>
+<td>Dev team</td>
+<td>Day 2–3</td>
+<td>TCPA class action exposure</td>
+<td>Cert hygiene memo</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TCPA consent language review</td>
+<td>Mo + Lauren</td>
+<td>Day 3–4</td>
+<td>FCC One-to-One rule (Jan 2025)</td>
+<td>Consent audit memo</td>
+</tr>
+<tr>
+<td>5</td>
+<td>QW affiliate compliance package</td>
+<td>Mo (Hassan signs off)</td>
+<td>Day 4–5</td>
+<td>QW-initiated compliance hold</td>
+<td>1-page compliance update PDF</td>
+</tr>
+<tr>
+<td>6</td>
+<td>State DOI exposure scan</td>
+<td>Mo + Lauren</td>
+<td>Day 5–7</td>
+<td>State DOI inquiry</td>
+<td>State exposure checklist</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-2-quotewizard-form-migration-the-honest-decoder">PART 2 — QuoteWizard Form Migration: The Honest Decoder</h2>
+<p>Hassan said "switch from QuoteWizard hosted form to our own form." That is one sentence covering four distinct projects with dramatically different payoffs, build times, and risk profiles. Mo needs to surface the spectrum on Tuesday so Hassan understands what he's actually asking for — and so the decision to pursue Tier 2 is explicit, not implicit.</p>
+<hr />
+<h3 id="tier-1-own-the-form-still-post-100-to-quotewizards-api">Tier 1: Own the Form, Still Post 100% to QuoteWizard's API</h3>
+<p><strong>What it means:</strong> Iron Corp builds and hosts the lead capture form. The form collects the lead data. On submission, Iron Corp's server posts the lead to QW's existing API endpoint — exactly as today, just with Iron Corp controlling the form layer.</p>
+<p><strong>What changes:</strong> Iron Corp now controls the form UX (faster load, mobile optimization, A/B testing), the consent language (critical for FCC One-to-One compliance), the cert integration (Jornaya / TrustedForm firing reliably), and the CAPI pixel firing (server-side, no ITP issues). Iron Corp also sees every lead field before QW does — that data can feed attribution models even if the monetization path is unchanged.</p>
+<p><strong>What doesn't change:</strong> Revenue per lead. Iron Corp is still selling 100% of leads to QW at QW's current rate structure. The lead still goes through QW's buyers. The RPL is QW's RPL.</p>
+<p><strong>Honest assessment of the margin gain:</strong> Modest. The CAPI and UX improvements may lift accept rate 5–15% if the current form has meaningful friction or cert issues. That's real but not transformative. At $33.52 RPL and ~33K leads/month, a 10% accept-rate lift might be worth $30–50K/month in incremental revenue (more leads accepted at the same RPL). The form UX work also enables better Meta CAPI signals, which compounds over weeks. But you're still fully dependent on QW's buyer pool and pricing.</p>
+<p><strong>Build time:</strong> 2–4 weeks of dev work (form build, API integration, cert wiring, CAPI). Lower compliance complexity because you still have QW's downstream consent architecture partially in play.</p>
+<p><strong>Verdict:</strong> Worth doing as Phase 1 of the migration — it's the foundation everything else builds on. But doing Tier 1 alone and stopping there is a lot of transition risk for a modest incremental gain. The real money is Tier 2.</p>
+<hr />
+<h3 id="tier-2-own-the-form-multi-buyer-ping-post">Tier 2: Own the Form + Multi-Buyer Ping-Post</h3>
+<p><strong>What it means:</strong> Iron Corp owns the form (same as Tier 1), but instead of posting every lead exclusively to QW, Iron Corp runs a ping-post auction. On lead submission, the lead data (minus PII) is "pinged" to multiple buyers simultaneously. Buyers respond with a price. Iron Corp accepts the highest bid and "posts" the full lead to the winning buyer. QW becomes one buyer in a competitive pool rather than the exclusive buyer.</p>
+<p><strong>What changes:</strong> Revenue per lead. When QW has to compete to buy a lead, the price goes up. Industry benchmarks for multi-buyer ping-post environments show 20–40% RPL lift vs. exclusive-supply arrangements. At Iron Corp's volume (~33K leads/month), that is the largest single revenue lever available without changing ad spend or traffic volume.</p>
+<p><strong>The math (at conservative 20–30% RPL lift):</strong>
+- Current RPL: $33.52
+- Ping-post RPL: $40.22 (20% lift) – $43.58 (30% lift)
+- Incremental per lead: $6.70 – $10.06
+- Monthly incremental at current volume: <strong>$223K – $335K</strong>
+- Annualized: <strong>$2.68M – $4.0M</strong></p>
+<p>This is the biggest single lever in the entire engagement. It requires no change to ad spend, no new creative, no new audience targeting. It is a monetization architecture change.</p>
+<p><strong>The gate:</strong> The QuoteWizard contract. If the existing contract includes an exclusivity clause — Iron Corp can only sell leads to QW — Tier 2 is contractually blocked until that clause is renegotiated or the contract expires. This is the single most important unknown in the entire engagement right now.</p>
+<p><strong>Build time:</strong> 4–8 weeks after contract gate is cleared. Requires: (a) lead distribution platform (LeadConduit, Phonexa, or Boberdoo, or a custom build), (b) buyer integrations (QW plus at least 2–3 other insurance buyers), (c) accept-rate monitoring to ensure the multi-buyer path doesn't introduce friction that lowers overall accept rate.</p>
+<p><strong>Verdict:</strong> This is the target. Everything else is preamble.</p>
+<hr />
+<h3 id="tier-3-run-your-own-lead-exchange">Tier 3: Run Your Own Lead Exchange</h3>
+<p><strong>What it means:</strong> Iron Corp builds a full publisher-side lead exchange — managing multiple traffic sources feeding into a centralized distribution platform with real-time bidding, lead scoring, compliance verification, and buyer management. Iron Corp becomes a lead marketplace operator, not just a lead generator.</p>
+<p><strong>Honest assessment:</strong> This is a 6–12 month build for a team with exchange experience. It requires a dedicated ops person, a compliance stack, ongoing buyer relationship management, and real-time fraud/quality scoring. It is the highest-margin path but it is a different business, not just a form change. Not in scope for this engagement.</p>
+<hr />
+<h3 id="tier-4-direct-carrier-deals">Tier 4: Direct Carrier Deals</h3>
+<p><strong>What it means:</strong> Rather than selling leads through QW or a multi-buyer ping-post, Iron Corp sells leads directly to insurance carriers (Progressive, GEICO, Liberty Mutual, etc.) under direct data purchase agreements.</p>
+<p><strong>Honest assessment:</strong> These agreements take 3–6 months of legal and compliance due diligence on the carrier side. Carriers require audited consent documentation, minimum volume guarantees, and carrier-specific data format integrations. Highest per-lead margin but requires the compliance foundation (Thread B) to be airtight before any carrier conversation. Phase 4 at the earliest.</p>
+<hr />
+<h3 id="the-honest-tier-summary">The Honest Tier Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Description</th>
+<th>RPL Lift</th>
+<th>Build Time</th>
+<th>Gate</th>
+<th>In Scope?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Own form, still post to QW</td>
+<td>5–15% (accept rate, CAPI)</td>
+<td>2–4 weeks</td>
+<td>Dev capacity</td>
+<td>Phase 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Own form + ping-post</td>
+<td><strong>20–30% RPL lift</strong></td>
+<td>4–8 weeks post-gate</td>
+<td><strong>QW contract exclusivity clause</strong></td>
+<td><strong>The target</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Own exchange</td>
+<td>40–60% RPL lift</td>
+<td>6–12 months</td>
+<td>Team / platform</td>
+<td>Out of scope</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Direct carrier deals</td>
+<td>50–80% RPL lift</td>
+<td>3–6 months legal</td>
+<td>Compliance audit + carrier relationships</td>
+<td>Phase 4</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-3-tuesday-qw-contract-discovery-checklist">PART 3 — Tuesday QW-Contract Discovery Checklist</h2>
+<p>These are the specific questions Mo needs answered on Tuesday June 2 — from Hassan directly, or from Lauren/dev if Hassan doesn't have the contract in front of him. Do not proceed past Phase 0 of the migration until every question has an answer.</p>
+<p><strong>For Hassan:</strong></p>
+<ol>
+<li>
+<p><strong>Where is the QW contract physically?</strong> Who has executed copies — Valnet legal, Iron Corp US Inc., Rony's team? Can Mo see it before end of day Tuesday?</p>
+</li>
+<li>
+<p><strong>Is there an exclusivity clause?</strong> Specifically: does the agreement prohibit Iron Corp / Military.com from selling insurance leads to buyers other than QuoteWizard during the contract term? This is the gate question. If the answer is yes, the entire Tier 2 timeline shifts to "when can we renegotiate or exit."</p>
+</li>
+<li>
+<p><strong>What is the termination notice period?</strong> 30 days? 60 days? 90 days? This determines the earliest possible clean migration date. If it's 90-day notice, the migration planning timeline moves accordingly.</p>
+</li>
+<li>
+<p><strong>Does the contract explicitly permit or prohibit ping-post to other buyers?</strong> Some affiliate agreements are silent on ping-post (not explicitly prohibited) — that is a negotiating position. Others explicitly prohibit it. Need to know which.</p>
+</li>
+<li>
+<p><strong>What is the current revenue share / accept-rate structure?</strong> Specifically: is Iron Corp being paid a flat RPL ($33.52 per accepted lead), a tiered RPL by lead quality / bind rate, or a revenue share of QW's downstream revenue? The structure matters for the migration comp model.</p>
+</li>
+<li>
+<p><strong>Are there volume commitments?</strong> If the contract requires Iron Corp to deliver a minimum number of leads per month, a partial migration (Tier 1 A/B test, 10–20% own-form traffic) may trigger a shortfall clause.</p>
+</li>
+</ol>
+<p><strong>For Lauren or dev:</strong></p>
+<ol start="7">
+<li><strong>Who is the named affiliate relationship manager at QuoteWizard?</strong> Need a name and email. This person is the contact for: (a) the proactive compliance package (Action 5 above), (b) any migration conversation, (c) any accept-rate dispute resolution.</li>
+</ol>
+<hr />
+<h2 id="part-4-phased-migration-plan-do-not-execute-in-measurement-window">PART 4 — Phased Migration Plan (Do NOT Execute in Measurement Window)</h2>
+<p>The hard sequencing rule governs everything below: <strong>the form migration cutover — meaning live traffic moving from the QW-hosted form to the Iron Corp-hosted form — does not land in July or August 2026.</strong></p>
+<p>The reason is not caution for its own sake. It is mathematical. July and August are the 60-day measurement window against which Mo's goal-post bonus is calculated. A migration-induced accept-rate dip of even 10–15% — which is a normal transition artifact — could cost Mo $30–60K in net revenue per month and potentially push the run rate below GP1. The upside of an early migration does not compensate for that risk. Phase it after the measurement window closes.</p>
+<hr />
+<h3 id="phase-0-discovery-contract-review-dev-capacity-scoping">Phase 0: Discovery + Contract Review + Dev Capacity Scoping</h3>
+<p><strong>Timing:</strong> June Week 1–2 (parallel to Thread A creative work and CAPI rebuild)
+<strong>What happens:</strong> QW contract reviewed, all 7 discovery questions answered, dev team capacity assessed (can they build the form in parallel with CAPI work without slowing CAPI?), compliance foundation work (Thread B Actions 1–6) executed.
+<strong>What does NOT happen:</strong> No code is written that touches the live lead flow. No changes to the QW API endpoint. No changes to the production form path.
+<strong>Decision gate to Phase 1:</strong> (a) QW contract reviewed and exclusivity/ping-post language documented, (b) Thread B Actions 1–3 complete, (c) dev capacity confirmed.
+<strong>Dev estimate:</strong> 0 dev hours on form build. All hours in Thread B compliance audit (est. 8–16 hours dev time for cert audit).
+<strong>Deliverable:</strong> Contract summary memo (1 page) + dev capacity assessment + Thread B completion report.</p>
+<hr />
+<h3 id="phase-1-build-the-own-form-in-staging-no-live-traffic">Phase 1: Build the Own-Form in Staging — No Live Traffic</h3>
+<p><strong>Timing:</strong> June Week 3–4 through July (approximately 3–5 weeks of dev work)
+<strong>What happens:</strong> Dev builds the Iron Corp-hosted form in a staging environment. Consent language is drafted per the FCC One-to-One standard (from Thread B Action 4). LeadiD and TrustedForm are wired at the field level — every submission generates a valid cert. Server-side CAPI is built on the new form path (this is the same CAPI work happening in Thread A — they share infrastructure). QW API integration is replicated exactly so the new form posts to QW's endpoint identically to the current form. The form is brought to "demo-ready" status — full functionality, correct cert yield, correct CAPI events — but zero live traffic.
+<strong>What does NOT happen:</strong> No production traffic is routed to the new form. QW sees no change in lead flow.
+<strong>Decision gate to Phase 2:</strong> (a) QW API integration tested and confirmed, (b) cert yield on test submissions = 100%, (c) CAPI events firing correctly on test submissions, (d) consent language reviewed by counsel (see Part 5), (e) Hassan has seen and approved the demo.
+<strong>Dev estimate:</strong> 3–5 weeks, 1–2 dev resources. Overlaps with CAPI build — coordinate to avoid bottleneck.
+<strong>Deliverable:</strong> Staging environment URL + test submission log + cert yield report + CAPI event validation report.</p>
+<hr />
+<h3 id="phase-2-controlled-ab-test-1020-of-live-traffic">Phase 2: Controlled A/B Test — 10–20% of Live Traffic</h3>
+<p><strong>Timing:</strong> July (early-to-mid, after Phase 1 gate is passed)
+<strong>What happens:</strong> 10–20% of incoming traffic is routed to the new Iron Corp-hosted form. 80–90% continues on the QW-hosted form. Watch three metrics obsessively for 2 weeks: (a) accept rate on the new form path vs. the QW form path, (b) cert yield on the new form path (should be 100%), (c) CPL and RPL on the new form path vs. the QW path.
+<strong>The test question:</strong> Does the Iron Corp form hold or improve accept rate vs. the QW form? If yes, the migration is safe to expand. If no — accept rate dips more than 5% — stop, diagnose, fix before expanding.
+<strong>Why 10–20%:</strong> Small enough that a bad outcome doesn't materially move the July run rate (10–20% of ~33K leads/month = 3,300–6,600 leads). Big enough to get statistically meaningful accept-rate data within 2 weeks.
+<strong>Decision gate to Phase 3:</strong> (a) New form accept rate within 5% of QW form accept rate for 14 consecutive days, (b) cert yield 100% confirmed, (c) measurement window closed (post-August 31).
+<strong>Dev estimate:</strong> 1–2 days to set up traffic split. Ongoing monitoring.
+<strong>Deliverable:</strong> A/B test results memo (accept rate, RPL, cert yield, sample size, confidence level).</p>
+<hr />
+<h3 id="phase-3-full-cutover-to-own-form-after-august-measurement-window">Phase 3: Full Cutover to Own Form — After August Measurement Window</h3>
+<p><strong>Timing:</strong> September 2026 (after August 31 measurement window closes, assuming Phase 2 gate passed)
+<strong>What happens:</strong> 100% of traffic routes to Iron Corp-hosted form. QW-hosted form is deprecated. At this point, if Tier 2 (ping-post) is contractually permitted and technically ready, ping-post to multi-buyer pool can begin — QW becomes one buyer competing for each lead rather than the exclusive buyer.
+<strong>The Tier 2 unlock:</strong> If the QW contract permits ping-post and the additional buyer integrations have been built during Phase 1/2 staging, September is when the RPL lift materializes. The $200–330K/month incremental revenue turns on here.
+<strong>Dev estimate:</strong> 1 day for cutover. 2–4 weeks prior to cutover for additional buyer API integrations (if Tier 2 is live).
+<strong>Deliverable:</strong> Migration completion report + first-week RPL comparison (new form vs. QW-hosted historical baseline).</p>
+<hr />
+<h3 id="phase-4-multi-buyer-optimization-direct-carrier-exploration">Phase 4: Multi-Buyer Optimization + Direct-Carrier Exploration</h3>
+<p><strong>Timing:</strong> Q4 2026
+<strong>What happens:</strong> Optimize buyer pool (add/remove buyers based on accept rate and RPL performance), implement lead scoring (route higher-intent leads to higher-paying buyers), begin exploratory conversations with 1–2 direct carrier contacts. Evaluate exchange platform options (LeadConduit, Phonexa) if volume growth justifies the operational overhead.
+<strong>Dev estimate:</strong> Ongoing. This is an operational capability, not a one-time build.
+<strong>Deliverable:</strong> Quarterly lead distribution performance report + carrier exploration summary.</p>
+<hr />
+<h3 id="phase-summary-table">Phase Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Timing</th>
+<th>What Ships</th>
+<th>Live Traffic Impact</th>
+<th>Decision Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>June W1–2</td>
+<td>Contract review, Thread B</td>
+<td>None</td>
+<td>Contract + dev capacity confirmed</td>
+</tr>
+<tr>
+<td>1</td>
+<td>June W3–4 / July</td>
+<td>Staging form (no live traffic)</td>
+<td>None</td>
+<td>Demo-ready, cert 100%, CAPI clean</td>
+</tr>
+<tr>
+<td>2</td>
+<td>July (mid)</td>
+<td>A/B test, 10–20% traffic</td>
+<td>Controlled, reversible</td>
+<td>Accept rate holds 14 days</td>
+</tr>
+<tr>
+<td>3</td>
+<td>September</td>
+<td>Full cutover + Tier 2</td>
+<td>100% own form, ping-post live</td>
+<td>Measurement window closed, Phase 2 positive</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Q4</td>
+<td>Buyer optimization, carrier exploration</td>
+<td>Ongoing optimization</td>
+<td>RPL lift confirmed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-5-the-compliance-liability-shift">PART 5 — The Compliance Liability Shift</h2>
+<p>This is the part Hassan probably hasn't fully internalized. It needs to be said on Tuesday — clearly, without alarm, framed as the reason for phasing correctly rather than the reason not to migrate.</p>
+<p><strong>The current state:</strong> QuoteWizard hosts the form. QuoteWizard's consent language appears on the form. QuoteWizard's LeadiD and TrustedForm integrations (if any) govern the cert. When a lead is submitted and then called by a downstream carrier or insurance agent, the consent documentation names QW's form as the collection point. In a TCPA action, the plaintiff's first call is to QW's legal team, not Iron Corp's. Iron Corp is upstream — it drove the traffic, but QW collected the consent.</p>
+<p><strong>The moment Iron Corp hosts the form:</strong> Iron Corp is now the entity that collected consent. Iron Corp's disclosure language is the operative consent document. Iron Corp's server is where the cert was generated. If a plaintiff or regulator wants to know "who got consent to call me about auto insurance," the answer is Iron Corp / Military.com. QW is now downstream — they bought the lead, but Iron Corp took the consent.</p>
+<p><strong>This is not a reason not to migrate.</strong> It is a reason to migrate with the compliance foundation in place first. Specifically:</p>
+<p><strong>Before Phase 3 (full cutover), Iron Corp needs:</strong></p>
+<ol>
+<li>
+<p><strong>In-house or partnered compliance counsel</strong> who has reviewed the consent language and the cert integration. This is a one-time legal engagement, not an ongoing retainer. Budget: $5,000–$15,000 for a qualified TCPA specialist to review the form and sign off. This is a rounding error relative to the $200–330K/month Tier 2 upside. It is not optional.</p>
+</li>
+<li>
+<p><strong>FCC One-to-One compliant consent language.</strong> The consent disclosure on the own-form must name each recipient entity individually (or use a clearly-labeled, narrowly-scoped multi-seller disclosure). Bundled "and our marketing partners" language is insufficient under the January 2025 rule.</p>
+</li>
+<li>
+<p><strong>100% cert yield on the new form path.</strong> Not 95%. Not 98%. Every single lead submitted through the Iron Corp form must carry a valid, timestamped LeadiD and/or TrustedForm certificate before any live traffic migrates. The cert is the safe harbor. A missing cert on a called lead is a $500–$1,500 TCPA exposure per lead.</p>
+</li>
+<li>
+<p><strong>A documented lead data retention and access policy.</strong> Iron Corp will be holding consent records. Those records need to be retrievable for 5 years minimum (FCC guidance) in case of litigation.</p>
+</li>
+</ol>
+<p><strong>Thread B is the load-bearing wall for the migration.</strong> If Thread B is skipped or half-executed, Phase 3 of the migration creates a compliance exposure that is larger than the current one — because Iron Corp now owns it directly. The reason Thread B is Week 1 is not just about the current 60% creatives. It is about building the compliance posture that makes the form migration safe to execute.</p>
+<hr />
+<h2 id="part-6-expected-dollar-impact-when-tier-2-is-live">PART 6 — Expected Dollar Impact When Tier 2 Is Live</h2>
+<p>The following is the math Hassan needs to understand. It is also the math that defines the value of getting the sequencing right.</p>
+<p><strong>Baseline:</strong>
+- May 2026 total net revenue: $281,622
+- Approximate lead volume: ~8,400 leads (at average CPL ~$25, spend ~$210K implied from daily data; or use RPL cross-check: $281,622 / $33.52 = ~8,400 accepted leads)
+- Average RPL: $33.52</p>
+<p><strong>Note on lead volume:</strong> The May CSV shows 33,368 total rows (leads generated), but <code>leads_sold</code> column is all zeros — meaning the internal report does not reflect actual accepted/sold lead count. The $281,622 net revenue at $33.52 RPL implies ~8,400 accepted leads out of ~33,368 total leads generated, which equals approximately a 25% accept rate. This is a critical baseline metric that needs confirmation from QW's affiliate dashboard on Monday.</p>
+<p><strong>The Tier 2 math:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>RPL Lift</th>
+<th>New RPL</th>
+<th>Monthly Incremental</th>
+<th>Annual Incremental</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conservative</td>
+<td>+20%</td>
+<td>$40.22</td>
+<td>+$56,400 on accepted leads</td>
+<td>+$677K</td>
+</tr>
+<tr>
+<td>Base case</td>
+<td>+25%</td>
+<td>$41.90</td>
+<td>+$70,500</td>
+<td>+$846K</td>
+</tr>
+<tr>
+<td>Optimistic</td>
+<td>+30%</td>
+<td>$43.58</td>
+<td>+$84,600</td>
+<td>+$1.015M</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important conditionality:</strong>
+- The RPL lift assumes the multi-buyer environment has at least 3–4 competitive buyers bidding on Iron Corp leads. A thin buyer pool produces a thin lift.
+- The lift assumes accept rate on the new form path holds at or above current QW accept rate. If the migration introduces any friction that lowers accept rate, the incremental RPL gain is partially or fully offset.
+- The QW contract must permit ping-post. If it does not, Tier 2 is blocked until the contract is renegotiated or terminates.
+- Volume must hold. If the form migration introduces tracking/pixel issues that degrade Meta's optimization signal, CPL rises and volume falls — offsetting the RPL gain.</p>
+<p><strong>The compounding picture:</strong> If Thread A (creative + CAPI) lifts monthly revenue from the current exit rate of ~$87K/month to $220–300K/month by July, and then Tier 2 adds 25% RPL lift on top of that base, the September run rate could be $275K–$375K/month purely from margin improvement on existing volume. That is GP2-to-GP3 territory, which is the zone where Mo's comp structure becomes very interesting.</p>
+<p><strong>This is why the form migration is the GM's second priority and Mo's highest-margin lever.</strong> But the margin only materializes if the sequencing is correct. A migration that breaks in July costs Mo more than the upside is worth.</p>
+<hr />
+<h2 id="part-7-tuesday-talking-points-with-hassan">PART 7 — Tuesday Talking Points with Hassan</h2>
+<p>The framing for Tuesday: affirm the instinct, surface the spectrum, name the gate, commit to the phase.</p>
+<hr />
+<p><strong>Talking point 1 — Affirm the instinct</strong></p>
+<blockquote>
+<p>"Hassan, you're right that the form migration is the highest-margin move in this engagement. You saw it before I got here. I ran the math: if we get to a multi-buyer environment, we're looking at $50–85K incremental net revenue per month at current volume, potentially more as we scale. That's the target."</p>
+</blockquote>
+<hr />
+<p><strong>Talking point 2 — Surface the four tiers</strong></p>
+<blockquote>
+<p>"When you say 'own the form,' there are actually four different versions of that project. The one that gets us to the real number is Tier 2 — own the form and run a ping-post auction to multiple buyers. Tier 1 alone — own the form and still post 100% to QW — is a meaningful improvement in data and compliance, but it doesn't move the revenue number much. I want to make sure we're aiming at Tier 2."</p>
+</blockquote>
+<hr />
+<p><strong>Talking point 3 — Surface the QW contract as the gate</strong></p>
+<blockquote>
+<p>"Before we plan any of this, I need to see the QW contract. Specifically: is there an exclusivity clause? If QW has Iron Corp locked to selling leads only to them, Tier 2 is blocked until we renegotiate. That's the single question that determines whether the migration is a June-to-September project or a 2027 project."</p>
+</blockquote>
+<hr />
+<p><strong>Talking point 4 — Surface the compliance liability shift honestly</strong></p>
+<blockquote>
+<p>"One thing I want to make sure you and Lauren are clear on: the moment we host our own form, TCPA liability transfers to us. Right now QW is on the hook for a lot of the consent documentation. When it's our form, it's our liability. That's not a reason not to do it — it's the reason we do Thread B first and get a TCPA lawyer to sign off on the consent language before we flip any live traffic. The compliance work is the foundation the migration sits on."</p>
+</blockquote>
+<hr />
+<p><strong>Talking point 5 — Commit to the phased approach and protect the measurement window</strong></p>
+<blockquote>
+<p>"Here's how I want to phase this so we don't blow up July and August. We build the form in staging in June, run a 10–20% A/B test in July, and do the full cutover in September after the measurement window closes. The upside is real, but not if a migration hiccup drops our accept rate in the middle of the window your comp structure is measuring against. Let's capture the win cleanly."</p>
+</blockquote>
+<hr />
+<p><strong>Talking point 6 — Make sure the migration upside is in Mo's comp model</strong></p>
+<blockquote>
+<p>"One thing I want to flag for when the contract comes back from legal: the RPL lift from the form migration is a significant revenue gain that doesn't show up in the spend-based metrics. I want to make sure the comp structure captures net revenue improvement broadly, not just spend efficiency. We should align on that before the contract is signed."</p>
+</blockquote>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<p><strong>Assumptions:</strong></p>
+<ol>
+<li>
+<p>The three "60%" Ad IDs cited (including <code>1004559982134492</code>) are confirmed live as of May 13, 2026. The two additional "60%" variant IDs will be confirmed on Monday June 1 when account access is granted. If the ads have already been paused by Lauren independently, Actions 1–2 are compressed but the audit still runs.</p>
+</li>
+<li>
+<p>The ~$33.52 RPL figure is net of all deductions (accept rate already applied). The May CSV <code>leads_sold</code> column showing all zeros means actual QW-reported accepted lead count and payout has not been reconciled against internal reporting. The $281,622 net revenue figure is treated as reliable (Hassan confirmed it matches his "$275K" claim). The implied ~25% accept rate is an estimate requiring confirmation from QW's affiliate dashboard.</p>
+</li>
+<li>
+<p>A 20–30% RPL lift from multi-buyer ping-post is an industry benchmark, not a confirmed Iron Corp outcome. The actual lift will depend on buyer pool depth and lead quality scoring. The math in Part 6 should be treated as directional until a 2-week A/B test provides Iron Corp-specific data.</p>
+</li>
+<li>
+<p>The QW contract contains standard affiliate agreement terms (non-exclusivity or limited exclusivity, 30–60 day termination notice). If the contract contains a longer exclusivity term or longer termination notice, the Phase 3 cutover date shifts accordingly.</p>
+</li>
+<li>
+<p>The dev team has capacity to build the staging form in June/July without materially slowing the CAPI rebuild (Thread A). If dev capacity is constrained, the CAPI rebuild takes priority — it has faster compounding effect on the measurement window performance.</p>
+</li>
+<li>
+<p>The FCC One-to-One Consent rule (effective January 27, 2025) applies to calls and texts initiated based on leads generated through the Military.com form. If Iron Corp's downstream buyers are limited to internet-delivery only (no calls/texts), the consent standard is different. Confirm with QW what downstream buyer contact methods are used.</p>
+</li>
+</ol>
+<p><strong>Open questions:</strong></p>
+<ol>
+<li>
+<p><strong>QW contract:</strong> Does it exist in signed form? Who has it? What are the exclusivity and termination provisions? What does it say about ping-post? This is the highest-priority unknown.</p>
+</li>
+<li>
+<p><strong>Accept rate:</strong> What is the actual QW-reported accept rate on Iron Corp's May leads? The internal CSV shows zero in the <code>leads_sold</code> column — the real accept rate must come from the QW affiliate dashboard. This number is the denominator for all RPL calculations and the baseline against which the A/B test is measured.</p>
+</li>
+<li>
+<p><strong>QW affiliate contact:</strong> Who is the named relationship manager at QuoteWizard for the Iron Corp / Military.com account? Name and email needed for Action 5 and the eventual migration conversation.</p>
+</li>
+<li>
+<p><strong>Dev capacity:</strong> Can the dev team build the staging form in parallel with the CAPI rebuild, or does one block the other? What is the team size and current sprint commitment?</p>
+</li>
+<li>
+<p><strong>Current cert yield:</strong> Does the QW-hosted form currently fire Jornaya LeadiD and/or TrustedForm on submission? If yes, what is the cert yield rate? If no, this is an active compliance gap that predates the migration.</p>
+</li>
+<li>
+<p><strong>Current consent language:</strong> Exact verbatim text of the consent disclosure on the current QW-hosted form. Is it One-to-One compliant? Does it name Iron Corp / Military.com explicitly?</p>
+</li>
+<li>
+<p><strong>Buyer pool:</strong> If Tier 2 is contractually viable, which other insurance lead buyers would Iron Corp approach? SmartFinancial, EverQuote, Integrity, MediaAlpha, and Goosehead are the obvious candidates. Has Hassan or Rony's team had any prior relationships with these buyers through other Valnet properties?</p>
+</li>
+<li>
+<p><strong>Baseline lock:</strong> Mo has not yet seen March and April 2026 data. The comp model baseline should not be finalized until that historical data is reviewed. If April's run rate was significantly lower than May W1, Hassan's $275K baseline may be generous. If April was stronger than May's exit rate, Mo's comp position improves materially. Do not let Hassan lock the baseline before the historical pull is complete.</p>
+</li>
+<li>
+<p><strong>Counsel:</strong> Has Iron Corp / Valnet US used a TCPA-specialized compliance counsel previously? If there is an existing relationship, routing the consent language review through that counsel is faster than starting a new engagement. If not, Mo should have 1–2 referrals ready to provide at the Tuesday meeting.</p>
+</li>
+</ol>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>

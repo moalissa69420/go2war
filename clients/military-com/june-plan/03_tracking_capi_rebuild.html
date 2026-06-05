@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 Tracking Capi Rebuild — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — 03 Tracking Capi Rebuild</div>
+<div class="meta">Source: <code>03_tracking_capi_rebuild.md</code></div>
+<hr class="divider">
+<h1 id="tracking-meta-capi-rebuild-technical-scope">Tracking + Meta CAPI Rebuild — Technical Scope</h1>
+<p><strong>Iron Corp / Military.com | Go To War Strategy | June 2, 2026</strong></p>
+<hr />
+<h2 id="context-why-this-document-exists">Context: Why This Document Exists</h2>
+<p>The May 2026 daily report has <code>leads_sold</code>, <code>click_lead</code>, <code>click_lead_revenue</code>, and <code>lead_revenue</code> all at zero for every single day of the month. This is not a reporting cosmetic — it means QuoteWizard's accept-rate, sold-lead count, and per-lead payout data are not flowing anywhere: not into Iron Corp's internal reporting, not into the CRM, and not into Meta. Meta's algorithm is optimizing on raw lead volume at a $21–28 CPL with zero visibility into which of those leads became revenue. The result is what the GTW audit called "value-blind CAPI" — Meta is flying blind, buying the cheapest leads rather than the most valuable ones, and the performance collapse from Week 1 to Week 4 of May (net-per-lead down 88%, ROAS 1.55 → 1.07) is the measurable cost of that blindness.</p>
+<p>The CAPI rebuild is the single highest-leverage technical action available before the July-August measurement window opens. This document is Mo's working brief for the Tuesday June 2 office visit with the dev team. It is not a finished spec — it is the diagnostic and design framework that becomes a finished spec after Tuesday's answers are in.</p>
+<hr />
+<h2 id="part-1-tuesday-diagnostic-checklist">Part 1 — Tuesday Diagnostic Checklist</h2>
+<p>Run through this with the dev lead in sequence. Do not skip to solutions. Every architectural decision in Parts 2 and 3 depends on answers here.</p>
+<h3 id="a-current-pixel-implementation">A. Current Pixel Implementation</h3>
+<ol>
+<li>What is the active Meta Pixel ID? Is it the same Pixel ID across all surfaces — military.com root, auto.military.com, home.military.com, and whichever domain the form resolves on?</li>
+<li>Which standard events are currently firing from the Pixel, and on which pages? Specifically: does a <code>Lead</code> event fire on form submit? Does <code>PageView</code> fire on the confirmation/thank-you page? Is there a <code>ViewContent</code> or <code>InitiateCheckout</code> analog anywhere in the funnel?</li>
+<li>Is the Pixel firing from a GTM container or hardcoded in the page source? If GTM, is it web container only or is there a server-side GTM container already stood up?</li>
+<li>What is the current Event Match Quality (EMQ) score in Meta Events Manager? Screenshot or number is fine. If EMQ is below 7.0, that is the first thing to fix.</li>
+<li>Is the Pixel passing any hashed PII — hashed email (<code>em</code>), hashed phone (<code>ph</code>), first name (<code>fn</code>), last name (<code>ln</code>), zip (<code>zp</code>)? If yes, where is that data coming from (form fields captured pre-submit, confirmed-data post-submit)?</li>
+<li>Is there any iOS ATT signal recovery in place — either Advanced Matching, Meta's Aggregated Event Measurement (AEM) configuration, or modeled conversion data toggled on in the dataset settings? What is the current "Modeled" vs "Measured" split showing in Events Manager?</li>
+<li>Are there any duplicate Pixel fires being flagged in Events Manager? Dedup key being passed?</li>
+</ol>
+<h3 id="b-current-capi-state-if-any">B. Current CAPI State (if any)</h3>
+<ol>
+<li>Is there a Conversions API integration running at all? Even a basic partner integration (QW itself, any ad tech vendor) that may be sending server-side events?</li>
+<li>If yes: What events are flowing server-side? Is the <code>event_id</code> deduplication parameter being sent on both the browser Pixel and the server-side CAPI call for the same event?</li>
+<li>Is there a GTM server-side container, a custom server endpoint, or a third-party CAPI middleware (Stape, Elevar, etc.) already deployed?</li>
+<li>What attribution window is set in Meta — 7-day click / 1-day view, or something else? Has this ever been changed?</li>
+<li>What is the current "Server + Browser" match rate shown in Events Manager for the <code>Lead</code> event?</li>
+</ol>
+<h3 id="c-quotewizard-postback-flow">C. QuoteWizard Postback Flow</h3>
+<ol>
+<li>How does Iron Corp receive QW accept/reject/sold/paid signals today? The specific question: is this (a) a daily email report, (b) a CSV pushed to a shared S3 bucket or SFTP, (c) a real-time webhook posted to an Iron Corp endpoint, or (d) something Mo can pull manually from a QW partner portal?</li>
+<li>Where do those signals land after Iron Corp receives them — into a CRM, an internal database, a spreadsheet, or are they currently not being stored at all (which the May data suggests)?</li>
+<li>What is the lag from form submission to QW accept/reject signal? Real-time, hourly, daily batch, or unknown?</li>
+<li>What is the lag from accept to sold/paid signal? QuoteWizard typically operates on net-30 or net-14 payout cycles — confirmed or different here?</li>
+<li>What fields does the QW postback carry? Specifically: does it include the original Iron Corp lead ID, the user's hashed or unhashed email/phone, the payout amount per lead, and the carrier ID?</li>
+</ol>
+<h3 id="d-crm-lead-store">D. CRM / Lead Store</h3>
+<ol>
+<li>Where does lead-level data live after a form submission completes? Is there a CRM (Salesforce, HubSpot, custom), a raw database table, or is the lead data effectively owned entirely by QW after submission?</li>
+<li>Does Iron Corp retain a lead record that links: source (Meta campaign/ad set/ad), form submission timestamp, user identifiers (email, phone — hashed or otherwise), consent record, Jornaya LeadiD, TrustedForm certificate URL, and QW lead ID?</li>
+<li>Can Iron Corp's infrastructure make outbound HTTPS calls to Meta's CAPI endpoint (graph.facebook.com)? Any firewall/egress restrictions?</li>
+<li>Is there an existing internal reporting pipeline that pulls the daily metrics that produced the May CSV? What system generates it? This is the most direct place to attach QW postback data.</li>
+</ol>
+<h3 id="e-form-consent-surfaces">E. Form + Consent Surfaces</h3>
+<ol>
+<li>What is the exact form architecture? Three options:
+   - <strong>Iframe</strong>: QW serves the form inside an <code>&lt;iframe&gt;</code> on a military.com page. Iron Corp's domain is in the URL bar; QW form is sandboxed inside.
+   - <strong>Redirect</strong>: User lands on military.com, clicks a CTA, gets redirected to a QW-hosted URL (qwlead.com or similar), fills out the form on QW's domain, then gets redirected back.
+   - <strong>Iron Corp page posting to QW API</strong>: The form lives on military.com, form fields post directly to QW's lead intake API, confirmation is displayed on military.com. No iframe, no redirect.</li>
+<li>Where do Jornaya LeadiD tokens and TrustedForm certificate URLs get generated and stored? Are they validated server-side before the lead is submitted to QW, or are they generated client-side and passed as fields without server-side validation?</li>
+<li>Is the consent disclosure language on the form seller-specific (Iron Corp / Military.com named as the seller obtaining consent) or bundled/shared-partner language (consent given to a list of unnamed or broadly defined partners)? This matters for QW's own TCPA exposure and will matter more post-January 2024 FCC one-to-one consent rule enforcement.</li>
+<li>Is there a confirmation/thank-you page on military.com domain after submission? Even if QW hosts the form, does the user return to a military.com URL?</li>
+</ol>
+<hr />
+<h2 id="part-2-event-taxonomy">Part 2 — Event Taxonomy</h2>
+<p>The goal is to move Meta from optimizing on raw <code>Lead</code> volume to optimizing on <code>AcceptedLead</code> value — and eventually on <code>SoldLead</code> or <code>PaidLead</code> revenue. Each event below is a step up the value chain.</p>
+<h3 id="event-table">Event Table</h3>
+<table>
+<thead>
+<tr>
+<th>Event Name</th>
+<th>Trigger</th>
+<th>Value Passed</th>
+<th>Match Keys</th>
+<th>Firing Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lead</code></td>
+<td>Form submit (client-side Pixel + server-side CAPI dedup)</td>
+<td>$0 placeholder</td>
+<td><code>em</code>, <code>ph</code>, <code>fn</code>, <code>ln</code>, <code>zp</code>, <code>fbp</code>, <code>fbc</code>, <code>client_ip_address</code>, <code>client_user_agent</code></td>
+<td>Browser Pixel + server-side CAPI with shared <code>event_id</code></td>
+</tr>
+<tr>
+<td><code>QualityLead</code></td>
+<td>Server confirms: Jornaya LeadiD valid, TrustedForm cert validates, anti-bot checks pass, no duplicate</td>
+<td>$0 placeholder</td>
+<td>Same + <code>lead_id</code> (Iron Corp internal), <code>jornaya_id</code>, <code>trustedform_url</code></td>
+<td>Server-side CAPI only</td>
+</tr>
+<tr>
+<td><code>AcceptedLead</code></td>
+<td>QW postback returns "accepted" status for this lead</td>
+<td>QW payout value in USD (e.g., $18.50)</td>
+<td>Same + <code>qw_lead_id</code></td>
+<td>Server-side CAPI real-time if webhook; offline CAPI batch upload if CSV/email postback</td>
+</tr>
+<tr>
+<td><code>SoldLead</code></td>
+<td>QW postback returns "sold to carrier" status</td>
+<td>Carrier payout value in USD</td>
+<td>Same + <code>carrier_id</code></td>
+<td>Server-side CAPI offline upload (typically lags 24–72h)</td>
+</tr>
+<tr>
+<td><code>PaidLead</code></td>
+<td>Revenue cleared in Iron Corp CRM / finance system</td>
+<td>Actual paid amount</td>
+<td>Same</td>
+<td>Server-side CAPI offline upload (net-14 or net-30 cycle)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-by-event-specification">Event-by-Event Specification</h3>
+<p><strong><code>Lead</code></strong>
+- Server endpoint: Iron Corp application server (same domain as form or same domain as form-hosting page). Fires immediately on form submit.
+- Payload: Standard CAPI payload — <code>event_name: "Lead"</code>, <code>event_time</code> (Unix timestamp), <code>event_id</code> (UUID generated at submit, shared with Pixel), <code>user_data</code> block with <code>em</code> + <code>ph</code> SHA-256 hashed, <code>fn</code> + <code>ln</code> hashed, <code>zp</code> hashed, <code>fbp</code> and <code>fbc</code> passed from cookies, <code>client_ip_address</code>, <code>client_user_agent</code>. <code>custom_data</code> block: <code>content_name</code> (product line — "auto" or "home"), <code>content_category</code> ("insurance"), <code>value: 0</code>, <code>currency: "USD"</code>.
+- Deduplication: <code>event_id</code> must be identical on both the browser Pixel call and the server CAPI call for the same submission. Meta deduplicates on this field within a 48-hour window.
+- Backfill: No — fires real-time on submit.</p>
+<p><strong><code>QualityLead</code></strong>
+- Server endpoint: Iron Corp application server, fires after cert validation and anti-bot logic completes (typically &lt;200ms post-submit if synchronous, or async within seconds).
+- Payload: Same as <code>Lead</code> plus <code>custom_data.lead_id</code> (internal), <code>custom_data.jornaya_id</code>, <code>custom_data.trustedform_cert_url</code>. <code>value: 0</code>.
+- Deduplication: Unique <code>event_id</code>. No browser Pixel counterpart — this event is server-side only and will not have a duplicate to resolve.
+- Backfill: If cert validation is not currently happening server-side, this event can initially be fired as a proxy by Iron Corp's server confirming non-duplicate submission. Full cert validation added in Week 3.</p>
+<p><strong><code>AcceptedLead</code></strong>
+- Server endpoint: Iron Corp webhook receiver (a new endpoint built in Week 2). QW POSTs accept signals here; the endpoint transforms the payload and forwards to Meta CAPI.
+- Payload: Same match keys as above (looked up from Iron Corp's lead store by <code>qw_lead_id</code> → <code>iron_corp_lead_id</code>). <code>custom_data.value</code> = QW payout amount (e.g., <code>18.50</code>). <code>custom_data.currency: "USD"</code>. <code>custom_data.qw_lead_id</code>.
+- Deduplication: <code>event_id</code> constructed as <code>"accepted_" + qw_lead_id</code>. No browser Pixel counterpart.
+- Backfill: If QW delivers postbacks via CSV or daily email rather than real-time webhook, this event uses Meta's offline Conversions API upload (same endpoint, same payload, <code>event_time</code> set to the actual accept timestamp from QW's data). Historical May data — if QW can provide it — should be backfilled in Week 3 to bootstrap signal.</p>
+<p><strong><code>SoldLead</code></strong>
+- Server endpoint: Same webhook receiver or a second handler if QW delivers "sold" signals separately from "accepted."
+- Payload: Same match keys. <code>custom_data.value</code> = carrier payout (if known; use QW sold value if carrier payout is not separately reported). <code>custom_data.carrier_id</code>.
+- Deduplication: <code>event_id</code> = <code>"sold_" + qw_lead_id</code>.
+- Backfill: Likely requires offline upload. QW's "sold to carrier" signal may lag 24-72 hours. Batch upload acceptable initially.</p>
+<p><strong><code>PaidLead</code></strong>
+- Server endpoint: Triggered by Iron Corp's finance/CRM reconciliation process, not a live webhook.
+- Payload: Same match keys. <code>custom_data.value</code> = actual USD amount received. This is the ground-truth event for long-term algorithm training.
+- Deduplication: <code>event_id</code> = <code>"paid_" + iron_corp_lead_id</code>.
+- Backfill: Offline upload on net-14 or net-30 cycle. Lower urgency — implement after <code>AcceptedLead</code> is stable. Most important for annual model quality.</p>
+<h3 id="which-event-to-optimize-on-and-when">Which event to optimize on (and when)</h3>
+<ul>
+<li><strong>Immediately (Week 2-3):</strong> Keep optimizing on <code>Lead</code>. Do not change the optimization event until CAPI is verified working and <code>AcceptedLead</code> has at least 50 events/week flowing (Meta's minimum for Value Optimization).</li>
+<li><strong>Week 4:</strong> If <code>AcceptedLead</code> volume &gt;= 50/week, test switching to <code>QualityLead</code> optimization first (higher volume, lower noise than <code>AcceptedLead</code>). Run as a holdout — not a full account switch.</li>
+<li><strong>Week 5+ (July):</strong> If <code>AcceptedLead</code> signal is clean and volume sufficient, switch Meta campaign objectives to <code>AcceptedLead</code> with value optimization. This is the point where Meta starts buying the right leads instead of just more leads.</li>
+</ul>
+<hr />
+<h2 id="part-3-server-side-capi-rebuild-architecture">Part 3 — Server-Side CAPI Rebuild Architecture</h2>
+<h3 id="where-the-endpoint-lives">Where the Endpoint Lives</h3>
+<p>Iron Corp's development team hosts a lightweight HTTPS endpoint on their existing application infrastructure — the same servers that already handle form submission processing. This is not a third-party middleware product (Stape, Elevar, etc.) unless the dev team has a strong preference. Third-party middleware is acceptable if Iron Corp's infra cannot make outbound HTTPS calls to Meta or if the dev team lacks bandwidth, but it adds a vendor dependency and a monthly cost. The spec below assumes Iron Corp infrastructure; if the Tuesday diagnostic reveals a blocker, the Stape/GTM server-side option is the fallback with the same event taxonomy.</p>
+<h3 id="lead-flow-form-to-meta">Lead Flow: Form to Meta</h3>
+<ol>
+<li>User fills out and submits the insurance lead form on military.com (or on QW-hosted form — architecture varies; see Part 6).</li>
+<li>The browser Pixel fires <code>Lead</code> with a UUID <code>event_id</code> generated at submit time.</li>
+<li>Simultaneously (or within &lt;1 second), Iron Corp's server receives the same form submission data, performs validation, hashes all PII fields (SHA-256, no salt, normalized as Meta specifies: lowercase email, E.164 phone, etc.), and POST-s to <code>https://graph.facebook.com/v19.0/{pixel_id}/events</code> with the <code>Lead</code> event payload including the same <code>event_id</code>.</li>
+<li>Meta receives both the browser event and the server event, matches them via <code>event_id</code>, deduplicates, and counts one <code>Lead</code> with higher match confidence than either signal alone.</li>
+<li>Iron Corp's server also stores the lead record: <code>iron_corp_lead_id</code>, timestamp, hashed PII, <code>fbp</code>, <code>fbc</code>, product line, form source, Jornaya ID, TrustedForm URL, consent language snapshot.</li>
+</ol>
+<h3 id="qw-postback-flow-qw-to-meta">QW Postback Flow: QW to Meta</h3>
+<p>Two sub-paths depending on how QW delivers postbacks (the Tuesday diagnostic determines which):</p>
+<p><strong>Path A — Real-time webhook (preferred):</strong>
+QW sends an HTTP POST to Iron Corp's webhook receiver endpoint each time a lead is accepted, sold, or paid. The endpoint looks up the original <code>iron_corp_lead_id</code> using the <code>qw_lead_id</code> from the postback, retrieves the stored hashed PII and match keys, constructs the <code>AcceptedLead</code> or <code>SoldLead</code> CAPI payload with the actual payout value, and forwards to Meta within seconds of the QW signal.</p>
+<p><strong>Path B — Batch postback (CSV/email/SFTP):</strong>
+Iron Corp receives a daily file from QW. An automated process (cron job or triggered script) parses the file, looks up each <code>qw_lead_id</code> in Iron Corp's lead store, constructs the CAPI payload for each resolved lead, and submits them as a batch to Meta's offline Conversions API endpoint. The <code>event_time</code> in each payload is set to the actual accept/sold timestamp from QW's data — not the upload time. Meta accepts events up to 7 days old for standard CAPI; up to 90 days for offline events API. Historical backfill of May data uses this same mechanism.</p>
+<h3 id="privacy-and-pii-handling">Privacy and PII Handling</h3>
+<ul>
+<li>No raw PII ever leaves Iron Corp's servers in the direction of Meta. All user identifiers (email, phone, name, zip) are SHA-256 hashed before inclusion in any CAPI payload, following Meta's normalization rules exactly.</li>
+<li>Raw PII is stored in Iron Corp's own systems (lead store / CRM) for consent record compliance and TCPA obligations. It is not transmitted to Meta.</li>
+<li>The consent record — including Jornaya LeadiD, TrustedForm certificate URL, consent language text, and timestamp — is stored in Iron Corp's lead record and is never sent to Meta. It exists for Iron Corp's legal protection.</li>
+<li>The Iron Corp CAPI endpoint requires authenticated access (access token scoped to the Pixel ID). The access token is stored as an environment variable, not in code.</li>
+<li>GDPR/CCPA note: Military.com's audience is US military and veteran demographics. Consent should be validated as US-compliant. If any international traffic is present, geo-filter before sending PII-derived data to Meta.</li>
+</ul>
+<h3 id="logging-and-reconciliation">Logging and Reconciliation</h3>
+<p>Daily automated reconciliation report (can be a simple email or Slack notification):
+- Total browser <code>Lead</code> events fired (from Pixel)
+- Total server-side <code>Lead</code> events fired (from CAPI)
+- Dedup match rate (should be &gt;90% after Week 2)
+- Total <code>AcceptedLead</code> events (from QW postback)
+- Total <code>QualityLead</code> events
+- Discrepancy flag: if server <code>Lead</code> count differs from browser <code>Lead</code> count by more than 5%, alert</p>
+<p>Monthly reconciliation: CAPI <code>AcceptedLead</code> count and total value vs QW's partner statement vs Iron Corp CRM revenue record. Any delta &gt; $500 triggers a manual audit.</p>
+<h3 id="enhanced-match-quality-optimization">Enhanced Match Quality Optimization</h3>
+<p>EMQ is the single fastest win before the full CAPI rebuild is complete. The steps in order of impact:
+1. Pass hashed email + phone on every <code>Lead</code> event. If these are not being passed today, adding them can raise EMQ from 4–5 range to 7+ in 48 hours.
+2. Add <code>fbp</code> and <code>fbc</code> cookie values to every server-side event. These cookies are set by the browser Pixel and should be captured on form submit and stored server-side.
+3. Add <code>fn</code>, <code>ln</code>, <code>zp</code> hashed on every event where the user provides them.
+4. Verify <code>client_ip_address</code> and <code>client_user_agent</code> are being passed on every CAPI event — these are mandatory for match quality and are frequently omitted in basic implementations.</p>
+<hr />
+<h2 id="part-4-implementation-timeline-june">Part 4 — Implementation Timeline (June)</h2>
+<h3 id="week-1-june-1-7-diagnostic-spec-lock">Week 1 — June 1-7: Diagnostic + Spec Lock</h3>
+<p><strong>Goal:</strong> Leave Tuesday June 2 with answers to every question in Part 1. By Friday June 6, have a locked technical spec that the dev team has signed off on.</p>
+<p>Actions:
+- Mo runs Part 1 diagnostic with dev lead on Tuesday June 2. Takes notes; does not push toward solutions until all questions are answered.
+- Review Events Manager on Tuesday live — EMQ score, current event volume, any CAPI status.
+- If EMQ is below 7.0 and the fix is purely additive (pass hashed email/phone to existing Pixel), push to do this Tuesday or Wednesday. This is a one-line GTM or code change and should not require a sprint cycle.
+- Dev lead confirms: (a) which form architecture (iframe / redirect / own-page-to-QW-API), (b) whether QW postback is webhook or batch, (c) whether Iron Corp has a lead store that retains QW lead IDs.
+- Deliverable: Written technical spec incorporating Tuesday's answers, shared back with dev team by Thursday June 5.</p>
+<p>Blocking risks: Dev team is unavailable or has no sprint capacity until the following week. Mitigation: Mo identifies the single EMQ fix that can ship without a sprint (hashed PII passthrough), and the dev lead commits to one engineer for the CAPI work.</p>
+<p>Dev capacity ask: One developer, part-time (estimated 3-5 hours for assessment, 2-3 hours for EMQ fix).</p>
+<h3 id="week-2-june-8-14-server-endpoint-first-events-in-test-mode">Week 2 — June 8-14: Server Endpoint + First Events in Test Mode</h3>
+<p><strong>Goal:</strong> Iron Corp's server-side CAPI endpoint is running in test mode. <code>Lead</code> and <code>QualityLead</code> events are firing server-side and deduplicating correctly with the browser Pixel.</p>
+<p>Actions:
+- Dev stands up the HTTPS endpoint. Integrates with Meta CAPI using the test event tool in Events Manager (test event code lets you verify payloads without counting toward real data).
+- Verify: <code>event_id</code> deduplication working. EMQ score rising. Server <code>Lead</code> count matching browser <code>Lead</code> count within 5%.
+- Begin building the QW postback receiver (if webhook) or the batch processor (if CSV/email). Even if this is not live to Meta yet, the Iron Corp side of the pipeline needs to exist.
+- Confirm: Iron Corp lead store is being populated with <code>qw_lead_id</code> and <code>iron_corp_lead_id</code> linkage. This is the linchpin — without the ID mapping, backfill is impossible.</p>
+<p>Blocking risks: QW does not deliver a real-time webhook and the daily CSV process requires a new ingestion pipeline. Mitigation: Start with the CSV/batch path as the fallback; it is slower but achievable in the same week.</p>
+<p>Dev capacity ask: One developer, approximately 15-20 hours across the week. If the dev team is resource-constrained, the QW postback processor can slip to Week 3 without blocking the <code>Lead</code> event work.</p>
+<h3 id="week-3-june-15-21-acceptedlead-backfill-live-acceptedlead-events">Week 3 — June 15-21: AcceptedLead Backfill + Live AcceptedLead Events</h3>
+<p><strong>Goal:</strong> <code>AcceptedLead</code> events are flowing to Meta — both historical (May data backfilled) and live (new accepts firing in near-real-time). Meta begins seeing lead value for the first time.</p>
+<p>Actions:
+- Request from QW: export of all accepted leads from May 1-May 30 with accept timestamps and payout amounts. If QW can provide this, backfill via offline CAPI upload. Even 1,000 historical <code>AcceptedLead</code> events with real USD values will immediately change what Meta knows about this account.
+- Turn on the live <code>AcceptedLead</code> pipeline (webhook or batch) in production. First live <code>AcceptedLead</code> events hit Meta.
+- Monitor: Does Meta's Events Manager show the <code>AcceptedLead</code> event populating? Does average event value look correct relative to expected QW payout rates?
+- Add cert validation to <code>QualityLead</code> if not already in place.</p>
+<p>Blocking risks: QW refuses to provide the May historical export. Mitigation: Even without historical data, forward-looking <code>AcceptedLead</code> events from June start training the Meta algorithm. The algorithm needs 50 events/week to be useful; if June volume supports it, optimization signal builds within 2-3 weeks from go-live.</p>
+<p>Dev capacity ask: One developer, approximately 10 hours (mostly integration testing and the historical upload script). QW partnership contact needed to request the data export — this is Mo's ask, not dev's.</p>
+<h3 id="week-4-june-22-28-optimization-switch-test">Week 4 — June 22-28: Optimization Switch Test</h3>
+<p><strong>Goal:</strong> Meta campaign is running with real value data flowing. Test switching at least one campaign's optimization objective from <code>Lead</code> to a value-based event.</p>
+<p>Actions:
+- Review <code>AcceptedLead</code> weekly volume. If &gt;= 50 events/week, propose test: create a duplicate campaign optimizing on <code>QualityLead</code> with Highest Value bidding. Run alongside existing <code>Lead</code>-optimized campaign as a holdout (not an A/B split that disrupts existing performance).
+- If <code>AcceptedLead</code> weekly volume is below 50, do not switch — report the volume gap and set a July target date.
+- Set up the daily reconciliation report in whatever format works for Lauren and the dev team — spreadsheet email, Slack, or dashboard.
+- Review <code>SoldLead</code> and <code>PaidLead</code> pipeline feasibility. If QW provides sold signals, stand up that event. If not, document it as a July item.</p>
+<p>Blocking risks: Volume is too low to switch optimization event (&lt; 50 <code>AcceptedLead</code>/week). This is the most likely blocker. At $25 CPL and a typical QW accept rate of 40-60%, ~3,500 leads/week should generate 1,400-2,100 accepts. If the accept-rate postback is working, volume should be sufficient. The risk is the postback itself not materializing.</p>
+<p>Dev capacity ask: Minimal — monitoring and threshold-check logic. No new development required unless switching optimization events triggers a campaign rebuild.</p>
+<hr />
+<h2 id="part-5-expected-impact">Part 5 — Expected Impact</h2>
+<h3 id="the-meta-benchmark">The Meta Benchmark</h3>
+<p>Meta's published performance data for accounts that implement CAPI with quality-signal optimization (optimizing on a downstream conversion event with real value rather than raw lead count):
+- 15% lower cost-per-quality-lead (CPQL)
+- 44% higher quality-conversion rate (more accepted / sold leads per dollar spent)</p>
+<p>These are averages across verticals. Insurance lead gen is a high-signal vertical — Meta's algorithm is well-trained on insurance purchase intent. The benchmarks are credible here.</p>
+<h3 id="applied-to-may-numbers">Applied to May Numbers</h3>
+<p>Current state (May Week 1 baseline, the best week):
+- CPL: $22.23 (May 1)
+- RPL: $34.74
+- Net margin: ~36%
+- Daily spend: ~$28K
+- Daily net revenue: ~$15.7K</p>
+<p>After CAPI rebuild with AcceptedLead optimization (applying Meta's 15% CPQL reduction):
+- CPL drops from ~$25 average to ~$21.25 (conservative — using the 15% figure on May's average, not the week 1 low)
+- At the same ~33K leads/month: spend drops from ~$825K to ~$700K for the same lead volume, or the same spend produces ~18% more leads
+- At $34 average RPL (holding revenue per lead stable): same spend goes from ~$281K gross to ~$331K gross
+- Net impact: approximately <strong>+$40,000-$55,000/month</strong> in net revenue at constant spend, before any creative or audience improvements</p>
+<p>More conservatively, if only the CPL improvement materializes (not the quality-conversion rate improvement): approximately <strong>+$20,000-$30,000/month</strong>.</p>
+<h3 id="this-is-foundational-not-a-ceiling">This Is Foundational, Not a Ceiling</h3>
+<p>These numbers assume nothing else changes. The CAPI rebuild compounds:
+- Creative testing becomes more efficient because Meta learns from accepted-lead signal, not raw click-through.
+- Audience expansion campaigns become less wasteful — Meta stops chasing cheap leads from low-intent audiences.
+- When form migration to Iron Corp's own form (Phase 2) happens, the CAPI infrastructure is already in place and the historical signal from QW-era leads provides continuity.</p>
+<p>The CAPI rebuild is the prerequisite for everything else in July-August to work at its full potential.</p>
+<hr />
+<h2 id="part-6-coexistence-with-quotewizard">Part 6 — Coexistence With QuoteWizard</h2>
+<p>This is the most architecturally critical section. The CAPI rebuild must not require changes to the QW integration — that migration is Phase 2 and is explicitly out of scope for the June-August measurement window. The implementation approach is different depending on which form architecture Tuesday reveals.</p>
+<h3 id="architecture-a-qw-iframe-on-militarycom-domain">Architecture A — QW Iframe on Military.com Domain</h3>
+<p><strong>What it looks like:</strong> User stays on military.com (e.g., <code>auto.military.com/insurance/</code>). The form appears in an <code>&lt;iframe src="qw-hosted-url.com/..."&gt;</code>. The URL bar shows military.com throughout.</p>
+<p><strong>The problem:</strong> Browser Pixel on the parent military.com page cannot read events that fire inside the QW iframe (cross-origin sandbox). The Pixel fires <code>PageView</code> on the parent page but has no visibility into form field entry or form submit inside the iframe.</p>
+<p><strong>CAPI implementation:</strong> Iron Corp's server-side endpoint is the primary event source. Iron Corp must receive a postback from QW at the moment of form submission (QW sends a "lead submitted" notification to an Iron Corp URL) — this postback triggers Iron Corp's CAPI <code>Lead</code> event. The browser Pixel fires <code>Lead</code> on the parent page using a custom event triggered by a postMessage from the QW iframe (QW must support this — confirm Tuesday). If QW does not support postMessage, the Pixel <code>Lead</code> event fires from Iron Corp's postback handler via a Meta Pixel server-side pixel event (not a browser event), and deduplication is handled purely server-side.</p>
+<p><strong>Risk level:</strong> Medium. Depends on QW's willingness to (a) send an Iron Corp postback on submit and (b) support postMessage. Both are standard QW partner features but need confirmation.</p>
+<p><strong>CAPI coexistence verdict:</strong> Workable without changing the QW form at all. Iron Corp just needs QW to fire a server-to-server "lead received" notification to a new Iron Corp endpoint.</p>
+<h3 id="architecture-b-qw-redirect">Architecture B — QW Redirect</h3>
+<p><strong>What it looks like:</strong> User lands on military.com, clicks a form CTA, gets redirected to a QW-hosted URL (e.g., <code>leads.quotelab.com/insurance/?...</code>), fills out the form on QW's domain, and gets redirected back to a military.com thank-you page.</p>
+<p><strong>The problem:</strong> The form submit happens on QW's domain. Iron Corp's Pixel never sees the submit event. The only Iron Corp-domain events are the pre-redirect click and the post-redirect thank-you page load.</p>
+<p><strong>CAPI implementation:</strong> Iron Corp fires <code>Lead</code> on the thank-you page (when the user returns from QW's domain). This is reliable if QW always redirects back to a military.com URL with a lead status parameter. Iron Corp server fires the CAPI <code>Lead</code> event based on the QW return postback (same as Architecture A). Match quality may be slightly lower because IP/UA forwarding depends on QW including them in the redirect parameters or the return postback.</p>
+<p>For <code>fbp</code> and <code>fbc</code> cookies: These persist on the military.com domain through the redirect and are available on the thank-you page. They should be captured on the thank-you page load and included in the server-side <code>Lead</code> event payload.</p>
+<p><strong>Risk level:</strong> Low to medium. The thank-you page is a clean trigger point. The gap is the ~10-15 second window between QW form submit and Iron Corp thank-you page where the lead technically exists but hasn't fired a CAPI event yet.</p>
+<p><strong>CAPI coexistence verdict:</strong> Straightforward. No QW form changes required. Iron Corp instructs the thank-you page and the QW return-postback handler.</p>
+<h3 id="architecture-c-iron-corp-page-posting-to-qw-api">Architecture C — Iron Corp Page Posting to QW API</h3>
+<p><strong>What it looks like:</strong> The form HTML lives on military.com. On submit, JavaScript on the military.com page POST-s the form data to QW's lead intake API directly. QW returns a response (accepted/rejected/pending) and Iron Corp displays the confirmation on the same military.com page.</p>
+<p><strong>The problem:</strong> There isn't one. This is the simplest possible architecture for CAPI.</p>
+<p><strong>CAPI implementation:</strong> Iron Corp's server intercepts the form submit (or the API response), fires the browser Pixel <code>Lead</code> event from the same page, and simultaneously calls its own CAPI endpoint with the full user data payload. The CAPI endpoint hashes the PII and sends to Meta. No iframe sandboxing, no redirect gap, no cross-domain issues.</p>
+<p><strong>Risk level:</strong> Low. All events fire on Iron Corp's domain with full PII access. EMQ will be highest in this architecture.</p>
+<p><strong>CAPI coexistence verdict:</strong> Ideal. This is also closest to what the Phase 2 form migration will look like, so the CAPI infrastructure built here carries forward with minimal changes.</p>
+<h3 id="likely-architecture-on-tuesday">Likely Architecture on Tuesday</h3>
+<p>Based on what the May data shows (military.com URLs appearing in the funnel, QW as the lead buyer, no indication of cross-domain complexity in the reporting structure), Architecture A (iframe) or Architecture C (Iron Corp page posting to QW API) is most likely. Architecture B (full redirect to QW domain) would typically show QW-domain URLs in UTM attribution data. The diagnostic questions in Part 1-E will confirm within the first five minutes of the Tuesday conversation.</p>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<p><strong>Assumptions made in this document:</strong></p>
+<ol>
+<li>
+<p>QW is the sole or primary lead buyer for the insurance vertical. If there are additional buyers (EverQuote, SmartFinancial, etc.) receiving leads from the same forms, the <code>AcceptedLead</code> event taxonomy needs to accommodate multiple buyer postbacks with different payout structures.</p>
+</li>
+<li>
+<p>Iron Corp has a server-side application layer (not a purely static site) that can be modified to make outbound HTTPS calls to Meta's CAPI endpoint. If military.com is a fully static or CDN-served site with no application server, a lightweight middleware service (Lambda, Cloud Run, or Stape) will need to stand up a new endpoint.</p>
+</li>
+<li>
+<p>QW sends postback signals (at minimum a daily batch) that include QW lead ID and accept/reject status. If QW provides no postback whatsoever and all lead status data lives inside QW's portal without an export mechanism, the <code>AcceptedLead</code> event is blocked until Mo negotiates postback access as a contract term with QW.</p>
+</li>
+<li>
+<p>The Meta Pixel is on a legitimate, active dataset that is linked to Iron Corp's active ad account. If the account is using a different Pixel ID than what is in Events Manager, or if there are multiple active Pixel IDs on different surfaces, deduplication will fail silently and EMQ will be artificially suppressed.</p>
+</li>
+<li>
+<p>The May 2026 daily CSV columns <code>leads_sold</code>, <code>click_lead</code>, <code>click_lead_revenue</code>, and <code>lead_revenue</code> being all zeros indicates the reporting pipeline was never built to consume QW postback data — not that QW isn't sending it. QW almost certainly has this data. The gap is on Iron Corp's side.</p>
+</li>
+<li>
+<p>Dev team has at least one engineer with Python or Node.js experience who can build the CAPI endpoint and QW postback handler. Estimated total dev hours for the full Phase 1 CAPI build: 40-60 hours across June.</p>
+</li>
+</ol>
+<p><strong>Open questions for Tuesday June 2:</strong></p>
+<ol>
+<li>Does QW currently send ANY postback to Iron Corp? If yes, what endpoint receives it and what fields does it carry?</li>
+<li>What is the current Meta Pixel EMQ score? (Open Events Manager before the meeting.)</li>
+<li>Is there an existing server-side GTM container? (This would accelerate Week 2 significantly.)</li>
+<li>Does Iron Corp store a lead record that maps <code>iron_corp_lead_id</code> ↔ <code>qw_lead_id</code>? Without this mapping, backfill is not possible and real-time <code>AcceptedLead</code> events require the QW postback to carry enough PII to re-identify the user independently.</li>
+<li>Is the QW relationship governed by a partner agreement that includes postback/API terms? Mo needs to know before requesting the May historical export — if QW can restrict data access contractually, this needs to go through the right channel.</li>
+<li>What is Lauren's current workflow for reporting — does she pull from the internal tool that generates the daily CSV, or does she use Meta Ads Manager natively? The reconciliation report format should match her workflow.</li>
+<li>Is there any existing offline conversion upload to Meta — even a manual one-time historical import? If yes, where is that dataset in Events Manager?</li>
+<li>What is Iron Corp's existing hosting/infra stack? (AWS, GCP, Azure, on-prem, managed WordPress, other?) This determines the fastest path to standing up the CAPI endpoint.</li>
+</ol>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>
