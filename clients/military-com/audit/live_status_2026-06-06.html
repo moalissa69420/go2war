@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Status 2026 06 06 — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Live Status 2026 06 06</div>
+<div class="meta">Source: <code>live_status_2026-06-06.md</code></div>
+<hr class="divider">
+<h1 id="live-api-status-check-june-6-2026">Live API Status Check — June 6, 2026</h1>
+<p><strong>Purpose:</strong> Direct API verification of the Jun 4 audit's findings + task terminal items. All read-only inspection. <strong>No edits, no pauses, no changes.</strong></p>
+<p><strong>Scope:</strong> 14 parallel Meta Marketing API calls covering account state, audiences, ad sets, top ads last 7d, competitive ad library.</p>
+<hr />
+<h2 id="tldr-the-headline-shifts">TL;DR — the headline shifts</h2>
+<p>Five things the audit got right. Three things the audit got wrong. Three new findings worth acting on.</p>
+<h3 id="audit-findings-confirmed">Audit findings CONFIRMED ✅</h3>
+<ol>
+<li><strong>"60% creatives" are sunset</strong> — <code>ads_library_search</code> on Military.com page returned <strong>0 active ads</strong> containing "60%". Compliance issue closed.</li>
+<li><strong>Customer-list seed is <code>Custom_Recruiting-Leads_08-05-2025</code></strong> (39K–46K size, created Aug 5, 2025 — 10 months old). The named "Mil FB Customer Match 4.12.21" does NOT exist in the inventory.</li>
+<li><strong>All Site Visitors / Visited Auto LP are still at 20 people each.</strong> SAC restriction holding.</li>
+<li><strong>Page-engagement audiences are healthy and unused:</strong> FB Likers 1.0M–1.2M, FB Engagers 349K–411K, IG Followers 30K–35K, IG Engagers 94K–110K.</li>
+<li><strong>28 broken placeholder LALs all at 1,000 + INACTIVE</strong> — confirmed for cleanup.</li>
+</ol>
+<h3 id="audit-findings-refuted">Audit findings REFUTED ❌</h3>
+<p><strong>1. C06 — "Narrow Custom ad sets" finding was wrong.</strong>
+The Jun 4 audit flagged ad sets <code>120240808864440498</code> and <code>120227142278180498</code> as broken (~1,000 audience). Live 30d data:</p>
+<table>
+<thead>
+<tr>
+<th>Ad Set</th>
+<th>Spend (30d)</th>
+<th>Reach</th>
+<th>Frequency</th>
+<th>CPL</th>
+<th>Results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>120240808864440498</code> (Custom Auto BAU)</td>
+<td>$36,178</td>
+<td><strong>576,423</strong></td>
+<td>2.22</td>
+<td><strong>$22.00</strong></td>
+<td>1,645 leads</td>
+</tr>
+<tr>
+<td><code>120227142278180498</code> (Custom Home BAU)</td>
+<td>$8,781</td>
+<td><strong>56,234</strong></td>
+<td>2.31</td>
+<td><strong>$12.60</strong></td>
+<td>697 leads</td>
+</tr>
+</tbody>
+</table>
+<p>Both performing at or below account-average CPL. <strong>These ad sets are working, not broken.</strong> The audit confused custom-audience source size with delivery reach. Task C06 should be marked "no action needed."</p>
+<p><strong>2. R04 — "Odometer 05/15 approaching fatigue at 3.27 frequency" — NOT confirmed.</strong>
+Live last-7d data on the top 15 ads:</p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>7d Spend</th>
+<th>Frequency</th>
+<th>7d CPL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Odometer_Static_NM_Animation_Swipe_05/15/26</td>
+<td>$23,650</td>
+<td><strong>1.55</strong></td>
+<td>$33.55</td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_Static_NM_Animation_Swipe_04/28/26</td>
+<td>$21,704</td>
+<td>1.61</td>
+<td><strong>$19.21</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Auto_Static_NM_Animation_Swipe_04/28/26 (v2)</td>
+<td>$13,713</td>
+<td>1.35</td>
+<td><strong>$20.17</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Home_Static_NM_Inside_Icon_05/07/26</td>
+<td>$8,395</td>
+<td>1.65</td>
+<td>$23.38</td>
+</tr>
+<tr>
+<td>Half-Car_Static_NM_Animation_Swipe_06/03/26 (NEW)</td>
+<td>$7,500</td>
+<td>1.46</td>
+<td>$19.33</td>
+</tr>
+<tr>
+<td>Odometer_Static_NM_Animation_Swipe_05/22/26</td>
+<td>$5,723</td>
+<td>1.26</td>
+<td>$19.33</td>
+</tr>
+<tr>
+<td>Drive-On_Static_NM_Animation_Swipe_05/29/26</td>
+<td>$5,313</td>
+<td>1.33</td>
+<td>$34.28</td>
+</tr>
+<tr>
+<td>Drive-On_Static_NM_Animation_Swipe_05/30/26 ⭐</td>
+<td>$5,190</td>
+<td>1.57</td>
+<td><strong>$18.47</strong></td>
+</tr>
+<tr>
+<td>Lower-Your-Home_Inside_Icon (variant)</td>
+<td>$4,965</td>
+<td>1.90</td>
+<td><strong>$12.14</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>No ad above 1.90 frequency in last 7 days.</strong> The audit's 3.27 reading was likely a 30d-cumulative on a single ad while live last-7d frequency is well below the 4.0 fatigue trigger. <strong>R04 monitoring stays but the urgency drops</strong> — fatigue isn't days away, it's weeks-to-months at current pacing.</p>
+<p><strong>3. The Jun 4 audit's Ad Library IDs ≠ Ads Manager internal IDs.</strong>
+The audit cited <code>767213169526603</code> (Odometer 05/15), <code>4218807058433926</code> (Lower-Your-Auto 04/28), <code>959932713150103</code> (Drive-On 05/30). Querying those IDs returned empty. The actual Ads Manager IDs are:
+- Odometer 05/15 → <code>120244338813140498</code>
+- Lower-Your-Auto 04/28 → <code>120243520709380498</code>
+- Drive-On 05/30 → <code>120245163764220498</code></p>
+<p>Same creatives, different ID systems. Not a real problem — just means the audit and Lauren/dev will be looking at different IDs for the same creative. <strong>For monitoring and creative briefs, use creative NAMES, not IDs.</strong></p>
+<h3 id="new-findings-the-jun-4-audit-didnt-catch">New findings the Jun 4 audit didn't catch 🆕</h3>
+<p><strong>1. Auto Max Val premium has shrunk from 67% to 50%.</strong>
+Live 7d:
+- Auto BAU CPL: <strong>$20.03</strong> (was $21.84 at audit)
+- Auto Max Val CPL: <strong>$30.02</strong> (was $36.44 at audit)
+- Premium: <strong>50%</strong> (was 67%)</p>
+<p>Either Meta's algorithm is learning despite the broken value pipe, OR the gap is closing organically as more BAU data accumulates. The Max Val decision (Task B02) is still material but <strong>less urgent than the audit suggested.</strong> Monthly bleed at current spend: ~$90K/mo (was ~$137K/mo). <strong>Pause-or-cap math:</strong> still favors pause + reallocate if dev timeline &gt;3 weeks.</p>
+<p><strong>2. The account is pacing way below budget — the gap is even bigger than the audit said.</strong>
+Live 7d daily-average vs daily caps:
+- Auto BAU: ~$9.8K/day actual vs $19.8K cap = <strong>49% utilization</strong> (audit said 57%)
+- Auto Max Val: ~$5.9K/day actual vs $7K cap = 84% utilization
+- Home BAU: ~$1.4K/day actual vs $2K cap = 70%
+- Home Max Val: ~$1.5K/day actual vs $1.6K cap = 94%</p>
+<p><strong>Auto BAU has ~$10K/day of approved-but-unspent budget.</strong> That's the single biggest reallocation lever in the account right now. If you can find creative that scales (which is what the page-engagement warm ad set + new Home creative is for), Auto BAU absorbs the spend at $20 CPL.</p>
+<p><strong>3. The ad library shrank — Mo's team has been pruning.</strong>
+Active ads on Military.com page (<code>6179724269</code>):
+- Jun 4 audit: ~240 active ads
+- Jun 6 (today): <strong>186 active ads</strong> (-22%)</p>
+<p>Concept families still dominated by "Easily Compare Quotes" (~150+ variants). New variants in the last week: Half-Car 06/03, Drive-On 05/29 + 05/30, Odometer 05/22 family. The audit's "creative refresh" was actually starting before you got involved.</p>
+<p><strong>4. New top-spender finding: Lower-Your-Home_Inside_Icon at $12.14 CPL.</strong>
+The best-CPL creative in the entire account last 7d is <strong>a Home Inside_Icon variant at $12.14</strong>. Audit said Home was best-CPL family — confirmed and even sharper than reported. <strong>Your creative_seed.md Home concepts (Concepts 1–4) target this exact family</strong> — that's the right call.</p>
+<p><strong>5. Drive-On 05/29 is a loser; 05/30 is the winner.</strong>
+Two variants shipped one day apart:
+- Drive-On_05/29: $34.28 CPL (LOSER — pause candidate)
+- Drive-On_05/30: $18.47 CPL (WINNER — scale candidate)</p>
+<p>This is an interesting A/B test on the same family. <strong>Worth Lauren confirming whether 05/30 was an iteration on a 05/29 learning</strong> — if so, the production cadence is healthy. If not, why is 05/29 still running at 2× CPL?</p>
+<p><strong>6. Insurify is running "Save up to 50%" — at scale.</strong>
+Page <code>1009512109078555</code> (Insurify) has <strong>255 active ads</strong> all titled "Save up to 50% on your car insurance bill." This is a direct contradiction of the audit's assumption that "claims above 15% without substantiation are blocked or risky under SAC." Either:
+- (a) Insurify has carrier substantiation Military.com doesn't
+- (b) The 50% language is allowed under SAC if framed correctly
+- (c) Insurify is taking the regulatory risk knowingly</p>
+<p><strong>Worth investigating before locking in the "up to 15% or more" ceiling forever.</strong> Could open a higher-CPL-better-conversion test. Don't run "50%" yourselves without confirming, but the data is worth knowing.</p>
+<p><strong>7. Opportunity Score returned empty recommendations.</strong>
+At audit, Opportunity Score was 99/100 with no specific items. Today: empty recommendations array (possibly score is now 100/100 or just no actionable suggestions). <strong>No anomaly signals either.</strong> Account is in a stable healthy state.</p>
+<hr />
+<h2 id="per-task-status-updates">Per-task status updates</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Audit status</th>
+<th>Live API verdict</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A01 (Events Mgr Diagnostics — Purchase)</td>
+<td>Pending</td>
+<td><strong>Cannot verify via API</strong> — Events Manager Diagnostics is web-UI-only. Still requires Mo to log into business.facebook.com and check.</td>
+<td>No change to task</td>
+</tr>
+<tr>
+<td>A02 (fbc/fbclid Diagnostics)</td>
+<td>Pending</td>
+<td>Same — UI-only check</td>
+<td>No change</td>
+</tr>
+<tr>
+<td><strong>A03 (60% sweep)</strong></td>
+<td>Pending</td>
+<td>✅ <strong>CONFIRMED ZERO ACTIVE</strong></td>
+<td>Mark COMPLETED</td>
+</tr>
+<tr>
+<td><strong>A04 (Mil FB CM 4.12.21 status)</strong></td>
+<td>Pending</td>
+<td>✅ <strong>CONFIRMED NOT IN INVENTORY</strong></td>
+<td>Mark COMPLETED</td>
+</tr>
+<tr>
+<td>A05 (Delete 28 placeholder LALs)</td>
+<td>Pending</td>
+<td>✅ 28 LALs at 1,000 INACTIVE confirmed</td>
+<td>Mo executes (destructive — Mo's call)</td>
+</tr>
+<tr>
+<td>B01 (Dev value-fix timeline)</td>
+<td>Blocked</td>
+<td>Requires Anthony — cannot do via API</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>B02 (Max Val decision)</td>
+<td>Blocked</td>
+<td><strong>Premium reduced 67% → 50%</strong> — less urgent but still material</td>
+<td>Lower urgency flag; numbers updated</td>
+</tr>
+<tr>
+<td>B03 (Lauren sold-leads export)</td>
+<td>Pending</td>
+<td>Requires Lauren</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>B04 (Mar/Apr daily reports)</td>
+<td>Pending</td>
+<td>Requires Lauren</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>B05 (QW contract terms)</td>
+<td>Pending</td>
+<td>Requires Anthony</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>B06 (MA dataset decide)</td>
+<td>Pending</td>
+<td>Requires Anthony</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>B07 (Content pixel CAPI Gateway)</td>
+<td>Pending</td>
+<td>Requires dev</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>C01 (Warm-layer ad set build)</td>
+<td>Pending</td>
+<td>✅ Page-engagement audiences confirmed healthy + unused — build ready</td>
+<td>Mo executes</td>
+</tr>
+<tr>
+<td>C02 (Rebuild seed)</td>
+<td>Pending</td>
+<td>Confirmed seed is 10 months stale</td>
+<td>Mo executes after B03</td>
+</tr>
+<tr>
+<td>C03 (Creative production)</td>
+<td>Pending</td>
+<td>Mo executing via Nano Banana + Claude per creative_lab.md</td>
+<td>In progress</td>
+</tr>
+<tr>
+<td>C04 (Reallocate BAU pacing gap)</td>
+<td>Pending</td>
+<td><strong>Gap is bigger</strong> — ~$10K/day undeployed on Auto BAU</td>
+<td>Mo executes</td>
+</tr>
+<tr>
+<td>C05 (Scale Home share)</td>
+<td>Pending</td>
+<td>✅ Home best-CPL confirmed at $12.14</td>
+<td>Mo executes</td>
+</tr>
+<tr>
+<td><strong>C06 (Narrow Custom ad sets)</strong></td>
+<td>Pending</td>
+<td>❌ <strong>REFUTED — both healthy, no action needed</strong></td>
+<td>Mark COMPLETED, NO ACTION</td>
+</tr>
+<tr>
+<td>C07 (LAL eligibility test)</td>
+<td>Pending</td>
+<td>✅ Already confirmed by live LAL ladder being active</td>
+<td>Mark COMPLETED</td>
+</tr>
+<tr>
+<td>C08 (Friday readout)</td>
+<td>WIP</td>
+<td>N/A</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>D03 (Scale warm ad set)</td>
+<td>Hold</td>
+<td>Awaiting C01</td>
+<td>No change</td>
+</tr>
+<tr>
+<td><strong>R04 (Odometer fatigue monitoring)</strong></td>
+<td>WIP</td>
+<td>⬇️ <strong>Fatigue not imminent</strong> — top 15 ads all below 2.0 frequency last 7d</td>
+<td>Lower urgency; monitor weekly not daily</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-this-means-for-the-tuesday-anthony-lauren-conversation">What this means for the Tuesday Anthony / Lauren conversation</h2>
+<h3 id="things-to-stop-worrying-about">Things to STOP worrying about</h3>
+<ul>
+<li><strong>C06 narrow Custom ad sets</strong> — they're fine, audit error. Don't waste meeting time.</li>
+<li><strong>R04 Odometer fatigue</strong> — not imminent. Stop monitoring daily; weekly is enough.</li>
+<li><strong>A03 / A04</strong> — closed. No action needed.</li>
+</ul>
+<h3 id="things-now-less-urgent-but-still-material">Things now LESS urgent (but still material)</h3>
+<ul>
+<li><strong>B02 Max Val decision</strong> — premium is 50% not 67%. Monthly bleed at current pacing is ~$90K not ~$137K. Still worth a decision but not Tuesday-emergency.</li>
+<li><strong>R04</strong> — see above.</li>
+</ul>
+<h3 id="things-now-more-urgent">Things now MORE urgent</h3>
+<ul>
+<li><strong>C04 (BAU pacing reallocation)</strong> — the gap is ~$10K/day, not $8.5K/day. Bigger free lever.</li>
+<li><strong>Drive-On 05/29 loser pause</strong> — new finding. $5,313 in 7 days at $34.28 CPL while 05/30 sibling runs at $18.47. Mo's call whether to ask Lauren to pause it.</li>
+<li><strong>Insurify "50%" investigation</strong> — could open a meaningful copy test if substantiation is available.</li>
+</ul>
+<h3 id="things-unchanged">Things unchanged</h3>
+<ul>
+<li><strong>The 5 things to walk out of Tuesday with</strong> stay the same: dev timeline (B01), Max Val decision (B02), Lauren commitments (B03/B04), Hassan 1:1 calendar (E01), CAPI Gateway scope (B07).</li>
+</ul>
+<hr />
+<h2 id="updates-needed-in-the-portal">Updates needed in the portal</h2>
+<p><strong>Task terminal (<code>task-list.html</code>):</strong>
+- Mark A03, A04, C06, C07 as DONE
+- Update C06 description: "REFUTED by live data — no action"
+- Update R04 to lower urgency: weekly check, not daily
+- Update B02 numbers: "Max Val premium: 50% (was 67% at audit)"
+- Update C04: "$10K/day unspent (was $8.5K)"
+- New task: <strong>C09 — Investigate Drive-On 05/29 vs 05/30 ($34 vs $18 CPL on sibling variants)</strong>
+- New task: <strong>C10 — Investigate Insurify "50%" claim — is substantiation possible?</strong></p>
+<p><strong>Master audit (<code>master_audit.md</code>):</strong>
+- Section 2 (Same vs Changed) needs a "Jun 6 update" addendum
+- Section 11 (Action list) re-ranked with the lower-urgency items dropped
+- Footer note: "Live verified Jun 6, 2026; deltas from Jun 4 audit listed in <code>live_status_2026-06-06.md</code>"</p>
+<hr />
+<h2 id="what-live-api-cant-do">What live API CAN'T do</h2>
+<p>These remain Mo / Lauren / Dev / Hassan only:</p>
+<ul>
+<li><strong>Events Manager Diagnostics tab</strong> — web UI only. Purchase value malformation + fbc truncation still need Mo's manual check.</li>
+<li><strong>Pause / scale / delete / create</strong> anything — destructive. Mo only.</li>
+<li><strong>Talk to humans</strong> — Anthony (dev), Lauren (media), Hassan (CEO) all live in Slack / email / meetings.</li>
+<li><strong>Read the QW contract</strong> — physical doc, not API-accessible.</li>
+</ul>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<ul>
+<li><strong>Why did the Jun 4 audit's frequency reading (3.27 on Odometer) not match today's (1.55)?</strong> Most likely the audit was on 30d cumulative window vs my last-7d window. The 30d total frequency could still be 3+. Worth re-pulling 30d to validate, but the 7d frequency is what matters for live fatigue risk.</li>
+<li><strong>Why did the audit's Ad Library IDs not match Ads Manager IDs?</strong> Different ID systems (public vs internal). Not a problem — just use creative names for monitoring.</li>
+<li><strong>The Insurify "50%" data point requires investigation.</strong> Could be substantiated, could be tolerated by Meta, could be regulatory risk Insurify accepts. Don't conclude either way without checking.</li>
+<li><strong>The empty Opportunity Score recommendations could mean 100/100</strong> OR just that no actionable items exist. Doesn't change the strategic picture.</li>
+<li><strong>C06's reversal suggests the Jun 4 audit may have other findings worth double-checking.</strong> Specifically the "30 broken placeholder LALs" was right (28 confirmed) and the page-engagement audience finding was right — but other inferred-state-not-verified findings should be flagged for re-validation as we hit them.</li>
+</ul>
+<hr />
+<p><em>All data fetched 2026-06-06 via Meta Marketing API. Account <code>1034037341617540</code> (LG Military Ads).</em></p>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>
