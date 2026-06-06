@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Lab — Military.com — GTW</title>
+<style>
+:root { --muted: #444; --border: #e9e9ec; --accent: #c33; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #000;
+    padding: 1.5em 1.25em 4em;
+    max-width: 840px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.site-title { font-size: 13px; font-weight: 700; margin-bottom: 0.3em; }
+.subtitle { font-size: 13px; font-weight: 400; margin-bottom: 0.3em; color: var(--muted); }
+.meta { font-size: 12px; color: var(--muted); margin-bottom: 1.25em; }
+.meta a { color: var(--muted); }
+.meta a:hover { color: #000; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 1em 0 1.5em; }
+h1 { font-size: 22px; font-weight: 700; margin: 1.5em 0 0.75em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; margin: 1.5em 0 0.5em; line-height: 1.25; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 14px; font-weight: 700; margin: 1.25em 0 0.4em; }
+h4 { font-size: 13px; font-weight: 700; margin: 1em 0 0.3em; }
+p { margin: 0.7em 0; }
+ul, ol { margin: 0.7em 0; padding-left: 1.4em; }
+li { margin: 0.25em 0; }
+li > ul, li > ol { margin: 0.25em 0; }
+a { color: #000; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #f5f5f5;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+}
+pre {
+    background: #f5f5f5;
+    padding: 0.8em 1em;
+    margin: 0.8em 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--muted);
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+pre code { background: none; padding: 0; border: none; font-size: 12px; }
+blockquote {
+    border-left: 3px solid var(--muted);
+    padding: 0.4em 0.8em;
+    margin: 0.8em 0;
+    color: var(--muted);
+    font-style: italic;
+}
+table { width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: #fafafa; font-weight: 700; }
+tr:nth-child(even) td { background: #fcfcfc; }
+.back { margin-top: 2em; font-size: 12px; color: var(--muted); }
+@media print {
+    body { max-width: 100%; padding: 0.5in; font-size: 11px; }
+    .meta a, .back { color: #000; text-decoration: none; }
+    pre, code { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="site-title">GO TO WAR</div>
+<div class="subtitle">Military.com — Creative Lab</div>
+<div class="meta">Source: <code>creative_lab.md</code></div>
+<hr class="divider">
+<h1 id="creative-lab-nano-banana-claude-production-playbook">Creative Lab — Nano Banana + Claude Production Playbook</h1>
+<p><strong>Purpose:</strong> Ship the 10 net-new statics from Task C03 this week using Nano Banana for visuals + Claude for copy.</p>
+<p><strong>Source brief:</strong> <code>task-list.html</code> → C03 + <code>audit/page_engagement_audience_build.md</code> + Mo's audit creative engine plan.</p>
+<p><strong>Compliance gate:</strong> Every concept here passes the "up to 15% or more" rule, the SAC restriction set, and Meta sensitive-attribute traps. <strong>Do not modify these unless you re-check compliance.</strong></p>
+<hr />
+<h2 id="the-pipeline">The pipeline</h2>
+<pre><code>┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│  Nano Banana    │    │     Claude       │    │  Figma/Photoshop │    │   Ads Manager   │
+│  (visuals)      │───▶│    (copy)        │───▶│  (composition)   │───▶│   (upload)      │
+│  ~3 min/image   │    │  ~2 min/concept  │    │  ~10 min/concept │    │  ~5 min/concept │
+└─────────────────┘    └──────────────────┘    └──────────────────┘    └─────────────────┘
+</code></pre>
+<p><strong>Time per concept end-to-end: ~20–25 min.</strong> Ten concepts in a 4-hour focused block.</p>
+<h3 id="why-this-split">Why this split</h3>
+<ul>
+<li><strong>Nano Banana</strong> (Gemini 2.5 Flash Image) is best at photorealistic scenes with character consistency, accepts reference images, costs ~$0.04/image, generates in seconds. Use it for the <em>visual</em>.</li>
+<li><strong>Claude</strong> writes compliance-tight copy variants in seconds with the right guardrails. Use it for <em>all text</em> — headline, primary text, CTA.</li>
+<li><strong>Figma/Photoshop</strong> composites the final ad (text overlay placement, logo, CTA button). Don't try to make Nano Banana do the layout — generate the <em>scene</em> clean and add text in post.</li>
+<li><strong>Ads Manager</strong> is upload + naming convention only.</li>
+</ul>
+<h3 id="critical-feed-nano-banana-reference-images">Critical: feed Nano Banana reference images</h3>
+<p>For brand consistency, <strong>download the top 3 currently-running creatives from Meta Ads Library</strong> and feed them as reference images to Nano Banana:</p>
+<ul>
+<li><code>Lower-Your-Auto-Insurance_04/28</code> (Ad ID <code>4218807058433926</code>) — the workhorse</li>
+<li><code>Drive-On_05/30</code> (Ad ID <code>959932713150103</code>) — newest winner</li>
+<li><code>Odometer_05/15</code> (Ad ID <code>767213169526603</code>) — current top spender</li>
+</ul>
+<p>Open each in Meta Ads Library → screenshot the creative → save to a <code>references/</code> folder. Nano Banana will hold visual style across generations when you reference these.</p>
+<hr />
+<h2 id="brand-kit-locked">Brand kit (locked)</h2>
+<h3 id="visual-rules">Visual rules</h3>
+<ul>
+<li><strong>Photorealistic editorial style</strong> — not stock-photo, not glossy commercial, not illustrated</li>
+<li><strong>Real-looking people in current civilian context</strong> — no uniforms, no insignia, no combat imagery</li>
+<li><strong>Natural lighting</strong> — golden hour, soft daylight, ambient interior. Avoid studio strobe look.</li>
+<li><strong>Shallow depth of field</strong> OK, but keep subjects sharp and recognizable</li>
+<li><strong>Composition leaves text-overlay zones clear</strong> — typically right third or bottom third of frame</li>
+<li><strong>American context</strong> — suburban, base-adjacent, mid-density city; not abstract or aspirational-luxury</li>
+</ul>
+<h3 id="color-palette-infer-from-existing-top-performers">Color palette (infer from existing top performers)</h3>
+<ul>
+<li>Primary: deep navy (#1E2761) — Military.com brand color</li>
+<li>Accent: warm amber/gold (#FF9D00) for CTAs and highlights</li>
+<li>Supporting: off-white (#F5F5F5), muted gray (#888) for secondary text</li>
+<li>Avoid: pure red (compliance-flag association), bright green (off-brand)</li>
+</ul>
+<h3 id="typography-for-figma-composition">Typography (for Figma composition)</h3>
+<ul>
+<li>Headline: sans-serif, bold, large (use Inter or SF Pro Display)</li>
+<li>Primary text: sans-serif, regular, mid-size (Inter or Helvetica)</li>
+<li>Disclosure / fine print: 10–11pt minimum, legible</li>
+</ul>
+<h3 id="logo-placement">Logo placement</h3>
+<ul>
+<li>Military.com logo: top-left, 80px wide on 1080×1080</li>
+<li>Partner logo (if co-brand): top-right, same dimensions</li>
+<li>Maintain 32px clear-space around logos</li>
+</ul>
+<hr />
+<h2 id="compliance-gates-non-negotiable">Compliance gates — non-negotiable</h2>
+<p>Every concept here passes these. If you generate variants, the variants must too.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Why</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>"Up to 15% or more"</strong> is the only savings claim language</td>
+<td>Carrier norm; Military.com site language; audit-validated. NO numbers above 15% without specific carrier substantiation.</td>
+<td>✅ "See if you save 15% or more" / ❌ "Save up to 60%"</td>
+</tr>
+<tr>
+<td><strong>No "Are you a veteran?" framing</strong></td>
+<td>Meta sensitive-attribute trigger — kills ad delivery.</td>
+<td>✅ "Service members may qualify" / ❌ "Are you a veteran?"</td>
+</tr>
+<tr>
+<td><strong>Service-first acknowledgment before benefit</strong></td>
+<td>Refuel Agency military marketing best practice; the audience tunes out benefit-first ads.</td>
+<td>✅ "You earned it. See what military insurance discounts you qualify for." / ❌ "Save big on car insurance now!"</td>
+</tr>
+<tr>
+<td><strong>No combat imagery, no PTSD tropes, no hero-worship</strong></td>
+<td>Military audience immediately calls out fakery; brand kill.</td>
+<td>✅ Veteran in civilian work clothes / ❌ Camo, dog tags, salute, wounded warrior</td>
+</tr>
+<tr>
+<td><strong>No fake military details</strong> (insignia, ranks, uniforms)</td>
+<td>Same as above — audience notices instantly.</td>
+<td>✅ Civilian dress / ❌ Anything with military insignia</td>
+</tr>
+<tr>
+<td><strong>Specificity over abstraction</strong></td>
+<td>"$15-and-some-change/mo savings" outperforms "great deals".</td>
+<td>✅ "Most members save $30+/mo" / ❌ "Save big"</td>
+</tr>
+<tr>
+<td><strong>Disclosure on any specific claim</strong></td>
+<td>NAIC principles + QuoteWizard ToS push compliance to publisher.</td>
+<td>If you say a specific %, include "*Savings vary by carrier and state."</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-10-concepts">The 10 concepts</h2>
+<h3 id="concept-1-home_inside_icon_family_porch-11-static">Concept 1 — Home_Inside_Icon_Family_Porch (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>LHI_Family_Porch_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Identity-led — military family stability
+<strong>Target audience:</strong> Auto SAC BAU + Home SAC BAU (warm + cold)
+<strong>Compliance:</strong> ✅ Passes all gates</p>
+<h4 id="nano-banana-prompt-copy-paste">Nano Banana prompt (copy-paste)</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, golden hour lighting.
+
+Scene: A real-looking American family of four standing on the front steps of a modest suburban single-family home — father early 30s in jeans and casual button-up shirt, mother in weekend casual clothes, two young children (one toddler, one early elementary age). No uniforms, no military insignia, no flag-waving — civilian clothing throughout. Natural unposed body language; slight smile on father; mother holding the toddler. The home is a real-looking suburban house (not a magazine-perfect estate) with a porch, modest landscaping, mid-density neighborhood context.
+
+Lighting: warm late-afternoon golden hour, soft side-light from the left. Shallow depth of field — family in sharp focus, home softly defocused in background.
+
+Composition: family positioned on the LEFT THIRD of the frame, leaving the RIGHT TWO-THIRDS clean and uncluttered for text overlay. Background is the home and surroundings, gently blurred.
+
+Style: editorial, dignified, real. Realistic skin texture (no glossy retouch). Natural color grading, slightly warm. Subjects feel like a real family on their actual porch, not stock photography or commercial models.
+
+Avoid: uniforms, military insignia, flags, combat imagery, dog tags, salutes, stock-photo poses (no thumbs-up, no fake laughing, no looking-into-distance), glossy commercial finish, magazine-real estate luxury, generic Caucasian-only casting (real family diversity is good).
+</code></pre>
+<h4 id="claude-copy-prompt-copy-paste">Claude copy prompt (copy-paste)</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com HOME INSURANCE lead-gen Meta ad. Visual shows a real-looking military family on the porch of their suburban home.
+
+HARD RULES (do not violate):
+- Savings claim language: use &quot;up to 15% or more&quot; only. Never &quot;60%&quot; or any number above 15% without carrier substantiation.
+- No &quot;Are you a veteran?&quot; or sensitive-attribute framings (Meta blocks).
+- Service-first acknowledgment, then benefit. Never benefit-first.
+- No combat, PTSD, hero-worship tropes.
+- Family-first angle (the visual is a family).
+- US English, sentence-case, conversational not corporate.
+- Max character limits: primary 90, headline 40, description 30.
+
+Output 5 distinct variants, each formatted exactly:
+
+VARIANT N
+Primary: [text]
+Headline: [text]
+Description: [text]
+CTA: [Get Quote | Learn More | See Plans]
+
+Context: Military.com runs auto + home insurance lead-gen via QuoteWizard. Audience: military families considering home insurance. Goal: drive quote-form starts.
+
+Make variants meaningfully different — not synonym swaps. Test different angles: stability, savings, family security, smart shopping, military-specific discount eligibility.
+</code></pre>
+<h4 id="composition-spec-figma">Composition spec (Figma)</h4>
+<ul>
+<li>Place Nano Banana scene as background, full-bleed 1080×1080</li>
+<li>Text zone: right two-thirds — overlay semi-transparent navy gradient (90% opacity at right edge fading to 30% at center)</li>
+<li>Headline: top-right zone, 56–64pt Inter Bold, white</li>
+<li>Primary text: below headline, 24–28pt Inter Regular, white</li>
+<li>CTA button: bottom-right, amber #FF9D00, 12px corner radius, 18pt Inter SemiBold</li>
+<li>Military.com logo: top-left, 80px wide</li>
+</ul>
+<h4 id="performance-hypothesis">Performance hypothesis</h4>
+<p>Home is the best-CPL line in the account ($12.68 BAU). Family-led identity angle should resonate with the warm page-engagement audience (C01 ad set). Target CPL: <strong>$12–14</strong>.</p>
+<hr />
+<h3 id="concept-2-home_inside_icon_couple_garage-11-static">Concept 2 — Home_Inside_Icon_Couple_Garage (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>LHI_Couple_Garage_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Lifestyle/savings-led
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, soft natural light.
+
+Scene: A couple in their late 20s / early 30s in a clean residential garage with their car partially visible (modern sedan or compact SUV, not a luxury vehicle). The man wears jeans and a tan work jacket; the woman wears casual jeans and a sweater. They're standing together, the man holding a clipboard or tablet, the woman looking over his shoulder. They appear to be reviewing something practical — like a checklist or quote. The garage is organized but lived-in — bikes, tools, a workbench in the background.
+
+Lighting: soft natural light from the open garage door (slightly off-camera left). Cool natural daylight tone.
+
+Composition: subjects on the LEFT THIRD, leaving the RIGHT TWO-THIRDS for text overlay. Car partially visible behind them.
+
+Style: editorial, candid, real. Realistic skin texture. Looks like a real moment of two people doing real adult life admin — not staged.
+
+Avoid: uniforms, military insignia, flags, salutes, combat imagery, dog tags, stock-photo poses (no laughing-at-camera, no thumbs-up), glossy commercial finish, expensive cars, magazine luxury.
+</code></pre>
+<h4 id="claude-copy-prompt">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com HOME + AUTO BUNDLE Meta ad. Visual shows a couple in their garage reviewing insurance options.
+
+[Same hard rules as Concept 1]
+
+Angle: bundle savings, smart-shopping, &quot;doing it together,&quot; practical homeowner mindset.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec">Composition spec</h4>
+<p>Same as Concept 1 (right two-thirds text overlay, navy gradient).</p>
+<h4 id="performance-hypothesis_1">Performance hypothesis</h4>
+<p>Bundle angle is under-tested in account. Should hit <strong>$14–16 CPL</strong> on cold; <strong>$11–13</strong> on warm.</p>
+<hr />
+<h3 id="concept-3-home_inside_icon_pcs_moving-45-vertical-static">Concept 3 — Home_Inside_Icon_PCS_Moving (4:5 vertical static)</h3>
+<p><strong>Codename:</strong> <code>LHI_PCS_v1</code>
+<strong>Format:</strong> 4:5 (1080×1350)
+<strong>Hook category:</strong> PCS / life-transition
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_1">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 4:5 vertical format, late afternoon natural light.
+
+Scene: A young military family in the middle of a residential move — moving boxes stacked in a half-empty living room, the father (30s, civilian clothing) bending down looking at a tablet/phone, the mother (30s, casual clothing) holding a coffee mug while looking out a window. Soft natural light from the window. A child's toy or backpack visible on the floor. The room is clearly mid-move — not staged-empty, but actively transitioning.
+
+Lighting: warm window light from the right, soft and natural. Slight haze.
+
+Composition: family scene fills the LOWER TWO-THIRDS of the frame. Upper third is the living-room ceiling and window light — clean for text overlay.
+
+Style: editorial, slightly cinematic, dignified. Realistic skin texture, candid body language, no posing for camera.
+
+Avoid: uniforms, military insignia, moving-trucks-with-military-decals, flags, combat imagery, salutes, glossy commercial finish, perfect-magazine-staged interiors.
+</code></pre>
+<h4 id="claude-copy-prompt_1">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com HOME INSURANCE Meta ad targeting military families who recently relocated (PCS — Permanent Change of Station). Visual shows a family mid-move with boxes in a half-empty living room.
+
+[Same hard rules as Concept 1]
+
+Angle: new home + new state = new insurance shopping moment. &quot;Updating your address means re-shopping your rate.&quot; Practical, time-sensitive, helpful tone.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_1">Composition spec</h4>
+<ul>
+<li>4:5 vertical</li>
+<li>Text zone: upper third — semi-transparent navy at top fading to clear at one-third mark</li>
+<li>Headline: top, 56pt, white</li>
+<li>Primary text: below headline, 24pt, white</li>
+<li>CTA: bottom-right of frame, amber button</li>
+<li>Military.com logo: top-left</li>
+</ul>
+<h4 id="performance-hypothesis_2">Performance hypothesis</h4>
+<p>PCS moments are high-intent for insurance shopping. Should hit <strong>$14–18 CPL</strong>. Strong candidate for retargeting via warm ad set (C01).</p>
+<hr />
+<h3 id="concept-4-home_inside_icon_veteran_workshop-11-static">Concept 4 — Home_Inside_Icon_Veteran_Workshop (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>LHI_Workshop_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Identity-led — veteran homeowner
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_2">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, warm interior workshop light.
+
+Scene: A man in his late 40s / early 50s (veteran-aged, civilian dress — flannel shirt, jeans, work boots) in a tidy home workshop or garage. He's working on something practical — sanding a piece of wood, organizing tools on a pegboard, or fixing a small engine. Late-afternoon light streams in from a workshop window. His expression is focused, content, working with his hands. Workshop has the lived-in character of years of hobby use — not staged.
+
+Lighting: warm tungsten interior light supplemented by natural light from window-left. Shadows are present and warm.
+
+Composition: subject in the center-left, with workshop detail in background filling the rest. The RIGHT TWO-THIRDS of upper frame should be slightly less detailed — clean for text overlay.
+
+Style: editorial, dignified, working-class American real. Realistic skin texture and lined hands. Candid body language. The kind of photograph that could run in a real human-interest editorial piece.
+
+Avoid: uniforms, dog tags, military memorabilia visible in workshop, flags hanging on wall, combat imagery, salutes, stock-photo poses, glossy commercial finish, &quot;old man posing for camera&quot; energy.
+</code></pre>
+<h4 id="claude-copy-prompt_2">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com HOME INSURANCE Meta ad. Visual shows a veteran-aged man working in his home workshop.
+
+[Same hard rules as Concept 1]
+
+Angle: long-term homeowner, you've built equity, time to make sure your insurance reflects what you've earned. Dignified, respectful, no hero-worship.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_2">Composition spec</h4>
+<p>Same as Concept 1.</p>
+<h4 id="performance-hypothesis_3">Performance hypothesis</h4>
+<p>Identity-anchored, dignified angle. Target retirees + Guard/Reserve segments via cold BAU. Target CPL: <strong>$15–18</strong>.</p>
+<hr />
+<h3 id="concept-5-drive_on_truck_highway-11-static">Concept 5 — Drive_On_Truck_Highway (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>DriveOn_Truck_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Auto savings-led, masculine appeal
+<strong>Compliance:</strong> ✅ Passes (15% savings band only)</p>
+<h4 id="nano-banana-prompt_3">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, golden hour lighting.
+
+Scene: A pickup truck (mid-size to full-size — Ford F-150, Chevy Silverado, or similar — NOT luxury) driving down an open American highway. Single subject visible in driver's seat through window — a man in his 30s, civilian clothing (baseball cap, t-shirt, work jacket). Truck is clean but lived-in. The road stretches into golden-hour distance with low rolling hills or open plains.
+
+Camera: low three-quarter rear angle, capturing the side of the truck and the open road. Slight motion in the light suggesting movement.
+
+Lighting: warm golden hour from front-left of frame. Strong directional warm light on the truck's flank.
+
+Composition: truck fills the LOWER LEFT HALF of the frame. Upper RIGHT TWO-THIRDS is sky and distant landscape — clean for text overlay.
+
+Style: editorial, slightly cinematic, masculine but not aggressive. Realistic vehicle and skin detail. Looks like an honest moment, not a truck commercial.
+
+Avoid: military bumper stickers, flag decals, lifted trucks, mud-bashing imagery, dust storms, combat/heroic imagery, stock-photo &quot;looking-determinedly-at-horizon&quot; pose, glossy commercial-finish.
+</code></pre>
+<h4 id="claude-copy-prompt_3">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO INSURANCE Meta ad. Visual shows a pickup truck on an open highway with a driver visible.
+
+[Same hard rules as Concept 1]
+
+Angle: practical auto-insurance savings, &quot;rate-check your auto in 60 seconds.&quot; Specific, time-bounded, mobile-friendly framing.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_3">Composition spec</h4>
+<p>Same as Concept 1.</p>
+<h4 id="performance-hypothesis_4">Performance hypothesis</h4>
+<p>Drive-On already a winner at $18.43 BAU. New variant should hit <strong>$17–20 CPL</strong>. Refreshes a top-performing concept family.</p>
+<hr />
+<h3 id="concept-6-drive_on_calculator_hook-45-vertical-static">Concept 6 — Drive_On_Calculator_Hook (4:5 vertical static)</h3>
+<p><strong>Codename:</strong> <code>DriveOn_Calc_v1</code>
+<strong>Format:</strong> 4:5 (1080×1350)
+<strong>Hook category:</strong> Interactive / calculator-style hook
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_4">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 4:5 vertical format, bright natural daylight.
+
+Scene: Close-up of a person's hands holding a smartphone — phone shows a generic-looking quote-calculator-style interface (don't try to render specific UI text — keep it abstract and blurred). Background context: car interior — steering wheel partially visible, dashboard, daylight through windshield. The person's hands are realistic, with the wrist of a casual sleeve (jacket or shirt) visible. No watch or jewelry that suggests luxury.
+
+Lighting: bright natural daylight from windshield, even and clean. Phone screen has soft glow.
+
+Composition: phone fills the CENTER of the frame, taking up about 60% of the visible area. Around the phone is car-interior context. Upper third and lower third are clean for text overlay.
+
+Style: editorial, mobile-first feel, real. Like a moment captured by a passenger watching someone get a quote on their phone.
+
+Avoid: specific brand logos on phone interface, military insignia visible in car, combat imagery, glossy commercial finish, &quot;iPhone product shot&quot; aesthetic, hands-too-perfect commercial-model look.
+</code></pre>
+<h4 id="claude-copy-prompt_4">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO INSURANCE Meta ad with an interactive/calculator angle. Visual shows hands holding a phone with a quote calculator interface.
+
+[Same hard rules as Concept 1]
+
+Angle: interactive, &quot;see your rate in 60 seconds,&quot; gamified curiosity. Use light interactivity language — &quot;find out,&quot; &quot;see,&quot; &quot;check&quot; — without overpromising.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_4">Composition spec</h4>
+<ul>
+<li>4:5 vertical</li>
+<li>Text zone: top third + bottom strip</li>
+<li>Headline: top, 48pt, white on translucent navy overlay</li>
+<li>CTA: bottom of frame, full-width amber button "See My Quote"</li>
+<li>Military.com logo: top-left small</li>
+</ul>
+<h4 id="performance-hypothesis_5">Performance hypothesis</h4>
+<p>Calculator angle is under-tested. Mobile-native format. Target CPL: <strong>$18–22</strong>.</p>
+<hr />
+<h3 id="concept-7-drive_on_veteran_civilian_job-11-static">Concept 7 — Drive_On_Veteran_Civilian_Job (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>DriveOn_VetWork_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Real-veteran-in-civilian-work (UGC-style stepping stone)
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_5">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, natural midday light.
+
+Scene: A man in his late 30s / early 40s leaning casually against the door of his work truck (electrician's van, plumber's truck, contractor's vehicle — clearly trade-work, not luxury). He wears a tan work shirt, jeans, work boots. He's holding a coffee cup, mid-conversation or mid-thought. Background is a residential or small commercial job-site context — driveway, lawn, modest single-family home in background. The subject has the unmistakable bearing of a former service member who's now in civilian trade work — straight posture, attentive expression — but NO uniforms, NO insignia, NO military markers visible.
+
+Lighting: natural midday light, slightly overcast — soft shadows, no harsh highlights.
+
+Composition: subject is on the LEFT THIRD of the frame, leaning against the truck which fills the lower-left quadrant. Right two-thirds is jobsite/home background — clean for text overlay.
+
+Style: documentary editorial. Like a portrait from a magazine feature on &quot;veterans in the trades.&quot; Realistic skin texture, slight stubble OK, lined hands and work-worn clothing.
+
+Avoid: uniforms, military insignia, dog tags, flag decals on truck, salutes, hero-pose, glossy commercial finish, perfect-model look.
+</code></pre>
+<h4 id="claude-copy-prompt_5">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO INSURANCE Meta ad. Visual shows a former-service-member-now-civilian-tradesperson on a job site with their work truck.
+
+[Same hard rules as Concept 1]
+
+Angle: real-veteran identity (acknowledged subtly), practical work-truck insurance, &quot;fellow vets in the trades save...&quot; Dignified, peer-to-peer tone.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_5">Composition spec</h4>
+<p>Same as Concept 1 / 4 / 5 (right-two-thirds overlay).</p>
+<h4 id="performance-hypothesis_6">Performance hypothesis</h4>
+<p>This is the stepping-stone to real veteran UGC. AI-generated "looks like UGC" should outperform stock-style ads — target <strong>$16–19 CPL</strong> on warm audience.</p>
+<hr />
+<h3 id="concept-8-spouse_family_finance-11-static">Concept 8 — Spouse_Family_Finance (1:1 static)</h3>
+<p><strong>Codename:</strong> <code>Spouse_FamFin_v1</code>
+<strong>Format:</strong> 1:1 (1080×1080)
+<strong>Hook category:</strong> Spouse-targeted, family-finance decision-maker
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_6">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 1:1 square format, natural kitchen light.
+
+Scene: A woman in her early 30s sitting at a kitchen table, laptop open in front of her, paperwork and a coffee mug nearby. She wears casual weekend clothes — sweater, jeans. She's mid-task — looking at the laptop screen, slight smile of focus or satisfaction. The kitchen is real — slightly lived-in, not magazine-staged. Soft natural light from a window behind her.
+
+Lighting: warm natural window light from behind-left, soft and diffused.
+
+Composition: subject on the RIGHT THIRD, laptop and table on center. Left two-thirds includes kitchen context (counter, plants, soft daylight) — clean for text overlay.
+
+Style: editorial documentary, warm and human. Realistic skin texture. Looks like a real moment of an adult handling household finance.
+
+Avoid: military memorabilia visible in kitchen, &quot;girlboss&quot; stock-photo pose, uniforms, flags, glossy commercial finish, kitchen-magazine luxury, perfect-model lighting.
+</code></pre>
+<h4 id="claude-copy-prompt_6">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO + HOME INSURANCE Meta ad targeting military SPOUSES (who are often the household finance decision-maker). Visual shows a woman at her kitchen table doing financial work on a laptop.
+
+[Same hard rules as Concept 1]
+
+Angle: spouse as smart financial decision-maker for the family. Practical, respectful, peer-to-peer (no condescension). Acknowledge spouse identity without making it the whole pitch.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_6">Composition spec</h4>
+<ul>
+<li>1:1 square</li>
+<li>Text zone: left two-thirds — semi-transparent navy gradient</li>
+<li>Headline: center-left, 56pt, white</li>
+<li>Primary text: below, 24pt, white</li>
+<li>CTA: bottom-left, amber button</li>
+<li>Military.com logo: top-right small</li>
+</ul>
+<h4 id="performance-hypothesis_7">Performance hypothesis</h4>
+<p>Spouse-angle is missing from current account. Competitor Veteran Life Insurance runs it successfully. Target CPL: <strong>$18–22</strong> on cold; will tell us if the spouse-angle works.</p>
+<hr />
+<h3 id="concept-9-spouse_pcs_stress-45-vertical-static">Concept 9 — Spouse_PCS_Stress (4:5 vertical static)</h3>
+<p><strong>Codename:</strong> <code>Spouse_PCS_v1</code>
+<strong>Format:</strong> 4:5 (1080×1350)
+<strong>Hook category:</strong> Spouse + PCS pain-point
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_7">Nano Banana prompt</h4>
+<pre><code>Photorealistic editorial photograph, 4:5 vertical format, soft evening interior light.
+
+Scene: A woman in her early 30s sitting on the floor of a living room surrounded by moving boxes — labeled with marker, partially open, some clothing or kitchenware spilling out. She has a clipboard or phone in her lap, hair tied back, casual clothes (leggings, oversized sweatshirt). Her expression is calm focus — not stressed, but deep in the work of organizing a move. Behind her, a couple of boxes are stacked higher; a single lamp provides warm light.
+
+Lighting: warm single-source lamp light from upper-left, creating soft ambient glow. Mood is contemplative not dramatic.
+
+Composition: subject in the center-lower portion of frame. Upper third is wall + lamp light — clean for text overlay. Boxes around her give vertical movement to the composition.
+
+Style: editorial, candid, real-life moment. Realistic skin texture and tired-but-determined body language.
+
+Avoid: military markers on boxes (no &quot;USMC&quot; or branch stickers), uniforms, military spouse stereotype imagery (no &quot;I am a military wife&quot; coffee mugs visible), flags, salutes, glossy commercial finish, stock-photo &quot;stressed-but-smiling&quot; pose.
+</code></pre>
+<h4 id="claude-copy-prompt_7">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO + HOME INSURANCE Meta ad targeting military spouses in the middle of a PCS move. Visual shows a spouse sorting moving boxes in a half-organized living room.
+
+[Same hard rules as Concept 1]
+
+Angle: practical PCS-time insurance shopping (new state, new rates), peer-to-peer spouse-to-spouse helpful tone. Acknowledge the workload without melodrama.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_7">Composition spec</h4>
+<ul>
+<li>4:5 vertical</li>
+<li>Text zone: upper third</li>
+<li>Headline: top, 48pt, white</li>
+<li>CTA: bottom-center, full-width amber button</li>
+<li>Military.com logo: top-left small</li>
+</ul>
+<h4 id="performance-hypothesis_8">Performance hypothesis</h4>
+<p>PCS + spouse = double-relevance, highly motivated moment. Target CPL: <strong>$14–18</strong> if angle resonates.</p>
+<hr />
+<h3 id="concept-10-ugc_style_selfie_vet-45-vertical-static">Concept 10 — UGC_Style_Selfie_Vet (4:5 vertical static)</h3>
+<p><strong>Codename:</strong> <code>UGC_Selfie_v1</code>
+<strong>Format:</strong> 4:5 (1080×1350)
+<strong>Hook category:</strong> UGC-aesthetic native to mobile, stepping stone to real veteran UGC
+<strong>Compliance:</strong> ✅ Passes</p>
+<h4 id="nano-banana-prompt_8">Nano Banana prompt</h4>
+<pre><code>Photorealistic photograph in iPhone/Android casual-selfie style, 4:5 vertical, natural lighting.
+
+Scene: A man in his 30s, civilian clothing (t-shirt or button-up), taking a casual selfie-style photo while sitting in his car (driver's seat, seatbelt visible, dashboard partially visible). The camera angle is slightly front-facing-handheld — not professional-photo angle, but the natural angle of someone using their phone's front camera. Background visible through windshield is a parking lot or quiet residential street.
+
+The subject's expression is candid — a slight smile, mid-thought, like he just finished something practical (got a quote, finished an errand). Realistic skin texture, natural lighting from the side window, no makeup or glossy retouch.
+
+Lighting: natural daylight from driver-side window, soft and uncontrolled. Slight imperfection in framing — looks like a real selfie, not a posed shoot.
+
+Composition: subject's face/upper body fills the center two-thirds of the frame. Top and bottom edges have headroom for text overlay.
+
+Style: UGC-native, mobile-first, REAL. The kind of photo someone would actually take on their phone — not professional. Slightly imperfect framing is GOOD. Natural color, no Instagram filter.
+
+Avoid: military insignia, uniforms, dog tags visible, flags on dashboard, hero-pose, &quot;iPhone product shot&quot; perfection, professional-photo lighting, model-perfect features.
+</code></pre>
+<h4 id="claude-copy-prompt_8">Claude copy prompt</h4>
+<pre><code>Write 5 variants of ad copy for a Military.com AUTO INSURANCE Meta ad in a UGC-testimonial-style format. Visual shows a man taking a casual selfie in his car, looking like real authentic UGC.
+
+[Same hard rules as Concept 1]
+
+Angle: testimonial voice — first-person, &quot;I just compared rates,&quot; &quot;I checked my discount.&quot; Conversational, peer-to-peer, NOT corporate. Use casual punctuation OK.
+
+Output format: same as Concept 1.
+</code></pre>
+<h4 id="composition-spec_8">Composition spec</h4>
+<ul>
+<li>4:5 vertical</li>
+<li>UGC style — minimal text overlay</li>
+<li>Headline: bottom third, casual handwriting-style or sans-serif (small), white with shadow</li>
+<li>"From a Military.com member" attribution at top in small text</li>
+<li>Military.com logo: bottom-right small</li>
+<li>No CTA button — instead, swipe-up indicator OR just headline serves as CTA</li>
+</ul>
+<h4 id="performance-hypothesis_9">Performance hypothesis</h4>
+<p>UGC-aesthetic statics consistently outperform polished statics by 20-40% in lead-gen verticals. This is the stepping stone to actual real-veteran UGC (D07 task). Target CPL: <strong>$14–17</strong>.</p>
+<hr />
+<h2 id="variant-generation-strategy">Variant generation strategy</h2>
+<p>Once a concept's first version is built, generate 4-5 variants for testing <strong>before shipping</strong>. Approach:</p>
+<h3 id="for-nano-banana-vary-one-axis-per-variant">For Nano Banana — vary one axis per variant</h3>
+<table>
+<thead>
+<tr>
+<th>Variant axis</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Subject demographics</strong></td>
+<td>Same scene, swap age / ethnicity / gender of subject — keeps visual style, tests audience preference</td>
+</tr>
+<tr>
+<td><strong>Setting/context</strong></td>
+<td>Same subject pose, swap interior to exterior, urban to suburban, day to evening</td>
+</tr>
+<tr>
+<td><strong>Lighting</strong></td>
+<td>Same scene, swap golden hour to morning soft, or interior tungsten to natural window</td>
+</tr>
+<tr>
+<td><strong>Composition</strong></td>
+<td>Same subject, swap left-third to right-third placement (mirror for text-overlay testing)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Best practice:</strong> generate 3-4 variants per scene to give Meta's algorithm choices. Don't generate 10 variants of the same scene with tiny differences — that's noise, not signal.</p>
+<h3 id="for-claude-copy-request-structured-variants-per-pull">For Claude copy — request structured variants per pull</h3>
+<p>Add to the copy prompt:</p>
+<pre><code>Additionally, for each variant, vary the OPENING HOOK across these 5 angles:
+1. Identity-led (&quot;Members may save...&quot;)
+2. Specificity (&quot;Most users get a quote in 90 seconds...&quot;)
+3. Time-bounded (&quot;This month, eligible service members...&quot;)
+4. Question hook (&quot;Wondering if you're overpaying?&quot;)
+5. Social proof (&quot;Thousands of military families compare rates here...&quot;)
+</code></pre>
+<p>This gives you 5 hook angles × 5 variants per pull = 25 copy options without rerunning the prompt.</p>
+<hr />
+<h2 id="qa-checklist-before-uploading-to-ads-manager">QA checklist — before uploading to Ads Manager</h2>
+<p>For each finished concept ad, check:</p>
+<ul>
+<li>[ ] <strong>Compliance:</strong> No claim above "15% or more"</li>
+<li>[ ] <strong>Compliance:</strong> No "Are you a veteran?" or sensitive-attribute trigger phrases</li>
+<li>[ ] <strong>Compliance:</strong> No combat imagery, no dog tags, no insignia, no salutes</li>
+<li>[ ] <strong>Compliance:</strong> Any specific savings number includes "*Savings vary by carrier/state"</li>
+<li>[ ] <strong>Visual quality:</strong> No AI artifacts visible (extra fingers, distorted faces, illegible text)</li>
+<li>[ ] <strong>Visual quality:</strong> Real-looking, not glossy-commercial</li>
+<li>[ ] <strong>Format:</strong> Correct aspect ratio (1:1 / 4:5 / 9:16)</li>
+<li>[ ] <strong>Format:</strong> Safe zones respected — nothing critical within 80px of edges</li>
+<li>[ ] <strong>Format:</strong> Text passes Meta's 20% rule (overlay text ≤ 20% of image area for best delivery)</li>
+<li>[ ] <strong>Brand:</strong> Military.com logo present and clear</li>
+<li>[ ] <strong>Brand:</strong> Navy + amber palette consistent</li>
+<li>[ ] <strong>CTA:</strong> Single clear CTA matching the offer</li>
+<li>[ ] <strong>Mobile preview:</strong> Render at mobile size and confirm legibility</li>
+<li>[ ] <strong>Naming:</strong> File named <code>[Concept]_[Format]_[Variant]_[Date]</code> (e.g., <code>LHI_Family_Porch_v1_1x1_2026-06-06</code>)</li>
+</ul>
+<hr />
+<h2 id="upload-to-ads-manager">Upload to Ads Manager</h2>
+<p>For each shipped concept:</p>
+<ol>
+<li><strong>Ads Manager</strong> → upload creative</li>
+<li><strong>Naming convention:</strong> match Lauren's existing pattern. Look at the current <code>Lower-Your-Auto-Insurance_Static_NM_Animation_Swipe_04/28/26</code> format and follow it: <code>[ConceptFamily]_[Format]_[Variant]_[Date]</code></li>
+<li><strong>Attach to the warm-layer ad set</strong> (C01) for initial testing</li>
+<li><strong>Set creative as a NEW ad in the existing ad set</strong> — don't create new ad sets per creative (kills learning)</li>
+<li><strong>Monitor first 48 hours</strong> — kill anything above $40 CPL, scale anything below $20 CPL</li>
+</ol>
+<hr />
+<h2 id="daily-production-rhythm-this-week">Daily production rhythm (this week)</h2>
+<p><strong>Mon Jun 8:</strong> Concepts 1, 2 (Home Family + Couple) — ship Tuesday morning
+<strong>Tue Jun 9:</strong> Concepts 3, 4 (Home PCS + Veteran Workshop)
+<strong>Wed Jun 10:</strong> Concepts 5, 6 (Drive-On Truck + Calculator)
+<strong>Thu Jun 11:</strong> Concepts 7, 8 (Drive-On Veteran + Spouse Family Finance)
+<strong>Fri Jun 12:</strong> Concepts 9, 10 (Spouse PCS + UGC Selfie) — ship Friday EOD</p>
+<p>Target: <strong>all 10 concepts live in market by Friday Jun 12.</strong></p>
+<p>If Nano Banana generation is faster than expected: bank Saturday for variant generation on Concept 1-3 winners.</p>
+<hr />
+<h2 id="cost-estimate">Cost estimate</h2>
+<ul>
+<li>Nano Banana: ~$0.04/image. 10 concepts × 4-5 variants each = ~40-50 images = <strong>~$2.00 total</strong>.</li>
+<li>Claude API: 10 prompts × 5 variants each = ~5K tokens per pull × $0.003 = <strong>~$0.15 total</strong>.</li>
+<li>Total Week 1 creative production cost: <strong>under $3 in API spend.</strong></li>
+</ul>
+<p>Time cost is the constraint, not budget. 20 min/concept × 10 = ~3.5 hours focused work.</p>
+<hr />
+<h2 id="whats-not-in-this-batch-intentionally">What's NOT in this batch (intentionally)</h2>
+<ul>
+<li><strong>Video concepts</strong> — saved for Week 2 (D07 / E04). Static-first; Mo's 5:1 static:video ratio means statics drive most of the spend.</li>
+<li><strong>Recruitment co-branded creative</strong> — those are Thread C (Anduril / GE Vernova / Helmets-to-Hardhats) — separate motion, post-pilot.</li>
+<li><strong>Real veteran UGC</strong> — D07 task. Concept 10 is the AI stepping stone; real UGC is parallel.</li>
+<li><strong>Compliance fix for any "60%" creative</strong> — that's A03 task. Different workstream (pause, not create).</li>
+</ul>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<ul>
+<li>These prompts assume Nano Banana via Gemini's API (or AI Studio). If using a different tool, adjust prompt style accordingly (DALL-E prefers shorter prompts; Midjourney prefers parameter-heavy).</li>
+<li>Brand colors are inferred from Military.com's existing visual presence — confirm exact hex codes with Lauren before shipping live.</li>
+<li>Composition specs assume Figma; Photoshop or Canva equivalents work the same way.</li>
+<li>"Up to 15% or more" is the audit-validated language. If Lauren or Anthony confirm a higher carrier-substantiated number is permitted, you can adjust — but the default stays at 15% until proven otherwise.</li>
+<li>Performance hypotheses are anchored to current account CPL ranges. They will move as new creative enters market and the algorithm re-learns.</li>
+</ul>
+<div class="back"><a href="../">← Back</a></div>
+</body>
+</html>
