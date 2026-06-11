@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Growth Audit — Jun 11, 2026</title><style>body { font-family: 'Times New Roman', Times, serif; max-width: 820px; margin: 2em auto; padding: 0 1em; font-size: 16px; line-height: 1.55; color: #1a1a1a; }
+h1, h2, h3 { font-family: 'Times New Roman', Times, serif; color: #1a1a1a; }
+h1 { font-size: 1.6em; border-bottom: 2px solid #ccc; padding-bottom: 0.3em; }
+h2 { font-size: 1.3em; margin-top: 2em; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+h3 { font-size: 1.1em; margin-top: 1.5em; }
+table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+th, td { border: 1px solid #ccc; padding: 0.45em 0.7em; text-align: left; }
+th { background: #f4f4f4; }
+code { background: #f4f4f4; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.92em; }
+pre { background: #f4f4f4; padding: 1em; overflow-x: auto; }
+blockquote { border-left: 3px solid #aaa; margin: 1em 0; padding-left: 1em; color: #555; }
+a { color: #003366; }
+strong { color: #000; }
+hr { border: 0; border-top: 1px solid #ddd; margin: 2em 0; }
+ul, ol { padding-left: 1.5em; }</style></head>
+<body><h1 id="growth-audit-june-11-2026">Growth Audit — June 11, 2026</h1>
+<p><strong>Framing:</strong> Where can we deploy more capital at positive incremental returns? Every section asks the same question.</p>
+<p><strong>Operating doctrine:</strong> Per Anthony — "deploy as much capital as possible as long as we are getting positive incremental returns." This audit operates under that doctrine.</p>
+<hr />
+<h2 id="tldr-the-headline">TL;DR — the headline</h2>
+<p><strong>Account is running well at the dollars currently deployed — but it's only deploying 42.5% of authorized daily capacity.</strong> Last 7 days the account spent $130,738 against a total daily budget cap of $307,300/week. That's <strong>$176,562 of pre-approved positive-return spend that didn't get deployed</strong> in the last 7 days alone.</p>
+<p><strong>Annualized at current performance, that's ~$9.2M/year of available capital not being deployed.</strong></p>
+<p>The work isn't to spend more recklessly. It's to systematically figure out <strong>what's preventing Meta from finding positive-return delivery up to the existing caps</strong> — and unblock those constraints campaign by campaign.</p>
+<p><strong>Six concrete capital-unlock opportunities</strong> are identified below, ranked by deployable dollars at positive ROAS. Top three alone get the account to GP1 territory without changing anything Anthony or Lauren are already doing well.</p>
+<hr />
+<h2 id="capital-deployment-status-last-7d-jun-410">Capital deployment status (last 7d, Jun 4–10)</h2>
+<table>
+<thead>
+<tr>
+<th>Campaign</th>
+<th>Daily Cap</th>
+<th>Avg Daily Spend</th>
+<th>Utilization</th>
+<th>Spare Capacity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auto BAU</strong></td>
+<td>$19,800</td>
+<td>$8,218</td>
+<td><strong>42%</strong></td>
+<td><strong>$11,582/day</strong></td>
+</tr>
+<tr>
+<td><strong>Auto Max Val</strong></td>
+<td>$8,400</td>
+<td>$7,412</td>
+<td>88%</td>
+<td>$988/day</td>
+</tr>
+<tr>
+<td><strong>Auto ALC</strong></td>
+<td>$8,500</td>
+<td>$334</td>
+<td><strong>4%</strong> ⚠️</td>
+<td><strong>$8,166/day</strong></td>
+</tr>
+<tr>
+<td><strong>Home BAU</strong></td>
+<td>$2,000</td>
+<td>$1,165</td>
+<td>58%</td>
+<td>$835/day</td>
+</tr>
+<tr>
+<td><strong>Home Max Val</strong></td>
+<td>$1,200</td>
+<td>$1,416</td>
+<td>118% ⚠️</td>
+<td>(overpacing — opp to raise cap)</td>
+</tr>
+<tr>
+<td><strong>Home ALC</strong></td>
+<td>$4,000</td>
+<td>$132</td>
+<td><strong>3%</strong> ⚠️</td>
+<td><strong>$3,868/day</strong></td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>$43,900</strong></td>
+<td><strong>$18,677</strong></td>
+<td><strong>43%</strong></td>
+<td><strong>$25,223/day</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reading this:</strong> Out of $43,900/day authorized, only $18,677 is getting deployed. Every dollar of the $25,223 gap that we can unlock at positive ROAS is direct upside.</p>
+<hr />
+<h2 id="capital-deployment-status-last-7d-by-campaign">Capital deployment status (last 7d, by campaign)</h2>
+<table>
+<thead>
+<tr>
+<th>Campaign</th>
+<th>7d Spend</th>
+<th>7d Leads</th>
+<th>7d CPL</th>
+<th>Marginal ROAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auto BAU</td>
+<td>$57,523</td>
+<td>3,067</td>
+<td><strong>$18.76</strong></td>
+<td>strongly positive</td>
+</tr>
+<tr>
+<td>Auto Max Val</td>
+<td>$51,885</td>
+<td>1,348</td>
+<td>$38.49</td>
+<td>positive (per Lauren)</td>
+</tr>
+<tr>
+<td>Home Max Val</td>
+<td>$9,913</td>
+<td>361</td>
+<td>$27.46</td>
+<td>positive at scale; Meta pacing over cap</td>
+</tr>
+<tr>
+<td>Home BAU</td>
+<td>$8,158</td>
+<td>599</td>
+<td><strong>$13.62</strong></td>
+<td>strongly positive</td>
+</tr>
+<tr>
+<td>Auto ALC</td>
+<td>$2,338</td>
+<td>135</td>
+<td><strong>$17.32</strong></td>
+<td>strongly positive (better CPL than BAU)</td>
+</tr>
+<tr>
+<td>Home ALC</td>
+<td>$921</td>
+<td>69</td>
+<td><strong>$13.34</strong></td>
+<td>strongly positive</td>
+</tr>
+<tr>
+<td><strong>7d TOTAL</strong></td>
+<td><strong>$130,738</strong></td>
+<td><strong>5,579</strong></td>
+<td><strong>$23.43</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two of the four cheapest-CPL campaigns (Auto ALC and Home ALC) are the LEAST deployed.</strong> That's the cleanest growth opportunity in the account.</p>
+<hr />
+<h2 id="where-to-deploy-more-capital-ranked-by-unlocked-dollars">Where to deploy more capital — ranked by unlocked dollars</h2>
+<h3 id="opportunity-1-auto-alc-underutilization-8166day-available-at-1732-cpl">🥇 OPPORTUNITY 1: Auto ALC underutilization ($8,166/day available at $17.32 CPL)</h3>
+<p><strong>The situation:</strong> Auto ALC has an $8,500/day cap. It's spending $334/day. <strong>96% of authorized capacity is sitting unused.</strong> And the CPL it's already producing ($17.32) is <em>better</em> than Auto BAU ($18.76).</p>
+<p><strong>What this could unlock:</strong> If we get Auto ALC to even 60% utilization ($5,100/day), that's an extra $4,766/day of spend at $17.32 CPL. That's ~275 incremental leads/day, ~8,250/month.</p>
+<p><strong>Why isn't it deploying?</strong> This is the question to ask Lauren in plain growth-language: <em>"Auto ALC has $8K/day of authorized headroom at a $17 CPL — what's keeping Meta from finding delivery there?"</em> Likely answers: campaign just launched (volume builds slowly), audience overlap with BAU is capping reach, ad fatigue, creative limitations.</p>
+<p><strong>Monthly net revenue unlock potential:</strong> ~$130–180K (high-confidence band: $80–120K)</p>
+<hr />
+<h3 id="opportunity-2-auto-bau-under-deployment-11582day-available-at-1876-cpl">🥈 OPPORTUNITY 2: Auto BAU under-deployment ($11,582/day available at $18.76 CPL)</h3>
+<p><strong>The situation:</strong> Auto BAU is the workhorse. Daily cap is $19,800. Actual avg spend $8,218. <strong>58% of capacity unused.</strong></p>
+<p><strong>Important caveat — frequency check:</strong> Auto BAU 30-day frequency is 3.82. Already approaching the 4.0 fatigue threshold. Adding more spend without expanding audience will push frequency higher, CPL higher.</p>
+<p><strong>The honest read:</strong> This $11,582/day is real available capacity <em>but</em> it's gated on <strong>audience expansion</strong> or <strong>creative refresh</strong>. You can't just turn up the budget knob — Meta is already serving the current audience at the frequency it can sustain.</p>
+<p><strong>Required unlock:</strong> Creative velocity (handled by Lauren) + a new audience layer (C01 page-engagement ad set is the right move here — see Opportunity 4).</p>
+<p><strong>Monthly net revenue unlock potential when audience expansion lands:</strong> ~$200–300K (gated on C01 + creative velocity)</p>
+<hr />
+<h3 id="opportunity-3-home-alc-underutilization-3868day-available-at-1334-cpl">🥉 OPPORTUNITY 3: Home ALC underutilization ($3,868/day available at $13.34 CPL)</h3>
+<p><strong>The situation:</strong> Home ALC has $4,000/day cap, spending $132/day. <strong>97% unused.</strong> And it's the <strong>lowest CPL in the entire account</strong> at $13.34.</p>
+<p><strong>Same question as Auto ALC:</strong> What's keeping Meta from finding delivery to spend the budget? Home market is smaller than Auto, so there's a natural ceiling — but going from 3% to even 30% utilization would deploy $1,200/day at $13.34 CPL = ~90 leads/day net new.</p>
+<p><strong>Monthly net revenue unlock potential:</strong> ~$30–60K</p>
+<hr />
+<h3 id="opportunity-4-page-engagement-warm-layer-ad-set-net-new-audience-pool">🏅 OPPORTUNITY 4: Page-engagement warm-layer ad set (net-new audience pool)</h3>
+<p><strong>The situation:</strong> The audit Jun 4 confirmed page-engagement audiences are healthy and unused:
+- FB Page Likers: 1.0M–1.2M people
+- FB Engagers (365D): 348K–410K
+- IG Account Engagers (365D): 93K–110K</p>
+<p><strong>These audiences are not currently fed into any active ad set.</strong> They represent net-new positive-return inventory the account hasn't touched.</p>
+<p><strong>What this could unlock:</strong> A new ad set inside Auto BAU campaign targeting these audiences (with exclusions for existing customers) — should hit warm-audience CPL (typically 30–40% better than cold). At Auto BAU's current $18.76 CPL, a warm ad set could plausibly land at $11–14 CPL.</p>
+<p><strong>This also unblocks Opportunity 2.</strong> Auto BAU can absorb more spend if there's a new audience to serve.</p>
+<p><strong>Monthly net revenue unlock potential:</strong> ~$60–90K (gated on Lauren building the ad set — task C01 in the terminal)</p>
+<hr />
+<h3 id="opportunity-5-home-max-val-cap-raise-its-overpacing-meta-wants-more">🏅 OPPORTUNITY 5: Home Max Val cap raise (it's overpacing — Meta wants more)</h3>
+<p><strong>The situation:</strong> Home Max Val daily cap is $1,200. Actual spend $1,416/day = <strong>118% utilization.</strong> Meta is finding more positive-return delivery than the cap allows. CPL is $27.46 — higher than Home BAU but still profitable.</p>
+<p><strong>The question to ask:</strong> <em>"If we raise Home Max Val cap to $2,500/day, how much of that does Meta deploy and at what CPL?"</em> This is a low-risk test — start at $1,800 (50% increase), watch 3 days, raise again if CPL holds.</p>
+<p><strong>Monthly net revenue unlock potential:</strong> ~$20–40K</p>
+<hr />
+<h3 id="opportunity-6-fix-fbc-unlock-max-val-capital-deployment-efficiency">🏅 OPPORTUNITY 6: Fix fbc → unlock Max Val capital deployment efficiency</h3>
+<p><strong>The situation:</strong> Per the Meta Diagnostics flagged Jun 3, fbc bug is degrading 30% of CompleteRegistration events. Auto Max Val needs cleaner signal more than BAU does to optimize correctly. Fixing this doesn't reallocate any budget — it makes the <em>same</em> capital deploy more efficiently.</p>
+<p><strong>Modeled impact:</strong> If fbc fix recovers even 50% of the current Auto Max Val CPL gap (currently $38.49 vs Auto BAU's $18.76 = $20 gap), Auto Max Val CPL drops to ~$28. On current spend ($7,412/day), that's an extra ~85 leads/day from the same $7,412.</p>
+<p><strong>This is pure deployment-efficiency upside, no reallocation, no capital trade-off.</strong></p>
+<p><strong>Monthly net revenue unlock potential:</strong> ~$60–80K (gated on FunnelFlux fix landing)</p>
+<hr />
+<h2 id="stacked-upside-all-six-opportunities">Stacked upside (all six opportunities)</h2>
+<table>
+<thead>
+<tr>
+<th>Opportunity</th>
+<th>Confidence</th>
+<th>Monthly net rev (low)</th>
+<th>Monthly net rev (high)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Auto ALC deployment</td>
+<td>High</td>
+<td>$80K</td>
+<td>$180K</td>
+</tr>
+<tr>
+<td>2. Auto BAU expansion (gated on C01 + creative)</td>
+<td>Medium</td>
+<td>$200K</td>
+<td>$300K</td>
+</tr>
+<tr>
+<td>3. Home ALC deployment</td>
+<td>High</td>
+<td>$30K</td>
+<td>$60K</td>
+</tr>
+<tr>
+<td>4. C01 page-engagement ad set</td>
+<td>Medium</td>
+<td>$60K</td>
+<td>$90K</td>
+</tr>
+<tr>
+<td>5. Home Max Val cap raise</td>
+<td>High</td>
+<td>$20K</td>
+<td>$40K</td>
+</tr>
+<tr>
+<td>6. fbc fix → Max Val efficiency</td>
+<td>High</td>
+<td>$60K</td>
+<td>$80K</td>
+</tr>
+<tr>
+<td><strong>Stack</strong></td>
+<td></td>
+<td><strong>$450K</strong></td>
+<td><strong>$750K</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current monthly run rate:</strong> ~$252K net revenue (7-day projected)</p>
+<p><strong>Where this puts the goal posts:</strong>
+- Current pace + low-case unlock = ~$700K/mo net revenue → <strong>crushes GP3 ($501.5K avg)</strong>
+- Current pace + high-case unlock = ~$1.0M/mo → <strong>GP3 lifetime ceiling</strong></p>
+<p><strong>The honest caveat:</strong> These are gross deployable opportunities. Real-world capture rate is probably 40–60% of the high case (delivery ceilings, audience overlap, creative absorption rate, RPL volatility). At 50% capture, the math says <strong>~$580K/mo net revenue is in range by August.</strong> That clears GP2 ($434K avg) cleanly and is within shouting distance of GP3.</p>
+<hr />
+<h2 id="capacity-blockers-whats-preventing-deployment-today">Capacity blockers (what's preventing deployment today)</h2>
+<p>Same growth framing — these aren't "things to cut," they're "things to fix so more positive-return capital deploys."</p>
+<h3 id="blocker-1-fbc-bug-at-30-of-completeregistration-events">Blocker 1: fbc bug at 30% of CompleteRegistration events</h3>
+<ul>
+<li>Owned by: FunnelFlux fix in flight (CAPI-01 task; email sent to Zeno)</li>
+<li>What it costs: Max Val campaign optimization signal degraded; can't deploy as much positive-return capital</li>
+<li>Unlock when fixed: ~$60–80K/mo upside on Max Val</li>
+</ul>
+<h3 id="blocker-2-no-active-warm-layer-ad-set">Blocker 2: No active warm-layer ad set</h3>
+<ul>
+<li>Owned by: Lauren + Mo (C01 task)</li>
+<li>What it costs: Auto BAU can't absorb its full $11K/day available budget without audience expansion (frequency already 3.82)</li>
+<li>Unlock when fixed: ~$60–90K/mo on C01 specifically + unlocks Opportunity 2</li>
+</ul>
+<h3 id="blocker-3-alc-campaigns-under-utilizing-daily-caps">Blocker 3: ALC campaigns under-utilizing daily caps</h3>
+<ul>
+<li>Owned by: Lauren — investigation needed</li>
+<li>What it costs: $12K/day of authorized positive-return capacity not deployed</li>
+<li>Unlock when fixed: ~$110–240K/mo across Auto + Home ALC</li>
+</ul>
+<h3 id="blocker-4-value-blind-capi-purchase-value-malformation">Blocker 4: Value-blind CAPI (Purchase value malformation)</h3>
+<ul>
+<li>Owned by: Dev team (CAPI-01 long-arc)</li>
+<li>What it costs: Meta can't optimize for actual revenue per lead, only for form-fill volume</li>
+<li>Unlock when fixed: ~10–15% lift across all campaigns from better signal quality</li>
+</ul>
+<h3 id="blocker-5-auto-frequency-approaching-fatigue-382-bau-417-max-val">Blocker 5: Auto frequency approaching fatigue (3.82 BAU, 4.17 Max Val)</h3>
+<ul>
+<li>Owned by: Lauren (creative velocity already strong)</li>
+<li>What it costs: Cannot scale Auto spend without expanding audience first</li>
+<li>Unlock when addressed: Compounds with Blocker 2 fix</li>
+</ul>
+<hr />
+<h2 id="capacity-expansion-opportunities-beyond-the-current-daily-caps">Capacity expansion opportunities (beyond the current daily caps)</h2>
+<p>These are positive-return capital deployment opportunities that require new infrastructure, not just unblocking what exists.</p>
+<h3 id="expansion-1-re-activate-paused-ad-sets-in-auto-bau-campaign">Expansion 1: Re-activate paused ad sets in Auto BAU campaign</h3>
+<p>Three paused ad sets in Auto BAU campaign all had positive CPLs when paused:</p>
+<table>
+<thead>
+<tr>
+<th>Ad set</th>
+<th>Last 7d before pause</th>
+<th>CPL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Digital Marketing &amp; Tech</td>
+<td>$11,310</td>
+<td>$20.45</td>
+</tr>
+<tr>
+<td>Vehicle Insurance</td>
+<td>$2,559</td>
+<td>$18.96</td>
+</tr>
+<tr>
+<td>Young Real Estate &amp; Career</td>
+<td>$1,414</td>
+<td>$20.80</td>
+</tr>
+<tr>
+<td>IG/FB Engagers</td>
+<td>$1,759</td>
+<td>$42.92</td>
+</tr>
+</tbody>
+</table>
+<p>These represent three known positive-ROAS audience pools that are dormant. Question for Lauren: <em>"What was the reason for pausing these? If it was audience overlap with current Broad ad sets, is there a way to re-activate them with cleaner exclusions?"</em></p>
+<p><strong>Three of four were sub-$21 CPL.</strong> Modest upside but well-tested capacity.</p>
+<h3 id="expansion-2-geographic-day-parting-expansion">Expansion 2: Geographic / day-parting expansion</h3>
+<p>Account currently doesn't appear to be exploiting day-parting (different bid pacing across hours) or geographic targeting refinement beyond broad-US. Not enough data here without ad set-level breakdown by hour/region to call this a definite opportunity, but worth asking Lauren if Meta's automated pacing is leaving daypart inventory on the table.</p>
+<h3 id="expansion-3-net-new-campaign-archetype-bundle-auto-home">Expansion 3: Net-new campaign archetype — Bundle (Auto + Home)</h3>
+<p>Zero ads in the top 50 mention bundling. Per Lauren and Anthony, Auto and Home both have positive ROAS. A bundle creative that promotes both products in the same campaign hasn't been tested. Plausible positive-return capital expansion.</p>
+<h3 id="expansion-4-recruitment-partnership-campaigns-thread-c">Expansion 4: Recruitment partnership campaigns (Thread C)</h3>
+<p>Currently 2 partners (GE Vernova, Piper Companies). The pitch identified 20–30+ defense/GovTech/power/trades partner opportunities at $50–250K/year each. This is net-new revenue, not lead-gen ad spend. Material upside but separate workstream from the Meta capital deployment lens.</p>
+<hr />
+<h2 id="watch-items-what-could-threaten-current-positive-roas">Watch items — what could threaten current positive ROAS</h2>
+<p>These aren't reasons to slow down — they're things to monitor so we don't deploy capital into a degrading position.</p>
+<h3 id="watch-1-frequency-drift-on-auto-max-val-417-at-30d">Watch 1: Frequency drift on Auto Max Val (4.17 at 30d)</h3>
+<ul>
+<li>If frequency hits 5.0+, CPL will start spiking</li>
+<li>Currently the under-utilization of Auto ALC and the lack of warm layer means Auto Max Val is doing most of the audience-expansion work</li>
+<li>Mitigation: C01 (warm layer) reduces Auto Max Val frequency pressure</li>
+</ul>
+<h3 id="watch-2-rpl-deterioration-via-fbc-bug">Watch 2: RPL deterioration via fbc bug</h3>
+<ul>
+<li>If 30% of CompleteRegistration events are getting downweighted by Meta, eventually the algorithm trains toward leads QuoteWizard accepts at lower payouts</li>
+<li>The fbc fix prevents this from compounding</li>
+</ul>
+<h3 id="watch-3-single-creative-concentration">Watch 3: Single-creative concentration</h3>
+<ul>
+<li>Top-spending creative (Odometer_05/15) is at $188K lifetime, $38 CPL — meaningful share of total Auto Max Val spend</li>
+<li>New creatives shipping is the mitigation (already in flight)</li>
+</ul>
+<h3 id="watch-4-home-max-val-pacing-over-cap">Watch 4: Home Max Val pacing over cap</h3>
+<ul>
+<li>Meta currently delivers $1,416/day vs $1,200 cap = 118% utilization</li>
+<li>This is the <em>opposite</em> problem of ALC — Meta wants to spend more than it's allowed</li>
+<li>Mitigation: raise the cap, capture the headroom</li>
+</ul>
+<hr />
+<h2 id="specific-actions-ranked-by-capital-unlock-potential">Specific actions ranked by capital unlock potential</h2>
+<h3 id="today-mo">Today (Mo)</h3>
+<ol>
+<li><strong>Send the FunnelFlux reply to Zeno</strong> with the screenshot — sets the fbc fix clock running (Opportunity 6)</li>
+<li><strong>Send Anthony a "biggest day" recap</strong> acknowledging the win + tee up next opportunities (Opportunities 1, 3, 4)</li>
+</ol>
+<h3 id="this-week-mo-lauren">This week (Mo + Lauren)</h3>
+<ol start="3">
+<li><strong>Ask Lauren what's blocking Auto ALC deployment.</strong> This is the single largest unblocked-capacity dollar in the account ($8K/day at $17 CPL). Conversation, not a directive.</li>
+<li><strong>Ask Lauren about re-activating the three paused Auto BAU ad sets.</strong> Net-new positive-return capacity already proven.</li>
+<li><strong>Build the C01 warm-layer ad set</strong> (page-engagement audiences). Unblocks Opportunity 2.</li>
+</ol>
+<h3 id="next-2-weeks">Next 2 weeks</h3>
+<ol start="6">
+<li><strong>Land the FunnelFlux fbc fix</strong> (Zeno timeline)</li>
+<li><strong>Test raising Home Max Val cap to $1,800/day</strong> for 3 days, monitor CPL, raise further if it holds</li>
+<li><strong>Test Bundle creative concept</strong> (small initial spend in Auto BAU campaign)</li>
+</ol>
+<h3 id="next-4-weeks">Next 4 weeks</h3>
+<ol start="9">
+<li><strong>Test fully deployed Auto ALC</strong> at 80% cap utilization once Lauren identifies what's gating it</li>
+<li><strong>Test fully deployed Home ALC</strong> at 50% cap utilization</li>
+</ol>
+<hr />
+<h2 id="what-the-data-confirms-positive">What the data confirms (positive)</h2>
+<ul>
+<li><strong>Account is running well at current deployment.</strong> Yesterday was a record net revenue day per Anthony + Lauren.</li>
+<li><strong>All 6 active campaigns are positive ROAS.</strong> No campaign is losing money.</li>
+<li><strong>Auto BAU and Home BAU are healthy</strong> at $18-19 and $13-14 CPL respectively.</li>
+<li><strong>Frequency is high but not yet broken.</strong> Auto campaigns at 3.8–4.2 means there's still optimization headroom before it gets ugly.</li>
+<li><strong>Account just hit Meta's Opportunity Score frontier</strong> (empty recommendations) — Meta has nothing left to suggest at current audience/creative inputs. The next gains come from expansion, not optimization.</li>
+<li><strong>30-day blended CPL ($25.41) → 7-day blended CPL ($23.43) is a 7.8% improvement.</strong> Trend is positive.</li>
+</ul>
+<h2 id="what-the-data-shows-is-changing">What the data shows is changing</h2>
+<ul>
+<li><strong>Capital deployment ceiling is rising</strong> — daily spend up from the May average (~$27K/day in audit) to roughly $30-35K/day in the last week</li>
+<li><strong>Home is overpacing</strong> vs cap (Home Max Val at 118%) — Meta wants more</li>
+<li><strong>ALC campaigns under-deployed</strong> — biggest pure-capacity opportunity in account</li>
+</ul>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<ul>
+<li><strong>RPL assumed at $34/lead</strong> based on May benchmark. Not directly verifiable without QuoteWizard payout data. If RPL has shifted, net revenue projections shift proportionally.</li>
+<li><strong>Daily caps used are 7-day average</strong> — actual configured caps may have been adjusted within the window. Lauren can verify.</li>
+<li><strong>ALC underutilization causes are inferred.</strong> Could be intentional campaign-launch pacing, audience overlap, or creative limitations. Lauren has the real answer.</li>
+<li><strong>Opportunity 4 (warm-layer ad set) capacity is benchmarked</strong> to typical 30–40% warm CPL improvement; actual capture varies.</li>
+<li><strong>Opportunity 6 (fbc fix) net revenue lift is modeled</strong> at 50% recovery of the current Auto Max Val premium. Real recovery could be higher or lower depending on root-cause specifics.</li>
+<li><strong>Goal-post baseline question is unresolved.</strong> This audit uses Hassan's $306/$350/$383K monthly net rev targets. If the baseline gets renegotiated against live data (May exit run rate), targets reset and the math gets easier.</li>
+</ul><hr><p style="font-size:0.85em;color:#666"><a href="../index.html">← Back to Military.com portal</a></p></body></html>
