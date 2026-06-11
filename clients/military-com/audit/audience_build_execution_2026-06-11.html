@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Audience Build Execution — Jun 11, 2026</title><style>body { font-family: 'Times New Roman', Times, serif; max-width: 820px; margin: 2em auto; padding: 0 1em; font-size: 16px; line-height: 1.55; color: #1a1a1a; }
+h1, h2, h3, h4 { font-family: 'Times New Roman', Times, serif; color: #1a1a1a; }
+h1 { font-size: 1.6em; border-bottom: 2px solid #ccc; padding-bottom: 0.3em; }
+h2 { font-size: 1.3em; margin-top: 2em; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+h3 { font-size: 1.1em; margin-top: 1.5em; }
+h4 { font-size: 1em; margin-top: 1em; }
+table { border-collapse: collapse; margin: 1em 0; width: 100%; font-size: 14px; }
+th, td { border: 1px solid #ccc; padding: 0.45em 0.7em; text-align: left; }
+th { background: #f4f4f4; }
+code { background: #f4f4f4; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.92em; }
+pre { background: #f4f4f4; padding: 1em; overflow-x: auto; font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 0.85em; line-height: 1.3; }
+blockquote { border-left: 3px solid #aaa; margin: 1em 0; padding-left: 1em; color: #555; }
+a { color: #003366; }
+strong { color: #000; }
+hr { border: 0; border-top: 1px solid #ddd; margin: 2em 0; }
+ul, ol { padding-left: 1.5em; }</style></head>
+<body><h1 id="audience-build-execution-jun-11-2026">Audience Build Execution — Jun 11, 2026</h1>
+<p><strong>The data prep step is done.</strong> Four ready-to-upload CSVs are sitting in <code>/Users/mo/Downloads/For FB Audiences/output/</code>. This doc walks through what's in them, the Ads Manager upload sequence, and what to do if match rates underperform.</p>
+<hr />
+<h2 id="what-just-happened">What just happened</h2>
+<p>The script <code>prep_audience_csvs.py</code> read both PII files Anthony Kaylor delivered, filtered to Military.com Auto + Home campaigns only (using the campaign-ID mapping from his email), renamed columns to Meta's customer-list spec, and deduplicated on email. Result: <strong>4 clean CSVs in <code>/Users/mo/Downloads/For FB Audiences/output/</code></strong> ready for direct upload.</p>
+<h3 id="output-files">Output files</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Use</th>
+<th>Rows</th>
+<th>Source window</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mil_combined_seed_90d.csv</code></td>
+<td>Fresh seed for general LAL ladder (warm layer)</td>
+<td><strong>112,264</strong></td>
+<td>Mar-May 2026, Auto + Home</td>
+</tr>
+<tr>
+<td><code>mil_auto_seed_90d.csv</code></td>
+<td>Auto-specific LAL ladder for Auto ALC</td>
+<td><strong>91,871</strong></td>
+<td>Mar-May 2026, Auto only</td>
+</tr>
+<tr>
+<td><code>mil_home_seed_90d.csv</code></td>
+<td>Home-specific LAL ladder for Home ALC</td>
+<td><strong>21,777</strong></td>
+<td>Mar-May 2026, Home only</td>
+</tr>
+<tr>
+<td><code>mil_suppression_all_7mo.csv</code></td>
+<td>Existing-customer suppression list</td>
+<td><strong>195,137</strong></td>
+<td>Nov 2025 - May 2026, all Mil.com</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-quality-check-from-the-script-run">Data quality check (from the script run)</h3>
+<ul>
+<li><strong>100% field completeness</strong> across email, first name, last name, ZIP, state, country, DOB, birthyear, gender on all 4 outputs. This is the best-case scenario for Meta match rates.</li>
+<li><strong>21,042 rows from the raw Mar-May file were skipped</strong> (12%) because they had no email. Meta needs email at minimum.</li>
+<li><strong>No phone column</strong> in the source data. Anthony Kaylor's email explicitly offered to add this from QW if needed — we'll use that escape hatch only if match rates come in below 60%.</li>
+<li><strong>Cross-file dedup worked:</strong> 82,873 unique emails from the older file (Nov-Feb) that weren't already in the Mar-May file got added to suppression.</li>
+</ul>
+<hr />
+<h2 id="ads-manager-upload-sequence">Ads Manager upload sequence</h2>
+<p><strong>Total time: ~60 minutes (mostly waiting for Meta to process).</strong></p>
+<h3 id="step-1-upload-fresh-seed-combined">Step 1 — Upload fresh seed (Combined)</h3>
+<p>Business Manager → <strong>Audiences</strong> → <strong>Create Audience</strong> → <strong>Custom Audience</strong> → <strong>Customer List</strong> → <strong>Use a list of customers</strong> → Next</p>
+<ul>
+<li><strong>Use customer lifetime value data:</strong> No (we use this for prospecting, not value modeling)</li>
+<li><strong>Original data source:</strong> Directly from customers</li>
+<li><strong>Audience name:</strong> <code>Custom_Recruiting-Leads_06-11-2026_Fresh</code></li>
+<li><strong>Description:</strong> "Mar-May 2026 QW accepted+sold leads, Auto+Home combined. 112,264 records. Replaces 08-05-2025 seed."</li>
+<li><strong>File to upload:</strong> <code>/Users/mo/Downloads/For FB Audiences/output/mil_combined_seed_90d.csv</code></li>
+<li><strong>Identifier mapping:</strong> Meta should auto-detect the columns (<code>email</code>, <code>fn</code>, <code>ln</code>, etc.). If it asks for manual mapping, confirm each maps to the matching Customer Information field.</li>
+<li><strong>Hash:</strong> Yes (Meta auto-hashes — check the box if asked)</li>
+<li>Click <strong>Upload &amp; Create</strong></li>
+</ul>
+<p>Meta begins processing. Audience size will show "Calculating..." for 30-60 minutes.</p>
+<h3 id="step-2-upload-auto-specific-seed-optional-but-recommended">Step 2 — Upload Auto-specific seed (optional but recommended)</h3>
+<p>Same flow as Step 1.</p>
+<ul>
+<li><strong>Audience name:</strong> <code>Custom_Auto-Leads_06-11-2026_Fresh</code></li>
+<li><strong>Description:</strong> "Mar-May 2026 QW Auto-only leads. 91,871 records. Seed for Auto ALC LAL ladder."</li>
+<li><strong>File:</strong> <code>/Users/mo/Downloads/For FB Audiences/output/mil_auto_seed_90d.csv</code></li>
+</ul>
+<h3 id="step-3-upload-home-specific-seed-optional-but-recommended">Step 3 — Upload Home-specific seed (optional but recommended)</h3>
+<ul>
+<li><strong>Audience name:</strong> <code>Custom_Home-Leads_06-11-2026_Fresh</code></li>
+<li><strong>Description:</strong> "Mar-May 2026 QW Home-only leads. 21,777 records. Seed for Home ALC LAL ladder."</li>
+<li><strong>File:</strong> <code>/Users/mo/Downloads/For FB Audiences/output/mil_home_seed_90d.csv</code></li>
+</ul>
+<h3 id="step-4-upload-suppression-list">Step 4 — Upload suppression list</h3>
+<p>Same flow.</p>
+<ul>
+<li><strong>Audience name:</strong> <code>Suppression_Existing-Customers_All-Time_06-11-2026</code></li>
+<li><strong>Description:</strong> "All Mil.com Auto+Home customers Nov 2025 - May 2026. 195,137 records. EXCLUDE from every prospecting ad set. Refresh monthly."</li>
+<li><strong>File:</strong> <code>/Users/mo/Downloads/For FB Audiences/output/mil_suppression_all_7mo.csv</code></li>
+</ul>
+<h3 id="step-5-wait-for-processing-30-60-min">Step 5 — Wait for processing (30-60 min)</h3>
+<p>Go check on Auto ALC's underutilization in the meantime, or build the Warm Layer ad set (it doesn't depend on these customer-list uploads — see the Audience Structure Spec).</p>
+<h3 id="step-6-validate-match-rates">Step 6 — Validate match rates</h3>
+<p>Once each audience shows "Audience size" instead of "Calculating...", note the size. Match rate is approximate:</p>
+<pre><code>Match rate ≈ (Audience size shown by Meta) / (Rows you uploaded)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Audience</th>
+<th>Rows uploaded</th>
+<th>Target Audience size (60% match)</th>
+<th>Target (75% match)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Combined seed</td>
+<td>112,264</td>
+<td>≥ 67,000</td>
+<td>≥ 84,000</td>
+</tr>
+<tr>
+<td>Auto seed</td>
+<td>91,871</td>
+<td>≥ 55,000</td>
+<td>≥ 68,000</td>
+</tr>
+<tr>
+<td>Home seed</td>
+<td>21,777</td>
+<td>≥ 13,000</td>
+<td>≥ 16,000</td>
+</tr>
+<tr>
+<td>Suppression</td>
+<td>195,137</td>
+<td>≥ 117,000</td>
+<td>≥ 146,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>If match rate &lt; 60% on any audience:</strong> email Anthony Kaylor accepting his phone-number offer. Draft below.</p>
+<p><strong>If 60-80% (likely outcome):</strong> proceed to build LAL audiences.</p>
+<p><strong>If 80%+:</strong> even better — proceed normally.</p>
+<hr />
+<h2 id="step-7-build-lal-ladders-after-seeds-finish-processing">Step 7 — Build LAL ladders (after seeds finish processing)</h2>
+<p>Per the Audience Structure Spec, <strong>Option C</strong> (hybrid: Combined LAL for Warm Layer, vertical-specific LALs for ALC) is the recommended approach.</p>
+<h3 id="lal-set-1-combined-lal-ladder-3-audiences">LAL set 1 — Combined LAL ladder (3 audiences)</h3>
+<p>Audiences → Create → <strong>Lookalike</strong> → Source: <code>Custom_Recruiting-Leads_06-11-2026_Fresh</code></p>
+<p>Build three at once:
+- <code>LAL_US_1pct_Custom-Recruiting-Leads_06-11-2026_Fresh</code> (size 1%, ~2M people)
+- <code>LAL_US_3pct_Custom-Recruiting-Leads_06-11-2026_Fresh</code> (size 3%, ~6M people)
+- <code>LAL_US_5pct_Custom-Recruiting-Leads_06-11-2026_Fresh</code> (size 5%, ~10M people)</p>
+<p>Location: US. Click Create.</p>
+<h3 id="lal-set-2-auto-specific-lal-ladder">LAL set 2 — Auto-specific LAL ladder</h3>
+<p>Source: <code>Custom_Auto-Leads_06-11-2026_Fresh</code></p>
+<ul>
+<li><code>LAL_US_1pct_Auto-Leads_06-11-2026_Fresh</code></li>
+<li><code>LAL_US_3pct_Auto-Leads_06-11-2026_Fresh</code></li>
+<li><code>LAL_US_5pct_Auto-Leads_06-11-2026_Fresh</code></li>
+</ul>
+<h3 id="lal-set-3-home-specific-lal-ladder">LAL set 3 — Home-specific LAL ladder</h3>
+<p>Source: <code>Custom_Home-Leads_06-11-2026_Fresh</code></p>
+<ul>
+<li><code>LAL_US_1pct_Home-Leads_06-11-2026_Fresh</code></li>
+<li><code>LAL_US_3pct_Home-Leads_06-11-2026_Fresh</code></li>
+<li><code>LAL_US_5pct_Home-Leads_06-11-2026_Fresh</code></li>
+</ul>
+<p>All LAL builds process in 5-15 minutes typically.</p>
+<hr />
+<h2 id="step-8-wire-into-campaigns-per-audience-structure-spec-with-updated-lal-assignments">Step 8 — Wire into campaigns (per Audience Structure Spec, with updated LAL assignments)</h2>
+<p>The Audience Structure Spec said "use new LAL ladder in Auto ALC and Home ALC." With vertical-specific LALs now available, <strong>use this assignment instead:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campaign</th>
+<th>Ad Set</th>
+<th>Include</th>
+<th>Exclude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auto BAU</strong></td>
+<td>Broad (existing — modify)</td>
+<td>(no custom audience — broad targeting + Advantage+ ON)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Auto BAU</strong></td>
+<td>Custom (existing — modify)</td>
+<td><code>Custom_Recruiting-Leads_06-11-2026_Fresh</code> (combined seed)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Auto BAU</strong></td>
+<td>NEW Warm Layer</td>
+<td>4 page-engagement audiences (FB Likers + Engagers + IG Followers + Engagers)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Auto Max Val</strong></td>
+<td>Broad (modify)</td>
+<td>(broad + Advantage+)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Auto ALC</strong></td>
+<td>Broad 2.O (modify)</td>
+<td><strong>Auto-specific LALs:</strong> <code>LAL_US_1pct_Auto-Leads_06-11-2026_Fresh</code> + 3% + 5%</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home BAU</strong></td>
+<td>Broad (modify)</td>
+<td>(broad + Advantage+)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home BAU</strong></td>
+<td>Custom (modify)</td>
+<td><code>Custom_Recruiting-Leads_06-11-2026_Fresh</code></td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home BAU</strong></td>
+<td>Home Insurance (existing)</td>
+<td>(keep as is, add suppression)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home BAU</strong></td>
+<td>NEW Warm Layer</td>
+<td>4 page-engagement audiences</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home Max Val</strong></td>
+<td>Broad (modify)</td>
+<td>(broad + Advantage+)</td>
+<td>Suppression list</td>
+</tr>
+<tr>
+<td><strong>Home ALC</strong></td>
+<td>Broad (modify)</td>
+<td><strong>Home-specific LALs:</strong> <code>LAL_US_1pct_Home-Leads_06-11-2026_Fresh</code> + 3% + 5%</td>
+<td>Suppression list</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Plus the Auto ALC overlap fix from the Audience Structure Spec:</strong> Auto ALC's targeting must have <strong>Detailed Targeting Expansion OFF</strong> and <strong>Advantage+ Audience OFF</strong>. Auto BAU has both ON. This makes the two campaigns structurally distinct so Meta no longer self-limits.</p>
+<hr />
+<h2 id="step-9-cleanup-after-72hr-stability-check">Step 9 — Cleanup (after 72hr stability check)</h2>
+<p>Once new LAL ladders are deploying at positive ROAS for 3 days:</p>
+<ol>
+<li><strong>Delete the 28 orphaned placeholder LALs</strong> (all sized 1,000, INACTIVE — bulk select in Audiences filter)</li>
+<li><strong>Delete the old stale LAL ladder:</strong>
+   - <code>Lookalike (US, 1%) - Custom Audience_08-05-2025</code>
+   - <code>Lookalike (US, 3%) - Custom_Recruiting-Leads_08-25</code>
+   - <code>Lookalike (US, 5%) - Custom_Recruiting-Leads_08-05-2025</code></li>
+<li><strong>Delete the old stale seed:</strong> <code>Custom_Recruiting-Leads_08-05-2025</code></li>
+</ol>
+<p>Don't delete before the new structure has been stable for 72 hours — rolling back is harder once the source data is gone.</p>
+<hr />
+<h2 id="whats-still-missing">What's still missing</h2>
+<h3 id="1-30-day-form-submitter-cooldown-list">1. 30-day form-submitter cooldown list</h3>
+<p>Anthony Kaylor's delivery only includes ACCEPTED + SOLD leads. The Audience Structure Spec also calls for a <strong>30-day form-submitter</strong> cooldown — all users who hit the quote form, regardless of QW outcome. This data lives in FunnelFlux / Iron Corp's funnel database, not in QW.</p>
+<p><strong>Email draft for Lauren:</strong></p>
+<blockquote>
+<p>Lauren — for the audience cleanup I'm doing in Ads Manager, I have the QW accepted/sold leads (Anthony Kaylor sent those). I'm also looking to build a 30-day form-submitter suppression list — all users who hit the quote form in the last 30 days, whether or not they ended up accepted by QW.</p>
+<p>Is that data accessible from FunnelFlux or wherever your funnel submission events land? Same format as Anthony's exports would be ideal (email + fn + ln + zip + dob + state + country + gender, raw — Meta auto-hashes on upload). Last 30 days rolling window. Want to use this to give recent submitters a cooldown before retargeting them again — prevents wasting impressions on users who just submitted.</p>
+<p>If easier I can pull it myself once you point me at the right access. Thanks!</p>
+</blockquote>
+<h3 id="2-phone-numbers-only-if-match-rate-60">2. Phone numbers (only if match rate &lt;60%)</h3>
+<p><strong>Email draft for Anthony Kaylor (only send if first match rate comes in below 60%):</strong></p>
+<blockquote>
+<p>Hey Anthony — thanks again for the PII exports. The combined seed matched at [X]% which is below the 60% threshold Meta uses for confident audience targeting. Want to take you up on your offer to pull phone numbers from QW and re-export — based on Meta's docs that should lift match rates by 10-15% which would put us comfortably in the deploy-confidently range.</p>
+<p>Same campaign ID filters as last time (Auto: C20188, C32405, C32535, C32533, C31885, C31476, C32381, C31701; Home: C20259, C32454, C31886, C31633). Just add a phone column to the existing schema.</p>
+<p>No urgency — first match rate is workable for the immediate build, but the phone-augmented version would help us scale the LAL ladder more confidently. Thanks!</p>
+</blockquote>
+<h3 id="3-recurring-refresh-cadence">3. Recurring refresh cadence</h3>
+<p>After this build is live, set a calendar reminder to ask Anthony Kaylor for a fresh export every 30 days. Re-run the prep script, re-upload to Meta (Meta's UI has an "Update audience" flow that preserves the audience ID — just replace the data behind it).</p>
+<hr />
+<h2 id="the-python-script-for-reference">The Python script (for reference)</h2>
+<p>Lives at <code>/Users/mo/Desktop/military.com/deliverables/audit_2026-06-04/prep_audience_csvs.py</code>.</p>
+<p>Re-run anytime by running:</p>
+<pre><code class="language-bash">python3 /Users/mo/Desktop/military.com/deliverables/audit_2026-06-04/prep_audience_csvs.py
+</code></pre>
+<p>It auto-creates <code>/Users/mo/Downloads/For FB Audiences/output/</code> if it doesn't exist and overwrites any prior CSVs.</p>
+<p>To use it for the next monthly refresh:
+1. Drop the new file into <code>/Users/mo/Downloads/For FB Audiences/</code> (same naming convention or update the script's <code>MAR_MAY</code> / <code>NOV_FEB</code> constants)
+2. Re-run the script
+3. Re-upload the resulting CSVs to Meta</p>
+<hr />
+<h2 id="verification-after-step-6">Verification (after Step 6)</h2>
+<p>The audience build is working when:</p>
+<ul>
+<li>✅ All 4 customer-list audiences show "Audience size" in Ads Manager (not "Calculating")</li>
+<li>✅ Match rates are ≥60% (≥75% is great)</li>
+<li>✅ Audience sizes (after Meta's match) are roughly: Combined ~70-95K, Auto ~55-75K, Home ~13-18K, Suppression ~120-160K</li>
+<li>✅ 3 LAL ladders successfully built (Combined, Auto, Home — 9 LAL audiences total)</li>
+<li>✅ Per-campaign include/exclude wired per the matrix above</li>
+<li>✅ 28 orphaned placeholder LALs deleted (after stability check)</li>
+<li>✅ Auto ALC daily utilization starts rising from 17% over the next 5-7 days</li>
+</ul>
+<p>If Auto ALC utilization doesn't move within 4 days of the build, the constraint isn't audience overlap — investigate other gating factors (bid strategy, optimization event volume, learning phase).</p>
+<hr />
+<h2 id="assumptions-open-questions">ASSUMPTIONS &amp; OPEN QUESTIONS</h2>
+<ul>
+<li><strong>Vertical-specific LAL approach (Option C):</strong> Recommended over the combined-only approach. Costs 15 extra minutes of Ads Manager work for better Meta optimization signal on Auto ALC + Home ALC.</li>
+<li><strong>Source data assumed correct:</strong> Trusting Anthony Kaylor's campaign-ID mapping. If the IDs include non-Mil.com data anywhere, the suppression list could over-suppress legitimate prospects. Spot-check a few rows from each campaign ID to confirm they look like Mil.com customers.</li>
+<li><strong>No phone field = lower match rate ceiling:</strong> Without phone, expect match rates in the 55-75% range. Anthony's offer to add phone if rates are low is the escape hatch.</li>
+<li><strong>21K records skipped (no email):</strong> Acceptable — these wouldn't have matched in Meta anyway. Not worth pursuing.</li>
+<li><strong>Recipients-only data:</strong> The data is QW accepted+sold leads. We don't have the "form submitter but didn't get accepted by QW" cohort, which is the larger user base. Lauren's 30-day cooldown list would fill this gap.</li>
+<li><strong>Conversion_value column:</strong> Present in source data but not included in upload (Meta supports value-based custom audiences but the Audience Structure Spec opted for prospecting use case). Reserved for future test if Lauren wants to try value-based optimization separately.</li>
+</ul><hr><p style="font-size:0.85em;color:#666"><a href="../index.html">← Back to Military.com portal</a></p></body></html>
