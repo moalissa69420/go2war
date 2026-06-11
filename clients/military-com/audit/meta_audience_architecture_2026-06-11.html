@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meta Audience Architecture — Jun 11</title>
+  <link rel="stylesheet" href="../../../styles.css" />
+  <style>
+    body { font-family: 'Times New Roman', Times, serif; }
+    .page { max-width: 920px; margin: 2rem auto; padding: 0 2rem; line-height: 1.55; }
+    h1, h2, h3, h4 { font-family: 'Times New Roman', Times, serif; }
+    h1 { font-size: 1.9rem; border-bottom: 1px solid #ccc; padding-bottom: .35rem; }
+    h2 { font-size: 1.45rem; margin-top: 2rem; }
+    h3 { font-size: 1.18rem; margin-top: 1.5rem; }
+    pre { background:#f4f4f4; padding: .9rem; overflow-x: auto; font-size:.9em; border-radius: 4px; }
+    code { font-family: 'Courier New', monospace; font-size: .92em; }
+    p code, li code { background:#f4f4f4; padding: 0 .25rem; border-radius: 3px; }
+    .md-table { border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
+    .md-table th, .md-table td { border: 1px solid #ccc; padding: .4rem .65rem; text-align: left; vertical-align: top; }
+    .md-table th { background: #f4f4f4; }
+    hr { border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; }
+    a { color: #2050a0; }
+    blockquote { border-left: 3px solid #ccc; margin: 1rem 0; padding-left: 1rem; color: #555; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div style="font-size:.85rem; margin-bottom:1rem;"><a href="../">← Back to Military.com</a></div>
+    <h1>Meta Audience Architecture — The Expert-Grade Build</h1>
+
+<p><strong>Date:</strong> June 11, 2026</p>
+<p><strong>Author:</strong> Mo / GTW (Meta Consultant)</p>
+<p><strong>Status:</strong> Strategic spec — supersedes earlier audience_structure docs for the data-rich state we're now in</p>
+
+<hr/>
+
+<h2>TL;DR</h2>
+
+<p>Anthony Kaylor's 7-month PII export changed the game. We're no longer working with a 10-month-old stale seed — we have 195K customer records with revenue tags, by-vertical mapping, and recent recency. This is enough fuel to build a <strong>proper Meta-best-practices audience architecture</strong> that maps directly to how the algorithm actually wants to be fed:</p>
+
+<ul>
+<li><strong>5 customer-list seeds</strong> (Combined, Auto, Home, High-Value, Bundle) → 4 distinct LAL ladders</li>
+<li><strong>2 suppression layers</strong> (existing customers all-time, recent submitters 30D — still pending Lauren)</li>
+<li><strong>1 warm engagement pool</strong> (page-engagement union, ~1.5M unused)</li>
+<li><strong>Per-campaign matrix</strong> that exits the cannibalization trap and lets us deploy capital on every campaign without overlap penalties</li>
+</ul>
+
+<p>This doc tells you <strong>(1) which seeds we need, (2) which spreadsheets each one maps to, (3) where they go in Ads Manager, and (4) which campaigns they target</strong>. Built under the SAC Financial Services restrictions (no Value LALs, no ZIP-narrowing, no age/gender narrowing) — but the workarounds get us ~80% of the value-LAL effect anyway via pre-filtered seed.</p>
+
+<hr/>
+
+<h2>Part 1 — The 9 Audiences We're Building</h2>
+
+<table class="md-table">
+<tr><th>#</th><th>Audience name in Ads Manager</th><th>Type</th><th>Source file</th><th>Est. size</th><th>Purpose</th></tr>
+<tr><td>1</td><td><code>Custom_Mil_Combined_Fresh_06-11-2026</code></td><td>Customer List</td><td><code>mil_combined_seed_90d.csv</code></td><td>112,264 raw → ~70-95K matched</td><td>Master seed for combined LAL ladder + warm BAU</td></tr>
+<tr><td>2</td><td><code>Custom_Mil_Auto_Fresh_06-11-2026</code></td><td>Customer List</td><td><code>mil_auto_seed_90d.csv</code></td><td>91,871 raw → ~60-80K matched</td><td>Auto-specific LAL ladder → Auto ALC</td></tr>
+<tr><td>3</td><td><code>Custom_Mil_Home_Fresh_06-11-2026</code></td><td>Customer List</td><td><code>mil_home_seed_90d.csv</code></td><td>21,777 raw → ~14-19K matched</td><td>Home-specific LAL ladder → Home ALC</td></tr>
+<tr><td>4</td><td><code>Custom_Mil_HighValue_06-11-2026</code></td><td>Customer List</td><td><code>mil_high_value_seed_7mo.csv</code></td><td>62,299 raw → ~40-55K matched</td><td><strong>Value-biased LAL — feeds Max Val campaigns</strong></td></tr>
+<tr><td>5</td><td><code>Custom_Mil_Bundle_06-11-2026</code></td><td>Customer List</td><td><code>mil_bundle_customers_7mo.csv</code></td><td>2,698 raw → ~1,800-2,400 matched</td><td>Cross-sell seed (Auto+Home buyers) — informational, not for LAL</td></tr>
+<tr><td>6</td><td><code>Suppression_Mil_AllCustomers_7mo_06-11-2026</code></td><td>Customer List</td><td><code>mil_suppression_all_7mo.csv</code></td><td>195,137 raw → ~125-170K matched</td><td>Exclude from every prospecting ad set</td></tr>
+<tr><td>7</td><td><code>Suppression_FormSubmitters_30D</code></td><td>Custom Audience (Website)</td><td>Pending Lauren</td><td>Unknown</td><td>Cooldown for recent submitters</td></tr>
+<tr><td>8</td><td><code>Warm_PageEngagement_Combined_365D</code></td><td>Saved (union of 4 existing)</td><td>n/a — combine in Ads Manager</td><td>~1.5M</td><td>Warm layer ad set in BAU campaigns</td></tr>
+<tr><td>9</td><td>LAL ladders (1% / 3% / 5%) off seeds 1-4</td><td>Lookalike</td><td>seeds above</td><td>Auto-built by Meta</td><td>Targeting layer for ALC + Max Val</td></tr>
+</table>
+
+<p>That's 5 customer-list uploads (the spreadsheets), 1 saved-audience union (UI-only, no upload), 1 pending Lauren, and <strong>12 lookalikes</strong> (1%/3%/5% × 4 seeds) Meta builds on its own once the seeds process.</p>
+
+<hr/>
+
+<h2>Part 2 — The Spreadsheets (Final State)</h2>
+
+<p>All in <code>/Users/mo/Downloads/For FB Audiences/output/</code> after running <code>prep_audience_csvs.py</code>:</p>
+
+<pre><code>
+output/
+├── mil_combined_seed_90d.csv            112,264 rows   Combined Mar-May seed
+├── mil_auto_seed_90d.csv                 91,871 rows   Auto-only Mar-May seed
+├── mil_home_seed_90d.csv                 21,777 rows   Home-only Mar-May seed
+├── mil_high_value_seed_7mo.csv           62,299 rows   Top quartile by value (Nov-May)
+├── mil_high_value_auto_seed_7mo.csv      57,544 rows   Top quartile Auto only (informational)
+├── mil_high_value_home_seed_7mo.csv       4,755 rows   Top quartile Home only (informational)
+├── mil_bundle_customers_7mo.csv           2,698 rows   Auto AND Home customers
+└── mil_suppression_all_7mo.csv          195,137 rows   All Mil.com customers, 7 months
+</code></pre>
+
+<p><strong>Upload 5 of these to Meta</strong> (numbered to match audience table above):</p>
+<ul>
+<li><code>mil_combined_seed_90d.csv</code> → audience #1</li>
+</ul>
+<ul>
+<li><code>mil_auto_seed_90d.csv</code> → audience #2</li>
+</ul>
+<ul>
+<li><code>mil_home_seed_90d.csv</code> → audience #3</li>
+</ul>
+<ul>
+<li><code>mil_high_value_seed_7mo.csv</code> → audience #4</li>
+</ul>
+<ul>
+<li><code>mil_bundle_customers_7mo.csv</code> → audience #5 (small but track it)</li>
+</ul>
+<ul>
+<li><code>mil_suppression_all_7mo.csv</code> → audience #6</li>
+</ul>
+
+<p>The two <code>mil_high_value_*_seed_7mo.csv</code> files are informational (split-out shows you that 92% of high-value records are Auto, only 8% Home — that's why we use the combined high-value seed for Max Val and don't bother building a Home-only Max Val variant yet).</p>
+
+<hr/>
+
+<h2>Part 3 — Why Each Seed Exists (the Meta-expert logic)</h2>
+
+<h3>Seed 1 — Combined (<code>mil_combined_seed_90d.csv</code>)</h3>
+<p><strong>Why:</strong> Recency-weighted. 90-day window means Meta builds LALs from fresh signal — strongest predictor of who's in-market now. Includes both Auto and Home in one pool because Meta's LAL algorithm doesn't care about vertical purity at this scale — it cares about behavioral pattern density.</p>
+<p><strong>Feeds:</strong> General-purpose LAL ladder + warm BAU campaigns.</p>
+
+<h3>Seed 2 — Auto-only (<code>mil_auto_seed_90d.csv</code>)</h3>
+<p><strong>Why:</strong> Vertical-pure signal. When Meta builds a LAL off this, every "look-alike" is modeled on Auto-converting behavior specifically — not diluted by Home patterns. Auto ALC needs this because the campaign objective is Auto leads.</p>
+<p><strong>Feeds:</strong> Auto ALC campaign LAL stack.</p>
+
+<h3>Seed 3 — Home-only (<code>mil_home_seed_90d.csv</code>)</h3>
+<p><strong>Why:</strong> Same logic, vertical-pure for Home. Smaller seed (22K) but well above the 10K Meta minimum for stable LAL — and the signal purity is worth more than seed size at this volume.</p>
+<p><strong>Feeds:</strong> Home ALC campaign LAL stack.</p>
+
+<h3>Seed 4 — High-Value (<code>mil_high_value_seed_7mo.csv</code>) — <strong>THE STRATEGIC WIN</strong></h3>
+<p><strong>Why:</strong> Under SAC Financial Services, Meta blocks the "Value-Based Lookalike" feature outright. The workaround that gets us ~80% of the same effect: <strong>pre-filter the seed CSV to only top-quartile customers by conversion_value, then build a standard LAL off that filtered seed</strong>. Meta doesn't see the value field, but every record in the seed is a $78+ customer — so the LAL it builds is structurally biased toward high-value users. We're using 7 months (not 90 days) here because high-value customers are rarer and we need volume — 62K is the right balance.</p>
+
+<p>This is the <strong>single biggest unlock for Max Val campaigns</strong>. Auto Max Val has been underperforming partly because (a) the fbc bug is poisoning the value signal feeding back to Meta, and (b) the audience layer treats all customers as equal. This seed fixes (b) directly even if (a) takes weeks. Top quartile only = Meta optimizes toward the customers we'd kill to acquire more of.</p>
+
+<p><strong>Feeds:</strong> Auto Max Val + Home Max Val LAL stacks.</p>
+
+<h3>Seed 5 — Bundle Customers (<code>mil_bundle_customers_7mo.csv</code>)</h3>
+<p><strong>Why:</strong> People who bought BOTH Auto and Home from us. 2,698 of them. Highest LTV in the entire database — proven cross-sellable. Too small (sub-10K) to build a stable LAL off, but worth uploading for two reasons: (1) baseline for cross-sell value benchmarking, (2) if it scales past 10K in 6 months from new data, we get a premium LAL seed nobody else in the category has.</p>
+<p><strong>Feeds:</strong> Informational for now. Eventually a Bundle Max Val LAL when we hit 10K threshold.</p>
+
+<h3>Seed 6 — All Customers Suppression (<code>mil_suppression_all_7mo.csv</code>)</h3>
+<p><strong>Why:</strong> Don't pay to re-acquire users we already converted. 195K names of existing customers excluded from every prospecting ad set saves a measurable % of CPL that was previously wasted on duplicates.</p>
+<p><strong>Feeds:</strong> Exclusion layer on all 6 campaigns' prospecting ad sets.</p>
+
+<h3>Seed 7 — Recent Form Submitters 30D (pending Lauren)</h3>
+<p><strong>Why:</strong> Even tighter cooldown — people who submitted a quote form in the last 30 days but didn't accept/convert yet. Don't spam them — they're in workflow. Lauren has access to FunnelFlux for this; needs a CSV pull.</p>
+<p><strong>Feeds:</strong> Exclusion layer on all 6 campaigns' prospecting ad sets.</p>
+
+<h3>Audience 8 — Warm Page-Engagement Pool</h3>
+<p><strong>Why:</strong> Pre-existing untouched ~1.5M people who engaged with the Military.com FB page, IG account, or related properties in the last 365 days. These are people who already know the brand — softer ad. Highest-engagement, lowest-objection, lowest-CPC audience available.</p>
+<p><strong>Feeds:</strong> Warm Layer ad sets in Auto BAU + Home BAU (NOT ALC — keep ALC clean for LAL signal).</p>
+
+<h3>Lookalikes (12 total) — built by Meta after seeds process</h3>
+<ul>
+<li>LAL_Combined_US_1% / 3% / 5%</li>
+<li>LAL_Auto_US_1% / 3% / 5%</li>
+<li>LAL_Home_US_1% / 3% / 5%</li>
+<li><strong>LAL_HighValue_US_1% / 3% / 5%</strong> ← the Max Val unlock</li>
+</ul>
+
+<p>Build them as ranges (1-3%, 3-5%) not stacks if you want smoother delivery; build as overlapping individual percentages (1%, 3%, 5%) if you want to A/B which size delivers best (recommended for first 30 days).</p>
+
+<hr/>
+
+<h2>Part 4 — Per-Campaign Assignment Matrix</h2>
+
+<p>This is where the architecture lands in production. Six campaigns, each with explicit ad-set targeting:</p>
+
+<h3>Campaign 1: <strong>Auto BAU</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads | <strong>Advantage+ Audience:</strong> ON</li>
+<li>Ad Set A — <em>Broad (Advantage+ ON)</em></li>
+<li>Targeting: Advantage+ Audience suggestion = broad US 18-65 (SAC default)</li>
+<li>Inclusions: none (Advantage+ handles it)</li>
+<li>Exclusions: Suppression_Mil_AllCustomers + Suppression_FormSubmitters_30D (when available)</li>
+<li>Ad Set B — <em>Warm Layer</em></li>
+<li>Targeting: Warm_PageEngagement_Combined_365D (the union audience)</li>
+<li>Advantage+ Audience: OFF (we want the warm pool exactly, not Meta-expanded)</li>
+<li>Exclusions: same suppressions + LAL_Combined_US_1% (so warm + LAL don't fight for the same impression)</li>
+<li>This is the <strong>C01 deploy</strong> — the 1.5M warm pool that's been sitting idle</li>
+</ul>
+
+<h3>Campaign 2: <strong>Auto Max Val</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads w/ Value Optimization | <strong>Bid:</strong> Highest Value | <strong>Advantage+ Audience:</strong> ON</li>
+<li>Ad Set A — <em>Broad Value (Advantage+ ON)</em></li>
+<li>Targeting: Advantage+ Audience</li>
+<li>Exclusions: suppressions</li>
+<li>Ad Set B — <em>High-Value LAL Stack</em>  ← <strong>THE STRATEGIC LIFT</strong></li>
+<li>Targeting: <strong>LAL_HighValue_US_1% + 3% + 5%</strong> combined (these LALs are biased toward $78+ customers)</li>
+<li>Advantage+ Audience: OFF (LAL is the targeting)</li>
+<li>Detailed Targeting Expansion: OFF</li>
+<li>Exclusions: suppressions</li>
+<li>This is the audience-level fix for Max Val under-delivery — pure high-value signal layer that doesn't depend on the broken fbc value pipeline</li>
+</ul>
+
+<h3>Campaign 3: <strong>Auto ALC</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads | <strong>Advantage+ Audience:</strong> OFF (LAL is the whole point)</li>
+<li>Ad Set A — <em>LAL Stack (Auto-pure)</em>  ← <strong>THE OVERLAP FIX</strong></li>
+<li>Targeting: <strong>LAL_Auto_US_1% + 3% + 5%</strong> combined (Auto-vertical-pure)</li>
+<li>Advantage+ Audience: OFF</li>
+<li>Detailed Targeting Expansion: OFF</li>
+<li>Exclusions: suppressions + LAL_HighValue_US_1% (so this campaign doesn't compete with Max Val for the highest-value users)</li>
+<li><strong>Critical:</strong> this is structurally different from Auto BAU's "Broad (Advantage+)" — fixes the cannibalization issue that's been capping Auto ALC at $7K/day when it could absorb $11K+</li>
+</ul>
+
+<h3>Campaign 4: <strong>Home BAU</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads | <strong>Advantage+ Audience:</strong> ON</li>
+<li>Ad Set A — <em>Broad (Advantage+ ON)</em></li>
+<li>Same shape as Auto BAU Ad Set A</li>
+<li>Ad Set B — <em>Warm Layer</em></li>
+<li>Same shape as Auto BAU Ad Set B (use the same Warm_PageEngagement_Combined_365D — Military.com page engagement covers both verticals)</li>
+</ul>
+
+<h3>Campaign 5: <strong>Home Max Val</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads w/ Value Optimization | <strong>Bid:</strong> Highest Value</li>
+<li>Ad Set A — <em>Broad Value (Advantage+ ON)</em></li>
+<li>Ad Set B — <em>High-Value LAL Stack</em></li>
+<li>Targeting: <strong>LAL_HighValue_US_1% + 3% + 5%</strong> (same combined high-value seed — only 8% of high-value is Home but Meta's LAL will find Home-shaped people inside it)</li>
+<li>Note: NOT using Home-only high-value because the 4,755 row count is too thin for stable LAL on its own. Combined high-value LAL covers it.</li>
+</ul>
+
+<h3>Campaign 6: <strong>Home ALC</strong></h3>
+<ul>
+<li><strong>Objective:</strong> Leads | <strong>Advantage+ Audience:</strong> OFF</li>
+<li>Ad Set A — <em>LAL Stack (Home-pure)</em></li>
+<li>Targeting: <strong>LAL_Home_US_1% + 3% + 5%</strong> (Home-vertical-pure)</li>
+<li>Exclusions: suppressions + LAL_HighValue_US_1% (same rationale as Auto ALC)</li>
+</ul>
+
+<hr/>
+
+<h2>Part 5 — Where Each Spreadsheet Goes (Ads Manager Path)</h2>
+
+<p>For each customer-list seed:</p>
+
+<ul>
+<li>Open Ads Manager → <strong>Audiences</strong> (top nav)</li>
+</ul>
+<ul>
+<li><strong>Create Audience → Custom Audience → Customer List</strong></li>
+</ul>
+<ul>
+<li>Select <strong>"Use a list with customer lifetime value (LTV)"</strong> = <strong>No</strong> (we don't have LTV; conversion_value is per-lead, not lifetime)</li>
+<li>Exception: for <code>mil_high_value_seed_7mo.csv</code>, you could add a per-record <code>value</code> column if you want — but under SAC, Meta won't use it for LAL anyway. Skip it. Our pre-filter does the work.</li>
+</ul>
+<ul>
+<li><strong>Upload file</strong> → select the CSV</li>
+</ul>
+<ul>
+<li><strong>Identifier mapping:</strong></li>
+<li>email → Email</li>
+<li>fn → First Name</li>
+<li>ln → Last Name</li>
+<li>zip → Zip Code</li>
+<li>st → State</li>
+<li>country → Country</li>
+<li>dob → Date of Birth (Year + Month + Day)</li>
+<li>doby → Date of Birth (Year only)</li>
+<li>ge → Gender</li>
+</ul>
+<ul>
+<li><strong>Audience name:</strong> use the names from Part 1's table (<code>Custom_Mil_*_06-11-2026</code>)</li>
+</ul>
+<ul>
+<li><strong>Description:</strong> "Auto/Home Mar-May 2026" or "Top quartile by conversion_value, Nov 2025–May 2026"</li>
+</ul>
+<ul>
+<li><strong>Upload</strong> → Meta auto-hashes everything → wait 30-60 min for processing</li>
+</ul>
+<ul>
+<li><strong>After processing, check the match rate:</strong></li>
+<li>Audience size ÷ raw row count</li>
+<li>Target: <strong>>60%</strong> (good), 50-60% (OK), <50% (low — need phone numbers from Anthony to lift it)</li>
+</ul>
+
+<h3>Then build the lookalikes:</h3>
+
+<p>For each processed seed, in Audiences:</p>
+<ul>
+<li><strong>Create Audience → Lookalike Audience</strong></li>
+</ul>
+<ul>
+<li>Source: select the customer-list audience</li>
+</ul>
+<ul>
+<li>Location: <strong>United States</strong></li>
+</ul>
+<ul>
+<li>Size: build <strong>three separate audiences</strong> at 1%, 3%, and 5%</li>
+</ul>
+<ul>
+<li>Name pattern: <code>LAL_Auto_US_1%_Jun26_FreshSeed</code>, etc.</li>
+</ul>
+
+<p>Build all 12 LALs at once (4 seeds × 3 percentages) — Meta builds them in parallel, ~30-60 min each.</p>
+
+<h3>Finally, build the saved warm-pool union:</h3>
+
+<ul>
+<li><strong>Create Audience → Saved Audience</strong></li>
+</ul>
+<ul>
+<li><strong>Custom Audiences → Include:</strong> add all 4 existing page-engagement audiences (FB Mil.com Likers + FB Engagers 365D + IG Followers + IG Engagers 365D)</li>
+</ul>
+<ul>
+<li><strong>Locations:</strong> United States | <strong>Age:</strong> 18-65 (SAC default)</li>
+</ul>
+<ul>
+<li><strong>Name:</strong> <code>Warm_PageEngagement_Combined_365D</code></li>
+</ul>
+<ul>
+<li>Save — this is your warm targeting layer for BAU ad sets</li>
+</ul>
+
+<hr/>
+
+<h2>Part 6 — SAC Compliance Notes (what you CAN'T do)</h2>
+
+<p>Working under Special Ad Category — Financial Services restrictions:</p>
+
+<table class="md-table">
+<tr><th>Feature</th><th>Allowed?</th><th>Workaround</th></tr>
+<tr><td>Customer-list Custom Audiences</td><td>✅ Yes</td><td>Use as-is</td></tr>
+<tr><td>Standard Lookalike Audiences (1/3/5%)</td><td>✅ Yes</td><td>Use as-is</td></tr>
+<tr><td><strong>Value-Based Lookalikes</strong></td><td>❌ Blocked</td><td><strong>Pre-filter the seed (what we're doing with high-value seed)</strong></td></tr>
+<tr><td>Engagement Custom Audiences (page, video)</td><td>✅ Yes</td><td>Warm pool union</td></tr>
+<tr><td>Detailed Targeting (interests)</td><td>⚠️ Restricted list</td><td>Don't use insurance interests — they're blocked anyway</td></tr>
+<tr><td>ZIP-code targeting</td><td>❌ Blocked (15-mile radius minimum)</td><td>State-level only</td></tr>
+<tr><td>Age narrowing</td><td>❌ Blocked (18-65 default)</td><td>Locked at 18-65</td></tr>
+<tr><td>Gender narrowing</td><td>❌ Blocked</td><td>All genders</td></tr>
+<tr><td>Custom Audience EXCLUSIONS</td><td>✅ Yes</td><td>Heavy use of suppression layer</td></tr>
+<tr><td>Advantage+ Audience suggestions</td><td>✅ Yes</td><td>Use in BAU and Max Val for broad ad sets</td></tr>
+</table>
+
+<p>Everything in this architecture is SAC-compliant. The high-value LAL workaround is the most sophisticated thing we can do legally under these restrictions.</p>
+
+<hr/>
+
+<h2>Part 7 — Build Sequence (Mo's day-of execution order)</h2>
+
+<p><strong>Day 1 (today, ~90 min in Ads Manager):</strong></p>
+<ul>
+<li>Upload <code>mil_suppression_all_7mo.csv</code> FIRST — it's the biggest, takes longest to process, and we need it for every other ad set's exclusion layer.</li>
+</ul>
+<ul>
+<li>While #1 processes, upload the 4 seed CSVs (#1-4 from the spreadsheet table).</li>
+</ul>
+<ul>
+<li>Upload <code>mil_bundle_customers_7mo.csv</code> last (it's small, fast to process).</li>
+</ul>
+<ul>
+<li>Walk away. All processing takes 30-90 min total.</li>
+</ul>
+
+<p><strong>Day 2 (after seeds process, ~60 min):</strong></p>
+<ul>
+<li>Check match rates on all 5. If any <50%, email Anthony Kaylor to add phone numbers and re-export.</li>
+</ul>
+<ul>
+<li>Build the 12 LAL audiences (4 seeds × 1/3/5%). 30-60 min build time each in the background.</li>
+</ul>
+<ul>
+<li>Build the Warm_PageEngagement_Combined_365D saved audience.</li>
+</ul>
+
+<p><strong>Day 3 (after LALs build, ~45 min in Ads Manager edit mode):</strong></p>
+<ul>
+<li>Apply the Part 4 matrix — edit each of the 6 campaigns' ad sets to the new targeting + exclusion layers.</li>
+</ul>
+<ul>
+<li>Don't change budgets at this step. Targeting changes first, see how delivery shapes up over 48-72 hours, THEN deploy capital where the new architecture opens headroom.</li>
+</ul>
+
+<p><strong>Day 4+ (the growth deploy):</strong></p>
+<ul>
+<li>Watch Auto ALC — it should start absorbing more daily budget without CPL spiking, because the LAL_Auto_US stack no longer cannibalizes with Auto BAU's broad audience. <strong>This is the $11K/day capacity unlock.</strong></li>
+</ul>
+<ul>
+<li>Watch Auto Max Val — the High-Value LAL stack should start surfacing $50+ value leads at sustainable CPL. <strong>This is the Max Val recovery.</strong></li>
+</ul>
+<ul>
+<li>Refresh seeds monthly. Set a recurring ask with Anthony Kaylor for the next CSV export.</li>
+</ul>
+
+<hr/>
+
+<h2>Part 8 — What This Architecture Unlocks (the doctrine framing)</h2>
+
+<p>Under Anthony Paolucci's "deploy maximum capital at positive incremental returns" doctrine:</p>
+
+<ul>
+<li><strong>Auto ALC capacity unlock:</strong> structural fix to overlap = Auto ALC absorbs another $4-8K/day at current ROAS. Annualized: $1.5M–$3M additional positive-return revenue.</li>
+<li><strong>Auto Max Val recovery:</strong> value-biased LAL bypass the fbc bug's audience-signal pollution = Max Val starts delivering at acceptable CPL even before the FunnelFlux fix lands. Frees the $1.2K/day Max Val budget from underperformance.</li>
+<li><strong>Warm layer deploy:</strong> 1.5M unused page-engagement pool activates with lowest CPC audience available = net-new lead source we've never tapped. Conservatively $500-1,500/day incremental at <$15 CPL.</li>
+<li><strong>Suppression savings:</strong> stop paying to acquire existing customers = 8-15% of CPL recovered across the account. On $25K/day spend that's $2-3.5K/day reclaimed for prospecting.</li>
+</ul>
+
+<p><strong>None of these recommendations cap, pause, or reallocate.</strong> Every one is a capacity unlock. The architecture itself is what removes the constraints.</p>
+
+<hr/>
+
+<h2>Part 9 — What's Missing / Open Loops</h2>
+
+<ul>
+<li><strong>30-day form-submitter cooldown (audience #7)</strong> — Lauren needs to pull from FunnelFlux. Without it, we're potentially re-spending on users who just submitted but haven't been accepted yet. Workaround: monthly all-customer suppression catches them eventually.</li>
+</ul>
+<ul>
+<li><strong>fbc/fbclid CAPI bug (FunnelFlux)</strong> — separate workstream. The audience architecture above HELPS Max Val survive the bug but doesn't fix it. Zeno diagnostic email is out.</li>
+</ul>
+<ul>
+<li><strong>Phone numbers on seed files</strong> — Anthony Kaylor offered them if match rate <60%. Don't ask preemptively — measure first.</li>
+</ul>
+<ul>
+<li><strong>Bundle LAL</strong> — 2,698 rows is below the 10K stable-LAL threshold. Track monthly; when bundle pool crosses 10K, build LAL_Bundle_US_1%/3%/5%. That'll likely be 6-9 months out.</li>
+</ul>
+<ul>
+<li><strong>Refresh cadence</strong> — set up a monthly recurring export with Anthony Kaylor's team so seeds + suppression don't decay back to the stale-seed state we just escaped.</li>
+</ul>
+
+<hr/>
+
+<h2>Appendix — File reference quick-card</h2>
+
+<pre><code>
+Local files:
+  Script:           /Users/mo/Desktop/military.com/deliverables/audit_2026-06-04/prep_audience_csvs.py
+  Inputs:           /Users/mo/Downloads/For FB Audiences/mar26-may26 PII data.csv
+                    /Users/mo/Downloads/For FB Audiences/nov25-feb26 PII data.csv
+  Outputs:          /Users/mo/Downloads/For FB Audiences/output/*.csv (8 files)
+  This doc:         /Users/mo/Desktop/military.com/deliverables/audit_2026-06-04/meta_audience_architecture_2026-06-11.md
+
+Meta upload (Audiences):
+  Custom_Mil_Combined_Fresh_06-11-2026             ← mil_combined_seed_90d.csv
+  Custom_Mil_Auto_Fresh_06-11-2026                 ← mil_auto_seed_90d.csv
+  Custom_Mil_Home_Fresh_06-11-2026                 ← mil_home_seed_90d.csv
+  Custom_Mil_HighValue_06-11-2026                  ← mil_high_value_seed_7mo.csv
+  Custom_Mil_Bundle_06-11-2026                     ← mil_bundle_customers_7mo.csv
+  Suppression_Mil_AllCustomers_7mo_06-11-2026      ← mil_suppression_all_7mo.csv
+
+  LAL_Combined_US_{1,3,5}%_Jun26    ← built from Custom_Mil_Combined
+  LAL_Auto_US_{1,3,5}%_Jun26         ← built from Custom_Mil_Auto
+  LAL_Home_US_{1,3,5}%_Jun26         ← built from Custom_Mil_Home
+  LAL_HighValue_US_{1,3,5}%_Jun26    ← built from Custom_Mil_HighValue
+
+  Warm_PageEngagement_Combined_365D ← saved-audience union of 4 page-engagement audiences
+
+Campaign assignments (see Part 4 for full matrix):
+  Auto BAU       → Broad (Adv+ ON) + Warm Layer
+  Auto Max Val   → Broad Value (Adv+ ON) + LAL_HighValue stack
+  Auto ALC       → LAL_Auto stack only
+  Home BAU       → Broad (Adv+ ON) + Warm Layer
+  Home Max Val   → Broad Value (Adv+ ON) + LAL_HighValue stack
+  Home ALC       → LAL_Home stack only
+
+  Suppressions applied to EVERY prospecting ad set:
+    Suppression_Mil_AllCustomers_7mo + Suppression_FormSubmitters_30D (when avail)
+</code></pre>
+
+<hr/>
+
+<p><em>End of architecture spec. Execute Day 1 sequence when you're ready to upload — script already produced the spreadsheets clean.</em></p>
+
+    <hr/>
+    <div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
+  </div>
+  <script>
+    window.GTW_CLIENT = "military-com";
+    window.GTW_API_BASE = window.GTW_API_BASE || "https://go2war-client-portal-api.moodiealissa.workers.dev";
+  </script>
+  <script src="../../../app/guard.js"></script>
+</body>
+</html>
