@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Campaign Setup Handoff — Lauren (Jun 13)</title><link rel="stylesheet" href="../../../styles.css"/>
+<title>Campaign Setup Handoff — Lauren (Jun 13, rev2)</title><link rel="stylesheet" href="../../../styles.css"/>
 <style>
 body { font-family:'Times New Roman',Times,serif; }
 .page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
@@ -20,29 +20,32 @@ hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a
 
 <p><strong>For:</strong> Lauren</p>
 <p><strong>From:</strong> Mo / GTW</p>
-<p><strong>Date:</strong> June 13, 2026</p>
+<p><strong>Date:</strong> June 13, 2026 (rev. 2 — corrected to Advantage+ best practice)</p>
 <p><strong>Account:</strong> LG Military Ads (1034037341617540)</p>
 
 <hr/>
 
 <h2>What's new</h2>
 
-<p>I built a fresh audience layer to replace the 10-month-old seed that was feeding the campaigns. Everything is live in the account, prefixed <strong><code>GTW_</code></strong> so it's easy to find. This doc tells you <strong>exactly which audience to load into which ad set</strong>, plus the targeting settings for each.</p>
+<p>I built a fresh audience layer to replace the 10-month-old seed that was feeding the campaigns. Everything is live, prefixed <strong><code>GTW_</code></strong>. This doc says exactly which audience to add to which ad set and the right settings.</p>
 
-<p><strong>All match rates came back healthy (~45-51%)</strong>, so these are strong seeds — no data issues.</p>
+<p><strong>Match rates came back healthy (~45-51%)</strong> — strong, clean seeds.</p>
 
-<p>⚠️ <strong>Budgets:</strong> don't change any daily budgets off this doc — that's a separate conversation with Anthony. This is <strong>targeting/audience only.</strong></p>
+<h3>⚠️ Important method note (read first)</h3>
+<p>Per current Meta best practice for lead gen under the Financial Services category: we are <strong>NOT</strong> hard-locking lookalikes. We **add the audience as a <em>suggestion</em> inside Advantage+ Audience (leave Advantage+ ON)** and let Meta expand from it. This outperforms the old "lock the LAL" approach — and the account already proves it (the Advantage+ broad ad set is the top performer). Audiences are a <em>guide</em>, not a wall.</p>
+
+<p><strong>Budgets:</strong> don't change any daily budgets off this doc — separate conversation with Anthony. Targeting only.</p>
 
 <hr/>
 
 <h2>The audiences (all live, prefixed GTW_)</h2>
 
-<p><strong>Lookalike ladders</strong> (load these into prospecting ad sets):</p>
+<p><strong>Seeds + Lookalikes</strong> (use as Advantage+ <em>suggestions</em>):</p>
 <ul>
-<li><code>Lookalike (1/3/5%) - GTW_HighValue_Seed_06-13</code> ← high-value customers</li>
-<li><code>Lookalike (1/3/5%) - GTW_Auto_Seed_06-13</code> ← Auto-vertical</li>
-<li><code>Lookalike (1/3/5%) - GTW_Home_Seed_06-13</code> ← Home-vertical</li>
-<li><code>Lookalike (1/3/5%) - GTW_Combined_Seed_06-13</code> ← general</li>
+<li><code>GTW_HighValue_Seed_06-13</code> + <code>Lookalike (1/3/5%) - GTW_HighValue_Seed</code> ← top-payout customers</li>
+<li><code>GTW_Auto_Seed_06-13</code> + <code>Lookalike (1/3/5%) - GTW_Auto_Seed</code></li>
+<li><code>GTW_Home_Seed_06-13</code> + <code>Lookalike (1/3/5%) - GTW_Home_Seed</code></li>
+<li><code>GTW_Combined_Seed_06-13</code> + <code>Lookalike (1/3/5%) - GTW_Combined_Seed</code></li>
 </ul>
 
 <p><strong>Exclusion (every prospecting ad set):</strong></p>
@@ -50,7 +53,7 @@ hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a
 <li><code>GTW_Mil_AllCustomers_7mo_06-13</code> (suppression — existing customers)</li>
 </ul>
 
-<p><strong>Warm pool (saved audience):</strong></p>
+<p><strong>Warm pool:</strong></p>
 <ul>
 <li><code>GTW_Warm_PageEngagement_365D</code> (~1.6M page/IG engagers)</li>
 </ul>
@@ -59,52 +62,52 @@ hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a
 
 <h2>Per-campaign setup</h2>
 
-<p>For each: which audience to load, Advantage+ Audience on/off, Detailed Targeting Expansion, and exclusions. Age 18-65 + US are locked by Special Ad Category (Financial Services) on all.</p>
+<p>Age 18-65 + US are locked by Special Ad Category on all. <strong>Advantage+ Audience stays ON everywhere</strong> — we add the GTW audience in the suggestion/Include box, and always set the suppression exclusion.</p>
 
 <h3>🚗 Auto Max Val — <code>120241310920250498</code></h3>
-<p><em>Goal: rescue this campaign — it's been the weakest on ROAS. The high-value LAL gives it a cleaner audience than its (currently broken) value signal.</em></p>
+<p><em>Why: this was the weakest campaign on ROAS (its value signal is degraded by the tracking bug). Feeding it our top-payout customers as a signal helps Meta find payers, not just form-fillers.</em></p>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad ( <code>120241310920230498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_HighValue_Seed</code></strong> (stack all 3)</td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><th>Ad set</th><th>Add as Advantage+ suggestion</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120241310920230498</code> )</td><td><strong><code>GTW_HighValue_Seed</code></strong> (+ optionally HighValue 1% LAL)</td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <h3>🚗 Auto ALC — <code>120240808866140498</code></h3>
-<p><em>Goal: vertical-pure LAL. This campaign already runs efficiently — give it a clean Auto audience and it can scale.</em></p>
+<p><em>Why: this campaign throttled to ~$0/day on stale targeting. A fresh Auto-vertical signal revives it — it has ~$8.5K/day of budget waiting.</em></p>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad 2.O ( <code>120243776055450498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_Auto_Seed</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_HighValue_Seed</code></td></tr>
+<tr><th>Ad set</th><th>Add as Advantage+ suggestion</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad 2.O ( <code>120243776055450498</code> )</td><td><strong><code>GTW_Auto_Seed</code></strong> (+ optionally Auto 1/3% LAL)</td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <h3>🚗 Auto BAU — <code>120240808864310498</code></h3>
-<p><em>Goal: this is the efficiency engine — keep it broad, just stop paying to re-acquire existing customers and add the warm layer.</em></p>
+<p><em>Why: this is the efficiency engine (1.6-1.7x ROAS) but only spends ~20-55% of its $19.8K budget — it runs out of efficient delivery. Suppression keeps spend on net-new; the warm layer opens a fresh, cheap pool.</em></p>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad ( <code>120240808864580498</code> )</td><td>Advantage+ broad (no custom include)</td><td>ON</td><td>ON</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
-<tr><td><em>New: Warm Layer</em></td><td><strong><code>GTW_Warm_PageEngagement_365D</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_Combined_Seed</code></td></tr>
+<tr><th>Ad set</th><th>Setting</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120240808864580498</code> )</td><td>Keep broad (no suggestion needed)</td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><td><em>New: Warm Layer</em></td><td>Include <code>GTW_Warm_PageEngagement_365D</code></td><td>ON (suggestion)</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <h3>🏠 Home Max Val — <code>120241432784690498</code></h3>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad ( <code>120241432784700498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_HighValue_Seed</code></strong> (same combined high-value)</td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><th>Ad set</th><th>Add as Advantage+ suggestion</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120241432784700498</code> )</td><td><strong><code>GTW_HighValue_Seed</code></strong></td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <h3>🏠 Home ALC — <code>120238737024600498</code></h3>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad ( <code>120238737024450498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_Home_Seed</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_HighValue_Seed</code></td></tr>
+<tr><th>Ad set</th><th>Add as Advantage+ suggestion</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120238737024450498</code> )</td><td><strong><code>GTW_Home_Seed</code></strong></td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <h3>🏠 Home BAU — <code>120227142278050498</code></h3>
 <table class="md-table">
-<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
-<tr><td>Broad ( <code>120227144637480498</code> )</td><td>Advantage+ broad</td><td>ON</td><td>ON</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
-<tr><td><em>New: Warm Layer</em></td><td><strong><code>GTW_Warm_PageEngagement_365D</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_Combined_Seed</code></td></tr>
+<tr><th>Ad set</th><th>Setting</th><th>Adv+ Audience</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120227144637480498</code> )</td><td>Keep broad</td><td><strong>ON</strong></td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><td><em>New: Warm Layer</em></td><td>Include <code>GTW_Warm_PageEngagement_365D</code></td><td>ON</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
 </table>
 
 <hr/>
 
-<h2>Account-level segments (already set by Mo — no action needed)</h2>
+<h2>Account-level segments (already set by Mo — no action)</h2>
 <ul>
 <li>✅ Existing customers → <code>GTW_Mil_AllCustomers_7mo</code></li>
 <li>✅ Engaged audience → 4 page-engagement audiences</li>
@@ -112,43 +115,43 @@ hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a
 
 <hr/>
 
-<h2>How to load an audience into an ad set (quick steps)</h2>
+<h2>How to add an audience as a suggestion (steps)</h2>
 <ul>
-<li>Ad set → <strong>Audience</strong> section</li>
+<li>Ad set → <strong>Audience</strong> section → keep <strong>Advantage+ Audience ON</strong></li>
 </ul>
 <ul>
-<li><strong>Custom Audiences → Include</strong> → search the GTW audience name → add</li>
+<li>In <strong>"Audience suggestions / Include these custom audiences"</strong> → search the GTW audience name → add it</li>
 </ul>
 <ul>
-<li>For LAL stacks: add all three (1% + 3% + 5%) in the Include box — Meta dedupes overlap</li>
+<li>In the <strong>Exclude</strong> box → add <code>GTW_Mil_AllCustomers_7mo</code></li>
 </ul>
 <ul>
-<li>When a LAL is the include, turn <strong>Advantage+ Audience OFF</strong> (so the LAL is the actual target, not just a suggestion) and <strong>Detailed Targeting Expansion OFF</strong></li>
-</ul>
-<ul>
-<li><strong>Exclude</strong> box → add <code>GTW_Mil_AllCustomers_7mo</code> (+ the HighValue 1% on ALC campaigns, to keep them from competing with Max Val)</li>
+<li>Leave everything else default (Meta expands from the suggestion)</li>
 </ul>
 <ul>
 <li>Publish</li>
 </ul>
 
-<h2>Priority order (if doing it in stages)</h2>
+<h2>Priority order</h2>
 <ul>
-<li><strong>Auto Max Val</strong> + <strong>Home Max Val</strong> → HighValue LAL (the rescue — biggest impact)</li>
+<li><strong>Auto Max Val</strong> + <strong>Auto ALC</strong> → HighValue / Auto suggestions (biggest impact — rescue + revive)</li>
 </ul>
 <ul>
-<li><strong>Auto ALC</strong> + <strong>Home ALC</strong> → vertical LAL stacks</li>
+<li><strong>Home Max Val</strong> + <strong>Home ALC</strong> → HighValue / Home suggestions</li>
 </ul>
 <ul>
-<li><strong>Auto BAU</strong> + <strong>Home BAU</strong> → suppression exclude + warm layer ad set</li>
+<li><strong>Auto BAU</strong> + <strong>Home BAU</strong> → confirm suppression exclude + add Warm Layer ad set</li>
 </ul>
 
-<h2>Rollout note</h2>
-<p>Load targeting, then give it <strong>48-72 hours</strong> before judging — new audiences go through Meta's learning phase. Don't change budgets at the same time as targeting (we want to isolate what each change does).</p>
+<h2>🚦 The most important rule — judge on lead QUALITY, not CPL</h2>
+<p>Advantage+ tends to lower CPL but can bring more <em>unqualified</em> leads. QuoteWizard pays on <strong>accepted</strong> leads. So track <strong>accept rate / conversion value</strong>, not just cost per lead. A cheap CPL with a low accept rate loses money. The Max Val (value-optimized) campaigns are our guardrail here.</p>
+
+<h2>⏳ After loading: leave it alone 3-5 days</h2>
+<p>New audiences enter Meta's learning phase (~50 conversions to stabilize). Don't change targeting or budgets mid-learning — it resets the algorithm. Load it, then let it run before judging.</p>
 
 <hr/>
 
-<p><em>Questions → Mo. Audience build doc + match rates: see "Audience Architecture — AS BUILT Jun 13" on the portal.</em></p>
+<p><em>Questions → Mo. Full audience build + match rates: "Audience Architecture — AS BUILT Jun 13" on the portal.</em></p>
 
 <hr/><div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
 </div>
