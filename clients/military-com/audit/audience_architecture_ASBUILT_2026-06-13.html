@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Audience Architecture — AS BUILT (Jun 13)</title><link rel="stylesheet" href="../../../styles.css"/>
+<style>
+body { font-family:'Times New Roman',Times,serif; }
+.page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
+h1,h2,h3,h4 { font-family:'Times New Roman',Times,serif; }
+h1 { font-size:1.9rem; border-bottom:1px solid #ccc; padding-bottom:.35rem; }
+h2 { font-size:1.45rem; margin-top:2rem; } h3 { font-size:1.18rem; margin-top:1.5rem; }
+pre { background:#f4f4f4; padding:.9rem; overflow-x:auto; font-size:.9em; border-radius:4px; }
+code { font-family:'Courier New',monospace; font-size:.92em; }
+p code,li code,td code { background:#f4f4f4; padding:0 .25rem; border-radius:3px; }
+.md-table { border-collapse:collapse; margin:1rem 0; font-size:.92rem; }
+.md-table th,.md-table td { border:1px solid #ccc; padding:.4rem .65rem; text-align:left; vertical-align:top; }
+.md-table th { background:#f4f4f4; }
+hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a0; }
+</style></head><body><div class="page">
+<div style="font-size:.85rem; margin-bottom:1rem;"><a href="../">← Back to Military.com</a></div>
+<h1>Audience Architecture — AS BUILT (verified live in Meta)</h1>
+
+<p><strong>Date:</strong> June 13, 2026</p>
+<p><strong>Account:</strong> LG Military Ads (1034037341617540)</p>
+<p><strong>Status:</strong> ✅ Built and live — verified against Meta API. Supersedes the Jun 11 architecture spec.</p>
+
+<hr/>
+
+<h2>TL;DR — what we did today</h2>
+
+<p>Replaced a 10-month-old stale audience layer with a fresh, verified one — <strong>18 new audiences built, all live</strong>, plus two account-level segment swaps. Match rates landed healthy (~45-51%), so the lookalikes are sitting on strong seeds. The earlier "8% match" scare was a populating-snapshot artifact, not a real problem — confirmed once lists finished processing.</p>
+
+<p><strong>Headline numbers (verified live):</strong></p>
+<ul>
+<li>Suppression list: <strong>82,900–97,600 matched</strong> (~46% of 195,137)</li>
+<li>HighValue seed: <strong>27,800–32,700 matched</strong> (~49% of 62,299)</li>
+<li>Auto seed: <strong>41,900–49,300 matched</strong> (~50%)</li>
+<li>Combined seed: <strong>50,100–58,900 matched</strong> (~49%)</li>
+<li>Auto phone file: <strong>10,000–11,800 matched</strong> (~51% of 21,375)</li>
+</ul>
+
+<hr/>
+
+<h2>Part 1 — What changed (before → after)</h2>
+
+<table class="md-table">
+<tr><th>Layer</th><th>BEFORE (stale)</th><th>AFTER (as-built today)</th></tr>
+<tr><td><strong>Customer seed</strong></td><td><code>Custom_Recruiting-Leads_08-05-2025</code> — 10 months old</td><td>6 fresh <code>GTW_</code> customer lists (Mar–May + 7-mo)</td></tr>
+<tr><td><strong>LAL ladder</strong></td><td>1/3/5% off the stale 2025 seed</td><td>12 fresh <code>GTW_</code> LALs off 4 new seeds</td></tr>
+<tr><td><strong>High-value targeting</strong></td><td>None</td><td><code>GTW_HighValue_Seed</code> + LAL ladder (SAC-compliant value workaround)</td></tr>
+<tr><td><strong>Phone identifier</strong></td><td>None (email-only)</td><td><code>gtw_mil_auto_owned_phone</code> added (phone + conversion values)</td></tr>
+<tr><td><strong>Existing-customers segment</strong></td><td><code>Mil FB Customer Match 4.12.21</code> (5+ years old)</td><td><code>GTW_Mil_AllCustomers_7mo_06-13</code> (~90K matched)</td></tr>
+<tr><td><strong>Engaged segment</strong></td><td>Not defined</td><td>4 page-engagement audiences (~1.5M warm pool) ✅</td></tr>
+<tr><td><strong>Warm pool</strong></td><td>1.5M sitting unused</td><td><code>GTW_Warm_PageEngagement_365D</code> saved audience built</td></tr>
+</table>
+
+<hr/>
+
+<h2>Part 2 — The audiences we built (live, with real match rates)</h2>
+
+<h3>Customer-list seeds</h3>
+
+<table class="md-table">
+<tr><th>Audience name (in Meta)</th><th>Source file</th><th>Raw rows</th><th>Matched (live)</th><th>Match %</th></tr>
+<tr><td><code>GTW_Mil_AllCustomers_7mo_06-13</code> <em>(shows as mil_suppression_all_7mo.csv, label Customers)</em></td><td><code>mil_suppression_all_7mo.csv</code></td><td>195,137</td><td>82,900–97,600</td><td>~46%</td></tr>
+<tr><td><code>GTW_HighValue_Seed_06-13</code></td><td><code>mil_high_value_seed_7mo.csv</code></td><td>62,299</td><td>27,800–32,700</td><td>~49%</td></tr>
+<tr><td><code>GTW_Combined_Seed_06-13</code></td><td><code>mil_combined_seed_90d.csv</code></td><td>112,264</td><td>50,100–58,900</td><td>~49%</td></tr>
+<tr><td><code>GTW_Auto_Seed_06-13</code></td><td><code>mil_auto_seed_90d.csv</code></td><td>91,871</td><td>41,900–49,300</td><td>~50%</td></tr>
+<tr><td><code>GTW_Home_Seed_06-13</code></td><td><code>mil_home_seed_90d.csv</code></td><td>21,777</td><td>8,700–10,200</td><td>~43%</td></tr>
+<tr><td><code>GTW_Bundle_06-13</code></td><td><code>mil_bundle_customers_7mo.csv</code></td><td>2,698</td><td>~1,000</td><td>(small — track only)</td></tr>
+<tr><td><code>gtw_mil_auto_owned_phone_06-13</code></td><td><code>mil_auto_owned_phone_06-13.csv</code></td><td>21,375</td><td>10,000–11,800</td><td><strong>~51%</strong></td></tr>
+<tr><td><code>mil_auto_owned_phone_highvalue_06-13</code></td><td><code>mil_auto_owned_phone_highvalue_06-13.csv</code></td><td>9,796</td><td>4,600–5,400</td><td><strong>~51%</strong></td></tr>
+</table>
+
+<h3>Lookalike ladders (12, all live)</h3>
+
+<table class="md-table">
+<tr><th>Ladder</th><th>Audiences</th><th>Built from</th></tr>
+<tr><td>HighValue ⭐</td><td><code>Lookalike (1/3/5%) - GTW_HighValue_Seed_06-13</code></td><td>HighValue seed</td></tr>
+<tr><td>Auto</td><td><code>Lookalike (1/3/5%) - GTW_Auto_Seed_06-13</code></td><td>Auto seed</td></tr>
+<tr><td>Home</td><td><code>Lookalike (1/3/5%) - GTW_Home_Seed_06-13</code></td><td>Home seed</td></tr>
+<tr><td>Combined</td><td><code>Lookalike (1/3/5%) - GTW_Combined_Seed_06-13</code></td><td>Combined seed</td></tr>
+</table>
+
+<p><em>(Meta no longer shows LAL size at creation — it displays when the LAL is loaded into an ad set, sized to that ad set's US location.)</em></p>
+
+<h3>Saved audience + account segments</h3>
+<ul>
+<li><code>GTW_Warm_PageEngagement_365D</code> — saved audience, <strong>1.6–1.9M</strong> (union of 4 page-engagement audiences)</li>
+<li><strong>Existing customers segment</strong> → swapped to <code>GTW_Mil_AllCustomers_7mo_06-13</code> ✅</li>
+<li><strong>Engaged audience segment</strong> → set to the 4 page-engagement audiences ✅</li>
+</ul>
+
+<hr/>
+
+<h2>Part 3 — The phone-file finding (important)</h2>
+
+<p>We added <code>Auto_owned_export</code> (phone + email + conversion values, ~3-month Auto window) expecting it to dramatically outperform the email-only files on match rate. <strong>It didn't — and that's good news, not bad:</strong></p>
+
+<ul>
+<li>Phone Auto file matched <strong>~51%</strong></li>
+<li>Email Auto seed matched <strong>~50%</strong></li>
+</ul>
+
+<p>They're essentially equal. <strong>This proves the email data was never the problem</strong> — the scary 8% we saw earlier was just a mid-population snapshot. Both land at a healthy ~50%.</p>
+
+<p><strong>So what's the phone file actually worth?</strong> Two things it has that the email files don't:</p>
+<ul>
+<li><strong>Real conversion values</strong> (93.5% populated, mean $94.81) → a cleaner high-value seed for the Auto Max Val rescue</li>
+</ul>
+<ul>
+<li><strong>Recency</strong> (Feb–Jun Auto cut) → fresher signal</li>
+</ul>
+
+<p>Use it as the <strong>sharper Auto + HighValue seed</strong>, not as a match-rate fix. The match rate was already fine.</p>
+
+<hr/>
+
+<h2>Part 4 — File → Audience → Campaign assignment map</h2>
+
+<p>This is where each audience gets deployed. <strong>(Ad-set loading + budget = Lauren/Anthony's lane — this is the target-state map for when they wire it in.)</strong></p>
+
+<table class="md-table">
+<tr><th>Campaign</th><th>Ad set</th><th>Audience to load</th><th>Exclude</th></tr>
+<tr><td><strong>Auto Max Val</strong> (0.91x — bleeder)</td><td>Broad Value</td><td><code>Lookalike 1/3/5% - GTW_HighValue_Seed</code> ⭐ (rescue)</td><td>Suppression</td></tr>
+<tr><td><strong>Auto ALC</strong> (1.73x — headroom)</td><td>Broad 2.O</td><td><code>Lookalike 1/3/5% - GTW_Auto_Seed</code> (or phone-owned)</td><td>Suppression + HighValue 1%</td></tr>
+<tr><td><strong>Auto BAU</strong> (1.76x — engine)</td><td>Broad (Adv+)</td><td>Advantage+ broad</td><td>Suppression</td></tr>
+<tr><td><strong>Auto BAU</strong></td><td>Warm Layer</td><td><code>GTW_Warm_PageEngagement_365D</code></td><td>Suppression</td></tr>
+<tr><td><strong>Home Max Val</strong></td><td>Broad Value</td><td><code>Lookalike 1/3/5% - GTW_HighValue_Seed</code> (combined)</td><td>Suppression</td></tr>
+<tr><td><strong>Home ALC</strong></td><td>Broad</td><td><code>Lookalike 1/3/5% - GTW_Home_Seed</code></td><td>Suppression + HighValue 1%</td></tr>
+<tr><td><strong>Home BAU</strong></td><td>Broad (Adv+)</td><td>Advantage+ broad</td><td>Suppression</td></tr>
+<tr><td><strong>Home BAU</strong></td><td>Warm Layer</td><td><code>GTW_Warm_PageEngagement_365D</code></td><td>Suppression</td></tr>
+<tr><td><strong>ALL prospecting</strong></td><td>(every ad set)</td><td>—</td><td><code>GTW_Mil_AllCustomers_7mo</code> (suppression)</td></tr>
+</table>
+
+<p><strong>Account-level (already applied, automatic across all Sales campaigns):</strong></p>
+<ul>
+<li>Existing customers = <code>GTW_Mil_AllCustomers_7mo</code> → Meta optimizes toward net-new</li>
+<li>Engaged = 4 page-engagement audiences → warm pool feeds optimization</li>
+</ul>
+
+<hr/>
+
+<h2>Part 5 — Cleanup list (do when convenient — not urgent)</h2>
+
+<p>Duplicate/failed uploads from the troubleshooting session. Safe to delete; <strong>leave the canonical ones:</strong></p>
+
+<table class="md-table">
+<tr><th>Delete</th><th>Why</th></tr>
+<tr><td><code>2gtw_mil_suppression_all_7mo.csv</code> (INACTIVE, 1,000)</td><td>Failed re-upload</td></tr>
+<tr><td><code>mil_suppression_all_7mo.csv</code> — <strong>Qualified leads</strong> label (99,200–116,700)</td><td>Duplicate; wrong label. Keep the <strong>Customers</strong>-labeled one instead</td></tr>
+</table>
+
+<p><strong>Retire AFTER the new LALs are validated in ad sets (don't delete yet — campaigns still use them):</strong></p>
+<ul>
+<li><code>Custom_Recruiting-Leads_08-05-2025</code> (stale seed) + its 1%/3%/5% LALs</li>
+<li>The ~28 orphaned 1,000-size placeholder LALs (Worldwide/US engagement)</li>
+</ul>
+
+<hr/>
+
+<h2>Part 6 — What results to expect, and when</h2>
+
+<p><strong>The audiences sharpen WHO Meta reaches. They are not an instant switch.</strong> Realistic timeline:</p>
+
+<table class="md-table">
+<tr><th>Timeframe</th><th>What happens</th></tr>
+<tr><td><strong>Immediate</strong></td><td>Existing-customers + Engaged segments apply automatically across all Sales campaigns. Meta begins steering toward net-new.</td></tr>
+<tr><td><strong>Days 1–3</strong></td><td>Once LALs are loaded into ad sets, they enter Meta's learning phase. Directional signal only — don't judge yet.</td></tr>
+<tr><td><strong>Days 4–7</strong></td><td>Learning phase stabilizes. CPL on LAL-targeted ad sets should begin to settle.</td></tr>
+<tr><td><strong>Weeks 1–2</strong></td><td>Clean read. Expect: prospecting CPL improvement from fresher/sharper seeds, less waste from suppression, the HighValue LAL giving Auto Max Val a cleaner audience than its broken value signal.</td></tr>
+</table>
+
+<p><strong>Honest expectation-setting:</strong> the audience layer is one lever. Two things matter more for hitting Anthony's June number:</p>
+<ul>
+<li><strong>Capital deployment</strong> — Auto BAU "Broad" runs 1.76x ROAS, Auto Max Val "Broad" runs 0.91x (loses money). Feeding the winners is the bigger, faster lever. <em>(Lauren/Anthony's call — separate memo.)</em></li>
+</ul>
+<ul>
+<li><strong>The fbc/CAPI value-signal fix</strong> — Max Val can't optimize properly until that's resolved. The HighValue LAL is the interim audience-side workaround, not the fix.</li>
+</ul>
+
+<p>The audience work makes every prospecting dollar work harder. It compounds with the above; it doesn't replace them.</p>
+
+<hr/>
+
+<h2>Appendix — quick reference</h2>
+
+<pre><code>
+Account: 1034037341617540 (LG Military Ads)
+
+GTW audiences live (verified 6/13):
+  Seeds (6):     AllCustomers_7mo, HighValue, Combined, Auto, Home, Bundle
+  Phone (2):     auto_owned_phone, auto_owned_phone_highvalue
+  LALs (12):     {HighValue, Auto, Home, Combined} × {1%, 3%, 5%}
+  Saved (1):     GTW_Warm_PageEngagement_365D (1.6-1.9M)
+  Segments (2):  Existing customers + Engaged → updated
+
+Match rates: all ~45-51% (healthy). 8% scare = populating snapshot, resolved.
+
+Source files: /Users/mo/Downloads/For FB Audiences/output/
+Prep script:  deliverables/audit_2026-06-04/prep_audience_csvs.py
+</code></pre>
+
+<hr/><div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
+</div>
+<script>window.GTW_CLIENT="military-com"; window.GTW_API_BASE=window.GTW_API_BASE||"https://go2war-client-portal-api.moodiealissa.workers.dev";</script>
+<script src="../../../app/guard.js"></script></body></html>
