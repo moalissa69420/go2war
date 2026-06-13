@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Campaign Setup Handoff — Lauren (Jun 13, rev2)</title><link rel="stylesheet" href="../../../styles.css"/>
+<title>Campaign Setup + Rollout — Lauren (Jun 13)</title><link rel="stylesheet" href="../../../styles.css"/>
 <style>
 body { font-family:'Times New Roman',Times,serif; }
 .page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
@@ -132,22 +132,69 @@ hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a
 <li>Publish</li>
 </ul>
 
-<h2>Priority order</h2>
+<h2>Rollout plan (phased — do it in this order)</h2>
+
+<p><strong>Key context:</strong> at this account's volume the big Auto ad sets clear Meta's learning phase in <strong>hours, not days</strong> (Auto BAU ~307 leads/day → ~4 hrs to 50 events; Auto Max Val ~182/day → ~7 hrs). So we don't need a slow week-long stagger — but we DO change things in waves so we can attribute results and protect lead quality.</p>
+
+<h3>Phase 0 — Pre-flight (before any change)</h3>
 <ul>
-<li><strong>Auto Max Val</strong> + <strong>Auto ALC</strong> → HighValue / Auto suggestions (biggest impact — rescue + revive)</li>
-</ul>
-<ul>
-<li><strong>Home Max Val</strong> + <strong>Home ALC</strong> → HighValue / Home suggestions</li>
-</ul>
-<ul>
-<li><strong>Auto BAU</strong> + <strong>Home BAU</strong> → confirm suppression exclude + add Warm Layer ad set</li>
+<li>Snapshot today's per-campaign CPL + net (baseline to compare against)</li>
+<li>Note which audience is currently in each ad set you'll edit (so nothing in-use gets removed by accident)</li>
+<li><strong>Do NOT delete any audience yet</strong> (the old stale-seed LALs may be feeding live ad sets — deleting an in-use audience pauses that ad set)</li>
+<li>Hold all budgets flat (we isolate the audience effect first)</li>
 </ul>
 
-<h2>🚦 The most important rule — judge on lead QUALITY, not CPL</h2>
-<p>Advantage+ tends to lower CPL but can bring more <em>unqualified</em> leads. QuoteWizard pays on <strong>accepted</strong> leads. So track <strong>accept rate / conversion value</strong>, not just cost per lead. A cheap CPL with a low accept rate loses money. The Max Val (value-optimized) campaigns are our guardrail here.</p>
+<h3>Phase 1 — Day 1 AM: the rescue + revive (most upside, least to lose)</h3>
+<ul>
+<li><strong>Auto Max Val "Broad"</strong> → add <code>GTW_HighValue_Seed</code> as Advantage+ suggestion + suppression exclude</li>
+<li><strong>Auto ALC "Broad 2.O"</strong> → add <code>GTW_Auto_Seed</code> as suggestion + suppression exclude</li>
+<li>Leave the working Auto BAU untouched for now (so we can read Phase 1 cleanly)</li>
+<li>These re-stabilize same day given the volume</li>
+</ul>
 
-<h2>⏳ After loading: leave it alone 3-5 days</h2>
-<p>New audiences enter Meta's learning phase (~50 conversions to stabilize). Don't change targeting or budgets mid-learning — it resets the algorithm. Load it, then let it run before judging.</p>
+<h3>Phase 2 — Day 2: read, then extend</h3>
+<ul>
+<li>Next morning, check Phase 1 on <strong>CPL AND accept rate / conversion value</strong> (not CPL alone)</li>
+<li>If it held: extend the same pattern to <strong>Home Max Val</strong> (<code>GTW_HighValue_Seed</code>) + <strong>Home ALC</strong> (<code>GTW_Home_Seed</code>)</li>
+<li>Add the suppression exclude to <strong>Auto BAU</strong> + <strong>Home BAU</strong> (tiny, low-risk change)</li>
+</ul>
+
+<h3>Phase 3 — Day 3-4: warm layer (additive, zero disruption)</h3>
+<ul>
+<li>Build the new <strong>Warm Layer ad sets</strong> in Auto BAU + Home BAU using <code>GTW_Warm_PageEngagement_365D</code></li>
+<li>These are net-new ad sets — they don't disturb the existing broad ad sets that are working</li>
+</ul>
+
+<h3>Phase 4 — Day 5-7: validate, then the budget conversation</h3>
+<ul>
+<li>After ~3-5 days: assess accept rate / conversion value across all changed campaigns</li>
+<li>IF quality held AND efficiency improved → that's when we talk budget with Anthony (Auto BAU + ALC have idle budget + now-fresh audiences = room to scale)</li>
+<li>IF accept rate dropped → tighten back toward the seed suggestions, ease off broad</li>
+</ul>
+
+<h3>Phase 5 — only after the above is validated: cleanup</h3>
+<ul>
+<li>Retire the old stale-seed LALs + delete the duplicate suppression uploads (<code>2gtw_...</code>, "Qualified leads")</li>
+<li><strong>Verify zero active usage before deleting anything</strong></li>
+</ul>
+
+<h2>🚦 The #1 rule throughout — judge on lead QUALITY, not CPL</h2>
+<p>Advantage+ lowers CPL but can raise the share of <em>unqualified</em> leads. QuoteWizard pays on <strong>accepted</strong> leads — a cheap CPL with a low accept rate loses money. Track <strong>accept rate / conversion value</strong> as the primary read at every phase.</p>
+
+<h2>Short-term risk (for Anthony)</h2>
+<ul>
+<li><strong>Learning-phase wobble:</strong> minor here — Auto clears in hours, not days. Only tiny Home ALC (~$800/wk) is slow.</li>
+<li><strong>Lead-quality drift:</strong> the real watch item — monitored via accept rate, with the value-optimized campaigns as guardrail.</li>
+<li><strong>Deletion risk:</strong> avoided by holding all deletions to Phase 5 and verifying usage first.</li>
+<li>Everything is <strong>reversible</strong>; budgets stay flat through Phase 3 so each change is isolated. Net: short-term transition noise, no irreversible moves.</li>
+</ul>
+
+<h2>🛑 Rollback triggers (undo a change if any of these)</h2>
+<ul>
+<li>Accept rate / conversion value drops materially vs the Phase 0 baseline (3-day rolling)</li>
+<li>A changed ad set's CPL stays elevated >24h <em>after</em> it's exited learning</li>
+<li>Account net revenue trends down vs baseline over a 3-day rolling window</li>
+</ul>
 
 <hr/>
 
