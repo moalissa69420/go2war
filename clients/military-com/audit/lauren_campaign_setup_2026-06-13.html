@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Campaign Setup Handoff — Lauren (Jun 13)</title><link rel="stylesheet" href="../../../styles.css"/>
+<style>
+body { font-family:'Times New Roman',Times,serif; }
+.page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
+h1,h2,h3,h4 { font-family:'Times New Roman',Times,serif; }
+h1 { font-size:1.9rem; border-bottom:1px solid #ccc; padding-bottom:.35rem; }
+h2 { font-size:1.45rem; margin-top:2rem; } h3 { font-size:1.18rem; margin-top:1.5rem; }
+pre { background:#f4f4f4; padding:.9rem; overflow-x:auto; font-size:.9em; border-radius:4px; }
+code { font-family:'Courier New',monospace; font-size:.92em; }
+p code,li code,td code { background:#f4f4f4; padding:0 .25rem; border-radius:3px; }
+.md-table { border-collapse:collapse; margin:1rem 0; font-size:.92rem; }
+.md-table th,.md-table td { border:1px solid #ccc; padding:.4rem .65rem; text-align:left; vertical-align:top; }
+.md-table th { background:#f4f4f4; }
+hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a0; }
+</style></head><body><div class="page">
+<div style="font-size:.85rem; margin-bottom:1rem;"><a href="../">← Back to Military.com</a></div>
+<h1>Campaign Setup Handoff — Which Audience Goes In Which Campaign</h1>
+
+<p><strong>For:</strong> Lauren</p>
+<p><strong>From:</strong> Mo / GTW</p>
+<p><strong>Date:</strong> June 13, 2026</p>
+<p><strong>Account:</strong> LG Military Ads (1034037341617540)</p>
+
+<hr/>
+
+<h2>What's new</h2>
+
+<p>I built a fresh audience layer to replace the 10-month-old seed that was feeding the campaigns. Everything is live in the account, prefixed <strong><code>GTW_</code></strong> so it's easy to find. This doc tells you <strong>exactly which audience to load into which ad set</strong>, plus the targeting settings for each.</p>
+
+<p><strong>All match rates came back healthy (~45-51%)</strong>, so these are strong seeds — no data issues.</p>
+
+<p>⚠️ <strong>Budgets:</strong> don't change any daily budgets off this doc — that's a separate conversation with Anthony. This is <strong>targeting/audience only.</strong></p>
+
+<hr/>
+
+<h2>The audiences (all live, prefixed GTW_)</h2>
+
+<p><strong>Lookalike ladders</strong> (load these into prospecting ad sets):</p>
+<ul>
+<li><code>Lookalike (1/3/5%) - GTW_HighValue_Seed_06-13</code> ← high-value customers</li>
+<li><code>Lookalike (1/3/5%) - GTW_Auto_Seed_06-13</code> ← Auto-vertical</li>
+<li><code>Lookalike (1/3/5%) - GTW_Home_Seed_06-13</code> ← Home-vertical</li>
+<li><code>Lookalike (1/3/5%) - GTW_Combined_Seed_06-13</code> ← general</li>
+</ul>
+
+<p><strong>Exclusion (every prospecting ad set):</strong></p>
+<ul>
+<li><code>GTW_Mil_AllCustomers_7mo_06-13</code> (suppression — existing customers)</li>
+</ul>
+
+<p><strong>Warm pool (saved audience):</strong></p>
+<ul>
+<li><code>GTW_Warm_PageEngagement_365D</code> (~1.6M page/IG engagers)</li>
+</ul>
+
+<hr/>
+
+<h2>Per-campaign setup</h2>
+
+<p>For each: which audience to load, Advantage+ Audience on/off, Detailed Targeting Expansion, and exclusions. Age 18-65 + US are locked by Special Ad Category (Financial Services) on all.</p>
+
+<h3>🚗 Auto Max Val — <code>120241310920250498</code></h3>
+<p><em>Goal: rescue this campaign — it's been the weakest on ROAS. The high-value LAL gives it a cleaner audience than its (currently broken) value signal.</em></p>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120241310920230498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_HighValue_Seed</code></strong> (stack all 3)</td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+</table>
+
+<h3>🚗 Auto ALC — <code>120240808866140498</code></h3>
+<p><em>Goal: vertical-pure LAL. This campaign already runs efficiently — give it a clean Auto audience and it can scale.</em></p>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad 2.O ( <code>120243776055450498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_Auto_Seed</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_HighValue_Seed</code></td></tr>
+</table>
+
+<h3>🚗 Auto BAU — <code>120240808864310498</code></h3>
+<p><em>Goal: this is the efficiency engine — keep it broad, just stop paying to re-acquire existing customers and add the warm layer.</em></p>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120240808864580498</code> )</td><td>Advantage+ broad (no custom include)</td><td>ON</td><td>ON</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><td><em>New: Warm Layer</em></td><td><strong><code>GTW_Warm_PageEngagement_365D</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_Combined_Seed</code></td></tr>
+</table>
+
+<h3>🏠 Home Max Val — <code>120241432784690498</code></h3>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120241432784700498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_HighValue_Seed</code></strong> (same combined high-value)</td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+</table>
+
+<h3>🏠 Home ALC — <code>120238737024600498</code></h3>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120238737024450498</code> )</td><td><strong><code>Lookalike 1% + 3% + 5% - GTW_Home_Seed</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_HighValue_Seed</code></td></tr>
+</table>
+
+<h3>🏠 Home BAU — <code>120227142278050498</code></h3>
+<table class="md-table">
+<tr><th>Ad set</th><th>Audience to load</th><th>Adv+ Audience</th><th>Detailed Targeting Exp.</th><th>Exclude</th></tr>
+<tr><td>Broad ( <code>120227144637480498</code> )</td><td>Advantage+ broad</td><td>ON</td><td>ON</td><td><code>GTW_Mil_AllCustomers_7mo</code></td></tr>
+<tr><td><em>New: Warm Layer</em></td><td><strong><code>GTW_Warm_PageEngagement_365D</code></strong></td><td>OFF</td><td>OFF</td><td><code>GTW_Mil_AllCustomers_7mo</code> + <code>Lookalike 1% - GTW_Combined_Seed</code></td></tr>
+</table>
+
+<hr/>
+
+<h2>Account-level segments (already set by Mo — no action needed)</h2>
+<ul>
+<li>✅ Existing customers → <code>GTW_Mil_AllCustomers_7mo</code></li>
+<li>✅ Engaged audience → 4 page-engagement audiences</li>
+</ul>
+
+<hr/>
+
+<h2>How to load an audience into an ad set (quick steps)</h2>
+<ul>
+<li>Ad set → <strong>Audience</strong> section</li>
+</ul>
+<ul>
+<li><strong>Custom Audiences → Include</strong> → search the GTW audience name → add</li>
+</ul>
+<ul>
+<li>For LAL stacks: add all three (1% + 3% + 5%) in the Include box — Meta dedupes overlap</li>
+</ul>
+<ul>
+<li>When a LAL is the include, turn <strong>Advantage+ Audience OFF</strong> (so the LAL is the actual target, not just a suggestion) and <strong>Detailed Targeting Expansion OFF</strong></li>
+</ul>
+<ul>
+<li><strong>Exclude</strong> box → add <code>GTW_Mil_AllCustomers_7mo</code> (+ the HighValue 1% on ALC campaigns, to keep them from competing with Max Val)</li>
+</ul>
+<ul>
+<li>Publish</li>
+</ul>
+
+<h2>Priority order (if doing it in stages)</h2>
+<ul>
+<li><strong>Auto Max Val</strong> + <strong>Home Max Val</strong> → HighValue LAL (the rescue — biggest impact)</li>
+</ul>
+<ul>
+<li><strong>Auto ALC</strong> + <strong>Home ALC</strong> → vertical LAL stacks</li>
+</ul>
+<ul>
+<li><strong>Auto BAU</strong> + <strong>Home BAU</strong> → suppression exclude + warm layer ad set</li>
+</ul>
+
+<h2>Rollout note</h2>
+<p>Load targeting, then give it <strong>48-72 hours</strong> before judging — new audiences go through Meta's learning phase. Don't change budgets at the same time as targeting (we want to isolate what each change does).</p>
+
+<hr/>
+
+<p><em>Questions → Mo. Audience build doc + match rates: see "Audience Architecture — AS BUILT Jun 13" on the portal.</em></p>
+
+<hr/><div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
+</div>
+<script>window.GTW_CLIENT="military-com"; window.GTW_API_BASE=window.GTW_API_BASE||"https://go2war-client-portal-api.moodiealissa.workers.dev";</script>
+<script src="../../../app/guard.js"></script></body></html>
