@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Master Action Log — Jun 13</title><link rel="stylesheet" href="../../../styles.css"/>
+<style>
+body { font-family:'Times New Roman',Times,serif; }
+.page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
+h1,h2,h3,h4 { font-family:'Times New Roman',Times,serif; }
+h1 { font-size:1.9rem; border-bottom:1px solid #ccc; padding-bottom:.35rem; }
+h2 { font-size:1.45rem; margin-top:2rem; } h3 { font-size:1.18rem; margin-top:1.5rem; }
+pre { background:#f4f4f4; padding:.9rem; overflow-x:auto; font-size:.9em; border-radius:4px; }
+code { font-family:'Courier New',monospace; font-size:.92em; }
+p code,li code,td code { background:#f4f4f4; padding:0 .25rem; border-radius:3px; }
+.md-table { border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
+.md-table th,.md-table td { border:1px solid #ccc; padding:.4rem .6rem; text-align:left; vertical-align:top; }
+.md-table th { background:#f4f4f4; }
+hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a0; }
+</style></head><body><div class="page">
+<div style="font-size:.85rem; margin-bottom:1rem;"><a href="../">← Back to Military.com</a></div>
+<h1>Master Action Log — June 13, 2026</h1>
+
+<p><strong>Account:</strong> LG Military Ads (1034037341617540) · <strong>Timezone:</strong> Pacific (PT) — Mo is EDT, account runs 3 hrs behind</p>
+<p><strong>Everything done, found, and recommended today — single source of truth.</strong></p>
+
+<hr/>
+
+<h2>Part 1 — DONE today (audiences, live in account)</h2>
+
+<h3>Customer-list seeds (uploaded, matched)</h3>
+<table class="md-table">
+<tr><th>Audience (GTW_)</th><th>Source file</th><th>Matched</th><th>Rate</th></tr>
+<tr><td><code>GTW_Mil_AllCustomers_7mo_06-13</code> (suppression)</td><td>mil_suppression_all_7mo.csv (195,137)</td><td>82,900–97,600</td><td>~46%</td></tr>
+<tr><td><code>GTW_HighValue_Seed_06-13</code></td><td>mil_high_value_seed_7mo.csv (62,299)</td><td>27,800–32,700</td><td>~49%</td></tr>
+<tr><td><code>GTW_Combined_Seed_06-13</code></td><td>mil_combined_seed_90d.csv (112,264)</td><td>50,100–58,900</td><td>~49%</td></tr>
+<tr><td><code>GTW_Auto_Seed_06-13</code></td><td>mil_auto_seed_90d.csv (91,871)</td><td>41,900–49,300</td><td>~50%</td></tr>
+<tr><td><code>GTW_Home_Seed_06-13</code></td><td>mil_home_seed_90d.csv (21,777)</td><td>8,700–10,200</td><td>~43%</td></tr>
+<tr><td><code>GTW_Bundle_06-13</code></td><td>mil_bundle_customers_7mo.csv (2,698)</td><td>~1,000</td><td>(track only)</td></tr>
+<tr><td><code>gtw_mil_auto_owned_phone_06-13</code></td><td>mil_auto_owned_phone (21,375, +phone)</td><td>10,000–11,800</td><td>~51%</td></tr>
+<tr><td><code>mil_auto_owned_phone_highvalue_06-13</code></td><td>(9,796, +phone)</td><td>4,600–5,400</td><td>~51%</td></tr>
+</table>
+
+<h3>Lookalikes (12, live)</h3>
+<p><code>Lookalike 1/3/5%</code> off each of: <strong>HighValue</strong>, <strong>Auto</strong>, <strong>Home</strong>, <strong>Combined</strong> seeds.</p>
+
+<h3>Saved audience + account segments</h3>
+<ul>
+<li><code>GTW_Warm_PageEngagement_365D</code> — union of 4 page-engagement audiences (~1.6–1.9M)</li>
+<li><strong>Existing customers segment</strong> → swapped to <code>GTW_Mil_AllCustomers_7mo</code> ✅</li>
+<li><strong>Engaged audience segment</strong> → 4 page-engagement audiences ✅</li>
+</ul>
+
+<h3>Cleanup still owed</h3>
+<ul>
+<li>Delete duplicate suppression uploads: <code>2gtw_mil_suppression_all_7mo</code> + the <code>mil_suppression…</code> labeled "Qualified leads". Keep only the <strong>Customers</strong>-labeled <code>GTW_Mil_AllCustomers_7mo</code>.</li>
+</ul>
+
+<hr/>
+
+<h2>Part 2 — RECOMMENDED campaign changes (Lauren's lane — step up gradually)</h2>
+
+<p>Current cost goals are throttling spend. Real lead value (Delty) is ~$32, so leads up to ~$26 (Auto) are still profitable. Raise cost goals to capture idle-budget volume.</p>
+
+<table class="md-table">
+<tr><th>Campaign</th><th>ID</th><th>Current cost goal</th><th>Change to</th><th>Plus</th></tr>
+<tr><td><strong>Auto BAU</strong></td><td>120240808864310498</td><td>~$15–17</td><td><strong>→ $23–24</strong></td><td>(already broad; cap is the lever)</td></tr>
+<tr><td><strong>Auto ALC</strong></td><td>120240808866140498</td><td>~$13</td><td><strong>→ $20</strong></td><td>+ deploy <code>GTW_Auto</code> LAL (revive — it's at ~$150/day on $8.5K budget)</td></tr>
+<tr><td><strong>Auto Max Val</strong></td><td>120241310920250498</td><td>Highest volume</td><td><strong>HOLD</strong></td><td>deploy <code>GTW_HighValue</code> LAL; no scale until value fix</td></tr>
+<tr><td><strong>Home BAU</strong></td><td>120227142278050498</td><td>~$10</td><td><strong>→ $16</strong></td><td>+ budget $2K → $3K</td></tr>
+<tr><td><strong>Home ALC</strong></td><td>120238737024600498</td><td>~$12</td><td><strong>→ $16</strong></td><td>+ deploy <code>GTW_Home</code> LAL (revive)</td></tr>
+<tr><td><strong>Home Max Val</strong></td><td>120241432784690498</td><td>Highest volume</td><td><strong>HOLD</strong></td><td>deploy <code>GTW_HighValue</code> LAL; no scale until value fix</td></tr>
+</table>
+
+<p><strong>Method:</strong> step cost goals up gradually ($17→$19→$22→$23, watch 24–48h between). One change per campaign at a time. Deploy audiences first, then loosen caps.</p>
+
+<p>**Audiences go in as Advantage+ <em>suggestions</em> (Advantage+ ON)** — not hard-locked. Suppression (<code>GTW_Mil_AllCustomers_7mo</code>) excluded on every prospecting ad set.</p>
+
+<hr/>
+
+<h2>Part 3 — FINDINGS: the tracking & value problem (the big discovery)</h2>
+
+<h3>The conversion VALUES are hardcoded placeholders</h3>
+<table class="md-table">
+<tr><th>Custom conversion</th><th>Value</th><th>Reality</th></tr>
+<tr><td>Auto click to quotes (26414218331497189)</td><td><strong>$0.00 fixed</strong></td><td>hand-typed, never set</td></tr>
+<tr><td>Home click to quotes (527662590217855)</td><td><strong>$15.00 fixed</strong></td><td>someone's guess</td></tr>
+<tr><td>Navy Lead (971436118437003)</td><td>$20.00 fixed</td><td>dead — wrong pixel, 108 days</td></tr>
+<tr><td>Auto Confirmed Lead (587949090991061)</td><td>$0, Physical Store source</td><td>never fired — misconfigured</td></tr>
+</table>
+
+<ul>
+<li><strong>Performance goal = "Maximize number of leads"</strong> (volume) · <strong>Value rules: OFF</strong> → value never drives optimization. <em>Editing the hardcoded number does nothing — and would only distort reporting. Leave it.</em></li>
+<li>The campaigns optimize for <strong>"click to quotes" = the lead/registration</strong> (volume matches leads exactly — so the event itself is fine, just the value is fake).</li>
+</ul>
+
+<h3>Events Manager diagnostics (High priority, detected Jun 3)</h3>
+<ul>
+<li>🔴 <strong>Server sending modified fbclid in fbc</strong> — 27% of CompleteRegistrations, <strong>$68,918 ad spend affected</strong> (FunnelFlux server issue)</li>
+<li>🔴 <strong>Purchase value static</strong> — "all Purchase events send the same price data." Meta estimates <strong>~7% ROAS</strong> upside if fixed</li>
+<li>🟡 <code>invalid.invalid</code> domain sending data — investigate/remove (possible test/bot pollution)</li>
+<li>🟡 Low fbp coverage via CAPI</li>
+</ul>
+
+<h3>What's actually happening</h3>
+<p>Meta has been optimizing for <strong>cheap form-fills on a fake value signal.</strong> The reported ROAS is built on hand-typed values, not real money. Real money is measured in Delty (see Part 5).</p>
+
+<hr/>
+
+<h2>Part 4 — THE FIX: close the value loop</h2>
+
+<p><strong>Can't connect QuoteWizard</strong> — it's a third-party lead marketplace, not a CRM you own. The native "Connect your CRM" button doesn't apply.</p>
+
+<p><strong>The fix = offline conversion upload of QW's accepted-lead data (with real values):</strong></p>
+<ul>
+<li>Get a recurring <strong>accepted-lead export from QW</strong> (email/phone + event time + <strong>real conversion_value</strong>) — the one real dependency</li>
+</ul>
+<ul>
+<li>Format → Events Manager → <strong>Import events / Offline event set</strong></li>
+</ul>
+<ul>
+<li>Meta matches on email/phone (bypasses the broken fbc), attributes <strong>real value</strong> to the ad</li>
+</ul>
+<ul>
+<li>Then optimize Max Val toward real value (switch to value bidding) → Meta finally optimizes for accepted leads, not form-fills</li>
+</ul>
+
+<ul>
+<li><strong>Manual</strong> (start this week with existing exports) → <strong>automated CAPI pipeline</strong> (later; this is where a dev / Make-Zapier flow helps — to move QW's <em>file</em>, not connect QW)</li>
+<li><strong>Do NOT</strong> edit the hardcoded value to a different fixed number — a fixed value can't power value optimization (no variation = no signal). Needs <em>real, varying</em> values.</li>
+</ul>
+
+<hr/>
+
+<h2>Part 5 — Spend-scale plan (close the delivery gap)</h2>
+
+<h3>The real numbers (Delty = source of truth, NOT Meta's fake values)</h3>
+<ul>
+<li><strong>Baseline = Delty earnings − Meta spend</strong> (confirmed with Anthony)</li>
+<li>June 1–13: Delty $353,145 − spend $255,668 = <strong>~$97K net · real ROAS 1.40x · ~$32 value/lead</strong></li>
+<li>Full-June projection: <strong>~$225–235K net</strong> (below $275K baseline — it's a <em>volume</em> gap, not efficiency)</li>
+</ul>
+
+<h3>Spend reality</h3>
+<ul>
+<li>Full-day average <strong>~$20K/day</strong> (peaks $26K on good days)</li>
+<li>Budget ceiling = <strong>$43.3K/day</strong> (sum of campaign budgets) — but never approached; realistic deployable <strong>~$26–30K/day</strong></li>
+<li>The gap is <strong>delivery-limited, not permission-limited</strong> — budget's already approved; closing it is the delivery work (audiences + caps + creative)</li>
+</ul>
+
+<h3>Levers (ranked)</h3>
+<ul>
+<li><strong>Loosen cost caps</strong> (Part 2) — biggest spend unlock, esp. Auto BAU</li>
+</ul>
+<ul>
+<li><strong>Deploy fresh audiences</strong> — revives throttled ALC ($150 → $2–4K/day), improves signal</li>
+</ul>
+<ul>
+<li><strong>Fresh creative</strong> — wins more auctions, opens delivery</li>
+</ul>
+<ul>
+<li><strong>Raise budgets on efficient campaigns</strong> (not Max Val until value fix)</li>
+</ul>
+
+<h3>Guardrails (watch at every step)</h3>
+<ul>
+<li><strong>CPL</strong> under ~$26 (Auto) / ~$18 (Home)</li>
+<li><strong>Delty value-per-lead</strong> must HOLD ~$32 — if CPL flat but value/lead drops, you're buying junk → stop, fix value loop before scaling more</li>
+<li><strong>Frequency</strong> under ~3–4 (May saturated at 6.85 @ $27.8K/day)</li>
+</ul>
+
+<h3>The deal math (July/Aug scored window)</h3>
+<p>Net rev = spend × (ROAS − 1). At <strong>1.40x</strong>, GP1 (~$350K) needs ~$29K/day. At <strong>1.50x</strong> it needs ~$23K/day. At <strong>1.60x</strong>, today's spend hits it. <strong>Efficiency is the lever</strong> — every 0.10x ROAS knocks ~$5–6K/day off the spend needed.</p>
+
+<hr/>
+
+<h2>Part 6 — Reference</h2>
+
+<h3>Exact campaign names + IDs</h3>
+<table class="md-table">
+<tr><th>Campaign</th><th>ID</th></tr>
+<tr><td>`QuoteWizard \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Auto_Insurance \</td><td>(18-65) SAC - BAU \</td><td>NEW`</td><td>120240808864310498</td></tr>
+<tr><td>`QuoteWizard  \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Auto_Insurance \</td><td>(18-65) SAC - ALC \</td><td>NEW` <em>(2 spaces after QuoteWizard)</em></td><td>120240808866140498</td></tr>
+<tr><td>`QuoteWizard \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Auto_Insurance \</td><td>(18-65) SAC - ALC - Max Val \</td><td>NEW`</td><td>120241310920250498</td></tr>
+<tr><td>`QuoteWizard \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Home_Insurance \</td><td>(18-65) SAC - BAU`</td><td>120227142278050498</td></tr>
+<tr><td>`QuoteWizard \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Home_Insurance \</td><td>(18-65) SAC - ALC`</td><td>120238737024600498</td></tr>
+<tr><td>`QuoteWizard \</td><td>MIL \</td><td>SOCIAL \</td><td>Insurance \</td><td>Home_Insurance \</td><td>(18-65) SAC - ALC - Max Val \</td><td>NEW`</td><td>120241432784690498</td></tr>
+</table>
+
+<h3>Key dataset</h3>
+<ul>
+<li>Active dataset: <strong>Military Insurance</strong> (332555186604235) — has live web + CAPI</li>
+</ul>
+
+<h3>Open dependencies</h3>
+<ul>
+<li><strong>QW recurring accepted-lead export</strong> (with values) — gates the value-loop fix</li>
+<li><strong>30-day form-submitter cooldown list</strong> — still pending (Lauren/FunnelFlux)</li>
+<li><strong>FunnelFlux fix</strong> for fbc + real-time value — vendor/dev (offline upload routes around it)</li>
+</ul>
+
+<hr/>
+
+<h2>Priority order from here</h2>
+<ul>
+<li><strong>Deploy audiences into ad sets</strong> (Lauren handoff) — as Advantage+ suggestions</li>
+</ul>
+<ul>
+<li><strong>Step up cost caps</strong> (Part 2) — Auto BAU $17→$23 first, watch guardrails</li>
+</ul>
+<ul>
+<li><strong>Get the QW accepted-lead feed</strong> → stand up offline-upload value loop</li>
+</ul>
+<ul>
+<li><strong>Then</strong> switch Max Val to value optimization</li>
+</ul>
+<ul>
+<li><strong>Cleanup</strong> duplicate audiences + the dead/<code>invalid.invalid</code> items</li>
+</ul>
+
+<hr/><div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
+</div>
+<script>window.GTW_CLIENT="military-com"; window.GTW_API_BASE=window.GTW_API_BASE||"https://go2war-client-portal-api.moodiealissa.workers.dev";</script>
+<script src="../../../app/guard.js"></script></body></html>
