@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Targeting Strategy — SAC-Verified (Jun 15)</title><link rel="stylesheet" href="../../../styles.css"/>
+<style>
+body { font-family:'Times New Roman',Times,serif; }
+.page { max-width:920px; margin:2rem auto; padding:0 2rem; line-height:1.55; }
+h1,h2,h3,h4 { font-family:'Times New Roman',Times,serif; }
+h1 { font-size:1.9rem; border-bottom:1px solid #ccc; padding-bottom:.35rem; }
+h2 { font-size:1.45rem; margin-top:2rem; } h3 { font-size:1.18rem; margin-top:1.5rem; }
+pre { background:#f4f4f4; padding:.9rem; overflow-x:auto; font-size:.9em; border-radius:4px; }
+code { font-family:'Courier New',monospace; font-size:.92em; }
+p code,li code,td code { background:#f4f4f4; padding:0 .25rem; border-radius:3px; }
+.md-table { border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
+.md-table th,.md-table td { border:1px solid #ccc; padding:.4rem .6rem; text-align:left; vertical-align:top; }
+.md-table th { background:#f4f4f4; }
+hr { border:none; border-top:1px solid #ccc; margin:1.5rem 0; } a { color:#2050a0; }
+</style></head><body><div class="page">
+<div style="font-size:.85rem; margin-bottom:1rem;"><a href="../">← Back to Military.com</a></div>
+<h1>Targeting Strategy — SAC-Verified (Jun 15, 2026)</h1>
+
+<p><strong>Supersedes the Jun 11–13 audience architecture (the lookalike ladders).</strong> Researched and verified across multiple 2025–26 sources + tested live in the account.</p>
+
+<hr/>
+
+<h2>The verified reality: under Financial SAC, audience-precision targeting is gone</h2>
+
+<p>The account runs under Meta's <strong>Financial Products & Services Special Ad Category.</strong> Verified — every audience-precision lever is unavailable:</p>
+
+<table class="md-table">
+<tr><th>Lever</th><th>Status under Financial SAC</th></tr>
+<tr><td>Standard lookalikes</td><td>❌ Blocked (confirmed live — won't appear in ad set picker)</td></tr>
+<tr><td>Special Ad Audiences (the old lookalike replacement)</td><td>❌ Discontinued entirely by Meta</td></tr>
+<tr><td>Advantage+ Audience expansion</td><td>❌ Not permitted for Financial SAC — Original audiences only</td></tr>
+<tr><td>Detailed targeting / interests</td><td>❌ Blocked</td></tr>
+<tr><td>Age / gender / ZIP narrowing</td><td>❌ Locked to 18–65, US, 15-mi min radius</td></tr>
+<tr><td>Custom audiences (the seeds)</td><td>⚠️ Allowed, but in Original mode they <strong>constrain</strong> (no expansion → small). Only genuinely useful as <strong>exclusions</strong>.</td></tr>
+</table>
+
+<p><strong>Conclusion: there is no audience-targeting precision under SAC. You optimize and create your way to performance — you do not target your way there.</strong></p>
+
+<hr/>
+
+<h2>The audience structure (every prospecting ad set — identical)</h2>
+
+<ul>
+<li><strong>Mode:</strong> Original audiences (Advantage+ unavailable under SAC)</li>
+<li><strong>Targeting:</strong> Broad — 18–65, US (locked)</li>
+<li><strong>Includes:</strong> none (lookalikes blocked; seed-includes constrain to ~seed size; Special Ad Audiences gone)</li>
+<li><strong>Exclude:</strong> <code>GTW_Mil_AllCustomers_7mo_06-13</code> (suppression — existing customers)</li>
+<li><strong>Account segments (already set):</strong> Existing customers + Engaged</li>
+</ul>
+
+<p>That's the whole audience setup. It does not differ by campaign — because under SAC it can't.</p>
+
+<hr/>
+
+<h2>What actually wins under SAC (ranked — this is the real strategy)</h2>
+
+<p>Research is emphatic: <em>"success depends heavily on creative quality and conversion optimization rather than granular audience targeting."</em></p>
+
+<ul>
+<li><strong>Creative — the #1 lever.</strong> Under broad targeting, <strong>creative IS your targeting</strong> (it self-selects who responds). Restricted-category data shows <strong>40%+ CTR swings</strong> from creative testing. Ship volume + iterate.</li>
+</ul>
+<ul>
+<li><strong>Conversion optimization / the value loop.</strong> Optimizing for the <em>right event</em> (real accepted leads via the QW data loop) drives <strong>up to 31% lower CPL</strong>. This is how you get <em>quality</em> when you can't target for it.</li>
+</ul>
+<ul>
+<li><strong>Suppression.</strong> Exclude existing customers → efficiency. (The one piece of the audience build that fully deploys.)</li>
+</ul>
+<ul>
+<li><strong>Cost caps + budget.</strong> The spend lever (loosen caps to deploy idle budget).</li>
+</ul>
+
+<p>Note: SAC carries a ~23% higher CPM (broad-targeting tax) — unavoidable, baked into the model.</p>
+
+<hr/>
+
+<h2>Per-campaign (differentiate by objective + cost cap + creative — NOT audience)</h2>
+
+<table class="md-table">
+<tr><th>Campaign</th><th>Audience</th><th>Real differentiator</th><th>Action</th></tr>
+<tr><td><strong>Auto BAU</strong></td><td>Broad + suppress</td><td>Leads / cost cap / creative</td><td>Engine — loosen cap $15→$23, best creative</td></tr>
+<tr><td><strong>Auto ALC</strong></td><td>Broad + suppress</td><td>(no distinct audience)</td><td>Redundant; let budget flow to BAU</td></tr>
+<tr><td><strong>Auto Max Val</strong></td><td>Broad + suppress</td><td>Sales / value loop</td><td>HOLD → becomes the value-optimized campaign once QW loop is live</td></tr>
+<tr><td><strong>Home BAU</strong></td><td>Broad + suppress</td><td>Leads / cost cap / creative</td><td>Home engine — cap $10→$16</td></tr>
+<tr><td><strong>Home ALC</strong></td><td>Broad + suppress</td><td>(no distinct audience)</td><td>Redundant; fold to Home BAU</td></tr>
+<tr><td><strong>Home Max Val</strong></td><td>Broad + suppress</td><td>Sales / value loop</td><td>HOLD → value campaign post-loop</td></tr>
+</table>
+
+<hr/>
+
+<h2>What to STOP doing</h2>
+<ul>
+<li>❌ Don't deploy the 12 lookalike ladders — blocked under SAC</li>
+<li>❌ Don't use seeds as prospecting <em>includes</em> — they constrain to ~seed size</li>
+<li>❌ Don't build Special Ad Audiences — discontinued</li>
+</ul>
+
+<h2>What the audience work IS still worth</h2>
+<ul>
+<li>✅ <strong>Suppression list</strong> (exclusion) — real efficiency lever, deployed</li>
+<li>✅ <strong>Existing-customers + Engaged segments</strong> — set, working</li>
+<li>✅ <strong>The accepted-lead / seed DATA</strong> — feeds the value loop (the actual targeting mechanism under SAC)</li>
+<li>✅ <strong>Fresh, clean, compliant first-party data</strong> — the foundation the value loop runs on</li>
+</ul>
+
+<hr/>
+
+<h2>The roadmap — "things we can do" under SAC (in priority order)</h2>
+
+<ul>
+<li><strong>Creative engine</strong> — the highest-leverage lever bar none under broad. Ship a steady volume of test creatives, kill losers fast, scale winners. This is where the account is actually won.</li>
+</ul>
+<ul>
+<li><strong>Value loop</strong> — get the QW accepted-lead export → push to Meta (offline conversions / CRM upload) → optimize Max Val for <em>real accepted-lead value</em>. This is how you beat plain broad. Replaces what lookalikes were meant to do.</li>
+</ul>
+<ul>
+<li><strong>Suppression</strong> — applied as exclusion on every prospecting ad set (deployed).</li>
+</ul>
+<ul>
+<li><strong>Cost-cap loosening</strong> — Auto BAU $15→$23, Home $10→$16, stepped up with guardrails (CPL < ~$26 Auto / $18 Home; Delty value/lead holds ~$32).</li>
+</ul>
+<ul>
+<li><strong>Concentrate budget in the winners</strong> (BAU campaigns) — let the redundant ALC campaigns self-deprioritize.</li>
+</ul>
+
+<hr/>
+
+<h2>The honest strategic reframe</h2>
+<p>The audience month surfaced the <strong>suppression lever</strong> (real) and the clean first-party data (foundation), but more importantly it proved that <strong>under SAC the account is won on creative + the value/conversion loop — not audiences.</strong> Both were already in scope; the research just promoted them from "also important" to <strong>the whole game.</strong> That's a more valuable conclusion than another lookalike ladder.</p>
+
+<hr/>
+
+<p><strong>Sources:</strong> Wolf Financial (Meta financial restrictions) · AdTaxi (Special Ad Audiences discontinued) · Benly (Finance/Insurance 2026) · Jon Loomer (Financial SAC) · LeadEnforce (SAC compliance). Verified live in account 1034037341617540 (lookalikes absent from SAC ad set picker).</p>
+
+<hr/><div style="font-size:.85rem; margin-top:2rem;"><a href="../">← Back</a></div>
+</div>
+<script>window.GTW_CLIENT="military-com"; window.GTW_API_BASE=window.GTW_API_BASE||"https://go2war-client-portal-api.moodiealissa.workers.dev";</script>
+<script src="../../../app/guard.js"></script></body></html>
